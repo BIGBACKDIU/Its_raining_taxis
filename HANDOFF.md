@@ -47,8 +47,13 @@ to `data/raw/` on `main` when done. Re-running skips months already present, so 
 
 Check progress: `git pull` and `ls data/raw/logs/` (one JSON per finished month), or
 `gh run list --workflow download-data` / `gh run view <id> --log-failed`.
-If months fail: read the log, fix, then re-run (push a trivial change to `pipeline/months.json`
-or `gh workflow run download-data`).
+If months fail: each job's console output is committed as `data/raw/logs/YYYY-MM.fetchlog.txt`
+(even on failure). Read it, fix, then re-run (push a trivial change to `pipeline/months.json`
+or `gh workflow run download-data`). A month is complete when `data/raw/logs/YYYY-MM.json` exists.
+Status on 22 Oct 2026: first run started 16:36 SGT; ~3-4 min per month, no rate limiting, all 2,688
+snapshots present in the first finished month. Four months (2026-05, -06, -07, -09) failed in the first
+run for an unknown reason; the parsing was hardened and a second run (queued after the first) retries
+any month without a `.json` log. **First task: confirm all 60 months are present.**
 
 Per month (`YYYY-MM`), all readable with numpy/pandas only:
 
