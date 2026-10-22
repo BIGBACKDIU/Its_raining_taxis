@@ -10,3 +10,9 @@ NUS DAO2702 group project: how rainfall affects the availability of vacant taxis
 - `tests/test_fetch_mock.py` – offline test with fake API payloads: `python tests/test_fetch_mock.py`
 
 Data sources: data.gov.sg (Singapore Open Data Licence), NEA, LTA.
+
+## Data and plan
+
+- **Start here:** [HANDOFF.md](HANDOFF.md) – full plan, decisions and next steps.
+- `.github/workflows/download.yml` downloads Oct 2021 – Sep 2026 (months in `pipeline/months.json`) on GitHub Actions and commits each month to `data/raw/`.
+- `data/static/` – Singapore coastline and planning areas (URA 2014, via yinshanyang/singapore) and MRT/LRT stations, exits and lines (cheeaun/sgraildata).
