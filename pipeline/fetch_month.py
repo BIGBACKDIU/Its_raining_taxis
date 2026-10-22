@@ -63,15 +63,36 @@ def fetch_taxi(client: Client, month: str, out: Path, workers: int, limit: int |
     return sn
 
 
+ERRORS: list = []
+
+
+def _safe(fn, empty):
+    def run(day):
+        try:
+            return fn(day)
+        except Exception as e:  # keep going; record the problem in the month log
+            ERRORS.append(f"{fn.__name__} {day.date()}: {type(e).__name__}: {e}")
+            return empty()
+    return run
+
+
 def fetch_weather(client: Client, month: str, out: Path, workers: int):
     days = month_days(month)
+    empty_rain = lambda: (pd.DataFrame(columns=["ts", "station_id", "mm"]),
+                          pd.DataFrame(columns=["date", "station_id", "name", "lat", "lon"]), "error")
+    empty_fc = lambda: (pd.DataFrame(columns=["issued", "item_ts", "valid_start", "valid_end", "area", "forecast"]),
+                        pd.DataFrame(columns=["area", "lat", "lon"]))
+    rain_fn = _safe(lambda d: rain_day(client, d), empty_rain); rain_fn.__name__ = "rain_day"
+    fc_fn = _safe(lambda d: forecast_day(client, d), empty_fc); fc_fn.__name__ = "forecast_day"
     with ThreadPoolExecutor(min(workers, 4)) as ex:
-        rain = list(ex.map(lambda d: rain_day(client, d), days))
-        fcs = list(ex.map(lambda d: forecast_day(client, d), days))
+        rain = list(ex.map(rain_fn, days))
+        fcs = list(ex.map(fc_fn, days))
     (out / "rain").mkdir(parents=True, exist_ok=True)
     (out / "forecast").mkdir(parents=True, exist_ok=True)
-    rd = pd.concat([r[0] for r in rain], ignore_index=True) if rain else pd.DataFrame(columns=["ts", "station_id", "mm"])
-    st = pd.concat([r[1] for r in rain], ignore_index=True)
+    nonempty = [r[0] for r in rain if len(r[0])]
+    rd = pd.concat(nonempty, ignore_index=True) if nonempty else pd.DataFrame(columns=["ts", "station_id", "mm"])
+    st_parts = [r[1] for r in rain if len(r[1])]
+    st = pd.concat(st_parts, ignore_index=True) if st_parts else pd.DataFrame(columns=["date", "station_id", "name", "lat", "lon"])
     sources = [r[2] for r in rain]
     if len(rd):
         rd["date"] = rd.ts.dt.normalize()
@@ -82,11 +103,12 @@ def fetch_weather(client: Client, month: str, out: Path, workers: int):
         rd.to_csv(out / "rain" / f"{month}_readings.csv.gz", index=False)
     comp.to_csv(out / "rain" / f"{month}_completeness.csv.gz", index=False)
     st.to_csv(out / "rain" / f"{month}_stations.csv.gz", index=False)
-    fc = pd.concat([f[0] for f in fcs], ignore_index=True).drop_duplicates()
-    ar = pd.concat([f[1] for f in fcs], ignore_index=True).drop_duplicates("area")
+    fc_parts, ar_parts = [f[0] for f in fcs if len(f[0])], [f[1] for f in fcs if len(f[1])]
+    fc = (pd.concat(fc_parts, ignore_index=True).drop_duplicates() if fc_parts else empty_fc()[0])
+    ar = (pd.concat(ar_parts, ignore_index=True).drop_duplicates("area") if ar_parts else empty_fc()[1])
     fc.to_csv(out / "forecast" / f"{month}_forecast.csv.gz", index=False)
     ar.to_csv(out / "forecast" / f"{month}_areas.csv.gz", index=False)
-    return {"rain_days_v1": sources.count("v1"), "rain_days_v2": sources.count("v2"),
+    return {"rain_days_v1": sources.count("v1"), "rain_days_v2": sources.count("v2"), "rain_days_error": sources.count("error"),
             "rain_readings_total": int(len(rd)), "rain_stations_max": int(st.groupby("date").size().max() if len(st) else 0),
             "forecast_rows": int(len(fc)), "forecast_issues": int(fc.issued.nunique() if len(fc) else 0)}
 
@@ -104,14 +126,17 @@ def main(argv=None):
     t0 = time.time()
     sn = fetch_taxi(client, a.month, out, a.workers, a.limit)
     t_taxi = time.time() - t0
-    weather = {} if a.skip_weather else fetch_weather(client, a.month, out, a.workers)
+    try:
+        weather = {} if a.skip_weather else fetch_weather(client, a.month, out, a.workers)
+    except Exception as e:
+        weather = {"weather_error": f"{type(e).__name__}: {e}"}
     log = {"month": a.month, "snapshots": int(len(sn)), "snapshots_ok": int((sn.status == "ok").sum()),
            "median_taxis": float(sn.n_points[sn.status == "ok"].median()) if (sn.status == "ok").any() else None,
            "median_offset_min": float(((pd.to_datetime(sn.act_ts) - pd.to_datetime(sn.req_ts)).dt.total_seconds() / 60).median())
            if (sn.status == "ok").any() else None,
            "taxi_seconds": round(t_taxi, 1), "total_seconds": round(time.time() - t0, 1),
            "calls_per_second": round(client.stats["calls"] / max(1e-9, time.time() - t0), 2),
-           "workers": a.workers, "client": client.stats, **weather}
+           "workers": a.workers, "client": client.stats, **weather, "errors": ERRORS[:50]}
     (out / "logs").mkdir(parents=True, exist_ok=True)
     (out / "logs" / f"{a.month}.json").write_text(json.dumps(log, indent=2, default=str))
     print(json.dumps(log, indent=2, default=str))

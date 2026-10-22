@@ -56,9 +56,15 @@ jobs:
         if: steps.have.outputs.done == '0'
         env:
           DATAGOV_KEY: ${{ secrets.DATAGOV_KEY }}
-        run: python -m pipeline.fetch_month --month ${{ matrix.month }} --out out --workers ${{ needs.plan.outputs.workers }}
+        run: |
+          set +e
+          python -m pipeline.fetch_month --month ${{ matrix.month }} --out out --workers ${{ needs.plan.outputs.workers }} > fetch.log 2>&1
+          code=$?
+          mkdir -p out/logs
+          tail -c 20000 fetch.log > out/logs/${{ matrix.month }}.fetchlog.txt
+          exit $code
       - name: Commit ${{ matrix.month }} to main
-        if: steps.have.outputs.done == '0'
+        if: always() && steps.have.outputs.done == '0'
         run: |
           mkdir -p data/raw
           cp -r out/* data/raw/

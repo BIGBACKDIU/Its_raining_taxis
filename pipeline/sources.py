@@ -96,16 +96,17 @@ def rain_day_v2(client: Client, day: pd.Timestamp):
         if token:
             params["paginationToken"] = token
         j = client.get_json(RAIN_V2, params)
-        if not j or "data" not in j:
+        d = (j or {}).get("data") if isinstance(j, dict) else None
+        if not isinstance(d, dict):
             break
-        d = j["data"]
         pages += 1
-        for s in d.get("stations", []):
+        for s in d.get("stations") or []:
             loc = s.get("location") or s.get("labelLocation") or {}
-            stations[s["id"]] = (s.get("name"), loc.get("latitude"), loc.get("longitude"))
-        for it in d.get("readings", []):
-            ts = it["timestamp"]
-            readings += [(ts, x["stationId"], x["value"]) for x in it.get("data", [])]
+            if s.get("id"):
+                stations[s["id"]] = (s.get("name"), loc.get("latitude"), loc.get("longitude"))
+        for it in d.get("readings") or []:
+            ts = it.get("timestamp")
+            readings += [(ts, x.get("stationId"), x.get("value")) for x in (it.get("data") or []) if ts]
         token = d.get("paginationToken")
         if not token or pages > 200:
             break
@@ -116,21 +117,24 @@ def rain_day(client: Client, day: pd.Timestamp):
     """5-minute rainfall for one day: readings (ts, station_id, mm) and station list."""
     readings, stations = [], {}
     j = client.get_json(RAIN_V1, {"date": day.strftime("%Y-%m-%d")})
-    if j and j.get("items"):
-        for s in j.get("metadata", {}).get("stations", []):
-            loc = s.get("location", {})
-            stations[s["id"]] = (s.get("name"), loc.get("latitude"), loc.get("longitude"))
-        for it in j["items"]:
-            readings += [(it["timestamp"], x["station_id"], x["value"]) for x in it.get("readings", [])]
+    if isinstance(j, dict) and j.get("items"):
+        for s in (j.get("metadata") or {}).get("stations") or []:
+            loc = s.get("location") or {}
+            if s.get("id"):
+                stations[s["id"]] = (s.get("name"), loc.get("latitude"), loc.get("longitude"))
+        for it in j["items"] or []:
+            ts = it.get("timestamp")
+            readings += [(ts, x.get("station_id"), x.get("value")) for x in (it.get("readings") or []) if ts]
     n_ts = len({r[0] for r in readings})
     source = "v1"
     if n_ts < 280:  # not a full day of 5-minute readings: use the paged v2 API instead
         r2, s2 = rain_day_v2(client, day)
         if len({r[0] for r in r2}) > n_ts:
             readings, stations, source = r2, s2, "v2"
-    rd = pd.DataFrame(readings, columns=["ts", "station_id", "mm"])
+    rd = pd.DataFrame(readings, columns=["ts", "station_id", "mm"]).dropna(subset=["ts", "station_id"])
     if len(rd):
-        rd["ts"] = pd.to_datetime(rd.ts, utc=True).dt.tz_convert("Asia/Singapore").dt.tz_localize(None)
+        rd["ts"] = pd.to_datetime(rd.ts, utc=True, errors="coerce").dt.tz_convert("Asia/Singapore").dt.tz_localize(None)
+        rd = rd.dropna(subset=["ts"])
         rd["mm"] = pd.to_numeric(rd.mm, errors="coerce")
         rd = rd.drop_duplicates(["ts", "station_id"])
     st = pd.DataFrame([(k, *v) for k, v in stations.items()], columns=["station_id", "name", "lat", "lon"])
@@ -142,19 +146,19 @@ def forecast_day(client: Client, day: pd.Timestamp):
     """All 2-hour area forecasts issued on one day, with issue and validity times."""
     j = client.get_json(FORECAST_V1, {"date": day.strftime("%Y-%m-%d")})
     fc_rows, areas = [], []
-    if j:
-        for it in j.get("items", []):
-            vp = it.get("valid_period", {})
-            for f in it.get("forecasts", []):
+    if isinstance(j, dict):
+        for it in j.get("items") or []:
+            vp = it.get("valid_period") or {}
+            for f in it.get("forecasts") or []:
                 fc_rows.append((it.get("update_timestamp"), it.get("timestamp"),
                                 vp.get("start"), vp.get("end"), f.get("area"), f.get("forecast")))
-        for a in j.get("area_metadata", []):
-            loc = a.get("label_location", {})
+        for a in j.get("area_metadata") or []:
+            loc = a.get("label_location") or {}
             areas.append((a.get("name"), loc.get("latitude"), loc.get("longitude")))
     fc = pd.DataFrame(fc_rows, columns=["issued", "item_ts", "valid_start", "valid_end", "area", "forecast"])
     for c in ["issued", "item_ts", "valid_start", "valid_end"]:
         if len(fc):
-            fc[c] = pd.to_datetime(fc[c], utc=True).dt.tz_convert("Asia/Singapore").dt.tz_localize(None)
+            fc[c] = pd.to_datetime(fc[c], utc=True, errors="coerce").dt.tz_convert("Asia/Singapore").dt.tz_localize(None)
     fc = fc.drop_duplicates()
     ar = pd.DataFrame(areas, columns=["area", "lat", "lon"]).drop_duplicates("area")
     return fc, ar
