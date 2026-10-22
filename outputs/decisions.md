@@ -48,3 +48,38 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
    fit period (Apr 2022 - Mar 2025) and 10 from the test year. Positions are saved from 3 h before to 4 h after
    the peak, not whole days, to keep the files small (13 MB in total). Five fit-period storms fall in the
    low-coverage regime R05 (Aug-Nov 2022); step 8 must scale or flag them.
+
+## Step B follow-up (agreed with Matthew at the step-B checkpoint)
+
+9. **Simulation storms come only from normal-coverage regimes.** Fit-period storms must lie in a regime with
+   coverage level 0.8-1.25x. This replaces the five R05 storms (Aug-Nov 2022) and also 16 Nov 2024, which lies in
+   the other half-coverage regime R10 (0.47x); the same reasoning applies. The next-ranked storms replace them
+   (20 Sep 2023, 15 Feb 2025, 6 Sep 2023, 22 Jan 2023, 16 Nov 2022, 10 Jan 2025). Still 20 fit + 10 test.
+   Test-year storms are unchanged: three fall in the high-coverage regime R14 (Oct 2025 - Jan 2026); their raw
+   positions allow de-duplication in step 8 if needed. Storm selection is re-run after step 0 so it skips
+   feed-outage days too (no storm changed).
+
+## Step 0: audit
+
+10. **Snapshot glitches.** A snapshot is dropped as a glitch if its citywide count is below 50% of the median of
+    the +-2 neighbouring snapshots (at least 3 present, all in adjacent slots) and both the previous and the next
+    snapshot are back at >= 80% of that median. Sustained drops are not touched. 462 snapshots dropped
+    (0.4%); 109 of them in Dec 2024.
+11. **Unusual days: feed outage vs rain-like.** For each unusual day (daily level > 0.35 log from its regime),
+    compute the correlation of its cell shares (1 km cells, sqrt shares, eight 3-hour blocks, weighted by taxis)
+    with the regime's normal shares for the same block. A day with fewer taxis has noisier shares, so the
+    benchmark is a null built from 40 of the regime's normal days, binomially thinned to the day's own level;
+    "high correlation" = at least the null's 10th percentile. "Little rain" = island-mean daily rain < 2 mm and
+    no working gauge above 20 mm. High correlation AND little rain = feed outage: excluded from the main
+    estimates, kept in a robustness set. Result: 87 unusual days, 17 feed outages (3 of them with any rain,
+    all <= 2 mm island mean), 70 kept. Of the kept days, 16 are dry but spatially unusual (e.g. Chinese New
+    Year 29-30 Jan 2025, 14-16 Mar 2023 right after the outage spell); they stay in by the rule.
+12. **Jump z-scores are de-seasoned.** The change in log citywide count between consecutive snapshots is compared
+    with the median change for the same quarter-hour of week (separately for 30- and 15-minute data), so the
+    morning ramp is not flagged. |z| > 6 is listed in `outputs/tables/audit_jumps.csv` for inspection, not
+    dropped.
+13. **Stuck gauges** (7+ consecutive complete days at 0 mm while the 3 nearest working gauges record > 1 mm on
+    3+ of those days): 20 gauges, 439 gauge-days, treated as missing (`working = complete & ~stuck`).
+14. **Exclusion sets** in `data/interim/day_flags.csv`: `exclude_main` = missing days (< 50% of snapshots) +
+    spells + feed-outage days (100 days); `exclude_robust` = missing days + spells except 26 Feb - 1 Mar 2023
+    (feed-outage days and the ambiguous spell come back in). `covid` flags Oct 2021 - Mar 2022.

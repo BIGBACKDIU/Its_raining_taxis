@@ -30,6 +30,7 @@ UA = {"User-Agent": "its-raining-taxis/1.0 (NUS DAO2702 student project)"}
 POLL = "https://api-open.data.gov.sg/v1/public/api/datasets/{}/poll-download"
 LTA_P2P = "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/statistics/pdf/P2P_info_{}.pdf"
 SEED = 2702
+FIT_STORM_LEVELS = (0.8, 1.25)   # allowed regime coverage level for fit-period simulation storms
 
 # MOE school holidays (primary and secondary), inclusive dates. Sources: MOE press releases
 # "School terms and holidays for YYYY"; 2025-2026 checked against moe.gov.sg (30 Jul 2025 release).
@@ -126,6 +127,9 @@ def fleet():
 def storm_days(n_fit: int = 20, n_test: int = 10, min_gap_days: int = 7) -> pd.DataFrame:
     """Rank days by peak island-mean rain over 30-minute windows (working gauges only)."""
     regimes = pd.read_csv("data/interim/feed_daily.csv", parse_dates=["date"]).set_index("date")
+    flags = Path("data/interim/day_flags.csv")       # step 0 output: adds feed-outage days to the exclusions
+    if flags.exists():
+        regimes["exclude"] = pd.read_csv(flags, parse_dates=["date"]).set_index("date").exclude_main
     rows = []
     for f in sorted(Path("data/raw/rain").glob("*_readings.csv.gz")):
         rd = pd.read_csv(f, parse_dates=["ts"])
@@ -141,16 +145,23 @@ def storm_days(n_fit: int = 20, n_test: int = 10, min_gap_days: int = 7) -> pd.D
         rows.append(w.loc[w.groupby("date").mmh.idxmax(), ["date", "win", "mmh"]])
     peaks = pd.concat(rows).rename(columns={"win": "peak_end", "mmh": "peak_mmh"})
     peaks = peaks[~peaks.date.map(regimes.exclude).fillna(True).astype(bool)]
+    # fit-period storms must come from normal-coverage regimes: in a half-coverage regime (R05 Aug-Nov 2022,
+    # R10 Nov-Dec 2024) the simulation would be tuned to a feed that shows only half the vacant taxis
+    lvl = pd.read_csv("data/interim/feed_regimes.csv").drop_duplicates("regime").set_index("regime").level_ratio
+    peaks["regime_level"] = peaks.date.map(regimes.regime).map(lvl)
     out = []
     for name, a, b, n in (("fit", "2022-04-01", "2025-03-31", n_fit), ("test", "2025-10-01", "2026-09-30", n_test)):
         cand = peaks[(peaks.date >= a) & (peaks.date <= b)].sort_values("peak_mmh", ascending=False)
+        if name == "fit":
+            cand = cand[cand.regime_level.between(*FIT_STORM_LEVELS)]
         chosen = []
         for r in cand.itertuples():
             if all(abs((r.date - c.date).days) >= min_gap_days for c in chosen):
                 chosen.append(r)
             if len(chosen) == n:
                 break
-        out += [dict(period=name, date=r.date, peak_end=r.peak_end, peak_mmh=round(r.peak_mmh, 2)) for r in chosen]
+        out += [dict(period=name, date=r.date, peak_end=r.peak_end, peak_mmh=round(r.peak_mmh, 2),
+                     regime=regimes.regime.get(r.date), regime_level=round(r.regime_level, 3)) for r in chosen]
     return pd.DataFrame(out)
 
 
@@ -158,6 +169,11 @@ def storm_positions(hours_before: int = 3, hours_after: int = 4):
     STORM_DIR.mkdir(parents=True, exist_ok=True)
     days = storm_days()
     days.to_csv(STORM_DIR / "storm_days.csv", index=False)
+    keep = {f"{d:%Y-%m-%d}_positions.parquet" for d in days.date}
+    for f in STORM_DIR.glob("*_positions.parquet"):
+        if f.name not in keep:
+            print("removing storm no longer selected:", f.name)
+            f.unlink()
     print(days.to_string(index=False))
     client = Client()
     for r in days.itertuples():
@@ -179,11 +195,13 @@ def storm_positions(hours_before: int = 3, hours_after: int = 4):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--skip-storms", action="store_true")
+    p.add_argument("--storms-only", action="store_true")
     a = p.parse_args()
     STATIC.mkdir(parents=True, exist_ok=True)
-    taxi_stands()
-    holidays()
-    fleet()
+    if not a.storms_only:
+        taxi_stands()
+        holidays()
+        fleet()
     if not a.skip_storms:
         storm_positions()
 
