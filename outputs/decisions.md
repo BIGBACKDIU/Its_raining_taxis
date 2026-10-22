@@ -153,3 +153,48 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
     more than chance allows for moderate and heavy rain (heavy: Cochran Q = 32.8, df 9, p < 0.001, I^2 73%;
     without R10 p = 0.004). The differences do not line up with coverage level (half-coverage R05 -4.0%,
     R10 +2.2%; normal-coverage regimes -3.9% to -11.7%). `outputs/tables/effects_by_regime_heterogeneity.csv`.
+
+## Step 3 follow-up (agreed with Matthew at the step-3 checkpoint)
+
+33. **Neighbouring-rain features** (panel, all from data up to t): `rain_2km` (mean mm/h over (t-30, t] in cells
+    whose centres are within 2 km, the cell itself excluded), `rain_ring` (2-5 km ring), `wet5_min` (minutes
+    since rain first appeared within 5 km in the current spell; 0 if none now), `dry5_min` (minutes since rain
+    was last seen within 5 km, capped at 1440), `gauges_wet_share` (island share of working gauges with rain).
+    Every 1 km cell seen in the feed (639, eligible or not) carries the rain of its nearest working gauge, so the
+    means are area-weighted gauge readings.
+34. **"Rain approaching" model**: dummies for ring rain (light <= 2.5 / heavier > 2.5 mm/h) and 2 km rain while
+    the cell itself has had no rain for 90 minutes, added to the main specification.
+35. **Season and time band**: NE monsoon = Dec-Mar, SW monsoon = Jun-Sep, inter-monsoon = Apr-May and Oct-Nov;
+    time bands night 00-07, AM peak 07-10, day 10-17, PM peak 17-20, evening 20-24. Tested as heavy x season and
+    heavy x time band terms in the share model, before and after heavy x regime terms (reference regime R09).
+    Result: they do not explain the regime differences (heavy x regime Wald 35.5 -> 27.9, df 9, p 0.001).
+36. **Interactions** are run one at a time (heavy x rush hour / city centre / weekend-or-holiday / fiscal year),
+    each in the absolute and share models. Rush hour = weekday 07-10 and 17-20.
+37. **Forecast value**: rows where the cell has had no rain for 90 minutes and a forecast is available; dummies for
+    the forecast category (reference fair/cloudy), with and without neighbouring-rain controls.
+38. **Robustness**: 3-gauge mean rain; fiscal-year splits; robustness sample; COVID months; 15-minute panel vs
+    30-minute panel over the same months (Oct 2024 - Mar 2025); 500 m grid vs 1 km over FY2024 (500 m eligibility
+    by the same >= 0.5 rule: 793 of 2,160 cells); Poisson and NB2 GLMs on a table aggregated to planning area x
+    3-hour block of week x ym^regime x band (NB2 alpha by method of moments from the Poisson fit, HC1 errors);
+    event-study onset thresholds 0.5 and 2 mm/h.
+
+## Step 4: inference
+
+39. **fit0** (no-rain model) = Poisson cell + how^month + ym^regime fitted by IPF on dry rows (no rain at the cell
+    for 90 minutes), predictions for all rows. Day bootstrap: 2,000 draws. Storm blocks: consecutive days with
+    heavy rain anywhere form one block (507 blocks, 131 multi-day). Permutation: 1,000 draws, rain patterns
+    (band per cell and half hour) swapped between days in the same year-month and weekday/weekend group.
+40. **Hotspots**: per-cell ratio statistic for heavy rain with day-bootstrap standard errors, normal p-values,
+    Benjamini-Hochberg at 10%, cells with >= 100 heavy-rain rows.
+
+## Step 5: risk
+
+41. **Logit with fixed effects** via the same estimator (logit family checked against pyfixest in tests/).
+    Rows where the fixed-effect group has no variation in the outcome are dropped (reported in the table).
+42. **Vulnerability** = percentage-point difference P(low | heavy) - P(low | dry) per cell, 1,000 day-bootstrap
+    draws; shown only where the 95% CI excludes 0 and the cell has >= 50 heavy-rain rows with baseline >= 4.
+43. **Severity multinomial** on a 1,000,000-row random sample with controls (city centre, peaks, night, weekend,
+    regime level, log baseline) instead of fixed effects, errors clustered by day; appendix only.
+44. **Rain-response types**: k-means on four log ratios (light, moderate, heavy, just after rain, each relative
+    to dry), k chosen by silhouette (k = 2); 200 day-bootstrap re-clusterings, mean adjusted Rand index 0.65
+    (5th-95th percentile 0.49-0.76): moderately stable, so the types are described, not relied on.

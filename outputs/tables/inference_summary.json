@@ -1,0 +1,13 @@
+{
+  "rows": 18393279,
+  "days": 1038,
+  "dry_rows_used_for_fit0": 16383828,
+  "storm_blocks": 507,
+  "multi_day_blocks": 131,
+  "hotspots": {
+    "significantly lower": 299,
+    "not significant": 69,
+    "significantly higher": 6
+  },
+  "bh_fdr": 0.1
+}

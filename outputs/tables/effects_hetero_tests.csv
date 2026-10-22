@@ -1,0 +1,7 @@
+model,test,wald,df,p
+regime only,heavy x regime = 0,35.521292,9,0.000048
+regime + season + time band,heavy x regime = 0,27.884568,9,0.000997
+regime + season + time band,heavy x season = 0,1.120001,2,0.571209
+regime + season + time band,heavy x time band = 0,3.688665,4,0.449777
+season + time band only,heavy x season = 0,7.140944,2,0.028143
+season + time band only,heavy x time band = 0,2.862695,4,0.581060

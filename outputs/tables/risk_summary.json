@@ -1,0 +1,40 @@
+{
+  "vulnerability_cells_clear_increase": 114,
+  "vulnerability_cells_tested": 179,
+  "vulnerability_median_rd_pp": 5.781969287414118,
+  "types": {
+    "k": 2,
+    "silhouette": {
+      "2": 0.4026,
+      "3": 0.3442,
+      "4": 0.2966,
+      "5": 0.2892
+    },
+    "ari_mean": 0.6490151964376761,
+    "ari_p05": 0.48850778574202736,
+    "ari_p95": 0.7555020958284526,
+    "bootstrap_draws": 200,
+    "type_means_pct": {
+      "pct_light": {
+        "0": -14.86,
+        "1": -4.74
+      },
+      "pct_moderate": {
+        "0": -19.75,
+        "1": -7.44
+      },
+      "pct_heavy": {
+        "0": -22.97,
+        "1": -9.24
+      },
+      "pct_just_after": {
+        "0": -15.29,
+        "1": -0.92
+      }
+    },
+    "type_sizes": {
+      "0": 121,
+      "1": 253
+    }
+  }
+}
