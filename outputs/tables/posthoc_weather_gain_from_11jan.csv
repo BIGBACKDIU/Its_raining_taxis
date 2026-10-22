@@ -1,0 +1,17 @@
+analysis,model,label,h,subset,rows,base_rate,pr_auc_with_weather,pr_auc_without_weather,weather_gain,lo,hi
+"POST-HOC check, added after first test scoring and after S1",primary 1 km LightGBM,deficit >= 50%,30,all,2170072,0.27519,0.51161,0.51089,0.00072,0.00044,0.00096
+"POST-HOC check, added after first test scoring and after S1",primary 1 km LightGBM,deficit >= 50%,30,rainy (rain at target time),81980,0.34105,0.57813,0.57787,0.00026,-0.00116,0.00183
+"POST-HOC check, added after first test scoring and after S1",primary 1 km LightGBM,deficit >= 50%,60,all,2168587,0.27530,0.48047,0.47968,0.00079,0.00044,0.00117
+"POST-HOC check, added after first test scoring and after S1",primary 1 km LightGBM,deficit >= 50%,60,rainy (rain at target time),81988,0.34064,0.54557,0.54437,0.00119,-0.00086,0.00306
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,30,all,545568,0.15224,0.47658,0.47682,-0.00024,-0.00161,0.00109
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,30,rainy (rain at target time),29848,0.20534,0.55438,0.55232,0.00206,-0.00111,0.00605
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,30,all,589274,0.07119,0.32815,0.32932,-0.00118,-0.00282,0.00037
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,30,rainy (rain at target time),31557,0.11167,0.41877,0.42442,-0.00565,-0.00924,-0.00214
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,60,all,545176,0.15248,0.42795,0.42807,-0.00012,-0.00268,0.00179
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,60,rainy (rain at target time),29846,0.20552,0.49921,0.50095,-0.00174,-0.00534,0.00199
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,60,all,588833,0.07136,0.26179,0.26377,-0.00198,-0.00391,-0.00002
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,60,rainy (rain at target time),31556,0.11148,0.34836,0.34957,-0.00122,-0.00551,0.00245
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,120,all,544679,0.15258,0.38597,0.38517,0.00080,-0.00177,0.00250
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,deficit >= 50%,120,rainy (rain at target time),29859,0.20624,0.44170,0.44898,-0.00728,-0.01140,-0.00032
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,120,all,588294,0.07146,0.20160,0.20014,0.00146,-0.00179,0.00378
+"POST-HOC check, added after first test scoring and after S1",S1 planning-area LightGBM,below NB 5th percentile,120,rainy (rain at target time),31566,0.11240,0.27153,0.27422,-0.00270,-0.00799,0.00261

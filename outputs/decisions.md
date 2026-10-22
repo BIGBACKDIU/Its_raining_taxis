@@ -292,3 +292,7 @@ results stay as they are and remain the pre-specified result.
     small for the test-year feed (duplicated records and a shrinking fleet within each test regime), so the
     "5th percentile" is not a 5% event in the test year. Outputs: `outputs/tables/s1_*.csv`,
     `outputs/figures/s1_weather_gain.*`.
+66. **POST-HOC check (after S1): normal-coverage months only.** On the test-year subset from 11 Jan 2026, the
+    weather gain stays negligible: primary 1 km LightGBM +0.0007 (30 min, CI +0.0004 to +0.0010) and +0.0008
+    (60 min); S1 planning areas -0.0020 to +0.0015 overall, -0.0073 to +0.0021 in rainy slots. The null is not
+    driven by the high-coverage months. `outputs/tables/posthoc_weather_gain_from_11jan.csv`.
