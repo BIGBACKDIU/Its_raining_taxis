@@ -47,7 +47,7 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
    07:00 and 23:00 (working gauges only), skip excluded days, keep days at least 7 days apart. Take 20 from the
    fit period (Apr 2022 - Mar 2025) and 10 from the test year. Positions are saved from 3 h before to 4 h after
    the peak, not whole days, to keep the files small (13 MB in total). Five fit-period storms fall in the
-   low-coverage regime R05 (Aug-Nov 2022); step 8 must scale or flag them.
+   low-coverage regime R05 (Aug-Nov 2022). Superseded by decision 9: they are replaced, not scaled.
 
 ## Step B follow-up (agreed with Matthew at the step-B checkpoint)
 
