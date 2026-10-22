@@ -1,0 +1,509 @@
+month,company,taxis
+2021-01,Comfort,7208
+2021-02,Comfort,7174
+2021-03,Comfort,7069
+2021-04,Comfort,7092
+2021-05,Comfort,7045
+2021-06,Comfort,7023
+2021-07,Comfort,7035
+2021-08,Comfort,7013
+2021-09,Comfort,6957
+2021-10,Comfort,6913
+2021-11,Comfort,6786
+2021-12,Comfort,6664
+2021-01,CityCab,2409
+2021-02,CityCab,2403
+2021-03,CityCab,2365
+2021-04,CityCab,2365
+2021-05,CityCab,2348
+2021-06,CityCab,2342
+2021-07,CityCab,2346
+2021-08,CityCab,2346
+2021-09,CityCab,2339
+2021-10,CityCab,2329
+2021-11,CityCab,2304
+2021-12,CityCab,2273
+2021-01,Trans-Cab,2482
+2021-02,Trans-Cab,2490
+2021-03,Trans-Cab,2507
+2021-04,Trans-Cab,2518
+2021-05,Trans-Cab,2507
+2021-06,Trans-Cab,2491
+2021-07,Trans-Cab,2484
+2021-08,Trans-Cab,2474
+2021-09,Trans-Cab,2460
+2021-10,Trans-Cab,2451
+2021-11,Trans-Cab,2421
+2021-12,Trans-Cab,2406
+2021-01,SMRT,1797
+2021-02,SMRT,1796
+2021-03,SMRT,1796
+2021-04,SMRT,1797
+2021-05,SMRT,1797
+2021-06,SMRT,1779
+2021-07,SMRT,1776
+2021-08,SMRT,1792
+2021-09,SMRT,1848
+2021-10,SMRT,1888
+2021-11,SMRT,1799
+2021-12,SMRT,1832
+2021-01,Premier,1310
+2021-02,Premier,1318
+2021-03,Premier,1322
+2021-04,Premier,1342
+2021-05,Premier,1295
+2021-06,Premier,1241
+2021-07,Premier,1204
+2021-08,Premier,1196
+2021-09,Premier,1192
+2021-10,Premier,1168
+2021-11,Premier,1132
+2021-12,Premier,1110
+2021-01,Prime,626
+2021-02,Prime,628
+2021-03,Prime,624
+2021-04,Prime,630
+2021-05,Prime,615
+2021-06,Prime,606
+2021-07,Prime,600
+2021-08,Prime,600
+2021-09,Prime,591
+2021-10,Prime,585
+2021-11,Prime,562
+2021-12,Prime,560
+2021-01,Individual Yellow-Top,56
+2021-02,Individual Yellow-Top,56
+2021-03,Individual Yellow-Top,55
+2021-04,Individual Yellow-Top,55
+2021-05,Individual Yellow-Top,54
+2021-06,Individual Yellow-Top,54
+2021-07,Individual Yellow-Top,52
+2021-08,Individual Yellow-Top,51
+2021-09,Individual Yellow-Top,47
+2021-10,Individual Yellow-Top,46
+2021-11,Individual Yellow-Top,44
+2021-12,Individual Yellow-Top,42
+2021-01,Total,15888
+2021-02,Total,15865
+2021-03,Total,15738
+2021-04,Total,15799
+2021-05,Total,15661
+2021-06,Total,15536
+2021-07,Total,15497
+2021-08,Total,15472
+2021-09,Total,15434
+2021-10,Total,15380
+2021-11,Total,15048
+2021-12,Total,14887
+2022-01,Comfort,6660
+2022-02,Comfort,6601
+2022-03,Comfort,6576
+2022-04,Comfort,6610
+2022-05,Comfort,6547
+2022-06,Comfort,6506
+2022-07,Comfort,6527
+2022-08,Comfort,6572
+2022-09,Comfort,6564
+2022-10,Comfort,6550
+2022-11,Comfort,6546
+2022-12,Comfort,6535
+2022-01,CityCab,2272
+2022-02,CityCab,2236
+2022-03,CityCab,2224
+2022-04,CityCab,2237
+2022-05,CityCab,2224
+2022-06,CityCab,2209
+2022-07,CityCab,2215
+2022-08,CityCab,2216
+2022-09,CityCab,2213
+2022-10,CityCab,2210
+2022-11,CityCab,2209
+2022-12,CityCab,2204
+2022-01,Trans-Cab,2396
+2022-02,Trans-Cab,2378
+2022-03,Trans-Cab,2312
+2022-04,Trans-Cab,2264
+2022-05,Trans-Cab,2250
+2022-06,Trans-Cab,2234
+2022-07,Trans-Cab,2216
+2022-08,Trans-Cab,2229
+2022-09,Trans-Cab,2206
+2022-10,Trans-Cab,2195
+2022-11,Trans-Cab,2201
+2022-12,Trans-Cab,2207
+2022-01,Strides,1829
+2022-02,Strides,1827
+2022-03,Strides,1825
+2022-04,Strides,1825
+2022-05,Strides,1815
+2022-06,Strides,1765
+2022-07,Strides,1726
+2022-08,Strides,1689
+2022-09,Strides,1650
+2022-10,Strides,1637
+2022-11,Strides,1610
+2022-12,Strides,1593
+2022-01,Premier,1105
+2022-02,Premier,1096
+2022-03,Premier,1084
+2022-04,Premier,1080
+2022-05,Premier,1077
+2022-06,Premier,1077
+2022-07,Premier,1073
+2022-08,Premier,1052
+2022-09,Premier,1041
+2022-10,Premier,1035
+2022-11,Premier,1032
+2022-12,Premier,1000
+2022-01,Prime,544
+2022-02,Prime,538
+2022-03,Prime,542
+2022-04,Prime,548
+2022-05,Prime,543
+2022-06,Prime,531
+2022-07,Prime,522
+2022-08,Prime,519
+2022-09,Prime,515
+2022-10,Prime,515
+2022-11,Prime,514
+2022-12,Prime,514
+2022-01,Individual Yellow-Top,41
+2022-02,Individual Yellow-Top,41
+2022-03,Individual Yellow-Top,40
+2022-04,Individual Yellow-Top,40
+2022-05,Individual Yellow-Top,39
+2022-06,Individual Yellow-Top,37
+2022-07,Individual Yellow-Top,37
+2022-08,Individual Yellow-Top,36
+2022-09,Individual Yellow-Top,35
+2022-10,Individual Yellow-Top,34
+2022-11,Individual Yellow-Top,34
+2022-12,Individual Yellow-Top,31
+2022-01,Total,14847
+2022-02,Total,14717
+2022-03,Total,14603
+2022-04,Total,14604
+2022-05,Total,14495
+2022-06,Total,14359
+2022-07,Total,14316
+2022-08,Total,14313
+2022-09,Total,14224
+2022-10,Total,14176
+2022-11,Total,14146
+2022-12,Total,14084
+2023-01,Comfort,6530
+2023-02,Comfort,6539
+2023-03,Comfort,6532
+2023-04,Comfort,6592
+2023-05,Comfort,6569
+2023-06,Comfort,6545
+2023-07,Comfort,6519
+2023-08,Comfort,6521
+2023-09,Comfort,6568
+2023-10,Comfort,6592
+2023-11,Comfort,6555
+2023-12,Comfort,6565
+2023-01,CityCab,2204
+2023-02,CityCab,2202
+2023-03,CityCab,2208
+2023-04,CityCab,2248
+2023-05,CityCab,2243
+2023-06,CityCab,2237
+2023-07,CityCab,2233
+2023-08,CityCab,2233
+2023-09,CityCab,2249
+2023-10,CityCab,2249
+2023-11,CityCab,2241
+2023-12,CityCab,2258
+2023-01,Trans-Cab,2170
+2023-02,Trans-Cab,2171
+2023-03,Trans-Cab,2165
+2023-04,Trans-Cab,2188
+2023-05,Trans-Cab,2168
+2023-06,Trans-Cab,2159
+2023-07,Trans-Cab,2154
+2023-08,Trans-Cab,2135
+2023-09,Trans-Cab,2126
+2023-10,Trans-Cab,2109
+2023-11,Trans-Cab,2104
+2023-12,Trans-Cab,2097
+2023-01,Strides,1569
+2023-02,Strides,1537
+2023-03,Strides,1513
+2023-04,Strides,1512
+2023-05,Strides,1505
+2023-06,Strides,1495
+2023-07,Strides,1492
+2023-08,Strides,1490
+2023-09,Strides,1454
+2023-10,Strides,1404
+2023-11,Strides,1373
+2023-12,Strides,1360
+2023-01,Premier,1001
+2023-02,Premier,965
+2023-03,Premier,973
+2023-04,Premier,997
+2023-05,Premier,976
+2023-06,Premier,889
+2023-07,Premier,837
+2023-08,Premier,799
+2023-09,Premier,792
+2023-10,Premier,797
+2023-11,Premier,792
+2023-12,Premier,784
+2023-01,Prime,513
+2023-02,Prime,512
+2023-03,Prime,510
+2023-04,Prime,510
+2023-05,Prime,510
+2023-06,Prime,510
+2023-07,Prime,510
+2023-08,Prime,510
+2023-09,Prime,510
+2023-10,Prime,532
+2023-11,Prime,532
+2023-12,Prime,532
+2023-01,Individual Yellow-Top,29
+2023-02,Individual Yellow-Top,29
+2023-03,Individual Yellow-Top,29
+2023-04,Individual Yellow-Top,28
+2023-05,Individual Yellow-Top,26
+2023-06,Individual Yellow-Top,26
+2023-07,Individual Yellow-Top,26
+2023-08,Individual Yellow-Top,26
+2023-09,Individual Yellow-Top,26
+2023-10,Individual Yellow-Top,26
+2023-11,Individual Yellow-Top,25
+2023-12,Individual Yellow-Top,24
+2023-01,Total,14016
+2023-02,Total,13955
+2023-03,Total,13930
+2023-04,Total,14075
+2023-05,Total,13997
+2023-06,Total,13861
+2023-07,Total,13771
+2023-08,Total,13714
+2023-09,Total,13725
+2023-10,Total,13709
+2023-11,Total,13622
+2023-12,Total,13620
+2024-01,Comfort,6512
+2024-02,Comfort,6501
+2024-03,Comfort,6493
+2024-04,Comfort,6487
+2024-05,Comfort,6428
+2024-06,Comfort,6513
+2024-07,Comfort,6462
+2024-08,Comfort,6479
+2024-09,Comfort,6509
+2024-10,Comfort,6388
+2024-11,Comfort,6322
+2024-12,Comfort,6339
+2024-01,CityCab,2233
+2024-02,CityCab,2223
+2024-03,CityCab,2219
+2024-04,CityCab,2218
+2024-05,CityCab,2207
+2024-06,CityCab,2229
+2024-07,CityCab,2200
+2024-08,CityCab,2190
+2024-09,CityCab,2169
+2024-10,CityCab,2136
+2024-11,CityCab,2113
+2024-12,CityCab,2085
+2024-01,Trans-Cab,2097
+2024-02,Trans-Cab,2095
+2024-03,Trans-Cab,2077
+2024-04,Trans-Cab,2077
+2024-05,Trans-Cab,2067
+2024-06,Trans-Cab,2066
+2024-07,Trans-Cab,2066
+2024-08,Trans-Cab,2065
+2024-09,Trans-Cab,2090
+2024-10,Trans-Cab,2079
+2024-11,Trans-Cab,2040
+2024-12,Trans-Cab,2076
+2024-01,Prime,532
+2024-02,Prime,532
+2024-03,Prime,530
+2024-04,Prime,537
+2024-05,Prime,537
+2024-06,Prime,537
+2024-07,Prime,537
+2024-08,Prime,537
+2024-09,Prime,539
+2024-10,Prime,539
+2024-11,Prime,541
+2024-12,Prime,544
+2024-01,Individual Yellow-Top,23
+2024-02,Individual Yellow-Top,23
+2024-03,Individual Yellow-Top,23
+2024-04,Individual Yellow-Top,22
+2024-05,Individual Yellow-Top,21
+2024-06,Individual Yellow-Top,21
+2024-07,Individual Yellow-Top,20
+2024-08,Individual Yellow-Top,20
+2024-09,Individual Yellow-Top,19
+2024-10,Individual Yellow-Top,17
+2024-11,Individual Yellow-Top,14
+2024-12,Individual Yellow-Top,14
+2024-01,Total,13485
+2024-02,Total,13436
+2024-03,Total,13376
+2024-04,Total,13396
+2024-05,Total,13330
+2024-06,Total,13436
+2024-07,Total,13343
+2024-08,Total,13352
+2024-09,Total,13389
+2024-10,Total,13218
+2024-11,Total,13087
+2024-12,Total,13117
+2025-01,Comfort,6257
+2025-02,Comfort,6202
+2025-03,Comfort,6181
+2025-04,Comfort,6123
+2025-05,Comfort,6045
+2025-06,Comfort,5986
+2025-07,Comfort,5931
+2025-08,Comfort,5900
+2025-09,Comfort,5902
+2025-10,Comfort,5915
+2025-11,Comfort,5887
+2025-12,Comfort,5751
+2025-01,CityCab,2063
+2025-02,CityCab,2053
+2025-03,CityCab,2048
+2025-04,CityCab,2034
+2025-05,CityCab,2003
+2025-06,CityCab,1972
+2025-07,CityCab,1942
+2025-08,CityCab,1916
+2025-09,CityCab,1918
+2025-10,CityCab,1906
+2025-11,CityCab,1867
+2025-12,CityCab,1851
+2025-01,Trans-Cab,2077
+2025-02,Trans-Cab,2113
+2025-03,Trans-Cab,2091
+2025-04,Trans-Cab,2029
+2025-05,Trans-Cab,1975
+2025-06,Trans-Cab,1950
+2025-07,Trans-Cab,1946
+2025-08,Trans-Cab,1948
+2025-09,Trans-Cab,1948
+2025-10,Trans-Cab,1948
+2025-11,Trans-Cab,1948
+2025-12,Trans-Cab,1948
+2025-01,Strides Premier,2044
+2025-02,Strides Premier,2019
+2025-03,Strides Premier,1974
+2025-04,Strides Premier,1932
+2025-05,Strides Premier,1902
+2025-06,Strides Premier,1881
+2025-07,Strides Premier,1849
+2025-08,Strides Premier,1830
+2025-09,Strides Premier,1825
+2025-10,Strides Premier,1797
+2025-11,Strides Premier,1793
+2025-12,Strides Premier,1789
+2025-01,Prime,545
+2025-02,Prime,541
+2025-03,Prime,540
+2025-04,Prime,533
+2025-05,Prime,531
+2025-06,Prime,529
+2025-07,Prime,532
+2025-08,Prime,523
+2025-09,Prime,534
+2025-10,Prime,538
+2025-11,Prime,524
+2025-12,Prime,517
+2025-01,Individual Yellow-Top,14
+2025-02,Individual Yellow-Top,13
+2025-03,Individual Yellow-Top,12
+2025-04,Individual Yellow-Top,11
+2025-05,Individual Yellow-Top,9
+2025-06,Individual Yellow-Top,8
+2025-07,Individual Yellow-Top,8
+2025-08,Individual Yellow-Top,7
+2025-09,Individual Yellow-Top,7
+2025-10,Individual Yellow-Top,6
+2025-11,Individual Yellow-Top,6
+2025-12,Individual Yellow-Top,5
+2025-01,Total,13000
+2025-02,Total,12941
+2025-03,Total,12846
+2025-04,Total,12662
+2025-05,Total,12465
+2025-06,Total,12346
+2025-07,Total,12261
+2025-08,Total,12189
+2025-09,Total,12213
+2025-10,Total,12216
+2025-11,Total,12234
+2025-12,Total,12161
+2026-01,Comfort,5734
+2026-02,Comfort,5729
+2026-03,Comfort,5728
+2026-04,Comfort,5754
+2026-05,Comfort,5758
+2026-06,Comfort,5729
+2026-07,Comfort,5681
+2026-08,Comfort,5606
+2026-01,CityCab,1845
+2026-02,CityCab,1839
+2026-03,CityCab,1828
+2026-04,CityCab,1817
+2026-05,CityCab,1809
+2026-06,CityCab,1804
+2026-07,CityCab,1790
+2026-08,CityCab,1755
+2026-01,Trans-Cab,1948
+2026-02,Trans-Cab,1948
+2026-03,Trans-Cab,1948
+2026-04,Trans-Cab,1936
+2026-05,Trans-Cab,1908
+2026-06,Trans-Cab,1861
+2026-07,Trans-Cab,1836
+2026-08,Trans-Cab,1757
+2026-01,Strides Premier,1786
+2026-02,Strides Premier,1784
+2026-03,Strides Premier,1778
+2026-04,Strides Premier,1787
+2026-05,Strides Premier,1765
+2026-06,Strides Premier,1760
+2026-07,Strides Premier,1735
+2026-08,Strides Premier,1697
+2026-01,Prime,515
+2026-02,Prime,520
+2026-03,Prime,532
+2026-04,Prime,528
+2026-05,Prime,539
+2026-06,Prime,538
+2026-07,Prime,531
+2026-08,Prime,534
+2026-01,GrabCab,345
+2026-02,GrabCab,370
+2026-03,GrabCab,420
+2026-04,GrabCab,453
+2026-05,GrabCab,492
+2026-06,GrabCab,531
+2026-07,GrabCab,557
+2026-08,GrabCab,579
+2026-01,Individual Yellow-Top,5
+2026-02,Individual Yellow-Top,5
+2026-03,Individual Yellow-Top,5
+2026-04,Individual Yellow-Top,5
+2026-05,Individual Yellow-Top,5
+2026-06,Individual Yellow-Top,5
+2026-07,Individual Yellow-Top,4
+2026-08,Individual Yellow-Top,4
+2026-01,Total,12178
+2026-02,Total,12195
+2026-03,Total,12239
+2026-04,Total,12280
+2026-05,Total,12276
+2026-06,Total,12228
+2026-07,Total,12134
+2026-08,Total,11932

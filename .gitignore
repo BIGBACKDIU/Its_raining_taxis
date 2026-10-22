@@ -3,3 +3,5 @@ __pycache__/
 out/
 artifacts/
 .ipynb_checkpoints/
+.venv/
+data/interim/*.parquet

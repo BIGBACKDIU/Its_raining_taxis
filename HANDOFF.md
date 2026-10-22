@@ -72,6 +72,12 @@ Status on 22 Oct 2026, 17:36 SGT: **all 60 months downloaded** (run 39755275255,
      contains the high-coverage regime) separately for the parts before and after the change.
    - Report this openly as a data limitation.
 
+   **Update 22 Oct 2026 (local run):** the retry of all 2,671 non-ok snapshots recovered none (the archive answers
+   "no results found"). Regimes are in `data/interim/feed_regimes.csv` (18 regimes, 8 short spells excluded;
+   `data/interim/feed_daily.csv` has a per-day `regime` and `exclude` flag). From Oct 2025 the feed holds exact
+   duplicate coordinates plus extra vehicles (`outputs/tables/feed_duplicate_check.csv`). Methods and choices:
+   `analysis/prep_feed_regimes.py` and `outputs/decisions.md`.
+
 Per month (`YYYY-MM`), all readable with numpy/pandas only:
 
 | File | Contents |
@@ -97,7 +103,12 @@ cell id = `cx * 1000 + cy`. **1 km cells nest exactly**: `grid.coarsen(cell500)`
 - `data/static/sg_map.json`: coastline (`land`) and 55 URA 2014 planning areas (lon/lat rings).
 - `data/static/sg_mrt.json`: 184 stations (`[name, code, network, lat, lon]`), 609 exits, line geometries.
 
-### 3c. Still to fetch (small; do these locally)
+### 3c. Small static data
+
+**Fetched 22 Oct 2026** by `analysis/prep_static.py`: `data/static/lta_taxi_stops.{geojson,csv}` (371 stops/stands),
+`data/static/holidays.csv` (public + MOE school holidays), `data/static/lta_cdg_share_monthly.csv` (fleet by
+company and P2P trips, Jan 2021 - Aug 2026), `data/raw/storm_positions/` (30 storms, positions from 3 h before to
+4 h after the peak; list in `storm_days.csv`). Original list:
 
 - LTA Taxi Stop / taxi stands: data.gov.sg dataset `d_fa1896e73ded89dd513788d501d45033` (GeoJSON).
 - Passenger pick-up bays and road sections (LTA DataMall static, optional).
