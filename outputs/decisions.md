@@ -327,3 +327,42 @@ results stay as they are and remain the pre-specified result.
     summed over the area's eligible cells), % loss (sum vacant / sum fit0 - 1) and share loss (fit0 rescaled to the
     observed citywide total over eligible cells at each snapshot). 500 day-bootstrap draws for CIs; groups with
     fewer than 200 cell-snapshots are not ranked.
+
+## Step 8: simulation (rules fixed before running)
+
+72. **Model type.** A scenario-based operational model, never "validation". Cell-based agent model on the 374
+    eligible 1 km cells, 1-minute steps, seeds vectorised (numpy). Each cell holds integer counts of vacant and
+    offline taxis; occupied and repositioning taxis are tracked by arrival minute and destination cell, so the
+    fleet is conserved exactly. Requests are Poisson per cell per minute; waiting requests abandon with a
+    geometric patience (mean 6 minutes). Matching uses the taxi's own cell first, then rings of cells by centre
+    distance (<= 1.5, 2.5, 3.2 km; widening dispatch adds <= 5 and 8 km for requests that have already waited).
+    A matched taxi's pickup is approximated by its own cell plus an approach time; destinations are drawn from the
+    scenario's destination matrix. Trip time = approach + 1.3 x distance / speed + 2 minutes.
+73. **Scenario grid.** Mechanism in rain (demand surge / supply drop / mix) x demand level (0.8, 1.0, 1.2) x
+    destinations (MRT pattern: weight 0.5 + MRT exits, gravity exp(-d / 10 km); distance decay from a land-use
+    proxy: city-centre 2, other 1, x taxi stops + 1, exp(-d / 4 km)) x travel times (dry 30 km/h everywhere /
+    rain congestion 20 km/h in raining cells) x dispatch (nearest within 3.2 km / widening radius) x policy
+    (as usual / step-7 repositioning every 30 minutes, LP relaxation solved with HiGHS, persistence forecast).
+    No land-use data are available; the land-use destination pattern is a labelled proxy.
+74. **Normal time-of-day path.** At each 30-minute boundary the number of taxis on the road is set to follow the
+    citywide panel baseline (expected vacant level without rain) relative to the storm start; taxis are added
+    at cells in proportion to the cell baseline and removed in proportion to current vacant taxis. Rain effects
+    are therefore relative to the expected path.
+75. **Calibration.** For each of the 24 mechanism x destinations x travel x dispatch combinations, Optuna (12
+    trials, TPE, seed 2702) tunes the initial occupied share (0.2-0.7), a demand scale around equilibrium
+    (0.7-1.3) and the rain response (demand surge per 10 mm/h 0-2; offline probability per minute at 30 mm/h
+    0-0.05; mix tunes both), on the 20 fit-period storms, 2 seeds, to minimise: RMSE of simulated vs observed
+    citywide vacant taxis (each relative to its value at the storm start) + 0.5 x (1 - correlation of cell
+    mean vacant over the window). Demand level 0.8 / 1.2 is applied after tuning.
+76. **Plausibility rule (fixed in advance)** on the 10 held-out test-year storms (positions de-duplicated within
+    5 m; relative series, so coverage level cancels): a storm passes if the simulated relative citywide vacant
+    series is within +-20% of the observed relative series at >= 70% of snapshot times; a combination passes if
+    >= 7 of 10 storms pass AND the sign of the change from start to rain peak matches the observed sign in >= 7 of
+    10 storms. Results are reported for all combinations, with pass / fail shown.
+77. **Grid runs.** 50 seeds per grid cell on the 10 held-out storms. Reported ranges (5th-95th percentile over
+    seeds and storms) are labelled "simulated, conditional on scenario X": vacant taxis at the rain peak relative
+    to start, share of requests abandoned during rain, mean wait of served requests, share of cells with no
+    vacant taxi. Requests, waits and abandonments are simulation quantities, never observed demand.
+78. **Web page check.** `sim/index.html` runs a JavaScript port of the same rules with a seeded RNG; the page
+    averages (50 seeds) must be within 5% of the Python engine for the same scenario and storm (checked in node
+    on 3 scenario x storm pairs).
