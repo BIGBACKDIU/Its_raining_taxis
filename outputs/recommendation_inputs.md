@@ -46,7 +46,7 @@ Use these to time rain incentives (e.g. driver bonuses) for forecast rainy perio
 Simulated, conditional on scenario; none of the 24 tuned scenario combinations passed the held-out plausibility
 rule (best 5 of 10 storms). Read as "what could happen under assumption X":
 - Vacant taxis at the rain peak relative to the start: about 0.6-0.9 of the start level in demand-surge or
-  supply-drop scenarios (5-95% ranges roughly 0.4-1.4); much lower (0.1-0.6) when both happen together.
+  supply-drop scenarios (5-95% ranges roughly 0.4-1.4); much lower (about 0.06-0.65) when both happen together.
 - Simulated share of requests abandoned during rain: about 1-10% depending on the scenario.
 - Step-7 repositioning in the simulation: abandoned requests during rain -1.3 percentage points on average
   (range 0 to -4.7), vacant taxis at the peak -4 points (taxis are in transit), waits essentially unchanged.
