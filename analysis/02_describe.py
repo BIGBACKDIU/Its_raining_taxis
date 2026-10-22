@@ -36,8 +36,8 @@ def fit_panel(columns=COLS):
 
 # ----------------------------------------------------------------------------- 1. profiles
 def profiles(p: pd.DataFrame, n_boot=200):
-    """Ratio sum(vacant) / sum(baseline) by hour of day x weekday/weekend x rain band, with day-bootstrap 95% CI."""
-    p = p.assign(hour=p.hod // 2, wk=np.where(p.daytype == 0, "Weekday", "Weekend or holiday"))
+    """Ratio sum(vacant) / sum(baseline) by 2-hour block of day x weekday/weekend x rain band, with day-bootstrap 95% CI."""
+    p = p.assign(hour=(p.hod // 4) * 2, wk=np.where(p.daytype == 0, "Weekday", "Weekend or holiday"))
     d = p.groupby(["date", "wk", "hour", "rain_band"], observed=True)[["vacant", "baseline"]].sum().reset_index()
     rng = np.random.default_rng(SEED)
     days = d.date.unique()
@@ -68,10 +68,10 @@ def profiles(p: pd.DataFrame, n_boot=200):
         ax.axhline(100, color=MUTED, lw=0.8, ls="--")
         ax.set_title(wk, fontsize=9.5)
         ax.set_xticks(range(0, 24, 3), [f"{h:02d}:00" for h in range(0, 24, 3)])
-        ax.set_xlabel("Hour of day")
+        ax.set_xlabel("Hour of day (2-hour blocks, start time)")
     axes[0].set_ylabel("Vacant taxis as % of expected level")
     axes[0].legend(title="Rain in previous 30 min", fontsize=8, title_fontsize=8, loc="lower left")
-    fig.suptitle("Fewer vacant taxis than expected when it rains, at every hour; heavier rain, bigger gap",
+    fig.suptitle("In rain, cells hold about 5-20% fewer vacant taxis than expected at most times of day",
                  x=0.01, ha="left", fontsize=10.5, color=INK)
     fig.tight_layout()
     save(fig, "desc_profile_rain_bands", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Apr 2022 - Mar 2025, "
@@ -222,7 +222,6 @@ def trend_vs_fleet():
     ax.axhline(100, color=MUTED, lw=0.8, ls="--")
     ax.set_ylabel("Index, Apr 2022 = 100")
     ax.legend(loc="upper left", fontsize=8)
-    ax.text(pd.Timestamp("2025-11-15"), 185, "high-coverage\nregime", fontsize=7.5, color=MUTED, ha="center")
     ax.set_title("The fleet shrank 18% and street hails more than halved, while the feed's level mostly tracks coverage",
                  fontsize=10.5)
     fig.tight_layout()
