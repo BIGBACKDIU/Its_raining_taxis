@@ -348,7 +348,9 @@ def parity(S=50):
                      "diff_mean_pct": 100 * (js["mean_rel"] / py_mean - 1), "diff_peak_pct": 100 * (js["peak_rel"] / py_peak - 1)})
         print(rows[-1], flush=True)
     t = pd.DataFrame(rows)
-    t["within_5pct"] = (t.diff_mean_pct.abs() <= 5) & (t.diff_peak_pct.abs() <= 5)
+    # near zero a relative difference is undefined: also accept an absolute gap <= 0.01 (1% of the start level)
+    ok_peak = (t.diff_peak_pct.abs() <= 5) | ((t.js_peak_rel - t.python_peak_rel).abs() <= 0.01)
+    t["within_5pct"] = (t.diff_mean_pct.abs() <= 5) & ok_peak
     t.to_csv(TABLES / "sim_parity_check.csv", index=False, float_format="%.4f")
 
 
@@ -374,8 +376,11 @@ def charts():
         ax.set_xlabel("Hours from start", fontsize=7.5)
     axes[0, 0].set_ylabel("Vacant taxis, % of start")
     axes[0, 0].legend(fontsize=7)
-    fig.suptitle(f"Held-out storms: simulated vs observed vacant taxis ({best.mechanism}, {best.dest}, {best.travel} travel, "
-                 f"{best.dispatch} dispatch) - {LABEL}", x=0.01, ha="left", fontsize=10)
+    pl = pd.read_csv(TABLES / "sim_plausibility.csv").set_index(["mechanism", "dest", "travel", "dispatch"])
+    ok = bool(pl.loc[(best.mechanism, best.dest, best.travel, best.dispatch), "combination_passes"])
+    fig.suptitle(f"Held-out storms, best training fit ({best.mechanism}, {best.dest}, {best.travel} travel, {best.dispatch} "
+                 f"dispatch): {'passes' if ok else 'does NOT pass'} the pre-registered plausibility rule - {LABEL}",
+                 x=0.01, ha="left", fontsize=10)
     fig.tight_layout()
     save(fig, "sim_heldout_storms", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Dashed: rain peak. "
          "Scenario-based operational model, not validation.")

@@ -1,0 +1,15 @@
+label,factor,value,vacant_rel_peak_mean,abandoned_rain_mean,wait_mean,combination_passes
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",mechanism,demand,0.7194,0.0134,0.0291,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",mechanism,supply,0.6772,0.0127,0.0298,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",mechanism,mix,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",dest,mrt,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",dest,landuse,0.4380,0.0849,0.2382,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",travel,dry,0.2141,0.0426,0.0671,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",travel,rain,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",dispatch,nearest,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",dispatch,widening,0.1192,0.0339,0.0203,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",demand_level,0.8,0.2192,0.0257,0.0455,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",demand_level,1.0,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",demand_level,1.2,0.1232,0.0494,0.0784,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",policy,as usual,0.1667,0.0365,0.0603,False
+"simulated, conditional on scenario (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)",policy,step-7 repositioning,0.1691,0.0332,0.0547,False

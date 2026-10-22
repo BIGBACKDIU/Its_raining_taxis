@@ -6,3 +6,4 @@ artifacts/
 .venv/
 data/interim/*.parquet
 data/interim/fc_*
+.claude/

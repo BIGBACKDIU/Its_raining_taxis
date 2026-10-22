@@ -380,3 +380,15 @@ results stay as they are and remain the pre-specified result.
     Planning layer: across all area x time groups, an issued NEA showers/thundery forecast goes with 6.6% fewer
     vacant taxis than the no-rain model and observed heavy rain with 13.8% fewer (consistent with step 4); small
     areas at specific hours show larger swings with wide day-level uncertainty.
+81. **Parity tolerance near zero.** Item 78's 5% rule is undefined when a value is close to zero (one check case
+    empties the fleet at the rain peak in both engines: 0.0017 vs 0). The peak comparison also passes if the
+    absolute gap is <= 0.01 of the start level. Mean paths differ by <= 0.32% in all three cases.
+82. **Step 8 results.** Tuning (12 trials per combination, pre-registered) left several combinations at the same
+    values near the lower bounds of the occupied share and demand scale; without rain effects the tuned setting
+    tracks the observed pre-rain path (mean bias +0.014), so this is not a broken model, but 12 trials is a
+    thin search. **No combination passes the pre-registered plausibility rule** (best: 5 of 10 held-out storms
+    within +-20% at 70% of times; the sign of the change at the rain peak matches in 7-9 of 10). All grid ranges
+    are therefore reported as "simulated, conditional on scenario X" AND "scenario did not pass the held-out
+    plausibility check". The greedy policy solver reaches 97.4% of the PuLP optimum on 60 step-7 decisions
+    (minimum 94.5%). The JavaScript page matches the Python engine (mean paths within 0.32%, peaks within 1.7%
+    or both near zero).
