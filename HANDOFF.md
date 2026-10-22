@@ -50,10 +50,27 @@ Check progress: `git pull` and `ls data/raw/logs/` (one JSON per finished month)
 If months fail: each job's console output is committed as `data/raw/logs/YYYY-MM.fetchlog.txt`
 (even on failure). Read it, fix, then re-run (push a trivial change to `pipeline/months.json`
 or `gh workflow run download-data`). A month is complete when `data/raw/logs/YYYY-MM.json` exists.
-Status on 22 Oct 2026: first run started 16:36 SGT; ~3-4 min per month, no rate limiting, all 2,688
-snapshots present in the first finished month. Four months (2026-05, -06, -07, -09) failed in the first
-run for an unknown reason; the parsing was hardened and a second run (queued after the first) retries
-any month without a `.json` log. **First task: confirm all 60 months are present.**
+Status on 22 Oct 2026, 17:36 SGT: **all 60 months downloaded** (run 39755275255, all jobs succeeded).
+122,688 snapshots requested, 120,017 usable (97.8%); 122 MB in `data/raw/`.
+
+**First audit findings (must be handled in step 0 and carried into every model):**
+
+1. **Gaps** (status `bad_payload` / `empty`): 2-10 Jan 2023, 23-24 Mar 2025, and **2-26 Jun 2025** (most of
+   the month). Retry those snapshots once with `pipeline.sources.taxi_snapshot` (the archive may simply
+   not have them); whatever is still missing is excluded and listed in the audit table.
+2. **The feed's coverage changes over time.** Weekly median vacant taxis, citywide, is usually 1,600-2,100
+   but drops to ~500-1,000 in some weeks (e.g. Aug-Nov 2022, late Feb 2023, late May 2024, mid Nov 2024,
+   end Dec 2024) and jumps to ~3,000-4,000 in Oct 2025 - Jan 2026. These look like changes in which
+   operators/vehicles the feed includes, not real market changes. Do this before modelling:
+   - Check one snapshot from Oct 2025 against Sep 2025 for duplicated coordinates (save raw positions).
+   - Detect feed regimes with change-point detection on the daily citywide median (by time of day),
+     and record them in `data/interim/feed_regimes.csv`; drop very short anomalous spells.
+   - In every model, include regime (or year-month) fixed effects; treat the **share-of-citywide**
+     model and slot fixed effects as the primary protection against coverage changes; compute the
+     expected baseline within regime (not across regimes); for forecasting, include the citywide count
+     at t and recent-level features so models adapt; check the test year (Oct 2025 - Sep 2026, which
+     contains the high-coverage regime) separately for the parts before and after the change.
+   - Report this openly as a data limitation.
 
 Per month (`YYYY-MM`), all readable with numpy/pandas only:
 
