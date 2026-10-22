@@ -38,6 +38,9 @@ from pipeline.grid import cell_centre, coarsen, split_id, to_xy
 START = pd.Timestamp("2021-10-01")
 BIN = 15                                   # rain bins in minutes; bin k covers (START + 15(k-1), START + 15k]
 FC_MAX_AGE_MIN = 180
+CELL_SIZE = 1000                           # 500 for the robustness grid (--size 500)
+SUFFIX = ""                                # "_500m" for the robustness grid
+NEAR_KM, RING_KM = 2.0, 5.0                # neighbouring-rain radii
 FC_CODES = {0: "fair or cloudy", 1: "light rain", 2: "showers or moderate rain", 3: "thundery or heavy"}
 
 
@@ -63,7 +66,8 @@ def day_flags() -> pd.DataFrame:
 
 def month_cells(month: str, keep_snaps) -> pd.DataFrame:
     z = np.load(RAW / "taxi" / f"{month}_cells500.npz")
-    df = pd.DataFrame({"snap": z["snap"], "cell": coarsen(z["cell"]), "n": z["n"].astype("int32")})
+    cell = coarsen(z["cell"]) if CELL_SIZE == 1000 else z["cell"]
+    df = pd.DataFrame({"snap": z["snap"], "cell": cell, "n": z["n"].astype("int32")})
     df = df[df.snap.isin(keep_snaps)]
     return df.groupby(["snap", "cell"], as_index=False).n.sum()
 
@@ -95,7 +99,7 @@ def build_cells(sn: pd.DataFrame, flags: pd.DataFrame) -> pd.DataFrame:
     c = pd.DataFrame({"cell": list(tot), "vacant_sum": list(tot.values())})
     c["mean_fit"] = c.vacant_sum / n_snap
     c["eligible"] = c.mean_fit >= 0.5
-    c["lon"], c["lat"] = cell_centre(c.cell, 1000)
+    c["lon"], c["lat"] = cell_centre(c.cell, CELL_SIZE)
     c["cx"], c["cy"] = split_id(c.cell)
     x, y = to_xy(c.lon, c.lat)
     # MRT/LRT exits (stations as fallback for stations without exits)
@@ -104,14 +108,15 @@ def build_cells(sn: pd.DataFrame, flags: pd.DataFrame) -> pd.DataFrame:
     ex_x, ex_y = to_xy(ex[:, 0], ex[:, 1])
     c["dist_mrt_m"] = cKDTree(np.c_[ex_x, ex_y]).query(np.c_[x, y])[0].round(0)
     c["mrt_exits_in_cell"] = 0
-    exc = pd.Series(coarsen(_cell500(ex[:, 0], ex[:, 1]))).value_counts()
+    ec = _cell500(ex[:, 0], ex[:, 1])
+    exc = pd.Series(coarsen(ec) if CELL_SIZE == 1000 else ec).value_counts()
     c["mrt_exits_in_cell"] = c.cell.map(exc).fillna(0).astype(int)
     # taxi stops/stands within 300 m of the cell square
     ts = pd.read_csv(STATIC / "lta_taxi_stops.csv")
     sx, sy = to_xy(ts.lon, ts.lat)
-    x0, y0 = c.cx.values * 1000, c.cy.values * 1000
-    dx = np.maximum(0, np.maximum(x0[:, None] - sx[None, :], sx[None, :] - (x0[:, None] + 1000)))
-    dy = np.maximum(0, np.maximum(y0[:, None] - sy[None, :], sy[None, :] - (y0[:, None] + 1000)))
+    x0, y0 = c.cx.values * CELL_SIZE, c.cy.values * CELL_SIZE
+    dx = np.maximum(0, np.maximum(x0[:, None] - sx[None, :], sx[None, :] - (x0[:, None] + CELL_SIZE)))
+    dy = np.maximum(0, np.maximum(y0[:, None] - sy[None, :], sy[None, :] - (y0[:, None] + CELL_SIZE)))
     c["taxi_stands_300m"] = (np.hypot(dx, dy) <= 300).sum(1)
     pa = json.load(open(STATIC / "sg_map.json"))["planning_areas"]
     c["planning_area"] = in_polygon_name(c.lon.values, c.lat.values, pa)
@@ -182,6 +187,52 @@ def _run_length(mask: np.ndarray) -> np.ndarray:
     return out
 
 
+def spatial_rain(rain: "Rain", k: np.ndarray, cells: pd.DataFrame, allc: pd.DataFrame):
+    """Neighbouring rain for each (snapshot, eligible cell), using only rain up to t.
+
+    Every 1 km cell seen in the feed (eligible or not) gets the rain at its nearest working gauge; then for each
+    eligible cell: mean mm/h over (t-30, t] in cells within 2 km (centre distance, cell itself excluded) and in
+    the 2-5 km ring; wet5_min = minutes since rain first appeared within 5 km in the current spell (0 if no rain
+    within 5 km now); dry5_min = minutes since rain was last seen within 5 km (capped at 1440); island-wide
+    share of working gauges with rain.
+    """
+    ax, ay = to_xy(allc.lon.values, allc.lat.values)
+    ex, ey = to_xy(cells.lon.values, cells.lat.values)
+    d = np.hypot(ex[:, None] - ax[None, :], ey[:, None] - ay[None, :])
+    W2 = ((d > 0) & (d <= NEAR_KM * 1000)).astype("float32")
+    WR = ((d > NEAR_KM * 1000) & (d <= RING_KM * 1000)).astype("float32")
+    A5 = (d <= RING_KM * 1000).astype("float32")
+    k0, k1 = max(1, int(k.min()) - 97), int(k.max())
+    bins = np.arange(k0, k1 + 1)
+    bday = ((bins - 1).clip(0) // 96)
+    udays = np.unique(bday)
+    near = rain.nearest(ax, ay, udays, k=1)[:, :, 0]                       # (days, all cells)
+    g = near[np.searchsorted(udays, bday)]                                  # (bins, all cells)
+    CB = rain.B[g.clip(0), bins[:, None]]
+    CB[g < 0] = np.nan
+    wet = np.nan_to_num(CB) > 0
+    any5 = (wet.astype("float32") @ A5.T) > 0                              # (bins, eligible)
+    wet5 = _run_length(any5.T)                                              # (eligible, bins)
+    dry5 = _run_length(~any5.T)
+    kk = k - k0
+    mm = 2 * (CB[kk] + CB[kk - 1])                                          # (snaps, all cells) mm/h
+    ok = ~np.isnan(mm)
+    m0 = np.nan_to_num(mm)
+
+    def wmean(W):
+        num, den = m0 @ W.T, ok.astype("float32") @ W.T
+        with np.errstate(invalid="ignore", divide="ignore"):
+            return np.where(den > 0, num / den, np.nan).astype("float32")
+
+    Bk = rain.B[:, k] + rain.B[:, k - 1]
+    with np.errstate(invalid="ignore"):
+        share = (np.nansum(Bk > 0, axis=0) / np.sum(~np.isnan(Bk), axis=0)).astype("float32")
+    return {"rain_2km": wmean(W2), "rain_ring": wmean(WR),
+            "wet5_min": (wet5[:, kk].T.astype("int32") * BIN).astype("int16"),
+            "dry5_min": np.minimum(dry5[:, kk].T.astype("int32") * BIN, 1440).astype("int16"),
+            "gauges_wet_share": share}
+
+
 # ----------------------------------------------------------------------------- forecasts
 def fc_code(text: pd.Series) -> np.ndarray:
     t = text.fillna("").str.lower()
@@ -221,7 +272,7 @@ class Forecasts:
 
 
 # ----------------------------------------------------------------------------- pass 2: year panels
-def build_year(year, sn, flags, cells, rain: Rain, fcs: Forecasts, hol, grid):
+def build_year(year, sn, flags, cells, rain: Rain, fcs: Forecasts, hol, grid, allc=None):
     s = sn[sn.ts.dt.year == year].sort_values("ts").reset_index(drop=True)
     if s.empty:
         return None
@@ -297,6 +348,11 @@ def build_year(year, sn, flags, cells, rain: Rain, fcs: Forecasts, hol, grid):
     out["wet_min"] = wet_min.ravel().astype("int16")
     out["dry_min"] = dry_min.ravel().astype("int16")
     out["mmh_island"] = rep(island).astype("float32")
+    if allc is not None:
+        sp = spatial_rain(rain, k, cells, allc)
+        for c in ("rain_2km", "rain_ring", "wet5_min", "dry5_min"):
+            out[c] = sp[c].ravel()
+        out["gauges_wet_share"] = rep(sp["gauges_wet_share"])
     out["fc_code"] = code[fca][:, :].T.ravel()
     out["fc_age_min"] = age[fca].T.ravel()
     out["how"] = rep(how).astype("int16")
@@ -315,7 +371,7 @@ def build_year(year, sn, flags, cells, rain: Rain, fcs: Forecasts, hol, grid):
 def fit_baseline(years, grid, n_iter=200, tol=1e-10):
     agg = []
     for y in years:
-        p = pd.read_parquet(INTERIM / f"panel{grid}_{y}.parquet",
+        p = pd.read_parquet(INTERIM / f"panel{grid}{SUFFIX}_{y}.parquet",
                             columns=["ts", "cell", "vacant", "how", "month", "regime_id", "drop_main"])
         p = p[~p.drop_main].assign(infit=lambda d: (d.ts >= FIT[0]) & (d.ts <= FIT[1]))
         agg.append(p.groupby(["cell", "how", "month", "regime_id", "infit"], observed=True)
@@ -353,7 +409,7 @@ def fit_baseline(years, grid, n_iter=200, tol=1e-10):
 
 
 def add_baseline(year, grid, A, H, R):
-    f = INTERIM / f"panel{grid}_{year}.parquet"
+    f = INTERIM / f"panel{grid}{SUFFIX}_{year}.parquet"
     p = pd.read_parquet(f)
     hm = p.how.astype(int) * 100 + p.month.astype(int)
     eta = p.cell.map(A).values + hm.map(H).values + p.regime_id.map(R).values
@@ -369,7 +425,7 @@ def add_baseline(year, grid, A, H, R):
     p["severity"] = pd.array(np.where(big, sev, pd.NA), dtype="Int8")
     # lags of vacant within cell (previous slots), using the end of the previous year where needed
     step = pd.Timedelta(minutes=grid)
-    prev = INTERIM / f"panel{grid}_{year - 1}.parquet"
+    prev = INTERIM / f"panel{grid}{SUFFIX}_{year - 1}.parquet"
     if prev.exists():
         tail = pd.read_parquet(prev, columns=["ts", "cell", "vacant"],
                                filters=[("ts", ">=", pd.Timestamp(f"{year}-01-01") - pd.Timedelta(hours=3))])
@@ -400,10 +456,10 @@ def hand_check(grid, cells, n=5, n_wet=3):
     drawn from rainy snapshots (random rows are almost always dry, which would not test the rain alignment)."""
     rng = np.random.default_rng(SEED)
     rows = []
-    years = [y for y in range(2021, 2027) if (INTERIM / f"panel{grid}_{y}.parquet").exists()]
+    years = [y for y in range(2021, 2027) if (INTERIM / f"panel{grid}{SUFFIX}_{y}.parquet").exists()]
     for i in range(n + n_wet):
         y = int(rng.choice(years))
-        p = pd.read_parquet(INTERIM / f"panel{grid}_{y}.parquet", columns=["ts", "cell", "vacant", "citywide", "mmh"])
+        p = pd.read_parquet(INTERIM / f"panel{grid}{SUFFIX}_{y}.parquet", columns=["ts", "cell", "vacant", "citywide", "mmh"])
         if i >= n:
             p = p[p.mmh > 0]
         r = p.iloc[int(rng.integers(len(p)))]
@@ -411,7 +467,8 @@ def hand_check(grid, cells, n=5, n_wet=3):
         sn = pd.read_csv(RAW / "taxi" / f"{month}_snapshots.csv.gz", parse_dates=["req_ts"])
         srow = sn[sn.req_ts == r.ts].iloc[0]
         z = np.load(RAW / "taxi" / f"{month}_cells500.npz")
-        sel = (z["snap"] == srow.snap) & (coarsen(z["cell"]) == r.cell)
+        zc = coarsen(z["cell"]) if CELL_SIZE == 1000 else z["cell"]
+        sel = (z["snap"] == srow.snap) & (zc == r.cell)
         raw_vacant = int(z["n"][sel].sum())
         # rain: nearest working gauge by hand from the raw readings and completeness files
         comp = pd.read_csv(RAW / "rain" / f"{month}_completeness.csv.gz", parse_dates=["date"])
@@ -419,7 +476,7 @@ def hand_check(grid, cells, n=5, n_wet=3):
         work = gd[(gd.date == r.ts.normalize()) & gd.working].station_id
         st = pd.read_csv(RAW / "rain" / f"{month}_stations.csv.gz").groupby("station_id")[["lat", "lon"]].median()
         st = st[st.index.isin(work)]
-        clon, clat = cell_centre(np.array([r.cell]), 1000)
+        clon, clat = cell_centre(np.array([r.cell]), CELL_SIZE)
         gx, gy = to_xy(st.lon.values, st.lat.values)
         x0, y0 = to_xy(clon, clat)
         g = st.index[np.argmin(np.hypot(gx - x0, gy - y0))]
@@ -438,14 +495,18 @@ def hand_check(grid, cells, n=5, n_wet=3):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--grid", type=int, default=30, choices=[30, 15])
+    ap.add_argument("--size", type=int, default=1000, choices=[1000, 500])
+    ap.add_argument("--years", type=int, nargs="*", default=None)
     a = ap.parse_args()
     grid = a.grid
+    global CELL_SIZE, SUFFIX
+    CELL_SIZE, SUFFIX = a.size, ("" if a.size == 1000 else "_500m")
     sn = snapshots(grid)
     flags = day_flags()
-    if grid == 30 or not (INTERIM / "cells.parquet").exists():
+    if (grid == 30 and not a.years) or not (INTERIM / f"cells{SUFFIX}.parquet").exists():
         allc = build_cells(sn, flags)
-        allc.to_parquet(INTERIM / "cells.parquet", index=False)
-    allc = pd.read_parquet(INTERIM / "cells.parquet")
+        allc.to_parquet(INTERIM / f"cells{SUFFIX}.parquet", index=False)
+    allc = pd.read_parquet(INTERIM / f"cells{SUFFIX}.parquet")
     cells = allc[allc.eligible].reset_index(drop=True)
     print(f"cells seen in fit period: {len(allc)}, eligible: {len(cells)}, excluded: {(~allc.eligible).sum()}")
     h = pd.read_csv(STATIC / "holidays.csv", parse_dates=["date"])
@@ -454,16 +515,16 @@ def main():
     rain = Rain()
     fcs = Forecasts((cells.lon.values, cells.lat.values))
     print("forecast texts -> codes:", {t: int(fc_code(pd.Series([t]))[0]) for t in fcs.texts.index})
-    years = sorted(sn.ts.dt.year.unique())
+    years = sorted(sn.ts.dt.year.unique()) if not a.years else a.years
     checks = {}
     for y in years:
-        p = build_year(y, sn, flags, cells, rain, fcs, hol, grid)
-        p.to_parquet(INTERIM / f"panel{grid}_{y}.parquet", index=False, compression="zstd")
+        p = build_year(y, sn, flags, cells, rain, fcs, hol, grid, allc)
+        p.to_parquet(INTERIM / f"panel{grid}{SUFFIX}_{y}.parquet", index=False, compression="zstd")
         print(y, len(p), "rows", flush=True)
         del p
     A, H, R, it = fit_baseline(years, grid)
     print("baseline IPF iterations:", it, "regime levels:", np.exp(R).round(3).to_dict())
-    pd.DataFrame({"regime_id": R.index, "log_level": R.values}).to_csv(TABLES / f"baseline_regime_levels_{grid}.csv",
+    pd.DataFrame({"regime_id": R.index, "log_level": R.values}).to_csv(TABLES / f"baseline_regime_levels_{grid}{SUFFIX}.csv",
                                                                        index=False, float_format="%.4f")
     for y in years:
         p = add_baseline(y, grid, A, H, R)
@@ -475,9 +536,9 @@ def main():
         del p
     ck = pd.DataFrame(checks).T
     ck.index.name = "year"
-    ck.to_csv(TABLES / f"panel_checks_{grid}.csv")
+    ck.to_csv(TABLES / f"panel_checks_{grid}{SUFFIX}.csv")
     hc = hand_check(grid, cells)
-    hc.to_csv(TABLES / f"panel_handcheck_{grid}.csv", index=False)
+    hc.to_csv(TABLES / f"panel_handcheck_{grid}{SUFFIX}.csv", index=False)
     print(ck.to_string())
     print(hc.to_string())
 

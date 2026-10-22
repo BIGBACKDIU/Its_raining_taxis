@@ -1,0 +1,4 @@
+year,rows,eligible_cells,panel_snapshots,usable_snapshots,rows_equal_cells_x_snapshots,duplicate_keys,rows_main_sample,rows_robust_sample,rain_missing_share,fc_missing_share,baseline_ge4_share,low_share_main,zero_share_main
+2024,3265394,374,8731,8600,True,0,3210790,3210790,0.0223,0.01122,0.3625,0.1728,0.014
+2025,12147520,374,32480,32428,True,0,11709192,11709192,0.00612,0.02309,0.2585,0.2115,0.0251
+2026,9752798,374,26077,25974,True,0,9393384,9393384,7e-05,0.01177,0.1713,0.3318,0.0572
