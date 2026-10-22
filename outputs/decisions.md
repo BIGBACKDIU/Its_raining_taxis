@@ -296,3 +296,34 @@ results stay as they are and remain the pre-specified result.
     weather gain stays negligible: primary 1 km LightGBM +0.0007 (30 min, CI +0.0004 to +0.0010) and +0.0008
     (60 min); S1 planning areas -0.0020 to +0.0015 overall, -0.0073 to +0.0021 in rainy slots. The null is not
     driven by the high-coverage months. `outputs/tables/posthoc_weather_gain_from_11jan.csv`.
+
+## Step 7: repositioning policy (rules fixed before running)
+
+67. **Framing.** The policy runs on availability forecasts made at t (step 6). Weather adds no early-warning value
+    there, so weather enters the step-7 count forecast only if it helps on the calibration period by BOTH:
+    lower calibration Poisson deviance of the count forecast (weather 1.1950 vs no weather 1.1981 at 30 min;
+    1.2695 vs 1.2734 at 60 min: met) AND higher calibration targeting precision of the policy (share of
+    targeted cells that are really low at t+h) on the same calibration sample. Otherwise the no-weather
+    forecast is used.
+68. **Policy inputs (all known at t).** base_j = pattern at t+h x trailing 7-day level (the feasible baseline);
+    mu_j = LightGBM count forecast; movable supply at origin i = floor(CDG share x max(0, vacant_i - base_i(t)))
+    with base_i(t) = pattern at t x 7-day level and the CDG share of the month (Aug 2026 for Sep 2026);
+    destinations need base_j >= 4, a taxi stop or stand within 300 m of the cell, and S_j(0) >= 0.05.
+    Travel time = 1.3 x straight-line distance / speed, speed 30 km/h (dry scenario) or 20 km/h (rain congestion
+    scenario, used when the island has rain at t); both are modelled assumptions, not observed speeds.
+    x_ij = 0 if travel time > lead time (= horizon). Marginal values r_jk for k <= min(ceil(base_j), 20).
+69. **Base case and sensitivity.** Base: N = 200 taxis per decision, lambda = 0.005 per taxi-minute, lead 60 min,
+    congestion by observed island rain, equal weights. One-at-a-time sensitivity: N 50 / 500; lambda 0.001 / 0.02;
+    lead 30; congestion always dry / always rain; weights station activity (1 + MRT exits in cell) and land-use
+    proxy (city-centre cells 2, others 1), both rescaled to mean 1. No land-use data are available, so the
+    "land use" weight is a proxy and is labelled as such.
+70. **Samples.** Calibration choice: 150 snapshots (75 with island rain at t, 75 without), seed 2702. Test-year
+    evaluation: 300 snapshots (150 rainy, 150 dry) for the base case and the ranked plans; 100 snapshots (50/50)
+    for each sensitivity setting. Expected shortfall reduction is a model quantity; the targeting check uses the
+    observed low-availability label at t+h.
+71. **Planning layer** (rain associations, fit period, no forecasting): for each planning area x time band x
+    weekday/weekend, availability under (a) an issued NEA forecast of showers or thundery rain (code >= 2) and
+    (b) observed heavy rain, against the no-rain model fit0 (step 4): absolute loss (vacant taxis per half hour,
+    summed over the area's eligible cells), % loss (sum vacant / sum fit0 - 1) and share loss (fit0 rescaled to the
+    observed citywide total over eligible cells at each snapshot). 500 day-bootstrap draws for CIs; groups with
+    fewer than 200 cell-snapshots are not ranked.
