@@ -1,0 +1,80 @@
+name: download-data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pipeline/months.json'
+      - '.github/workflows/download.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-data
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      months: ${{ steps.m.outputs.months }}
+      workers: ${{ steps.m.outputs.workers }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: pipeline
+      - id: m
+        run: |
+          python3 -c "import json; c=json.load(open('pipeline/months.json')); print('months=' + json.dumps(c['months'])); print('workers=' + str(c.get('workers', 4)))" >> "$GITHUB_OUTPUT"
+
+  fetch:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        month: ${{ fromJson(needs.plan.outputs.months) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout: pipeline
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements-fetch.txt
+      - name: Skip if this month is already in the repo
+        id: have
+        run: |
+          if git cat-file -e "origin/main:data/raw/logs/${{ matrix.month }}.json" 2>/dev/null; then echo "done=1" >> "$GITHUB_OUTPUT"; else echo "done=0" >> "$GITHUB_OUTPUT"; fi
+      - name: Download ${{ matrix.month }}
+        if: steps.have.outputs.done == '0'
+        env:
+          DATAGOV_KEY: ${{ secrets.DATAGOV_KEY }}
+        run: python -m pipeline.fetch_month --month ${{ matrix.month }} --out out --workers ${{ needs.plan.outputs.workers }}
+      - name: Commit ${{ matrix.month }} to main
+        if: steps.have.outputs.done == '0'
+        run: |
+          mkdir -p data/raw
+          cp -r out/* data/raw/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse data/raw
+          git commit -q -m "data: ${{ matrix.month }}"
+          for i in $(seq 1 15); do
+            if git pull -q --rebase origin main && git push -q origin HEAD:main; then exit 0; fi
+            sleep $((RANDOM % 25 + 5))
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: failed-${{ matrix.month }}
+          path: out
+          retention-days: 7
+          if-no-files-found: ignore
