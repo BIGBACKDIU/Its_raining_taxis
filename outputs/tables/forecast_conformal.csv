@@ -1,0 +1,49 @@
+h,model,subset,target,achieved_coverage,mean_width,qhat
+30,persistence,test all,0.9000,0.7803,9.7162,2.0000
+30,persistence,test rainy,0.9000,0.7803,9.5472,2.0000
+30,persistence,test before 11 Jan 2026,0.9000,0.7282,11.3151,2.0000
+30,persistence,test from 11 Jan 2026,0.9000,0.7997,9.1185,2.0000
+30,seasonal,test all,0.9000,0.7716,8.9038,1.7451
+30,seasonal,test rainy,0.9000,0.7696,9.0723,1.7451
+30,seasonal,test before 11 Jan 2026,0.9000,0.7095,10.1706,1.7451
+30,seasonal,test from 11 Jan 2026,0.9000,0.7948,8.4302,1.7451
+30,lgb_no_weather,test all,0.9000,0.7465,6.9971,1.4164
+30,lgb_no_weather,test rainy,0.9000,0.7470,6.9774,1.4164
+30,lgb_no_weather,test before 11 Jan 2026,0.9000,0.6831,7.8797,1.4164
+30,lgb_no_weather,test from 11 Jan 2026,0.9000,0.7702,6.6671,1.4164
+30,glm_no_weather,test all,0.9000,0.7522,7.3498,1.5151
+30,glm_no_weather,test rainy,0.9000,0.7541,7.2863,1.5151
+30,glm_no_weather,test before 11 Jan 2026,0.9000,0.6926,8.4318,1.5151
+30,glm_no_weather,test from 11 Jan 2026,0.9000,0.7745,6.9453,1.5151
+30,lgb_weather,test all,0.9000,0.7458,6.9694,1.4153
+30,lgb_weather,test rainy,0.9000,0.7466,6.8960,1.4153
+30,lgb_weather,test before 11 Jan 2026,0.9000,0.6813,7.8308,1.4153
+30,lgb_weather,test from 11 Jan 2026,0.9000,0.7699,6.6474,1.4153
+30,glm_weather,test all,0.9000,0.7524,7.3498,1.5152
+30,glm_weather,test rainy,0.9000,0.7544,7.2515,1.5152
+30,glm_weather,test before 11 Jan 2026,0.9000,0.6929,8.4323,1.5152
+30,glm_weather,test from 11 Jan 2026,0.9000,0.7747,6.9450,1.5152
+60,persistence,test all,0.9000,0.7611,9.8167,2.0207
+60,persistence,test rainy,0.9000,0.7609,9.7668,2.0207
+60,persistence,test before 11 Jan 2026,0.9000,0.7072,11.4340,2.0207
+60,persistence,test from 11 Jan 2026,0.9000,0.7813,9.2122,2.0207
+60,seasonal,test all,0.9000,0.7713,8.9007,1.7445
+60,seasonal,test rainy,0.9000,0.7697,9.0676,1.7445
+60,seasonal,test before 11 Jan 2026,0.9000,0.7092,10.1664,1.7445
+60,seasonal,test from 11 Jan 2026,0.9000,0.7945,8.4276,1.7445
+60,lgb_no_weather,test all,0.9000,0.7491,7.1941,1.4609
+60,lgb_no_weather,test rainy,0.9000,0.7507,7.2389,1.4609
+60,lgb_no_weather,test before 11 Jan 2026,0.9000,0.6838,8.0528,1.4609
+60,lgb_no_weather,test from 11 Jan 2026,0.9000,0.7735,6.8731,1.4609
+60,glm_no_weather,test all,0.9000,0.7560,7.6175,1.5775
+60,glm_no_weather,test rainy,0.9000,0.7584,7.6185,1.5775
+60,glm_no_weather,test before 11 Jan 2026,0.9000,0.6955,8.6819,1.5775
+60,glm_no_weather,test from 11 Jan 2026,0.9000,0.7786,7.2197,1.5775
+60,lgb_weather,test all,0.9000,0.7484,7.1715,1.4602
+60,lgb_weather,test rainy,0.9000,0.7502,7.1285,1.4602
+60,lgb_weather,test before 11 Jan 2026,0.9000,0.6819,8.0014,1.4602
+60,lgb_weather,test from 11 Jan 2026,0.9000,0.7733,6.8612,1.4602
+60,glm_weather,test all,0.9000,0.7563,7.6205,1.5762
+60,glm_weather,test rainy,0.9000,0.7587,7.5913,1.5762
+60,glm_weather,test before 11 Jan 2026,0.9000,0.6962,8.6967,1.5762
+60,glm_weather,test from 11 Jan 2026,0.9000,0.7788,7.2181,1.5762

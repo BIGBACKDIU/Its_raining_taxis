@@ -198,3 +198,42 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
 44. **Rain-response types**: k-means on four log ratios (light, moderate, heavy, just after rain, each relative
     to dry), k chosen by silhouette (k = 2); 200 day-bootstrap re-clusterings, mean adjusted Rand index 0.65
     (5th-95th percentile 0.49-0.76): moderately stable, so the types are described, not relied on.
+
+## Step 6: forecasting
+
+45. **Target and inputs.** Targets are the vacant count and low availability at t+h (h = 30, 60 min), using the
+    panel's regime-level baseline (HANDOFF 5). That baseline uses the whole regime, so it is never an input.
+    Inputs replace it with what is known at t: the fit-period pattern (cell + how^month effects, no regime level),
+    the current coverage level (sum of vacant / sum of pattern over eligible cells at t) and its trailing 1-day
+    and 7-day medians, a feasible deficit at t (pattern x 7-day level vs taxis at t), the climatology of low
+    availability (fit period, cell x hour x day type, lightly shrunk; 0.17 where undefined) and calendar and cell
+    traits. Weather inputs (with-weather models only): rain at the cell and lags, 3-gauge rain, wet/dry
+    durations, 2 km and 2-5 km ring rain, minutes since rain appeared within 5 km, island rain and wet-gauge
+    share, the latest issued forecast for the cell's area and the highest forecast category within 5 km.
+46. **Samples.** Training uses 35% of fit-period issue snapshots (all cells at each kept snapshot), and LightGBM
+    a further random 3 million rows (count) / all ~2.6 million defined rows (low); regression models 2 million
+    rows. Calibration (Apr - Sep 2025) and test (Oct 2025 - Sep 2026) use every snapshot.
+47. **Tuning.** Optuna (8 trials, TPE, seed 2702) on three time-ordered expanding folds inside the fit period,
+    400k rows per fold, h = 60 with weather; the chosen settings are reused for all LightGBM models (with and
+    without weather, both horizons) so the weather comparison is not confounded by tuning effort.
+48. **Persistence and seasonal scores for "low".** Persistence ranks by the feasible deficit at t; the seasonal
+    baseline ranks by the climatology of low availability. Count persistence = taxis at t; count seasonal =
+    pattern at t+h x 7-day level.
+49. **Calibration and alerts.** Isotonic calibration and alert thresholds are fitted on Apr - Sep 2025. Fixed
+    workload = 5% of eligible cell-snapshots (the threshold is the calibration-period 95th percentile of each
+    model's score). Precision in the top-20 risk cells is averaged over snapshots.
+50. **Lead time.** A low-availability run is a sequence of consecutive low snapshots in a cell. Its warning lead
+    time is h minus (target time of the first alert that falls inside the run minus the run start); runs with no
+    such alert are "not warned".
+51. **Weather gain uncertainty.** 1,000 day-block bootstrap draws of the PR-AUC difference on the test year,
+    computed from per-day counts in 2,000 score bins (checked against exact average precision: 0.3032 vs 0.3035
+    on synthetic data; observed binned vs exact gains agree to 4 decimals).
+52. **Conformal ranges** use scaled residuals |y - yhat| / sqrt(yhat + 1), 90% level, quantile from the
+    calibration period; achieved coverage is reported, not guaranteed.
+53. **Test year first scored: 2026-10-23 00:08:41 SGT** (`data/interim/test_year_first_scored.txt`). After that,
+    only evaluation code and new subsets of the same frozen predictions were added; no model was refitted.
+54. **High-coverage regime check (after test scoring, as agreed).** Share model per test-year regime
+    (`outputs/tables/effects_test_year_by_regime.csv`). R13 (1-15 Oct 2025) is too short (< 200k rows) and is
+    skipped. In R14 (high coverage, 1.8x) heavy rain: share -10.2% (CI -14.0 to -6.2), absolute -16.1%; other
+    test-year regimes: share -8.5% to -24.9%. The direction matches the fit period; sizes are larger in the test
+    year, in line with the trend across fiscal years (FY2024 share -7.7%).

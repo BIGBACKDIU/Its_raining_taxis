@@ -193,6 +193,15 @@ def part_features():
 
 
 # ============================================================================= models
+CLIM_FILL = 0.17                       # fit-period share of low availability; used where climatology is undefined
+
+
+def load_split(h, split):
+    d = pd.read_parquet(INTERIM / f"fc_h{h}_{split}.parquet")
+    d["clim_low"] = d.clim_low.fillna(CLIM_FILL)
+    return d
+
+
 def feats(weather: bool):
     return BASE + (WEATHER if weather else [])
 
@@ -206,13 +215,13 @@ def lgb_params(objective, tuned=None):
     return p
 
 
-def part_tune(n_trials=12, rows_per_fold=600_000):
+def part_tune(n_trials=8, rows_per_fold=400_000):
     """Optuna on time-ordered expanding folds inside the fit period, for each LightGBM objective
     (h = 60, with weather); the chosen settings are reused for all LightGBM models."""
     import lightgbm as lgb
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
-    d = pd.read_parquet(INTERIM / "fc_h60_fit.parquet")
+    d = load_split(60, "fit")
     folds = [("2022-04-01", "2023-03-31", "2023-04-01", "2023-09-30"),
              ("2022-04-01", "2023-09-30", "2023-10-01", "2024-03-31"),
              ("2022-04-01", "2024-03-31", "2024-04-01", "2025-03-31")]
@@ -269,31 +278,33 @@ def glm_design(d, weather, scaler=None):
     return np.hstack([Xn] + cats), scaler
 
 
-def part_fit(glm_rows=2_000_000):
+def part_fit(glm_rows=2_000_000, lgb_rows=3_000_000, horizons=HORIZONS):
     import lightgbm as lgb
     from sklearn.linear_model import LogisticRegression, PoissonRegressor
     tuned = json.loads((TABLES / "forecast_tuning.json").read_text())
     rng = np.random.default_rng(SEED)
     imp_rows = []
-    for h in HORIZONS:
-        tr = pd.read_parquet(INTERIM / f"fc_h{h}_fit.parquet")
+    for h in horizons:
+        tr = load_split(h, "fit")
         models = {}
         for weather in (False, True):
             tag = "weather" if weather else "no_weather"
             F = feats(weather)
             for objective, target in (("poisson", "y_count"), ("binary", "y_low")):
                 ok = tr[target].notna().values
+                lgb_idx = np.sort(np.random.default_rng(SEED).choice(np.flatnonzero(ok), min(lgb_rows, ok.sum()),
+                                                                     replace=False))
                 t0 = time.time()
                 prm = dict(tuned[objective]["params"])
                 rounds = prm.pop("num_boost_round")
-                ds = lgb.Dataset(tr.loc[ok, F], tr.loc[ok, target].astype(float), categorical_feature=["cell_cat"])
+                ds = lgb.Dataset(tr.iloc[lgb_idx][F], tr[target].values[lgb_idx].astype(float), categorical_feature=["cell_cat"])
                 m = lgb.train(lgb_params(objective, prm), ds, num_boost_round=rounds)
                 m.save_model(str(INTERIM / f"fc_lgb_{objective}_h{h}_{tag}.txt"))
                 models[("lgb", objective, tag)] = m
                 gain = pd.Series(m.feature_importance("gain"), index=F)
                 imp_rows += [{"h": h, "model": f"lgb_{objective}_{tag}", "feature": k, "gain_share": v / gain.sum()}
                              for k, v in gain.items()]
-                print(f"h={h} lgb {objective} {tag}: {ok.sum():,} rows {time.time() - t0:.0f}s", flush=True)
+                print(f"h={h} lgb {objective} {tag}: {len(lgb_idx):,} rows {time.time() - t0:.0f}s", flush=True)
                 # regression
                 idx = rng.choice(np.flatnonzero(ok), min(glm_rows, ok.sum()), replace=False)
                 X, sc = glm_design(tr.iloc[idx], weather)
@@ -308,7 +319,7 @@ def part_fit(glm_rows=2_000_000):
         del tr
         gc.collect()
         for split in ("calib", "test"):
-            d = pd.read_parquet(INTERIM / f"fc_h{h}_{split}.parquet")
+            d = load_split(h, split)
             out = d[["ts", "cell", "y_count", "y_low", "baseline_h", "mmh_h", "regime_h", "vacant", "seasonal_h",
                      "deficit_feasible_t", "clim_low", "mmh", "rain_ring", "rain_2km"]].copy()
             out["count_persistence"] = d.vacant.astype("float32")
@@ -341,7 +352,7 @@ def part_fit(glm_rows=2_000_000):
                                                                         float_format="%.6f")
             del d, out
             gc.collect()
-    pd.DataFrame(imp_rows).to_csv(TABLES / "forecast_importance_gain.csv", index=False, float_format="%.6f")
+    pd.DataFrame(imp_rows).to_csv(TABLES / f"forecast_importance_gain_h{'_'.join(map(str, horizons))}.csv", index=False, float_format="%.6f")
 
 
 # ============================================================================= evaluation
@@ -371,6 +382,27 @@ def lead_times(ts, cell, alert, y, h):
     return runs
 
 
+def binned_ap(score, y, day, n_days, W, n_bins=2000):
+    """Average precision from per-day counts in score bins, for the observed data and for bootstrap day weights W.
+    Scores are tied within a bin (2,000 quantile bins), so the observed value is a close approximation."""
+    s = np.nan_to_num(np.asarray(score, float), nan=np.nanmin(score))
+    edges = np.unique(np.quantile(s, np.linspace(0, 1, n_bins + 1)))
+    bi = np.clip(np.searchsorted(edges, s, "right") - 1, 0, len(edges) - 2)
+    nb = len(edges) - 1
+    P = np.zeros((n_days, nb))
+    N = np.zeros((n_days, nb))
+    np.add.at(P, (day, bi), y)
+    np.add.at(N, (day, bi), 1 - y)
+
+    def ap(pos, neg):                     # pos, neg: (..., bins), highest score bin last
+        pos, neg = pos[..., ::-1], neg[..., ::-1]
+        tp, fp = np.cumsum(pos, -1), np.cumsum(neg, -1)
+        prec = tp / np.maximum(tp + fp, 1e-12)
+        return (pos * prec).sum(-1) / np.maximum(pos.sum(-1), 1e-12)
+
+    return ap(P.sum(0), N.sum(0)), ap(W @ P, W @ N)
+
+
 def evaluate_split(pr, split, h, thresholds=None):
     from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
     count_models = ["count_persistence", "count_seasonal", "count_glm_no_weather", "count_glm_weather",
@@ -378,7 +410,11 @@ def evaluate_split(pr, split, h, thresholds=None):
     score_models = ["score_persistence", "score_seasonal", "score_glm_no_weather", "score_glm_weather",
                     "score_lgb_no_weather", "score_lgb_weather"]
     subsets = {"all": np.ones(len(pr), bool), "rainy (rain at target time)": (pr.mmh_h.fillna(0) > 0).values,
-               "rain at or near cell at issue": ((pr.mmh.fillna(0) > 0) | (pr.rain_ring.fillna(0) > 0)).values}
+               "rain at or near cell at issue": ((pr.mmh.fillna(0) > 0) | (pr.rain_ring.fillna(0) > 0)).values,
+               "rain starts between issue and target": ((pr.mmh.fillna(0) == 0) & (pr.mmh_h.fillna(0) > 0)).values,
+               "heavy rain at target time": (pr.mmh_h.fillna(0) > 10).values,
+               "cell dry at issue, heavier rain 2-5 km away": ((pr.mmh.fillna(0) == 0)
+                                                               & (pr.rain_ring.fillna(0) > 2.5)).values}
     if split == "test":
         subsets["test before 11 Jan 2026 (high coverage)"] = (pr.ts < COVERAGE_CHANGE).values
         subsets["test from 11 Jan 2026"] = (pr.ts >= COVERAGE_CHANGE).values
@@ -410,7 +446,7 @@ def evaluate_split(pr, split, h, thresholds=None):
     return rows
 
 
-def part_evaluate(n_boot=200):
+def part_evaluate(n_boot=1000):
     from sklearn.isotonic import IsotonicRegression
     from sklearn.metrics import average_precision_score
     style()
@@ -444,23 +480,22 @@ def part_evaluate(n_boot=200):
         days = tl.ts.dt.normalize()
         ud = np.sort(days.unique())
         di = np.searchsorted(ud, days.values)
-        groups = [np.flatnonzero(di == i) for i in range(len(ud))]
-        rainy = ((tl.mmh_h.fillna(0) > 0)).values
+        rainy = (tl.mmh_h.fillna(0) > 0).values
+        W = rng.multinomial(len(ud), np.full(len(ud), 1 / len(ud)), size=n_boot).astype(float)
         for kind in ("lgb", "glm"):
             a, b = f"score_{kind}_weather", f"score_{kind}_no_weather"
-            for sub, msk in (("all", np.ones(len(tl), bool)), ("rainy (rain at target time)", rainy)):
-                diffs = []
-                for i in range(n_boot):
-                    pick = rng.integers(0, len(ud), len(ud))
-                    idx = np.concatenate([groups[j] for j in pick])
-                    idx = idx[msk[idx]]
-                    y = tl.y_low.values[idx].astype(int)
-                    diffs.append(average_precision_score(y, tl[a].values[idx]) - average_precision_score(y, tl[b].values[idx]))
+            starts = ((tl.mmh.fillna(0) == 0) & (tl.mmh_h.fillna(0) > 0)).values
+            for sub, msk in (("all", np.ones(len(tl), bool)), ("rainy (rain at target time)", rainy),
+                             ("rain starts between issue and target", starts)):
                 y = tl.y_low.values[msk].astype(int)
-                obs = average_precision_score(y, tl[a].values[msk]) - average_precision_score(y, tl[b].values[msk])
-                boot_rows.append({"h": h, "model": kind, "subset": sub, "pr_auc_gain": obs,
+                exact = (average_precision_score(y, tl[a].values[msk]) - average_precision_score(y, tl[b].values[msk]))
+                ap_a = binned_ap(tl[a].values[msk], y, di[msk], len(ud), W)
+                ap_b = binned_ap(tl[b].values[msk], y, di[msk], len(ud), W)
+                diffs = ap_a[1] - ap_b[1]
+                boot_rows.append({"h": h, "model": kind, "subset": sub, "pr_auc_gain": exact,
+                                  "pr_auc_gain_binned": ap_a[0] - ap_b[0],
                                   "lo": float(np.quantile(diffs, 0.025)), "hi": float(np.quantile(diffs, 0.975)),
-                                  "boot": n_boot})
+                                  "share_draws_gain_positive": float((diffs > 0).mean()), "boot": n_boot})
                 print(boot_rows[-1], flush=True)
         # lead times (alerts at the calibration-period threshold)
         for c in score_models:
@@ -513,14 +548,14 @@ def charts():
         ax.set_title(f"{h}-minute horizon", fontsize=9.5)
         ax.grid(axis="x", visible=False)
     axes[0].set_ylabel("PR-AUC, test year (dotted: base rate)")
-    axes[0].legend(fontsize=8, loc="upper left")
-    g = gain[(gain.model == "lgb")]
-    txt = "; ".join(f"{r.h} min {('all' if r.subset == 'all' else 'rainy')}: {r.pr_auc_gain:+.3f} "
-                    f"[{r.lo:+.3f}, {r.hi:+.3f}]" for r in g.itertuples())
+    axes[0].legend(fontsize=8, loc="upper center", bbox_to_anchor=(1.05, -0.16), ncol=2)
+    g = gain[(gain.model == "lgb") & gain.subset.isin(["all", "rainy (rain at target time)"])]
+    txt = "; ".join(f"{r.h} min, {('all slots' if r.subset == 'all' else 'rainy slots')}: {r.pr_auc_gain:+.4f} "
+                    f"[{r.lo:+.4f}, {r.hi:+.4f}]" for r in g.itertuples())
     fig.suptitle("Early warning of unusually low availability: what weather adds beyond current taxi numbers",
                  x=0.01, ha="left", fontsize=10.5)
-    fig.text(0.01, 0.92, f"LightGBM PR-AUC gain from weather (95% day-bootstrap CI): {txt}", fontsize=7.5, color=MUTED)
-    fig.tight_layout(rect=(0, 0, 1, 0.92))
+    fig.text(0.01, 0.915, f"LightGBM PR-AUC gain from weather, 95% day-bootstrap CI. {txt}", fontsize=7.5, color=MUTED)
+    fig.tight_layout(rect=(0, 0.02, 1, 0.91))
     save(fig, "forecast_pr_auc", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall and 2-hour forecasts. "
          "Test year Oct 2025 - Sep 2026, scored once. Low = deficit >= 50% where expected >= 4.")
     plt.close(fig)
@@ -529,8 +564,11 @@ def charts():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--part", required=True, choices=["features", "tune", "fit", "evaluate", "charts"])
+    ap.add_argument("--h", type=int, nargs="*", default=list(HORIZONS))
     a = ap.parse_args()
-    {"features": part_features, "tune": part_tune, "fit": part_fit, "evaluate": part_evaluate, "charts": charts}[a.part]()
+    if a.part == "fit":
+        return part_fit(horizons=a.h)
+    {"features": part_features, "tune": part_tune, "evaluate": part_evaluate, "charts": charts}[a.part]()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+h,model,subset,pr_auc_gain,pr_auc_gain_binned,lo,hi,share_draws_gain_positive,boot
+30,lgb,all,0.00107,0.00107,0.00077,0.00134,1.00000,1000
+30,lgb,rainy (rain at target time),0.00080,0.00081,-0.00062,0.00211,0.90500,1000
+30,lgb,rain starts between issue and target,0.00079,0.00078,-0.00017,0.00183,0.94300,1000
+30,glm,all,0.00028,0.00027,0.00014,0.00041,1.00000,1000
+30,glm,rainy (rain at target time),0.00104,0.00106,0.00040,0.00165,0.99900,1000
+30,glm,rain starts between issue and target,0.00074,0.00071,-0.00008,0.00165,0.95600,1000
+60,lgb,all,0.00118,0.00118,0.00086,0.00148,1.00000,1000
+60,lgb,rainy (rain at target time),0.00154,0.00152,0.00004,0.00304,0.97700,1000
+60,lgb,rain starts between issue and target,0.00002,-0.00000,-0.00160,0.00161,0.50200,1000
+60,glm,all,0.00011,0.00012,-0.00006,0.00031,0.90600,1000
+60,glm,rainy (rain at target time),0.00105,0.00105,0.00017,0.00178,0.99400,1000
+60,glm,rain starts between issue and target,0.00049,0.00051,-0.00042,0.00143,0.87900,1000

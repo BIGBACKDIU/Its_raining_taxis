@@ -331,6 +331,29 @@ def negbin_aggregated():
     return out
 
 
+def part_testregimes():
+    """Share model per regime in the test year. Run only after the test year has been scored in step 6
+    (agreed at the step-3 checkpoint): it checks the rain association in the high-coverage regime."""
+    stamp = INTERIM / "test_year_first_scored.txt"
+    assert stamp.exists(), "score the test year in step 6 first"
+    p = load(years=[2025, 2026], start=pd.Timestamp("2025-10-01"), end=pd.Timestamp("2026-09-30 23:59"))
+    p["regime"] = p.regime.astype(str)
+    reg = pd.read_csv(INTERIM / "feed_regimes.csv").drop_duplicates("regime").set_index("regime").level_ratio
+    rows = []
+    for r in sorted(p.regime.unique()):
+        q = p[p.regime == r].reset_index(drop=True)
+        if r == "spell" or len(q) < 200_000:
+            continue
+        for t in fit(f"test-year {r}", q, base_X(q), REGS, which=("share", "abs")):
+            t = t.loc[BANDS].reset_index(names="term")
+            t.attrs = {}
+            t["regime"], t["level_ratio"] = r, reg.get(r)
+            rows.append(t)
+    out = pd.concat(rows)
+    out.to_csv(TABLES / "effects_test_year_by_regime.csv", index=False, float_format="%.6f")
+    print(out[["regime", "level_ratio", "model", "term", "pct", "pct_lo", "pct_hi", "n"]].round(3).to_string())
+
+
 # ----------------------------------------------------------------------------- charts
 def charts():
     style()
@@ -417,10 +440,10 @@ def charts():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--part", required=True,
-                    choices=["approach", "hetero", "interact", "forecast", "robust", "charts"])
+                    choices=["approach", "hetero", "interact", "forecast", "robust", "testregimes", "charts"])
     a = ap.parse_args()
     {"approach": part_approach, "hetero": part_hetero, "interact": part_interact, "forecast": part_forecast,
-     "robust": part_robust, "charts": charts}[a.part]()
+     "robust": part_robust, "testregimes": part_testregimes, "charts": charts}[a.part]()
 
 
 if __name__ == "__main__":

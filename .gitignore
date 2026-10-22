@@ -5,3 +5,4 @@ artifacts/
 .ipynb_checkpoints/
 .venv/
 data/interim/*.parquet
+data/interim/fc_*
