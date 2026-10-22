@@ -51,7 +51,8 @@ jobs:
       - name: Skip if this month is already in the repo
         id: have
         run: |
-          if git cat-file -e "origin/main:data/raw/logs/${{ matrix.month }}.json" 2>/dev/null; then echo "done=1" >> "$GITHUB_OUTPUT"; else echo "done=0" >> "$GITHUB_OUTPUT"; fi
+          git fetch -q origin main
+          if git ls-tree --name-only origin/main "data/raw/logs/${{ matrix.month }}.json" | grep -q .; then echo "done=1" >> "$GITHUB_OUTPUT"; else echo "done=0" >> "$GITHUB_OUTPUT"; fi
       - name: Download ${{ matrix.month }}
         if: steps.have.outputs.done == '0'
         env:
@@ -66,14 +67,17 @@ jobs:
       - name: Commit ${{ matrix.month }} to main
         if: always() && steps.have.outputs.done == '0'
         run: |
-          mkdir -p data/raw
-          cp -r out/* data/raw/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse data/raw
-          git commit -q -m "data: ${{ matrix.month }}"
-          for i in $(seq 1 15); do
-            if git pull -q --rebase origin main && git push -q origin HEAD:main; then exit 0; fi
+          for i in $(seq 1 20); do
+            git fetch -q origin main
+            git reset -q origin/main
+            mkdir -p data/raw
+            cp -r out/* data/raw/
+            git add --sparse data/raw
+            if git diff --cached --quiet; then echo "nothing new to commit"; exit 0; fi
+            git commit -q -m "data: ${{ matrix.month }}"
+            if git push -q origin HEAD:main; then echo "pushed on attempt $i"; exit 0; fi
             sleep $((RANDOM % 25 + 5))
           done
           exit 1
