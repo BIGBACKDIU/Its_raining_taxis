@@ -1,0 +1,3 @@
+h,weather,snapshots,targeted_low_rate,candidates_low_rate,expected_shortfall_reduction,calib_poisson_deviance,weather_kept
+60,False,150,0.23204,0.18715,9.04451,1.27340,False
+60,True,150,0.23202,0.18715,9.11219,1.26950,False

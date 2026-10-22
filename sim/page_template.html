@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storm Taxi Simulator</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #fcfcfb; --panel: #f4f3f0; --ink: #0b0b0b; --ink2: #52514e; --muted: #8a8984; --line: #e2e1dc;
+  --land: #ecebe6; --coast: #c9c8c2; --accent: #2a78d6; --accent2: #eb6834; --good: #1baf7a;
+  --low: #b8431c; --mid: #f2f1ed; --high: #1a4f91; --rain: 42, 120, 214;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #1a1a19; --panel: #242422; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8e88; --line: #3a3936;
+    --land: #2c2c2a; --coast: #4a4945; --accent: #3987e5; --accent2: #d95926; --good: #199e70;
+    --low: #e0703f; --mid: #3a3936; --high: #7fb0e8; --rain: 90, 160, 240;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1a1a19; --panel: #242422; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8e88; --line: #3a3936;
+  --land: #2c2c2a; --coast: #4a4945; --accent: #3987e5; --accent2: #d95926; --good: #199e70;
+  --low: #e0703f; --mid: #3a3936; --high: #7fb0e8; --rain: 90, 160, 240;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, "Helvetica Neue", Arial, sans-serif; }
+header { padding: 16px 16px 4px; }
+h1 { font-size: 20px; margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--ink2); font-size: 13px; margin: 0; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--panel); color: var(--ink2); margin-top: 6px; }
+main { display: grid; grid-template-columns: 300px 1fr; gap: 16px; padding: 12px 16px 24px; }
+@media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+.card { background: var(--panel); border-radius: 10px; padding: 12px; }
+.ctl { display: grid; grid-template-columns: 1fr; gap: 8px; }
+label { font-size: 12px; color: var(--ink2); display: block; }
+select, input[type=number] { width: 100%; padding: 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: 13px; }
+input[type=range] { width: 100%; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+button { flex: 1; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; font-size: 13px; }
+button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.maps { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.maps.compare { grid-template-columns: 1fr 1fr; }
+@media (max-width: 860px) { .maps.compare { grid-template-columns: 1fr; } }
+.mapwrap { position: relative; }
+.maptitle { font-size: 12px; color: var(--ink2); margin: 0 0 4px; }
+canvas.map { width: 100%; height: auto; background: var(--bg); border-radius: 8px; border: 1px solid var(--line); cursor: crosshair; display: block; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-top: 12px; }
+.stat { background: var(--panel); border-radius: 8px; padding: 8px 10px; }
+.stat .v { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat .k { font-size: 11px; color: var(--ink2); }
+canvas.chart { width: 100%; height: 180px; display: block; margin-top: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--ink2); margin-top: 6px; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+.pass { color: var(--good); font-weight: 600; } .fail { color: var(--accent2); font-weight: 600; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Storm Taxi Simulator</h1>
+  <p class="sub">How vacant taxis might move through a Singapore storm under different assumptions. Every number on this page is <b>simulated, conditional on the chosen scenario</b>; it is not a forecast and not a validation.</p>
+  <span class="badge" id="plausBadge"></span>
+</header>
+<main>
+  <section class="card ctl" aria-label="Controls">
+    <div><label for="storm">Storm</label><select id="storm"></select></div>
+    <div><label for="mech">What changes in rain (mechanism)</label>
+      <select id="mech"><option value="demand">More requests (demand surge)</option><option value="supply">Fewer taxis on the road (supply drop)</option><option value="mix" selected>Both (mix)</option></select></div>
+    <div><label for="dl">Demand level</label><select id="dl"><option value="0.8">0.8x</option><option value="1" selected>1.0x</option><option value="1.2">1.2x</option></select></div>
+    <div><label for="dest">Trip destinations</label><select id="dest"><option value="mrt">MRT pattern</option><option value="landuse">Distance decay, land-use proxy</option></select></div>
+    <div><label for="travel">Travel times</label><select id="travel"><option value="dry">Dry speeds (30 km/h)</option><option value="rain" selected>Rain congestion (20 km/h where raining)</option></select></div>
+    <div><label for="disp">Dispatch</label><select id="disp"><option value="nearest">Nearest taxi within 3.2 km</option><option value="widening">Widening radius (up to 8 km)</option></select></div>
+    <div><label><input type="checkbox" id="policy"> Step-7 repositioning (every 30 min)</label>
+      <label><input type="checkbox" id="compare"> Side by side: as usual vs repositioning</label></div>
+    <div><label for="rain">Rain intensity multiplier: <span id="rainv">1.0</span>x</label><input type="range" id="rain" min="0" max="2" step="0.1" value="1"></div>
+    <div><label for="layer">Map layer</label><select id="layer"><option value="vacant">Vacant taxis</option><option value="risk" selected>Vacant vs expected (risk)</option></select></div>
+    <div><label for="speed">Minutes per frame: <span id="speedv">2</span></label><input type="range" id="speed" min="1" max="10" step="1" value="2"></div>
+    <div><label for="seed">Seed</label><input type="number" id="seed" value="2702"></div>
+    <div class="row"><button class="primary" id="play">Play</button><button id="reset">Reset</button></div>
+    <div class="row"><button id="many">Average of 50 seeds</button></div>
+    <p class="note">Click a cell on the map to add 10 simulated requests there. Arrows show the last repositioning moves. Tuned parameters come from 20 training storms; the badge shows the pre-registered plausibility check on 10 held-out storms.</p>
+  </section>
+  <section>
+    <div class="maps" id="maps">
+      <div class="mapwrap"><p class="maptitle" id="titleA">As configured</p><canvas class="map" id="mapA" width="900" height="520" aria-label="Map of simulated vacant taxis"></canvas></div>
+      <div class="mapwrap" id="wrapB" style="display:none"><p class="maptitle">With step-7 repositioning</p><canvas class="map" id="mapB" width="900" height="520" aria-label="Map of simulated vacant taxis with repositioning"></canvas></div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="sClock">00:00</div><div class="k">Time (storm start + minutes)</div></div>
+      <div class="stat"><div class="v" id="sRain">0</div><div class="k">Mean rain, mm/h (cells)</div></div>
+      <div class="stat"><div class="v" id="sVac">0</div><div class="k">Vacant taxis (simulated)</div></div>
+      <div class="stat"><div class="v" id="sRel">100%</div><div class="k">Vacant vs start: simulated / observed</div></div>
+      <div class="stat"><div class="v" id="sAb">0%</div><div class="k">Requests abandoned (simulated)</div></div>
+      <div class="stat"><div class="v" id="sWait">0</div><div class="k">Mean wait, min (simulated)</div></div>
+    </div>
+    <canvas class="chart" id="chart" width="900" height="180" aria-label="Citywide vacant taxis relative to start"></canvas>
+    <div class="legend"><span><span class="sw" style="background:var(--accent)"></span>Simulated (this run)</span><span><span class="sw" style="background:var(--ink)"></span>Observed feed</span><span><span class="sw" style="background:var(--accent2)"></span>Repositioning run</span><span><span class="sw" style="background:rgba(42,120,214,.25)"></span>50-seed 5-95% band</span></div>
+    <p class="note">Sources: data.gov.sg taxi availability (LTA), NEA rainfall, LTA fleet statistics. Cell model on 374 analysed 1 km cells; requests, waits and abandonments are simulation quantities, never observed demand. Travel speeds and destination patterns are assumptions.</p>
+  </section>
+</main>
+<script>
+/*__ENGINE__*/
+</script>
+<script>
+/*__DATA__*/
+const world = new World(DATA.cells);
+const C = world.C, cells = DATA.cells;
+const $ = (id) => document.getElementById(id);
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+let simA = null, simB = null, playing = false, pathA = [], pathB = [], band = null;
+DATA.storms.forEach((s, k) => {
+  const o = document.createElement("option");
+  o.value = k; o.textContent = `${s.date} - ${s.period === "fit" ? "training" : "held-out"} storm, peak ${s.peak_mmh.toFixed(0)} mm/h`;
+  $("storm").appendChild(o);
+});
+function scen() {
+  return { mechanism: $("mech").value, dest: $("dest").value, travel: $("travel").value, dispatch: $("disp").value,
+           demand_level: parseFloat($("dl").value) };
+}
+function params() {
+  const s = scen();
+  const t = TUNED.find((r) => r.mechanism === s.mechanism && r.dest === s.dest && r.travel === s.travel && r.dispatch === s.dispatch);
+  const p = PLAUS.find((r) => r.mechanism === s.mechanism && r.dest === s.dest && r.travel === s.travel && r.dispatch === s.dispatch);
+  $("plausBadge").innerHTML = p ? `Plausibility (held-out storms): <span class="${p.combination_passes ? "pass" : "fail"}">${p.combination_passes ? "passes" : "does not pass"}</span> (${p.storms_passed}/10 storms within 20% at 70% of times; sign at peak ${p.sign_matches}/10)` : "";
+  return { occ0: t.occ0, kappa: t.kappa, beta_dem: t.beta_dem, beta_off: t.beta_off };
+}
+// map geometry
+const lon0 = 103.6, lon1 = 104.05, lat0 = 1.215, lat1 = 1.475;
+function proj(cv, lon, lat) {
+  const w = cv.width, h = cv.height;
+  const sx = w / (lon1 - lon0), sy = h / (lat1 - lat0), s = Math.min(sx, sy * Math.cos(1.35 * Math.PI / 180));
+  const ox = (w - s * (lon1 - lon0)) / 2;
+  const sy2 = s / Math.cos(1.35 * Math.PI / 180);
+  const oy = (h - sy2 * (lat1 - lat0)) / 2;
+  return [ox + (lon - lon0) * s, h - oy - (lat - lat0) * sy2, s, sy2];
+}
+function colorRisk(ratio) {
+  const lo = css("--low"), mid = css("--mid"), hi = css("--high");
+  const lerp = (a, b, t) => { const pa = a.match(/\w\w/g).map((h) => parseInt(h, 16)), pb = b.match(/\w\w/g).map((h) => parseInt(h, 16));
+    return `rgb(${pa.map((v, i) => Math.round(v + (pb[i] - v) * t)).join(",")})`; };
+  if (ratio < 1) return lerp(lo, mid, Math.max(0, Math.min(1, ratio)));
+  return lerp(mid, hi, Math.max(0, Math.min(1, (ratio - 1) / 1)));
+}
+function colorVac(v) {
+  const t = Math.min(1, Math.log1p(v) / Math.log1p(40));
+  const a = css("--mid"), b = css("--high");
+  const pa = a.match(/\w\w/g).map((h) => parseInt(h, 16)), pb = b.match(/\w\w/g).map((h) => parseInt(h, 16));
+  return `rgb(${pa.map((x, i) => Math.round(x + (pb[i] - x) * t)).join(",")})`;
+}
+function draw(cv, sim) {
+  const g = cv.getContext("2d");
+  g.fillStyle = css("--bg"); g.fillRect(0, 0, cv.width, cv.height);
+  g.fillStyle = css("--land"); g.strokeStyle = css("--coast"); g.lineWidth = 0.6;
+  for (const ring of DATA.land) {
+    g.beginPath();
+    ring.forEach(([lo, la], k) => { const [x, y] = proj(cv, lo, la); k ? g.lineTo(x, y) : g.moveTo(x, y); });
+    g.closePath(); g.fill(); g.stroke();
+  }
+  if (!sim) return;
+  const slot = Math.min(Math.floor(sim.m / 30), sim.st.base.length - 1);
+  const base = sim.st.base[slot], rain = sim.rainAt(slot), layer = $("layer").value;
+  const half = 0.0045;
+  for (let i = 0; i < C; i++) {
+    const [x0, y0] = proj(cv, cells.lon[i] - half, cells.lat[i] + half);
+    const [x1, y1] = proj(cv, cells.lon[i] + half, cells.lat[i] - half);
+    g.fillStyle = layer === "risk" ? colorRisk(sim.V[i] / Math.max(1, base[i])) : colorVac(sim.V[i]);
+    g.fillRect(x0, y0, x1 - x0 - 0.5, y1 - y0 - 0.5);
+    if (rain[i] > 0) { g.fillStyle = `rgba(${css("--rain")}, ${Math.min(0.55, 0.08 + rain[i] / 40)})`; g.fillRect(x0, y0, x1 - x0 - 0.5, y1 - y0 - 0.5); }
+  }
+  // move arrows
+  g.strokeStyle = css("--accent2"); g.fillStyle = css("--accent2"); g.lineWidth = 1.2;
+  for (const mv of sim.lastMoves || []) {
+    const [ax, ay] = proj(cv, cells.lon[mv.i], cells.lat[mv.i]), [bx, by] = proj(cv, cells.lon[mv.j], cells.lat[mv.j]);
+    g.globalAlpha = Math.min(1, 0.3 + mv.n / 10);
+    g.beginPath(); g.moveTo(ax, ay); g.lineTo(bx, by); g.stroke();
+    const an = Math.atan2(by - ay, bx - ax);
+    g.beginPath(); g.moveTo(bx, by); g.lineTo(bx - 7 * Math.cos(an - 0.4), by - 7 * Math.sin(an - 0.4)); g.lineTo(bx - 7 * Math.cos(an + 0.4), by - 7 * Math.sin(an + 0.4)); g.fill();
+  }
+  g.globalAlpha = 1;
+}
+function legend() {
+  const layer = $("layer").value;
+  $("legend").innerHTML = layer === "risk"
+    ? `<span><span class="sw" style="background:${css("--low")}"></span>Below expected (risk)</span><span><span class="sw" style="background:${css("--mid")};border:1px solid ${css("--line")}"></span>At expected</span><span><span class="sw" style="background:${css("--high")}"></span>Above expected</span><span><span class="sw" style="background:rgba(${css("--rain")},.4)"></span>Raining (previous 30 min)</span>`
+    : `<span><span class="sw" style="background:${css("--mid")};border:1px solid ${css("--line")}"></span>Few vacant taxis</span><span><span class="sw" style="background:${css("--high")}"></span>Many vacant taxis</span><span><span class="sw" style="background:rgba(${css("--rain")},.4)"></span>Raining</span>`;
+}
+function obsRelAt(st, m) {
+  let k = 0; while (k + 1 < st.snap_minutes.length && st.snap_minutes[k + 1] <= m) k++;
+  return st.obs_city[k] / st.obs_city[0];
+}
+function chart() {
+  const cv = $("chart"), g = cv.getContext("2d"), st = DATA.storms[+$("storm").value];
+  const W = cv.width, H = cv.height, padL = 40, padB = 20;
+  g.fillStyle = css("--bg"); g.fillRect(0, 0, W, H);
+  const ymax = 1.6, X = (m) => padL + (W - padL - 8) * m / st.minutes, Y = (v) => (H - padB) - (H - padB - 8) * Math.min(v, ymax) / ymax;
+  g.strokeStyle = css("--line"); g.fillStyle = css("--ink2"); g.font = "11px sans-serif"; g.lineWidth = 1;
+  for (const v of [0, 0.5, 1, 1.5]) { g.beginPath(); g.moveTo(padL, Y(v)); g.lineTo(W - 8, Y(v)); g.stroke(); g.fillText(`${Math.round(v * 100)}%`, 4, Y(v) + 4); }
+  for (let h = 0; h * 60 <= st.minutes; h++) g.fillText(`${h}h`, X(h * 60) - 6, H - 4);
+  g.strokeStyle = css("--accent2"); g.setLineDash([4, 3]); g.beginPath(); g.moveTo(X(st.peak_minute), 8); g.lineTo(X(st.peak_minute), H - padB); g.stroke(); g.setLineDash([]);
+  if (band) {
+    g.fillStyle = "rgba(42,120,214,.22)"; g.beginPath();
+    band.forEach(([m, lo], k) => k ? g.lineTo(X(m), Y(lo)) : g.moveTo(X(m), Y(lo)));
+    [...band].reverse().forEach(([m, , hi]) => g.lineTo(X(m), Y(hi))); g.closePath(); g.fill();
+  }
+  const line = (pts, col, w) => { g.strokeStyle = col; g.lineWidth = w; g.beginPath(); pts.forEach(([m, v], k) => k ? g.lineTo(X(m), Y(v)) : g.moveTo(X(m), Y(v))); g.stroke(); };
+  line(st.snap_minutes.map((m, k) => [m, st.obs_city[k] / st.obs_city[0]]), css("--ink"), 1.5);
+  line(pathA, css("--accent"), 2);
+  if (pathB.length) line(pathB, css("--accent2"), 2);
+}
+function reset() {
+  const st = DATA.storms[+$("storm").value], s = scen(), p = params(), seed = parseInt($("seed").value) || 2702;
+  const compare = $("compare").checked;
+  simA = new Sim(world, st, s, p, seed, { policy: !compare && $("policy").checked, rainMult: parseFloat($("rain").value) });
+  simB = compare ? new Sim(world, st, s, p, seed, { policy: true, rainMult: parseFloat($("rain").value) }) : null;
+  $("wrapB").style.display = compare ? "" : "none";
+  $("maps").classList.toggle("compare", compare);
+  $("titleA").textContent = compare ? "As usual" : ($("policy").checked ? "With step-7 repositioning" : "As usual");
+  pathA = []; pathB = []; band = null;
+  render();
+}
+function render() {
+  draw($("mapA"), simA); if (simB) draw($("mapB"), simB);
+  legend();
+  const st = simA.st, m = simA.m;
+  const hh = String(Math.floor(m / 60)).padStart(2, "0"), mm = String(m % 60).padStart(2, "0");
+  $("sClock").textContent = `${hh}:${mm}`;
+  const r = simA.rainAt(Math.min(Math.floor(m / 30), st.rain.length - 1));
+  $("sRain").textContent = (r.reduce((a, b) => a + b, 0) / C).toFixed(1);
+  $("sVac").textContent = simA.vacantTotal().toLocaleString();
+  const rel = simA.vacantTotal() / st.v0.reduce((a, b) => a + b, 0);
+  $("sRel").textContent = `${Math.round(rel * 100)}% / ${Math.round(obsRelAt(st, m) * 100)}%`;
+  const s = simA.stats;
+  $("sAb").textContent = `${(100 * s.abandoned / Math.max(1, s.requests)).toFixed(1)}%`;
+  $("sWait").textContent = (s.wait_minutes / Math.max(1, s.served)).toFixed(1);
+  chart();
+}
+function tick() {
+  if (!playing) return;
+  const n = parseInt($("speed").value);
+  for (let k = 0; k < n && simA.m < simA.M; k++) {
+    simA.step(); pathA.push([simA.m, simA.vacantTotal() / simA.st.v0.reduce((a, b) => a + b, 0)]);
+    if (simB) { simB.step(); pathB.push([simB.m, simB.vacantTotal() / simB.st.v0.reduce((a, b) => a + b, 0)]); }
+  }
+  render();
+  if (simA.m >= simA.M) { playing = false; $("play").textContent = "Play"; return; }
+  requestAnimationFrame(tick);
+}
+$("play").onclick = () => { playing = !playing; $("play").textContent = playing ? "Pause" : "Play"; if (playing) requestAnimationFrame(tick); };
+$("reset").onclick = () => { playing = false; $("play").textContent = "Play"; reset(); };
+$("many").onclick = () => {
+  const st = DATA.storms[+$("storm").value];
+  $("many").textContent = "Running 50 seeds...";
+  setTimeout(() => {
+    const city = runSeeds(world, st, scen(), params(), 50, 2702, { policy: $("policy").checked, rainMult: parseFloat($("rain").value) });
+    band = st.snap_minutes.map((m, k) => {
+      const v = city.map((row) => row[k] / row[0]).sort((a, b) => a - b);
+      return [m, v[Math.floor(0.05 * v.length)], v[Math.floor(0.95 * v.length) - 1]];
+    });
+    $("many").textContent = "Average of 50 seeds"; chart();
+  }, 20);
+};
+["storm", "mech", "dl", "dest", "travel", "disp", "policy", "compare", "seed", "layer"].forEach((id) => $(id).addEventListener("change", () => { if (id === "layer") render(); else { playing = false; $("play").textContent = "Play"; reset(); } }));
+$("rain").addEventListener("input", () => { $("rainv").textContent = parseFloat($("rain").value).toFixed(1); if (simA) { simA.rainMult = parseFloat($("rain").value); if (simB) simB.rainMult = simA.rainMult; } });
+$("speed").addEventListener("input", () => { $("speedv").textContent = $("speed").value; });
+for (const id of ["mapA", "mapB"]) {
+  $(id).addEventListener("click", (e) => {
+    const cv = $(id), rect = cv.getBoundingClientRect();
+    const px = (e.clientX - rect.left) * cv.width / rect.width, py = (e.clientY - rect.top) * cv.height / rect.height;
+    let best = -1, bd = Infinity;
+    for (let i = 0; i < C; i++) { const [x, y] = proj(cv, cells.lon[i], cells.lat[i]); const d = (x - px) ** 2 + (y - py) ** 2; if (d < bd) { bd = d; best = i; } }
+    if (best >= 0) { simA.extra[best] += 10; if (simB) simB.extra[best] += 10; }
+  });
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+reset();
+</script>
+</body>
+</html>

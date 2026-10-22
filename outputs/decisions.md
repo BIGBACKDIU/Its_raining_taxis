@@ -366,3 +366,17 @@ results stay as they are and remain the pre-specified result.
 78. **Web page check.** `sim/index.html` runs a JavaScript port of the same rules with a seeded RNG; the page
     averages (50 seeds) must be within 5% of the Python engine for the same scenario and storm (checked in node
     on 3 scenario x storm pairs).
+79. **Policy solver inside the simulation.** The step-7 objective is solved by a greedy marginal-value heuristic
+    in both the Python engine and the web page (no LP solver in the browser), instead of HiGHS as first written
+    in item 73. Its objective is compared with the PuLP optimum on 60 step-7 test decisions
+    (`outputs/tables/sim_greedy_vs_pulp.csv`). The simulation's policy forecast is persistence (current vacant
+    taxis), and the plan is computed once per decision from the seed-mean state and applied to every seed
+    (capped by each seed's available taxis).
+80. **Step 7 results.** Weather was not kept for step 7: on the calibration sample its targeting precision was
+    no better (23.20% with vs 23.20% without; candidates 18.7%). Test year, base case (N = 200, lambda 0.005,
+    60 min): 149-166 taxis moved per decision, 73-78 cells targeted, targeted cells really low 31-32% vs 28% of
+    all candidate cells; modelled expected shortfall reduced by 34-39%. Smaller budgets target better (N = 50:
+    38-39%), larger budgets remove more modelled shortfall (N = 500: 39-43%) at lower precision (31-32%).
+    Planning layer: across all area x time groups, an issued NEA showers/thundery forecast goes with 6.6% fewer
+    vacant taxis than the no-rain model and observed heavy rain with 13.8% fewer (consistent with step 4); small
+    areas at specific hours show larger swings with wide day-level uncertainty.

@@ -1,0 +1,21 @@
+condition,planning_area,time_band,day,cells,half_hours,cell_snapshots,expected_taxis_per_half_hour,abs_loss_taxis_per_half_hour,pct_change,pct_lo,pct_hi,share_change,share_lo,share_hi
+NEA forecast showers/thundery (issued before t),CHANGI,00-07,weekend/holiday,11,234,2407,134.188,34.637,-25.812,-39.931,-13.965,-23.426,-36.613,-11.604
+NEA forecast showers/thundery (issued before t),CHANGI,00-07,weekday,11,395,4154,141.111,33.146,-23.490,-33.718,-13.106,-18.775,-28.100,-10.217
+NEA forecast showers/thundery (issued before t),BUKIT MERAH,00-07,weekend/holiday,14,269,3722,68.613,26.587,-38.749,-41.999,-35.061,-38.656,-41.431,-35.898
+NEA forecast showers/thundery (issued before t),DOWNTOWN CORE,07-10,weekend/holiday,5,240,1200,46.073,26.465,-57.441,-62.001,-52.092,-57.169,-61.738,-51.841
+NEA forecast showers/thundery (issued before t),CHANGI,07-10,weekday,11,380,3857,152.930,25.149,-16.444,-22.751,-10.246,-4.233,-11.002,2.252
+NEA forecast showers/thundery (issued before t),BUKIT MERAH,20-24,weekday,14,187,2466,87.971,24.757,-28.142,-33.062,-22.859,-25.839,-30.021,-21.400
+NEA forecast showers/thundery (issued before t),CHANGI,20-24,weekend/holiday,11,81,786,142.360,23.854,-16.756,-30.377,-0.019,-4.438,-18.087,10.412
+NEA forecast showers/thundery (issued before t),BUKIT MERAH,00-07,weekday,14,440,6098,71.001,23.329,-32.857,-37.820,-27.488,-28.943,-32.604,-24.649
+NEA forecast showers/thundery (issued before t),BUKIT MERAH,17-20,weekday,14,568,7480,76.664,21.449,-27.978,-30.516,-25.335,-19.355,-21.170,-17.430
+NEA forecast showers/thundery (issued before t),DOWNTOWN CORE,00-07,weekday,5,415,2071,46.848,20.229,-43.180,-49.438,-36.513,-39.755,-45.243,-33.437
+NEA forecast showers/thundery (issued before t),TAMPINES,20-24,weekend/holiday,20,77,1381,82.489,18.372,-22.272,-30.098,-12.346,-9.789,-16.248,-2.527
+NEA forecast showers/thundery (issued before t),GEYLANG,07-10,weekday,11,373,3811,65.737,17.874,-27.190,-30.786,-23.468,-16.230,-18.340,-13.803
+NEA forecast showers/thundery (issued before t),CHANGI,10-17,weekday,11,1946,18136,156.113,17.410,-11.152,-15.208,-7.354,-6.348,-10.387,-2.241
+NEA forecast showers/thundery (issued before t),KALLANG,17-20,weekday,9,592,4471,62.313,17.309,-27.778,-29.893,-25.406,-19.155,-21.031,-17.072
+NEA forecast showers/thundery (issued before t),SENGKANG,10-17,weekday,13,1964,21943,69.552,17.248,-24.799,-26.656,-22.879,-21.374,-22.699,-19.967
+NEA forecast showers/thundery (issued before t),BEDOK,20-24,weekend/holiday,21,72,1479,77.579,16.676,-21.496,-28.757,-11.866,-9.166,-14.289,-3.809
+NEA forecast showers/thundery (issued before t),GEYLANG,17-20,weekday,11,546,5588,68.323,16.453,-24.081,-26.407,-21.522,-15.442,-17.216,-13.582
+NEA forecast showers/thundery (issued before t),ANG MO KIO,20-24,weekend/holiday,12,62,712,71.311,16.214,-22.738,-29.780,-13.783,-11.396,-17.057,-5.482
+NEA forecast showers/thundery (issued before t),KALLANG,07-10,weekday,9,416,3317,64.698,15.929,-24.620,-28.791,-20.067,-13.090,-16.049,-10.046
+NEA forecast showers/thundery (issued before t),GEYLANG,20-24,weekend/holiday,11,78,799,64.028,15.387,-24.032,-30.625,-15.817,-13.729,-17.306,-9.690
