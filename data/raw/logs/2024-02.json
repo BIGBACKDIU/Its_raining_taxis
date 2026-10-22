@@ -1,0 +1,24 @@
+{
+  "month": "2024-02",
+  "snapshots": 1392,
+  "snapshots_ok": 1392,
+  "median_taxis": 1679.0,
+  "median_offset_min": -0.26666666666666666,
+  "taxi_seconds": 98.2,
+  "total_seconds": 137.6,
+  "calls_per_second": 10.53,
+  "workers": 4,
+  "client": {
+    "calls": 1450,
+    "ok": 1450,
+    "retries": 0,
+    "rate_limited": 0,
+    "failed": 0
+  },
+  "rain_days_v1": 29,
+  "rain_days_v2": 0,
+  "rain_readings_total": 513337,
+  "rain_stations_max": 63,
+  "forecast_rows": 84882,
+  "forecast_issues": 1806
+}
