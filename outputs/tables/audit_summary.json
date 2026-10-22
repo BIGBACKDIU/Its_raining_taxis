@@ -2,16 +2,17 @@
   "snapshots_expected": 122688,
   "snapshots_ok": 120017,
   "dropped_offset_gt_10min": 1345,
-  "dropped_glitch": 462,
-  "snapshots_usable": 118210,
-  "jumps_abs_z_gt6_after_glitches": 2509,
+  "dropped_glitch_spike": 462,
+  "dropped_glitch_dip": 74,
+  "snapshots_usable": 118136,
+  "jumps_abs_z_gt6_after_glitches": 2428,
   "days_total": 1826,
   "days_missing_lt50pct": 43,
   "spell_days": 41,
   "unusual_days": 87,
   "unusual_feed_outage": 17,
   "unusual_kept": 70,
-  "feed_outage_days_any_rain_gt0.2mm": 3,
+  "feed_outage_days_any_rain_gt0.2mm": 2,
   "feed_outage_days_list": [
     "2021-11-16",
     "2021-12-06",
@@ -25,9 +26,9 @@
     "2022-05-18",
     "2022-06-27",
     "2022-06-29",
-    "2022-08-12",
     "2022-12-14",
     "2023-02-21",
+    "2024-04-09",
     "2024-07-18",
     "2024-07-19"
   ],
@@ -41,6 +42,8 @@
     "dry_max_gauge_mm": 20.0,
     "glitch_low": 0.5,
     "glitch_back": 0.8,
+    "dip_low": 0.25,
+    "dip_max_run": 3,
     "jump_z": 6
   }
 }

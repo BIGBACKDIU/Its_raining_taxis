@@ -71,7 +71,7 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
     benchmark is a null built from 40 of the regime's normal days, binomially thinned to the day's own level;
     "high correlation" = at least the null's 10th percentile. "Little rain" = island-mean daily rain < 2 mm and
     no working gauge above 20 mm. High correlation AND little rain = feed outage: excluded from the main
-    estimates, kept in a robustness set. Result: 87 unusual days, 17 feed outages (3 of them with any rain,
+    estimates, kept in a robustness set. Result: 87 unusual days, 17 feed outages (2 of them with any rain,
     all <= 2 mm island mean), 70 kept. Of the kept days, 16 are dry but spatially unusual (e.g. Chinese New
     Year 29-30 Jan 2025, 14-16 Mar 2023 right after the outage spell); they stay in by the rule.
 12. **Jump z-scores are de-seasoned.** The change in log citywide count between consecutive snapshots is compared
@@ -83,3 +83,8 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
 14. **Exclusion sets** in `data/interim/day_flags.csv`: `exclude_main` = missing days (< 50% of snapshots) +
     spells + feed-outage days (100 days); `exclude_robust` = missing days + spells except 26 Feb - 1 Mar 2023
     (feed-outage days and the ambiguous spell come back in). `covid` flags Oct 2021 - Mar 2022.
+15. **Multi-snapshot dips** (agreed at the step-0 checkpoint): runs of 1-3 consecutive snapshots whose citywide
+    count is below 25% of the median of the surrounding +-2 hours (the run itself excluded) are dropped as
+    glitches; longer runs are kept as sustained drops. 74 snapshots dropped (`glitch_dip`), on top of the 462
+    single spikes (`glitch_spike`). Usable snapshots: 118,136. Unusual-day classification re-run on the cleaned
+    snapshots: still 17 feed-outage days, now 2 with any rain.

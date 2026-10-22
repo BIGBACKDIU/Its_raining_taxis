@@ -7,6 +7,8 @@ Snapshot level
   - glitch: a single snapshot whose citywide count is below 50% of the median of the surrounding
     +-2 snapshots, with both the snapshot before and the one after back at >= 80% of that median
     (a spike). Sustained drops are not touched.
+  - dip: a run of 1-3 consecutive snapshots below 25% of the median of the surrounding +-2 hours
+    (run excluded); longer runs are sustained drops and are kept
   - robust z-score of the change in log citywide count between consecutive snapshots; z > 6 listed
 Day level
   - feed regimes and short spells from prep_feed_regimes.py
@@ -48,6 +50,7 @@ FIGS = Path("outputs/figures")
 FINE_START = pd.Timestamp("2024-10-01")
 MAX_OFFSET_MIN = 10
 GLITCH_LOW, GLITCH_BACK = 0.5, 0.8
+DIP_LOW, DIP_MAX_RUN, DIP_WINDOW_MIN = 0.25, 3, 120   # multi-snapshot dips (agreed at step-0 checkpoint)
 JUMP_Z = 6
 GAUGE_COMPLETE = 0.8 * 288
 STUCK_DAYS, STUCK_NEIGHBOURS, STUCK_WET_DAYS = 7, 3, 3
@@ -99,8 +102,10 @@ def flag_glitches(sn: pd.DataFrame) -> pd.DataFrame:
     enough = (~np.isnan(nb)).sum(1) >= 3
     glitch = enough & (n < GLITCH_LOW * m) & (nb[:, 1] >= GLITCH_BACK * m) & (nb[:, 2] >= GLITCH_BACK * m)
     sn["neighbour_median"] = pd.Series(m, index=v.index)
-    sn["glitch"] = False
-    sn.loc[v.index[glitch], "glitch"] = True
+    sn["glitch_spike"] = False
+    sn.loc[v.index[glitch], "glitch_spike"] = True
+    sn["glitch_dip"] = flag_dips(sn[sn.ok & ~sn.offset_bad & ~sn.glitch_spike]).reindex(sn.index, fill_value=False)
+    sn["glitch"] = sn.glitch_spike | sn.glitch_dip
     # robust z of jumps in log count, after glitches are removed
     w = sn[sn.ok & ~sn.offset_bad & ~sn.glitch].sort_values("req_ts")
     dl = np.log(w.n_points.clip(lower=1)).diff()
@@ -115,6 +120,39 @@ def flag_glitches(sn: pd.DataFrame) -> pd.DataFrame:
     sn["jump_z"] = ((dl - np.nanmedian(dl)) / (1.4826 * mad)).reindex(sn.index)
     sn["usable"] = sn.ok & ~sn.offset_bad & ~sn.glitch
     return sn
+
+
+def flag_dips(v: pd.DataFrame) -> pd.Series:
+    """Runs of 1-3 consecutive snapshots below DIP_LOW x the median of the surrounding +-2 hours
+    (the run itself excluded). Longer runs are sustained drops and are kept."""
+    v = v.sort_values("req_ts")
+    t = v.req_ts.values.astype("datetime64[m]").astype(np.int64)
+    n = v.n_points.astype(float).values
+    lo = np.searchsorted(t, t - DIP_WINDOW_MIN, "left")
+    hi = np.searchsorted(t, t + DIP_WINDOW_MIN, "right")
+
+    def window_median(a, b, skip):
+        idx = np.r_[lo[a]:hi[b]]
+        idx = idx[(idx < a) | (idx > b)] if skip else idx[idx != a]
+        return np.median(n[idx]) if len(idx) >= 4 else np.nan
+
+    cand = np.array([n[i] < DIP_LOW * window_median(i, i, False) for i in range(len(n))])
+    step = np.where(v.req_ts >= FINE_START, 15, 30)
+    out = np.zeros(len(n), bool)
+    i = 0
+    while i < len(n):
+        if not cand[i]:
+            i += 1
+            continue
+        j = i
+        while j + 1 < len(n) and cand[j + 1] and t[j + 1] - t[j] <= step[j]:
+            j += 1
+        if j - i + 1 <= DIP_MAX_RUN:
+            m = window_median(i, j, True)
+            if np.all(n[i:j + 1] < DIP_LOW * m):
+                out[i:j + 1] = True
+        i = j + 1
+    return pd.Series(out, index=v.index)
 
 
 # ----------------------------------------------------------------------------- rain gauges
@@ -246,7 +284,7 @@ def classify_unusual(daily: pd.DataFrame, cells: pd.DataFrame, rain: pd.DataFram
 # ----------------------------------------------------------------------------- monthly appendix
 def monthly_table(sn, daily, comp, glitches_by_month):
     m = sn.groupby("month").agg(expected=("snap", "size"), returned_ok=("ok", "sum"),
-                                offset_dropped=("offset_bad", "sum"), glitches=("glitch", "sum"),
+                                offset_dropped=("offset_bad", "sum"), glitches=("glitch_spike", "sum"), dips=("glitch_dip", "sum"),
                                 usable=("usable", "sum"), median_offset_min=("offset_min", "median"),
                                 jumps_z_gt6=("jump_z", lambda z: int((z.abs() > JUMP_Z).sum())),
                                 median_citywide=("n_points", "median"))
@@ -275,7 +313,7 @@ def monthly_table(sn, daily, comp, glitches_by_month):
     out["covid_flag"] = (p >= COVID[0].to_period("M")) & (p <= COVID[1].to_period("M"))
     out["period"] = np.select([p < pd.Period("2022-04"), p <= pd.Period("2025-03"), p <= pd.Period("2025-09")],
                               ["pre-fit (COVID)", "fit", "calibrate"], "test")
-    cols = ["period", "covid_flag", "expected", "returned_ok", "offset_dropped", "glitches", "usable", "share_present",
+    cols = ["period", "covid_flag", "expected", "returned_ok", "offset_dropped", "glitches", "dips", "usable", "share_present",
             "median_offset_min", "jumps_z_gt6", "median_citywide", "regimes", "days", "days_missing", "spell_days",
             "feed_outage_days", "unusual_kept_days", "days_excluded_main", "gauges", "gauge_complete_share",
             "gauge_days_stuck", "forecast_issues", "forecast_day_coverage"]
@@ -326,13 +364,13 @@ def main():
     daily["covid"] = daily.index.to_series().between(*COVID)
 
     # ---- save
-    sn[["month", "snap", "req_ts", "act_ts", "n_points", "status", "offset_min", "offset_bad", "glitch",
-        "neighbour_median", "jump_z", "usable"]].to_csv(INTERIM / "snapshot_flags.csv.gz", index=False,
+    sn[["month", "snap", "req_ts", "act_ts", "n_points", "status", "offset_min", "offset_bad", "glitch_spike",
+        "glitch_dip", "glitch", "neighbour_median", "jump_z", "usable"]].to_csv(INTERIM / "snapshot_flags.csv.gz", index=False,
                                                          float_format="%.3f")
     daily.reset_index().to_csv(INTERIM / "day_flags.csv", index=False, float_format="%.4f")
     comp[["date", "station_id", "n_readings", "mm_total", "complete", "stuck", "working", "nb_mm"]].to_csv(
         INTERIM / "gauge_day_flags.csv.gz", index=False, float_format="%.2f")
-    gl = sn[sn.glitch][["req_ts", "n_points", "neighbour_median"]]
+    gl = sn[sn.glitch][["req_ts", "n_points", "neighbour_median", "glitch_spike", "glitch_dip"]]
     gl.to_csv(TABLES / "audit_glitches.csv", index=False)
     jumps = sn[sn.jump_z.abs() > JUMP_Z].sort_values("jump_z", key=np.abs, ascending=False)
     jumps[["req_ts", "n_points", "jump_z"]].to_csv(TABLES / "audit_jumps.csv", index=False, float_format="%.2f")
@@ -349,7 +387,7 @@ def main():
     fo = daily[daily.feed_outage]
     summary = {
         "snapshots_expected": int(len(sn)), "snapshots_ok": int(sn.ok.sum()),
-        "dropped_offset_gt_10min": int(sn.offset_bad.sum()), "dropped_glitch": int(sn.glitch.sum()),
+        "dropped_offset_gt_10min": int(sn.offset_bad.sum()), "dropped_glitch_spike": int(sn.glitch_spike.sum()), "dropped_glitch_dip": int(sn.glitch_dip.sum()),
         "snapshots_usable": int(sn.usable.sum()), "jumps_abs_z_gt6_after_glitches": int(len(jumps)),
         "days_total": int(len(daily)), "days_missing_lt50pct": int((~daily.usable).sum()),
         "spell_days": int((daily.regime == "spell").sum()),
@@ -361,7 +399,7 @@ def main():
         "gauge_days_complete_share": round(float(comp.complete.mean()), 4),
         "gauge_days_stuck": int(comp.stuck.sum()), "stuck_gauges": int(comp[comp.stuck].station_id.nunique()),
         "thresholds": {"share_q": SHARE_Q, "dry_mm": DRY_MM, "dry_max_gauge_mm": DRY_MAX_GAUGE_MM,
-                       "glitch_low": GLITCH_LOW, "glitch_back": GLITCH_BACK, "jump_z": JUMP_Z},
+                       "glitch_low": GLITCH_LOW, "glitch_back": GLITCH_BACK, "dip_low": DIP_LOW, "dip_max_run": DIP_MAX_RUN, "jump_z": JUMP_Z},
     }
     (TABLES / "audit_summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
