@@ -1,0 +1,24 @@
+{
+  "month": "2023-03",
+  "snapshots": 1488,
+  "snapshots_ok": 1488,
+  "median_taxis": 1500.5,
+  "median_offset_min": -0.35,
+  "taxi_seconds": 86.4,
+  "total_seconds": 312.0,
+  "calls_per_second": 5.01,
+  "workers": 4,
+  "client": {
+    "calls": 1564,
+    "ok": 1548,
+    "retries": 16,
+    "rate_limited": 0,
+    "failed": 2
+  },
+  "rain_days_v1": 31,
+  "rain_days_v2": 0,
+  "rain_readings_total": 590176,
+  "rain_stations_max": 69,
+  "forecast_rows": 80323,
+  "forecast_issues": 1709
+}
