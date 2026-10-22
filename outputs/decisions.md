@@ -237,3 +237,48 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
     skipped. In R14 (high coverage, 1.8x) heavy rain: share -10.2% (CI -14.0 to -6.2), absolute -16.1%; other
     test-year regimes: share -8.5% to -24.9%. The direction matches the fit period; sizes are larger in the test
     year, in line with the trend across fiscal years (FY2024 share -7.7%).
+
+## Secondary forecasting analysis S1 - PRE-REGISTERED (written and committed before any S1 code was run)
+
+Added after the first test-year scoring (2026-10-23 00:08:41), at Matthew's request at the step-6 checkpoint.
+Every S1 output is labelled "secondary analysis (S1), added after first test scoring". The primary step-6
+results stay as they are and remain the pre-specified result.
+
+55. **Why.** At 1 km the 50%-deficit label is dominated by count noise (rain moves expected counts by 5-15%;
+    typical counts are 4-10). S1 asks whether weather adds more when the label is noise-aware and when counts
+    are aggregated to larger units.
+56. **Units (scales).** (a) 1 km cells (374 eligible); (b) 2 km blocks: non-overlapping 2 x 2 groups of eligible
+    1 km cells (cx // 2, cy // 2), 129 blocks; (c) URA planning areas of the eligible cells' centres, 49 areas.
+    Counts, baselines and patterns are summed over member cells first; labels are defined on the sums.
+57. **Labels.** (i) deficit: (B - Y) / max(1, B) >= 0.5 where B >= 4 (as primary), B = summed panel baseline;
+    (ii) noise-aware: Y below the 5th percentile of a negative binomial with mean B and dispersion alpha,
+    i.e. Y < q, where q is the smallest k with NB-CDF(k) >= 0.05. One NB2 alpha per scale (Var = mu + alpha mu^2),
+    fitted by maximum likelihood on fit-period main-sample unit-snapshots (random 2 million if more).
+    Base rates of both labels are reported for fit, calibration and test periods at every scale.
+58. **Horizons.** 30, 60 and 120 minutes.
+59. **Models.** Persistence (feasible score known at t: deficit label - feasible deficit at t; NB label -
+    1 - NB-CDF(Y_t) with mean = pattern_t x trailing 7-day level) and LightGBM binary with and without weather.
+    Hyperparameters = the primary tuned binary settings (outputs/tables/forecast_tuning.json); the only choice
+    made per model is the number of boosting rounds, by early stopping on calibration-period log loss
+    (patience 50, maximum 2,000 rounds). No other tuning, no feature selection. No regression models in S1.
+60. **Features.** As primary, built at unit level from data available by t. Count features are unit sums;
+    coverage level is citywide (as primary); climatology of both labels per unit x hour x day type from the fit
+    period. Weather: unit mean and max of prior rain, mean lags, mean 3-gauge rain, mean 2 km and ring rain,
+    max wet duration within 5 km, min dry duration within 5 km, mean wet/dry duration at the gauges, island rain
+    and wet-gauge share, max issued forecast code in the unit and within 5 km, mean forecast age.
+61. **Training rows.** 1 km and 2 km: 35% of fit-period issue snapshots (all units at kept snapshots), capped at
+    3 million rows for LightGBM; planning areas: all fit-period snapshots. Calibration and test: all snapshots.
+62. **Evaluation (test year scored once more, for S1 only).** For each scale x horizon x label: PR-AUC without and
+    with weather, gain with 95% CI from 1,000 day-block bootstrap draws (binned average precision as in
+    decision 51), overall and in rainy slots (any rain at target time in the unit: unit mean prior rain > 0);
+    lead time and share of runs warned at a fixed 5% alert workload (thresholds from the calibration period).
+    Calibration-period PR-AUC is reported next to the test-year values.
+63. **Pre-specified reading.** Weather is called "materially useful" for a scale x horizon x label only if the
+    test-year gain is >= 0.01 PR-AUC AND its 95% CI excludes 0. Smaller significant gains are "detectable but
+    small". 18 comparisons (3 scales x 3 horizons x 2 labels) x 2 subsets are made; no multiplicity correction
+    is applied, so isolated hits are read with caution.
+64. **Notes stated in all S1 outputs.** The test-year label baseline uses each test regime's own level, estimated
+    from that regime's own rows (no fit data exist for those regimes). The primary 1 km deficit label's base rate
+    rose from 18.4% (calibration) to 26.5% (test). Subsets added to the primary evaluation after first scoring
+    ("rain starts between issue and target", "heavy rain at target time", "cell dry at issue, heavier rain
+    2-5 km away") are post-hoc.
