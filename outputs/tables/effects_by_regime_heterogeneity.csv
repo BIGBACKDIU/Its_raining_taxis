@@ -1,0 +1,7 @@
+term,set,regimes,pooled_pct,Q,df,p,I2
+light,all regimes,10,-1.7008,10.6579,9,0.2999,0.1556
+light,without R10,9,-1.7946,8.6430,8,0.3733,0.0744
+moderate,all regimes,10,-3.7489,21.9317,9,0.0091,0.5896
+moderate,without R10,9,-4.1085,11.5775,8,0.1711,0.3090
+heavy,all regimes,10,-5.3995,32.7521,9,0.0001,0.7252
+heavy,without R10,9,-5.7773,22.3183,8,0.0044,0.6416

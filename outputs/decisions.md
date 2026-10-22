@@ -119,3 +119,37 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
 24. **Panel checks** (`outputs/tables/panel_checks_30.csv`): rows = 374 cells x snapshots in every year, no duplicate
     (cell, ts) keys. Hand check (`panel_handcheck_30.csv`): 5 random rows plus 3 extra rows drawn from rainy
     snapshots (random rows are almost always dry); vacant, citywide count and prior rain all match the raw files.
+
+## Step 2: description
+
+25. **Availability is shown relative to the baseline** (sum of vacant / sum of baseline), so feed coverage changes
+    are not mistaken for rain effects. Profiles use 2-hour blocks (hourly blocks for heavy rain are too thin),
+    weekday vs weekend-or-holiday, with 95% day-bootstrap bands (200 draws). Map counts (mean vacant per cell)
+    use normal-coverage regimes only (0.8-1.25x); the % change map uses all fit-period regimes via the
+    baseline ratio and needs >= 100 heavy-rain snapshots per cell.
+26. **Trend vs fleet** is indexed (Apr 2022 = 100) on one axis instead of using two y-axes.
+
+## Step 3: rain associations
+
+27. **Own Poisson fixed-effects estimator** (`analysis/fepois_hd.py`). pyfixest needs ~550 bytes per row, about
+    10 GB for the 18 million fit-period rows. The replacement implements the same estimator (IRLS with weighted
+    alternating projections, CRV1 by day, G/(G-1)(N-1)/(N-K) correction) with plain numpy arrays. On 2023 it
+    reproduces pyfixest's coefficients to 6 decimals and its standard errors to within 0.04%
+    (`outputs/tables/effects_validation.csv`).
+28. **ym^regime instead of separate ym and regime effects.** Separate effects are nearly collinear and make the
+    demeaning 25x slower. The interaction contains both (it is more flexible) and gave identical coefficients
+    on 2023.
+29. **Event study**: the estimation reference is all cell-snapshots outside any event window; coefficients are
+    then expressed relative to -30 min (HANDOFF), with delta-method standard errors.
+30. **Association models use the fit period only** (Apr 2022 - Mar 2025), to keep the test year untouched
+    (rule 5). The high-coverage regime (Oct 2025 - Jan 2026) exists only in the test year, so the by-regime
+    check covers half-coverage (R05, R10) and normal-coverage regimes, not the high-coverage one.
+31. **Reading the three main models.** The absolute model compares a wet cell with the same cell at the same
+    time of week when dry; the share and offset models also remove whatever happens to the citywide count at
+    that snapshot. Rain usually covers many cells at once and the citywide count falls with it, so the share
+    and offset effects (local, relative) are smaller than the absolute one. Both are reported; neither is
+    "the" effect.
+32. **By-regime check.** The share-model effect is negative in 9 of 10 fit-period regimes, but its size differs
+    more than chance allows for moderate and heavy rain (heavy: Cochran Q = 32.8, df 9, p < 0.001, I^2 73%;
+    without R10 p = 0.004). The differences do not line up with coverage level (half-coverage R05 -4.0%,
+    R10 +2.2%; normal-coverage regimes -3.9% to -11.7%). `outputs/tables/effects_by_regime_heterogeneity.csv`.
