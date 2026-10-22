@@ -282,3 +282,13 @@ results stay as they are and remain the pre-specified result.
     rose from 18.4% (calibration) to 26.5% (test). Subsets added to the primary evaluation after first scoring
     ("rain starts between issue and target", "heavy rain at target time", "cell dry at issue, heavier rain
     2-5 km away") are post-hoc.
+65. **S1 result (test year scored for S1 on 2026-10-23 00:46:42, `data/interim/s1_test_scored.txt`).** None of the
+    36 scale x horizon x label x subset comparisons meets the pre-registered "materially useful" rule (gain
+    >= 0.01 with CI excluding 0). Largest test-year gain +0.0021 (1 km, 60 min, deficit, rainy; CI -0.0001 to
+    +0.0046). At 2 km and planning-area scale the weather models are often slightly worse on the test year
+    (e.g. planning areas, 30 min, NB label, rainy: -0.0074, CI -0.0109 to -0.0037), although they were slightly
+    better on the calibration period (+0.002 to +0.009). The NB label's base rate jumps between calibration and
+    test (1 km 1.3% -> 5.1%; 2 km 2.2% -> 7.0%; planning areas 2.8% -> 7.5%): the fit-period dispersion is too
+    small for the test-year feed (duplicated records and a shrinking fleet within each test regime), so the
+    "5th percentile" is not a 5% event in the test year. Outputs: `outputs/tables/s1_*.csv`,
+    `outputs/figures/s1_weather_gain.*`.
