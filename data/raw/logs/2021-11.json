@@ -1,0 +1,24 @@
+{
+  "month": "2021-11",
+  "snapshots": 1440,
+  "snapshots_ok": 1437,
+  "median_taxis": 2427.0,
+  "median_offset_min": -0.35,
+  "taxi_seconds": 85.0,
+  "total_seconds": 124.8,
+  "calls_per_second": 12.02,
+  "workers": 4,
+  "client": {
+    "calls": 1500,
+    "ok": 1500,
+    "retries": 0,
+    "rate_limited": 0,
+    "failed": 0
+  },
+  "rain_days_v1": 30,
+  "rain_days_v2": 0,
+  "rain_readings_total": 577500,
+  "rain_stations_max": 69,
+  "forecast_rows": 85446,
+  "forecast_issues": 1818
+}
