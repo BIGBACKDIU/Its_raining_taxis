@@ -88,3 +88,34 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
     glitches; longer runs are kept as sustained drops. 74 snapshots dropped (`glitch_dip`), on top of the 462
     single spikes (`glitch_spike`). Usable snapshots: 118,136. Unusual-day classification re-run on the cleaned
     snapshots: still 17 feed-outage days, now 2 with any rain.
+
+## Step 1: panel
+
+16. **Two panels.** The main panel (`panel30_YYYY.parquet`) uses the :00 and :30 snapshots for all years. A
+    15-minute panel (`--grid 15`, Oct 2024 on) is built only when an analysis needs it. Panels are
+    per calendar year and stay out of git (~65 MB each).
+17. **Eligibility** is computed on 30-minute fit-period snapshots in the main sample: 374 of 639 cells have a mean
+    of at least 0.5 vacant taxis; 265 are "not analysed".
+18. **Every row carries** `regime_id`, `regime`, `day_missing`, `spell`, `feed_outage`, `glitch`, `covid`,
+    `drop_main` (any exclusion) and `drop_robust` (glitches, missing days and spells except 26 Feb - 1 Mar 2023).
+    Glitch snapshots stay in the panel, flagged, so models can be re-run with them.
+19. **Cell traits** are in `data/interim/cells.parquet` (joined on `cell`), not repeated on every row:
+    distance from cell centre to the nearest MRT/LRT exit, taxi stops/stands within 300 m of the cell square,
+    MRT exits in the cell, planning area of the cell centre, city-centre flag (URA Central Area planning areas).
+20. **Rain to snapshots.** 5-minute readings are summed into 15-minute bins per gauge; prior rain = the two bins in
+    (t-30, t] at the nearest working gauge for the snapshot's date, in mm/h. Lags (t-60, t-30] and (t-90, t-60].
+    `mmh_3g` = mean of the 3 nearest working gauges. `wet_min` / `dry_min` = length of the current wet / dry run
+    at that gauge (15-minute resolution). Bins of a gauge-day that is not working are missing (not dry).
+21. **Forecasts as issued.** The latest 2-hour forecast issued strictly before t for the nearest forecast area;
+    missing if older than 180 minutes. Codes: 0 fair/cloudy/hazy/windy, 1 light rain/light or passing showers,
+    2 showers/moderate rain, 3 thundery or heavy.
+22. **Baseline** = Poisson `vacant ~ 1 | cell + how^month + regime` on fit-period main-sample rows, solved exactly
+    by iterative proportional fitting on aggregated counts (38 iterations). The regime term gives a level within
+    each regime (HANDOFF 3a). Regimes outside the fit period get their level from their own main-sample rows with
+    the cell and how^month effects held fixed. Spell rows have no baseline. This regime level uses data from the
+    whole regime, so it is fine for description and association models; the forecasting step must not use it as
+    an input (only as part of the target definition, to be decided in step 6).
+23. **Severity** (baseline >= 4 only): 0 if deficit < 0.25, 1 if < 0.5, 2 if < 0.75, 3 otherwise.
+24. **Panel checks** (`outputs/tables/panel_checks_30.csv`): rows = 374 cells x snapshots in every year, no duplicate
+    (cell, ts) keys. Hand check (`panel_handcheck_30.csv`): 5 random rows plus 3 extra rows drawn from rainy
+    snapshots (random rows are almost always dry); vacant, citywide count and prior rain all match the raw files.
