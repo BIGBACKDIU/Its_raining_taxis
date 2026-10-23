@@ -231,7 +231,7 @@ def charts(c, p):
     norm = BoundaryNorm([0, 1, 2, 3, 4, 6, 8, 12], blues.N, extend="max")
     d02.draw_base(axes[0])
     N.draw_cells(axes[0], dry.index.values, dry.values, blues, norm)
-    lab = names.loc[dry.sort_values(ascending=False).index[:10]].assign(short=lambda d: d.place.str.slice(0, 30))
+    lab = names.loc[dry.sort_values(ascending=False).index[:10]].assign(short=lambda d: d.place)
     N.label(axes[0], lab.reset_index(), "short", 10)
     fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=blues), ax=axes[0], orientation="horizontal", fraction=0.05,
                  pad=0.02, label="Median drive minutes to the nearest vacant taxi (dry, modelled road times)")
@@ -240,7 +240,7 @@ def charts(c, p):
     norm2 = TwoSlopeNorm(vcenter=0, vmin=-20, vmax=60)
     d02.draw_base(axes[1])
     N.draw_cells(axes[1], c.cell.values, c.pct.clip(-20, 60).values, div, norm2)
-    N.label(axes[1], c.assign(short=c.place.str.slice(0, 30)), "short", 10)
+    N.label(axes[1], c.assign(short=c.place), "short", 10)
     fig.colorbar(plt.cm.ScalarMappable(norm=norm2, cmap=div), ax=axes[1], orientation="horizontal", fraction=0.05,
                  pad=0.02, label="% longer drive to the nearest vacant taxi in heavy rain (vs no-rain model)")
     axes[1].set_title("Heavy rain: where the nearest vacant taxi moves furthest away (labels: 10 most extra minutes)",
@@ -251,11 +251,27 @@ def charts(c, p):
     plt.close(fig)
 
 
+def part_names():
+    """Re-attach the current step-10 names to the per-cell table and redraw the maps (no re-estimation)."""
+    style()
+    E = importlib.import_module("analysis.03_effects")
+    c = pd.read_csv(TABLES / "minutes_cells_named.csv")
+    names = pd.read_csv(TABLES / "names_cells.csv")
+    keep = ["cell", "planning_area", "subzone", "nearest_mrt", "landmarks", "place", "lon", "lat"]
+    c = c.drop(columns=keep[1:]).merge(names[keep], on="cell").sort_values("rank")
+    c.to_csv(TABLES / "minutes_cells_named.csv", index=False, float_format="%.3f")
+    mins = pd.read_parquet(INTERIM / "minutes_to_taxi_fit.parquet")
+    p = E.load_fit(columns=["ts", "cell", "mmh", "mmh_lag1", "mmh_lag2", "drop_main", "rain_band"])
+    p = p[E.sample(p)].merge(mins, on=["ts", "cell"], how="inner")
+    charts(c, p)
+    print(c.head(10)[["rank", "planning_area", "subzone", "landmarks", "extra_minutes", "pct"]].to_string(index=False))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", required=True, choices=["graph", "minutes", "effects"])
+    ap.add_argument("--part", required=True, choices=["graph", "minutes", "effects", "names"])
     a = ap.parse_args()
-    {"graph": part_graph, "minutes": part_minutes, "effects": part_effects}[a.part]()
+    {"graph": part_graph, "minutes": part_minutes, "effects": part_effects, "names": part_names}[a.part]()
 
 
 if __name__ == "__main__":

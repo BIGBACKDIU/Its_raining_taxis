@@ -645,3 +645,47 @@ results stay as they are and remain the pre-specified result.
     heavy-rain cell-snapshots. Meta-regression of the monthly log effect on the LTA total taxi fleet (thousands),
     log feed coverage level (regime), and season, weights 1 / (SE^2 + tau^2), HC1 errors; slope reported as the
     change in the heavy-rain effect per 1,000 fewer taxis.
+
+## Phase-2 data note: HDB block locations
+
+118. OneMap's public search allows about one request per second and returned repeated 429 responses, so neither
+    per-block (13,393 requests) nor per-street (657) geocoding was practical. HDB Property Information blocks are
+    instead matched to the data.gov.sg HDB Existing Building footprints by block number inside the block's HDB
+    town (town code mapped to URA planning areas); where a street geocode had already been collected (75
+    streets) the footprint nearest that street is used; where several footprints with the same block number lie
+    in the town, the one nearest the median of the street's already-matched blocks is taken. Result: 10,187 town
+    matches, 1,701 street matches, 1,067 street-median matches, 437 unmatched; 1,142,558 of 1,179,156 dwelling
+    units (96.9%) located. Steps 10 and 12 are rerun with these units.
+
+## Step 20 pre-registration: simulation v2 (written before any v2 run)
+
+119. **Diagnosis of the step-8 failure.** For each of the 24 tuned step-8 combinations, on the 20 fit-period
+    storms (no test-year data) and, for reporting only, on the 10 held-out storms (logged): (a) level - mean of
+    simulated minus observed relative citywide vacant series; (b) timing - correlation over time of the two
+    relative series and the gap between the minutes of their minima; (c) spatial pattern - correlation across
+    cells of mean vacant taxis over the window and of the change from start to rain peak. (d) Noise floor - the
+    same +-20% / 70% rule applied to two references that are not simulations: the normal path (citywide panel
+    baseline relative to the start) and the statistical path (each cell's baseline times exp(main-model band
+    effect for its rain band), summed). If the references also fail most storms, the rule is stricter than
+    storm-day feed variation allows; this is reported, and the rule itself is NOT changed.
+120. **v2 model changes (all else as items 72-79).** (1) Travel: drive times between the 374 eligible 1 km cells
+    from the step-11 OSM matrices (each 1 km cell represented by the 500 m land cell nearest its centre); trip
+    time = approach + drive time + 2 minutes; "rain congestion" uses the step-11 rain matrix for trips starting in
+    a raining cell. (2) Dispatch rings by drive time from the taxi's cell: <= 4, 4-7, 7-10 minutes (nearest);
+    widening adds 10-15 and 15-20 minutes. (3) Requests and destinations: cell weights from a Poisson regression,
+    on fit-period dry daytime (07-24) snapshots, of mean vacant taxis per cell on the step-12 kept
+    characteristics ("characteristics" pattern), or the observed fit-period dry mean vacant taxis per cell
+    ("observed" pattern, an empirical benchmark); destination choice = weight x exp(-drive minutes / 15). (4)
+    Supply response in rain scaled per cell by the step-12 random-forest predicted heavy-rain effect (cells with
+    predicted gains get no extra offline probability; scale normalised to mean 1). Grid: mechanism (demand,
+    supply, mix) x pattern (characteristics, observed) x travel (dry roads, rain-congested roads) x dispatch
+    (nearest, widening) = 24 combinations; tuning exactly as item 75 (Optuna, 12 trials, seed 2702, 20 fit
+    storms, same loss).
+121. **v2 plausibility.** Same rule as item 76 on the same 10 held-out storms (logged). If no v2 combination passes,
+    the page presents the simulation only as an illustration and says why (using the item-119 diagnosis).
+122. **Dispatcher panel.** On the page, at every 30-minute decision of a replayed storm, list the top staging moves
+    of the step-7 greedy plan (from area -> named place, taxis, reason). Reason rules, fixed: "rain approaching"
+    if the destination cell is dry now but rain is recorded within 5 km in the current slot; "rain-sensitive
+    area" if the destination is a step-3 type-0 cell or its step-12 predicted heavy-rain effect is below -20%;
+    otherwise "forecast risk" (expected shortfall from the persistence forecast). Labelled throughout:
+    "demonstration on historical replays, not a live system".

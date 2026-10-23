@@ -2,28 +2,28 @@ rank,planning_area,subzone,nearest_mrt,landmarks,taxis_lost_per_heavy_half_hour,
 1,Changi,Changi Airport,"Changi Airport (0.5 km), Upper Changi (3.0 km)",Changi Airport Terminal 3; Changi Airport Terminal 2; Crowne Plaza Changi Airport,7.08,83.37,-8.50,-15.60,-0.56,48022
 2,Changi,Changi Airport,"Changi Airport (0.7 km), Tampines East (3.5 km)",Changi Airport Terminal 1; Jewel Changi Airport; Jewel Changi Basement,6.86,43.08,-15.94,-21.84,-9.38,48023
 3,Downtown Core,Raffles Place,"Telok Ayer (0.3 km), Downtown (0.3 km)","Lau Pa Sat Singapore; Fuk Tak Chi Museum & Places of Interest; Thian Hock Keng Temple, Singapore",4.90,15.88,-30.83,-38.19,-23.46,33014
-4,Downtown Core,Bayfront Subzone,"Bayfront (0.2 km), Downtown (0.8 km)","Marina Bay SandsÂ® SkyPark; Marina Bay SandsÂ®; Marina Bay Sands, Singapore",4.76,13.08,-36.42,-41.30,-31.02,34014
+4,Downtown Core,Bayfront Subzone,"Bayfront (0.2 km), Downtown (0.8 km)","Marina Bay Sands SkyPark; Marina Bay Sands; Marina Bay Sands, Singapore",4.76,13.08,-36.42,-41.30,-31.02,34014
 5,Museum,Dhoby Ghaut,"Dhoby Ghaut (0.3 km), Somerset (0.4 km)",Fort Canning Park; Hong San See Temple Singapore; Orchard Plaza,3.75,10.75,-34.87,-39.07,-30.65,32016
 6,Kallang,Lavender,"Lavender (0.3 km), Jalan Besar (0.6 km)","Malay Heritage Centre, Singapore; Hajjah Fatimah Mosque; Kampong Glam & Malay Culture in Singapore",3.62,16.53,-21.91,-26.14,-18.01,34017
 7,Rochor,Victoria,"Bencoolen (0.1 km), Bras Basah (0.3 km)",Maghain Aboth Synagogue; Singapore Art Museum; SAM at 8Q & Singapore Art Museum,3.54,14.85,-23.87,-28.44,-19.76,33016
 8,Downtown Core,Nicoll,"Nicoll Highway (0.4 km), Bugis (0.5 km)","Kampong Glam & Malay Culture in Singapore; Sultan Mosque (Masjid Sultan) Singapore; Malay Heritage Centre, Singapore",3.19,14.57,-21.92,-26.57,-17.07,34016
-9,Downtown Core,City Hall,"City Hall (0.3 km), Clarke Quay (0.5 km)",Old Supreme Court Singapore; National Gallery Singapore; Raffles Statue â€“ Sir Stamford Raffles Landing Site,3.04,11.67,-26.05,-31.39,-20.68,33015
+9,Downtown Core,City Hall,"City Hall (0.3 km), Clarke Quay (0.5 km)",Old Supreme Court Singapore; National Gallery Singapore; Raffles Statue – Sir Stamford Raffles Landing Site,3.04,11.67,-26.05,-31.39,-20.68,33015
 10,Outram,Chinatown,"Outram Park (0.2 km), Maxwell (0.2 km)",Kreta Ayer Square; Chinatown Singapore: History & Culture; Chinatown Food Street,3.01,13.81,-21.82,-28.04,-15.69,32014
-11,Rochor,Farrer Park,"Little India (0.3 km), Rochor (0.5 km)",Sri Veeramakaliamman Temple: Hindu Temple in Singapore; Little India Singapore: History & Culture; Lasalle College of the Arts,2.66,11.69,-22.75,-27.88,-17.52,33017
-12,Woodlands,Woodlands East,"Admiralty (0.6 km), Woodlands (1.4 km)",Admiralty Place; Kampung Admiralty Hawker Centre,2.47,14.33,-17.27,-21.73,-12.72,27032
-13,Woodlands,North Coast,"Marsiling (1.3 km), Woodlands North (1.8 km)",,2.46,7.45,-33.01,-38.84,-27.28,24032
+11,Rochor,Farrer Park,"Little India (0.3 km), Rochor (0.5 km)",Sri Veeramakaliamman Temple: Hindu Temple in Singapore; Little India Singapore: History & Culture; Institute of Contemporary Arts Singapore,2.66,11.69,-22.75,-27.88,-17.52,33017
+12,Woodlands,Woodlands East,"Admiralty (0.6 km), Woodlands (1.4 km)",Admiralty Place; Kampung Admiralty Hawker Centre; Evergreen Primary School,2.47,14.33,-17.27,-21.73,-12.72,27032
+13,Woodlands,North Coast,"Marsiling (1.3 km), Woodlands North (1.8 km)",Woodlands Secondary School,2.46,7.45,-33.01,-38.84,-27.28,24032
 14,Singapore River,Robertson Quay,"Fort Canning (0.3 km), Clarke Quay (0.6 km)",Hong San See Temple Singapore; Singapore River: History & Culture Tours; PARKROYAL on Pickering,2.45,13.12,-18.67,-23.88,-14.05,32015
 15,Yishun,Yishun West,"Yishun (0.5 km), Khatib (0.9 km)",Northpoint City; Yishun Community Hospital; Khoo Teck Puat Hospital,2.37,15.51,-15.27,-21.20,-9.47,31030
 16,Sengkang,Rivervale,"Bakau (0.2 km), Rumbia (0.2 km)",Rivervale Mall; Rivervale Plaza; Sengkang Joint Testing & Vaccination Centre,2.28,13.49,-16.92,-21.39,-12.60,39026
 17,Sengkang,Sengkang Town Centre,"Sengkang (0.2 km), Ranggung (0.6 km)",Compass One; Sengkang Specialist Clinic; Sengkang General & Community Hospital,2.05,11.83,-17.32,-21.53,-13.37,38026
 18,Downtown Core,Marina Centre,"Promenade (0.4 km), Esplanade (0.6 km)",Singapore Flyer; ArtScience Museum Singapore; Esplanade Theatres on the Bay,2.03,9.36,-21.73,-28.20,-14.93,34015
 19,Yishun,Yishun South,"Yishun (0.9 km), Khatib (1.4 km)",Northpoint City; Khoo Teck Puat Hospital; Yishun Community Hospital,1.98,10.13,-19.50,-23.65,-15.07,32030
-20,Geylang,Kampong Ubi,"Ubi (0.7 km), Eunos (0.8 km)",Eunos Crescent Blk 4A,1.90,8.25,-23.09,-27.73,-18.14,39019
+20,Geylang,Kampong Ubi,"Ubi (0.7 km), Eunos (0.8 km)",Eunos Crescent Blk 4A; Eunos Primary School; Manjusri Secondary School,1.90,8.25,-23.09,-27.73,-18.14,39019
 21,Sengkang,Sengkang Town Centre,"Cheng Lim (0.4 km), Compassvale (0.7 km)",Sengkang General Hospital; Sengkang General & Community Hospital; Sengkang Community Hospital,1.90,9.55,-19.91,-24.45,-15.19,38027
-22,Pasir Ris,Pasir Ris Drive,"Pasir Ris (1.1 km), Tampines East (1.8 km)",E! Hub,1.76,10.03,-17.57,-22.42,-12.65,45024
+22,Pasir Ris,Pasir Ris Drive,"Pasir Ris (1.1 km), Tampines East (1.8 km)",E! Hub; Pasir Ris Crest Secondary School; Casuarina Primary School,1.76,10.03,-17.57,-22.42,-12.65,45024
 23,Sembawang,Sembawang East,"Canberra (0.4 km), Sembawang (1.6 km)",Canberra Plaza,1.75,5.12,-34.07,-39.05,-28.68,31032
 24,Newton,Orange Grove,"Orchard (0.6 km), Newton (0.8 km)","Orchard Road, Singapore: Asia's Most Famous Shopping Street; Far East Plaza; Pacific Plaza",1.72,8.87,-19.43,-24.69,-14.36,31017
-25,Serangoon,Serangoon Garden,"Ang Mo Kio (2.2 km), Kovan (2.2 km)",,1.72,9.05,-19.02,-22.92,-14.43,35024
+25,Serangoon,Serangoon Garden,"Ang Mo Kio (2.2 km), Kovan (2.2 km)",Serangoon Garden Secondary School; International French School (Singapore); Rosyth School,1.72,9.05,-19.02,-22.92,-14.43,35024
 26,Geylang,Aljunied,"Aljunied (0.5 km), Geylang Bahru (0.8 km)",St Andrew's Nursing Home (Aljunied); ECM Building; James Cook University Singapore,1.70,8.24,-20.69,-25.67,-15.50,36018
 27,Woodlands,Woodlands West,"Woodlands North (0.9 km), Woodlands (1.1 km)",Singapore Institute of Technology @ RP (SIT@RP); Republic Polytechnic; Marsiling Lane Blk 20/21,1.70,10.14,-16.79,-22.53,-10.95,25032
 28,Jurong East,Jurong Gateway,"Jurong East (0.3 km), Chinese Garden (1.4 km)",Westgate; JEM; Muji,1.67,7.45,-22.47,-27.78,-17.14,21020

@@ -115,31 +115,88 @@ def onemap(addr, session):
     return None, None, None
 
 
+TOWN_PA = {"AMK": ["ANG MO KIO"], "BB": ["BUKIT BATOK"], "BD": ["BEDOK"], "BH": ["BISHAN"], "BM": ["BUKIT MERAH"],
+           "BP": ["BUKIT PANJANG"], "BT": ["BUKIT TIMAH"], "CCK": ["CHOA CHU KANG"], "CL": ["CLEMENTI"],
+           "CT": ["DOWNTOWN CORE", "OUTRAM", "ROCHOR", "SINGAPORE RIVER", "MUSEUM", "RIVER VALLEY"],
+           "GL": ["GEYLANG"], "HG": ["HOUGANG"], "JE": ["JURONG EAST"], "JW": ["JURONG WEST", "BOON LAY"],
+           "KWN": ["KALLANG", "NOVENA", "ROCHOR"], "MP": ["MARINE PARADE"], "PG": ["PUNGGOL"], "PRC": ["PASIR RIS"],
+           "QT": ["QUEENSTOWN"], "SB": ["SEMBAWANG"], "SGN": ["SERANGOON"], "SK": ["SENGKANG"], "TAP": ["TAMPINES"],
+           "TG": ["TENGAH"], "TP": ["TOA PAYOH"], "WL": ["WOODLANDS"], "YS": ["YISHUN"]}
+
+
 def part_hdb():
+    """HDB blocks located without per-block geocoding (OneMap throttles unauthenticated search to ~1 request/s and
+    a street-by-street pass would take ~2 hours): each block in HDB Property Information is matched to the HDB
+    Existing Building footprint with the same block number lying in (or nearest to) its HDB town's planning
+    area(s); where a street geocode was already collected, the footprint nearest that street is used instead.
+    Block numbers are unique within most HDB towns; remaining ties are flagged (match = "ambiguous")."""
     info = pd.read_csv(datagov("hdb_info", "csv"))
     datagov("hdb_resale", "csv")
     out = OUT / "hdb_blocks_geocoded.csv"
     if out.exists():
         return
-    info.columns = [c.lower() for c in info.columns]
-    addrs = (info.blk_no.astype(str) + " " + info.street.astype(str)).tolist()
-    s = requests.Session()
-    s.headers.update(UA)
-    t0 = time.time()
-
-    def go(a):
-        time.sleep(0.12)
-        return onemap(a, s)
-
-    with ThreadPoolExecutor(3) as ex:
-        res = list(ex.map(go, addrs))
-    info["lat"] = [r[0] for r in res]
-    info["lon"] = [r[1] for r in res]
-    info["postal"] = [r[2] for r in res]
+    fp = OUT / "hdb_existing_building.geojson"
+    if not fp.exists():
+        j = requests.get(POLL.format("d_16b157c52ed637edd6ba1232e026258d"), headers=UA, timeout=60).json()
+        fp.write_bytes(requests.get(j["data"]["url"], headers=UA, timeout=600).content)
+        note(fp.name, "data.gov.sg HDB Existing Building (d_16b157c52ed637edd6ba1232e026258d)")
+    import geopandas as gpd
+    from analysis import geo
+    from pipeline.grid import to_xy
+    b = gpd.read_file(fp).to_crs(3414)
+    b["geometry"] = b.geometry.centroid
+    sz = geo.subzones().to_crs(3414)
+    pa = sz.dissolve("planning_area")
+    b = b.sjoin_nearest(pa[["geometry"]].reset_index(), how="left").drop_duplicates("OBJECTID")
+    ll = b.to_crs(4326).geometry
+    b = pd.DataFrame({"blk": b.BLK_NO.astype(str).str.strip().str.upper(), "pa": b.planning_area.values,
+                      "lon": ll.x.values, "lat": ll.y.values, "postal": b.POSTAL_COD.values})
+    info.columns = [x.lower() for x in info.columns]
+    cache_f = OUT / "hdb_street_geocodes.csv"
+    sg = pd.read_csv(cache_f).dropna().set_index("street") if cache_f.exists() else pd.DataFrame(columns=["lat", "lon"])
+    bx, by = to_xy(b.lon.values, b.lat.values)
+    lat_out, lon_out, post_out, how = [], [], [], []
+    for blk, st, town in zip(info.blk_no.astype(str).str.strip().str.upper(), info.street.astype(str).str.strip(),
+                             info.bldg_contract_town):
+        cand = np.flatnonzero(b.blk.values == blk)
+        j, h = None, "unmatched"
+        if len(cand) and st in sg.index:
+            ax, ay = to_xy([sg.loc[st, "lon"]], [sg.loc[st, "lat"]])
+            d = np.hypot(bx[cand] - ax[0], by[cand] - ay[0])
+            if d.min() <= 2000:
+                j, h = cand[np.argmin(d)], "street"
+        if j is None and len(cand):
+            inside = cand[np.isin(b.pa.values[cand], TOWN_PA.get(town, []))]
+            if len(inside) and b.postal.values[inside].astype(str).tolist().count(b.postal.values[inside[0]]) == len(inside):
+                j, h = inside[0], "town"                     # one block drawn as several footprints
+            elif len(inside) > 1:
+                j, h = inside, "ambiguous"
+        lat_out.append(j)
+        how.append(h)
+    # second pass: an ambiguous block takes the candidate nearest the median of its street's matched blocks
+    info["match"] = how
+    pick = pd.Series(lat_out, dtype=object)
+    sure = info.match.isin(["street", "town"]).values
+    sx = pd.DataFrame({"street": info.street.values[sure], "x": bx[pick[sure].astype(int)],
+                       "y": by[pick[sure].astype(int)]}).groupby("street").median()
+    for i in np.flatnonzero(info.match.values == "ambiguous"):
+        cand, st = pick[i], info.street.iloc[i]
+        if st in sx.index:
+            pick[i] = cand[np.argmin(np.hypot(bx[cand] - sx.loc[st, "x"], by[cand] - sx.loc[st, "y"]))]
+            info.loc[i, "match"] = "street median"
+        else:
+            pick[i] = None
+            info.loc[i, "match"] = "unmatched (ambiguous)"
+    ok = pick.notna().values
+    idx = pick[ok].astype(int).values
+    info["lat"], info["lon"], info["postal"] = np.nan, np.nan, None
+    info.loc[ok, "lat"], info.loc[ok, "lon"], info.loc[ok, "postal"] = b.lat.values[idx], b.lon.values[idx], b.postal.values[idx]
     info.to_csv(out, index=False)
-    note(out.name, "HDB Property Information (data.gov.sg) geocoded with OneMap search API",
-         f"{int(info.lat.notna().sum())} of {len(info)} blocks geocoded")
-    print("geocoded", info.lat.notna().sum(), "of", len(info), f"{time.time() - t0:.0f}s", flush=True)
+    vc = info.match.value_counts().to_dict()
+    note(out.name, "HDB Property Information matched to HDB Existing Building footprints by block number within the "
+         "HDB town's planning area(s) (street geocode where available)", f"match counts {vc}")
+    print("match", vc, "units located", int(info.total_dwelling_units[info.lat.notna()].sum()), "of",
+          int(info.total_dwelling_units.sum()), flush=True)
 
 
 def part_private():

@@ -15,3 +15,4 @@ data/interim/*.npy
 data/interim/*.joblib
 data/static/phase2/landuse.parquet
 data/static/phase2/osm_drive_*.parquet
+data/static/phase2/hdb_existing_building.geojson

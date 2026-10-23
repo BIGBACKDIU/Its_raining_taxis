@@ -97,6 +97,8 @@ def pois() -> pd.DataFrame:
         df = pd.concat([df, o[o.category != "other"]], ignore_index=True)
     df = df.dropna(subset=["lon", "lat"])
     df["name"] = df.name.map(_fix_text)
+    hw = df.category.eq("hawker centre") & df.name.str.contains(r"\(.+\)", na=False)
+    df.loc[hw, "name"] = df.loc[hw, "name"].str.extract(r"\((.+)\)", expand=False)    # "Blk 17 (X Food Centre)" -> X
     df = df[(df.lon > 103.5) & (df.lon < 104.1) & (df.lat > 1.15) & (df.lat < 1.5)]
     return df.reset_index(drop=True)
 
@@ -119,7 +121,8 @@ def _fix_text(s):
 def landmarks(lon, lat, radius_m=700, k=3):
     """Up to k named destinations within radius of each point, by category priority then distance."""
     p = pois()
-    p = p[p.category.isin(LANDMARK_PRIORITY) & p.name.notna() & (p.name.str.len() > 2)].copy()
+    p = p[p.category.isin(LANDMARK_PRIORITY) & p.name.notna() & (p.name.str.len() > 2)
+          & ~p.name.str.match(r"(?i)^(blk|block|tower|building|level)\s*[\w-]{0,4}$", na=False)].copy()
     p["prio"] = p.category.map({c: i for i, c in enumerate(LANDMARK_PRIORITY)})
     px, py = to_xy(p.lon.values, p.lat.values)
     tree = cKDTree(np.c_[px, py])

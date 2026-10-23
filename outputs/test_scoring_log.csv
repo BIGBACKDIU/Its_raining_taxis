@@ -18,3 +18,7 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T16:24:59,06d_label_versions.py,disclosed additional scoring,"primary and S1 test-year predictions scored against retrospective and issue-time labels (top-K workload, corrected lead time)",,
 2026-10-23T16:30:18,07_policy.py --part labels,step 7,policy targeting re-scored with issue-time labels,,
 2026-10-23T16:42:44,07_policy.py --part diagnose,step 7 follow-up,policy variants (a)/(b)/(c) targeting on test-year decisions,,
+2026-10-23T17:41:44,13_mrt_did.py,step 13,"post-opening months of NEL extension / DTL infill cohorts fall in the test year (association analysis, no forecasting)",,
+2026-10-23T17:43:20,13_mrt_did.py,step 13,"post-opening months of NEL extension / DTL infill cohorts fall in the test year (association analysis, no forecasting)",,
+2026-10-23T21:18:08,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
+2026-10-23T21:19:01,19_fleet.py,step 19,monthly heavy-rain effects incl. test-year months (association only),,

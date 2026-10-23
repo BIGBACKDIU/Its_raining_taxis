@@ -1,26 +1,26 @@
 rank,planning_area,subzone,nearest_mrt,landmarks,residents,hdb_units,share_65plus,mean_fit,vacant_per_10k_residents,eligible,cell
-1,Bishan,Upper Thomson,"Upper Thomson (1.0 km), Bright Hill (1.5 km)",,6595.722,,0.204,0.047,0.072,False,30022
-2,Punggol,Waterway East,"Kadaloor (0.7 km), Riviera (0.9 km)",,9485.242,,0.068,0.205,0.216,False,41027
-3,Pasir Ris,Pasir Ris Park,"Pasir Ris (0.8 km), Tampines East (2.8 km)",Downtown East; D'RESORT @ DOWNTOWN EAST; Aranda Country Club,5849.641,,0.099,0.178,0.304,False,44025
-4,Central Water Catchment,Central Water Catchment,"Bright Hill (1.0 km), Upper Thomson (1.3 km)",,5476.900,,0.204,0.226,0.413,False,30023
-5,Sembawang,Sembawang Straits,"Canberra (1.1 km), Sembawang (1.5 km)",,8240.870,,0.073,0.485,0.589,False,31033
-6,Punggol,Punggol Town Centre,"Soo Teck (0.3 km), Sumang (0.3 km)",Waterway Point,23616.980,,0.066,1.571,0.665,True,38028
-7,Punggol,Punggol Canal,"Oasis (0.6 km), Damai (0.7 km)",Block E5; Block E6; Block E4,11724.743,,0.068,0.831,0.709,True,40028
-8,Tengah,Brickland,"South View (1.0 km), Keat Hong (1.0 km)",Keat Hong Shopping Centre,16407.876,,0.081,1.206,0.735,True,21024
-9,Bukit Batok,Gombak,"Hillview (0.7 km), Cashew (0.9 km)",HillV2 Mall,7478.816,,0.132,0.630,0.842,True,23023
-10,Bukit Batok,Gombak,"Teck Whye (0.6 km), Keat Hong (0.9 km)",,12510.792,,0.108,1.090,0.871,True,22024
-11,Bukit Timah,Anak Bukit,"Beauty World (0.9 km), King Albert Park (1.6 km)",Ngee Ann Polytechnic,8775.119,,0.184,0.780,0.888,True,24020
-12,Jurong West,Safti,"Pioneer (0.9 km), Joo Koon (1.5 km)",,8427.564,,0.122,0.813,0.965,True,15020
-13,Jurong West,Chin Bee,"Lakeside (1.1 km), Boon Lay (1.2 km)",Taman Jurong Shopping Centre; Taman Jurong Market and Food Centre,8804.034,,0.118,0.854,0.970,True,18020
-14,Bedok,Bedok South,"Tanah Merah (0.4 km), Bayshore (1.7 km)",Q Loft Hotels@Bedok,15261.225,,0.214,1.590,1.042,True,44019
-15,Bukit Timah,Ulu Pandan,"Dover (0.7 km), Clementi (1.6 km)",,7666.856,,0.187,0.833,1.086,True,25018
-16,Hougang,Kovan,"Kovan (0.8 km), Serangoon (1.5 km)",The Japanese Cemetery Park,12736.356,,0.168,1.415,1.111,True,36023
-17,Woodlands,Woodlands East,"Admiralty (0.8 km), Woodlands South (0.9 km)",888 Plaza; Vista Point; Kampung Admiralty Hawker Centre,43124.933,,0.086,4.834,1.121,True,27031
-18,Bedok,Bayshore,"Bayshore (1.0 km), Tanah Merah (1.2 km)",,10050.678,,0.192,1.193,1.187,True,44018
-19,Bukit Panjang,Dairy Farm,"Pending (0.5 km), Cashew (0.7 km)",,19077.868,,0.144,2.326,1.219,True,24024
-20,Bukit Timah,Leedon Park,"Holland Village (1.0 km), Buona Vista (1.1 km)",Ghim Moh Road Blk 20,8063.063,,0.201,0.988,1.226,True,26018
-21,Yishun,Khatib,"Khatib (1.0 km), Yishun (1.9 km)",,5431.589,,0.175,0.677,1.246,True,30029
-22,Toa Payoh,Toa Payoh West,"Caldecott (0.3 km), Toa Payoh (0.7 km)",Toa Payoh Lorong 1 Blk 127 (Toa Payoh West Market and Food Court),22943.111,,0.202,3.027,1.319,True,32020
-23,Jurong East,Lakeside (Leisure),"Lakeside (1.1 km), Chinese Garden (1.1 km)",Chinese Garden Singapore; Taman Jurong Shopping Centre; West Point Hospital,15579.630,,0.124,2.119,1.360,True,19020
-24,Jurong West,Jurong West Central,"Pioneer (0.3 km), Boon Lay (0.9 km)",Jurong West Hawker Centre,23121.776,,0.107,3.246,1.404,True,16020
-25,Sengkang,Fernvale,"Thanggam (0.8 km), Fernvale (1.1 km)",,10882.068,,0.086,1.533,1.409,True,35027
+1,Bishan,Upper Thomson,"Upper Thomson (1.0 km), Bright Hill (1.5 km)",,6595.722,0.000,0.204,0.047,0.072,False,30022
+2,Punggol,Waterway East,"Kadaloor (0.7 km), Riviera (0.9 km)",Waterway Primary School,9485.242,3013.000,0.068,0.205,0.216,False,41027
+3,Pasir Ris,Pasir Ris Park,"Pasir Ris (0.8 km), Tampines East (2.8 km)",Downtown East; D'RESORT @ DOWNTOWN EAST; Aranda Country Club,5849.641,1335.000,0.099,0.178,0.304,False,44025
+4,Central Water Catchment,Central Water Catchment,"Bright Hill (1.0 km), Upper Thomson (1.3 km)",,5476.900,0.000,0.204,0.226,0.413,False,30023
+5,Sembawang,Sembawang Straits,"Canberra (1.1 km), Sembawang (1.5 km)",,8240.870,2689.000,0.073,0.485,0.589,False,31033
+6,Punggol,Punggol Town Centre,"Soo Teck (0.3 km), Sumang (0.3 km)",Waterway Point; Yusof Ishak Secondary School; Valour Primary School,23616.980,6450.000,0.066,1.571,0.665,True,38028
+7,Punggol,Punggol Canal,"Oasis (0.6 km), Damai (0.7 km)",Kwek Leng Beng University Tower; Oasis Primary School,11724.743,3723.000,0.068,0.831,0.709,True,40028
+8,Simpang,Simpang South,"Yishun (1.9 km), Canberra (2.6 km)",,4783.416,2098.000,0.097,0.348,0.727,False,33031
+9,Tengah,Brickland,"South View (1.0 km), Keat Hong (1.0 km)",Keat Hong Shopping Centre,16407.876,5129.000,0.081,1.206,0.735,True,21024
+10,Bukit Batok,Gombak,"Hillview (0.7 km), Cashew (0.9 km)",HillV2 Mall,7478.816,0.000,0.132,0.630,0.842,True,23023
+11,Bukit Batok,Gombak,"Teck Whye (0.6 km), Keat Hong (0.9 km)",Delta Senior School; ITE College West,12510.792,697.000,0.108,1.090,0.871,True,22024
+12,Bukit Timah,Anak Bukit,"Beauty World (0.9 km), King Albert Park (1.6 km)",Ngee Ann Polytechnic; Bukit Timah Primary School; SIT@NP,8775.119,1323.000,0.184,0.780,0.888,True,24020
+13,Jurong West,Safti,"Pioneer (0.9 km), Joo Koon (1.5 km)",Juying Secondary School; Juying Primary School,8427.564,1239.000,0.122,0.813,0.965,True,15020
+14,Jurong West,Chin Bee,"Lakeside (1.1 km), Boon Lay (1.2 km)",Taman Jurong Shopping Centre; Taman Jurong Market and Food Centre; Lakeside Primary School,8804.034,1109.000,0.118,0.854,0.970,True,18020
+15,Bedok,Bedok South,"Tanah Merah (0.4 km), Bayshore (1.7 km)",Q Loft Hotels@Bedok; Bedok South Secondary School,15261.225,0.000,0.214,1.590,1.042,True,44019
+16,Bukit Timah,Ulu Pandan,"Dover (0.7 km), Clementi (1.6 km)",Henry Park Primary School,7666.856,0.000,0.187,0.833,1.086,True,25018
+17,Hougang,Kovan,"Kovan (0.8 km), Serangoon (1.5 km)",The Japanese Cemetery Park; Idea Minds Employment Development Centre; Dimensions,12736.356,284.000,0.168,1.415,1.111,True,36023
+18,Woodlands,Woodlands East,"Admiralty (0.8 km), Woodlands South (0.9 km)",888 Plaza; Vista Point; Kampung Admiralty Hawker Centre,43124.933,11458.000,0.086,4.834,1.121,True,27031
+19,Bedok,Bayshore,"Bayshore (1.0 km), Tanah Merah (1.2 km)",Temasek Secondary School; Temasek Primary School,10050.678,1738.000,0.192,1.193,1.187,True,44018
+20,Bukit Panjang,Dairy Farm,"Pending (0.5 km), Cashew (0.7 km)",Bukit Panjang Primary School; The Perse School; The ART (Assumption Restaurant for Training),19077.868,3058.000,0.144,2.326,1.219,True,24024
+21,Bukit Timah,Leedon Park,"Holland Village (1.0 km), Buona Vista (1.1 km)",Ghim Moh Road Blk 20; Henry Park Primary School; Singapore Centre for Chinese Language,8063.063,438.000,0.201,0.988,1.226,True,26018
+22,Yishun,Khatib,"Khatib (1.0 km), Yishun (1.9 km)",,5431.589,0.000,0.175,0.677,1.246,True,30029
+23,Toa Payoh,Toa Payoh West,"Caldecott (0.3 km), Toa Payoh (0.7 km)",Toa Payoh West Market and Food Court; CHIJ (Toa Payoh) Primary School; Solomon Block,22943.111,8706.000,0.202,3.027,1.319,True,32020
+24,Jurong East,Lakeside (Leisure),"Lakeside (1.1 km), Chinese Garden (1.1 km)",Chinese Garden Singapore; Taman Jurong Shopping Centre; West Point Hospital,15579.630,6620.000,0.124,2.119,1.360,True,19020
+25,Jurong West,Jurong West Central,"Pioneer (0.3 km), Boon Lay (0.9 km)",Jurong West Hawker Centre; Frontier Primary School; Jurong West Primary School,23121.776,7848.000,0.107,3.246,1.404,True,16020

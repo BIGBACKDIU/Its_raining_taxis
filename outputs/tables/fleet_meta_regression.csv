@@ -1,0 +1,3 @@
+model,months,tau2,slope_log_per_1000_taxis,se,p,pp_change_in_effect_per_1000_fewer_taxis,lo,hi,coverage_coef,coverage_p
+abs,55,0.00051,0.01040,0.00803,0.19551,-1.03997,-2.61465,0.53471,-0.08471,0.00004
+share,55,0.00083,0.02193,0.00966,0.02326,-2.19296,-4.08712,-0.29879,-0.05757,0.00871

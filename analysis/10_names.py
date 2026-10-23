@@ -162,11 +162,26 @@ def draw_cells(ax, cells, values, cmap, norm, grey=None):
                                    zorder=2))
 
 
-def label(ax, df, text_col, n, fs=6.5):
-    for r in df.head(n).itertuples():
-        ax.annotate(getattr(r, text_col), (r.lon, r.lat), xytext=(4, 4), textcoords="offset points", fontsize=fs,
-                    color=INK, zorder=5, bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.8))
-        ax.plot(r.lon, r.lat, "o", ms=2.5, color=INK, zorder=5)
+def short(text, n=34):
+    """Shorten a place label at a word boundary, closing an open bracket."""
+    text = str(text)
+    if len(text) <= n:
+        return text
+    cut = text[:n - 1].rsplit(" ", 1)[0].rstrip(",;( ")
+    return cut + ("...)" if cut.count("(") > cut.count(")") else "...")
+
+
+def label(ax, df, text_col, n, fs=6.5, loc="upper left"):
+    """Numbered markers on the map and a numbered key in a corner box (no overlapping place labels)."""
+    rows = list(df.head(n).itertuples())
+    for k, r in enumerate(rows, 1):
+        ax.plot(r.lon, r.lat, "o", ms=7, mfc="white", mec=INK, mew=0.8, zorder=5)
+        ax.annotate(str(k), (r.lon, r.lat), ha="center", va="center", fontsize=fs - 1.5, color=INK, zorder=6)
+    key = "\n".join(f"{k}  {short(getattr(r, text_col), 40)}" for k, r in enumerate(rows, 1))
+    x, ha = (0.01, "left") if "left" in loc else (0.99, "right")
+    y, va = (0.01, "bottom") if "lower" in loc else (0.99, "top")
+    ax.text(x, y, key, transform=ax.transAxes, ha=ha, va=va, fontsize=fs, color=INK, zorder=7, linespacing=1.35,
+            bbox=dict(boxstyle="round,pad=0.4", fc="white", ec="#d9d8d4", alpha=0.92))
 
 
 def maps(e, ds, deserts_t, names):
@@ -181,7 +196,7 @@ def maps(e, ds, deserts_t, names):
         draw_cells(ax, t.cell.values, t[col].clip(-40, 20).values, div, norm)
         lab = t.sort_values("taxis_lost_per_heavy_half_hour" if col == "abs_pct" else "share_pct",
                             ascending=col != "abs_pct")
-        label(ax, lab.assign(short=lab.place.str.slice(0, 32)), "short", 10)
+        label(ax, lab.assign(short=lab.place), "short", 10)
         fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=div), ax=ax, orientation="horizontal", fraction=0.05,
                      pad=0.02, label="%")
         ax.set_title(title, fontsize=9.5)
@@ -199,7 +214,7 @@ def maps(e, ds, deserts_t, names):
         t = ds[ds.band == lab]
         draw_cells(ax, t.cell.values, t.mean_vacant_dry.values, blues, norm)
         tt = t.sort_values("mean_vacant_dry", ascending=False)
-        label(ax, tt.assign(short=tt.place.str.slice(0, 28)), "short", 8, fs=6)
+        label(ax, tt.assign(short=tt.place), "short", 8, fs=6)
         ax.set_title(f"Dry weather, {lab}", fontsize=9.5)
     ax = axes.ravel()[-1]
     ax.axis("off")

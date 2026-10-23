@@ -116,23 +116,36 @@ def main():
         rows.append(q)
     D = pd.concat(rows, ignore_index=True)
     D["y"] = np.log(D.dry_mean + 0.1)
-    import statsmodels.formula.api as smf
+    import pyfixest as pf
     D["cc"] = D.cohort + "_" + D.cell.astype(str)
     D["mc"] = D.cohort + "_" + D.ts.astype(str)
+    D["cell_id"] = D.cell
     rels = [r for r in range(-WIN, WIN + 1) if r != -1]
     for r in rels:
         D[f"e{r + WIN}"] = ((D.rel == r) & (D.treated == 1)).astype(float)
-    f = "y ~ " + " + ".join(f"e{r + WIN}" for r in rels) + " + C(cc) + C(mc)"
-    es = smf.ols(f, data=D).fit(cov_type="cluster", cov_kwds={"groups": pd.factorize(D.cell)[0]})
-    ev = pd.DataFrame({"rel_month": rels, "coef": [es.params[f"e{r + WIN}"] for r in rels],
-                       "se": [es.bse[f"e{r + WIN}"] for r in rels]})
+    es = pf.feols("y ~ " + " + ".join(f"e{r + WIN}" for r in rels) + " | cc + mc", data=D, vcov={"CRV1": "cell_id"})
+    co, se_ = es.coef(), es.se()
+    ev = pd.DataFrame({"rel_month": rels, "coef": [co[f"e{r + WIN}"] for r in rels],
+                       "se": [se_[f"e{r + WIN}"] for r in rels]})
     ev["pct"] = 100 * (np.exp(ev.coef) - 1)
     ev["lo"] = 100 * (np.exp(ev.coef - 1.96 * ev.se) - 1)
     ev["hi"] = 100 * (np.exp(ev.coef + 1.96 * ev.se) - 1)
     pre = [f"e{r + WIN}" for r in rels if r < -1]
-    wt = es.wald_test(" , ".join(f"{p} = 0" for p in pre), scalar=True)
+    b = co[pre].values
+    V = es._vcov[np.ix_([list(co.index).index(p) for p in pre], [list(co.index).index(p) for p in pre])]
+    from scipy.stats import chi2
+    wstat = float(b @ np.linalg.pinv(V) @ b)
+
+    class _W:
+        pvalue = float(chi2.sf(wstat, len(pre)))
+    wt = _W()
     D["post_t"] = ((D.rel >= 0) & (D.treated == 1)).astype(float)
-    did = smf.ols("y ~ post_t + C(cc) + C(mc)", data=D).fit(cov_type="cluster", cov_kwds={"groups": pd.factorize(D.cell)[0]})
+    dd = pf.feols("y ~ post_t | cc + mc", data=D, vcov={"CRV1": "cell_id"})
+
+    class _Did:
+        params = dd.coef()
+        bse = dd.se()
+    did = _Did()
     ev.to_csv(TABLES / "mrt_did_event_study_supply.csv", index=False, float_format="%.5f")
     summ = {"treated_cells": int(S[S.treated == 1].cell.nunique()), "control_cells": int(S[S.treated == 0].cell.nunique()),
             "pretrend_wald_p": float(wt.pvalue), "did_supply_pct": float(100 * (np.exp(did.params.post_t) - 1)),
@@ -152,14 +165,22 @@ def main():
         parts.append(p)
     P = pd.concat(parts, ignore_index=True)
     hv = (P.rain_band.values == 3).astype("float32")
-    X = np.column_stack([P.rain_band.values == 1, P.rain_band.values == 2, hv, hv * P.post.values, hv * P.treated.values,
-                         hv * P.treated.values * P.post.values, P.mmh_lag1.values, P.mmh_lag2.values]).astype("float32")
     names = ["light", "moderate", "heavy", "heavy_x_post", "heavy_x_treated", "heavy_x_treated_x_post", "mmh_lag1",
              "mmh_lag2"]
-    k = P.cohort_id.values.astype(np.int64)
-    fes = [k * 100000 + P.cell.values, k * 10 ** 7 + P.how.values.astype(np.int64) * 100 + P.month.values,
-           k * 10 ** 9 + P.ym.values.astype(np.int64) * 100 + P.regime_id.values]
-    r = pct(fepois(P.vacant.values, X, names, fes, P.ts.values.astype("datetime64[D]")))
+    P["heavy"] = hv
+    P["light"] = (P.rain_band.values == 1).astype(float)
+    P["moderate"] = (P.rain_band.values == 2).astype(float)
+    P["heavy_x_post"] = hv * P.post.values
+    P["heavy_x_treated"] = hv * P.treated.values
+    P["heavy_x_treated_x_post"] = hv * P.treated.values * P.post.values
+    P["fe_cell"] = P.cohort_id.astype(str) + "_" + P.cell.astype(str)
+    P["fe_hm"] = P.cohort_id.astype(str) + "_" + (P.how.astype(int) * 100 + P.month.astype(int)).astype(str)
+    P["fe_ymr"] = P.cohort_id.astype(str) + "_" + (P.ym.astype(int) * 100 + P.regime_id.astype(int)).astype(str)
+    P["day"] = P.ts.dt.normalize().astype(str)
+    import pyfixest as pf
+    m = pf.fepois("vacant ~ " + " + ".join(names) + " | fe_cell + fe_hm + fe_ymr", data=P, vcov={"CRV1": "day"})
+    r = pd.DataFrame({"coef": m.coef(), "se": m.se()})
+    r = pct(r)
     r.attrs = {}
     r.to_csv(TABLES / "mrt_did_heavy_rain.csv", float_format="%.5f")
     print(r[["pct", "pct_lo", "pct_hi"]].round(2).to_string())
@@ -169,6 +190,15 @@ def main():
                  "heavy_rows_treated_post": int(((P.rain_band == 3) & (P.treated == 1) & (P.post == 1)).sum())})
     pd.Series(summ).to_csv(TABLES / "mrt_did_summary.csv")
     print(summ)
+    chart()
+
+
+def chart():
+    """Event-study chart from the saved tables (reference month -1 drawn at 0)."""
+    ev = pd.read_csv(TABLES / "mrt_did_event_study_supply.csv")
+    ev = pd.concat([ev, pd.DataFrame([{"rel_month": -1, "pct": 0.0, "lo": 0.0, "hi": 0.0}])]).sort_values("rel_month")
+    summ = pd.read_csv(TABLES / "mrt_did_summary.csv", index_col=0).iloc[:, 0]
+    style()
     fig, ax = plt.subplots(figsize=(8, 3.8))
     ax.fill_between(ev.rel_month, ev.lo, ev.hi, color=BLUE, alpha=0.2, lw=0)
     ax.plot(ev.rel_month, ev.pct, "o-", color=BLUE_DARK, ms=4)
@@ -179,8 +209,8 @@ def main():
     clear = summ["did_supply_lo"] > 0 or summ["did_supply_hi"] < 0
     verdict = (f"dry-weather supply nearby changed {summ['did_supply_pct']:+.1f}% after opening" if clear else
                "no clear change in nearby dry-weather taxi supply")
-    ax.set_title(f"New MRT stations: {verdict} (DiD CI {summ['did_supply_lo']:+.1f} to {summ['did_supply_hi']:+.1f}%; "
-                 f"pre-trend p = {wt.pvalue:.2f})", fontsize=10)
+    ax.set_title(f"New MRT stations: {verdict}\n(DiD CI {summ['did_supply_lo']:+.1f} to {summ['did_supply_hi']:+.1f}%; "
+                 f"pre-trends differ, p = {summ['pretrend_wald_p']:.3f}, so read with caution)", fontsize=10)
     fig.tight_layout()
     save(fig, "mrt_did_event_study", "Sources: data.gov.sg taxi availability (LTA), LTA station openings. TEL3, TEL4, "
          "Punggol Coast, Hume; cells within 800 m vs 3 matched cells > 2 km away; 95% CI clustered by cell.")
@@ -188,4 +218,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    chart() if sys.argv[1:] == ["chart"] else main()
