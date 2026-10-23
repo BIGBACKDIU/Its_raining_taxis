@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import average_precision_score
 
-from analysis.common import INTERIM, SEED, TABLES
+from analysis.common import INTERIM, SEED, TABLES, log_test_scoring
 
 P = importlib.import_module("analysis.06_forecast")
 LABEL = "POST-HOC check, added after first test scoring and after S1"
@@ -38,6 +38,7 @@ def gain(ts, y, a, b, mmh_h, rng, n_boot=1000):
 
 
 def main():
+    log_test_scoring("06c_posthoc_normal_coverage.py", "weather gain on test-year subset from 11 Jan 2026", "post-hoc")
     rng = np.random.default_rng(SEED)
     out = []
     for h in (30, 60):

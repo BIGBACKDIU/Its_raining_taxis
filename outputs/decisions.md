@@ -233,10 +233,11 @@ Choices not fixed by HANDOFF.md, in the order they were made. Each entry says wh
 53. **Test year first scored: 2026-10-23 00:08:41 SGT** (`data/interim/test_year_first_scored.txt`). After that,
     only evaluation code and new subsets of the same frozen predictions were added; no model was refitted.
 54. **High-coverage regime check (after test scoring, as agreed).** Share model per test-year regime
-    (`outputs/tables/effects_test_year_by_regime.csv`). R13 (1-15 Oct 2025) is too short (< 200k rows) and is
-    skipped. In R14 (high coverage, 1.8x) heavy rain: share -10.2% (CI -14.0 to -6.2), absolute -16.1%; other
-    test-year regimes: share -8.5% to -24.9%. The direction matches the fit period; sizes are larger in the test
-    year, in line with the trend across fiscal years (FY2024 share -7.7%).
+    (`outputs/tables/effects_test_year_by_regime.csv`). [Corrected after review: R13 was NOT skipped; it has
+    269,226 rows.] R13 (1-15 Oct 2025, high coverage 2.0x) heavy rain: share -14.0%, absolute -17.6%; R14 (high
+    coverage, 1.8x): share -10.2% (CI -14.0 to -6.2), absolute -16.1%; other test-year regimes: share -8.5% to
+    -24.9%. The direction matches the fit period; sizes are larger in the test year, in line with the trend across
+    fiscal years (FY2024 share -7.7%).
 
 ## Secondary forecasting analysis S1 - PRE-REGISTERED (written and committed before any S1 code was run)
 
@@ -299,8 +300,9 @@ results stay as they are and remain the pre-specified result.
 
 ## Step 7: repositioning policy (rules fixed before running)
 
-67. **Framing.** The policy runs on availability forecasts made at t (step 6). Weather adds no early-warning value
-    there, so weather enters the step-7 count forecast only if it helps on the calibration period by BOTH:
+67. **Framing.** The policy runs on availability forecasts made at t (step 6). [Wording corrected after review:]
+    there was no material weather gain (all 36 S1 comparisons below the pre-registered 0.01 PR-AUC threshold;
+    largest +0.002) for the tested labels, models and horizons, so weather enters the step-7 count forecast only if it helps on the calibration period by BOTH:
     lower calibration Poisson deviance of the count forecast (weather 1.1950 vs no weather 1.1981 at 30 min;
     1.2695 vs 1.2734 at 60 min: met) AND higher calibration targeting precision of the policy (share of
     targeted cells that are really low at t+h) on the same calibration sample. Otherwise the no-weather
@@ -392,3 +394,55 @@ results stay as they are and remain the pre-specified result.
     plausibility check". The greedy policy solver reaches 97.4% of the PuLP optimum on 60 step-7 decisions
     (minimum 94.5%). The JavaScript page matches the Python engine (mean paths within 0.32%, peaks within 1.7%
     or both near zero).
+
+## Changes after the independent review of commit aac26fe (reviewer's items 1-9)
+
+83. **Retrospective labels (item 1).** All forecasting results before this point are evaluated against
+    RETROSPECTIVE labels: the test-year baseline uses each test regime's level estimated from that regime's own
+    test-year rows (`01_panel.py`, regime levels outside the fit period), and the regime change points were
+    detected on all five years. A disclosed additional scoring of the test year (no refitting,
+    `analysis/06d_label_versions.py`) adds an ISSUE-TIME-KNOWABLE label: baseline = pattern at t+h x trailing
+    7-day coverage level known at t (= the seasonal_h input), same deficit >= 0.5 (baseline >= 4) and NB rules.
+    Results (`forecast_eval_both_labels.csv`): base rates barely move (1 km deficit 26.5% -> 26.4%); PR-AUC and
+    the weather gain are nearly identical; largest weather gain +0.0024 (issue-time) vs +0.0021 (retrospective);
+    no comparison meets the pre-registered materiality rule under either label.
+84. **Fixed workload (item 3).** The earlier "5% workload" used thresholds set on rows with a defined label, so it
+    alerted about 2.2% of eligible cell-snapshots, at different rates per model. Main metric now: top-K per issue
+    time, K = 19 / 6 / 2 (5% of 374 cells / 129 blocks / 49 planning areas), same K for every model. A first
+    corrected run ranked all cells and gave persistence 5% precision because its top scores fall on cells with
+    expected < 4, where the deficit label is undefined (never low). After seeing that, the ranking set for the
+    deficit label was restricted to cells with expected >= 4 known at issue time (the same condition as the
+    label and the step-7 destinations); the NB label ranks all units. Both runs are kept
+    (`*_allcells_ranking.csv` = superseded first run). Calibration-threshold results are kept separately
+    (`forecast_calibration_threshold.csv`). Main numbers, 1 km, retrospective label: top-19 precision 30 min
+    LightGBM 52.9% (with weather 52.9%), persistence 46.1%, climatology 42.6%; 60 min 50.8% / 50.7% / 42.9% /
+    42.6%.
+85. **Lead time (item 4).** `fc_eval.lead_times` now counts a run as warned only if an alert targeting it was
+    issued before the run started (lead > 0); alerts first issued at or after onset are reported as "detected at
+    or after onset". With top-19 alerts, 1 km: warned before onset 6.2% (30 min) and 13.2% (60 min) of runs for
+    LightGBM, 12.7% / 14.2% for the climatology ranking, 0.8% / 11.6% for persistence; detected at or after onset
+    9.4% / 3.3% (LightGBM); the rest are missed. Before the fix, "warned" included alerts after onset.
+86. **Wording (item 5).** "Weather adds no early-warning value" is replaced everywhere by "no material weather gain
+    (all 36 comparisons below the pre-registered 0.01 PR-AUC threshold; largest +0.002) for the tested labels,
+    models and horizons".
+87. **Robustness sample bug (item 2).** `03_effects_more.load()` and `03_effects.sample()` no longer require a
+    baseline (association fits do not use it). The robustness sample now contains the 26 Feb - 1 Mar 2023 spell
+    (70,686 rows): heavy rain -12.5% (absolute, CI -13.9 to -11.0) and -5.8% (share) - unchanged at one decimal.
+    The main sample is unchanged (spells are excluded there anyway).
+88. **Rain timing (item 6).** Sensitivity with the rain window lagged one 15-minute bin, (t-45, t-15], lags
+    shifted the same way: heavy rain -13.1% absolute (main -12.9%), -4.3% share (main -5.7%); light and moderate
+    also slightly smaller in the share model. Limitation: snapshots are taken ~19 seconds before the requested
+    time, so the last 5-minute rain reading in (t-30, t] can end up to ~19 s after the snapshot; the lagged
+    window removes this and the conclusions hold.
+89. **Permutation (item 7).** p-values are reported as "< 0.001" (1,000 draws; none as extreme as observed). The
+    test assumes rain patterns are exchangeable between days within the same year-month and weekday/weekend group.
+90. **Titles and log (item 8).** "Rain raises the odds" -> "Rain is associated with higher odds" (05_risk);
+    "cells lose vacant taxis" -> "cells have fewer vacant taxis" (02_describe); item 54 corrected (R13 was
+    included, heavy-rain share effect -14.0%).
+91. **Scoring log (item 9).** `outputs/test_scoring_log.csv` gets a row from every script run that scores or uses
+    outcomes from the test year (`common.log_test_scoring`). Rows before this review are reconstructed from file
+    times. This review added five rows: primary evaluation re-run twice (corrected definitions; then the
+    ranking-set change) and two runs of 06d, plus the step-7 label re-scoring.
+92. **Step 7.** No alert thresholds or lead times are used in step 7. Its targeting check now reports both labels
+    (`policy_sensitivity.csv`): base case 31-32% (retrospective) and 30-32% (issue-time) of targeted cells low,
+    vs 27-28% of all candidate cells.

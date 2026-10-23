@@ -35,7 +35,8 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from analysis.common import (BLUE, BLUE_DARK, CALIB, FIT, INTERIM, MUTED, ORANGE, SEED, TABLES, TEST, save, style)
+from analysis.common import (BLUE, BLUE_DARK, CALIB, FIT, INTERIM, MUTED, ORANGE, SEED, TABLES, TEST,
+                             log_test_scoring, save, style)
 
 HORIZONS = (30, 60)
 SPLITS = {"fit": FIT, "calib": CALIB, "test": TEST}
@@ -336,6 +337,8 @@ def part_fit(glm_rows=2_000_000, lgb_rows=3_000_000, horizons=HORIZONS):
                     out[col] = (g.predict(X) if objective == "poisson" else g.predict_proba(X)[:, 1]).astype("float32")
             out.to_parquet(INTERIM / f"fc_pred_h{h}_{split}.parquet", index=False)
             if split == "test":
+                log_test_scoring(f"06_forecast.py --part fit --h {h}", f"test-year predictions ({h} min) written",
+                                 "primary", len(out))
                 stamp = INTERIM / "test_year_first_scored.txt"
                 if not stamp.exists():
                     stamp.write_text(datetime.now().isoformat(timespec="seconds"))
@@ -356,32 +359,6 @@ def part_fit(glm_rows=2_000_000, lgb_rows=3_000_000, horizons=HORIZONS):
 
 
 # ============================================================================= evaluation
-def top_k_precision(ts, score, y, k=TOP_K):
-    d = pd.DataFrame({"ts": ts, "s": score, "y": y})
-    d = d.sort_values(["ts", "s"], ascending=[True, False])
-    top = d.groupby("ts").head(k)
-    return float(top.y.mean())
-
-
-def lead_times(ts, cell, alert, y, h):
-    """Warning lead time for each low-availability run (consecutive low snapshots in a cell).
-
-    alert[i] is issued at ts[i] for target time ts[i] + h; y[i] is low at ts[i] + h. For each run starting at
-    target time s, the warning time is s minus the earliest issue time of an alert whose target falls inside
-    the run (and before or at the run start + the run length); runs with no such alert count as missed."""
-    d = pd.DataFrame({"tt": ts + np.timedelta64(h, "m"), "cell": cell, "a": alert, "y": y}).sort_values(["cell", "tt"])
-    d = d[d.y.notna()]
-    d["y"] = d.y.astype(bool)
-    gap = (d.tt.diff() != pd.Timedelta(minutes=30)) | (d.cell != d.cell.shift())
-    start = d.y & (~d.y.shift(fill_value=False) | gap)
-    d["run"] = np.where(d.y, start.cumsum(), -1)
-    runs = d[d.run >= 0].groupby("run").agg(s=("tt", "min"), n=("tt", "size"))
-    al = d[(d.run >= 0) & d.a].groupby("run").tt.min()
-    runs["first_alert_target"] = al
-    runs["lead_min"] = h - (runs.first_alert_target - runs.s).dt.total_seconds() / 60
-    return runs
-
-
 def binned_ap(score, y, day, n_days, W, n_bins=2000):
     """Average precision from per-day counts in score bins, for the observed data and for bootstrap day weights W.
     Scores are tied within a bin (2,000 quantile bins), so the observed value is a close approximation."""
@@ -418,7 +395,12 @@ def evaluate_split(pr, split, h, thresholds=None):
     if split == "test":
         subsets["test before 11 Jan 2026 (high coverage)"] = (pr.ts < COVERAGE_CHANGE).values
         subsets["test from 11 Jan 2026"] = (pr.ts >= COVERAGE_CHANGE).values
-    rows = []
+    from analysis.fc_eval import k_for, topk_alerts
+    K = k_for(pr.cell.nunique())
+    elig = (pr.seasonal_h.values >= 4)          # expected >= 4 known at issue time (deficit label defined)
+    alerts = {c: topk_alerts(pr.ts.values, pr[c].values, K, elig) for c in score_models}
+    ylow_all = np.nan_to_num(pr.y_low.astype(float).values, nan=0.0) > 0.5
+    rows, thr_rows = [], []
     for sub, m in subsets.items():
         q = pr[m]
         for c in count_models:
@@ -429,21 +411,27 @@ def evaluate_split(pr, split, h, thresholds=None):
         for c in score_models:
             s = cl[c].values.astype(float)
             s = np.nan_to_num(s, nan=np.nanmin(s))
+            a = alerts[c][m]
+            ya = ylow_all[m]
             r = {"h": h, "split": split, "subset": sub, "task": "low", "model": c.replace("score_", ""),
                  "base_rate": float(yl.mean()), "rows": int(len(cl)),
                  "PR_AUC": float(average_precision_score(yl, s)) if yl.any() else np.nan,
-                 "ROC_AUC": float(roc_auc_score(yl, s)) if 0 < yl.mean() < 1 else np.nan}
-            if thresholds is not None:
-                thr = thresholds[c]
-                a = s >= thr
-                r.update({"alert_rate": float(a.mean()), "precision_at_workload": float(yl[a].mean()) if a.any() else np.nan,
-                          "recall_at_workload": float(a[yl == 1].mean()),
-                          "precision_top20": top_k_precision(cl.ts.values, s, yl)})
-                if c.endswith(("glm_weather", "glm_no_weather", "lgb_weather", "lgb_no_weather")):
-                    pcal = cl[c + "_cal"].values
-                    r["brier_calibrated"] = float(brier_score_loss(yl, pcal))
+                 "ROC_AUC": float(roc_auc_score(yl, s)) if 0 < yl.mean() < 1 else np.nan,
+                 "K_per_issue_time": K, "topk_alert_rate_all_cells": float(a.mean()),
+                 "topk_precision": float(ya[a].mean()) if a.any() else np.nan,
+                 "topk_recall": float(a[ya].mean()) if ya.any() else np.nan}
+            if c.endswith(("glm_weather", "glm_no_weather", "lgb_weather", "lgb_no_weather")) and c + "_cal" in cl:
+                r["brier_calibrated"] = float(brier_score_loss(yl, cl[c + "_cal"].values))
             rows.append(r)
-    return rows
+            if thresholds is not None:
+                at = s >= thresholds[c]
+                thr_rows.append({"h": h, "split": split, "subset": sub, "model": c.replace("score_", ""),
+                                 "note": "SECONDARY: threshold = calibration-period 95th percentile of the score on "
+                                         "rows with a defined label; alert rates differ by model",
+                                 "alert_rate_labelled_rows": float(at.mean()),
+                                 "precision": float(yl[at].mean()) if at.any() else np.nan,
+                                 "recall": float(at[yl == 1].mean()) if yl.any() else np.nan})
+    return rows, thr_rows
 
 
 def part_evaluate(n_boot=1000):
@@ -451,7 +439,11 @@ def part_evaluate(n_boot=1000):
     from sklearn.metrics import average_precision_score
     style()
     rng = np.random.default_rng(SEED)
-    all_rows, boot_rows, lead_rows, conf_rows, calib_rows = [], [], [], [], []
+    from analysis.fc_eval import k_for, lead_summary, topk_alerts
+    from analysis.fc_eval import lead_times as lead_runs
+    log_test_scoring("06_forecast.py --part evaluate", "primary test-year metrics (corrected top-K workload and lead "
+                     "time; retrospective labels)", "primary")
+    all_rows, boot_rows, lead_rows, conf_rows, calib_rows, thr_all, lead_thr = [], [], [], [], [], [], []
     for h in HORIZONS:
         ca = pd.read_parquet(INTERIM / f"fc_pred_h{h}_calib.parquet")
         te = pd.read_parquet(INTERIM / f"fc_pred_h{h}_test.parquet")
@@ -473,8 +465,10 @@ def part_evaluate(n_boot=1000):
                                                           n=("y_low", "size")).reset_index(drop=True)
                 rel["h"], rel["model"] = h, c
                 calib_rows.append(rel)
-        all_rows += evaluate_split(ca, "calib", h, thresholds)
-        all_rows += evaluate_split(te, "test", h, thresholds)
+        for d_, nm in ((ca, "calib"), (te, "test")):
+            r1, r2 = evaluate_split(d_, nm, h, thresholds)
+            all_rows += r1
+            thr_all += r2
         # day-block bootstrap of the weather gain on the test year (LightGBM and regression)
         tl = te[te.y_low.notna()].reset_index(drop=True)
         days = tl.ts.dt.normalize()
@@ -497,15 +491,15 @@ def part_evaluate(n_boot=1000):
                                   "lo": float(np.quantile(diffs, 0.025)), "hi": float(np.quantile(diffs, 0.975)),
                                   "share_draws_gain_positive": float((diffs > 0).mean()), "boot": n_boot})
                 print(boot_rows[-1], flush=True)
-        # lead times (alerts at the calibration-period threshold)
+        # lead times: main = fixed top-K workload per issue time; secondary = calibration thresholds
+        K = k_for(te.cell.nunique())
         for c in score_models:
-            a = np.nan_to_num(te[c].values.astype(float), nan=-np.inf) >= thresholds[c]
-            runs = lead_times(te.ts.values, te.cell.values, a, te.y_low.values, h)
-            warned = runs.lead_min.notna()
-            lead_rows.append({"h": h, "model": c.replace("score_", ""), "runs": int(len(runs)),
-                              "share_warned": float(warned.mean()),
-                              "share_warned_ge30min": float((runs.lead_min >= 30).mean()),
-                              "median_lead_min_if_warned": float(runs.lead_min[warned].median()) if warned.any() else np.nan})
+            for kind, a in (("top-K", topk_alerts(te.ts.values, te[c].values, K, te.seasonal_h.values >= 4)),
+                            ("calibration threshold", np.nan_to_num(te[c].values.astype(float), nan=-np.inf) >= thresholds[c])):
+                runs = lead_runs(te.ts.values, te.cell.values, a, te.y_low.values, h)
+                row = {"h": h, "model": c.replace("score_", ""), "alerts": kind, "label": "retrospective",
+                       **lead_summary(runs)}
+                (lead_rows if kind == "top-K" else lead_thr).append(row)
         # split-conformal count ranges (scaled residuals), calibrated on Apr-Sep 2025
         for c in [c for c in ca.columns if c.startswith("count_")]:
             r_ca = np.abs(ca.y_count - ca[c]) / np.sqrt(ca[c].clip(lower=0) + 1)
@@ -524,6 +518,8 @@ def part_evaluate(n_boot=1000):
     res.to_csv(TABLES / "forecast_metrics.csv", index=False, float_format="%.5f")
     pd.DataFrame(boot_rows).to_csv(TABLES / "forecast_weather_gain.csv", index=False, float_format="%.5f")
     pd.DataFrame(lead_rows).to_csv(TABLES / "forecast_lead_times.csv", index=False, float_format="%.4f")
+    pd.DataFrame(lead_thr).to_csv(TABLES / "forecast_lead_times_calibration_threshold.csv", index=False, float_format="%.4f")
+    pd.DataFrame(thr_all).to_csv(TABLES / "forecast_calibration_threshold.csv", index=False, float_format="%.5f")
     pd.DataFrame(conf_rows).to_csv(TABLES / "forecast_conformal.csv", index=False, float_format="%.4f")
     pd.concat(calib_rows).to_csv(TABLES / "forecast_reliability.csv", index=False, float_format="%.4f")
     charts()

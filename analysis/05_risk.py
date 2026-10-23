@@ -192,7 +192,7 @@ def charts(lg, v, types):
     ax.set_xticks(range(3), ["Light", "Moderate", "Heavy"])
     ax.set_ylabel("Odds ratio vs dry")
     ax.legend(fontsize=8, loc="upper left")
-    ax.set_title("Rain raises the odds of unusually low availability in a cell", fontsize=10.5)
+    ax.set_title("Rain is associated with higher odds of unusually low availability in a cell", fontsize=10.5)
     fig.tight_layout()
     save(fig, "risk_odds", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Apr 2022 - Mar 2025, cells with "
          "expected >= 4 vacant taxis. Logit with cell, how^month, ym^regime FE; 95% CI by day.")

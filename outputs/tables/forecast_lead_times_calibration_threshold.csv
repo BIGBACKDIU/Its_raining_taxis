@@ -1,0 +1,13 @@
+h,model,alerts,label,runs,share_warned_before_onset,share_warned_ge30min,median_lead_min_if_warned,share_detected_at_or_after_onset_only,share_missed
+30,persistence,calibration threshold,retrospective,486560,0.0138,0.0138,30.0000,0.2058,0.7805
+30,seasonal,calibration threshold,retrospective,486560,0.0695,0.0695,30.0000,0.0178,0.9127
+30,lgb_no_weather,calibration threshold,retrospective,486560,0.0215,0.0215,30.0000,0.0580,0.9205
+30,glm_no_weather,calibration threshold,retrospective,486560,0.0316,0.0316,30.0000,0.0581,0.9104
+30,lgb_weather,calibration threshold,retrospective,486560,0.0204,0.0204,30.0000,0.0571,0.9225
+30,glm_weather,calibration threshold,retrospective,486560,0.0318,0.0318,30.0000,0.0581,0.9101
+60,persistence,calibration threshold,retrospective,488706,0.1449,0.1449,60.0000,0.0798,0.7753
+60,seasonal,calibration threshold,retrospective,488706,0.0792,0.0792,60.0000,0.0080,0.9128
+60,lgb_no_weather,calibration threshold,retrospective,488706,0.0540,0.0540,60.0000,0.0246,0.9214
+60,glm_no_weather,calibration threshold,retrospective,488706,0.0669,0.0669,60.0000,0.0238,0.9092
+60,lgb_weather,calibration threshold,retrospective,488706,0.0529,0.0529,60.0000,0.0245,0.9226
+60,glm_weather,calibration threshold,retrospective,488706,0.0669,0.0669,60.0000,0.0239,0.9092

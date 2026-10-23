@@ -15,3 +15,22 @@
   calibration period (Apr - Sep 2025) and 26.5% in the test year. Precision and recall at a fixed alert
   workload, and calibrated probabilities, are affected by this shift; PR-AUC values should be compared with
   each period's base rate.
+
+## Changes after the independent review of commit aac26fe
+
+- **Retrospective labels.** Every forecasting table that does not say otherwise is evaluated against
+  retrospective labels (test-regime levels estimated from test-year rows; change points found on all five
+  years). `forecast_eval_both_labels.csv` and `forecast_eval_lead_both_labels.csv` add an issue-time-knowable
+  label (baseline = pattern at t+h x trailing 7-day level known at t), scored without refitting.
+- **Fixed workload.** The main operational metric is now top-K per issue time (K = 19 of 374 cells, 6 of 129
+  blocks, 2 of 49 planning areas = 5% of eligible units), identical for every model. For the deficit label the
+  ranking set is the cells with expected >= 4 known at issue time (the label is undefined elsewhere); for the NB
+  label all units. The earlier calibration-threshold metrics (thresholds on labelled rows, so about 2% of
+  eligible cell-snapshots and different alert rates per model) are kept only in
+  `forecast_calibration_threshold.csv` and `forecast_lead_times_calibration_threshold.csv`.
+  `*_allcells_ranking.csv` keep a first corrected run that ranked all cells, including cells whose label is
+  undefined; it penalised scores that rank such cells (persistence 5% precision) and is superseded.
+- **Lead time.** A run counts as warned only if an alert was issued before the run started (lead > 0).
+  Detection at or after onset and missed runs are reported separately.
+- **Scoring log.** `outputs/test_scoring_log.csv` lists every script run that scored or used outcomes from the
+  test year (rows before this review reconstructed from file times).

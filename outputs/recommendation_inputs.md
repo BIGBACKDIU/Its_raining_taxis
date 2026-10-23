@@ -7,12 +7,23 @@ storms, so they are illustrations of mechanisms, not predictions.
 
 ## 1. What the forecasting result means for the recommendation
 
-- Short-term forecasts (30-120 min) of unusually low availability work far better than "assume it stays as it
-  is now" (1 km, 60 min: PR-AUC 0.47 vs 0.40 for persistence; base rate 26%).
-- **Adding weather data does not improve these early warnings** (gain about +0.001 PR-AUC at every scale,
-  horizon and label tried, also in normal-coverage months). Recommendation: drive real-time repositioning with
-  availability forecasts built from current taxi numbers and the usual pattern for the place and time; weather
-  is not needed in that real-time model.
+All forecasting results are evaluated against **retrospective labels**: the test-year "normal level" uses each
+feed regime's level estimated from that regime's own test-year rows, and the regime change points were found on
+all five years. A second scoring with an **issue-time-knowable label** (normal level = usual pattern x the
+coverage level of the previous 7 days, known when the forecast is made) gives the same picture
+(`forecast_eval_both_labels.csv`).
+
+- Short-term forecasts (30-120 min) of unusually low availability beat "it stays as it is now". At a fixed
+  workload of 19 alerted cells per half hour (5% of analysed cells), 1 km, 30 min: 53% of alerted cells are
+  really low with LightGBM vs 46% with persistence (issue-time label: 54% vs 47%).
+- **No material weather gain** (all 36 comparisons below the pre-registered 0.01 PR-AUC threshold; largest
+  +0.002) for the tested labels, models and horizons; also in normal-coverage months and with issue-time labels
+  (largest +0.0024). Recommendation: drive real-time repositioning with availability forecasts built from current
+  taxi numbers and the usual pattern for the place and time; the tested weather inputs did not add to them.
+- Early warning is limited: with 19 alerts per half hour, only 6-14% of low-availability runs get an alert
+  before they start (1 km; 30 / 60 min ahead); a further 3-10% are flagged at or after onset; most runs are
+  never flagged. A simple "usual risk for this place and time" ranking warns more runs before onset at 30 min
+  (13%) but is less precise (43%).
 - Weather is useful for **planning in advance** (section 3): rain is reliably associated with fewer vacant taxis,
   and the NEA 2-hour forecast flags when.
 
@@ -21,8 +32,8 @@ storms, so they are illustrations of mechanisms, not predictions.
 - Model: move idle CDG taxis (62% of surplus vacant taxis in over-supplied cells) to cells forecast to fall short
   of their normal level, where a taxi stop or stand is within 300 m, within 60 minutes' modelled travel.
 - Test year, base case (200 taxis per decision): about 150-170 taxis moved to 73-78 cells per half-hour decision.
-  Targeted cells were really unusually low 31-32% of the time vs 28% for all candidate cells (39% with a
-  50-taxi budget, which picks only the clearest cases).
+  Targeted cells were unusually low 31-32% of the time vs 28% for all candidate cells (retrospective label);
+  30-32% vs 27-28% with the issue-time label. A 50-taxi budget picks clearer cases (35-39%).
 - Modelled expected shortfall at targeted cells falls by about 34-39% (a model quantity).
 - Cells most often targeted when it rains (equal weights): Tampines (2 cells), Geylang, Sengkang (2), Ang Mo Kio,
   Woodlands, Clementi, Hougang - see `policy_staging_plans.csv` for the ranked lists by weighting scenario

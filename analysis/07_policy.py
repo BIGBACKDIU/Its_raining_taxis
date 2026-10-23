@@ -28,7 +28,8 @@ import pandas as pd
 import pulp
 from scipy.stats import poisson
 
-from analysis.common import (BLUE, BLUE_DARK, FIT, INTERIM, MUTED, ORANGE, SEED, STATIC, TABLES, save, style)
+from analysis.common import (BLUE, BLUE_DARK, FIT, INTERIM, MUTED, ORANGE, SEED, STATIC, TABLES, log_test_scoring, save,
+                             style)
 from pipeline.grid import to_xy
 
 SPEED_KMH = {"dry": 30.0, "rain": 20.0}
@@ -196,6 +197,7 @@ def part_choose():
 def part_evaluate():
     cells, shares = cells_info(), cdg_share()
     keep = bool(pd.read_csv(TABLES / "policy_forecast_choice.csv").weather_kept.iloc[0])
+    log_test_scoring("07_policy.py --part evaluate", "policy targeting check on test-year decisions", "step 7")
     rows, plans = [], []
     t0 = time.time()
     d60 = decision_frame(60, "test", keep)
@@ -249,6 +251,39 @@ def summary(R, P, cells):
             z.insert(1, "rain_at_decision", rain)
             out.append(z)
     pd.concat(out).to_csv(TABLES / "policy_staging_plans.csv", index=False, float_format="%.4f")
+
+
+def part_labels():
+    """Add the issue-time-knowable label (baseline = pattern at t+h x 7-day level known at t) to the targeting check
+    (review of aac26fe). No re-solving: the saved plans are re-scored."""
+    log_test_scoring("07_policy.py --part labels", "policy targeting re-scored with issue-time labels", "step 7")
+    R = pd.read_csv(TABLES / "policy_runs.csv", parse_dates=["ts"])
+    P = pd.read_csv(TABLES / "policy_plans_long.csv", parse_dates=["ts"])
+    out = []
+    for h in (60, 30):
+        f = pd.read_parquet(INTERIM / f"fc_pred_h{h}_test.parquet", columns=["ts", "cell", "y_count", "seasonal_h"])
+        f = f[f.ts.isin(R.ts.unique())]
+        mu = f.seasonal_h.astype(float)
+        f["low_issue"] = np.where(mu >= 4, ((mu - f.y_count) / np.maximum(1, mu) >= 0.5).astype(float), np.nan)
+        settings = [s for s in R.setting.unique() if (s == "h=30") == (h == 30)]
+        for st in settings:
+            rr = R[R.setting == st]
+            pp = P[P.setting == st].merge(f[["ts", "cell", "low_issue"]], on=["ts", "cell"], how="left")
+            tgt = pp.groupby("ts").low_issue.mean().rename("targeted_low_rate_issue")
+            cand = f[f.seasonal_h >= 4].groupby("ts").low_issue.mean().rename("candidates_low_rate_issue")
+            out.append(rr.set_index("ts").join(tgt).join(cand).reset_index())
+    R2 = pd.concat(out)
+    R2.to_csv(TABLES / "policy_runs.csv", index=False, float_format="%.5f")
+    g = pd.read_csv(TABLES / "policy_sensitivity.csv")
+    add = R2.groupby(["setting", "rain_at_t"])[["targeted_low_rate_issue", "candidates_low_rate_issue"]].mean().reset_index()
+    g = g.drop(columns=[c for c in add.columns if c in g.columns and c not in ("setting", "rain_at_t")]).merge(
+        add, on=["setting", "rain_at_t"], how="left")
+    g = g.rename(columns={"targeted_low_rate": "targeted_low_rate_retrospective",
+                          "candidates_low_rate": "candidates_low_rate_retrospective",
+                          "all_eligible_low_rate": "all_eligible_low_rate_retrospective"})
+    g.to_csv(TABLES / "policy_sensitivity.csv", index=False, float_format="%.4f")
+    print(g[["setting", "rain_at_t", "targeted_low_rate_retrospective", "candidates_low_rate_retrospective",
+             "targeted_low_rate_issue", "candidates_low_rate_issue"]].round(3).to_string())
 
 
 def part_planning(n_boot=500):
@@ -317,11 +352,14 @@ def charts():
     for k, (rain, col) in enumerate(((False, BLUE), (True, ORANGE))):
         t = g[g.rain_at_t == rain].set_index("setting").reindex(order)
         x = np.arange(len(order)) + (k - 0.5) * 0.36
-        ax.bar(x, t.targeted_low_rate * 100, 0.34, color=col, label=f"{'Rain' if rain else 'No rain'} at decision: targeted cells")
-        ax.scatter(x, t.candidates_low_rate * 100, marker="_", s=120, color="black", zorder=3,
-                   label="All candidate cells (expected >= 4)" if k == 0 else None)
+        ax.bar(x, t.targeted_low_rate_retrospective * 100, 0.34, color=col,
+               label=f"{'Rain' if rain else 'No rain'} at decision: targeted cells (retrospective label)")
+        ax.scatter(x, t.candidates_low_rate_retrospective * 100, marker="_", s=120, color="black", zorder=3,
+                   label="All candidate cells (retrospective label)" if k == 0 else None)
+        ax.scatter(x, t.targeted_low_rate_issue * 100, marker="o", s=18, color="white", edgecolor="black", zorder=4,
+                   label="Targeted cells, issue-time label" if k == 0 else None)
     ax.set_xticks(range(len(order)), [o.replace("=", "\n") for o in order], fontsize=7.5)
-    ax.set_ylabel("% of cells really low at t+h (test year)")
+    ax.set_ylabel("% of cells low at t+h (test year)")
     ax.legend(fontsize=7.5, loc="upper right")
     ax.set_title("Targeting check: cells chosen by the repositioning plan are more often truly low", fontsize=10.5)
     fig.tight_layout()
@@ -359,9 +397,10 @@ def charts():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", required=True, choices=["choose", "evaluate", "planning", "charts"])
+    ap.add_argument("--part", required=True, choices=["choose", "evaluate", "labels", "planning", "charts"])
     a = ap.parse_args()
-    {"choose": part_choose, "evaluate": part_evaluate, "planning": part_planning, "charts": charts}[a.part]()
+    {"choose": part_choose, "evaluate": part_evaluate, "labels": part_labels, "planning": part_planning,
+     "charts": charts}[a.part]()
 
 
 if __name__ == "__main__":

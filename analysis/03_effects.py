@@ -48,8 +48,8 @@ def load_fit(columns=COLS):
 
 
 def sample(p):
-    return ((p.ts >= FIT[0]) & ~p.drop_main & (p.rain_band >= 0) & p.mmh_lag1.notna() & p.mmh_lag2.notna()
-            & p.baseline.notna()).values
+    return ((p.ts >= FIT[0]) & ~p.drop_main & (p.rain_band >= 0) & p.mmh_lag1.notna()
+            & p.mmh_lag2.notna()).values
 
 
 def design(p):
@@ -221,7 +221,7 @@ def heterogeneity(br):
 def validate():
     import pyfixest as pf
     p = load_panel([2023], columns=COLS)
-    s = (~p.drop_main & (p.rain_band >= 0) & p.mmh_lag1.notna() & p.mmh_lag2.notna() & p.baseline.notna()).values
+    s = (~p.drop_main & (p.rain_band >= 0) & p.mmh_lag1.notna() & p.mmh_lag2.notna()).values
     p = p[s]
     X, fe_abs, fe_share, day = design(p)
     ours = fepois(p.vacant.values, X, REGS, fe_abs, day)

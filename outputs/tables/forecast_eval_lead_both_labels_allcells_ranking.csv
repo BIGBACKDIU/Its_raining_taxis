@@ -1,0 +1,129 @@
+note,analysis,scale,label,h,label_version,model,alerts,runs,share_warned_before_onset,share_warned_ge30min,median_lead_min_if_warned,share_detected_at_or_after_onset_only,share_missed
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,retrospective,persistence,top-19 per issue time,486560,0.0022,0.0022,30.0000,0.0251,0.9728
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,retrospective,lgb_no_weather,top-19 per issue time,486560,0.0176,0.0176,30.0000,0.0529,0.9295
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,retrospective,lgb_weather,top-19 per issue time,486560,0.0163,0.0163,30.0000,0.0519,0.9318
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,retrospective,glm_no_weather,top-19 per issue time,486560,0.0144,0.0144,30.0000,0.0379,0.9477
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,retrospective,glm_weather,top-19 per issue time,486560,0.0144,0.0144,30.0000,0.0377,0.9479
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,issue-time,persistence,top-19 per issue time,480633,0.0020,0.0020,30.0000,0.0245,0.9735
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,issue-time,lgb_no_weather,top-19 per issue time,480633,0.0174,0.0174,30.0000,0.0535,0.9291
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,issue-time,lgb_weather,top-19 per issue time,480633,0.0161,0.0161,30.0000,0.0524,0.9315
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,issue-time,glm_no_weather,top-19 per issue time,480633,0.0144,0.0144,30.0000,0.0382,0.9474
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,30,issue-time,glm_weather,top-19 per issue time,480633,0.0144,0.0144,30.0000,0.0380,0.9476
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,retrospective,persistence,top-19 per issue time,488706,0.0146,0.0146,60.0000,0.0115,0.9739
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,retrospective,lgb_no_weather,top-19 per issue time,488706,0.0661,0.0661,60.0000,0.0249,0.9090
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,retrospective,lgb_weather,top-19 per issue time,488706,0.0678,0.0678,60.0000,0.0256,0.9066
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,retrospective,glm_no_weather,top-19 per issue time,488706,0.0558,0.0558,60.0000,0.0197,0.9245
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,retrospective,glm_weather,top-19 per issue time,488706,0.0555,0.0555,60.0000,0.0197,0.9248
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,issue-time,persistence,top-19 per issue time,482856,0.0140,0.0140,60.0000,0.0114,0.9746
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,issue-time,lgb_no_weather,top-19 per issue time,482856,0.0663,0.0663,60.0000,0.0253,0.9084
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,issue-time,lgb_weather,top-19 per issue time,482856,0.0679,0.0679,60.0000,0.0260,0.9061
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,issue-time,glm_no_weather,top-19 per issue time,482856,0.0559,0.0559,60.0000,0.0199,0.9243
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,primary,1km,deficit >= 50%,60,issue-time,glm_weather,top-19 per issue time,482856,0.0556,0.0556,60.0000,0.0199,0.9246
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,retrospective,persistence,top-19 per issue time,486560,0.0022,0.0022,30.0000,0.0251,0.9728
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,retrospective,lgb_no_weather,top-19 per issue time,486560,0.0255,0.0255,30.0000,0.0674,0.9071
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,retrospective,lgb_weather,top-19 per issue time,486560,0.0237,0.0237,30.0000,0.0646,0.9117
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,issue-time,persistence,top-19 per issue time,480633,0.0020,0.0020,30.0000,0.0245,0.9735
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,issue-time,lgb_no_weather,top-19 per issue time,480633,0.0254,0.0254,30.0000,0.0683,0.9064
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,30,issue-time,lgb_weather,top-19 per issue time,480633,0.0236,0.0236,30.0000,0.0655,0.9109
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,retrospective,persistence,top-19 per issue time,231813,0.0374,0.0374,30.0000,0.1429,0.8197
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,retrospective,lgb_no_weather,top-19 per issue time,231813,0.1403,0.1403,30.0000,0.0615,0.7981
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,retrospective,lgb_weather,top-19 per issue time,231813,0.1424,0.1424,30.0000,0.0602,0.7974
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,issue-time,persistence,top-19 per issue time,229961,0.0371,0.0371,30.0000,0.1432,0.8196
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,issue-time,lgb_no_weather,top-19 per issue time,229961,0.1401,0.1401,30.0000,0.0615,0.7983
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,30,issue-time,lgb_weather,top-19 per issue time,229961,0.1420,0.1420,30.0000,0.0603,0.7977
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,retrospective,persistence,top-19 per issue time,488706,0.0146,0.0146,60.0000,0.0115,0.9739
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,retrospective,lgb_no_weather,top-19 per issue time,488706,0.0800,0.0800,60.0000,0.0286,0.8914
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,retrospective,lgb_weather,top-19 per issue time,488706,0.0802,0.0802,60.0000,0.0289,0.8909
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,issue-time,persistence,top-19 per issue time,482856,0.0140,0.0140,60.0000,0.0114,0.9746
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,issue-time,lgb_no_weather,top-19 per issue time,482856,0.0803,0.0803,60.0000,0.0291,0.8906
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,60,issue-time,lgb_weather,top-19 per issue time,482856,0.0805,0.0805,60.0000,0.0294,0.8901
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,retrospective,persistence,top-19 per issue time,232876,0.1474,0.1474,60.0000,0.0327,0.8199
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,retrospective,lgb_no_weather,top-19 per issue time,232876,0.1849,0.1849,60.0000,0.0131,0.8020
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,retrospective,lgb_weather,top-19 per issue time,232876,0.1863,0.1863,60.0000,0.0126,0.8011
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,issue-time,persistence,top-19 per issue time,231167,0.1467,0.1467,60.0000,0.0333,0.8200
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,issue-time,lgb_no_weather,top-19 per issue time,231167,0.1848,0.1848,60.0000,0.0134,0.8019
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,60,issue-time,lgb_weather,top-19 per issue time,231167,0.1863,0.1863,60.0000,0.0129,0.8008
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,retrospective,persistence,top-19 per issue time,488087,0.0218,0.0218,120.0000,0.0032,0.9750
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,retrospective,lgb_no_weather,top-19 per issue time,488087,0.1234,0.1234,120.0000,0.0066,0.8701
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,retrospective,lgb_weather,top-19 per issue time,488087,0.1237,0.1237,120.0000,0.0065,0.8698
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,issue-time,persistence,top-19 per issue time,482271,0.0211,0.0211,120.0000,0.0032,0.9757
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,issue-time,lgb_no_weather,top-19 per issue time,482271,0.1236,0.1236,120.0000,0.0068,0.8696
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,deficit >= 50%,120,issue-time,lgb_weather,top-19 per issue time,482271,0.1241,0.1241,120.0000,0.0066,0.8693
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,retrospective,persistence,top-19 per issue time,232325,0.1596,0.1596,120.0000,0.0034,0.8371
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,retrospective,lgb_no_weather,top-19 per issue time,232325,0.1875,0.1875,120.0000,0.0012,0.8113
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,retrospective,lgb_weather,top-19 per issue time,232325,0.1877,0.1877,120.0000,0.0012,0.8111
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,issue-time,persistence,top-19 per issue time,230703,0.1592,0.1592,120.0000,0.0037,0.8371
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,issue-time,lgb_no_weather,top-19 per issue time,230703,0.1875,0.1875,120.0000,0.0013,0.8112
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,1km,below NB 5th percentile,120,issue-time,lgb_weather,top-19 per issue time,230703,0.1877,0.1877,120.0000,0.0014,0.8109
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,retrospective,persistence,top-6 per issue time,178648,0.0023,0.0023,30.0000,0.0276,0.9701
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,retrospective,lgb_no_weather,top-6 per issue time,178648,0.0251,0.0251,30.0000,0.0702,0.9048
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,retrospective,lgb_weather,top-6 per issue time,178648,0.0235,0.0235,30.0000,0.0673,0.9091
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,issue-time,persistence,top-6 per issue time,177030,0.0024,0.0024,30.0000,0.0274,0.9701
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,issue-time,lgb_no_weather,top-6 per issue time,177030,0.0253,0.0253,30.0000,0.0705,0.9042
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,30,issue-time,lgb_weather,top-6 per issue time,177030,0.0237,0.0237,30.0000,0.0678,0.9085
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,retrospective,persistence,top-6 per issue time,103903,0.0280,0.0280,30.0000,0.1297,0.8423
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,retrospective,lgb_no_weather,top-6 per issue time,103903,0.0826,0.0826,30.0000,0.0797,0.8377
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,retrospective,lgb_weather,top-6 per issue time,103903,0.0835,0.0835,30.0000,0.0783,0.8382
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,issue-time,persistence,top-6 per issue time,103012,0.0275,0.0275,30.0000,0.1304,0.8422
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,issue-time,lgb_no_weather,top-6 per issue time,103012,0.0817,0.0817,30.0000,0.0807,0.8376
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,30,issue-time,lgb_weather,top-6 per issue time,103012,0.0826,0.0826,30.0000,0.0793,0.8381
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,retrospective,persistence,top-6 per issue time,179734,0.0160,0.0160,60.0000,0.0123,0.9717
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,retrospective,lgb_no_weather,top-6 per issue time,179734,0.0872,0.0872,60.0000,0.0275,0.8853
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,retrospective,lgb_weather,top-6 per issue time,179734,0.0751,0.0751,60.0000,0.0247,0.9002
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,issue-time,persistence,top-6 per issue time,178142,0.0158,0.0158,60.0000,0.0122,0.9720
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,issue-time,lgb_no_weather,top-6 per issue time,178142,0.0874,0.0874,60.0000,0.0277,0.8850
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,60,issue-time,lgb_weather,top-6 per issue time,178142,0.0752,0.0752,60.0000,0.0249,0.8999
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,retrospective,persistence,top-6 per issue time,104650,0.1122,0.1122,60.0000,0.0379,0.8499
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,retrospective,lgb_no_weather,top-6 per issue time,104650,0.1399,0.1399,60.0000,0.0192,0.8409
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,retrospective,lgb_weather,top-6 per issue time,104650,0.1399,0.1399,60.0000,0.0189,0.8411
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,issue-time,persistence,top-6 per issue time,103858,0.1112,0.1112,60.0000,0.0387,0.8500
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,issue-time,lgb_no_weather,top-6 per issue time,103858,0.1387,0.1387,60.0000,0.0197,0.8415
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,60,issue-time,lgb_weather,top-6 per issue time,103858,0.1391,0.1391,60.0000,0.0196,0.8414
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,retrospective,persistence,top-6 per issue time,179444,0.0229,0.0229,120.0000,0.0035,0.9736
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,retrospective,lgb_no_weather,top-6 per issue time,179444,0.1073,0.1073,120.0000,0.0052,0.8875
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,retrospective,lgb_weather,top-6 per issue time,179444,0.1118,0.1118,120.0000,0.0050,0.8832
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,issue-time,persistence,top-6 per issue time,177881,0.0227,0.0227,120.0000,0.0034,0.9739
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,issue-time,lgb_no_weather,top-6 per issue time,177881,0.1078,0.1078,120.0000,0.0053,0.8869
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,deficit >= 50%,120,issue-time,lgb_weather,top-6 per issue time,177881,0.1121,0.1121,120.0000,0.0051,0.8828
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,retrospective,persistence,top-6 per issue time,104419,0.1250,0.1250,120.0000,0.0062,0.8688
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,retrospective,lgb_no_weather,top-6 per issue time,104419,0.1464,0.1464,120.0000,0.0033,0.8503
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,retrospective,lgb_weather,top-6 per issue time,104419,0.1447,0.1447,120.0000,0.0032,0.8522
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,issue-time,persistence,top-6 per issue time,103657,0.1253,0.1253,120.0000,0.0066,0.8681
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,issue-time,lgb_no_weather,top-6 per issue time,103657,0.1460,0.1460,120.0000,0.0036,0.8503
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,2km,below NB 5th percentile,120,issue-time,lgb_weather,top-6 per issue time,103657,0.1442,0.1442,120.0000,0.0035,0.8523
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,retrospective,persistence,top-2 per issue time,64877,0.0082,0.0082,30.0000,0.0948,0.8969
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,retrospective,lgb_no_weather,top-2 per issue time,64877,0.0515,0.0515,30.0000,0.0666,0.8820
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,retrospective,lgb_weather,top-2 per issue time,64877,0.0492,0.0492,30.0000,0.0662,0.8847
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,issue-time,persistence,top-2 per issue time,64369,0.0079,0.0079,30.0000,0.0938,0.8983
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,issue-time,lgb_no_weather,top-2 per issue time,64369,0.0513,0.0513,30.0000,0.0663,0.8824
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,30,issue-time,lgb_weather,top-2 per issue time,64369,0.0491,0.0491,30.0000,0.0660,0.8849
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,retrospective,persistence,top-2 per issue time,39677,0.0275,0.0275,30.0000,0.1167,0.8558
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,retrospective,lgb_no_weather,top-2 per issue time,39677,0.0734,0.0734,30.0000,0.0756,0.8510
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,retrospective,lgb_weather,top-2 per issue time,39677,0.0785,0.0785,30.0000,0.0711,0.8504
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,issue-time,persistence,top-2 per issue time,39322,0.0272,0.0272,30.0000,0.1165,0.8563
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,issue-time,lgb_no_weather,top-2 per issue time,39322,0.0722,0.0722,30.0000,0.0761,0.8516
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,30,issue-time,lgb_weather,top-2 per issue time,39322,0.0779,0.0779,30.0000,0.0715,0.8506
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,retrospective,persistence,top-2 per issue time,65427,0.0601,0.0601,60.0000,0.0402,0.8997
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,retrospective,lgb_no_weather,top-2 per issue time,65427,0.0995,0.0995,60.0000,0.0234,0.8771
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,retrospective,lgb_weather,top-2 per issue time,65427,0.0999,0.0999,60.0000,0.0227,0.8773
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,issue-time,persistence,top-2 per issue time,64933,0.0592,0.0592,60.0000,0.0403,0.9005
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,issue-time,lgb_no_weather,top-2 per issue time,64933,0.1000,0.1000,60.0000,0.0233,0.8768
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,60,issue-time,lgb_weather,top-2 per issue time,64933,0.1001,0.1001,60.0000,0.0225,0.8774
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,retrospective,persistence,top-2 per issue time,40109,0.0913,0.0913,60.0000,0.0385,0.8703
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,retrospective,lgb_no_weather,top-2 per issue time,40109,0.1235,0.1235,60.0000,0.0203,0.8562
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,retrospective,lgb_weather,top-2 per issue time,40109,0.1230,0.1230,60.0000,0.0185,0.8585
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,issue-time,persistence,top-2 per issue time,39782,0.0903,0.0903,60.0000,0.0386,0.8711
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,issue-time,lgb_no_weather,top-2 per issue time,39782,0.1227,0.1227,60.0000,0.0208,0.8565
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,60,issue-time,lgb_weather,top-2 per issue time,39782,0.1227,0.1227,60.0000,0.0190,0.8583
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,retrospective,persistence,top-2 per issue time,65305,0.0823,0.0823,120.0000,0.0098,0.9079
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,retrospective,lgb_no_weather,top-2 per issue time,65305,0.1200,0.1200,120.0000,0.0040,0.8760
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,retrospective,lgb_weather,top-2 per issue time,65305,0.1179,0.1179,120.0000,0.0041,0.8780
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,issue-time,persistence,top-2 per issue time,64840,0.0818,0.0818,120.0000,0.0101,0.9081
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,issue-time,lgb_no_weather,top-2 per issue time,64840,0.1200,0.1200,120.0000,0.0041,0.8759
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,deficit >= 50%,120,issue-time,lgb_weather,top-2 per issue time,64840,0.1180,0.1180,120.0000,0.0042,0.8778
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,retrospective,persistence,top-2 per issue time,40006,0.1014,0.1014,120.0000,0.0074,0.8912
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,retrospective,lgb_no_weather,top-2 per issue time,40006,0.1301,0.1301,120.0000,0.0025,0.8674
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,retrospective,lgb_weather,top-2 per issue time,40006,0.1313,0.1313,120.0000,0.0020,0.8666
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,issue-time,persistence,top-2 per issue time,39710,0.0997,0.0997,120.0000,0.0081,0.8922
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,issue-time,lgb_no_weather,top-2 per issue time,39710,0.1300,0.1300,120.0000,0.0025,0.8675
+Disclosed additional test-year scoring (after review of aac26fe); no refitting,S1,pa,below NB 5th percentile,120,issue-time,lgb_weather,top-2 per issue time,39710,0.1317,0.1317,120.0000,0.0020,0.8663

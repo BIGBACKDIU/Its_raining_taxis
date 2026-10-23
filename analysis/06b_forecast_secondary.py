@@ -27,7 +27,8 @@ import pandas as pd
 from scipy import special, stats
 from scipy.optimize import minimize_scalar
 
-from analysis.common import CALIB, FIT, INTERIM, MUTED, SEED, TABLES, TEST, save, style
+from analysis.common import CALIB, FIT, INTERIM, MUTED, SEED, TABLES, TEST, log_test_scoring, save, style
+from analysis.fc_eval import k_for, lead_summary, lead_times, topk_alerts
 
 P = importlib.import_module("analysis.06_forecast")
 LABEL = "Secondary analysis (S1), added after first test scoring"
@@ -305,6 +306,8 @@ def part_fit(scales):
                     print(rows[-1], flush=True)
             for s, d in out.items():
                 d.to_parquet(INTERIM / f"s1_pred_{scale}_h{h}_{s}.parquet", index=False)
+            log_test_scoring(f"06b_forecast_secondary.py --part fit --scale {scale}", f"S1 test-year predictions h={h}",
+                             "S1", len(te))
             stamp = INTERIM / "s1_test_scored.txt"
             if not stamp.exists():
                 stamp.write_text(datetime.now().isoformat(timespec="seconds"))
@@ -318,6 +321,7 @@ def part_fit(scales):
 # ============================================================================= evaluate
 def part_evaluate(n_boot=1000):
     from sklearn.metrics import average_precision_score
+    log_test_scoring("06b_forecast_secondary.py --part evaluate", "S1 test-year metrics (retrospective labels)", "S1")
     rng = np.random.default_rng(SEED)
     res, base = [], []
     for scale in SCALES:
@@ -359,15 +363,7 @@ def part_evaluate(n_boot=1000):
                     r["gain_lo"], r["gain_hi"] = float(np.quantile(diffs, 0.025)), float(np.quantile(diffs, 0.975))
                     r["materially_useful"] = bool(r["weather_gain"] >= 0.01 and r["gain_lo"] > 0)
                     r["detectable"] = bool(r["gain_lo"] > 0 or r["gain_hi"] < 0)
-                    for m in models[1:]:
-                        short = m.replace(f"score_{target}_", "")
-                        al = (tt[m].values >= thr[m])
-                        runs = P.lead_times(tt.ts.values[msk], tt.unit.values[msk], al[msk], tt[yc].values[msk], h)
-                        warned = runs.lead_min.notna()
-                        r[f"runs_{short}"] = int(len(runs))
-                        r[f"share_warned_{short}"] = float(warned.mean())
-                        r[f"share_warned_ge30_{short}"] = float((runs.lead_min >= 30).mean())
-                        r[f"median_lead_{short}"] = float(runs.lead_min[warned].median()) if warned.any() else np.nan
+                    # lead times and fixed-workload metrics: see analysis/06d_label_versions.py
                     res.append(r)
                     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in r.items()
                            if k in ("scale", "h", "target", "subset", "base_rate_test", "pr_auc_test_lgb_no_weather",

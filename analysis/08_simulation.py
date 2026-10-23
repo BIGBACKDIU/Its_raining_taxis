@@ -26,7 +26,8 @@ import numpy as np
 import pandas as pd
 from scipy.spatial import cKDTree
 
-from analysis.common import (BLUE, BLUE_DARK, INTERIM, MUTED, ORANGE, SEED, STATIC, TABLES, save, style)
+from analysis.common import (BLUE, BLUE_DARK, INTERIM, MUTED, ORANGE, SEED, STATIC, TABLES, log_test_scoring, save,
+                             style)
 from analysis.sim_engine import World, simulate
 from pipeline.grid import cell_ids, coarsen, to_xy, to_lonlat
 
@@ -153,6 +154,7 @@ def plausibility():
     world, storms, _ = load()
     held = [s for s in storms if s["period"] == "test"]
     tun = pd.read_csv(TABLES / "sim_tuning.csv")
+    log_test_scoring("08_simulation.py --part plausibility", "held-out test-year storms: simulated vs observed", "step 8")
     rows = []
     for r in tun.itertuples():
         scen = {"mechanism": r.mechanism, "dest": r.dest, "travel": r.travel, "dispatch": r.dispatch}
@@ -186,6 +188,8 @@ def grid(mechanisms, S=50):
     world, storms, _ = load()
     held = [s for s in storms if s["period"] == "test"]
     tun = pd.read_csv(TABLES / "sim_tuning.csv")
+    log_test_scoring("08_simulation.py --part grid", "scenario grid on held-out test-year storm inputs", "step 8",
+                     note="simulated outputs only; no observed outcomes")
     f = TABLES / "sim_grid_runs.csv"
     prev = pd.read_csv(f) if f.exists() else pd.DataFrame()
     rows = []
@@ -362,6 +366,7 @@ def charts():
     tun = pd.read_csv(TABLES / "sim_tuning.csv").sort_values("loss")
     best = tun.iloc[0]
     held = [s for s in storms if s["period"] == "test"]
+    log_test_scoring("08_simulation.py --part charts", "held-out chart: simulated vs observed feed", "step 8")
     fig, axes = plt.subplots(2, 5, figsize=(14, 5.5), sharey=True)
     scen = {"mechanism": best.mechanism, "dest": best.dest, "travel": best.travel, "dispatch": best.dispatch}
     for ax, st in zip(axes.ravel(), held):

@@ -1,0 +1,13 @@
+h,model,alerts,label,runs,share_warned_before_onset,share_warned_ge30min,median_lead_min_if_warned,share_detected_at_or_after_onset_only,share_missed
+30,persistence,top-K,retrospective,486560,0.0022,0.0022,30.0000,0.0251,0.9728
+30,seasonal,top-K,retrospective,486560,0.1197,0.1197,30.0000,0.0247,0.8555
+30,lgb_no_weather,top-K,retrospective,486560,0.0176,0.0176,30.0000,0.0529,0.9295
+30,glm_no_weather,top-K,retrospective,486560,0.0144,0.0144,30.0000,0.0379,0.9477
+30,lgb_weather,top-K,retrospective,486560,0.0163,0.0163,30.0000,0.0519,0.9318
+30,glm_weather,top-K,retrospective,486560,0.0144,0.0144,30.0000,0.0377,0.9479
+60,persistence,top-K,retrospective,488706,0.0146,0.0146,60.0000,0.0115,0.9739
+60,seasonal,top-K,retrospective,488706,0.1339,0.1339,60.0000,0.0104,0.8557
+60,lgb_no_weather,top-K,retrospective,488706,0.0661,0.0661,60.0000,0.0249,0.9090
+60,glm_no_weather,top-K,retrospective,488706,0.0558,0.0558,60.0000,0.0197,0.9245
+60,lgb_weather,top-K,retrospective,488706,0.0678,0.0678,60.0000,0.0256,0.9066
+60,glm_weather,top-K,retrospective,488706,0.0555,0.0555,60.0000,0.0197,0.9248

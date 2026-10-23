@@ -1,0 +1,19 @@
+timestamp,script,analysis,description,rows,note
+2026-10-23T00:08:41,06_forecast.py --part fit --h 30,primary,test-year predictions (30 min) written,6179228,reconstructed from file time; first test-year scoring
+2026-10-23T00:19:08,06_forecast.py --part fit --h 60,primary,test-year predictions (60 min) written,6174366,reconstructed from file time
+2026-10-23T00:21:00,06_forecast.py --part evaluate,primary,test-year metrics (first evaluation),,reconstructed; approximate time
+2026-10-23T00:23:01,06_forecast.py --part evaluate,primary + post-hoc subsets,test-year metrics re-computed with three post-hoc subsets added,,reconstructed from file time
+2026-10-23T00:23:31,03_effects_more.py --part testregimes,association,rain association models on test-year rows per regime,,reconstructed from file time
+2026-10-23T01:10:07,06b_forecast_secondary.py --part fit,S1,S1 test-year predictions written (all scales),,reconstructed from file time (started 00:46:42)
+2026-10-23T01:11:28,06b_forecast_secondary.py --part evaluate,S1,S1 test-year metrics,,reconstructed from file time
+2026-10-23T01:23:11,06c_posthoc_normal_coverage.py,post-hoc,weather gain on test-year subset from 11 Jan 2026,,reconstructed from file time
+2026-10-23T01:50:09,07_policy.py --part evaluate,step 7,policy targeting check against test-year labels,,reconstructed from file time
+2026-10-23T01:58:42,08_simulation.py --part plausibility,step 8,held-out test-year storms: simulated vs observed feed,,reconstructed from file time
+2026-10-23T01:59:50,08_simulation.py --part greedy,step 8,greedy vs PuLP objective on test-year decision inputs,,reconstructed; uses test-year inputs only (no outcomes)
+2026-10-23T02:37:17,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,reconstructed; simulated outputs only (no observed outcomes)
+2026-10-23T02:38:39,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,reconstructed from file time
+2026-10-23T16:14:31,06_forecast.py --part evaluate,primary,primary test-year metrics (corrected top-K workload and lead time; retrospective labels),,
+2026-10-23T16:16:51,06d_label_versions.py,disclosed additional scoring,"primary and S1 test-year predictions scored against retrospective and issue-time labels (top-K workload, corrected lead time)",,
+2026-10-23T16:23:03,06_forecast.py --part evaluate,primary,primary test-year metrics (corrected top-K workload and lead time; retrospective labels),,
+2026-10-23T16:24:59,06d_label_versions.py,disclosed additional scoring,"primary and S1 test-year predictions scored against retrospective and issue-time labels (top-K workload, corrected lead time)",,
+2026-10-23T16:30:18,07_policy.py --part labels,step 7,policy targeting re-scored with issue-time labels,,

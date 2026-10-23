@@ -147,7 +147,7 @@ def maps(p: pd.DataFrame):
     fig.colorbar(sm, ax=ax, orientation="horizontal", fraction=0.05, pad=0.02, label="% change (vacant / expected)")
     axes[2].legend(handles=[Patch(color=NOT_ANALYSED, label="Not analysed")], loc="upper left", fontsize=8)
     med = t.pct_change_heavy_vs_dry.median()
-    fig.suptitle(f"In heavy rain most cells lose vacant taxis relative to normal (median cell {med:+.0f}%)",
+    fig.suptitle(f"In heavy rain most cells have fewer vacant taxis than normal (median cell {med:+.0f}%)",
                  x=0.01, ha="left", fontsize=10.5, color=INK)
     fig.tight_layout()
     save(fig, "desc_maps_dry_heavy", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Apr 2022 - Mar 2025. "

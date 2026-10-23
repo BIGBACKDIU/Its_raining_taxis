@@ -145,6 +145,8 @@ def main():
         r["perm_null_mean_pct"] = 100 * (np.exp(perm_T[:, k].mean()) - 1)
         r["perm_p_two_sided"] = float((np.abs(perm_T[:, k] - perm_T[:, k].mean()) >= abs(T[b] - perm_T[:, k].mean())).mean())
         r["perm_draws"] = N_PERM
+        r["perm_p_display"] = f"< {1 / N_PERM:g}" if r["perm_p_two_sided"] == 0 else f"{r['perm_p_two_sided']:.3f}"
+        r["perm_assumption"] = "rain patterns exchangeable between days within year-month x weekday/weekend"
     tab = pd.DataFrame(rows)
     tab.to_csv(TABLES / "inference_ratio_statistic.csv", index=False, float_format="%.4f")
     pd.DataFrame(perm_T, columns=["light", "moderate", "heavy"]).to_csv(TABLES / "inference_permutation_draws.csv",
@@ -192,7 +194,8 @@ def charts(tab, perm_T, hs):
         r = tab.set_index("band").loc[b]
         ax.axvline(r.pct, color=BLUE_DARK, lw=2, label="Observed")
         ax.axvspan(r.day_boot_lo, r.day_boot_hi, color=BLUE, alpha=0.2, lw=0, label="95% day-bootstrap CI")
-        ax.set_title(f"{b.capitalize()} rain (permutation p = {r.perm_p_two_sided:.3f})", fontsize=9.5)
+        pdisp = f"< {1 / N_PERM:g}" if r.perm_p_two_sided == 0 else f"= {r.perm_p_two_sided:.3f}"
+        ax.set_title(f"{b.capitalize()} rain (permutation p {pdisp})", fontsize=9.5)
         ax.set_xlabel("% vacant taxis vs no-rain model")
         ax.grid(False)
     axes[0].set_ylabel("Permutation draws")
@@ -201,7 +204,8 @@ def charts(tab, perm_T, hs):
                  fontsize=10.5)
     fig.tight_layout()
     save(fig, "inference_permutation", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Apr 2022 - Mar 2025. "
-         f"{N_PERM} permutations within month x day type; {B_BOOT} day-bootstrap draws.")
+         f"{N_PERM} permutations within month x day type (assumes rain patterns are exchangeable between such days); "
+         f"{B_BOOT} day-bootstrap draws.")
     plt.close(fig)
     # hotspot map
     d02 = __import__("importlib").import_module("analysis.02_describe")
@@ -234,5 +238,18 @@ def charts(tab, perm_T, hs):
     plt.close(fig)
 
 
+def charts_from_tables():
+    style()
+    tab = pd.read_csv(TABLES / "inference_ratio_statistic.csv")
+    tab["perm_p_display"] = np.where(tab.perm_p_two_sided == 0, f"< {1 / N_PERM:g}", tab.perm_p_two_sided.map("{:.3f}".format))
+    tab["perm_assumption"] = "rain patterns exchangeable between days within year-month x weekday/weekend"
+    tab.loc[tab.band == "dry", ["perm_p_display", "perm_assumption"]] = ""
+    tab.to_csv(TABLES / "inference_ratio_statistic.csv", index=False, float_format="%.4f")
+    perm_T = pd.read_csv(TABLES / "inference_permutation_draws.csv").values
+    hs = pd.read_csv(TABLES / "inference_hotspots.csv")
+    charts(tab, perm_T, hs)
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    charts_from_tables() if "--charts" in sys.argv else main()

@@ -70,3 +70,20 @@ def load_panel(years=YEARS, grid: int = 30, columns=None, filters=None) -> pd.Da
 
 def cells() -> pd.DataFrame:
     return pd.read_parquet(INTERIM / "cells.parquet")
+
+
+SCORING_LOG = Path("outputs/test_scoring_log.csv")
+
+
+def log_test_scoring(script: str, description: str, analysis: str = "", rows=None, note: str = ""):
+    """Append one row to outputs/test_scoring_log.csv every time a script scores (or uses outcomes from) the test
+    year, so the number of test-year scorings can be verified."""
+    import csv
+    from datetime import datetime
+    new = not SCORING_LOG.exists()
+    with SCORING_LOG.open("a", newline="") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["timestamp", "script", "analysis", "description", "rows", "note"])
+        w.writerow([datetime.now().isoformat(timespec="seconds"), script, analysis, description,
+                    "" if rows is None else int(rows), note])

@@ -31,6 +31,7 @@ from scipy.stats import chi2
 
 from analysis.common import (BAND_COLORS, BLUE, BLUE_DARK, FIT, INTERIM, MUTED, ORANGE, TABLES, load_panel, save,
                              style)
+from analysis.common import log_test_scoring
 from analysis.fepois_hd import fepois, pct
 
 E = importlib.import_module("analysis.03_effects")
@@ -59,7 +60,8 @@ def load(extra=(), years=range(2022, 2026), start=FIT[0], end=FIT[1], drop="drop
         if f.exists():
             parts.append(pd.read_parquet(f, columns=cols, filters=[("ts", ">=", start), ("ts", "<=", end)]))
     p = pd.concat(parts, ignore_index=True)
-    s = (~p[drop] & (p.rain_band >= 0) & p.mmh_lag1.notna() & p.mmh_lag2.notna() & p.baseline.notna()).values
+    # association fits do not use the baseline (spell rows have none), so it is not required here
+    s = (~p[drop] & (p.rain_band >= 0) & p.mmh_lag1.notna() & p.mmh_lag2.notna()).values
     return p[s].reset_index(drop=True)
 
 
@@ -336,6 +338,7 @@ def part_testregimes():
     (agreed at the step-3 checkpoint): it checks the rain association in the high-coverage regime."""
     stamp = INTERIM / "test_year_first_scored.txt"
     assert stamp.exists(), "score the test year in step 6 first"
+    log_test_scoring("03_effects_more.py --part testregimes", "rain association models on test-year rows", "association")
     p = load(years=[2025, 2026], start=pd.Timestamp("2025-10-01"), end=pd.Timestamp("2026-09-30 23:59"))
     p["regime"] = p.regime.astype(str)
     reg = pd.read_csv(INTERIM / "feed_regimes.csv").drop_duplicates("regime").set_index("regime").level_ratio
@@ -352,6 +355,79 @@ def part_testregimes():
     out = pd.concat(rows)
     out.to_csv(TABLES / "effects_test_year_by_regime.csv", index=False, float_format="%.6f")
     print(out[["regime", "level_ratio", "model", "term", "pct", "pct_lo", "pct_hi", "n"]].round(3).to_string())
+
+
+def part_robustfix():
+    """Re-fit the robustness-sample variant after removing the baseline requirement (review of aac26fe): the
+    26 Feb - 1 Mar 2023 spell has no baseline and was silently dropped before. Replaces that variant in
+    effects_robust.csv and reports how many rows the spell adds."""
+    p = load(drop="drop_robust")
+    spell = (p.ts >= "2023-02-26") & (p.ts < "2023-03-02")
+    print("robust-sample rows:", len(p), "of which 26 Feb - 1 Mar 2023:", int(spell.sum()))
+    res = fit("robust sample", p, base_X(p), REGS)
+    rb = pd.read_csv(TABLES / "effects_robust.csv")
+    lab = "robustness sample (outage days back in)"
+    rb = rb[rb.variant != lab]
+    new = []
+    for r in res:
+        r = r.loc[r.index.intersection(BANDS)].reset_index(names="term")
+        r.attrs = {}
+        r["variant"] = lab
+        r["rows_26feb_1mar_2023"] = int(spell.sum())
+        new.append(r)
+    pd.concat([rb] + new).to_csv(TABLES / "effects_robust.csv", index=False, float_format="%.6f")
+
+
+def part_rainlag():
+    """Sensitivity: rain window lagged by one 15-minute bin, (t-45, t-15] instead of (t-30, t] (snapshots are
+    taken ~19 s before the requested time, so the last bin can include a few seconds after the snapshot). Lags
+    shift by the same bin. Computed from the gauge bins exactly as in the panel builder."""
+    import importlib
+    P1 = importlib.import_module("analysis.01_panel")
+    from analysis.common import rain_band
+    from pipeline.grid import to_xy
+    rain = P1.Rain()
+    cells = pd.read_parquet(INTERIM / "cells.parquet")
+    cells = cells[cells.eligible].sort_values("cell").reset_index(drop=True)
+    cx, cy = to_xy(cells.lon.values, cells.lat.values)
+    p = load()
+    parts = []
+    for y in range(2022, 2026):
+        ts = np.sort(p.ts[p.ts.dt.year == y].unique())
+        if not len(ts):
+            continue
+        tsi = pd.DatetimeIndex(ts)
+        k = ((tsi - P1.START).total_seconds().values / 60 / P1.BIN).astype(int)
+        day = (tsi.normalize() - P1.START).days.values
+        ud, inv = np.unique(day, return_inverse=True)
+        g = rain.nearest(cx, cy, ud, k=1)[inv][:, :, 0]
+
+        def window(k_end):
+            kk = np.broadcast_to(k_end[:, None], g.shape)
+            v = (rain.B[g.clip(0), kk] + rain.B[g.clip(0), kk - 1]) * 2
+            v[g < 0] = np.nan
+            return v
+
+        df = pd.DataFrame({"ts": np.repeat(tsi.values, len(cells)), "cell": np.tile(cells.cell.values, len(tsi)),
+                           "mmh_l15": window(k - 1).ravel(), "lag1_l15": window(k - 3).ravel(),
+                           "lag2_l15": window(k - 5).ravel()})
+        parts.append(df)
+    lag = pd.concat(parts)
+    p = p.merge(lag, on=["ts", "cell"], how="left")
+    p = p[p.mmh_l15.notna() & p.lag1_l15.notna() & p.lag2_l15.notna()].reset_index(drop=True)
+    b = rain_band(p.mmh_l15.values)
+    cols = [b == 1, b == 2, b == 3, p.lag1_l15.values, p.lag2_l15.values]
+    res = fit("rain lagged 15 min", p, cols, REGS)
+    rb = pd.read_csv(TABLES / "effects_robust.csv")
+    lab = "rain window lagged 15 min, (t-45, t-15]"
+    rb = rb[rb.variant != lab]
+    new = []
+    for r in res:
+        r = r.loc[r.index.intersection(BANDS)].reset_index(names="term")
+        r.attrs = {}
+        r["variant"] = lab
+        new.append(r)
+    pd.concat([rb] + new).to_csv(TABLES / "effects_robust.csv", index=False, float_format="%.6f")
 
 
 # ----------------------------------------------------------------------------- charts
@@ -440,10 +516,12 @@ def charts():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--part", required=True,
-                    choices=["approach", "hetero", "interact", "forecast", "robust", "testregimes", "charts"])
+                    choices=["approach", "hetero", "interact", "forecast", "robust", "testregimes", "robustfix", "rainlag",
+                             "charts"])
     a = ap.parse_args()
     {"approach": part_approach, "hetero": part_hetero, "interact": part_interact, "forecast": part_forecast,
-     "robust": part_robust, "testregimes": part_testregimes, "charts": charts}[a.part]()
+     "robust": part_robust, "testregimes": part_testregimes, "robustfix": part_robustfix, "rainlag": part_rainlag,
+     "charts": charts}[a.part]()
 
 
 if __name__ == "__main__":
