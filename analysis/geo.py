@@ -5,6 +5,7 @@ All distances are computed in SVY21 (EPSG:3414) or with pipeline.grid's local me
 from __future__ import annotations
 
 import json
+import re
 from functools import lru_cache
 from pathlib import Path
 
@@ -60,9 +61,12 @@ def land_cells(size: int = 1000) -> gpd.GeoDataFrame:
 def mrt() -> pd.DataFrame:
     m = json.load(open(STATIC / "sg_mrt.json"))
     st = pd.DataFrame(m["stations"], columns=["name", "code", "network", "lat", "lon"])
-    st["line"] = st.code.str.extract(r"^([A-Z]+)")
+    # a station's code can combine several lines ("NS24-NE6-CC1"): every line prefix counts
+    st["line_set"] = st.code.map(lambda c: frozenset(re.findall(r"([A-Z]+)\d+", c)))
     g = st.groupby("name").agg(lat=("lat", "mean"), lon=("lon", "mean"), codes=("code", lambda c: " ".join(sorted(c))),
-                               lines=("line", lambda l: len(set(l))), network=("network", "first")).reset_index()
+                               line_set=("line_set", lambda l: frozenset().union(*l)),
+                               network=("network", "first")).reset_index()
+    g["lines"] = g.line_set.map(len)
     g["interchange"] = g.lines >= 2
     op = pd.read_csv(P2 / "mrt_station_openings.csv", parse_dates=["opened"])
     g = g.merge(op[["station", "opened", "stage"]].rename(columns={"station": "name"}), on="name", how="left")

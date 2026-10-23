@@ -1,834 +1,834 @@
 cell,planning_area,subzone,eligible,land,status,residents,pred_heavy_abs_pct,measured_heavy_abs_pct
-20002,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-22.247,
-19004,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-22.482,
-24004,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-21.081,
-24005,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-20.657,
-25005,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-20.609,
-18006,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-22.151,
-19006,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-21.919,
-23006,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-21.364,
-25006,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-19.859,
-7007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.197,
-8007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.170,
-9007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-19.003,
-10007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-20.410,
-11007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-21.475,
-33007,SOUTHERN ISLANDS,SOUTHERN GROUP,False,True,predicted (no reliable taxi data),0.000,-20.855,
-6008,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.110,
-23008,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-19.292,
-24008,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-19.468,
-6009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.092,
-7009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-16.443,
-8009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-18.407,
-9009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-19.490,
-10009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-21.404,
-13009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-21.640,
-14009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.832,
-21009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.192,
-23009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.279,
-13010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.966,
-14010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.860,
-15010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-21.480,
-31010,SOUTHERN ISLANDS,SENTOSA,False,True,predicted (no reliable taxi data),245.936,-18.960,
-32010,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),795.996,-16.838,-16.835
-12011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.032,
-13011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.997,
-14011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.968,
-16011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-19.594,
-29011,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.573,-22.386
-30011,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.950,-25.401
-31011,SOUTHERN ISLANDS,SENTOSA,False,True,predicted (no reliable taxi data),29.979,-19.216,
-7012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-16.397,
-8012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.449,
-9012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-19.736,
-12012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.017,
-13012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.179,
-16012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.864,
-17012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.461,
-19012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.380,
-26012,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-19.791,
-30012,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),35.549,-21.010,-15.798
-31012,BUKIT MERAH,CITY TERMINALS,False,True,predicted (no reliable taxi data),0.000,-22.036,
-7013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-13.098,
-8013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-14.390,
-9013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-17.083,
-12013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.048,
-13013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.054,
-14013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.143,
-15013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.122,
-16013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.028,
-17013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.931,
-18013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.345,
-19013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.949,
-20013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.395,
-24013,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-20.220,
-26013,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),18.781,-18.322,
-27013,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),187.529,-17.909,-33.062
-28013,BUKIT MERAH,TELOK BLANGAH DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10972.305,-10.631,-10.205
-29013,BUKIT MERAH,MARITIME SQUARE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6932.436,-12.106,-10.448
-30013,BUKIT MERAH,TELOK BLANGAH RISE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12731.871,-17.071,-6.779
-31013,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5880.336,-18.837,-17.802
-32013,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5103.805,-20.255,-25.180
-33013,DOWNTOWN CORE,CENTRAL SUBZONE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-25.101,-26.597
-34013,STRAITS VIEW,STRAITS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-24.818,-23.261
-8014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-14.302,
-9014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-15.675,
-10014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-20.465,
-13014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.664,
-14014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.064,
-15014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.646,
-16014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.225,
-17014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-18.216,
-18014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.831,
-19014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.438,
-22014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-20.291,
-23014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-19.982,
-25014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),397.650,-18.380,
-26014,QUEENSTOWN,PASIR PANJANG 2,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3802.559,-15.567,-19.144
-27014,QUEENSTOWN,KENT RIDGE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),725.951,-16.374,-26.593
-28014,BUKIT MERAH,TELOK BLANGAH DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7914.269,-10.926,-9.331
-29014,BUKIT MERAH,DEPOT ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8983.567,-12.104,-0.994
-30014,BUKIT MERAH,KAMPONG TIONG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28557.046,-18.304,-4.564
-31014,BUKIT MERAH,SINGAPORE GENERAL HOSPITAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14542.051,-18.457,-9.789
-32014,OUTRAM,CHINATOWN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11297.497,-22.513,-21.816
-33014,DOWNTOWN CORE,RAFFLES PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),823.017,-23.492,-30.833
-34014,DOWNTOWN CORE,BAYFRONT SUBZONE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-25.124,-36.419
-35014,MARINA SOUTH,MARINA SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-24.061,-42.978
-8015,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-15.183,
-9015,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-17.288,
-10015,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-18.945,
-15015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.497,
-17015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.243,
-18015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-20.255,
-24015,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3478.532,-15.722,-22.521
-25015,QUEENSTOWN,PASIR PANJANG 1,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1126.373,-16.935,-9.435
-26015,QUEENSTOWN,KENT RIDGE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5.372,-18.360,-15.805
-27015,QUEENSTOWN,QUEENSWAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2607.491,-12.237,-18.342
-28015,QUEENSTOWN,MEI CHIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19087.912,-12.072,-9.252
-29015,BUKIT MERAH,ALEXANDRA HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17128.505,-13.336,-6.587
-30015,BUKIT MERAH,HENDERSON HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18459.923,-17.126,-5.690
-31015,BUKIT MERAH,BUKIT HO SWEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15088.866,-18.904,-11.628
-32015,SINGAPORE RIVER,ROBERTSON QUAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5452.402,-21.972,-18.670
-33015,DOWNTOWN CORE,CITY HALL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-24.215,-26.051
-34015,DOWNTOWN CORE,MARINA CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-24.604,-21.735
-35015,MARINA EAST,MARINA EAST,False,True,predicted (no reliable taxi data),0.000,-24.005,
-36015,MARINE PARADE,MARINA EAST (MP),False,True,predicted (no reliable taxi data),0.000,-20.285,
-37015,MARINE PARADE,MARINA EAST (MP),False,True,predicted (no reliable taxi data),0.000,-16.180,
-8016,TUAS,TUAS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-18.026,-1.614
-9016,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-14.535,
-10016,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-19.883,
-12016,PIONEER,PIONEER SECTOR,False,True,predicted (no reliable taxi data),0.000,-17.728,
-14016,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-18.945,
-22016,JURONG EAST,PENJURU CRESCENT,False,True,predicted (no reliable taxi data),0.000,-17.037,
-23016,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5434.141,-11.656,-5.670
-24016,QUEENSTOWN,NATIONAL UNIVERSITY OF S'PORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7719.196,-12.166,-6.080
-25016,QUEENSTOWN,NATIONAL UNIVERSITY OF S'PORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1054.564,-14.435,-3.095
-26016,QUEENSTOWN,ONE NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),485.969,-17.511,-21.568
-27016,QUEENSTOWN,TANGLIN HALT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15272.882,-11.266,-9.697
-28016,QUEENSTOWN,MARGARET DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11092.078,-10.356,-1.400
-29016,TANGLIN,RIDOUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3384.039,-13.234,-15.497
-30016,TANGLIN,CHATSWORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5584.798,-18.224,-7.289
-31016,RIVER VALLEY,LEONIE HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5069.239,-22.257,-16.648
-32016,MUSEUM,DHOBY GHAUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3183.909,-22.244,-34.871
-33016,ROCHOR,VICTORIA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4669.476,-22.795,-23.875
-34016,DOWNTOWN CORE,NICOLL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2231.219,-22.438,-21.916
-35016,KALLANG,TANJONG RHU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4258.476,-19.340,-22.703
-36016,KALLANG,TANJONG RHU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3604.527,-18.794,3.197
-37016,MARINE PARADE,MOUNTBATTEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6932.843,-14.983,-6.859
-38016,MARINE PARADE,MOUNTBATTEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8336.396,-13.616,-5.819
-39016,MARINE PARADE,EAST COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9027.153,-11.442,1.109
-8017,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-19.057,
-9017,TUAS,TUAS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.693,24.848
-10017,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-17.240,
-12017,PIONEER,PIONEER SECTOR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-16.662,-2.564
-13017,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-16.875,
-14017,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-18.549,
-15017,BOON LAY,SHIPYARD,False,True,predicted (no reliable taxi data),0.000,-15.475,
-16017,BOON LAY,SAMULUN,False,True,predicted (no reliable taxi data),0.000,-15.903,
-17017,BOON LAY,SAMULUN,False,True,predicted (no reliable taxi data),0.000,-17.443,
-18017,JURONG EAST,JURONG PORT,False,True,predicted (no reliable taxi data),0.000,-19.507,
-19017,JURONG EAST,JURONG PORT,False,True,predicted (no reliable taxi data),0.000,-18.451,
-20017,JURONG EAST,PENJURU CRESCENT,False,True,predicted (no reliable taxi data),0.000,-16.670,
-21017,JURONG EAST,TEBAN GARDENS,False,True,predicted (no reliable taxi data),0.000,-19.724,
-22017,CLEMENTI,PANDAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),125.611,-19.274,-31.733
-23017,CLEMENTI,CLEMENTI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16285.385,-12.202,-7.076
-24017,CLEMENTI,CLEMENTI WOODS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10540.638,-12.290,-11.290
-25017,QUEENSTOWN,SINGAPORE POLYTECHNIC,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4881.979,-11.448,-8.729
-26017,QUEENSTOWN,GHIM MOH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17633.804,-13.044,-5.094
-27017,BUKIT TIMAH,LEEDON PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16495.125,-13.122,-13.393
-28017,TANGLIN,RIDOUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3399.446,-15.876,-18.728
-29017,TANGLIN,TYERSALL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),690.650,-14.558,-24.867
-30017,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3801.464,-16.668,-18.858
-31017,NEWTON,ORANGE GROVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3537.489,-22.409,-19.426
-32017,NEWTON,MONK's HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3602.835,-22.307,-28.418
-33017,ROCHOR,FARRER PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10201.922,-22.817,-22.751
-34017,KALLANG,LAVENDER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13432.465,-20.265,-21.908
-35017,KALLANG,KAMPONG BUGIS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4027.561,-19.257,-16.059
-36017,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1898.532,-17.934,-20.519
-37017,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15339.626,-13.539,-8.927
-38017,MARINE PARADE,KATONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10818.242,-14.006,-2.393
-39017,MARINE PARADE,KATONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10619.182,-13.612,-16.195
-40017,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13922.600,-10.594,-8.562
-41017,BEDOK,SIGLAP,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8631.257,-12.310,-13.862
-42017,BEDOK,SIGLAP,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4817.698,-13.256,-21.970
-43017,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1633.120,-13.783,-7.254
-8018,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-18.514,
-9018,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-14.839,
-10018,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-15.230,
-11018,TUAS,TUAS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.444,-1.929
-12018,PIONEER,GUL CIRCLE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.372,-3.557
-13018,PIONEER,GUL CIRCLE,False,True,predicted (no reliable taxi data),0.000,-15.613,
-14018,PIONEER,BENOI SECTOR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.668,7.701
-15018,PIONEER,BENOI SECTOR,False,True,predicted (no reliable taxi data),0.000,-17.432,
-16018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.531,-22.891
-17018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.942,-4.548
-18018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.133,-20.691
-19018,JURONG EAST,JURONG RIVER,False,True,predicted (no reliable taxi data),0.000,-18.715,
-20018,JURONG EAST,JURONG RIVER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1365.556,-12.603,-5.725
-21018,JURONG EAST,TEBAN GARDENS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7391.742,-12.829,-17.638
-22018,CLEMENTI,WEST COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8883.432,-15.369,-16.809
-23018,CLEMENTI,FABER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15069.921,-13.631,-19.586
-24018,CLEMENTI,CLEMENTI NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19690.607,-13.512,-20.470
-25018,BUKIT TIMAH,ULU PANDAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7666.856,-14.615,-11.245
-26018,BUKIT TIMAH,LEEDON PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8063.063,-11.395,-14.091
-27018,BUKIT TIMAH,LEEDON PARK,False,True,predicted (no reliable taxi data),3662.162,-17.398,
-28018,BUKIT TIMAH,FARRER COURT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7177.291,-11.825,4.658
-29018,TANGLIN,TYERSALL,False,True,predicted (no reliable taxi data),2351.367,-14.958,
-30018,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4102.010,-15.648,-20.496
-31018,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4161.368,-16.186,-16.043
-32018,NOVENA,MOULMEIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7297.741,-17.525,-13.358
-33018,KALLANG,KAMPONG JAVA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11377.310,-17.072,-11.369
-34018,KALLANG,BENDEMEER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21262.885,-16.249,-12.180
-35018,KALLANG,GEYLANG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16069.341,-13.682,-2.091
-36018,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11730.919,-17.150,-20.686
-37018,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17153.631,-15.879,-16.720
-38018,GEYLANG,GEYLANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7889.228,-15.959,-16.962
-39018,GEYLANG,GEYLANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14372.977,-14.276,-10.144
-40018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10384.578,-15.710,-18.838
-41018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9426.033,-15.690,-13.875
-42018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6873.532,-14.443,-10.177
-43018,BEDOK,BEDOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14076.460,-11.484,-5.923
-44018,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10050.678,-13.015,-11.988
-45018,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1332.805,-14.055,-15.014
-46018,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.376,-8.138
-47018,TAMPINES,XILIN,False,True,predicted (no reliable taxi data),0.000,-11.376,
-48018,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.560,10.820
-49018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.295,
-50018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-13.043,
-51018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-13.199,
-52018,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-13.256,
-53018,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-14.076,
-8019,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-19.164,
-9019,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-16.248,
-10019,TUAS,TUAS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.377,-1.912
-11019,TUAS,TUAS NORTH,False,True,predicted (no reliable taxi data),0.000,-15.965,
-12019,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-20.183,
-13019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.439,-4.779
-14019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.754,-16.948
-15019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.128,-0.171
-16019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-18.402,-21.118
-17019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-18.669,-11.019
-18019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),275.902,-17.068,-13.741
-19019,JURONG WEST,TAMAN JURONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7623.478,-12.934,-8.299
-20019,JURONG EAST,JURONG RIVER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2949.654,-13.689,-8.546
-21019,JURONG EAST,LAKESIDE (BUSINESS),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3499.482,-14.781,-15.995
-22019,CLEMENTI,FABER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1033.309,-19.048,-25.897
-23019,CLEMENTI,TOH TUCK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4895.186,-13.697,-17.103
-24019,CLEMENTI,SUNSET WAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5221.495,-11.059,2.742
-25019,BUKIT TIMAH,HOLLAND ROAD,False,True,predicted (no reliable taxi data),3084.633,-15.379,
-26019,BUKIT TIMAH,HOLLAND ROAD,False,True,predicted (no reliable taxi data),3150.354,-14.962,
-27019,BUKIT TIMAH,CORONATION ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5170.663,-14.856,-3.640
-28019,BUKIT TIMAH,CORONATION ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2895.206,-15.058,-18.926
-29019,NOVENA,DUNEARN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3266.661,-16.488,-22.637
-30019,NOVENA,DUNEARN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2228.534,-16.320,-33.054
-31019,NOVENA,MOUNT PLEASANT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1539.596,-15.634,-6.409
-32019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9261.346,-16.568,-24.122
-33019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15066.965,-16.683,-18.192
-34019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20539.921,-14.726,-10.318
-35019,KALLANG,GEYLANG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12699.770,-15.132,-13.591
-36019,GEYLANG,KALLANG WAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4252.866,-15.406,-21.413
-37019,GEYLANG,MACPHERSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20760.070,-14.845,-15.524
-38019,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4044.718,-15.359,-7.450
-39019,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23185.274,-15.613,-23.085
-40019,BEDOK,KEMBANGAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18279.892,-16.108,-19.248
-41019,BEDOK,KEMBANGAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15918.200,-12.957,-10.987
-42019,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22094.812,-13.591,-11.589
-43019,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22820.824,-13.074,-13.547
-44019,BEDOK,BEDOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15261.225,-14.808,-19.939
-45019,TAMPINES,XILIN,False,True,predicted (no reliable taxi data),2223.634,-15.639,
-46019,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.589,32.123
-47019,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.677,3.241
-48019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.605,
-49019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.829,
-50019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.999,
-51019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.221,
-9020,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-17.317,
-10020,TUAS,TUAS NORTH,False,True,predicted (no reliable taxi data),0.000,-19.234,
-11020,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-20.004,
-12020,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.747,
-13020,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.950,
-14020,JURONG WEST,SAFTI,False,True,predicted (no reliable taxi data),0.000,-20.812,
-15020,JURONG WEST,SAFTI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8427.564,-15.609,-12.653
-16020,JURONG WEST,JURONG WEST CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23121.776,-14.704,-10.340
-17020,JURONG WEST,KIAN TECK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10391.906,-17.242,-24.557
-18020,JURONG WEST,CHIN BEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8804.034,-14.829,-17.049
-19020,JURONG EAST,LAKESIDE (LEISURE),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15579.630,-15.302,-18.576
-20020,JURONG EAST,LAKESIDE (BUSINESS),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8913.514,-14.150,-16.949
-21020,JURONG EAST,JURONG GATEWAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11175.313,-15.152,-22.471
-22020,CLEMENTI,TOH TUCK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.092,-16.332
-23020,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2407.921,-18.459,-26.011
-24020,BUKIT TIMAH,ANAK BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8775.119,-12.298,-12.010
-25020,BUKIT TIMAH,HOLLAND ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2699.300,-13.056,-15.156
-26020,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2257.340,-16.234,-25.009
-27020,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2381.904,-17.448,-36.555
-28020,BUKIT TIMAH,HILLCREST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3554.736,-16.767,-18.326
-29020,BUKIT TIMAH,HILLCREST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2405.523,-17.269,-8.246
-30020,NOVENA,MOUNT PLEASANT,False,True,predicted (no reliable taxi data),90.752,-16.026,
-31020,NOVENA,MOUNT PLEASANT,False,True,predicted (no reliable taxi data),332.678,-13.558,
-32020,TOA PAYOH,TOA PAYOH WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22943.111,-13.597,-12.794
-33020,TOA PAYOH,BOON TECK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),30440.629,-12.768,-15.483
-34020,TOA PAYOH,PEI CHUN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20105.195,-14.736,-17.289
-35020,TOA PAYOH,WOODLEIGH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11708.162,-12.946,-15.536
-36020,TOA PAYOH,SENNETT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8916.886,-13.107,-17.359
-37020,TOA PAYOH,JOO SENG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4290.984,-16.807,-15.812
-38020,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-16.372,-20.309
-39020,BEDOK,KAKI BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8252.955,-14.973,-4.536
-40020,BEDOK,KAKI BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17521.018,-14.318,-9.745
-41020,BEDOK,BEDOK RESERVOIR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21795.669,-14.318,-14.685
-42020,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21792.705,-14.516,-13.533
-43020,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19503.986,-16.549,-20.120
-44020,TAMPINES,SIMEI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9636.846,-16.164,-15.899
-45020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5860.250,-15.815,-11.958
-46020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.380,-3.120
-47020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.485,-1.680
-48020,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.271,-3.308
-49020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.750,
-50020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.737,
-51020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.673,
-52020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.470,
-10021,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-19.718,
-11021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.883,
-12021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.891,
-13021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.821,
-14021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),81.378,-16.671,
-15021,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20438.865,-14.231,-12.352
-16021,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),35426.165,-13.222,-15.342
-17021,JURONG WEST,BOON LAY PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32420.570,-14.284,-9.689
-18021,JURONG WEST,BOON LAY PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),30818.456,-15.777,-19.958
-19021,JURONG EAST,LAKESIDE (LEISURE),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12985.080,-13.049,-16.467
-20021,JURONG EAST,YUHUA WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19293.287,-15.447,-18.329
-21021,JURONG EAST,YUHUA EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31453.841,-13.009,-10.582
-22021,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19103.848,-13.836,-19.835
-23021,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14290.951,-14.281,-20.066
-24021,BUKIT TIMAH,ANAK BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9807.652,-13.773,-17.991
-25021,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3023.467,-16.965,-27.474
-26021,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),935.157,-16.121,-5.344
-27021,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1552.049,-17.897,-31.188
-28021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),577.156,-15.924,-15.172
-29021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),45.753,-15.681,
-30021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.299,-14.250,
-31021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1123.638,-13.470,-10.127
-32021,TOA PAYOH,TOA PAYOH WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8997.279,-14.190,-10.500
-33021,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),26109.237,-11.829,-5.064
-34021,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9224.819,-13.566,-14.480
-35021,SERANGOON,LORONG CHUAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9576.691,-13.798,-6.505
-36021,SERANGOON,UPPER PAYA LEBAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11966.501,-11.480,1.463
-37021,HOUGANG,TAI SENG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7625.810,-13.815,-10.166
-38021,HOUGANG,DEFU INDUSTRIAL PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-16.068,-6.331
-39021,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-14.285,
-40021,PAYA LEBAR,PAYA LEBAR EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.795,-10.917
-41021,BEDOK,BEDOK RESERVOIR,False,True,predicted (no reliable taxi data),1472.019,-15.562,
-42021,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10099.320,-12.376,-9.523
-43021,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21387.726,-14.022,-14.952
-44021,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23252.428,-15.430,-17.841
-45021,TAMPINES,SIMEI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20436.075,-14.815,-14.913
-46021,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1248.837,-14.874,-4.175
-47021,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.429,-7.124
-48021,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.793,-9.088
-49021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.744,
-50021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.566,
-51021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.823,
-52021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.209,
-58021,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.433,
-10022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.890,
-11022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.902,
-12022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.130,
-13022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.104,
-14022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-17.381,
-15022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),3.898,-17.494,
-16022,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14453.148,-14.946,-8.622
-17022,JURONG WEST,WENYA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9713.634,-14.274,-20.557
-18022,JURONG WEST,HONG KAH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17687.901,-13.362,-11.630
-19022,JURONG WEST,HONG KAH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17585.943,-12.980,-11.730
-20022,TENGAH,PLANTATION,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4775.647,-11.450,-13.256
-21022,BUKIT BATOK,BRICKWORKS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22693.597,-11.576,-7.944
-22022,BUKIT BATOK,GUILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17783.610,-14.520,-6.771
-23022,BUKIT BATOK,HILLVIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15062.757,-13.072,-10.646
-24022,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3427.240,-16.757,-22.849
-25022,BUKIT PANJANG,NATURE RESERVE,False,True,predicted (no reliable taxi data),3.137,-20.105,
-26022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),789.983,-17.502,-23.780
-27022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-19.596,
-28022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-17.070,
-29022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),438.000,-14.538,
-30022,BISHAN,UPPER THOMSON,False,True,predicted (no reliable taxi data),6595.722,-13.280,
-31022,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6385.288,-11.979,1.176
-32022,BISHAN,MARYMOUNT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16108.025,-13.412,-4.308
-33022,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11793.348,-13.056,-12.969
-34022,SERANGOON,LORONG CHUAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7082.924,-14.872,-20.175
-35022,SERANGOON,SERANGOON CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20971.530,-14.153,-14.865
-36022,HOUGANG,LORONG AH SOO,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18363.789,-14.893,-7.918
-37022,HOUGANG,LORONG AH SOO,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17928.707,-13.904,-8.584
-38022,PAYA LEBAR,AIRPORT ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),608.643,-13.163,-5.519
-39022,PAYA LEBAR,PLAB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.854,-54.621
-40022,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-13.119,
-41022,PAYA LEBAR,PAYA LEBAR EAST,False,True,predicted (no reliable taxi data),1282.362,-15.027,
-42022,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27524.463,-13.078,-12.178
-43022,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19800.787,-12.690,-7.778
-44022,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),34572.014,-13.049,-11.121
-45022,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31389.122,-16.440,-18.077
-46022,CHANGI,CHANGI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5773.590,-16.856,-24.924
-47022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.125,
-48022,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.609,-8.498
-49022,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-10.478,16.437
-50022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.511,
-51022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.522,
-52022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.949,
-53022,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-13.406,
-57022,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.145,
-58022,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.037,
-11023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.214,
-12023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.191,
-13023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.975,
-14023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.282,
-15023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.473,
-16023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.787,
-17023,JURONG WEST,WENYA,False,True,predicted (no reliable taxi data),0.000,-20.603,
-18023,TENGAH,TENGAH INDUSTRIAL ESTATE,False,True,predicted (no reliable taxi data),0.000,-19.895,
-19023,TENGAH,TENGAH INDUSTRIAL ESTATE,False,True,predicted (no reliable taxi data),0.000,-15.096,
-20023,TENGAH,PARK,False,True,predicted (no reliable taxi data),12.959,-14.839,
-21023,BUKIT BATOK,HONG KAH NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12868.665,-12.605,-18.681
-22023,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14856.364,-12.100,-9.611
-23023,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7478.816,-13.956,-6.376
-24023,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3021.527,-15.762,-28.785
-25023,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),676.365,-17.804,-27.419
-26023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.051,
-27023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.056,
-28023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-17.123,
-29023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),6.275,-14.987,
-30023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),5476.900,-12.437,
-31023,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6668.823,-10.237,-10.037
-32023,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15473.788,-11.116,-8.547
-33023,ANG MO KIO,TOWNSVILLE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22732.368,-11.974,-9.703
-34023,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16308.556,-15.615,-13.096
-35023,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12198.273,-14.587,-14.944
-36023,HOUGANG,KOVAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12736.356,-14.235,-15.001
-37023,HOUGANG,KOVAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17143.567,-13.975,-14.942
-38023,HOUGANG,LORONG HALUS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13757.000,-14.309,-12.245
-39023,PAYA LEBAR,PLAB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.322,-29.141
-40023,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-13.076,
-41023,PAYA LEBAR,PAYA LEBAR EAST,False,True,predicted (no reliable taxi data),10.000,-12.625,
-42023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5135.634,-12.142,-6.803
-43023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10274.721,-11.202,-9.460
-44023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19708.608,-14.860,-10.501
-45023,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32960.439,-16.619,-18.381
-46023,PASIR RIS,FLORA DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12976.047,-15.960,-14.531
-47023,CHANGI,CHANGI WEST,False,True,predicted (no reliable taxi data),1242.552,-14.231,
-48023,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.116,-15.936
-49023,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-10.497,13.062
-50023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.529,
-51023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.750,
-52023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.077,
-56023,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.775,
-57023,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.214,
-11024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.259,
-12024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.486,
-13024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.589,
-14024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.012,
-15024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.045,
-16024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.020,
-17024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.791,
-18024,WESTERN WATER CATCHMENT,MURAI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.751,-32.561
-19024,TENGAH,FOREST HILL,False,True,predicted (no reliable taxi data),0.890,-17.291,
-20024,TENGAH,FOREST HILL,False,True,predicted (no reliable taxi data),2570.664,-14.537,
-21024,TENGAH,BRICKLAND,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16407.875,-13.838,-22.926
-22024,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12510.792,-11.839,-21.477
-23024,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6342.320,-14.896,-31.436
-24024,BUKIT PANJANG,DAIRY FARM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19077.868,-12.359,-1.197
-25024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5471.174,-13.878,-25.033
-26024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.328,
-27024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.125,
-28024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-17.390,
-29024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-16.761,
-30024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),958.028,-14.538,
-31024,ANG MO KIO,KEBUN BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15832.689,-12.150,-8.183
-32024,ANG MO KIO,KEBUN BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20373.846,-9.954,0.664
-33024,ANG MO KIO,CHENG SAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),29274.250,-13.111,-7.508
-34024,ANG MO KIO,CHENG SAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15405.238,-15.117,-17.578
-35024,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13725.148,-13.584,-19.024
-36024,HOUGANG,HOUGANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27820.355,-13.863,-8.347
-37024,HOUGANG,HOUGANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27937.395,-12.942,-14.929
-38024,HOUGANG,HOUGANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),29387.048,-13.242,-14.092
-39024,HOUGANG,LORONG HALUS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5140.940,-13.967,-21.707
-40024,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-13.543,
-41024,PAYA LEBAR,PAYA LEBAR NORTH,False,True,predicted (no reliable taxi data),0.000,-12.754,
-42024,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2333.798,-15.306,-3.255
-43024,PASIR RIS,PASIR RIS CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16656.707,-16.631,-18.788
-44024,PASIR RIS,PASIR RIS CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18822.524,-13.802,-12.342
-45024,PASIR RIS,PASIR RIS DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32003.499,-14.575,-17.571
-46024,PASIR RIS,LOYANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2613.090,-13.747,-1.964
-47024,PASIR RIS,LOYANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.497,-19.318
-48024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.596,
-49024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.700,
-50024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.634,
-55024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.148,
-56024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.049,
-57024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.625,
-58024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.118,
-12025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.858,
-13025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.933,
-14025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.597,
-15025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.422,
-16025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.392,
-17025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.523,
-18025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.340,
-19025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.373,
-20025,WESTERN WATER CATCHMENT,MURAI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12851.971,-15.591,-14.220
-21025,CHOA CHU KANG,KEAT HONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),40275.561,-15.286,-13.498
-22025,CHOA CHU KANG,TECK WHYE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27212.094,-14.251,-13.402
-23025,BUKIT PANJANG,SENJA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28502.737,-14.921,-11.999
-24025,BUKIT PANJANG,FAJAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),38239.400,-13.190,-13.161
-25025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2341.546,-15.899,-26.366
-26025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.315,
-27025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-19.987,
-28025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-17.613,
-29025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-16.860,
-30025,ANG MO KIO,TAGORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),407.885,-15.099,-20.435
-31025,ANG MO KIO,SEMBAWANG HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9239.074,-10.749,4.516
-32025,ANG MO KIO,YIO CHU KANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19930.676,-12.762,-4.166
-33025,ANG MO KIO,YIO CHU KANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2469.992,-13.623,7.852
-34025,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3472.334,-16.024,-16.398
-35025,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4747.203,-14.218,-9.605
-36025,HOUGANG,TRAFALGAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20645.267,-13.362,-5.980
-37025,HOUGANG,TRAFALGAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22388.889,-14.593,-17.303
-38025,SENGKANG,COMPASSVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33013.059,-12.687,-12.643
-39025,SENGKANG,LORONG HALUS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16053.294,-12.630,-23.167
-40025,SENGKANG,LORONG HALUS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.747,-16.410
-41025,PASIR RIS,PASIR RIS WAFER FAB PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.336,-16.416
-42025,PASIR RIS,PASIR RIS WAFER FAB PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5171.077,-14.689,-15.543
-43025,PASIR RIS,PASIR RIS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21658.085,-13.573,-11.102
-44025,PASIR RIS,PASIR RIS PARK,False,True,predicted (no reliable taxi data),5849.641,-12.394,
-45025,PASIR RIS,PASIR RIS PARK,False,True,predicted (no reliable taxi data),4104.964,-13.881,
-46025,PASIR RIS,LOYANG WEST,False,True,predicted (no reliable taxi data),2278.271,-15.432,
-47025,PASIR RIS,LOYANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.821,-23.178
-48025,CHANGI,CHANGI WEST,False,True,predicted (no reliable taxi data),0.000,-10.126,
-49025,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.701,
-53025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.662,
-54025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.913,
-55025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.139,
-56025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.911,
-57025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.587,
-58025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.093,
-12026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.580,
-13026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.389,
-14026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.563,
-15026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.453,
-16026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.855,
-17026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.760,
-18026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.788,
-19026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.282,
-20026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.396,
-21026,CHOA CHU KANG,CHOA CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19865.518,-15.796,-17.007
-22026,CHOA CHU KANG,CHOA CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9245.198,-14.806,-22.088
-23026,BUKIT PANJANG,SENJA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17937.127,-14.027,-13.339
-24026,BUKIT PANJANG,SAUJANA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24775.285,-13.978,-13.844
-25026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.350,
-26026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.271,
-27026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-19.882,
-28026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-17.852,
-29026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),312.344,-15.224,
-30026,ANG MO KIO,TAGORE,False,True,predicted (no reliable taxi data),3331.818,-16.001,
-31026,ANG MO KIO,TAGORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2688.245,-13.824,-10.986
-32026,ANG MO KIO,YIO CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2884.543,-15.590,-7.600
-33026,ANG MO KIO,YIO CHU KANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1385.498,-15.137,11.039
-34026,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3233.002,-17.020,-15.466
-35026,SENGKANG,SENGKANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12460.126,-12.965,-8.712
-36026,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),25495.585,-13.604,-10.621
-37026,SENGKANG,ANCHORVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28481.899,-12.856,-18.816
-38026,SENGKANG,SENGKANG TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),42609.967,-15.238,-17.323
-39026,SENGKANG,RIVERVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),41935.737,-16.392,-16.922
-40026,PUNGGOL,PUNGGOL FIELD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24158.315,-15.511,-15.144
-41026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),4.561,-13.900,
-42026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),0.000,-13.445,
-43026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),1371.686,-13.675,
-47026,CHANGI,CHANGI POINT,False,True,predicted (no reliable taxi data),82.462,-10.805,
-48026,CHANGI,CHANGI POINT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),457.538,-12.229,-4.423
-49026,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.012,
-52026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.346,
-53026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.918,
-54026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.107,
-55026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.299,
-56026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.586,
-57026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.691,
-58026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.100,
-12027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.443,
-13027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.567,
-14027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.710,
-15027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.570,
-16027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.122,
-17027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.133,
-18027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.860,
-19027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.511,
-20027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.508,
-21027,CHOA CHU KANG,YEW TEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19529.311,-15.336,-22.070
-22027,SUNGEI KADUT,GALI BATU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23167.851,-16.896,-24.418
-23027,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-20.379,
-24027,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-20.459,
-25027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.405,
-26027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.423,
-27027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.591,
-28027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-18.346,
-29027,YISHUN,NEE SOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),931.664,-15.161,-21.311
-30027,YISHUN,SPRINGLEAF,False,True,predicted (no reliable taxi data),2877.122,-13.970,
-31027,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),353.247,-15.692,-25.272
-32027,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-15.488,
-33027,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.504,-36.229
-34027,SENGKANG,SENGKANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.878,-10.240
-35027,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10882.068,-15.531,-13.740
-36027,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22158.272,-15.336,-12.948
-37027,SENGKANG,ANCHORVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16946.245,-12.324,-13.986
-38027,SENGKANG,SENGKANG TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33525.345,-14.187,-19.913
-39027,PUNGGOL,PUNGGOL FIELD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),39688.082,-14.954,-13.769
-40027,PUNGGOL,WATERWAY EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),37008.963,-14.092,-11.238
-41027,PUNGGOL,WATERWAY EAST,False,True,predicted (no reliable taxi data),9485.242,-11.392,
-42027,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),0.000,-13.542,
-52027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.918,
-53027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.839,
-54027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.048,
-55027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.235,
-56027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.606,
-57027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.438,
-58027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.100,
-59027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.367,
-13028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.291,
-14028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.677,
-15028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.522,
-16028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.752,
-17028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.954,
-18028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.659,
-19028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.004,
-20028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.128,
-21028,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),3206.686,-17.453,
-22028,SUNGEI KADUT,PANG SUA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4568.996,-17.656,-14.941
-23028,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-18.946,
-24028,SUNGEI KADUT,GALI BATU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.104,-14.823
-25028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.344,-17.810
-26028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-21.578,-26.811
-27028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.318,
-28028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-18.210,
-29028,YISHUN,NEE SOON,False,True,predicted (no reliable taxi data),286.625,-17.591,
-30028,YISHUN,SPRINGLEAF,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),954.786,-15.943,-29.003
-31028,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2466.777,-15.777,-29.061
-32028,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),1650.756,-15.738,
-33028,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-14.798,
-34028,SELETAR,SELETAR AEROSPACE PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.207,-39.762
-35028,SELETAR,SELETAR AEROSPACE PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.106,-34.161
-36028,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),0.000,-14.435,
-37028,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),2069.305,-14.996,
-38028,PUNGGOL,PUNGGOL TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23616.980,-11.412,-11.106
-39028,PUNGGOL,PUNGGOL TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17529.421,-11.322,-3.044
-40028,PUNGGOL,PUNGGOL CANAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11724.743,-10.978,-1.637
-41028,PUNGGOL,CONEY ISLAND,False,True,predicted (no reliable taxi data),0.000,-12.791,
-44028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.835,
-45028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.583,
-46028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.666,
-47028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.950,
-48028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.377,
-49028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.473,
-53028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.106,
-54028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.695,
-55028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.335,
-56028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.904,
-57028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.235,
-58028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.331,
-14029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.751,
-15029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.470,
-16029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.230,
-17029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-22.432,
-18029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-23.002,
-19029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.876,
-20029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.067,
-21029,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),0.000,-20.753,
-22029,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),274.892,-18.334,
-23029,SUNGEI KADUT,TURF CLUB,False,True,predicted (no reliable taxi data),374.851,-19.412,
-24029,SUNGEI KADUT,TURF CLUB,False,True,predicted (no reliable taxi data),0.000,-20.476,
-25029,MANDAI,MANDAI WEST,False,True,predicted (no reliable taxi data),0.000,-20.784,
-26029,MANDAI,MANDAI WEST,False,True,predicted (no reliable taxi data),0.000,-19.784,
-27029,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.825,-18.997
-28029,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.960,-15.734
-29029,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-18.674,
-30029,YISHUN,KHATIB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5431.589,-14.503,-29.636
-31029,YISHUN,YISHUN SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23674.928,-13.728,-18.998
-32029,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24180.397,-12.663,-16.814
-33029,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6948.391,-15.540,-12.680
-34029,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-12.765,
-35029,SELETAR,SELETAR AEROSPACE PARK,False,True,predicted (no reliable taxi data),0.000,-14.122,
-36029,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),0.000,-14.120,
-37029,SELETAR,PULAU PUNGGOL TIMOR,False,True,predicted (no reliable taxi data),0.000,-14.001,
-38029,SELETAR,PULAU PUNGGOL TIMOR,False,True,predicted (no reliable taxi data),2225.235,-11.832,
-39029,PUNGGOL,NORTHSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),281.338,-11.129,-12.832
-40029,PUNGGOL,NORTHSHORE,False,True,predicted (no reliable taxi data),154.955,-10.827,
-43029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.321,
-44029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.114,
-45029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.246,
-46029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.104,
-47029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.548,
-48029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.134,
-49029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.868,
-51029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.249,
-52029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.339,
-53029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.688,
-54029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.845,
-55029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.656,
-56029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.235,
-57029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.248,
-58029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.461,
-14030,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-22.312,
-15030,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.369,
-16030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.649,
-17030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.381,
-18030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.658,
-19030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-22.457,
-20030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.917,
-21030,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-20.239,
-22030,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),14.495,-17.795,
-23030,SUNGEI KADUT,KRANJI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5.761,-19.656,-32.262
-24030,SUNGEI KADUT,TURF CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4288.238,-14.228,-11.970
-25030,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10768.486,-15.420,-12.330
-26030,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10967.898,-13.614,1.522
-27030,WOODLANDS,WOODLANDS SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8572.207,-16.926,-25.192
-28030,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-20.100,
-29030,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-18.206,
-30030,MANDAI,MANDAI ESTATE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6763.413,-16.519,-21.849
-31030,YISHUN,YISHUN WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22645.442,-12.732,-15.265
-32030,YISHUN,YISHUN SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20754.286,-12.151,-19.502
-33030,YISHUN,YISHUN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),25354.999,-12.540,-17.210
-36030,SELETAR,PULAU PUNGGOL BARAT,False,True,predicted (no reliable taxi data),0.000,-14.209,
-37030,SELETAR,PULAU PUNGGOL BARAT,False,True,predicted (no reliable taxi data),0.000,-14.267,
-42030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.641,
-51030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.924,
-52030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.107,
-53030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.451,
-54030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.688,
-55030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.182,
-56030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.208,
-57030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-16.233,
-16031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.228,
-17031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.334,
-18031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.105,
-19031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-22.681,
-20031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.597,
-21031,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-20.142,
-22031,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-20.323,
-23031,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-19.720,
-24031,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14131.394,-16.090,-20.482
-25031,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20852.080,-13.496,-13.312
-26031,WOODLANDS,WOODLANDS REGIONAL CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23291.161,-16.689,-19.485
-27031,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),43124.933,-14.542,-19.016
-28031,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7700.428,-14.543,-20.924
-29031,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-20.360,
-30031,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9623.345,-15.953,-15.214
-31031,YISHUN,YISHUN WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33357.123,-14.294,-17.747
-32031,YISHUN,NORTHLAND,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28877.926,-13.643,-9.631
-33031,SIMPANG,SIMPANG SOUTH,False,True,predicted (no reliable taxi data),4783.416,-14.579,
-34031,SIMPANG,SIMPANG SOUTH,False,True,predicted (no reliable taxi data),0.000,-15.152,
-52031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.422,
-53031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.037,
-54031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-17.082,
-17032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.568,
-18032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.264,
-19032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.481,
-20032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-20.895,
-21032,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-20.959,
-22032,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-21.155,
-23032,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-21.005,
-24032,WOODLANDS,NORTH COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8078.950,-15.480,-33.009
-25032,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7097.618,-13.823,-16.794
-26032,WOODLANDS,GREENWOOD PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15289.425,-14.381,-14.283
-27032,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),41656.167,-14.372,-17.266
-28032,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31244.395,-14.590,-16.504
-29032,SEMBAWANG,SEMBAWANG CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18035.345,-16.278,-17.572
-30032,SEMBAWANG,SEMBAWANG SPRINGS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14872.210,-15.261,-13.235
-31032,SEMBAWANG,SEMBAWANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13556.380,-14.819,-34.074
-32032,SIMPANG,SIMPANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1609.515,-14.719,-14.029
-33032,SIMPANG,SIMPANG NORTH,False,True,predicted (no reliable taxi data),0.000,-15.119,
-34032,SIMPANG,PULAU SELETAR,False,True,predicted (no reliable taxi data),0.000,-15.224,
-35032,SIMPANG,PULAU SELETAR,False,True,predicted (no reliable taxi data),0.000,-15.384,
-25033,WOODLANDS,NORTH COAST,False,True,predicted (no reliable taxi data),1986.865,-18.775,
-26033,WOODLANDS,NORTH COAST,False,True,predicted (no reliable taxi data),2924.337,-18.226,
-27033,WOODLANDS,SENOKO WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),908.995,-17.268,21.025
-28033,SEMBAWANG,SENOKO SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1796.395,-15.304,-11.126
-29033,SEMBAWANG,SEMBAWANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19300.371,-13.998,-11.057
-30033,SEMBAWANG,ADMIRALTY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13668.373,-14.467,-15.738
-31033,SEMBAWANG,SEMBAWANG STRAITS,False,True,predicted (no reliable taxi data),8240.870,-11.479,
-32033,SIMPANG,SIMPANG NORTH,False,True,predicted (no reliable taxi data),214.350,-16.614,
-33033,SIMPANG,TANJONG IRAU,False,True,predicted (no reliable taxi data),0.000,-16.908,
-27034,SEMBAWANG,SENOKO NORTH,False,True,predicted (no reliable taxi data),0.000,-18.548,
-28034,SEMBAWANG,SENOKO NORTH,False,True,predicted (no reliable taxi data),0.000,-17.725,
-29034,SEMBAWANG,SEMBAWANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10111.087,-18.005,-35.872
-30034,SEMBAWANG,THE WHARVES,False,True,predicted (no reliable taxi data),3818.649,-18.222,
-32034,SEMBAWANG,SEMBAWANG STRAITS,False,True,predicted (no reliable taxi data),454.190,-16.408,
-7010,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-16.668,
-7011,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-16.428,
-7014,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.574,
-7015,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.457,
-7016,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.446,
-9021,TUAS,TUAS PROMENADE,False,False,predicted (no reliable taxi data),0.000,-19.547,
-9022,TUAS,TUAS PROMENADE,False,False,predicted (no reliable taxi data),0.000,-20.771,
-11016,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-18.751,
-11017,TUAS,TUAS BAY,False,False,predicted (no reliable taxi data),0.000,-18.405,
-12015,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-20.648,
-13015,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-21.192,
-13016,PIONEER,GUL BASIN,False,False,predicted (no reliable taxi data),0.000,-18.693,
-14012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-20.515,
-15011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-21.758,
-15012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-21.090,
-15016,BOON LAY,SHIPYARD,False,False,predicted (no reliable taxi data),0.000,-20.201,
-16016,BOON LAY,SAMULUN,False,False,predicted (no reliable taxi data),0.000,-20.735,
-17011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-21.415,
-17016,BOON LAY,SAMULUN,False,False,predicted (no reliable taxi data),0.000,-20.733,
-18016,JURONG EAST,JURONG PORT,False,False,predicted (no reliable taxi data),0.000,-20.588,
-19015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-20.580,
-20016,JURONG EAST,PENJURU CRESCENT,False,False,predicted (no reliable taxi data),0.000,-19.654,
-21016,JURONG EAST,PENJURU CRESCENT,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-18.822,-14.306
-23015,QUEENSTOWN,PORT,False,False,predicted (no reliable taxi data),0.000,-20.154,
-24014,QUEENSTOWN,PORT,False,False,predicted (no reliable taxi data),0.000,-20.149,
-24033,WOODLANDS,NORTH COAST,False,False,predicted (no reliable taxi data),0.000,-22.214,
-26034,WOODLANDS,NORTH COAST,False,False,predicted (no reliable taxi data),0.000,-21.009,
-28011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-20.313,
-28012,BUKIT MERAH,MARITIME SQUARE,False,False,predicted (no reliable taxi data),0.000,-20.300,
-28035,SEMBAWANG,SENOKO NORTH,False,False,predicted (no reliable taxi data),0.000,-19.020,
-29012,BUKIT MERAH,MARITIME SQUARE,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-21.277,-30.412
-29035,SEMBAWANG,SENOKO NORTH,False,False,predicted (no reliable taxi data),0.000,-21.010,
-30010,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-20.314,
-30035,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-21.650,
-31009,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-20.739,
-31034,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-17.313,
-31035,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-21.442,
-32009,SOUTHERN ISLANDS,SOUTHERN GROUP,False,False,predicted (no reliable taxi data),0.000,-20.362,
-32011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-22.193,
-33010,SOUTHERN ISLANDS,SOUTHERN GROUP,False,False,predicted (no reliable taxi data),0.000,-18.614,
-33011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-21.786,
-34012,STRAITS VIEW,STRAITS VIEW,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.778,-16.203
-34030,SIMPANG,SIMPANG SOUTH,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.976,-31.625
-35013,MARINA SOUTH,MARINA SOUTH,False,False,predicted (no reliable taxi data),0.000,-20.609,
-35030,SELETAR,PULAU PUNGGOL BARAT,False,False,predicted (no reliable taxi data),0.000,-13.531,
-36031,SELETAR,PULAU PUNGGOL BARAT,False,False,predicted (no reliable taxi data),0.000,-14.655,
-40016,MARINE PARADE,EAST COAST,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.016,3.555
-41016,BEDOK,SIGLAP,False,False,predicted (no reliable taxi data),0.000,-14.282,
-44017,BEDOK,BAYSHORE,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.141,-15.223
-46026,PASIR RIS,LOYANG WEST,False,False,predicted (no reliable taxi data),0.000,-11.578,
-49017,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-12.339,
-50017,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-13.132,
-50025,CHANGI,CHANGI AIRPORT,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-10.987,-34.169
-50026,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-11.608,
-51024,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-10.763,
+20002,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-17.885,
+19004,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-18.037,
+24004,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-17.632,
+24005,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-17.600,
+25005,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-17.475,
+18006,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-18.037,
+19006,WESTERN ISLANDS,SUDONG,False,True,predicted (no reliable taxi data),0.000,-19.446,
+23006,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-21.595,
+25006,WESTERN ISLANDS,SEMAKAU,False,True,predicted (no reliable taxi data),0.000,-16.995,
+7007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+8007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+9007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+10007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+11007,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+33007,SOUTHERN ISLANDS,SOUTHERN GROUP,False,True,predicted (no reliable taxi data),0.000,-21.995,
+6008,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+23008,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-16.144,
+24008,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-16.143,
+6009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+7009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.556,
+8009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+9009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+10009,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.694,
+13009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-10.674,
+14009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.493,
+21009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.260,
+23009,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.544,
+13010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.485,
+14010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-7.187,
+15010,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-11.927,
+31010,SOUTHERN ISLANDS,SENTOSA,False,True,predicted (no reliable taxi data),245.936,-20.524,
+32010,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),795.996,-19.852,-16.835
+12011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.453,
+13011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.269,
+14011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-8.248,
+16011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-11.446,
+29011,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.619,-22.386
+30011,SOUTHERN ISLANDS,SENTOSA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-23.018,-25.401
+31011,SOUTHERN ISLANDS,SENTOSA,False,True,predicted (no reliable taxi data),29.979,-18.407,
+7012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-12.298,
+8012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-7.184,
+9012,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-6.602,
+12012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.453,
+13012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.540,
+16012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-11.388,
+17012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.210,
+19012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-14.166,
+26012,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-15.982,
+30012,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),35.549,-21.871,-15.798
+31012,BUKIT MERAH,CITY TERMINALS,False,True,predicted (no reliable taxi data),0.000,-15.761,
+7013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-7.647,
+8013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-4.911,
+9013,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-9.924,
+12013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.453,
+13013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-6.540,
+14013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-8.632,
+15013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-9.094,
+16013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-11.762,
+17013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-12.966,
+18013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.641,
+19013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-14.296,
+20013,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-14.114,
+24013,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-16.167,
+26013,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),18.781,-21.808,
+27013,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),187.529,-23.610,-33.062
+28013,BUKIT MERAH,TELOK BLANGAH DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10972.305,-10.039,-10.205
+29013,BUKIT MERAH,MARITIME SQUARE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6932.436,-11.261,-10.448
+30013,BUKIT MERAH,TELOK BLANGAH RISE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12731.871,-8.026,-6.779
+31013,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5880.336,-18.182,-17.802
+32013,BUKIT MERAH,CITY TERMINALS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5103.805,-21.269,-25.180
+33013,DOWNTOWN CORE,CENTRAL SUBZONE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-27.007,-26.597
+34013,STRAITS VIEW,STRAITS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-26.776,-23.261
+8014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-6.555,
+9014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-4.860,
+10014,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-10.886,
+13014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-10.042,
+14014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-8.663,
+15014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.124,
+16014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-12.346,
+17014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.414,
+18014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.872,
+19014,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-17.700,
+22014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-17.455,
+23014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),0.000,-16.943,
+25014,QUEENSTOWN,PORT,False,True,predicted (no reliable taxi data),397.650,-23.680,
+26014,QUEENSTOWN,PASIR PANJANG 2,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3802.559,-18.725,-19.144
+27014,QUEENSTOWN,KENT RIDGE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),725.951,-20.077,-26.593
+28014,BUKIT MERAH,TELOK BLANGAH DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7914.269,-9.561,-9.331
+29014,BUKIT MERAH,DEPOT ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8983.567,-6.953,-0.994
+30014,BUKIT MERAH,KAMPONG TIONG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28557.046,-8.234,-4.564
+31014,BUKIT MERAH,SINGAPORE GENERAL HOSPITAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14542.051,-14.218,-9.789
+32014,OUTRAM,CHINATOWN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11297.497,-23.813,-21.816
+33014,DOWNTOWN CORE,RAFFLES PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),823.017,-27.447,-30.833
+34014,DOWNTOWN CORE,BAYFRONT SUBZONE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-27.620,-36.419
+35014,MARINA SOUTH,MARINA SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-25.720,-42.978
+8015,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-6.936,
+9015,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-3.937,
+10015,TUAS,TUAS VIEW EXTENSION,False,True,predicted (no reliable taxi data),0.000,-9.097,
+15015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-12.913,
+17015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-13.398,
+18015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,True,predicted (no reliable taxi data),0.000,-16.049,
+24015,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3478.532,-20.468,-22.521
+25015,QUEENSTOWN,PASIR PANJANG 1,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1126.373,-15.239,-9.435
+26015,QUEENSTOWN,KENT RIDGE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5.372,-17.461,-15.805
+27015,QUEENSTOWN,QUEENSWAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2607.491,-15.558,-18.342
+28015,QUEENSTOWN,MEI CHIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19087.912,-9.913,-9.252
+29015,BUKIT MERAH,ALEXANDRA HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17128.505,-8.534,-6.587
+30015,BUKIT MERAH,HENDERSON HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18459.923,-7.471,-5.690
+31015,BUKIT MERAH,BUKIT HO SWEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15088.866,-12.985,-11.628
+32015,SINGAPORE RIVER,ROBERTSON QUAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5452.402,-22.749,-18.670
+33015,DOWNTOWN CORE,CITY HALL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-25.918,-26.051
+34015,DOWNTOWN CORE,MARINA CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-25.828,-21.735
+35015,MARINA EAST,MARINA EAST,False,True,predicted (no reliable taxi data),0.000,-24.087,
+36015,MARINE PARADE,MARINA EAST (MP),False,True,predicted (no reliable taxi data),0.000,-19.437,
+37015,MARINE PARADE,MARINA EAST (MP),False,True,predicted (no reliable taxi data),0.000,-14.298,
+8016,TUAS,TUAS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-6.862,-1.614
+9016,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-3.794,
+10016,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-9.002,
+12016,PIONEER,PIONEER SECTOR,False,True,predicted (no reliable taxi data),0.000,-7.044,
+14016,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-10.900,
+22016,JURONG EAST,PENJURU CRESCENT,False,True,predicted (no reliable taxi data),0.000,-16.418,
+23016,QUEENSTOWN,PORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5434.141,-11.185,-5.670
+24016,QUEENSTOWN,NATIONAL UNIVERSITY OF S'PORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7719.196,-10.949,-6.080
+25016,QUEENSTOWN,NATIONAL UNIVERSITY OF S'PORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1054.564,-10.406,-3.095
+26016,QUEENSTOWN,ONE NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),485.969,-19.941,-21.568
+27016,QUEENSTOWN,TANGLIN HALT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15272.882,-9.226,-9.697
+28016,QUEENSTOWN,MARGARET DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11092.078,-5.436,-1.400
+29016,TANGLIN,RIDOUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3384.039,-12.050,-15.497
+30016,TANGLIN,CHATSWORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5584.798,-12.914,-7.289
+31016,RIVER VALLEY,LEONIE HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5069.239,-19.664,-16.648
+32016,MUSEUM,DHOBY GHAUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3183.909,-27.578,-34.871
+33016,ROCHOR,VICTORIA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4669.476,-23.995,-23.875
+34016,DOWNTOWN CORE,NICOLL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2231.219,-24.384,-21.916
+35016,KALLANG,TANJONG RHU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4258.476,-18.534,-22.703
+36016,KALLANG,TANJONG RHU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3604.527,-10.996,3.197
+37016,MARINE PARADE,MOUNTBATTEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6932.843,-11.262,-6.859
+38016,MARINE PARADE,MOUNTBATTEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8336.396,-9.613,-5.819
+39016,MARINE PARADE,EAST COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9027.153,-7.297,1.109
+8017,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-8.877,
+9017,TUAS,TUAS VIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-2.788,24.848
+10017,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-3.924,
+12017,PIONEER,PIONEER SECTOR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-2.950,-2.564
+13017,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-5.096,
+14017,PIONEER,GUL BASIN,False,True,predicted (no reliable taxi data),0.000,-6.948,
+15017,BOON LAY,SHIPYARD,False,True,predicted (no reliable taxi data),0.000,-10.564,
+16017,BOON LAY,SAMULUN,False,True,predicted (no reliable taxi data),0.000,-10.277,
+17017,BOON LAY,SAMULUN,False,True,predicted (no reliable taxi data),0.000,-12.683,
+18017,JURONG EAST,JURONG PORT,False,True,predicted (no reliable taxi data),0.000,-16.218,
+19017,JURONG EAST,JURONG PORT,False,True,predicted (no reliable taxi data),0.000,-18.449,
+20017,JURONG EAST,PENJURU CRESCENT,False,True,predicted (no reliable taxi data),0.000,-18.215,
+21017,JURONG EAST,TEBAN GARDENS,False,True,predicted (no reliable taxi data),0.000,-22.519,
+22017,CLEMENTI,PANDAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),125.611,-22.628,-31.733
+23017,CLEMENTI,CLEMENTI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16285.385,-9.956,-7.076
+24017,CLEMENTI,CLEMENTI WOODS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10540.638,-12.305,-11.290
+25017,QUEENSTOWN,SINGAPORE POLYTECHNIC,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4881.979,-10.953,-8.729
+26017,QUEENSTOWN,GHIM MOH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17633.804,-8.893,-5.094
+27017,BUKIT TIMAH,LEEDON PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16495.125,-12.139,-13.393
+28017,TANGLIN,RIDOUT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3399.446,-18.774,-18.728
+29017,TANGLIN,TYERSALL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),690.650,-22.297,-24.867
+30017,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3801.464,-16.263,-18.858
+31017,NEWTON,ORANGE GROVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3537.489,-21.752,-19.426
+32017,NEWTON,MONK'S HILL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3602.835,-24.361,-28.418
+33017,ROCHOR,FARRER PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10201.922,-21.451,-22.751
+34017,KALLANG,LAVENDER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13432.465,-18.301,-21.908
+35017,KALLANG,KAMPONG BUGIS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4027.561,-14.087,-16.059
+36017,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1898.532,-17.356,-20.519
+37017,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15339.626,-9.481,-8.927
+38017,MARINE PARADE,KATONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10818.242,-9.770,-2.393
+39017,MARINE PARADE,KATONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10619.182,-14.232,-16.195
+40017,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13922.600,-9.539,-8.562
+41017,BEDOK,SIGLAP,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8631.257,-13.069,-13.862
+42017,BEDOK,SIGLAP,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4817.698,-16.395,-21.970
+43017,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1633.120,-10.085,-7.254
+8018,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-5.887,
+9018,TUAS,TUAS VIEW,False,True,predicted (no reliable taxi data),0.000,-4.120,
+10018,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-3.612,
+11018,TUAS,TUAS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-4.344,-1.929
+12018,PIONEER,GUL CIRCLE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-4.688,-3.557
+13018,PIONEER,GUL CIRCLE,False,True,predicted (no reliable taxi data),0.000,-5.023,
+14018,PIONEER,BENOI SECTOR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-1.325,7.701
+15018,PIONEER,BENOI SECTOR,False,True,predicted (no reliable taxi data),0.000,-8.601,
+16018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.249,-22.891
+17018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-18.689,-4.548
+18018,BOON LAY,LIU FANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.638,-20.691
+19018,JURONG EAST,JURONG RIVER,False,True,predicted (no reliable taxi data),0.000,-17.311,
+20018,JURONG EAST,JURONG RIVER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1365.556,-9.858,-5.725
+21018,JURONG EAST,TEBAN GARDENS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7391.742,-15.948,-17.638
+22018,CLEMENTI,WEST COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8883.432,-16.095,-16.809
+23018,CLEMENTI,FABER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15069.921,-15.293,-19.586
+24018,CLEMENTI,CLEMENTI NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19690.607,-15.966,-20.470
+25018,BUKIT TIMAH,ULU PANDAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7666.856,-14.150,-11.245
+26018,BUKIT TIMAH,LEEDON PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8063.063,-12.059,-14.091
+27018,BUKIT TIMAH,LEEDON PARK,False,True,predicted (no reliable taxi data),3662.162,-18.391,
+28018,BUKIT TIMAH,FARRER COURT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7177.291,-8.852,4.658
+29018,TANGLIN,TYERSALL,False,True,predicted (no reliable taxi data),2351.367,-17.607,
+30018,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4102.010,-19.218,-20.496
+31018,TANGLIN,NASSIM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4161.368,-16.946,-16.043
+32018,NOVENA,MOULMEIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7297.741,-15.768,-13.358
+33018,KALLANG,KAMPONG JAVA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11377.310,-13.500,-11.369
+34018,KALLANG,BENDEMEER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21262.885,-12.633,-12.180
+35018,KALLANG,GEYLANG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16069.341,-6.742,-2.091
+36018,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11730.919,-17.979,-20.686
+37018,GEYLANG,ALJUNIED,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17153.631,-15.363,-16.720
+38018,GEYLANG,GEYLANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7889.228,-15.744,-16.962
+39018,GEYLANG,GEYLANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14372.977,-11.566,-10.144
+40018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10384.578,-16.254,-18.838
+41018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9426.033,-14.350,-13.875
+42018,BEDOK,FRANKEL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6873.532,-11.610,-10.177
+43018,BEDOK,BEDOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14076.460,-8.328,-5.923
+44018,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10050.678,-12.957,-11.988
+45018,BEDOK,BAYSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1332.805,-11.295,-15.014
+46018,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-9.513,-8.138
+47018,TAMPINES,XILIN,False,True,predicted (no reliable taxi data),0.000,-10.630,
+48018,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.107,10.820
+49018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-14.106,
+50018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-10.572,
+51018,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-15.251,
+52018,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-14.136,
+53018,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-10.008,
+8019,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-10.568,
+9019,TUAS,TUAS BAY,False,True,predicted (no reliable taxi data),0.000,-4.098,
+10019,TUAS,TUAS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-3.968,-1.912
+11019,TUAS,TUAS NORTH,False,True,predicted (no reliable taxi data),0.000,-3.658,
+12019,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-15.940,
+13019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-9.012,-4.779
+14019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-10.587,-16.948
+15019,PIONEER,JOO KOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-7.824,-0.171
+16019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.259,-21.118
+17019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-13.096,-11.019
+18019,BOON LAY,TUKANG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),275.902,-15.182,-13.741
+19019,JURONG WEST,TAMAN JURONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7623.478,-11.320,-8.299
+20019,JURONG EAST,JURONG RIVER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2949.654,-14.739,-8.546
+21019,JURONG EAST,LAKESIDE (BUSINESS),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3499.482,-16.474,-15.995
+22019,CLEMENTI,FABER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1033.309,-22.757,-25.897
+23019,CLEMENTI,TOH TUCK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4895.186,-15.246,-17.103
+24019,CLEMENTI,SUNSET WAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5221.495,-9.267,2.742
+25019,BUKIT TIMAH,HOLLAND ROAD,False,True,predicted (no reliable taxi data),3084.633,-17.138,
+26019,BUKIT TIMAH,HOLLAND ROAD,False,True,predicted (no reliable taxi data),3150.354,-17.564,
+27019,BUKIT TIMAH,CORONATION ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5170.663,-12.638,-3.640
+28019,BUKIT TIMAH,CORONATION ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2895.206,-18.881,-18.926
+29019,NOVENA,DUNEARN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3266.661,-20.896,-22.637
+30019,NOVENA,DUNEARN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2228.534,-23.159,-33.054
+31019,NOVENA,MOUNT PLEASANT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1539.596,-13.243,-6.409
+32019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9261.346,-19.381,-24.122
+33019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15066.965,-16.304,-18.192
+34019,NOVENA,BALESTIER,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20539.921,-12.429,-10.318
+35019,KALLANG,GEYLANG BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12699.770,-15.123,-13.591
+36019,GEYLANG,KALLANG WAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4252.866,-17.449,-21.413
+37019,GEYLANG,MACPHERSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20760.070,-15.046,-15.524
+38019,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4044.718,-10.527,-7.450
+39019,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23185.274,-18.167,-23.085
+40019,BEDOK,KEMBANGAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18279.892,-15.658,-19.248
+41019,BEDOK,KEMBANGAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15918.200,-11.101,-10.987
+42019,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22094.812,-11.338,-11.589
+43019,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22820.824,-12.711,-13.547
+44019,BEDOK,BEDOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15261.225,-15.515,-19.939
+45019,TAMPINES,XILIN,False,True,predicted (no reliable taxi data),2223.634,-9.378,
+46019,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-6.099,32.123
+47019,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-6.427,3.241
+48019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-8.299,
+49019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-9.135,
+50019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-8.817,
+51019,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-8.809,
+9020,TUAS,TUAS PROMENADE,False,True,predicted (no reliable taxi data),0.000,-11.048,
+10020,TUAS,TUAS NORTH,False,True,predicted (no reliable taxi data),0.000,-4.979,
+11020,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-15.367,
+12020,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.441,
+13020,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.835,
+14020,JURONG WEST,SAFTI,False,True,predicted (no reliable taxi data),0.000,-15.890,
+15020,JURONG WEST,SAFTI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8427.564,-14.842,-12.653
+16020,JURONG WEST,JURONG WEST CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23121.776,-13.289,-10.340
+17020,JURONG WEST,KIAN TECK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10391.906,-20.085,-24.557
+18020,JURONG WEST,CHIN BEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8804.034,-14.879,-17.049
+19020,JURONG EAST,LAKESIDE (LEISURE),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15579.630,-16.150,-18.576
+20020,JURONG EAST,LAKESIDE (BUSINESS),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8913.514,-16.851,-16.949
+21020,JURONG EAST,JURONG GATEWAY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11175.313,-19.505,-22.471
+22020,CLEMENTI,TOH TUCK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.846,-16.332
+23020,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2407.921,-21.739,-26.011
+24020,BUKIT TIMAH,ANAK BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8775.119,-11.950,-12.010
+25020,BUKIT TIMAH,HOLLAND ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2699.300,-15.560,-15.156
+26020,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2257.340,-22.853,-25.009
+27020,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2381.904,-22.569,-36.555
+28020,BUKIT TIMAH,HILLCREST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3554.736,-17.318,-18.326
+29020,BUKIT TIMAH,HILLCREST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2405.523,-17.600,-8.246
+30020,NOVENA,MOUNT PLEASANT,False,True,predicted (no reliable taxi data),90.752,-20.369,
+31020,NOVENA,MOUNT PLEASANT,False,True,predicted (no reliable taxi data),332.678,-14.295,
+32020,TOA PAYOH,TOA PAYOH WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22943.111,-10.724,-12.794
+33020,TOA PAYOH,BOON TECK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),30440.629,-13.106,-15.483
+34020,TOA PAYOH,PEI CHUN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20105.195,-15.734,-17.289
+35020,TOA PAYOH,WOODLEIGH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11708.162,-12.868,-15.536
+36020,TOA PAYOH,SENNETT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8916.886,-13.498,-17.359
+37020,TOA PAYOH,JOO SENG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4290.984,-16.146,-15.812
+38020,GEYLANG,KAMPONG UBI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.169,-20.309
+39020,BEDOK,KAKI BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8252.955,-9.796,-4.536
+40020,BEDOK,KAKI BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17521.018,-11.829,-9.745
+41020,BEDOK,BEDOK RESERVOIR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21795.669,-13.700,-14.685
+42020,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21792.705,-14.176,-13.533
+43020,BEDOK,BEDOK NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19503.986,-17.472,-20.120
+44020,TAMPINES,SIMEI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9636.846,-16.068,-15.899
+45020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5860.250,-13.206,-11.958
+46020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-6.665,-3.120
+47020,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-5.898,-1.680
+48020,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-7.362,-3.308
+49020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-7.217,
+50020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-7.329,
+51020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-8.052,
+52020,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.852,
+10021,TUAS,TENGEH,False,True,predicted (no reliable taxi data),0.000,-15.573,
+11021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.500,
+12021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.962,
+13021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.559,
+14021,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),81.378,-13.431,
+15021,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20438.865,-12.499,-12.352
+16021,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),35426.165,-14.366,-15.342
+17021,JURONG WEST,BOON LAY PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32420.570,-12.826,-9.689
+18021,JURONG WEST,BOON LAY PLACE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),30818.456,-17.514,-19.958
+19021,JURONG EAST,LAKESIDE (LEISURE),True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12985.080,-16.684,-16.467
+20021,JURONG EAST,YUHUA WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19293.287,-17.457,-18.329
+21021,JURONG EAST,YUHUA EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31453.841,-12.033,-10.582
+22021,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19103.848,-16.613,-19.835
+23021,BUKIT BATOK,BUKIT BATOK SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14290.951,-17.902,-20.066
+24021,BUKIT TIMAH,ANAK BUKIT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9807.652,-15.818,-17.991
+25021,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3023.467,-23.711,-27.474
+26021,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),935.157,-15.851,-5.344
+27021,BUKIT TIMAH,SWISS CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1552.049,-20.878,-31.188
+28021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),577.156,-21.345,-15.172
+29021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),45.753,-20.582,
+30021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.299,-20.853,
+31021,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1123.638,-14.855,-10.127
+32021,TOA PAYOH,TOA PAYOH WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8997.279,-10.024,-10.500
+33021,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),26109.237,-7.623,-5.064
+34021,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9224.819,-15.080,-14.480
+35021,SERANGOON,LORONG CHUAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9576.691,-8.357,-6.505
+36021,SERANGOON,UPPER PAYA LEBAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11966.501,-6.229,1.463
+37021,HOUGANG,TAI SENG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7625.810,-12.262,-10.166
+38021,HOUGANG,DEFU INDUSTRIAL PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-11.991,-6.331
+39021,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-11.841,
+40021,PAYA LEBAR,PAYA LEBAR EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.193,-10.917
+41021,BEDOK,BEDOK RESERVOIR,False,True,predicted (no reliable taxi data),1472.019,-12.608,
+42021,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10099.320,-10.068,-9.523
+43021,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21387.726,-13.866,-14.952
+44021,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23252.428,-16.783,-17.841
+45021,TAMPINES,SIMEI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20436.075,-15.295,-14.913
+46021,TAMPINES,XILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1248.837,-9.176,-4.175
+47021,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-5.740,-7.124
+48021,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-7.954,-9.088
+49021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-4.930,
+50021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-5.949,
+51021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-7.216,
+52021,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-11.010,
+58021,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+10022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.453,
+11022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.887,
+12022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.875,
+13022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.421,
+14022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-14.307,
+15022,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),3.898,-14.345,
+16022,JURONG WEST,YUNNAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14453.148,-12.857,-8.622
+17022,JURONG WEST,WENYA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9713.634,-17.728,-20.557
+18022,JURONG WEST,HONG KAH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17687.901,-13.013,-11.630
+19022,JURONG WEST,HONG KAH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17585.943,-12.890,-11.730
+20022,TENGAH,PLANTATION,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4775.647,-13.040,-13.256
+21022,BUKIT BATOK,BRICKWORKS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22693.597,-10.527,-7.944
+22022,BUKIT BATOK,GUILIN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17783.610,-11.682,-6.771
+23022,BUKIT BATOK,HILLVIEW,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15062.757,-10.182,-10.646
+24022,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3427.240,-23.009,-22.849
+25022,BUKIT PANJANG,NATURE RESERVE,False,True,predicted (no reliable taxi data),3.137,-23.151,
+26022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),789.983,-22.473,-23.780
+27022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-22.833,
+28022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.142,
+29022,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),438.000,-18.614,
+30022,BISHAN,UPPER THOMSON,False,True,predicted (no reliable taxi data),6595.722,-14.490,
+31022,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6385.288,-7.570,1.176
+32022,BISHAN,MARYMOUNT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16108.025,-7.187,-4.308
+33022,BISHAN,BISHAN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11793.348,-12.554,-12.969
+34022,SERANGOON,LORONG CHUAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7082.924,-16.313,-20.175
+35022,SERANGOON,SERANGOON CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20971.530,-12.434,-14.865
+36022,HOUGANG,LORONG AH SOO,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18363.789,-9.559,-7.918
+37022,HOUGANG,LORONG AH SOO,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17928.707,-10.022,-8.584
+38022,PAYA LEBAR,AIRPORT ROAD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),608.643,-10.286,-5.519
+39022,PAYA LEBAR,PLAB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.678,-54.621
+40022,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-11.504,
+41022,PAYA LEBAR,PAYA LEBAR EAST,False,True,predicted (no reliable taxi data),1282.362,-12.264,
+42022,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27524.463,-12.675,-12.178
+43022,TAMPINES,TAMPINES WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19800.787,-9.802,-7.778
+44022,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),34572.014,-11.949,-11.121
+45022,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31389.122,-16.887,-18.077
+46022,CHANGI,CHANGI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5773.590,-17.291,-24.924
+47022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-6.908,
+48022,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-7.258,-8.498
+49022,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-3.192,16.437
+50022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-3.903,
+51022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-6.120,
+52022,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-7.648,
+53022,CHANGI BAY,CHANGI BAY,False,True,predicted (no reliable taxi data),0.000,-11.397,
+57022,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.080,
+58022,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+11023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.589,
+12023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.875,
+13023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.875,
+14023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.039,
+15023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.274,
+16023,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.293,
+17023,JURONG WEST,WENYA,False,True,predicted (no reliable taxi data),0.000,-20.110,
+18023,TENGAH,TENGAH INDUSTRIAL ESTATE,False,True,predicted (no reliable taxi data),0.000,-22.230,
+19023,TENGAH,TENGAH INDUSTRIAL ESTATE,False,True,predicted (no reliable taxi data),0.000,-14.954,
+20023,TENGAH,PARK,False,True,predicted (no reliable taxi data),12.959,-16.886,
+21023,BUKIT BATOK,HONG KAH NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12868.665,-16.486,-18.681
+22023,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14856.364,-9.866,-9.611
+23023,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7478.816,-12.034,-6.376
+24023,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3021.527,-22.924,-28.785
+25023,BUKIT PANJANG,NATURE RESERVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),676.365,-23.627,-27.419
+26023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.493,
+27023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.869,
+28023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.347,
+29023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),6.275,-18.995,
+30023,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),5476.900,-15.827,
+31023,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6668.823,-7.744,-10.037
+32023,BISHAN,UPPER THOMSON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15473.788,-8.406,-8.547
+33023,ANG MO KIO,TOWNSVILLE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22732.368,-9.594,-9.703
+34023,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16308.556,-13.878,-13.096
+35023,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12198.273,-13.977,-14.944
+36023,HOUGANG,KOVAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12736.356,-14.141,-15.001
+37023,HOUGANG,KOVAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17143.567,-13.331,-14.942
+38023,HOUGANG,LORONG HALUS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13757.000,-12.884,-12.245
+39023,PAYA LEBAR,PLAB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.403,-29.141
+40023,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-12.132,
+41023,PAYA LEBAR,PAYA LEBAR EAST,False,True,predicted (no reliable taxi data),10.000,-13.876,
+42023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5135.634,-9.362,-6.803
+43023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10274.721,-9.869,-9.460
+44023,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19708.608,-11.920,-10.501
+45023,TAMPINES,TAMPINES EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32960.439,-17.141,-18.381
+46023,PASIR RIS,FLORA DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12976.047,-15.002,-14.531
+47023,CHANGI,CHANGI WEST,False,True,predicted (no reliable taxi data),1242.552,-8.625,
+48023,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-6.743,-15.936
+49023,CHANGI,CHANGI AIRPORT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-2.599,13.062
+50023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-3.845,
+51023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-8.714,
+52023,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-12.907,
+56023,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.279,
+57023,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.796,
+11024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.875,
+12024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.910,
+13024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.875,
+14024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.738,
+15024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-17.526,
+16024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.880,
+17024,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.927,
+18024,WESTERN WATER CATCHMENT,MURAI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-21.197,-32.561
+19024,TENGAH,FOREST HILL,False,True,predicted (no reliable taxi data),0.890,-19.618,
+20024,TENGAH,FOREST HILL,False,True,predicted (no reliable taxi data),2570.664,-16.724,
+21024,TENGAH,BRICKLAND,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16407.875,-18.046,-22.926
+22024,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12510.792,-17.013,-21.477
+23024,BUKIT BATOK,GOMBAK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6342.320,-22.165,-31.436
+24024,BUKIT PANJANG,DAIRY FARM,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19077.868,-9.566,-1.197
+25024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5471.174,-19.908,-25.033
+26024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.695,
+27024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.948,
+28024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.548,
+29024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.958,
+30024,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),958.028,-21.429,
+31024,ANG MO KIO,KEBUN BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15832.689,-8.978,-8.183
+32024,ANG MO KIO,KEBUN BAHRU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20373.846,-5.430,0.664
+33024,ANG MO KIO,CHENG SAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),29274.250,-10.742,-7.508
+34024,ANG MO KIO,CHENG SAN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15405.238,-15.979,-17.578
+35024,SERANGOON,SERANGOON GARDEN,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13725.148,-15.558,-19.024
+36024,HOUGANG,HOUGANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27820.355,-11.012,-8.347
+37024,HOUGANG,HOUGANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27937.395,-13.185,-14.929
+38024,HOUGANG,HOUGANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),29387.048,-13.090,-14.092
+39024,HOUGANG,LORONG HALUS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5140.940,-17.029,-21.707
+40024,PAYA LEBAR,PLAB,False,True,predicted (no reliable taxi data),0.000,-14.888,
+41024,PAYA LEBAR,PAYA LEBAR NORTH,False,True,predicted (no reliable taxi data),0.000,-14.302,
+42024,TAMPINES,TAMPINES NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2333.798,-9.096,-3.255
+43024,PASIR RIS,PASIR RIS CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16656.707,-17.052,-18.788
+44024,PASIR RIS,PASIR RIS CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18822.524,-13.082,-12.342
+45024,PASIR RIS,PASIR RIS DRIVE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),32003.499,-15.105,-17.571
+46024,PASIR RIS,LOYANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2613.090,-8.220,-1.964
+47024,PASIR RIS,LOYANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.420,-19.318
+48024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-4.581,
+49024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-4.247,
+50024,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-9.701,
+55024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.012,
+56024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.367,
+57024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.080,
+58024,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+12025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.091,
+13025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.088,
+14025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.790,
+15025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.650,
+16025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-13.534,
+17025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.327,
+18025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.663,
+19025,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-17.026,
+20025,WESTERN WATER CATCHMENT,MURAI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12851.971,-14.960,-14.220
+21025,CHOA CHU KANG,KEAT HONG,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),40275.561,-15.656,-13.498
+22025,CHOA CHU KANG,TECK WHYE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),27212.094,-13.502,-13.402
+23025,BUKIT PANJANG,SENJA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28502.737,-14.487,-11.999
+24025,BUKIT PANJANG,FAJAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),38239.400,-13.470,-13.161
+25025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2341.546,-21.449,-26.366
+26025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-22.117,
+27025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.820,
+28025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.054,
+29025,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.474,
+30025,ANG MO KIO,TAGORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),407.885,-22.190,-20.435
+31025,ANG MO KIO,SEMBAWANG HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9239.074,-5.405,4.516
+32025,ANG MO KIO,YIO CHU KANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19930.676,-7.454,-4.166
+33025,ANG MO KIO,YIO CHU KANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2469.992,-7.056,7.852
+34025,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3472.334,-15.000,-16.398
+35025,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4747.203,-13.242,-9.605
+36025,HOUGANG,TRAFALGAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20645.267,-9.775,-5.980
+37025,HOUGANG,TRAFALGAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22388.889,-16.058,-17.303
+38025,SENGKANG,COMPASSVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33013.059,-12.281,-12.643
+39025,SENGKANG,LORONG HALUS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16053.294,-17.713,-23.167
+40025,SENGKANG,LORONG HALUS NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-17.244,-16.410
+41025,PASIR RIS,PASIR RIS WAFER FAB PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.526,-16.416
+42025,PASIR RIS,PASIR RIS WAFER FAB PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5171.077,-13.521,-15.543
+43025,PASIR RIS,PASIR RIS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),21658.085,-12.703,-11.102
+44025,PASIR RIS,PASIR RIS PARK,False,True,predicted (no reliable taxi data),5849.641,-10.093,
+45025,PASIR RIS,PASIR RIS PARK,False,True,predicted (no reliable taxi data),4104.964,-9.175,
+46025,PASIR RIS,LOYANG WEST,False,True,predicted (no reliable taxi data),2278.271,-9.840,
+47025,PASIR RIS,LOYANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.293,-23.178
+48025,CHANGI,CHANGI WEST,False,True,predicted (no reliable taxi data),0.000,-8.537,
+49025,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-7.645,
+53025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.053,
+54025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.760,
+55025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.086,
+56025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.367,
+57025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.080,
+58025,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+12026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+13026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+14026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.883,
+15026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.563,
+16026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-13.539,
+17026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-13.901,
+18026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.921,
+19026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-15.177,
+20026,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.680,
+21026,CHOA CHU KANG,CHOA CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19865.518,-17.106,-17.007
+22026,CHOA CHU KANG,CHOA CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9245.198,-18.834,-22.088
+23026,BUKIT PANJANG,SENJA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17937.127,-14.111,-13.339
+24026,BUKIT PANJANG,SAUJANA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24775.285,-14.828,-13.844
+25026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-23.641,
+26026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-22.588,
+27026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.620,
+28026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.767,
+29026,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),312.344,-22.238,
+30026,ANG MO KIO,TAGORE,False,True,predicted (no reliable taxi data),3331.818,-17.119,
+31026,ANG MO KIO,TAGORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2688.245,-14.437,-10.986
+32026,ANG MO KIO,YIO CHU KANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2884.543,-12.633,-7.600
+33026,ANG MO KIO,YIO CHU KANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1385.498,-7.595,11.039
+34026,SERANGOON,SELETAR HILLS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),3233.002,-16.349,-15.466
+35026,SENGKANG,SENGKANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),12460.126,-11.090,-8.712
+36026,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),25495.585,-12.126,-10.621
+37026,SENGKANG,ANCHORVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28481.899,-15.679,-18.816
+38026,SENGKANG,SENGKANG TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),42609.967,-15.420,-17.323
+39026,SENGKANG,RIVERVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),41935.737,-16.692,-16.922
+40026,PUNGGOL,PUNGGOL FIELD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24158.315,-15.301,-15.144
+41026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),4.561,-14.534,
+42026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),0.000,-11.946,
+43026,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),1371.686,-11.534,
+47026,CHANGI,CHANGI POINT,False,True,predicted (no reliable taxi data),82.462,-12.770,
+48026,CHANGI,CHANGI POINT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),457.538,-12.051,-4.423
+49026,CHANGI,CHANGI AIRPORT,False,True,predicted (no reliable taxi data),0.000,-13.449,
+52026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.053,
+53026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.687,
+54026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.878,
+55026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.747,
+56026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.732,
+57026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.931,
+58026,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+12027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.062,
+13027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+14027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+15027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.811,
+16027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.255,
+17027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.442,
+18027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.525,
+19027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-20.493,
+20027,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.776,
+21027,CHOA CHU KANG,YEW TEE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19529.311,-18.558,-22.070
+22027,SUNGEI KADUT,GALI BATU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23167.851,-20.475,-24.418
+23027,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-15.610,
+24027,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-22.563,
+25027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.771,
+26027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-22.210,
+27027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.412,
+28027,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-20.546,
+29027,YISHUN,NEE SOON,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),931.664,-21.215,-21.311
+30027,YISHUN,SPRINGLEAF,False,True,predicted (no reliable taxi data),2877.122,-19.592,
+31027,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),353.247,-22.891,-25.272
+32027,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-20.986,
+33027,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-22.031,-36.229
+34027,SENGKANG,SENGKANG WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-14.784,-10.240
+35027,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10882.068,-15.734,-13.740
+36027,SENGKANG,FERNVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22158.272,-14.244,-12.948
+37027,SENGKANG,ANCHORVALE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),16946.245,-11.389,-13.986
+38027,SENGKANG,SENGKANG TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33525.345,-16.457,-19.913
+39027,PUNGGOL,PUNGGOL FIELD,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),39688.082,-14.080,-13.769
+40027,PUNGGOL,WATERWAY EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),37008.963,-12.729,-11.238
+41027,PUNGGOL,WATERWAY EAST,False,True,predicted (no reliable taxi data),9485.242,-10.324,
+42027,PASIR RIS,PASIR RIS WAFER FAB PARK,False,True,predicted (no reliable taxi data),0.000,-14.724,
+52027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-9.687,
+53027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.071,
+54027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.532,
+55027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.948,
+56027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.944,
+57027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.345,
+58027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+59027,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.040,
+13028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+14028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+15028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-17.453,
+16028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.878,
+17028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.064,
+18028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-19.258,
+19028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.797,
+20028,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.961,
+21028,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),3206.686,-18.041,
+22028,SUNGEI KADUT,PANG SUA,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4568.996,-17.414,-14.941
+23028,SUNGEI KADUT,GALI BATU,False,True,predicted (no reliable taxi data),0.000,-19.989,
+24028,SUNGEI KADUT,GALI BATU,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.268,-14.823
+25028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-21.493,-17.810
+26028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-24.050,-26.811
+27028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.142,
+28028,CENTRAL WATER CATCHMENT,CENTRAL WATER CATCHMENT,False,True,predicted (no reliable taxi data),0.000,-21.492,
+29028,YISHUN,NEE SOON,False,True,predicted (no reliable taxi data),286.625,-20.550,
+30028,YISHUN,SPRINGLEAF,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),954.786,-23.470,-29.003
+31028,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),2466.777,-24.283,-29.061
+32028,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),1650.756,-14.237,
+33028,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-21.283,
+34028,SELETAR,SELETAR AEROSPACE PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-21.457,-39.762
+35028,SELETAR,SELETAR AEROSPACE PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.645,-34.161
+36028,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),0.000,-13.751,
+37028,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),2069.305,-13.719,
+38028,PUNGGOL,PUNGGOL TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23616.980,-11.265,-11.106
+39028,PUNGGOL,PUNGGOL TOWN CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),17529.421,-8.801,-3.044
+40028,PUNGGOL,PUNGGOL CANAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),11724.743,-8.030,-1.637
+41028,PUNGGOL,CONEY ISLAND,False,True,predicted (no reliable taxi data),0.000,-13.001,
+44028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.474,
+45028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.371,
+46028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.186,
+47028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.326,
+48028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.498,
+49028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.159,
+53028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.546,
+54028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.948,
+55028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.452,
+56028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.068,
+57028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+58028,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+14029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+15029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-17.453,
+16029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-21.003,
+17029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-20.351,
+18029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.812,
+19029,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.266,
+20029,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-18.491,
+21029,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),0.000,-17.160,
+22029,SUNGEI KADUT,PANG SUA,False,True,predicted (no reliable taxi data),274.892,-17.183,
+23029,SUNGEI KADUT,TURF CLUB,False,True,predicted (no reliable taxi data),374.851,-21.156,
+24029,SUNGEI KADUT,TURF CLUB,False,True,predicted (no reliable taxi data),0.000,-21.481,
+25029,MANDAI,MANDAI WEST,False,True,predicted (no reliable taxi data),0.000,-20.420,
+26029,MANDAI,MANDAI WEST,False,True,predicted (no reliable taxi data),0.000,-21.215,
+27029,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.847,-18.997
+28029,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-20.483,-15.734
+29029,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-22.341,
+30029,YISHUN,KHATIB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5431.589,-22.537,-29.636
+31029,YISHUN,YISHUN SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23674.928,-18.155,-18.998
+32029,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),24180.397,-15.238,-16.814
+33029,YISHUN,LOWER SELETAR,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6948.391,-14.703,-12.680
+34029,YISHUN,LOWER SELETAR,False,True,predicted (no reliable taxi data),0.000,-19.793,
+35029,SELETAR,SELETAR AEROSPACE PARK,False,True,predicted (no reliable taxi data),0.000,-15.027,
+36029,SELETAR,SELETAR,False,True,predicted (no reliable taxi data),0.000,-15.210,
+37029,SELETAR,PULAU PUNGGOL TIMOR,False,True,predicted (no reliable taxi data),0.000,-14.921,
+38029,SELETAR,PULAU PUNGGOL TIMOR,False,True,predicted (no reliable taxi data),2225.235,-10.117,
+39029,PUNGGOL,NORTHSHORE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),281.338,-9.921,-12.832
+40029,PUNGGOL,NORTHSHORE,False,True,predicted (no reliable taxi data),154.955,-11.067,
+43029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.428,
+44029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.114,
+45029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.650,
+46029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.814,
+47029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.455,
+48029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.352,
+49029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.989,
+51029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.086,
+52029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.279,
+53029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.948,
+54029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-13.452,
+55029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.906,
+56029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+57029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+58029,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.229,
+14030,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.026,
+15030,WESTERN WATER CATCHMENT,MURAI,False,True,predicted (no reliable taxi data),0.000,-16.949,
+16030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-18.360,
+17030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.213,
+18030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-20.251,
+19030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.552,
+20030,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.245,
+21030,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-18.438,
+22030,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),14.495,-17.449,
+23030,SUNGEI KADUT,KRANJI,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),5.761,-23.213,-32.262
+24030,SUNGEI KADUT,TURF CLUB,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),4288.238,-13.938,-11.970
+25030,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10768.486,-15.297,-12.330
+26030,MANDAI,MANDAI WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10967.898,-10.482,1.522
+27030,WOODLANDS,WOODLANDS SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8572.207,-20.633,-25.192
+28030,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-18.889,
+29030,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-16.698,
+30030,MANDAI,MANDAI ESTATE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),6763.413,-19.817,-21.849
+31030,YISHUN,YISHUN WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),22645.442,-15.082,-15.265
+32030,YISHUN,YISHUN SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20754.286,-16.140,-19.502
+33030,YISHUN,YISHUN EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),25354.999,-15.974,-17.210
+36030,SELETAR,PULAU PUNGGOL BARAT,False,True,predicted (no reliable taxi data),0.000,-16.592,
+37030,SELETAR,PULAU PUNGGOL BARAT,False,True,predicted (no reliable taxi data),0.000,-15.688,
+42030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.799,
+51030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.367,
+52030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-10.712,
+53030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-14.032,
+54030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.068,
+55030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+56030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.166,
+57030,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.211,
+16031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-18.360,
+17031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-17.156,
+18031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-18.533,
+19031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-20.501,
+20031,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-21.544,
+21031,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-20.091,
+22031,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-11.650,
+23031,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-13.648,
+24031,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14131.394,-18.652,-20.482
+25031,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),20852.080,-14.661,-13.312
+26031,WOODLANDS,WOODLANDS REGIONAL CENTRE,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),23291.161,-18.048,-19.485
+27031,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),43124.933,-16.951,-19.016
+28031,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7700.428,-19.235,-20.924
+29031,MANDAI,MANDAI EAST,False,True,predicted (no reliable taxi data),0.000,-15.621,
+30031,MANDAI,MANDAI EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),9623.345,-17.068,-15.214
+31031,YISHUN,YISHUN WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),33357.123,-16.654,-17.747
+32031,YISHUN,NORTHLAND,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),28877.926,-12.443,-9.631
+33031,SIMPANG,SIMPANG SOUTH,False,True,predicted (no reliable taxi data),4783.416,-15.748,
+34031,SIMPANG,SIMPANG SOUTH,False,True,predicted (no reliable taxi data),0.000,-15.919,
+52031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-11.772,
+53031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-12.053,
+54031,NORTH-EASTERN ISLANDS,NORTH-EASTERN ISLANDS,False,True,predicted (no reliable taxi data),0.000,-15.850,
+17032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-17.715,
+18032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-18.414,
+19032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.130,
+20032,LIM CHU KANG,LIM CHU KANG,False,True,predicted (no reliable taxi data),0.000,-19.009,
+21032,SUNGEI KADUT,RESERVOIR VIEW,False,True,predicted (no reliable taxi data),0.000,-13.978,
+22032,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-13.235,
+23032,SUNGEI KADUT,KRANJI,False,True,predicted (no reliable taxi data),0.000,-12.837,
+24032,WOODLANDS,NORTH COAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),8078.950,-19.051,-33.009
+25032,WOODLANDS,WOODLANDS WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),7097.618,-16.173,-16.794
+26032,WOODLANDS,GREENWOOD PARK,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),15289.425,-14.999,-14.283
+27032,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),41656.167,-16.597,-17.266
+28032,WOODLANDS,WOODLANDS EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),31244.395,-15.589,-16.504
+29032,SEMBAWANG,SEMBAWANG CENTRAL,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),18035.345,-18.971,-17.572
+30032,SEMBAWANG,SEMBAWANG SPRINGS,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),14872.210,-14.763,-13.235
+31032,SEMBAWANG,SEMBAWANG EAST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13556.380,-21.160,-34.074
+32032,SIMPANG,SIMPANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1609.515,-17.656,-14.029
+33032,SIMPANG,SIMPANG NORTH,False,True,predicted (no reliable taxi data),0.000,-16.411,
+34032,SIMPANG,PULAU SELETAR,False,True,predicted (no reliable taxi data),0.000,-16.464,
+35032,SIMPANG,PULAU SELETAR,False,True,predicted (no reliable taxi data),0.000,-16.014,
+25033,WOODLANDS,NORTH COAST,False,True,predicted (no reliable taxi data),1986.865,-20.330,
+26033,WOODLANDS,NORTH COAST,False,True,predicted (no reliable taxi data),2924.337,-20.531,
+27033,WOODLANDS,SENOKO WEST,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),908.995,-5.103,21.025
+28033,SEMBAWANG,SENOKO SOUTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),1796.395,-9.072,-11.126
+29033,SEMBAWANG,SEMBAWANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),19300.371,-13.213,-11.057
+30033,SEMBAWANG,ADMIRALTY,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),13668.373,-16.096,-15.738
+31033,SEMBAWANG,SEMBAWANG STRAITS,False,True,predicted (no reliable taxi data),8240.870,-13.747,
+32033,SIMPANG,SIMPANG NORTH,False,True,predicted (no reliable taxi data),214.350,-14.813,
+33033,SIMPANG,TANJONG IRAU,False,True,predicted (no reliable taxi data),0.000,-16.069,
+27034,SEMBAWANG,SENOKO NORTH,False,True,predicted (no reliable taxi data),0.000,-11.354,
+28034,SEMBAWANG,SENOKO NORTH,False,True,predicted (no reliable taxi data),0.000,-7.831,
+29034,SEMBAWANG,SEMBAWANG NORTH,True,True,analysed (prediction shown; measured effect in cell_rain_effects.csv),10111.087,-21.367,-35.872
+30034,SEMBAWANG,THE WHARVES,False,True,predicted (no reliable taxi data),3818.649,-15.702,
+32034,SEMBAWANG,SEMBAWANG STRAITS,False,True,predicted (no reliable taxi data),454.190,-18.125,
+7010,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-18.339,
+7011,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.743,
+7014,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.845,
+7015,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-17.948,
+7016,TUAS,TUAS VIEW EXTENSION,False,False,predicted (no reliable taxi data),0.000,-18.111,
+9021,TUAS,TUAS PROMENADE,False,False,predicted (no reliable taxi data),0.000,-16.915,
+9022,TUAS,TUAS PROMENADE,False,False,predicted (no reliable taxi data),0.000,-17.300,
+11016,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-14.107,
+11017,TUAS,TUAS BAY,False,False,predicted (no reliable taxi data),0.000,-12.561,
+12015,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-15.530,
+13015,PIONEER,PIONEER SECTOR,False,False,predicted (no reliable taxi data),0.000,-15.752,
+13016,PIONEER,GUL BASIN,False,False,predicted (no reliable taxi data),0.000,-14.146,
+14012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-17.216,
+15011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-17.445,
+15012,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-17.445,
+15016,BOON LAY,SHIPYARD,False,False,predicted (no reliable taxi data),0.000,-18.098,
+16016,BOON LAY,SAMULUN,False,False,predicted (no reliable taxi data),0.000,-19.884,
+17011,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-19.558,
+17016,BOON LAY,SAMULUN,False,False,predicted (no reliable taxi data),0.000,-20.115,
+18016,JURONG EAST,JURONG PORT,False,False,predicted (no reliable taxi data),0.000,-20.605,
+19015,WESTERN ISLANDS,JURONG ISLAND AND BUKOM,False,False,predicted (no reliable taxi data),0.000,-20.569,
+20016,JURONG EAST,PENJURU CRESCENT,False,False,predicted (no reliable taxi data),0.000,-19.749,
+21016,JURONG EAST,PENJURU CRESCENT,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.776,-14.306
+23015,QUEENSTOWN,PORT,False,False,predicted (no reliable taxi data),0.000,-22.322,
+24014,QUEENSTOWN,PORT,False,False,predicted (no reliable taxi data),0.000,-18.971,
+24033,WOODLANDS,NORTH COAST,False,False,predicted (no reliable taxi data),0.000,-21.490,
+26034,WOODLANDS,NORTH COAST,False,False,predicted (no reliable taxi data),0.000,-17.863,
+28011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-19.734,
+28012,BUKIT MERAH,MARITIME SQUARE,False,False,predicted (no reliable taxi data),0.000,-19.446,
+28035,SEMBAWANG,SENOKO NORTH,False,False,predicted (no reliable taxi data),0.000,-18.006,
+29012,BUKIT MERAH,MARITIME SQUARE,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-23.406,-30.412
+29035,SEMBAWANG,SENOKO NORTH,False,False,predicted (no reliable taxi data),0.000,-18.376,
+30010,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-20.416,
+30035,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-19.314,
+31009,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-20.553,
+31034,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-18.229,
+31035,SEMBAWANG,THE WHARVES,False,False,predicted (no reliable taxi data),0.000,-19.428,
+32009,SOUTHERN ISLANDS,SOUTHERN GROUP,False,False,predicted (no reliable taxi data),0.000,-20.256,
+32011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-19.408,
+33010,SOUTHERN ISLANDS,SOUTHERN GROUP,False,False,predicted (no reliable taxi data),0.000,-20.348,
+33011,SOUTHERN ISLANDS,SENTOSA,False,False,predicted (no reliable taxi data),0.000,-19.267,
+34012,STRAITS VIEW,STRAITS VIEW,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-19.087,-16.203
+34030,SIMPANG,SIMPANG SOUTH,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-22.069,-31.625
+35013,MARINA SOUTH,MARINA SOUTH,False,False,predicted (no reliable taxi data),0.000,-19.396,
+35030,SELETAR,PULAU PUNGGOL BARAT,False,False,predicted (no reliable taxi data),0.000,-19.417,
+36031,SELETAR,PULAU PUNGGOL BARAT,False,False,predicted (no reliable taxi data),0.000,-19.957,
+40016,MARINE PARADE,EAST COAST,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-8.123,3.555
+41016,BEDOK,SIGLAP,False,False,predicted (no reliable taxi data),0.000,-14.005,
+44017,BEDOK,BAYSHORE,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-12.603,-15.223
+46026,PASIR RIS,LOYANG WEST,False,False,predicted (no reliable taxi data),0.000,-12.557,
+49017,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-17.150,
+50017,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-18.080,
+50025,CHANGI,CHANGI AIRPORT,True,False,analysed (prediction shown; measured effect in cell_rain_effects.csv),0.000,-15.850,-34.169
+50026,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-15.038,
+51024,CHANGI,CHANGI AIRPORT,False,False,predicted (no reliable taxi data),0.000,-14.642,

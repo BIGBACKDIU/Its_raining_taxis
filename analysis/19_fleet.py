@@ -17,9 +17,7 @@ from analysis.fepois_hd import fepois, pct
 COLS = ["ts", "cell", "vacant", "rain_band", "mmh_lag1", "mmh_lag2", "how", "regime_id", "drop_main"]
 
 
-def main():
-    style()
-    log_test_scoring("19_fleet.py", "monthly heavy-rain effects incl. test-year months (association only)", "step 19")
+def monthly():
     rows = []
     for y in range(2021, 2027):
         p = load_panel([y], columns=COLS)
@@ -38,13 +36,29 @@ def main():
                 rec[f"{kind}_coef"], rec[f"{kind}_se"] = float(r.coef["heavy"]), float(r.se["heavy"])
             rows.append(rec)
         print(y, flush=True)
-    t = pd.DataFrame(rows)
+    return pd.DataFrame(rows)
+
+
+def main(meta_only=False):
+    style()
+    if meta_only:                    # reuse the monthly effects; re-run the meta-regression only
+        log_test_scoring("19_fleet.py meta", "meta-regression re-run on saved monthly effects incl. test-year months "
+                         "(registered coverage variable, HAC errors)", "step 19 fix")
+        t = pd.read_csv(TABLES / "fleet_monthly_effects.csv")[["month", "heavy_rows", "abs_coef", "abs_se", "share_coef",
+                                                                 "share_se"]]
+    else:
+        log_test_scoring("19_fleet.py", "monthly heavy-rain effects incl. test-year months (association only)", "step 19")
+        t = monthly()
     fl = pd.read_csv(STATIC / "lta_cdg_share_monthly.csv", parse_dates=["month"])
     fl["month"] = fl.month.dt.to_period("M").astype(str)
     t = t.merge(fl[["month", "total_taxis"]], on="month", how="left")
     t["total_taxis"] = t.total_taxis.ffill()
+    # registered coverage variable: the feed regime's log coverage level (feed_regimes.csv), averaged over the
+    # month's days (decision 130; the first run used the daily level instead)
     dfl = pd.read_csv(INTERIM / "day_flags.csv", parse_dates=["date"])
-    lev = dfl.groupby(dfl.date.dt.to_period("M").astype(str)).lr.median()
+    reg = pd.read_csv(TABLES / "feed_regimes.csv").set_index("regime_id").level_log
+    dfl["regime_level"] = dfl.regime_id.map(reg)
+    lev = dfl.groupby(dfl.date.dt.to_period("M").astype(str)).regime_level.mean()
     t["log_coverage"] = t.month.map(lev)
     mm = pd.PeriodIndex(t.month, freq="M").month
     t["season"] = np.select([np.isin(mm, [12, 1, 2, 3]), np.isin(mm, [6, 7, 8, 9])], ["NE monsoon", "SW monsoon"],
@@ -59,9 +73,12 @@ def main():
         ols = smf.wls("y ~ fleet_k + log_coverage + C(season)", data=d, weights=1 / d.se ** 2).fit()
         Q = float(np.sum(ols.resid ** 2 / d.se ** 2))
         tau2 = max(0.0, (Q - (len(d) - len(ols.params))) / np.sum(1 / d.se ** 2))
-        m = smf.wls("y ~ fleet_k + log_coverage + C(season)", data=d, weights=1 / (d.se ** 2 + tau2)).fit(cov_type="HC1")
+        d = d.sort_values("month").reset_index(drop=True)
+        lag = int(np.floor(4 * (len(d) / 100) ** (2 / 9)))              # Newey-West rule of thumb
+        m = smf.wls("y ~ fleet_k + log_coverage + C(season)", data=d, weights=1 / (d.se ** 2 + tau2)).fit(
+            cov_type="HAC", cov_kwds={"maxlags": lag})
         b, s = m.params["fleet_k"], m.bse["fleet_k"]
-        res.append({"model": kind, "months": len(d), "tau2": tau2,
+        res.append({"model": kind, "months": len(d), "tau2": tau2, "se_type": f"HAC Newey-West, {lag} lags",
                     "slope_log_per_1000_taxis": b, "se": s, "p": m.pvalues["fleet_k"],
                     "pp_change_in_effect_per_1000_fewer_taxis": -100 * b,
                     "lo": -100 * (b + 1.96 * s), "hi": -100 * (b - 1.96 * s),
@@ -91,4 +108,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(meta_only=sys.argv[1:] == ["meta"])

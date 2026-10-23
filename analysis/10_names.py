@@ -79,10 +79,33 @@ def cell_effects(names):
                       "abs_hi": 100 * np.nanquantile(ba, 0.975, 0), "share_pct": 100 * (V / Fs - 1),
                       "share_lo": 100 * np.nanquantile(bs, 0.025, 0), "share_hi": 100 * np.nanquantile(bs, 0.975, 0)})
     e["tested"] = e.heavy_rows >= 100
+    # absolute change in taxis per heavy-rain half-hour with its day-bootstrap CI (shown beside share results)
+    e["abs_change_per_half_hour"] = (V - F) / n_slots
+    e["abs_change_lo"] = e.abs_lo / 100 * e.expected_vacant_heavy
+    e["abs_change_hi"] = e.abs_hi / 100 * e.expected_vacant_heavy
+    # two-sided day-bootstrap p-values and Benjamini-Hochberg q-values across tested cells (decision 133)
+    for k, b in (("abs", ba), ("share", bs)):
+        p_ = 2 * np.minimum(np.nanmean(b >= 0, 0), np.nanmean(b <= 0, 0))
+        e[f"{k}_p"] = np.clip(p_, 1 / B_BOOT, 1)
+        e[f"{k}_q"] = np.nan
+        t = e.tested.values
+        e.loc[t, f"{k}_q"] = bh(e.loc[t, f"{k}_p"].values)
+    e["presentable_abs"] = e.tested & (e.expected_vacant_heavy >= 4) & (e.abs_q < 0.10)
+    e["presentable_share"] = e.tested & (e.expected_vacant_heavy >= 4) & (e.share_q < 0.10)
     e = e.merge(names[["cell", "planning_area", "subzone", "nearest_mrt", "landmarks", "place", "lon", "lat"]],
                 on="cell", how="left")
     e.to_csv(TABLES / "cell_rain_effects.csv", index=False, float_format="%.4f")
     return e, p
+
+
+def bh(p):
+    """Benjamini-Hochberg q-values."""
+    p = np.asarray(p, float)
+    n = len(p)
+    o = np.argsort(p)
+    q = np.empty(n)
+    q[o] = np.minimum.accumulate((p[o] * n / np.arange(1, n + 1))[::-1])[::-1]
+    return np.minimum(q, 1)
 
 
 def named(t, cols):
@@ -94,13 +117,22 @@ def named(t, cols):
     return t[keep + ["cell"]]
 
 
+ABS_COLS = ["abs_change_per_half_hour", "abs_change_lo", "abs_change_hi"]
+
+
 def rankings(e):
+    """Presentation lists: tested cells with >= 4 expected vacant taxis in heavy rain and a BH q < 0.10 effect;
+    the full sorted lists are kept as appendix tables (*_all.csv)."""
     tested = e[e.tested]
-    a = named(tested.sort_values("taxis_lost_per_heavy_half_hour", ascending=False).head(30),
-              ["taxis_lost_per_heavy_half_hour", "expected_vacant_heavy", "abs_pct", "abs_lo", "abs_hi"])
+    cols_a = ["taxis_lost_per_heavy_half_hour", "expected_vacant_heavy", "abs_pct", "abs_lo", "abs_hi", "abs_q"]
+    full = tested.sort_values("taxis_lost_per_heavy_half_hour", ascending=False)
+    named(full, cols_a + ["presentable_abs"]).to_csv(TABLES / "rain_hit_absolute_all.csv", index=False, float_format="%.3f")
+    a = named(full[full.presentable_abs].head(30), cols_a)
     a.to_csv(TABLES / "rain_hit_top30_absolute.csv", index=False, float_format="%.2f")
-    s = named(tested.sort_values("share_pct").head(30), ["share_pct", "share_lo", "share_hi", "abs_pct",
-                                                          "taxis_lost_per_heavy_half_hour"])
+    cols_s = ["share_pct", "share_lo", "share_hi", "share_q", "expected_vacant_heavy"] + ABS_COLS + ["abs_pct"]
+    full = tested.sort_values("share_pct")
+    named(full, cols_s + ["presentable_share"]).to_csv(TABLES / "rain_hit_share_all.csv", index=False, float_format="%.3f")
+    s = named(full[full.presentable_share & (full.share_hi < 0)].head(30), cols_s)
     s.to_csv(TABLES / "rain_hit_top30_share.csv", index=False, float_format="%.2f")
     ty = pd.read_csv(TABLES / "risk_types.csv")
     t0 = e.merge(ty[["cell", "type"]], on="cell")
@@ -108,9 +140,13 @@ def rankings(e):
                                                           "taxis_lost_per_heavy_half_hour"])
     t0.to_csv(TABLES / "rain_sensitive_type0.csv", index=False, float_format="%.2f")
     hs = pd.read_csv(TABLES / "inference_hotspots.csv").set_index("cell").hotspot
-    g = tested[(tested.share_lo > 0) | (tested.cell.map(hs) == "significantly higher")]
-    g = named(g.sort_values("share_pct", ascending=False), ["share_pct", "share_lo", "share_hi", "abs_pct", "abs_lo",
-                                                            "abs_hi"])
+    g = tested[(tested.share_lo > 0) | (tested.cell.map(hs) == "significantly higher")].sort_values("share_pct",
+                                                                                                   ascending=False)
+    cols_g = ["share_pct", "share_lo", "share_hi", "share_q", "expected_vacant_heavy"] + ABS_COLS + \
+        ["abs_pct", "abs_lo", "abs_hi", "presentable_share"]
+    g = named(g, cols_g)
+    # gaining share is not gaining taxis: flag cells whose absolute count rises with a CI above 0
+    g["absolute_gain"] = g.abs_change_lo > 0
     g.to_csv(TABLES / "rain_gainers.csv", index=False, float_format="%.2f")
     return a, s, t0, g
 
@@ -128,6 +164,8 @@ def dry_supply(p, names):
         rows.append(s)
     t = pd.concat(rows).merge(names[["cell", "planning_area", "subzone", "place", "lon", "lat"]], on="cell")
     t.to_csv(TABLES / "dry_supply_by_band.csv", index=False, float_format="%.3f")
+    allday = q.groupby("cell").vacant.mean().rename("dry_mean_vacant")       # all hours, dry snapshots only
+    allday.to_csv(TABLES / "dry_supply_all_hours.csv", float_format="%.4f")
     return t
 
 
@@ -142,10 +180,13 @@ def deserts(names):
         t["hdb_units"] = t.cell.map(b.groupby("cell").total_dwelling_units.sum()).fillna(0)
     else:
         t["hdb_units"] = np.nan
-    t["vacant_per_10k_residents"] = np.where(t.residents > 0, t.mean_fit / t.residents * 1e4, np.nan)
-    cand = t[(t.residents >= 5000) | (t.hdb_units.fillna(0) >= 2000)]
+    # dry-weather supply (decision 134): mean vacant taxis over dry, normal-coverage snapshots, all hours
+    dm = pd.read_csv(TABLES / "dry_supply_all_hours.csv").set_index("cell").dry_mean_vacant
+    t["dry_mean_vacant"] = t.cell.map(dm)
+    t["vacant_per_10k_residents"] = np.where(t.residents > 0, t.dry_mean_vacant / t.residents * 1e4, np.nan)
+    cand = t[((t.residents >= 5000) | (t.hdb_units.fillna(0) >= 2000)) & t.dry_mean_vacant.notna()]
     d = cand.sort_values("vacant_per_10k_residents").head(25)
-    d = named(d, ["residents", "hdb_units", "share_65plus", "mean_fit", "vacant_per_10k_residents", "eligible"])
+    d = named(d, ["residents", "hdb_units", "share_65plus", "dry_mean_vacant", "vacant_per_10k_residents", "eligible"])
     d.to_csv(TABLES / "taxi_deserts.csv", index=False, float_format="%.3f")
     t.to_csv(TABLES / "cells_residents_supply.csv", index=False, float_format="%.3f")
     return d, t
@@ -194,13 +235,15 @@ def maps(e, ds, deserts_t, names):
         norm = TwoSlopeNorm(vcenter=0, vmin=-40, vmax=20)
         t = e[e.tested]
         draw_cells(ax, t.cell.values, t[col].clip(-40, 20).values, div, norm)
-        lab = t.sort_values("taxis_lost_per_heavy_half_hour" if col == "abs_pct" else "share_pct",
+        t_lab = t[t.presentable_abs] if col == "abs_pct" else t[t.presentable_share & (t.share_hi < 0)]
+        lab = t_lab.sort_values("taxis_lost_per_heavy_half_hour" if col == "abs_pct" else "share_pct",
                             ascending=col != "abs_pct")
         label(ax, lab.assign(short=lab.place), "short", 10)
         fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=div), ax=ax, orientation="horizontal", fraction=0.05,
                      pad=0.02, label="%")
         ax.set_title(title, fontsize=9.5)
-    fig.suptitle("Where heavy rain goes with the fewest vacant taxis (labels: 10 largest losses)", x=0.01, ha="left",
+    fig.suptitle("Where heavy rain goes with the fewest vacant taxis (labels: 10 largest losses among cells with >= 4 "
+                 "expected taxis and FDR q < 0.10)", x=0.01, ha="left",
                  fontsize=10.5)
     fig.tight_layout()
     save(fig, "names_rain_hit_map", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, URA MP2019, OSM. "
@@ -234,18 +277,19 @@ def maps(e, ds, deserts_t, names):
     draw_cells(ax, t.cell.values, v, LinearSegmentedColormap.from_list("r", ["#8a2f10", ORANGE, "#f2f1ed", "#7fb0e8",
                                                                              BLUE_DARK]), norm)
     dd = deserts_t.merge(names[["cell"]], on="cell").sort_values("vacant_per_10k_residents")
-    dd = dd[(dd.residents >= 5000) | (dd.hdb_units.fillna(0) >= 2000)]
+    dd = dd[((dd.residents >= 5000) | (dd.hdb_units.fillna(0) >= 2000)) & dd.dry_mean_vacant.notna()]
     label(ax, dd.assign(short=dd.subzone.str.title().str.replace("'S", "'s")), "short", 12)
     sm = plt.cm.ScalarMappable(norm=norm, cmap=LinearSegmentedColormap.from_list("r", ["#8a2f10", ORANGE, "#f2f1ed",
                                                                                        "#7fb0e8", BLUE_DARK]))
     cb = fig.colorbar(sm, ax=ax, orientation="horizontal", fraction=0.05, pad=0.02)
     cb.set_ticks(np.log10([0.01, 0.1, 1, 5, 20, 100]), labels=["0.01", "0.1", "1", "5", "20", "100"])
-    cb.set_label("Mean vacant taxis per 10,000 residents (cells with >= 2,000 residents)")
-    ax.set_title("Taxi deserts: residential areas with the fewest vacant taxis per resident (labels: 12 lowest)",
+    cb.set_label("Dry-weather mean vacant taxis per 10,000 residents (analysed cells with >= 2,000 residents)")
+    ax.set_title("Dry-weather taxi deserts: residential areas with the fewest vacant taxis per resident (labels: 12 lowest)",
                  fontsize=10)
     fig.tight_layout()
-    save(fig, "taxi_deserts_map", "Sources: data.gov.sg taxi availability (LTA), Census 2020 (SingStat), URA MP2019, "
-         "HDB. Residents allocated to cells by residential land-use area.")
+    save(fig, "taxi_deserts_map", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, Census 2020 (SingStat), "
+         "URA MP2019, HDB. Apr 2022 - Mar 2025, snapshots with no rain at the cell for 90 min, normal-coverage regimes; "
+         "residents allocated to cells by residential land-use area.")
     plt.close(fig)
 
 
@@ -263,7 +307,7 @@ def main():
     ds = dry_supply(p, names)
     del p
     d, t = deserts(names)
-    print(d[["rank", "planning_area", "subzone", "residents", "hdb_units", "mean_fit", "vacant_per_10k_residents"]]
+    print(d[["rank", "planning_area", "subzone", "residents", "hdb_units", "dry_mean_vacant", "vacant_per_10k_residents"]]
           .round(2).to_string(index=False))
     maps(e, ds, t, names)
 

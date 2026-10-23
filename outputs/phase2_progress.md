@@ -236,3 +236,28 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - Charts: `sim2_diagnosis`, `sim2_heldout_storms`. Tables: `sim2_diagnosis_by_storm.csv`,
   `sim2_diagnosis_summary.csv`, `sim2_noise_floor.csv`, `sim2_cell_inputs.csv`, `sim2_tuning.csv`,
   `sim2_plausibility.csv`, `sim2_plausibility_by_storm.csv`, `sim2_parity_check.csv`.
+
+# Fixes after the second independent review (commit 37081c1)
+
+## Group A - data fixes (decisions 123-126)
+
+- A1, MRT lines and exits: station codes such as "NS24-NE6-CC1" are now split into every line prefix (27
+  interchange stations; before, none was detected and the interchange flag was a constant that the VIF step
+  dropped). Interchange within 800 m now stays in the model (no characteristic exceeds VIF 10). "Exit"
+  variables use the 545 MRT exits in `sg_mrt.json`: distance to the nearest MRT exit replaces station distance
+  in step 12 (cell regressions and panel bands) and step 14.
+- A2, HDB blocks: matched only inside the block's HDB town and only when the footprint carries the street's
+  consensus street code and an unclaimed postal code. 12,929 of 13,392 blocks located (coverage, not verified
+  accuracy): 1,139,610 of 1,179,156 dwelling units (96.6%; was 96.9% with the looser rule); 463 blocks rejected
+  (380 streets without a clear street code, 79 without a footprint of that number in the town, 4 on 2 postal
+  codes claimed by different streets; the old match had 54 such postal codes).
+- Rerun: step 10, step 12 (characteristics, cell-level, panel, charts), step 11 names, step 14 (with the B1
+  transform fix below). Changes in step 12:
+  - Panel (unchanged conclusion): heavy rain -24.5% in the Central Area (CI -27.6 to -21.3) vs -12.0% for cells
+    1 km or more from an MRT exit; within 300 m of an MRT exit -12.5% (interaction -0.5%, CI -2.2 to +1.2);
+    taxi stand within 300 m -11.7%; mall -12.3%.
+  - Cell level, plain WLS and spatial-error model: Central Area -10.4% (WLS CI -17.6 to -2.5) / -10.2% (spatial,
+    CI -18.2 to -1.5); business/industrial land +3.5% smaller loss per SD in both; more MRT lines within 800 m
+    -2.7% per SD (spatial, CI -4.9 to -0.5; new after the parsing fix); taxi stands +2.8% per SD and HDB units
+    +3.5% per SD only in the spatial model; interchange and a new station nearby only in plain WLS.
+  - Random forest: spatial-CV R2 0.12 (abs) / 0.15 (share); type-0 AUC 0.71 (logistic) / 0.70 (forest).

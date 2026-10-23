@@ -119,8 +119,6 @@ def tune(mechanisms, n_trials=12):
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     world, storms, _ = load()
     fit = [s for s in storms if s["period"] == "fit"]
-    f = TABLES / "sim_tuning.csv"
-    prev = pd.read_csv(f) if f.exists() else pd.DataFrame()
     rows = []
     for mech, dest, travel, disp in COMBOS:
         if mech not in mechanisms:
@@ -141,8 +139,12 @@ def tune(mechanisms, n_trials=12):
         rows.append({**scen, **bp, "loss": L, "rmse_rel": rmse, "cell_corr": cor, "trials": n_trials,
                      "seconds": round(time.time() - t0)})
         print(rows[-1], flush=True)
-    out = pd.concat([prev, pd.DataFrame(rows)]).drop_duplicates(["mechanism", "dest", "travel", "dispatch"], keep="last")
-    out.to_csv(f, index=False, float_format="%.5f")
+    parts = INTERIM / "sim_tuning_parts"                     # one file per process so mechanisms can run in parallel
+    parts.mkdir(exist_ok=True)
+    pd.DataFrame(rows).to_csv(parts / f"{'_'.join(mechanisms)}.csv", index=False)
+    out = pd.concat([pd.read_csv(p) for p in sorted(parts.glob("*.csv"))])
+    out = out.drop_duplicates(["mechanism", "dest", "travel", "dispatch"], keep="last")
+    out.to_csv(TABLES / "sim_tuning.csv", index=False, float_format="%.5f")
 
 
 def params_of(row):
@@ -190,8 +192,6 @@ def grid(mechanisms, S=50):
     tun = pd.read_csv(TABLES / "sim_tuning.csv")
     log_test_scoring("08_simulation.py --part grid", "scenario grid on held-out test-year storm inputs", "step 8",
                      note="simulated outputs only; no observed outcomes")
-    f = TABLES / "sim_grid_runs.csv"
-    prev = pd.read_csv(f) if f.exists() else pd.DataFrame()
     rows = []
     t0 = time.time()
     for r in tun.itertuples():
@@ -216,10 +216,13 @@ def grid(mechanisms, S=50):
                                      "mean_wait_min": out["wait_minutes"][s_] / max(1, out["served"][s_]),
                                      "zero_share_end": zero[s_]})
                 print(r.mechanism, r.dest, r.travel, r.dispatch, dl, policy, f"{time.time() - t0:.0f}s", flush=True)
-    out = pd.concat([prev, pd.DataFrame(rows)])
+    parts = INTERIM / "sim_grid_parts"                       # one file per process; merged from all parts
+    parts.mkdir(exist_ok=True)
+    pd.DataFrame(rows).to_csv(parts / f"{'_'.join(mechanisms)}.csv", index=False)
+    out = pd.concat([pd.read_csv(p) for p in sorted(parts.glob("*.csv"))])
     out = out.drop_duplicates(["mechanism", "dest", "travel", "dispatch", "demand_level", "policy", "storm", "seed"],
                               keep="last")
-    out.to_csv(f, index=False, float_format="%.5f")
+    out.to_csv(TABLES / "sim_grid_runs.csv", index=False, float_format="%.5f")
 
 
 def summarise():

@@ -56,6 +56,45 @@ def sample_dest(world, dest, origins, rng):
     return np.clip(idx - origins * world.C, 0, world.C - 1)
 
 
+def systematic_round(x, u):
+    """Integer vector per row with each entry floor(x) or ceil(x), row total floor(sum + u) - floor(u) (u in [0, 1)
+    per row): unbiased, keeps every entry within its bounds and gives two vectors with equal sums equal totals."""
+    c = np.cumsum(x, 1)
+    k = np.floor(c + u[:, None])
+    return np.diff(np.concatenate([np.floor(u)[:, None], k], 1), axis=1).astype(np.int64)
+
+
+def allocate(A, Q, V, u):
+    """Match waiting requests Q (integers, S x C) to vacant taxis V (S x C) within one ring.
+    A[i, j] = 1 when request cell j is in the ring of taxi cell i (outgoing adjacency of i; incoming of j).
+    Proportional fluid flows: taxi cell i offers min(V_i, P_i) over its reachable requests P_i = sum_j A_ij Q_j;
+    request cell j accepts at most Q_j of what it receives (incoming sum over i). Both sides are rounded with the
+    same systematic offset, so taxis dispatched = requests served exactly, no request is served twice and no
+    taxi leaves twice. Returns (taxis dispatched per taxi cell, requests served per request cell)."""
+    P = (A @ Q.T).T
+    o = np.minimum(V, P)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        g = np.where(P > 0, o / P, 0.0)
+    R = Q * (A.T @ g.T).T                                       # offers received by request cell j (incoming)
+    served = np.minimum(Q, R)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        sj = np.where(R > 0, served / R, 0.0)
+    used = g * (A @ (Q * sj).T).T                               # taxis used per taxi cell; sums equal served
+    used = np.minimum(used, V)
+    d = systematic_round(used, u)
+    q = systematic_round(served, u)
+    gap = d.sum(1) - q.sum(1)                                   # floating-point ties only
+    for s in np.flatnonzero(gap):
+        k = int(abs(gap[s]))
+        if gap[s] > 0:
+            idx = np.flatnonzero(d[s] > 0)[:k]
+            d[s, idx] -= 1
+        else:
+            idx = np.flatnonzero(q[s] > 0)[:k]
+            q[s, idx] -= 1
+    return d, q
+
+
 def stochastic_round(a, rng):
     f = np.floor(a)
     return (f + (rng.random(a.shape) < (a - f))).astype(np.int64)
@@ -128,7 +167,7 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
         o = rng.choice(C, size=O0, p=attr)
         t = rng.integers(1, 31, size=O0)
         np.add.at(ARR[s], (t, o), 1)
-    Qw = np.zeros((S, C))
+    Qw = np.zeros((S, C), np.int64)                     # waiting requests (integers)
     B_city0 = base[0].sum()
     stats = {"requests": np.zeros(S), "served": np.zeros(S), "abandoned": np.zeros(S), "wait_minutes": np.zeros(S),
              "requests_rain": np.zeros(S), "abandoned_rain": np.zeros(S)}
@@ -138,7 +177,12 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
     moves_log = []
     seed_rows = np.repeat(np.arange(S), C)
 
+    inflight = ARR.sum((1, 2)).astype(np.int64)          # taxis occupied or repositioning, per seed
+    fleet = V.sum(1) + inflight                          # changes only through the time-of-day path
+
     def start_trips(cnt, approach, m, speed):
+        nonlocal inflight
+        inflight += cnt.sum(1)
         flat = cnt.ravel()
         nz = np.flatnonzero(flat)
         if len(nz) == 0:
@@ -152,25 +196,22 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
         np.add.at(ARR, (s_idx, ta, d_idx), 1)
 
     def match(Q, rings, m, speed):
-        served_total = np.zeros(S)
-        own = np.minimum(V, np.floor(Q)).astype(np.int64)
+        """Requests Q are integers; returns requests served (= trips started) per seed (decision 127)."""
+        served_total = np.zeros(S, np.int64)
+        own = np.minimum(V, Q).astype(np.int64)
         V[:] -= own
         Q -= own
         served_total += own.sum(1)
         start_trips(own, 1.0, m, speed)
         for A, mid in rings:
-            P = (A @ Q.T).T                                              # requests in ring around each source cell
-            take = np.minimum(V, stochastic_round(P, rng))
-            if take.sum() == 0:
-                continue
-            V[:] -= take
-            with np.errstate(divide="ignore", invalid="ignore"):
-                frac = np.where(P > 0, take / P, 0.0)
-            served = Q * (A @ frac.T).T
-            served = np.minimum(served, Q)
-            Q -= served
-            served_total += take.sum(1)
-            start_trips(take, mid / speed.mean() * 60, m, speed)
+            if not Q.any() or not V.any():
+                break
+            d, q = allocate(A, Q, V, rng.random(S))
+            V[:] -= d
+            Q -= q
+            served_total += d.sum(1)
+            start_trips(d, mid / speed.mean() * 60, m, speed)
+        assert (V >= 0).all() and (Q >= 0).all(), "negative taxis or requests after matching"
         return served_total
 
     for m in range(M):
@@ -179,18 +220,21 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
         raining = r > 0
         speed = np.where(raining & (scen["travel"] == "rain"), SPEED["rain"], SPEED["dry"])
         V += ARR[:, m]
+        inflight -= ARR[:, m].sum(1)
         # normal time-of-day path: taxis on the road follow the citywide baseline
         if m % 30 == 0 and m > 0:
-            onroad = V.sum(1) + OFF.sum(1) + ARR[:, m + 1:].sum((1, 2))      # offline taxis are still on shift
+            onroad = V.sum(1) + OFF.sum(1) + inflight                          # offline taxis are still on shift
             target = (v0.sum() + O0) * base[slot].sum() / B_city0
             diff = np.round(target - onroad).astype(int)
             for s in range(S):
                 if diff[s] > 0:
                     add = rng.multinomial(diff[s], base[slot] / base[slot].sum())
                     V[s] += add
+                    fleet[s] += add.sum()
                 elif diff[s] < 0 and V[s].sum() > 0:
-                    rem = rng.multinomial(min(-diff[s], V[s].sum()), V[s] / V[s].sum())
-                    V[s] -= np.minimum(rem, V[s])
+                    rem = np.minimum(rng.multinomial(min(-diff[s], V[s].sum()), V[s] / V[s].sum()), V[s])
+                    V[s] -= rem
+                    fleet[s] -= rem.sum()
         # supply drop
         if mech in ("supply", "mix"):
             p_off = params["beta_off"] * np.minimum(r, 30) / 30
@@ -209,27 +253,36 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
                 mv = np.minimum(n, V[:, i])
                 V[:, i] -= mv
                 ARR[:, min(m + int(np.ceil(tt)), M + HORIZON_PAD - 1), j] += mv.astype(np.int32)
+                inflight += mv
             moves_log.append({"minute": m, "moves": [(int(i), int(j), int(n)) for (i, j), (n, _) in plan.items()]})
         # waiting requests: abandon, then match (wider rings if widening dispatch)
         rain_city = r.mean() > 0.5
-        ab = Qw / PATIENCE_MIN
+        ab = rng.binomial(Qw, 1 / PATIENCE_MIN)          # geometric patience, mean 6 minutes
         Qw -= ab
         stats["abandoned"] += ab.sum(1)
         if rain_city:
             stats["abandoned_rain"] += ab.sum(1)
         rings_w = world.rings[:5] if scen["dispatch"] == "widening" else world.rings[:3]
-        stats["served"] += match(Qw, rings_w, m, speed)
+        n_wait = Qw.sum(1)
+        served_w = match(Qw, rings_w, m, speed)
+        stats["served"] += served_w
         stats["wait_minutes"] += Qw.sum(1)
         # new requests
         lam = lam_total * attr * dl
         if mech in ("demand", "mix"):
             lam = lam * (1 + params["beta_dem"] * np.minimum(r, 30) / 10)
-        new = rng.poisson(np.broadcast_to(lam, (S, C))).astype(float)
+        new = rng.poisson(np.broadcast_to(lam, (S, C))).astype(np.int64)
+        n_new = new.sum(1)
         stats["requests"] += new.sum(1)
         if rain_city:
             stats["requests_rain"] += new.sum(1)
-        stats["served"] += match(new, world.rings[:3], m, speed)
+        served_new = match(new, world.rings[:3], m, speed)
+        stats["served"] += served_new
         Qw += new
+        # conservation: taxis (vacant + offline + in flight) equal the fleet; trips never exceed requests
+        assert (V.sum(1) + OFF.sum(1) + inflight == fleet).all(), f"taxis not conserved at minute {m}"
+        assert (served_w <= n_wait).all() and (served_new <= n_new).all(), f"more trips than requests at minute {m}"
+        assert (stats["served"] <= stats["requests"]).all(), f"more trips than requests by minute {m}"
         if m in snaps:
             k = snaps.index(m)
             city[:, k] = V.sum(1)

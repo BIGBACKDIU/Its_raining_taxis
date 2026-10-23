@@ -160,8 +160,10 @@ def prep():
     obs_w = ds.groupby("cell").apply(lambda q: np.average(q.mean_vacant_dry, weights=q.h), include_groups=False)
     obs_w = obs_w.reindex(order).fillna(0.05).clip(lower=0.05).values
     ch = pd.read_csv(TABLES / "cell_characteristics.csv").set_index("cell").loc[order].reset_index()
-    keep = pd.read_csv(TABLES / "factors_cell_wls.csv").query("outcome == 'abs'").characteristic.unique()
-    X = F.design_matrix(ch, [k for k in keep if k in F.NUM])
+    import joblib
+    rfm = joblib.load(INTERIM / "rf_rain_abs.joblib")                 # step-12 training imputation and scaling
+    keep = rfm["keep_wls"]
+    X = F.design_matrix(ch, [k for k in keep if k in F.NUM], rfm["scaling"])
     for b in [k for k in keep if k in F.BOOL]:
         X[b] = ch[b].astype(float).values
     glm = sm.GLM(obs_w, sm.add_constant(X.fillna(0)), family=sm.families.Poisson()).fit()

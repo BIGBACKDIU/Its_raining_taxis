@@ -58,14 +58,14 @@ def part_chars():
     names = pd.read_csv(TABLES / "names_cells.csv")
     c = names[["cell", "lon", "lat", "planning_area", "subzone", "eligible", "land"]].copy()
     st, ex = geo.mrt()
-    c["dist_mrt_m"] = geo.dist_to(c.lon, c.lat, st.lon, st.lat)
-    c["mrt_exits_500m"] = geo.counts_within(c.lon, c.lat, ex.lon, ex.lat, 500)
+    mx = ex[ex.network.str.contains("mrt")]                    # MRT station exits only (LRT stops excluded)
+    c["dist_mrt_exit_m"] = geo.dist_to(c.lon, c.lat, mx.lon, mx.lat)
+    c["mrt_exits_500m"] = geo.counts_within(c.lon, c.lat, mx.lon, mx.lat, 500)
     sx, sy = to_xy(st.lon.values, st.lat.values)
     x, y = to_xy(c.lon.values, c.lat.values)
     tree = cKDTree(np.c_[sx, sy])
     near = tree.query_ball_point(np.c_[x, y], 800)
-    lines_tbl = st.codes.str.split()
-    c["mrt_lines_800m"] = [len({cd.rstrip("0123456789") for j in idx for cd in lines_tbl.iloc[j]}) for idx in near]
+    c["mrt_lines_800m"] = [len(frozenset().union(*st.line_set.iloc[idx])) if idx else 0 for idx in near]
     c["interchange_800m"] = [bool(st.interchange.iloc[idx].any()) if idx else False for idx in near]
     c["new_station_800m"] = [bool(st.opened.iloc[idx].notna().any()) if idx else False for idx in near]
     p = geo.pois()
@@ -148,7 +148,7 @@ def betweenness(nodes, e, k=500):
 
 
 # ============================================================================= design (i)
-NUM = ["dist_mrt_m", "mrt_exits_500m", "mrt_lines_800m", "bus_stops", "hdb_units", "private_transactions",
+NUM = ["dist_mrt_exit_m", "mrt_exits_500m", "mrt_lines_800m", "bus_stops", "hdb_units", "private_transactions",
        "share_private_tx", "hdb_resale_psf", "private_psf", "residents", "share_65plus", "lu_residential", "lu_commercial",
        "lu_business", "lu_institution", "lu_park", "malls", "hospitals", "hotels", "offices", "schools", "nightlife",
        "food_outlets", "attractions", "taxi_stands_300m", "osm_taxi_points_300m", "road_km_total", "road_km_expressway",
@@ -159,14 +159,30 @@ LOGS = {"mrt_exits_500m", "bus_stops", "hdb_units", "private_transactions", "res
         "betweenness"}
 
 
-def design_matrix(c, cols):
+def fit_scaling(c, cols):
+    """Imputation (median) and standardisation (mean, sd) fitted on the given rows, after the log transforms."""
+    par = {}
+    for k in cols:
+        v = c[k].astype(float)
+        if k in LOGS:
+            v = np.log1p(v)
+        med = float(v.median())
+        v = v.fillna(med)
+        par[k] = (med, float(v.mean()), float(v.std()) if v.std() > 0 else 1.0)
+    return par
+
+
+def design_matrix(c, cols, scaling=None):
+    """Standardised characteristics; with `scaling` (from fit_scaling on the training rows) the stored
+    imputation and scaling are applied unchanged, so predictions for new cells use the training transform."""
+    par = scaling if scaling is not None else fit_scaling(c, cols)
     X = pd.DataFrame(index=c.index)
     for k in cols:
         v = c[k].astype(float)
         if k in LOGS:
             v = np.log1p(v)
-        v = v.fillna(v.median())
-        X[k] = (v - v.mean()) / (v.std() if v.std() > 0 else 1)
+        med, mu, sd = par[k]
+        X[k] = (v.fillna(med) - mu) / sd
     return X
 
 
@@ -208,10 +224,12 @@ def part_cell():
     e = pd.read_csv(TABLES / "cell_rain_effects.csv")
     d = c.merge(e[["cell", "abs_pct", "abs_lo", "abs_hi", "share_pct", "share_lo", "share_hi", "tested"]], on="cell")
     d = d[d.tested].reset_index(drop=True)
-    X = design_matrix(d, NUM)
+    scaling = fit_scaling(d, NUM)
+    X = design_matrix(d, NUM, scaling)
     for b in BOOL:
         X[b] = d[b].astype(float).values
     keep, dropped, vif = vif_prune(X)
+    print("VIF kept", len(keep), "dropped", dropped, flush=True)
     out, coef_rows, rf_rows = {}, [], []
     W = KNN.from_array(np.c_[to_xy(d.lon.values, d.lat.values)], k=8)
     W.transform = "r"
@@ -265,7 +283,8 @@ def part_cell():
                                                for i, k in enumerate(Xa.columns)]})
         rf_rows.append(imp.sort_values("mean_abs_shap", ascending=False))
         import joblib
-        joblib.dump({"model": rf, "columns": list(Xa.columns), "tau2": tau2}, INTERIM / f"rf_rain_{kind}.joblib")
+        joblib.dump({"model": rf, "columns": list(Xa.columns), "tau2": tau2, "scaling": scaling, "bool": BOOL,
+                     "keep_wls": keep}, INTERIM / f"rf_rain_{kind}.joblib")
     pd.DataFrame(coef_rows).to_csv(TABLES / "factors_cell_wls.csv", index=False, float_format="%.5f")
     pd.concat(rf_rows).to_csv(TABLES / "factors_cell_rf_shap.csv", index=False, float_format="%.6f")
     pd.DataFrame({"dropped_for_vif": [a for a, _ in dropped], "vif": [b for _, b in dropped]}).to_csv(
@@ -302,7 +321,7 @@ def part_panel():
     p = p[E.sample(p)].reset_index(drop=True)
     X, fe_abs, fe_share, day = E.design(p)
     heavy = (p.rain_band.values == 3)
-    dm = p.cell.map(c.dist_mrt_m).values
+    dm = p.cell.map(c.dist_mrt_exit_m).values
     z = lambda s: (s - s.mean()) / s.std()
     cc = c.loc[c.eligible]
     terms = {"heavy_x_mrt_lt300m": heavy & (dm < 300), "heavy_x_mrt_300_1000m": heavy & (dm >= 300) & (dm < 1000),
@@ -347,7 +366,7 @@ def charts():
     labels = {"dist_city_km": "Distance to Raffles Place", "central_area": "URA Central Area", "hotels": "Hotels",
               "offices": "Offices", "malls": "Malls", "attractions": "Attractions", "nightlife": "Bars / nightlife",
               "food_outlets": "Food outlets", "hdb_units": "HDB dwelling units", "residents": "Residents",
-              "dist_mrt_m": "Distance to MRT", "mrt_exits_500m": "MRT exits within 500 m", "lu_commercial": "Commercial land",
+              "dist_mrt_exit_m": "Distance to MRT exit", "mrt_exits_500m": "MRT exits within 500 m", "lu_commercial": "Commercial land",
               "lu_residential": "Residential land", "taxi_stands_300m": "Taxi stops / stands", "betweenness": "Road betweenness",
               "dist_airport_km": "Distance to airport", "road_km_total": "Road length", "bus_stops": "Bus stops",
               "hdb_resale_psf": "HDB resale price (psf)", "private_psf": "Private housing price (psf)",

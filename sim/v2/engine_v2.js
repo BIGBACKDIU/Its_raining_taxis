@@ -147,6 +147,14 @@ function greedyPlan(world, vac, baseNow, baseNext, mu, rain, share, travel, N = 
   return moves;
 }
 
+// systematic rounding: each entry floor or ceil of x, total floor(sum + u) - floor(u)
+function sysRound(x, u) {
+  const out = new Int32Array(x.length);
+  let c = 0, prev = Math.floor(u);
+  for (let i = 0; i < x.length; i++) { c += x[i]; const k = Math.floor(c + u); out[i] = k - prev; prev = k; }
+  return out;
+}
+
 // ---------------------------------------------------------------- one seed
 class Sim {
   constructor(world, storm, scen, params, seed, opts = {}) {
@@ -189,32 +197,43 @@ class Sim {
     }
   }
   match(Q, nRings, facArr) {
+    // Requests Q hold integers. Proportional allocation within each ring (decision 127): taxi cell i offers
+    // min(V_i, P_i) over the requests it reaches; request cell j accepts at most Q_j of the offers it receives
+    // (incoming adjacency); both sides are rounded with the same systematic offset, so taxis dispatched equal
+    // requests served and no request or taxi is used twice.
     const C = this.C, V = this.V;
     let served = 0;
-    let meanFac = 0; for (let i = 0; i < C; i++) meanFac += facArr[i]; meanFac /= C;
+    let meanF = 0; for (let i = 0; i < C; i++) meanF += facArr[i]; meanF /= C;
     for (let i = 0; i < C; i++) {
-      const own = Math.min(V[i], Math.floor(Q[i]));
+      const own = Math.min(V[i], Q[i]);
       if (own > 0) { V[i] -= own; Q[i] -= own; served += own; this.startTrips(own, i, 1.0, facArr); }
     }
     for (let r = 0; r < nRings; r++) {
+      let anyQ = 0, anyV = 0;
+      for (let i = 0; i < C; i++) { anyQ += Q[i]; anyV += V[i]; }
+      if (anyQ === 0 || anyV === 0) break;
       const { adj, mid } = this.w.rings[r];
-      const P = new Float64Array(C), take = new Int32Array(C);
-      let any = 0;
-      for (let i = 0; i < C; i++) { let s = 0; for (const j of adj[i]) s += Q[j]; P[i] = s; }
+      const g = new Float64Array(C), inc = new Float64Array(C);
       for (let i = 0; i < C; i++) {
-        const f = Math.floor(P[i]);
-        const sr = f + (this.rng.random() < (P[i] - f) ? 1 : 0);
-        take[i] = Math.min(V[i], sr);
-        any += take[i];
+        let P = 0; for (const j of adj[i]) P += Q[j];
+        if (P > 0) { g[i] = Math.min(V[i], P) / P; for (const j of adj[i]) inc[j] += g[i]; }
       }
-      if (any === 0) continue;
-      const frac = new Float64Array(C);
-      for (let i = 0; i < C; i++) { V[i] -= take[i]; frac[i] = P[i] > 0 ? take[i] / P[i] : 0; }
-      for (let j = 0; j < C; j++) {
-        let s = 0; for (const i of adj[j]) s += frac[i];
-        Q[j] -= Math.min(Q[j] * s, Q[j]);
+      const srv = new Float64Array(C), sj = new Float64Array(C), used = new Float64Array(C);
+      for (let j = 0; j < C; j++) { const R = Q[j] * inc[j]; srv[j] = Math.min(Q[j], R); sj[j] = R > 0 ? srv[j] / R : 0; }
+      for (let i = 0; i < C; i++) {
+        if (g[i] === 0) continue;
+        let t = 0; for (const j of adj[i]) t += Q[j] * sj[j];
+        used[i] = Math.min(V[i], g[i] * t);
       }
-      for (let i = 0; i < C; i++) if (take[i] > 0) { served += take[i]; this.startTrips(take[i], i, mid * meanFac, facArr); }
+      const u = this.rng.random();
+      const d = sysRound(used, u), q = sysRound(srv, u);
+      let gap = 0; for (let i = 0; i < C; i++) gap += d[i] - q[i];
+      for (let i = 0; i < C && gap > 0; i++) if (d[i] > 0) { d[i]--; gap--; }
+      for (let j = 0; j < C && gap < 0; j++) if (q[j] > 0) { q[j]--; gap++; }
+      for (let i = 0; i < C; i++) {
+        if (d[i] > 0) { V[i] -= d[i]; served += d[i]; this.startTrips(d[i], i, mid * meanF, facArr); }
+        Q[i] -= q[i];
+      }
     }
     return served;
   }
@@ -274,7 +293,7 @@ class Sim {
     let rmean = 0; for (const v of r) rmean += v; rmean /= C;
     const rainCity = rmean > 0.5;
     let ab = 0;
-    for (let i = 0; i < C; i++) { const a = this.Qw[i] / PATIENCE_MIN; this.Qw[i] -= a; ab += a; }
+    for (let i = 0; i < C; i++) { const a = this.rng.binomial(this.Qw[i], 1 / PATIENCE_MIN); this.Qw[i] -= a; ab += a; }
     this.stats.abandoned += ab; if (rainCity) this.stats.abandoned_rain += ab;
     this.stats.served += this.match(this.Qw, scen.dispatch === "widening" ? 5 : 3, facArr);
     let wq = 0; for (let i = 0; i < C; i++) wq += this.Qw[i]; this.stats.wait_minutes += wq;
@@ -285,12 +304,14 @@ class Sim {
     for (let i = 0; i < C; i++) {
       let lam = this.lamTotal * this.attr[i] * dl;
       if (scen.mechanism === "demand" || scen.mechanism === "mix") lam *= 1 + this.p.beta_dem * Math.min(r[i], 30) / 10;
-      nw[i] = this.rng.poisson(lam) + this.extra[i];
+      nw[i] = this.rng.poisson(lam) + Math.round(this.extra[i]);
       this.extra[i] = 0;
       nreq += nw[i];
     }
     this.stats.requests += nreq; if (rainCity) this.stats.requests_rain += nreq;
-    this.stats.served += this.match(nw, 3, facArr);
+    const servedNew = this.match(nw, 3, facArr);
+    if (servedNew > nreq) throw new Error(`more trips than requests at minute ${m}`);
+    this.stats.served += servedNew;
     for (let i = 0; i < C; i++) this.Qw[i] += nw[i];
     this.m++;
   }

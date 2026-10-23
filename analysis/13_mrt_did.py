@@ -56,12 +56,20 @@ def monthly_dry(cells, start, end):
     return q.groupby(["cell", q.ts.dt.to_period("M")]).vacant.mean().rename("dry_mean").reset_index()
 
 
+def dist_existing_station(c, date):
+    """Distance from each cell centre to the nearest MRT station already open before `date` (decision 129)."""
+    st, _ = geo.mrt()
+    old = st[st.opened.isna() | (st.opened < pd.Timestamp(date))]
+    return geo.dist_to(c.lon, c.lat, old.lon, old.lat)
+
+
 def match(c, T, far, pre_means):
     out = []
-    feats = ["pre_log", "dist_city_km", "central_area", "dist_mrt_m"]
+    feats = ["pre_log", "dist_city_km", "central_area", "dist_mrt_pre"]
     for coh, g in T.groupby("cohort"):
         pm = pre_means[coh]
-        cc = c.assign(pre_log=c.cell.map(pm)).dropna(subset=["pre_log"])
+        cc = c.assign(pre_log=c.cell.map(pm), dist_mrt_pre=dist_existing_station(c, COHORTS[coh]))
+        cc = cc.dropna(subset=["pre_log"])
         Z = cc[feats].astype(float)
         S = np.linalg.pinv(np.cov(Z.values.T))
         pool = cc[far[cc.index] & ~cc.cell.isin(T.cell)]
@@ -165,11 +173,12 @@ def main():
         parts.append(p)
     P = pd.concat(parts, ignore_index=True)
     hv = (P.rain_band.values == 3).astype("float32")
-    names = ["light", "moderate", "heavy", "heavy_x_post", "heavy_x_treated", "heavy_x_treated_x_post", "mmh_lag1",
-             "mmh_lag2"]
+    names = ["light", "moderate", "heavy", "treated_x_post", "heavy_x_post", "heavy_x_treated", "heavy_x_treated_x_post",
+             "mmh_lag1", "mmh_lag2"]
     P["heavy"] = hv
     P["light"] = (P.rain_band.values == 1).astype(float)
     P["moderate"] = (P.rain_band.values == 2).astype(float)
+    P["treated_x_post"] = (P.treated.values * P.post.values).astype("float32")   # lower-order term (decision 129)
     P["heavy_x_post"] = hv * P.post.values
     P["heavy_x_treated"] = hv * P.treated.values
     P["heavy_x_treated_x_post"] = hv * P.treated.values * P.post.values

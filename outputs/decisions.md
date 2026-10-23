@@ -689,3 +689,84 @@ results stay as they are and remain the pre-specified result.
     area" if the destination is a step-3 type-0 cell or its step-12 predicted heavy-rain effect is below -20%;
     otherwise "forecast risk" (expected shortfall from the persistence forecast). Labelled throughout:
     "demonstration on historical replays, not a live system".
+
+## Fixes after the second independent review of phase 2 (commit 37081c1)
+
+123. **HDB block matching (review item 4).** The earlier match (decision 118) could take a footprint from a
+    different street with the same block number, used the nearest footprint outside the town as a fallback and
+    left 54 postal codes claimed by blocks of different streets. Now: candidates must lie inside the block's
+    HDB town (never outside); each street's footprint street code (ST_COD) is the consensus (>= 80%) of its
+    blocks with exactly one candidate in the town; a block is accepted only if exactly one candidate footprint
+    carries that street code and its postal code is not claimed by another street. The street-geocode and
+    street-median rules are dropped. Result: 12,929 of 13,392 blocks located (1,139,610 of 1,179,156 dwelling
+    units, 96.6%); rejected: 380 blocks on streets without a clear street code, 79 with no footprint of that
+    block number in the town, 4 blocks on 2 postal codes claimed by different streets. "Located" is coverage, not
+    verified accuracy. Steps 10, 12 and everything downstream are rerun.
+124. **MRT lines and exits (review item 5).** Station codes such as "NS24-NE6-CC1" were parsed to their first
+    prefix only, so no station counted as an interchange and `interchange_800m` was constant (dropped as such in
+    the VIF step). All prefixes are now used (27 interchange stations; 24 with two lines, 3 with three), lines
+    within 800 m are counted over all prefixes, and interchange goes through the VIF step like any other
+    characteristic. The "exit" variables now use the 545 MRT exits in `sg_mrt.json` (LRT-only exits excluded):
+    `dist_mrt_exit_m` (distance to the nearest MRT exit) replaces the station distance, and MRT exits within
+    500 m count exits only. The step-12 panel bands (< 300 m, 300-1,000 m, >= 1 km) and step 14 use exit distance.
+125. **Prediction transform (review item 2).** The random forest's imputation (median) and standardisation (mean,
+    sd) are fitted on the 374 training cells and stored with the model; step 14 (all 778 land cells) and the
+    simulation-v2 inputs apply that stored transform unchanged instead of re-standardising on the new rows.
+126. **Registration timing for steps 10-11 (review note).** The step-10 and step-11 specifications (decisions
+    98-104) and their first outputs were committed together (commit 00be15d), so the order "registered before
+    run" cannot be verified from the repository for those two steps. Steps 12 onwards were registered in earlier
+    commits than their results, except where a later fix is recorded as such.
+127. **Simulation request/taxi conservation (review item 1, Critical).** In both engines (step 8 `sim_engine.py`,
+    step 20 `sim_engine_v2.py`) and both JavaScript ports, every taxi cell in a dispatch ring could take the same
+    waiting requests (each source took up to all requests in its ring), so trips exceeded requests (for example
+    11,469 requests and 21,486 trips on one storm), and request removal used outgoing instead of incoming
+    adjacency (wrong for the asymmetric drive-time rings). Fix: requests are integers (abandonment is binomial
+    with probability 1/6 per minute, the same geometric patience with mean 6 minutes); within each ring, taxi cell
+    i offers min(V_i, P_i) over the requests it reaches, request cell j accepts at most its Q_j of the offers it
+    receives through incoming adjacency, and both sides are rounded with one systematic offset, so taxis
+    dispatched equal requests served, no request is served twice and no taxi leaves twice. Every simulated minute
+    asserts that vacant + offline + in-flight taxis equal the fleet and that trips do not exceed requests;
+    `tests/test_sim_conservation.py` fails on the old rule. All step-8 and step-20 simulation results produced
+    before this fix are void and are replaced by reruns with unchanged tuning settings and the unchanged
+    plausibility rule (items 75-77, 119-121). Parity tolerance, as checked: mean within 5% and peak within 5% or
+    0.01 absolute.
+128. **Simulation reruns.** Steps 8 and 20 are retuned (Optuna, 12 trials, seed 2702, same ranges and loss), the
+    plausibility rule is re-run unchanged on the same 10 held-out storms (logged), the diagnosis (item 119) is
+    redone, and the step-8 grid (50 seeds) is re-run.
+129. **Step 13 corrections (review item 6).** Matching now uses the registered cohort-specific distance to the
+    nearest MRT station already open before each cohort's opening date (it used today's station network). The
+    heavy-rain DiD adds the missing lower-order term treated x post (treated and post are absorbed by the cell x
+    cohort and ym^regime x cohort effects; heavy, heavy x post and heavy x treated were already in).
+130. **Step 19 corrections (review item 8).** The coverage control is now the registered regime coverage level
+    (feed_regimes.csv log level, averaged over the month's days) instead of the daily level, and the
+    meta-regression uses Newey-West HAC errors with 3 lags (rule of thumb floor(4 (n/100)^(2/9)), n = 55
+    months) on months in calendar order. Monthly effects are reused unchanged. Extrapolations about future
+    fleet sizes are removed.
+131. **Step 15 timing corrections (review item 3).** Everything in the morning model is now knowable at 09:00:
+    previous-day and previous-7-day history come from the issue-time label only (never the retrospective label);
+    exposure is the scheduled exposure (eligible cells in the planning area x half-hours in the band) instead
+    of the realised later-day count of observed cell-half-hours; the GLM's missing-value imputation uses
+    training-row medians only; and per day the single latest NEA 24-hour forecast issue before 09:00 is used (all
+    of its periods), not the latest row per period. Climatology uses the fit-period rows of the modelled label.
+    The test year is re-scored once (logged); all model x label results are reported.
+132. **Step 18 wording (review item 7).** The "corrected" effect (-17.5%) and the claim that the headline is
+    understated are withdrawn: the reliability ratio rests on a classical-error assumption the near/far
+    comparison does not support. Gauge agreement and the near/far comparison are reported as sensitivity
+    diagnostics only.
+133. **Named lists for presentation (review item 9).** Every cell effect gets a two-sided day-bootstrap p-value
+    and a Benjamini-Hochberg q-value across the 374 tested cells (abs and share separately). Lists used in the
+    summary, recommendations and map labels show only cells with >= 4 expected vacant taxis in heavy rain and
+    q < 0.10; full sorted lists stay as appendix tables (`*_all.csv`, `rain_gainers.csv`,
+    `spillover_islandwide_share.csv`). Every share percentage is shown with the absolute change in taxis per
+    heavy-rain half-hour and its CI. "Gather" or "more taxis" is used only where the absolute change has a CI
+    above 0; otherwise "gains share". The minutes-to-taxi result is described as associated with the citywide
+    drop (a conditional association), not "explained" by it.
+134. **Taxi deserts (review item 11).** Recomputed on dry snapshots only (no rain at the cell for 90 minutes,
+    normal-coverage regimes, all hours, Apr 2022 - Mar 2025) per resident, analysed cells only, so the
+    "dry-weather" wording is kept. The earlier ranking used the all-weather model mean and included cells
+    without reliable taxi data.
+135. **Recovery wording (review item 12).** Recovery times are reported as the registered statistical recovery
+    criterion (from 120 / 150 minutes after onset every later event-study CI includes zero), not as "back to
+    normal".
+136. **Step 12 reporting (review item 10).** WLS, spatial-error and panel-interaction results are reported
+    separately; only characteristics supported in all designs that test them are called robust.

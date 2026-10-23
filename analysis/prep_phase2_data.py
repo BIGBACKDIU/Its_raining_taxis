@@ -125,16 +125,18 @@ TOWN_PA = {"AMK": ["ANG MO KIO"], "BB": ["BUKIT BATOK"], "BD": ["BEDOK"], "BH": 
 
 
 def part_hdb():
-    """HDB blocks located without per-block geocoding (OneMap throttles unauthenticated search to ~1 request/s and
-    a street-by-street pass would take ~2 hours): each block in HDB Property Information is matched to the HDB
-    Existing Building footprint with the same block number lying in (or nearest to) its HDB town's planning
-    area(s); where a street geocode was already collected, the footprint nearest that street is used instead.
-    Block numbers are unique within most HDB towns; remaining ties are flagged (match = "ambiguous")."""
+    """HDB blocks located without per-block geocoding (OneMap throttles unauthenticated search; decisions 118, 123).
+
+    Each block in HDB Property Information is matched to an HDB Existing Building footprint with the same block
+    number that lies inside the block's HDB town (town code mapped to URA planning areas); never outside it.
+    Street identity is then checked: every street's footprint street code (ST_COD) is the consensus of its
+    blocks that have exactly one candidate in the town; a block is accepted only if its footprint carries that
+    street code. Rejected: blocks with no candidate, streets without a clear consensus code, candidates with a
+    different street code, several distinct footprints left after the checks, and footprints (postal codes)
+    claimed by blocks of different streets. "Located" describes coverage, not verified accuracy."""
     info = pd.read_csv(datagov("hdb_info", "csv"))
     datagov("hdb_resale", "csv")
     out = OUT / "hdb_blocks_geocoded.csv"
-    if out.exists():
-        return
     fp = OUT / "hdb_existing_building.geojson"
     if not fp.exists():
         j = requests.get(POLL.format("d_16b157c52ed637edd6ba1232e026258d"), headers=UA, timeout=60).json()
@@ -142,61 +144,71 @@ def part_hdb():
         note(fp.name, "data.gov.sg HDB Existing Building (d_16b157c52ed637edd6ba1232e026258d)")
     import geopandas as gpd
     from analysis import geo
-    from pipeline.grid import to_xy
     b = gpd.read_file(fp).to_crs(3414)
     b["geometry"] = b.geometry.centroid
-    sz = geo.subzones().to_crs(3414)
-    pa = sz.dissolve("planning_area")
-    b = b.sjoin_nearest(pa[["geometry"]].reset_index(), how="left").drop_duplicates("OBJECTID")
+    pa = geo.subzones().to_crs(3414).dissolve("planning_area")
+    b = b.sjoin(pa[["geometry"]].reset_index(), how="left", predicate="within").drop_duplicates("OBJECTID")
     ll = b.to_crs(4326).geometry
     b = pd.DataFrame({"blk": b.BLK_NO.astype(str).str.strip().str.upper(), "pa": b.planning_area.values,
-                      "lon": ll.x.values, "lat": ll.y.values, "postal": b.POSTAL_COD.values})
+                      "stcod": b.ST_COD.astype(str).str.strip(), "postal": b.POSTAL_COD.astype(str).str.strip(),
+                      "lon": ll.x.values, "lat": ll.y.values})
+    # one row per (block number, street code, postal code): a block drawn as several footprints is one candidate
+    b = b.groupby(["blk", "stcod", "postal", "pa"], as_index=False)[["lon", "lat"]].mean()
     info.columns = [x.lower() for x in info.columns]
-    cache_f = OUT / "hdb_street_geocodes.csv"
-    sg = pd.read_csv(cache_f).dropna().set_index("street") if cache_f.exists() else pd.DataFrame(columns=["lat", "lon"])
-    bx, by = to_xy(b.lon.values, b.lat.values)
-    lat_out, lon_out, post_out, how = [], [], [], []
-    for blk, st, town in zip(info.blk_no.astype(str).str.strip().str.upper(), info.street.astype(str).str.strip(),
-                             info.bldg_contract_town):
-        cand = np.flatnonzero(b.blk.values == blk)
-        j, h = None, "unmatched"
-        if len(cand) and st in sg.index:
-            ax, ay = to_xy([sg.loc[st, "lon"]], [sg.loc[st, "lat"]])
-            d = np.hypot(bx[cand] - ax[0], by[cand] - ay[0])
-            if d.min() <= 2000:
-                j, h = cand[np.argmin(d)], "street"
-        if j is None and len(cand):
-            inside = cand[np.isin(b.pa.values[cand], TOWN_PA.get(town, []))]
-            if len(inside) and b.postal.values[inside].astype(str).tolist().count(b.postal.values[inside[0]]) == len(inside):
-                j, h = inside[0], "town"                     # one block drawn as several footprints
-            elif len(inside) > 1:
-                j, h = inside, "ambiguous"
-        lat_out.append(j)
-        how.append(h)
-    # second pass: an ambiguous block takes the candidate nearest the median of its street's matched blocks
-    info["match"] = how
-    pick = pd.Series(lat_out, dtype=object)
-    sure = info.match.isin(["street", "town"]).values
-    sx = pd.DataFrame({"street": info.street.values[sure], "x": bx[pick[sure].astype(int)],
-                       "y": by[pick[sure].astype(int)]}).groupby("street").median()
-    for i in np.flatnonzero(info.match.values == "ambiguous"):
-        cand, st = pick[i], info.street.iloc[i]
-        if st in sx.index:
-            pick[i] = cand[np.argmin(np.hypot(bx[cand] - sx.loc[st, "x"], by[cand] - sx.loc[st, "y"]))]
-            info.loc[i, "match"] = "street median"
+    info["blk"] = info.blk_no.astype(str).str.strip().str.upper()
+    info["street"] = info.street.astype(str).str.strip()
+    cands = []
+    for i, (blk, town) in enumerate(zip(info.blk, info.bldg_contract_town)):
+        q = b[(b.blk == blk) & b.pa.isin(TOWN_PA.get(town, []))]
+        cands.append(q.index.values)
+    info["n_cand"] = [len(c) for c in cands]
+    # street-code consensus from blocks with exactly one candidate inside their town
+    one = info.n_cand == 1
+    votes = pd.DataFrame({"street": info.street[one].values,
+                          "stcod": [b.stcod.values[c[0]] for c, o in zip(cands, one) if o]})
+    vc = votes.groupby(["street", "stcod"]).size().rename("n").reset_index()
+    tot = vc.groupby("street").n.transform("sum")
+    vc["share"] = vc.n / tot
+    cons = vc[(vc.share >= 0.8)].sort_values("n").drop_duplicates("street", keep="last").set_index("street").stcod
+    pick, why = [], []
+    for c, st in zip(cands, info.street):
+        if len(c) == 0:
+            pick.append(-1); why.append("rejected: no footprint with this block number in the town")
+            continue
+        if st not in cons.index:
+            pick.append(-1); why.append("rejected: no clear street code for this street")
+            continue
+        ok = c[b.stcod.values[c] == cons[st]]
+        if len(ok) == 1:
+            pick.append(ok[0]); why.append("located: town + street code")
+        elif len(ok) == 0:
+            pick.append(-1); why.append("rejected: footprint street code differs from the street's")
         else:
-            pick[i] = None
-            info.loc[i, "match"] = "unmatched (ambiguous)"
-    ok = pick.notna().values
-    idx = pick[ok].astype(int).values
+            pick.append(-1); why.append("rejected: several footprints left after checks")
+    info["pick"], info["match"] = pick, why
+    # postal codes claimed by blocks of different streets: reject all of them
+    took = info[info.pick >= 0]
+    pc = took.assign(postal=b.postal.values[took.pick.values]).groupby("postal").street.nunique()
+    bad = set(pc[pc > 1].index)
+    clash = (info.pick >= 0) & info.pick.map(lambda k: b.postal.values[k] in bad if k >= 0 else False)
+    info.loc[clash, "match"] = "rejected: postal code claimed by blocks of different streets"
+    info.loc[clash, "pick"] = -1
+    ok = info.pick.values >= 0
     info["lat"], info["lon"], info["postal"] = np.nan, np.nan, None
-    info.loc[ok, "lat"], info.loc[ok, "lon"], info.loc[ok, "postal"] = b.lat.values[idx], b.lon.values[idx], b.postal.values[idx]
-    info.to_csv(out, index=False)
-    vc = info.match.value_counts().to_dict()
-    note(out.name, "HDB Property Information matched to HDB Existing Building footprints by block number within the "
-         "HDB town's planning area(s) (street geocode where available)", f"match counts {vc}")
-    print("match", vc, "units located", int(info.total_dwelling_units[info.lat.notna()].sum()), "of",
-          int(info.total_dwelling_units.sum()), flush=True)
+    info.loc[ok, "lat"] = b.lat.values[info.pick.values[ok]]
+    info.loc[ok, "lon"] = b.lon.values[info.pick.values[ok]]
+    info.loc[ok, "postal"] = b.postal.values[info.pick.values[ok]]
+    info.drop(columns=["pick", "blk"]).to_csv(out, index=False)
+    counts = info.match.value_counts().to_dict()
+    units = int(info.total_dwelling_units[ok].sum())
+    note(out.name, "HDB Property Information matched to HDB Existing Building footprints by block number inside the "
+         "block's HDB town, accepted only with a consistent street code and an unclaimed postal code (decision 123)",
+         f"{int(ok.sum())} of {len(info)} blocks located (coverage, not verified accuracy); {units} of "
+         f"{int(info.total_dwelling_units.sum())} dwelling units; {len(bad)} postal codes with conflicting streets "
+         f"rejected; counts {counts}")
+    print("located", int(ok.sum()), "of", len(info), "blocks;", units, "of", int(info.total_dwelling_units.sum()),
+          "units; conflicting postal codes", len(bad), flush=True)
+    print(pd.Series(counts).to_string(), flush=True)
 
 
 def part_private():

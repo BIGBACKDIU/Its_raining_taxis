@@ -25,3 +25,6 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T21:27:46,15_morning.py,step 15,morning-forecast models scored on the test year (once),,
 2026-10-23T21:54:34,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
 2026-10-23T21:57:04,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
+2026-10-23T23:00:03,19_fleet.py meta,step 19 fix,"meta-regression re-run on saved monthly effects incl. test-year months (registered coverage variable, HAC errors)",,
+2026-10-23T23:01:47,15_morning.py,step 15 fix,"morning-forecast models re-scored on the test year after the timing fixes (issue-time history, scheduled exposure, train-only imputation, one forecast issue)",,
+2026-10-23T23:01:57,13_mrt_did.py,step 13,"post-opening months of NEL extension / DTL infill cohorts fall in the test year (association analysis, no forecasting)",,

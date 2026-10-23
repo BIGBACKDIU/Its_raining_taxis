@@ -30,7 +30,7 @@ def part_a(c):
     X, fe_abs, fe_share, day = E.design(p)
     heavy = p.rain_band.values == 3
     stand = (c.taxi_stands_300m + c.osm_taxi_points_300m) > 0
-    dm = p.cell.map(c.dist_mrt_m).values
+    dm = p.cell.map(c.dist_mrt_exit_m).values
     cc = c[c.eligible]
     z = lambda s: (s - s.mean()) / s.std()
     terms = {"heavy_x_stand_or_taxi_point_300m": heavy & p.cell.map(stand).values.astype(bool),
@@ -65,7 +65,7 @@ def part_a(c):
 def notes(r):
     n = []
     n.append("arterial road in cell" if r.road_km_arterial > 0.3 else "no arterial road in cell")
-    if r.dist_mrt_m < 300:
+    if r.dist_mrt_exit_m < 300:
         n.append("MRT exit within 300 m")
     if r.malls > 0:
         n.append("mall in cell")
@@ -105,7 +105,7 @@ def part_b(c):
 def part_c(c):
     m = joblib.load(INTERIM / "rf_rain_abs.joblib")
     cols = m["columns"]
-    X = F.design_matrix(c, [k for k in cols if k in F.NUM])
+    X = F.design_matrix(c, [k for k in cols if k in F.NUM], m["scaling"])     # training transform, unchanged
     for b in [k for k in cols if k in F.BOOL]:
         X[b] = c[b].astype(float).values
     pred = m["model"].predict(X[cols])
