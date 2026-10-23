@@ -22,3 +22,4 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T17:43:20,13_mrt_did.py,step 13,"post-opening months of NEL extension / DTL infill cohorts fall in the test year (association analysis, no forecasting)",,
 2026-10-23T21:18:08,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
 2026-10-23T21:19:01,19_fleet.py,step 19,monthly heavy-rain effects incl. test-year months (association only),,
+2026-10-23T21:27:46,15_morning.py,step 15,morning-forecast models scored on the test year (once),,

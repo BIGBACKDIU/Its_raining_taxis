@@ -25,7 +25,7 @@ rank,planning_area,subzone,nearest_mrt,landmarks,abs_pct,abs_lo,abs_hi,share_pct
 24,Yishun,Lower Seletar,"Khatib (1.1 km), Springleaf (2.0 km)",,-29.06,-36.07,-21.82,-19.31,0.40,31028
 25,Yishun,Springleaf,"Springleaf (1.3 km), Khatib (1.5 km)",Madrasah At-Tahzibiah Al-Islamiah,-29.00,-38.78,-19.23,-19.26,0.21,30028
 26,Bukit Panjang,Nature Reserve,"Hillview (0.3 km), Hume (0.9 km)",HillV2 Mall; Dairy Farm Mall; Trinity Theological College,-28.79,-35.58,-22.17,-19.80,0.43,24023
-27,Newton,Monk'S Hill,"Newton (0.6 km), Little India (0.8 km)",Cuppage Plaza; KK Women's and Children's Hospital; KKH@Halifax,-28.42,-33.05,-22.95,-18.08,1.50,32017
+27,Newton,Monk's Hill,"Newton (0.6 km), Little India (0.8 km)",Cuppage Plaza; KK Women's and Children's Hospital; KKH@Halifax,-28.42,-33.05,-22.95,-18.08,1.50,32017
 28,Bukit Panjang,Nature Reserve,"Beauty World (0.5 km), King Albert Park (1.1 km)",Bukit Timah Shopping Center; Beauty World Centre; Beauty World Plaza,-27.47,-33.33,-21.08,-18.47,0.65,25021
 29,Bukit Panjang,Nature Reserve,"Hillview (1.3 km), Hume (1.4 km)",Dairy Farm Mall; German European School Singapore (Physical Education Complex); German European School Singapore,-27.42,-37.72,-16.07,-19.18,0.22,25023
 30,Central Water Catchment,Central Water Catchment,"Woodlands South (2.3 km), Segar (3.0 km)","River Safari Singapore; Night Safari, Singapore; Singapore Zoo: Attractions & Things to Do",-26.81,-38.03,-13.57,-17.43,0.43,26028

@@ -89,8 +89,8 @@ def named(t, cols):
     keep = ["rank", "planning_area", "subzone", "nearest_mrt", "landmarks"] + cols
     t = t.copy()
     t.insert(0, "rank", np.arange(1, len(t) + 1))
-    t["planning_area"] = t.planning_area.str.title()
-    t["subzone"] = t.subzone.str.title()
+    t["planning_area"] = t.planning_area.str.title().str.replace("'S", "'s")
+    t["subzone"] = t.subzone.str.title().str.replace("'S", "'s")
     return t[keep + ["cell"]]
 
 
@@ -235,7 +235,7 @@ def maps(e, ds, deserts_t, names):
                                                                              BLUE_DARK]), norm)
     dd = deserts_t.merge(names[["cell"]], on="cell").sort_values("vacant_per_10k_residents")
     dd = dd[(dd.residents >= 5000) | (dd.hdb_units.fillna(0) >= 2000)]
-    label(ax, dd.assign(short=dd.subzone.str.title()), "short", 12)
+    label(ax, dd.assign(short=dd.subzone.str.title().str.replace("'S", "'s")), "short", 12)
     sm = plt.cm.ScalarMappable(norm=norm, cmap=LinearSegmentedColormap.from_list("r", ["#8a2f10", ORANGE, "#f2f1ed",
                                                                                        "#7fb0e8", BLUE_DARK]))
     cb = fig.colorbar(sm, ax=ax, orientation="horizontal", fraction=0.05, pad=0.02)

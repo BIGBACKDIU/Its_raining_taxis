@@ -150,7 +150,8 @@ def nearest_mrt(lon, lat, k=2):
 def place_label(row):
     lm = row.get("landmarks") or ""
     first = lm.split(";")[0].strip() if lm else ""
-    return f"{row['subzone'].title()} ({first})" if first else f"{row['subzone'].title()}, {row['planning_area'].title()}"
+    sz, pa = row["subzone"].title().replace("'S", "'s"), row["planning_area"].title().replace("'S", "'s")
+    return f"{sz} ({first})" if first else f"{sz}, {pa}"
 
 
 @lru_cache

@@ -1,0 +1,5 @@
+label,model,deviance_without,deviance_with,deviance_improvement_pct,lo,hi,mae_without,mae_with,test_rows,material_rule_met
+retrospective,lgb,264842.68568,247452.98217,6.56605,5.68516,7.47398,4.45336,4.36538,51156,True
+retrospective,glm,308883.90843,308994.54219,-0.03582,-0.23199,0.17025,4.29082,4.29623,51156,False
+issue-time,lgb,241673.05590,240247.56647,0.58984,-1.02978,2.13467,4.28700,4.28241,51156,False
+issue-time,glm,608140.99629,640134.26505,-5.26083,-6.22218,-4.34518,9.82407,10.26644,51156,False

@@ -15,6 +15,6 @@ osm_pois.parquet,Geofabrik malaysia-singapore-brunei-latest.osm.pbf parsed with 
 osm_drive_edges.parquet,Geofabrik malaysia-singapore-brunei-latest.osm.pbf parsed with pyosmium (Overpass API unavailable),2026-10-23,"331835 nodes, 521961 directed edges"
 hdb_info.csv,data.gov.sg dataset d_17f5382f26140b1fdae0ba2ef6239d2f,2026-10-23,0.9 MB
 hdb_resale.csv,data.gov.sg dataset d_8b84c4ee58e3cfc0ece0d773c8ca6abc,2026-10-23,24.1 MB
-sg_drive.graphml,OpenStreetMap via osmnx graph_from_bbox(network_type='drive'),2026-10-23,"26090 nodes, 49808 edges"
-hdb_blocks_geocoded.csv,HDB Property Information matched to HDB Existing Building footprints by block number within the HDB town's planning area(s) (street geocode where available),2026-10-23,"match counts {'town': 10187, 'street': 1701, 'ambiguous': 1425, 'unmatched': 79}"
+sg_drive.graphml,OpenStreetMap via osmnx graph_from_bbox(network_type='drive'),2026-10-23,"26090 nodes, 49808 edges; partial download (Overpass failures), not used - the Geofabrik network replaces it"
 hdb_blocks_geocoded.csv,HDB Property Information matched to HDB Existing Building footprints by block number within the HDB town's planning area(s) (street geocode where available),2026-10-23,"match counts {'town': 10187, 'street': 1701, 'street median': 1067, 'unmatched (ambiguous)': 358, 'unmatched': 79}"
+hdb_existing_building.geojson,data.gov.sg dataset d_16b157c52ed637edd6ba1232e026258d (HDB Existing Building footprints),2026-10-23,"13,436 footprints; 57 MB, kept outside git"

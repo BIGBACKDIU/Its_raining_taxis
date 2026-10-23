@@ -24,6 +24,7 @@ N = importlib.import_module("analysis.10_names")
 
 
 def part_a(c):
+    c = c.set_index("cell", drop=False)
     p = E.load_fit()
     p = p[E.sample(p)].reset_index(drop=True)
     X, fe_abs, fe_share, day = E.design(p)
@@ -93,8 +94,8 @@ def part_b(c):
     names = pd.read_csv(TABLES / "names_cells.csv").set_index("cell")
     for k in ("planning_area", "subzone", "nearest_mrt", "landmarks"):
         out[k] = out.cell.map(names[k])
-    out["planning_area"] = out.planning_area.str.title()
-    out["subzone"] = out.subzone.str.title()
+    out["planning_area"] = out.planning_area.str.title().str.replace("'S", "'s")
+    out["subzone"] = out.subzone.str.title().str.replace("'S", "'s")
     out["note"] = "No cost, kerb-space or traffic-safety data were available; feasibility notes are qualitative."
     out.to_csv(TABLES / "stands_candidates.csv", index=False, float_format="%.2f")
     print(out.groupby("reason").head(10)[["reason", "planning_area", "subzone", "landmarks", "score",
@@ -123,7 +124,7 @@ def part_c(c):
             "cells": len(q), "residents": q.residents.sum(),
             "pred_heavy_abs_pct_resident_weighted": np.average(q.pred_heavy_abs_pct, weights=q.w),
             "share_cells_predicted_only": (~q.eligible).mean()}), include_groups=False).reset_index()
-        g[lvl] = g[lvl].str.title()
+        g[lvl] = g[lvl].str.title().str.replace("'S", "'s")
         g.sort_values("pred_heavy_abs_pct_resident_weighted").to_csv(TABLES / f"stands_predicted_by_{lvl}.csv",
                                                                      index=False, float_format="%.3f")
     print(g.sort_values("pred_heavy_abs_pct_resident_weighted").head(15).round(2).to_string(index=False))

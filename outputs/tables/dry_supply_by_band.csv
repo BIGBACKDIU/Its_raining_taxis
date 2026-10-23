@@ -192,7 +192,7 @@ cell,mean_vacant_dry,band,planning_area,subzone,place,lon,lat
 32014,12.643,07-10,OUTRAM,CHINATOWN,Chinatown (Kreta Ayer Square),103.842,1.281
 32015,14.118,07-10,SINGAPORE RIVER,ROBERTSON QUAY,Robertson Quay (Hong San See Temple Singapore),103.842,1.290
 32016,7.109,07-10,MUSEUM,DHOBY GHAUT,Dhoby Ghaut (Fort Canning Park),103.842,1.299
-32017,4.723,07-10,NEWTON,MONK'S HILL,Monk'S Hill (Cuppage Plaza),103.842,1.308
+32017,4.723,07-10,NEWTON,MONK's HILL,Monk's Hill (Cuppage Plaza),103.842,1.308
 32018,5.532,07-10,NOVENA,MOULMEIN,Moulmein (United Square),103.842,1.317
 32019,4.633,07-10,NOVENA,BALESTIER,Balestier (Sun Yat Sen Memorial Hall),103.842,1.326
 32020,3.244,07-10,TOA PAYOH,TOA PAYOH WEST,Toa Payoh West (Toa Payoh West Market and Food Court),103.842,1.335
@@ -566,7 +566,7 @@ cell,mean_vacant_dry,band,planning_area,subzone,place,lon,lat
 32014,20.596,10-17,OUTRAM,CHINATOWN,Chinatown (Kreta Ayer Square),103.842,1.281
 32015,17.506,10-17,SINGAPORE RIVER,ROBERTSON QUAY,Robertson Quay (Hong San See Temple Singapore),103.842,1.290
 32016,10.597,10-17,MUSEUM,DHOBY GHAUT,Dhoby Ghaut (Fort Canning Park),103.842,1.299
-32017,6.944,10-17,NEWTON,MONK'S HILL,Monk'S Hill (Cuppage Plaza),103.842,1.308
+32017,6.944,10-17,NEWTON,MONK's HILL,Monk's Hill (Cuppage Plaza),103.842,1.308
 32018,8.978,10-17,NOVENA,MOULMEIN,Moulmein (United Square),103.842,1.317
 32019,5.573,10-17,NOVENA,BALESTIER,Balestier (Sun Yat Sen Memorial Hall),103.842,1.326
 32020,3.901,10-17,TOA PAYOH,TOA PAYOH WEST,Toa Payoh West (Toa Payoh West Market and Food Court),103.842,1.335
@@ -940,7 +940,7 @@ cell,mean_vacant_dry,band,planning_area,subzone,place,lon,lat
 32014,16.642,17-20,OUTRAM,CHINATOWN,Chinatown (Kreta Ayer Square),103.842,1.281
 32015,15.603,17-20,SINGAPORE RIVER,ROBERTSON QUAY,Robertson Quay (Hong San See Temple Singapore),103.842,1.290
 32016,12.400,17-20,MUSEUM,DHOBY GHAUT,Dhoby Ghaut (Fort Canning Park),103.842,1.299
-32017,5.081,17-20,NEWTON,MONK'S HILL,Monk'S Hill (Cuppage Plaza),103.842,1.308
+32017,5.081,17-20,NEWTON,MONK's HILL,Monk's Hill (Cuppage Plaza),103.842,1.308
 32018,4.816,17-20,NOVENA,MOULMEIN,Moulmein (United Square),103.842,1.317
 32019,4.198,17-20,NOVENA,BALESTIER,Balestier (Sun Yat Sen Memorial Hall),103.842,1.326
 32020,3.259,17-20,TOA PAYOH,TOA PAYOH WEST,Toa Payoh West (Toa Payoh West Market and Food Court),103.842,1.335
@@ -1314,7 +1314,7 @@ cell,mean_vacant_dry,band,planning_area,subzone,place,lon,lat
 32014,18.329,20-24,OUTRAM,CHINATOWN,Chinatown (Kreta Ayer Square),103.842,1.281
 32015,17.219,20-24,SINGAPORE RIVER,ROBERTSON QUAY,Robertson Quay (Hong San See Temple Singapore),103.842,1.290
 32016,17.696,20-24,MUSEUM,DHOBY GHAUT,Dhoby Ghaut (Fort Canning Park),103.842,1.299
-32017,7.349,20-24,NEWTON,MONK'S HILL,Monk'S Hill (Cuppage Plaza),103.842,1.308
+32017,7.349,20-24,NEWTON,MONK's HILL,Monk's Hill (Cuppage Plaza),103.842,1.308
 32018,4.324,20-24,NOVENA,MOULMEIN,Moulmein (United Square),103.842,1.317
 32019,4.643,20-24,NOVENA,BALESTIER,Balestier (Sun Yat Sen Memorial Hall),103.842,1.326
 32020,3.341,20-24,TOA PAYOH,TOA PAYOH WEST,Toa Payoh West (Toa Payoh West Market and Food Court),103.842,1.335
@@ -1688,7 +1688,7 @@ cell,mean_vacant_dry,band,planning_area,subzone,place,lon,lat
 32014,9.787,00-07,OUTRAM,CHINATOWN,Chinatown (Kreta Ayer Square),103.842,1.281
 32015,10.271,00-07,SINGAPORE RIVER,ROBERTSON QUAY,Robertson Quay (Hong San See Temple Singapore),103.842,1.290
 32016,11.974,00-07,MUSEUM,DHOBY GHAUT,Dhoby Ghaut (Fort Canning Park),103.842,1.299
-32017,4.865,00-07,NEWTON,MONK'S HILL,Monk'S Hill (Cuppage Plaza),103.842,1.308
+32017,4.865,00-07,NEWTON,MONK's HILL,Monk's Hill (Cuppage Plaza),103.842,1.308
 32018,2.732,00-07,NOVENA,MOULMEIN,Moulmein (United Square),103.842,1.317
 32019,4.257,00-07,NOVENA,BALESTIER,Balestier (Sun Yat Sen Memorial Hall),103.842,1.326
 32020,2.700,00-07,TOA PAYOH,TOA PAYOH WEST,Toa Payoh West (Toa Payoh West Market and Food Court),103.842,1.335

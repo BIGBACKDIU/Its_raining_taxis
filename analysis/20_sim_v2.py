@@ -173,8 +173,8 @@ def prep():
     off_scale = loss / loss.mean()
     names = pd.read_csv(TABLES / "names_cells.csv").set_index("cell").loc[order]
     ty = pd.read_csv(TABLES / "risk_types.csv").set_index("cell").type.reindex(order)
-    cells2 = {**cells, "place": names.place.tolist(), "subzone": names.subzone.str.title().tolist(),
-              "planning_area": names.planning_area.str.title().tolist(), "type0": (ty == 0).astype(int).tolist(),
+    cells2 = {**cells, "place": names.place.tolist(), "subzone": names.subzone.str.title().str.replace("'S", "'s").tolist(),
+              "planning_area": names.planning_area.str.title().str.replace("'S", "'s").tolist(), "type0": (ty == 0).astype(int).tolist(),
               "pred_heavy_pct": np.round(pr.reindex(order).values, 1).tolist()}
     data = {"cells": cells2, "T": np.round(T, 1).ravel().tolist(),
             "weights": {"characteristics": np.round(ch_w, 3).tolist(), "observed": np.round(obs_w, 3).tolist()},
@@ -207,8 +207,6 @@ def tune(mechanisms, n_trials=12):
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     world, storms, _ = load2()
     fit = [s for s in storms if s["period"] == "fit"]
-    f = TABLES / "sim2_tuning.csv"
-    prev = pd.read_csv(f) if f.exists() else pd.DataFrame()
     rows = []
     for mech, dest, travel, disp in COMBOS:
         if mech not in mechanisms:
@@ -229,8 +227,12 @@ def tune(mechanisms, n_trials=12):
         rows.append({**scen, **bp, "loss": L, "rmse_rel": rmse, "cell_corr": cor, "trials": n_trials,
                      "seconds": round(time.time() - t0)})
         print(rows[-1], flush=True)
-    out = pd.concat([prev, pd.DataFrame(rows)]).drop_duplicates(["mechanism", "dest", "travel", "dispatch"], keep="last")
-    out.to_csv(f, index=False, float_format="%.5f")
+    parts = INTERIM / "sim2_tuning_parts"                    # one file per process so mechanisms can run in parallel
+    parts.mkdir(exist_ok=True)
+    pd.DataFrame(rows).to_csv(parts / f"{'_'.join(mechanisms)}.csv", index=False)
+    out = pd.concat([pd.read_csv(p) for p in sorted(parts.glob("*.csv"))])
+    out = out.drop_duplicates(["mechanism", "dest", "travel", "dispatch"], keep="last")
+    out.to_csv(TABLES / "sim2_tuning.csv", index=False, float_format="%.5f")
 
 
 # ============================================================================= plausibility
@@ -332,6 +334,60 @@ def charts():
     save(fig, "sim2_diagnosis", "Sources: step-8 simulation, data.gov.sg taxi availability (LTA), NEA rainfall. "
          "Each box: 8 tuned combinations x storms.")
     plt.close(fig)
+
+
+
+# ============================================================================= page and parity check
+def diag_text():
+    d = pd.read_csv(TABLES / "sim2_diagnosis_summary.csv").set_index("period")
+    pl = pd.read_csv(TABLES / "sim2_plausibility.csv")
+    f, t = d.loc["fit"], d.loc["test"]
+    return (f"Why: in the step-8 version the simulated citywide path sat on average {abs(100 * f.level_bias):.0f}% below the "
+            f"observed one on training storms, its timing matched only moderately (correlation {f.time_corr:.2f} training, "
+            f"{t.time_corr:.2f} held-out) and the pattern of which cells lost taxis matched poorly (correlation "
+            f"{f.cell_change_corr:.2f} / {t.cell_change_corr:.2f}). Held-out storms show deeper, noisier drops: even a "
+            f"non-simulation path (baseline x estimated rain effects) meets the rule on only {int(t.stat_passes)} of 10. "
+            f"v2 (road times, place characteristics) reaches a mean level gap of {100 * pl.level_bias.mean():+.0f}% on held-out "
+            f"storms. Use the page to explore mechanisms, not to read off numbers.")
+
+
+def page():
+    data = (V2 / "data.json").read_text()
+    tun = pd.read_csv(TABLES / "sim2_tuning.csv").to_dict(orient="records")
+    pl = pd.read_csv(TABLES / "sim2_plausibility.csv").to_dict(orient="records")
+    engine = (V2 / "engine_v2.js").read_text()
+    shell = (V2 / "page_template_v2.html").read_text()
+    html = (shell.replace("/*__ENGINE__*/", engine)
+            .replace("/*__DATA__*/", f"const DATA = {data};\nconst TUNED = {json.dumps(tun)};\nconst PLAUS = {json.dumps(pl)};"
+                     f"\nconst DIAG = {json.dumps(diag_text())};"))
+    (V2 / "index.html").write_text(html)
+    print("sim/v2/index.html", round((V2 / "index.html").stat().st_size / 1e6, 2), "MB")
+    parity()
+
+
+def parity(S=50):
+    from analysis.sim_engine_v2 import simulate as sim2
+    world, storms, _ = load2()
+    tun = pd.read_csv(TABLES / "sim2_tuning.csv")
+    held = [s for s in storms if s["period"] == "test"]
+    cases = [(tun.iloc[0], held[0]), (tun.iloc[len(tun) // 2], held[3]), (tun.iloc[-1], held[7])]
+    rows = []
+    for r, st in cases:
+        scen = {"mechanism": r.mechanism, "dest": r.dest, "travel": r.travel, "dispatch": r.dispatch, "demand_level": 1.0}
+        out = sim2(world, st, scen, S8.params_of(r), S=S, seed=SEED, record_cells=False)
+        pk = int(np.argmin(np.abs(np.array(st["snap_minutes"]) - st["peak_minute"])))
+        py_mean, py_peak = float(rel(out["city"]).mean()), float(rel(out["city"])[:, pk].mean())
+        arg = json.dumps({"scen": scen, "params": S8.params_of(r), "storm": st["date"], "seeds": S})
+        res = subprocess.run(["node", str(V2 / "parity_v2.mjs"), arg], capture_output=True, text=True, timeout=3600)
+        js = json.loads(res.stdout.strip().splitlines()[-1])
+        rows.append({**scen, "storm": st["date"], "python_mean_rel": py_mean, "js_mean_rel": js["mean_rel"],
+                     "python_peak_rel": py_peak, "js_peak_rel": js["peak_rel"],
+                     "diff_mean_pct": 100 * (js["mean_rel"] / py_mean - 1), "diff_peak_pct": 100 * (js["peak_rel"] / py_peak - 1)})
+        print(rows[-1], flush=True)
+    t = pd.DataFrame(rows)
+    ok_peak = (t.diff_peak_pct.abs() <= 5) | ((t.js_peak_rel - t.python_peak_rel).abs() <= 0.01)
+    t["within_5pct"] = (t.diff_mean_pct.abs() <= 5) & ok_peak
+    t.to_csv(TABLES / "sim2_parity_check.csv", index=False, float_format="%.4f")
 
 
 def main():

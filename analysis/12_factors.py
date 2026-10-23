@@ -349,14 +349,24 @@ def charts():
               "food_outlets": "Food outlets", "hdb_units": "HDB dwelling units", "residents": "Residents",
               "dist_mrt_m": "Distance to MRT", "mrt_exits_500m": "MRT exits within 500 m", "lu_commercial": "Commercial land",
               "lu_residential": "Residential land", "taxi_stands_300m": "Taxi stops / stands", "betweenness": "Road betweenness",
-              "dist_airport_km": "Distance to airport", "road_km_total": "Road length", "bus_stops": "Bus stops"}
+              "dist_airport_km": "Distance to airport", "road_km_total": "Road length", "bus_stops": "Bus stops",
+              "hdb_resale_psf": "HDB resale price (psf)", "private_psf": "Private housing price (psf)",
+              "lu_park": "Park land", "lu_business": "Business / industrial land", "lu_institution": "Institutional land",
+              "share_65plus": "Share of residents 65+", "road_km_arterial": "Arterial road length",
+              "road_km_expressway": "Expressway length", "dist_expressway_m": "Distance to expressway",
+              "hospitals": "Hospitals", "schools": "Schools", "private_transactions": "Private housing transactions",
+              "share_private_tx": "Share private housing", "mrt_lines_800m": "MRT lines within 800 m",
+              "osm_taxi_points_300m": "OSM taxi points"}
+    summ = pd.read_csv(TABLES / "factors_cell_summary.csv").set_index("outcome")
     for ax, kind in zip(axes, ("abs", "share")):
         t = s[s.outcome == kind].head(12)[::-1]
         cols = [ORANGE if d < 0 else BLUE for d in t.direction_corr]
         ax.barh([labels.get(k, k.replace("_", " ")) for k in t.characteristic], t.mean_abs_shap, color=cols)
-        ax.set_title("Absolute" if kind == "abs" else "Share of citywide", fontsize=9.5)
+        ax.set_title(f"{'Absolute' if kind == 'abs' else 'Share of citywide'} (spatial-CV R2 = "
+                     f"{summ.loc[kind, 'rf_spatial_cv_r2']:.2f}: weak out-of-area prediction)", fontsize=9.5)
         ax.set_xlabel("Mean |SHAP| (log ratio of heavy-rain effect)")
-    fig.suptitle("What distinguishes cells that lose more vacant taxis in heavy rain (orange: higher value = bigger loss)",
+    fig.suptitle("What distinguishes cells that lose more vacant taxis in heavy rain (orange: higher value goes with a bigger "
+                 "loss; blue: with a smaller loss)",
                  x=0.01, ha="left", fontsize=10.5)
     fig.tight_layout()
     save(fig, "factors_shap", "Sources: data.gov.sg taxi availability, NEA rainfall, URA MP2019, HDB, Census 2020, OSM, "
