@@ -113,9 +113,7 @@ residential cells: Upper Thomson, Waterway East and Punggol Town Centre (23,600 
 heavy rain grew by 2.2 log-points per 1,000 fewer taxis [0.3, 4.1] (absolute: 1.0 [-0.5, 2.6], not clear); feed
 coverage changes are a competing explanation (fig 23). New MRT stations (Thomson-East Coast Line stages 3-4,
 Punggol Coast, Hume) show no clear change in nearby dry-weather supply (+2.3% [-6.6, +12.0]) or in the
-heavy-rain effect, but pre-opening trends differ, so this is not a clean test (fig 22). Cells far from a working
-rain gauge show slightly larger, not smaller, effects; a classical-error correction would put heavy rain nearer
--17.5%, so the headline -12.9% may be somewhat understated.
+heavy-rain effect, but pre-opening trends differ, so this is not a clean test (fig 22). Cells far from a working rain gauge show slightly larger, not smaller, effects (a sensitivity diagnostic; no correction is applied).
 
 ## 3. How sure are we?
 

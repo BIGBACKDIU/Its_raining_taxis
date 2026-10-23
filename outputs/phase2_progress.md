@@ -152,6 +152,7 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   attenuation that pure measurement error would cause, so distance to the gauge does not visibly weaken the
   estimates (far cells also differ in other ways, so this is not a clean test).
 - Reliability ratio of the cell rain measure (nearest gauge vs the 2nd/3rd nearest): 0.72 (correlation 0.79).
+  [Withdrawn in review fix B5 below: the next sentence's correction rests on an unsupported assumption.]
   Under the classical-error assumption the headline heavy-rain effect (-12.9%) could be understated, with an
   indicative corrected size of about -17.5%; because the near/far comparison shows no attenuation, the true
   understatement is probably smaller. Table: `gauges_measurement_error.csv`.
@@ -261,3 +262,34 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
     -2.7% per SD (spatial, CI -4.9 to -0.5; new after the parsing fix); taxi stands +2.8% per SD and HDB units
     +3.5% per SD only in the spatial model; interchange and a new station nearby only in plain WLS.
   - Random forest: spatial-CV R2 0.12 (abs) / 0.15 (share); type-0 AUC 0.71 (logistic) / 0.70 (forest).
+
+## Group B - model fixes (decisions 125, 129-132)
+
+- B1, planning map: the random forest's imputation and standardisation are fitted on the 374 training cells and
+  stored with the model; step 14 and the simulation-v2 inputs reuse them unchanged. Before, every land cell was
+  re-standardised on the 778-cell set, which shifted predictions. Resident-weighted predicted heavy-rain effect
+  by planning area now: Museum -27.6%, Downtown Core -25.2%, Outram -23.8% (CBD and fringe largest); among large
+  residential areas Woodlands -16.8%, Sembawang -16.7%, Choa Chu Kang -16.1% at the high end and Bishan -9.4%,
+  Ang Mo Kio -9.6%, Bukit Merah -10.3%, Queenstown -10.5% at the low end (Bukit Merah was -16.1% before the fix).
+  Figure 24 and `stands_predicted_by_*.csv` regenerated. The model stays weak out of area (R2 0.12).
+- B2, morning forecast timing: history now uses the issue-time label only, exposure is scheduled (cells x
+  half-hours), GLM imputation uses training rows only, and one forecast issue (the latest before 09:00) is used
+  per day. Test year re-scored once (logged). Deviance change with the forecast:
+  - LightGBM, retrospective label: -10.1% (CI 9.4 to 10.8) - meets the rule.
+  - LightGBM, issue-time label: -6.3% (CI 4.9 to 7.5) - meets the rule (it did not before).
+  - GLM, retrospective: +0.2% better (CI -0.1 to +0.5) - not material; GLM, issue-time: 4.5% worse with the
+    forecast (CI -5.4 to -3.8).
+  The flexible model gains under both labels once the timing is right; the linear model never does.
+- B3, MRT natural experiment: controls now matched on the cohort-specific distance to the nearest station open
+  before each opening; the heavy-rain DiD includes treated x post. Pre-trends fail more clearly (Wald p =
+  0.00002). Dry-supply DiD +2.2% (CI -6.8 to +12.1), still no clear change. Heavy-rain DiD -4.2% (CI -13.4 to
+  +5.9), not clear. The new treated x post term (+5.0%, CI 3.2 to 6.8) says vacant supply near the new stations
+  rose relative to controls in the snapshot panel; with failed pre-trends this is not evidence of a station
+  effect.
+- B4, fleet trend: registered regime coverage level and Newey-West HAC errors (3 lags). Per 1,000 fewer taxis
+  the absolute heavy-rain effect changes by -0.9 log-points (CI -2.8 to +1.0) and the share effect by -2.0
+  (CI -4.3 to +0.3): neither is clear any more (the share result was CI -4.1 to -0.3 with HC1 errors and the
+  daily coverage control). The forward-looking sentence about a shrinking fleet is removed.
+- B5, measurement error: the "-17.5% corrected" figure and the claim that the headline is understated are
+  withdrawn; gauge agreement (reliability ratio 0.72, correlation 0.79) and the near/far comparison (far cells
+  -13.3% vs near -12.4%) are kept as sensitivity diagnostics only.

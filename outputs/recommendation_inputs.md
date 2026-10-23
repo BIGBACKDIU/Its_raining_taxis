@@ -123,7 +123,7 @@ real but modest.
 
 **Fleet trend (`fleet_meta_regression.csv`).** As the fleet fell from about 15,400 to 11,900 taxis, heavy rain took
 a larger local share (2.2 log-points per 1,000 fewer taxis, CI 0.3-4.1); feed-coverage changes compete as an
-explanation. If the fleet keeps shrinking, expect rain gaps to widen somewhat.
+explanation.
 
 **Simulation v2 and dispatcher (`sim/v2/index.html`).** Rebuilt on OpenStreetMap drive times with place
 characteristics; it reproduces where taxis are much better than v1, but no scenario passes the held-out

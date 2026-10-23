@@ -32,25 +32,42 @@ def main():
     days = np.sort(h.ts.dt.normalize().unique())
     di = np.searchsorted(days, h.ts.dt.normalize().values)
     cc, cl = pd.factorize(h.cell)
-    V, S = np.zeros((len(days), len(cl))), np.zeros((len(days), len(cl)))
+    V, S, F0 = (np.zeros((len(days), len(cl))) for _ in range(3))
     np.add.at(V, (di, cc), h.vacant.values)
     np.add.at(S, (di, cc), h.fit0s.values)
+    np.add.at(F0, (di, cc), h.fit0.values)
     W = np.random.default_rng(SEED).multinomial(len(days), np.full(len(days), 1 / len(days)), size=1000).astype(float)
     with np.errstate(invalid="ignore", divide="ignore"):
         b = (W @ V) / (W @ S) - 1
+        ba = (W @ V) / (W @ F0) - 1
     names = pd.read_csv(TABLES / "names_cells.csv")
-    r = pd.DataFrame({"cell": cl, "rows": np.bincount(cc, minlength=len(cl)),
+    N10 = importlib.import_module("analysis.10_names")
+    slots = h.groupby("cell").ts.nunique().reindex(cl).values
+    r = pd.DataFrame({"cell": cl, "rows": np.bincount(cc, minlength=len(cl)), "expected_vacant": F0.sum(0) / slots,
                       "share_pct": 100 * (V.sum(0) / S.sum(0) - 1), "lo": 100 * np.nanquantile(b, 0.025, 0),
-                      "hi": 100 * np.nanquantile(b, 0.975, 0)})
+                      "hi": 100 * np.nanquantile(b, 0.975, 0), "abs_pct": 100 * (V.sum(0) / F0.sum(0) - 1),
+                      "abs_change_per_half_hour": (V.sum(0) - F0.sum(0)) / slots})
+    r["abs_change_lo"] = np.nanquantile(ba, 0.025, 0) * r.expected_vacant
+    r["abs_change_hi"] = np.nanquantile(ba, 0.975, 0) * r.expected_vacant
+    for k, bb in (("share", b), ("abs", ba)):
+        r[f"{k}_p"] = np.clip(2 * np.minimum(np.nanmean(bb >= 0, 0), np.nanmean(bb <= 0, 0)), 1e-3, 1)
+        r[f"{k}_q"] = N10.bh(r[f"{k}_p"].values)
+    r["presentable"] = (r.expected_vacant >= 4) & (r.share_q < 0.10)
     r["direction"] = np.where(r.lo > 0, "gains share", np.where(r.hi < 0, "loses share", "no clear change"))
+    r["absolute"] = np.where(r.abs_change_lo > 0, "more taxis", np.where(r.abs_change_hi < 0, "fewer taxis",
+                                                                           "no clear change"))
     r = r.merge(names[["cell", "planning_area", "subzone", "nearest_mrt", "landmarks", "place", "lon", "lat"]], on="cell")
     r.sort_values("share_pct").to_csv(TABLES / "spillover_islandwide_share.csv", index=False, float_format="%.3f")
     print("island-wide rain snapshots:", h.ts.nunique(), "days:", len(days))
-    print(r.direction.value_counts().to_dict())
-    print(r.sort_values("share_pct").head(10)[["planning_area", "subzone", "landmarks", "share_pct", "lo", "hi"]]
+    print(r.direction.value_counts().to_dict(), r.absolute.value_counts().to_dict(),
+          "presentable:", int(r.presentable.sum()))
+    pr = r[r.presentable]
+    print(pr.sort_values("share_pct").head(10)[["planning_area", "subzone", "share_pct", "lo", "hi",
+                                                "abs_change_per_half_hour", "abs_change_lo", "abs_change_hi"]]
           .round(1).to_string(index=False))
-    print(r.sort_values("share_pct", ascending=False).head(10)[["planning_area", "subzone", "landmarks", "share_pct",
-                                                                 "lo", "hi"]].round(1).to_string(index=False))
+    print(pr.sort_values("share_pct", ascending=False).head(10)[["planning_area", "subzone", "share_pct", "lo", "hi",
+                                                                 "abs_change_per_half_hour", "abs_change_lo",
+                                                                 "abs_change_hi"]].round(1).to_string(index=False))
     # characteristics of gainers vs losers (WLS on kept step-12 characteristics)
     import statsmodels.api as sm
     c = pd.read_csv(TABLES / "cell_characteristics.csv")
