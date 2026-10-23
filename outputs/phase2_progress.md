@@ -356,3 +356,20 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   0.5-0.8 when both act; simulated abandonment during rain 0.1-6%; step-7 repositioning changes abandonment
   during rain by -0.4 points on average (0 to -2.6). Before the fix the same summary read 1-10% abandonment and
   -1.3 points (0 to -4.7); those numbers are void. `recommendation_inputs.md` section 4 is updated.
+
+## Follow-ups (decisions 137-138)
+
+- MRT lines: MRT lines only (LRT codes excluded, CG counted as EW; codes without numbers now parsed). 25
+  interchange stations; the interchange flag changed for 4 eligible cells (Gombak, Keat Hong, Senja, Choa Chu Kang
+  North). Step 12 cell-level designs rerun: the Central Area result is unchanged (-10.6% WLS, -10.7% spatial);
+  the interchange flag is now significant in the spatial model too (+5.5%, CI 0.1 to 11.2), alongside more MRT
+  lines nearby (-3.4% per SD); both hold in the two cell-level designs with opposite signs and are not tested in
+  the panel, so the summary calls only the Central Area robust across all designs. Random forest R2 and AUC
+  unchanged (0.12 / 0.15; 0.71 / 0.70). Step-14 map regenerated.
+- Morning planning and simulation wording in `summary.md` clarified (second test-year scoring; plain words;
+  the statistical path also fails the unchanged rule).
+- Simulators: trips now start at the request cells. Training loss moved by more than 1% for 5 of 48 combinations
+  (largest 1.44%), so both versions were retuned and re-checked with the unchanged rule (logged): still no
+  combination passes (step 8 best 4 of 10 storms, v2 best 3 of 10); diagnosis and parity (within 5% or 0.01;
+  largest gap 1.9% at the peak) unchanged in substance. Grid: abandonment during rain 0.1-5%, repositioning
+  -0.3 points on average (0 to -2.3).

@@ -69,9 +69,9 @@ best 3 of 10 - section 5). Read as "what could happen under assumption X":
 - Vacant taxis at the rain peak relative to the start: about 0.7-1.0 of the start level in demand-surge or
   supply-drop scenarios (5-95% ranges roughly 0.5-1.5); about 0.5-0.8 when both happen together (5-95% roughly
   0.3-1.25).
-- Simulated share of requests abandoned during rain: about 0.1-6% depending on the scenario.
-- Step-7 repositioning in the simulation: abandoned requests during rain -0.4 percentage points on average
-  (range 0 to -2.6), vacant taxis at the peak -2 points (taxis are in transit), waits essentially unchanged.
+- Simulated share of requests abandoned during rain: about 0.1-5% depending on the scenario.
+- Step-7 repositioning in the simulation: abandoned requests during rain -0.3 percentage points on average
+  (range 0 to -2.3), vacant taxis at the peak -2 points (taxis are in transit), waits essentially unchanged.
 These are simulation quantities; they are not observed demand, waiting times or revenue.
 
 ## 5. Phase-2 inputs: where to act and what to expect (steps 10-20)

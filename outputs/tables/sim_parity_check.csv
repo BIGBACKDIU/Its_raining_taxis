@@ -1,4 +1,4 @@
 mechanism,dest,travel,dispatch,demand_level,storm,python_mean_rel,js_mean_rel,python_peak_rel,js_peak_rel,diff_mean_pct,diff_peak_pct,within_5pct
-demand,mrt,dry,nearest,1.0000,2026-09-27,1.0909,1.0904,0.7963,0.8020,-0.0489,0.7116,True
-mix,landuse,dry,nearest,1.0000,2026-05-08,0.9592,0.9565,0.6113,0.6054,-0.2901,-0.9664,True
-supply,landuse,rain,widening,1.0000,2026-06-12,0.8877,0.8851,0.5658,0.5576,-0.2979,-1.4414,True
+demand,mrt,dry,nearest,1.0000,2026-09-27,1.0911,1.0897,0.7998,0.7947,-0.1273,-0.6372,True
+mix,landuse,dry,nearest,1.0000,2026-05-08,0.9570,0.9560,0.6111,0.5995,-0.1010,-1.8971,True
+supply,landuse,rain,widening,1.0000,2026-06-12,0.8866,0.8846,0.5653,0.5589,-0.2263,-1.1302,True

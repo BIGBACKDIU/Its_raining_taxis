@@ -231,8 +231,8 @@ class Sim {
       for (let i = 0; i < C && gap > 0; i++) if (d[i] > 0) { d[i]--; gap--; }
       for (let j = 0; j < C && gap < 0; j++) if (q[j] > 0) { q[j]--; gap++; }
       for (let i = 0; i < C; i++) {
-        if (d[i] > 0) { V[i] -= d[i]; served += d[i]; this.startTrips(d[i], i, mid * meanF, facArr); }
-        Q[i] -= q[i];
+        if (d[i] > 0) { V[i] -= d[i]; served += d[i]; }
+        if (q[i] > 0) { Q[i] -= q[i]; this.startTrips(q[i], i, mid * meanF, facArr); }   // trips start at the request cell
       }
     }
     return served;

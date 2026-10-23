@@ -5,7 +5,7 @@ outputs/summary.md:9 [waiting time] demand, waiting times or revenue. All rain r
 outputs/summary.md:9 [revenue] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:9 [cause] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:49 [demand] dispatcher panel) show how demand surges, drivers going offline, or both, could play out. A review found a
-outputs/summary.md:65 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes. Named places are
+outputs/summary.md:70 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes. Named places are
 outputs/recommendation_inputs.md:4 [cause] operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
 outputs/recommendation_inputs.md:44 [demand] - Modelled expected shortfall reductions are model quantities, not observed demand or service.
 outputs/recommendation_inputs.md:69 [demand] - Vacant taxis at the rain peak relative to the start: about 0.7-1.0 of the start level in demand-surge or

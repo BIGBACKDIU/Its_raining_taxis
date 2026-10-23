@@ -36,3 +36,11 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T23:30:56,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
 2026-10-23T23:33:15,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
 2026-10-23T23:34:34,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,
+2026-10-24T06:06:04,08_simulation.py --part plausibility,step 8,held-out test-year storms: simulated vs observed,,
+2026-10-24T06:06:46,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
+2026-10-24T06:08:23,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T06:08:23,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T06:08:23,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T06:09:00,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
+2026-10-24T06:27:19,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
+2026-10-24T06:28:22,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,

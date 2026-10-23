@@ -61,8 +61,11 @@ def land_cells(size: int = 1000) -> gpd.GeoDataFrame:
 def mrt() -> pd.DataFrame:
     m = json.load(open(STATIC / "sg_mrt.json"))
     st = pd.DataFrame(m["stations"], columns=["name", "code", "network", "lat", "lon"])
-    # a station's code can combine several lines ("NS24-NE6-CC1"): every line prefix counts
-    st["line_set"] = st.code.map(lambda c: frozenset(re.findall(r"([A-Z]+)\d+", c)))
+    # a station's code can combine several lines ("NS24-NE6-CC1"): every MRT line prefix counts (decision 137).
+    # MRT lines only: LRT codes (BP, PTC, STC, SW, SE, PE, PW) are not lines; the Changi Airport branch CG is EW.
+    lrt = {"BP", "PTC", "STC", "SW", "SE", "PE", "PW"}
+    st["line_set"] = st.code.map(lambda c: frozenset("EW" if p == "CG" else p for p in re.findall(r"([A-Z]+)\d*", c)
+                                                     if p not in lrt))
     g = st.groupby("name").agg(lat=("lat", "mean"), lon=("lon", "mean"), codes=("code", lambda c: " ".join(sorted(c))),
                                line_set=("line_set", lambda l: frozenset().union(*l)),
                                network=("network", "first")).reset_index()

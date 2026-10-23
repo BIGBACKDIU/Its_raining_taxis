@@ -770,3 +770,19 @@ results stay as they are and remain the pre-specified result.
     normal".
 136. **Step 12 reporting (review item 10).** WLS, spatial-error and panel-interaction results are reported
     separately; only characteristics supported in all designs that test them are called robust.
+
+## Follow-ups after the review fixes
+
+137. **MRT line rule.** Lines are MRT lines only. Every prefix in a station code counts, with or without a number
+    ("NE17-PTC", "EW4-CG"); LRT codes (BP, PTC, STC, SW, SE, PE, PW) are not lines; the Changi Airport branch CG
+    counts as EW. Result: 25 interchange stations (Bukit Panjang and Choa Chu Kang are no longer interchanges;
+    Punggol, Sengkang and Tanah Merah stay single-line). The interchange flag changed for 4 eligible cells
+    (Gombak, Keat Hong, Senja, Choa Chu Kang North) and MRT lines within 800 m for 29, so step 12 (cell-level
+    designs, charts) and the step-14 prediction map were rerun; the step-12 panel does not use these variables
+    and the step-17 regression and simulation-v2 inputs were not rerun.
+138. **Trip origin in the simulators.** After the allocation in a ring, trips now start at the request cells
+    (the cells whose requests were served) instead of at the taxis' cells; the approach time is unchanged. Both
+    Python engines and both JavaScript ports. The change moved the training loss of 5 of 48 tuned combinations by
+    more than 1% (largest 1.44%; seed-to-seed noise at most 0.45%), so, as agreed, both versions were retuned
+    with unchanged settings and the unchanged plausibility rule was re-run (logged), followed by the step-8
+    grid, the step-20 diagnosis, charts, pages and parity.

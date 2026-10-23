@@ -210,7 +210,7 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
             V[:] -= d
             Q -= q
             served_total += d.sum(1)
-            start_trips(d, mid / speed.mean() * 60, m, speed)
+            start_trips(q, mid / speed.mean() * 60, m, speed)                   # trips start at the request cells (decision 138)
         assert (V >= 0).all() and (Q >= 0).all(), "negative taxis or requests after matching"
         return served_total
 

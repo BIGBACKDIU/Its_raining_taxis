@@ -50,14 +50,19 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
    matching bug (requests could be served more than once); after the fix and retuning, **no tuned scenario of
    either version passes the plausibility check we fixed in advance** on 10 held-out storms (best: 4 of 10 and 3
    of 10). The citywide level now matches on average, but timing matches only moderately and which cells lose
-   taxis poorly; even a non-simulation path built from our estimated rain effects meets the rule on only 3 of the
-   10 held-out storms. Use the pages to explain mechanisms, not to predict. (figs 14, 26-27)
+   taxis poorly. Both versions fail the rule. A non-simulation path built from the estimated rain effects
+   themselves also passes only 3 of the 10 held-out storms, so the pre-registered rule is stricter than the
+   observed rain effects meet on these storms; the rule stays unchanged. Use the pages to explain mechanisms, not
+   to predict. (figs 14, 26-27)
 9. **Morning planning.** Information available by 09:00 - recent issue-time labels, usual patterns and the
    single latest NEA 24-hour forecast issued before 09:00 - predicts how many low-availability half-hours a
-   planning area will have later that day. Adding the forecast cut the test-year deviance by 10.1% [9.4, 10.8]
-   (retrospective label) and 6.3% [4.9, 7.5] (issue-time label) in the flexible model, meeting the materiality rule
-   fixed in advance for both labels; it did not help the linear regression (+0.2% and -4.5%). Support for planning
-   the day around the morning forecast, from a flexible model. (`morning_forecast_value.csv`)
+   planning area will have later that day. This is the second scoring of the test year, made after the timing
+   fixes the reviewer required (the first scoring met the materiality rule only on the retrospective label).
+   Adding the forecast cut the test-year deviance by 10.1% [9.4, 10.8] (retrospective label) and 6.3% [4.9, 7.5]
+   (issue-time label) in the flexible model, meeting the materiality rule fixed in advance for both labels. In the
+   linear regression the forecast made essentially no difference on the retrospective label and made it 4.5%
+   worse on the issue-time label. Support for planning the day around the morning forecast, from a flexible
+   model. (`morning_forecast_value.csv`)
 
 ## 2. Where and why (phase 2)
 
@@ -97,16 +102,20 @@ still lose taxis in absolute terms.
   -18.9% vs -5.0%). Within 300 m of an MRT exit -12.5% (difference -0.5% [-2.2, +1.2]); a taxi stand within
   300 m -11.7% (difference +0.4% [-1.2, +2.0]); a mall in the cell -12.3%; HDB density and distance to the city
   show no clear difference.
-- **Cell-level weighted regression (374 cells):** Central Area cells lose 10.4% more [2.5, 17.6] than
-  otherwise similar cells; more business/industrial land goes with a 3.5% smaller loss per SD [1.3, 5.7]; several
-  others are significant here only (interchange or new station nearby, HDB resale price, share 65+, hospitals,
-  offices, commercial land).
-- **Spatial-error model (residuals were spatially clustered):** Central Area -10.2% [1.5, 18.2]; business land
-  +3.5% per SD [1.5, 5.5]; more MRT lines within 800 m -2.7% per SD [-4.9, -0.5]; HDB units +3.5% and taxi stands
-  +2.8% per SD appear here only.
-- **Robust across designs:** the Central Area (all three) and business/industrial land (both cell-level
-  designs; not tested in the panel). HDB density and taxi stands are not robust. A random forest predicts the
-  cell effects weakly out of area (spatial-CV R2 0.12-0.15; type-0 AUC 0.70-0.71).
+- **Cell-level weighted regression (374 cells):** Central Area cells lose 10.6% more [3.0, 17.6] than
+  otherwise similar cells; business/industrial land goes with a 3.6% smaller loss per SD [1.5, 5.8]; an MRT
+  interchange within 800 m with a 5.2% smaller loss [1.3, 9.4] but each SD more MRT lines within 800 m with a 2.7%
+  larger loss [0.7, 4.7]; taxi stands within 300 m +2.5% per SD [0.3, 4.7]; several others are significant here
+  only (new station nearby, HDB resale price, share 65+, hospitals, commercial land, distance to the airport).
+- **Spatial-error model (residuals were spatially clustered):** Central Area -10.7% [1.9, 18.6]; business land
+  +3.6% per SD [1.6, 5.6]; interchange +5.5% [0.1, 11.2]; MRT lines -3.4% per SD [-5.7, -1.0]; taxi stands +3.0%
+  per SD [0.6, 5.4]; HDB units +3.4% per SD [0.3, 6.5] appears here only.
+- **Robust across designs:** the Central Area (all three designs). Business/industrial land, the MRT interchange
+  and the number of MRT lines nearby hold in both cell-level designs but are not tested in the panel; the last
+  two have opposite signs and overlap, so read them together, not as separate effects. Taxi stands hold in both
+  cell-level designs but show no difference in the panel, and HDB density appears in one design only: neither is
+  robust. A random forest predicts the cell effects weakly out of area (spatial-CV R2 0.12-0.15; type-0 AUC
+  0.70-0.71).
 
 **Why: rain is regional, and the drop is mostly citywide.** Rain 2-5 km away goes with -6.7% [-7.9, -5.4]
 vacant taxis even with the cell's own rain in the model (own heavy rain then -5.6%). The drive time to the
@@ -162,7 +171,7 @@ correction is applied to the headline.
   and allowed for them in every model; some excluded days (100) and missing months (Jun 2025 mostly) remain.
 - **Retrospective labels.** "Unusually low" in the test year uses each feed regime's normal level estimated from
   that regime's own data. A second scoring with a label knowable at forecast time gives the same conclusions.
-- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 37 runs that scored or used
+- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 45 runs that scored or used
   test-year outcomes (13 reconstructed from file times): the pre-specified primary scoring, a pre-registered
   secondary analysis, post-hoc checks (marked as such), the policy evaluation, the simulation's held-out storms,
   re-scorings after an independent review, and phase-2 uses (morning-forecast scoring once, test-year months in the
