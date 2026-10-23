@@ -446,3 +446,15 @@ results stay as they are and remain the pre-specified result.
 92. **Step 7.** No alert thresholds or lead times are used in step 7. Its targeting check now reports both labels
     (`policy_sensitivity.csv`): base case 31-32% (retrospective) and 30-32% (issue-time) of targeted cells low,
     vs 27-28% of all candidate cells.
+
+## Step 7 follow-up: why the policy dilutes the forecast (rule fixed before running)
+
+93. **Question.** Targeted cells are low 31-32% of the time, while the forecast's top-19 ranking reaches about
+    53%. Variants compared per decision time: (a) policy as designed (equal weights); (b) the same policy with
+    destination weights = forecast risk (LightGBM probability of low availability at t+h, no weather); (c) top-19
+    forecast ranking among cells with expected >= 4, ignoring all policy constraints. Diagnostics: (c) restricted
+    step by step to cells with a staging point, then with modelled shortfall S_j(0) >= 0.05, then reachable from a
+    surplus cell within the lead time; and the policy's 19 destinations that receive the most taxis.
+    **Choice rule (calibration period only, 150 decision times):** adopt (b) for the test year if its targeting
+    precision (retrospective label, all targeted cells) is at least 2 percentage points higher than (a); otherwise
+    keep (a). The test year is then scored once for (a), (b) and (c) and logged.
