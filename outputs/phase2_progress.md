@@ -293,3 +293,61 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - B5, measurement error: the "-17.5% corrected" figure and the claim that the headline is understated are
   withdrawn; gauge agreement (reliability ratio 0.72, correlation 0.79) and the near/far comparison (far cells
   -13.3% vs near -12.4%) are kept as sensitivity diagnostics only.
+
+## Group D - wording and presentation (decisions 126, 133-136)
+
+- D1, named lists: every cell effect now has a day-bootstrap p-value and a Benjamini-Hochberg q-value across
+  the 374 tested cells. Presentation lists and map labels show only cells with >= 4 expected vacant taxis in
+  heavy rain and q < 0.10 (abs: 145 cells; share: 70); full sorted lists are kept as appendix tables
+  (`rain_hit_absolute_all.csv`, `rain_hit_share_all.csv`, `rain_gainers.csv`, `spillover_islandwide_share.csv`,
+  `minutes_cells_named.csv` with a `presentable` flag). Every share result now carries the absolute change in
+  taxis per heavy-rain half-hour with its CI. Consequences:
+  - The extreme share losses at Plab (-48%), Marina South (-34%) and Seletar Aerospace Park (-31%) came from cells
+    with fewer than 4 expected taxis and drop out of the presented list; the presented share losers are Bayfront
+    (-26.4%; -4.8 taxis per heavy-rain half-hour), North Coast (-25.6%; -2.5), Dhoby Ghaut (-25.5%; -3.8),
+    Sembawang East (-25.0%; -1.8) and Raffles Place (-21.1%; -4.9).
+  - Of 40 cells that gain share in heavy rain, 14 are listable and only 2 gain taxis in absolute terms (Senoko
+    West +1.7 taxis, CI 1.1 to 2.3; Yio Chu Kang East +1.4, CI 0.2 to 2.6). In island-wide rain 329 of 374 cells
+    have fewer vacant taxis and 3 have more; every listable share gainer still loses taxis. "Gather" is no
+    longer used.
+  - Minutes to the nearest taxi: described as associated with the citywide drop (conditional association), not
+    explained by it; the listable places with the most extra drive time are Monk's Hill (+18%), Tampines East
+    (+15%), Bishan East (+10%) and Sentosa (+5%). Changi Airport's +22.6% and Plab drop out (fewer than 4 expected
+    taxis in that cell or q >= 0.10). p-values here come from the bootstrap CI (normal approximation on the log
+    scale).
+- D2, step 12: WLS, spatial-error and panel results are reported separately in the summary; only the Central
+  Area (all designs) and business/industrial land (both cell-level designs) are called robust; HDB density and
+  taxi stands are not.
+- D3, deserts: recomputed on dry snapshots only (normal-coverage regimes, all hours) for analysed cells, so the
+  "dry-weather" wording stays. New ranking: Punggol Town Centre (0.73 vacant taxis per 10,000 residents),
+  Punggol Canal, Brickland, Gombak, Anak Bukit, Safti, Chin Bee, Bedok South, Ulu Pandan, Kovan, Woodlands East.
+  Upper Thomson, Waterway East and Pasir Ris Park left the list (they had no reliable taxi data). Step 14's
+  desert candidates follow.
+- D4, recovery: reported as the registered statistical recovery criterion (CIs include zero from 120 / 150
+  minutes), not "back to normal".
+- D5: decision 126 records that the step 10-11 specifications and first outputs share one commit.
+
+## Group C - simulation conservation (Critical; decisions 127-128)
+
+- Bug: in every dispatch ring each taxi cell could take all requests it reached, so overlapping rings served the
+  same requests several times (one storm: 11,469 requests, 21,486 trips), and requests were removed with the
+  wrong (outgoing) adjacency. The step-8 engine and both JavaScript ports had the same rule, so all earlier
+  step-8 and step-20 simulation numbers are void.
+- Fix: integer requests; proportional allocation within each ring through incoming adjacency with matched
+  systematic rounding, so taxis dispatched equal requests served and nothing is used twice; per-minute
+  assertions (taxis conserved, trips never exceed requests) in both Python engines and a trip check in the
+  JavaScript ports; `tests/test_sim_conservation.py` (4 tests, fail on the old rule).
+- Retuned all 24 combinations of both versions with the unchanged settings; training fits improved (step 8 best
+  loss 0.23, was 0.30; v2 best 0.23, was 0.34 - the v2 "drain" reported before was this bug).
+- Unchanged plausibility rule on the 10 held-out storms (logged): **no combination passes in either version.**
+  Step 8: best 4 of 10 storms (mix, land-use proxy, dry roads), signs at the peak 7-9 of 10. v2: best 3 of 10,
+  signs 7-9 of 10.
+- Redone diagnosis (step-8 combinations, fixed engine): level gap now small (-9% training, -3% held-out on
+  average; demand +2.5%, supply -11%, mix -18% on training storms); timing still moderate (correlation 0.65
+  training, 0.46 held-out); which cells lose taxis still matches poorly (0.27 / 0.18); which cells hold taxis
+  matches well in v2 (0.87-0.92). The noise floor is unchanged: a non-simulation path from the estimated rain
+  effects passes 11 of 20 training and 3 of 10 held-out storms.
+- Parity (Python vs JavaScript, 50 seeds, 3 scenario-storm pairs per version; tolerance: mean within 5%, peak
+  within 5% or 0.01 absolute): all pass; largest gaps 0.3% (mean) and 1.4% (peak).
+- Pages rebuilt and republished: `sim/index.html` and `sim/v2/index.html` (dispatcher panel unchanged in
+  design, illustration banner with the new diagnosis). The step-8 scenario grid (50 seeds) is re-run.

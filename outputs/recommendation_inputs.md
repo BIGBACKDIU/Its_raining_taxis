@@ -73,61 +73,69 @@ These are simulation quantities; they are not observed demand, waiting times or 
 
 ## 5. Phase-2 inputs: where to act and what to expect (steps 10-20)
 
-All supply associations in the public feed; named places from URA subzones and nearby landmarks. Tables in
-`outputs/tables/`; plain-English detail in `outputs/phase2_progress.md`.
+All supply associations in the public feed; named places from URA subzones and nearby landmarks. Named lists
+show only cells with at least 4 expected vacant taxis in heavy rain and an effect passing a 10% false-discovery
+rate; full lists are appendix tables. Plain-English detail in `outputs/phase2_progress.md`.
 
 **Where to focus rain measures (by taxis lost).** Most vacant taxis lost per heavy-rain half-hour: Changi Airport
-terminals (about 7 taxis each for T3/T2 and T1/Jewel), Raffles Place, Bayfront / Marina Bay Sands, Dhoby Ghaut,
+terminals (about 7 taxis each at T3/T2 and T1/Jewel), Raffles Place, Bayfront / Marina Bay Sands, Dhoby Ghaut,
 Lavender, Victoria (Bugis), Nicoll (Kampong Glam), City Hall and Chinatown (3-5 taxis each, -22% to -36%)
-(`rain_hit_top30_absolute.csv`). The URA Central Area as a whole loses about twice the share elsewhere (-24% vs
--12% in heavy rain), and it is the one place characteristic with a clear, robust association. Rain incentives
-or staging aimed at the CBD and its fringe in forecast heavy rain address the largest absolute gap.
+(`rain_hit_top30_absolute.csv`). The URA Central Area loses about twice as much as elsewhere (-24.5% vs -12.0% in
+heavy rain in the panel model), and it is the only place characteristic supported in every design. Rain
+incentives or staging aimed at the CBD and its fringe in forecast heavy rain address the largest absolute gap.
 
 **What not to expect from stands, MRT or malls.** A taxi stop/stand or taxi point within 300 m, an MRT exit
-within 300 m or a mall shows no clear difference in the heavy-rain drop (differences within about +-1 point,
-CIs crossing 0; `stands_effect.csv`, `factors_panel_interactions.csv`). New stands are a dry-weather convenience
+within 300 m or a mall shows no clear difference in the heavy-rain drop in the panel model (differences within
+about +-1 point, CIs crossing 0; `stands_effect.csv`, `factors_panel_interactions.csv`); a small association with
+stands appears only in the cell-level spatial model and is not robust. New stands are a dry-weather convenience
 and coverage measure, not a proven rain fix.
 
 **Candidate stand / staging locations** (no stand or taxi point within 300 m; `stands_candidates.csv`; qualitative
-feasibility only - no cost, kerb-space or traffic-safety data): rain-hit cells in Woodlands South (Vista Point,
-Woodlands Hospital), Changi West (Liv@Changi), Lower Seletar (Wisteria Mall), Cheng San (Ang Mo Kio), Bukit Batok
-South, Pei Chun (Toa Payoh), Tampines West, Hougang West (Hougang 1), Teck Whye and Bedok North; taxi deserts
-in Waterway East (Punggol), Simpang South, Safti (Jurong West), Bayshore (Bedok), Khatib and the Upper Thomson edge.
+feasibility only - no cost, kerb-space or traffic-safety data): rain-hit cells (listable, top 100 by taxis lost)
+in Woodlands South (Vista Point, Woodlands Hospital), Changi West (Liv@Changi), Lower Seletar (Wisteria Mall),
+Cheng San (Ang Mo Kio), Bukit Batok South (two cells), Pei Chun (Toa Payoh), Tampines West, Hougang West (Hougang
+1), Teck Whye, Bedok North, Yishun East and Yunnan; dry-weather taxi deserts in Safti (Jurong West), Bayshore
+(Bedok), Khatib, Sunset Way, Fernvale and Punggol Field.
 
-**Taxi deserts in dry weather** (`taxi_deserts.csv`): Upper Thomson, Waterway East, Punggol Town Centre (23,600
-residents, 0.67 vacant taxis per 10,000), Punggol Canal, Pasir Ris Park, Sembawang Straits, Simpang South,
-Brickland (Tengah) and Gombak - candidates for dry-weather coverage, separate from the rain question.
+**Dry-weather taxi deserts** (`taxi_deserts.csv`, dry snapshots only): Punggol Town Centre (23,600 residents,
+0.73 dry-weather vacant taxis per 10,000), Punggol Canal, Brickland (Tengah), Gombak, Anak Bukit, Safti, Chin
+Bee, Bedok South, Ulu Pandan, Kovan and Woodlands East - candidates for dry-weather coverage, separate from the
+rain question.
 
 **Planning-area sensitivity map** (`stands_predicted_by_planning_area.csv`, resident-weighted predicted heavy-rain
-effect, every land cell): Downtown Core, Rochor, Outram, Newton, River Valley about -22% to -23%; large residential
-areas such as Bishan, Queenstown, Ang Mo Kio, Bukit Batok and Clementi about -12% to -13%. The prediction model is
-weak out of area (R2 0.12), so use this to rank areas roughly, not to quote cell values.
+effect for every land cell, using the training transform): Museum -27.6%, Downtown Core -25.2%, Outram -23.8%;
+among large residential areas Woodlands -16.8%, Sembawang -16.7% and Choa Chu Kang -16.1% at the high end, Bishan
+-9.4%, Ang Mo Kio -9.6%, Bukit Merah -10.3% and Queenstown -10.5% at the low end. The prediction model is weak out
+of area (R2 0.12), so use this to rank areas roughly, not to quote cell values.
 
 **Timing.** The first millimetre matters most (-9.7% at 1 mm/h, little further deepening above 20 mm/h); long
-spells bite harder (heavy rain beyond 2 hours: -18%); after rain stops vacant taxis stay about 5% low for the next
-half hour and about 2% low for up to 3 hours, citywide. Recovery takes about 2-2.5 hours from onset
-(`dose_*.csv`). Incentives should start with the rain (or the forecast) and run at least 1-2 hours past its end.
+spells bite harder (heavy rain beyond 2 hours: -18%); after rain stops vacant taxis stay about 5% below the dry
+level for the next half hour and about 2% below for up to 3 hours, citywide. By the registered statistical
+recovery criterion (event-study CIs include zero from 120 / 150 minutes after onset), cells recover within about
+2-2.5 hours. Incentives should start with the rain (or the forecast) and run at least 1-2 hours past its end.
 
-**Regional, not local.** Rain 2-5 km away is associated with as large a drop as rain overhead, and the extra drive
-time to the nearest vacant taxi in rain is entirely explained by the citywide drop (`spillover_model.csv`,
-`minutes_effects.csv`). Measures should target the whole wet region (and the citywide fleet on the road), not
-just the cells under the cloud. In island-wide rain, vacant taxis concentrate at the airport terminals and in
-Tampines, Katong, Bedok South, Senoko and Tuas, while the CBD thins (`spillover_islandwide_share.csv`) - natural
-sources for repositioning.
+**Regional, not local.** Rain 2-5 km away is associated with as large a drop as rain overhead, and the longer
+drive to the nearest vacant taxi in rain is associated with the citywide drop (a conditional association only;
+`spillover_model.csv`, `minutes_effects.csv`). Measures should target the whole wet region and the citywide fleet
+on the road, not just the cells under the cloud. In island-wide rain almost every cell loses vacant taxis (329 of
+374 clearly, 3 gain); the CBD loses share most (Bayfront -22%, Dhoby Ghaut -20%, Raffles Place -17%), and the
+places that gain share (Tampines, Yishun, Clementi, Pasir Ris, Woodlands West; +3% to +5%) still lose taxis, so
+there is no surplus area to draw from in island-wide rain.
 
-**Morning planning with the forecast (tests the main recommendation; `morning_forecast_value.csv`).** The NEA
-24-hour forecast issued before 09:00 improved predictions of later low-availability half-hours by planning area
-and band by 6.6% (CI 5.7-7.5%) in the flexible model - meeting the pre-registered materiality rule - but not in
-the simpler regression or with the issue-time label. Support for "plan the day with the morning forecast" is
-real but modest.
+**Morning planning with the forecast (tests the main recommendation; `morning_forecast_value.csv`).** Using only
+information knowable at 09:00, the latest NEA 24-hour forecast issued before 09:00 improved predictions of later
+low-availability half-hours by planning area and band by 10.1% (retrospective label) and 6.3% (issue-time label)
+in the flexible model - both meet the pre-registered materiality rule - but not in the linear regression. This
+supports planning the day around the morning forecast with a flexible model.
 
-**Fleet trend (`fleet_meta_regression.csv`).** As the fleet fell from about 15,400 to 11,900 taxis, heavy rain took
-a larger local share (2.2 log-points per 1,000 fewer taxis, CI 0.3-4.1); feed-coverage changes compete as an
-explanation.
+**Fleet trend (`fleet_meta_regression.csv`).** No clear relation between the monthly heavy-rain effect and the
+LTA fleet size once the regime coverage level is controlled and errors allow for autocorrelation (share: -2.0
+log-points per 1,000 fewer taxis, CI -4.3 to +0.3).
 
-**Simulation v2 and dispatcher (`sim/v2/index.html`).** Rebuilt on OpenStreetMap drive times with place
-characteristics; it reproduces where taxis are much better than v1, but no scenario passes the held-out
-plausibility rule (best 1 of 10 storms) and even a statistical non-simulation path passes only 3 of 10. The
-dispatcher panel lists staging moves per 30 minutes (from area -> named place, taxis, reason) as a
-**demonstration on historical replays, not a live system**; present it as an illustration of how a plan would
-read, not as evidence of its effect.
+**Simulation v2 and dispatcher (`sim/v2/index.html`).** Both simulators had a matching bug that let requests be
+served more than once; after the fix and retuning, no scenario of either version passes the held-out plausibility
+rule (step 8 best 4 of 10 storms, v2 best 3 of 10), while a statistical non-simulation path passes 3 of 10. v2
+places taxis well (cell correlation 0.87-0.92) but its timing is weak (0.38-0.54). The dispatcher panel lists
+staging moves per 30 minutes (from area -> named place, taxis, reason) as a **demonstration on historical
+replays, not a live system**; present it as an illustration of how a plan would read, not as evidence of its
+effect.

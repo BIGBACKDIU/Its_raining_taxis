@@ -80,13 +80,13 @@ def part_b(c):
     e = pd.read_csv(TABLES / "cell_rain_effects.csv")
     d = pd.read_csv(TABLES / "taxi_deserts.csv")
     no_stand = c.set_index("cell").eval("taxi_stands_300m + osm_taxi_points_300m == 0")
-    hit = e[e.tested].sort_values("taxis_lost_per_heavy_half_hour", ascending=False).head(100)
+    hit = e[e.presentable_abs].sort_values("taxis_lost_per_heavy_half_hour", ascending=False).head(100)
     hit = hit[hit.cell.map(no_stand).fillna(False).astype(bool)]
     hit = hit.merge(c, on="cell", suffixes=("", "_c"))
-    hit["reason"] = "rain-hit (top 100 by taxis lost in heavy rain)"
+    hit["reason"] = "rain-hit (top 100 by taxis lost in heavy rain; >= 4 expected taxis, FDR q < 0.10)"
     hit["feasibility_notes"] = hit.apply(notes, axis=1)
     des = d[d.cell.map(no_stand).fillna(False).astype(bool)].merge(c, on="cell", suffixes=("", "_c"))
-    des["reason"] = "taxi desert (few vacant taxis per resident)"
+    des["reason"] = "dry-weather taxi desert (few dry-weather vacant taxis per resident)"
     des["feasibility_notes"] = des.apply(notes, axis=1)
     cols = ["reason", "planning_area", "subzone", "nearest_mrt", "landmarks", "feasibility_notes", "cell"]
     out = pd.concat([hit.assign(score=hit.taxis_lost_per_heavy_half_hour)[cols + ["score"]],
@@ -147,12 +147,12 @@ def part_c(c):
     plt.close(fig)
 
 
-def main():
+def main(parts=("a", "b", "c")):
     c = pd.read_csv(TABLES / "cell_characteristics.csv")
-    part_a(c)
-    part_b(c)
-    part_c(c)
+    for k in parts:
+        {"a": part_a, "b": part_b, "c": part_c}[k](c)
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(tuple(sys.argv[1:]) or ("a", "b", "c"))

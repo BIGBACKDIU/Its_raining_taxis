@@ -240,10 +240,12 @@ def charts(c, p):
     norm2 = TwoSlopeNorm(vcenter=0, vmin=-20, vmax=60)
     d02.draw_base(axes[1])
     N.draw_cells(axes[1], c.cell.values, c.pct.clip(-20, 60).values, div, norm2)
-    N.label(axes[1], c.assign(short=c.place), "short", 10)
+    cl = c[c.presentable] if "presentable" in c else c
+    N.label(axes[1], cl.assign(short=cl.place), "short", 10)
     fig.colorbar(plt.cm.ScalarMappable(norm=norm2, cmap=div), ax=axes[1], orientation="horizontal", fraction=0.05,
                  pad=0.02, label="% longer drive to the nearest vacant taxi in heavy rain (vs no-rain model)")
-    axes[1].set_title("Heavy rain: where the nearest vacant taxi moves furthest away (labels: 10 most extra minutes)",
+    axes[1].set_title("Heavy rain: where the nearest vacant taxi is furthest away (labels: 10 most extra minutes, "
+                      ">= 4 expected taxis, FDR q < 0.10)",
                       fontsize=9.5)
     fig.tight_layout()
     save(fig, "minutes_to_taxi_maps", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, OpenStreetMap roads "
@@ -258,13 +260,25 @@ def part_names():
     c = pd.read_csv(TABLES / "minutes_cells_named.csv")
     names = pd.read_csv(TABLES / "names_cells.csv")
     keep = ["cell", "planning_area", "subzone", "nearest_mrt", "landmarks", "place", "lon", "lat"]
-    c = c.drop(columns=keep[1:]).merge(names[keep], on="cell").sort_values("rank")
+    c = c.drop(columns=[k for k in keep[1:] + ["expected_vacant_heavy", "p", "q", "presentable"] if k in c])
+    c = c.merge(names[keep], on="cell").sort_values("rank")
+    # presentation filter (decision 133): >= 4 expected vacant taxis in heavy rain and BH q < 0.10; p from the
+    # day-bootstrap CI on the log scale (normal approximation)
+    from scipy.stats import norm
+    N10 = importlib.import_module("analysis.10_names")
+    se = (np.log1p(c.hi / 100) - np.log1p(c.lo / 100)) / 3.92
+    c["p"] = 2 * norm.sf(np.abs(np.log1p(c.pct / 100) / se))
+    c["q"] = N10.bh(c.p.values)
+    ev = pd.read_csv(TABLES / "cell_rain_effects.csv").set_index("cell").expected_vacant_heavy
+    c["expected_vacant_heavy"] = c.cell.map(ev)
+    c["presentable"] = (c.expected_vacant_heavy >= 4) & (c.q < 0.10)
     c.to_csv(TABLES / "minutes_cells_named.csv", index=False, float_format="%.3f")
     mins = pd.read_parquet(INTERIM / "minutes_to_taxi_fit.parquet")
     p = E.load_fit(columns=["ts", "cell", "mmh", "mmh_lag1", "mmh_lag2", "drop_main", "rain_band"])
     p = p[E.sample(p)].merge(mins, on=["ts", "cell"], how="inner")
     charts(c, p)
-    print(c.head(10)[["rank", "planning_area", "subzone", "landmarks", "extra_minutes", "pct"]].to_string(index=False))
+    print(c[c.presentable].head(10)[["rank", "planning_area", "subzone", "extra_minutes", "pct", "lo", "hi"]]
+          .to_string(index=False))
 
 
 def main():

@@ -1,0 +1,375 @@
+rank,planning_area,subzone,nearest_mrt,landmarks,share_pct,share_lo,share_hi,share_q,expected_vacant_heavy,abs_change_per_half_hour,abs_change_lo,abs_change_hi,abs_pct,presentable_share,cell
+1,Paya Lebar,Plab,"Kaki Bukit  (2.1 km), Kovan (2.3 km)",,-47.864,-57.380,-37.511,0.005,1.803,-0.985,-1.133,-0.822,-54.621,False,39022
+2,Marina South,Marina South,"Gardens by the Bay (0.2 km), Bayfront (1.0 km)",Marina Barrage; Gardens by the Bay,-34.040,-44.586,-21.508,0.005,2.157,-0.927,-1.116,-0.699,-42.978,False,35014
+3,Seletar,Seletar Aerospace Park,"Thanggam (2.1 km), Fernvale (2.5 km)",,-30.893,-41.580,-19.671,0.005,0.739,-0.294,-0.365,-0.224,-39.762,False,34028
+4,Yishun,Lower Seletar,"Yio Chu Kang (2.0 km), Lentor (2.2 km)",,-29.221,-40.400,-16.824,0.005,0.592,-0.214,-0.273,-0.146,-36.229,False,33027
+5,Bukit Timah,Swiss Club,"Sixth Avenue (0.5 km), King Albert Park (1.4 km)",Blue House International school; NYGH Boarding School,-28.619,-38.131,-18.428,0.005,0.911,-0.333,-0.410,-0.250,-36.555,False,27020
+6,Sembawang,Sembawang North,"Sembawang (1.5 km), Canberra (2.6 km)",Northoarks Primary School; Rainbow Centre Admiral Hill School,-28.382,-36.727,-19.054,0.005,2.263,-0.812,-0.973,-0.648,-35.872,False,29034
+7,Downtown Core,Bayfront Subzone,"Bayfront (0.2 km), Downtown (0.8 km)","Marina Bay Sands SkyPark; Marina Bay Sands; Marina Bay Sands, Singapore",-26.436,-31.859,-20.169,0.005,13.079,-4.763,-5.402,-4.057,-36.419,True,34014
+8,Woodlands,North Coast,"Marsiling (1.3 km), Woodlands North (1.8 km)",Woodlands Secondary School,-25.601,-32.113,-19.075,0.005,7.452,-2.460,-2.894,-2.033,-33.009,True,24032
+9,Museum,Dhoby Ghaut,"Dhoby Ghaut (0.3 km), Somerset (0.4 km)",Fort Canning Park; Hong San See Temple Singapore; Orchard Plaza,-25.487,-29.839,-21.171,0.005,10.748,-3.748,-4.199,-3.294,-34.871,True,32016
+10,Changi,Changi Airport,"Changi Airport (3.1 km), Tampines East (6.1 km)",,-25.311,-43.167,-7.549,0.021,1.202,-0.411,-0.596,-0.223,-34.169,False,50025
+11,Sembawang,Sembawang East,"Canberra (0.4 km), Sembawang (1.6 km)",Canberra Plaza,-25.016,-30.421,-19.504,0.005,5.125,-1.746,-2.001,-1.470,-34.074,True,31032
+12,Western Water Catchment,Murai,"Lakeside (3.1 km), South View (3.4 km)",,-24.957,-38.438,-10.904,0.005,0.572,-0.186,-0.253,-0.114,-32.561,False,18024
+13,Clementi,Pandan,"Clementi (1.6 km), Jurong East (3.0 km)",The Japanese Secondary School,-24.722,-36.906,-11.836,0.008,0.525,-0.167,-0.227,-0.103,-31.733,False,22017
+14,Seletar,Seletar Aerospace Park,"Thanggam (1.4 km), Kupang (1.7 km)",,-24.413,-34.923,-13.681,0.005,0.742,-0.254,-0.326,-0.182,-34.161,False,35028
+15,Sungei Kadut,Kranji,"Kranji (0.1 km), Marsiling (1.6 km)",,-24.271,-32.065,-15.881,0.005,1.238,-0.399,-0.489,-0.299,-32.262,False,23030
+16,Queenstown,Port,"Labrador Park (0.6 km), Pasir Panjang (0.8 km)",Alexandra Retail Centre; Labrador Villa,-24.086,-34.895,-13.409,0.005,1.790,-0.592,-0.764,-0.422,-33.062,False,27013
+17,Novena,Dunearn,"Stevens (0.7 km), Botanic Gardens (1.0 km)",Indoor Sports Hall; St. Joseph's Institution; Chapel,-23.650,-31.239,-16.641,0.005,1.742,-0.576,-0.694,-0.461,-33.054,False,30019
+18,Bukit Batok,Gombak,"Cashew (0.4 km), Bukit Panjang (0.8 km)",Greenridge Secondary School; Assumption Pathway School; The ART (Assumption Restaurant for Training),-22.753,-32.774,-12.880,0.005,1.204,-0.379,-0.483,-0.272,-31.436,False,23024
+19,Bukit Timah,Swiss Club,"Sixth Avenue (1.5 km), King Albert Park (1.7 km)",Chatsworth International School Singapore (Bukit Timah Campus)),-22.613,-34.904,-8.977,0.005,0.599,-0.187,-0.255,-0.111,-31.188,False,27021
+20,Simpang,Simpang South,"Yishun (2.8 km), Khatib (3.1 km)",,-21.558,-31.537,-10.835,0.008,0.664,-0.210,-0.270,-0.144,-31.625,False,34030
+21,Downtown Core,Raffles Place,"Telok Ayer (0.3 km), Downtown (0.3 km)","Lau Pa Sat Singapore; Fuk Tak Chi Museum & Places of Interest; Thian Hock Keng Temple, Singapore",-21.127,-29.623,-12.303,0.005,15.881,-4.896,-6.065,-3.725,-30.833,True,33014
+22,Bukit Merah,Maritime Square,"HarbourFront (0.9 km), Telok Blangah (1.0 km)","HarbourFront, Singapore; Equarius Villas; Equarius Hotel",-20.990,-29.530,-11.801,0.005,1.193,-0.363,-0.459,-0.266,-30.411,False,29012
+23,Yishun,Khatib,"Khatib (1.0 km), Yishun (1.9 km)",,-19.969,-31.932,-8.347,0.005,0.669,-0.198,-0.268,-0.128,-29.636,False,30029
+24,Bukit Panjang,Nature Reserve,"Hillview (0.3 km), Hume (0.9 km)",HillV2 Mall; Dairy Farm Mall; Trinity Theological College,-19.803,-27.065,-12.453,0.005,1.497,-0.431,-0.533,-0.332,-28.785,False,24023
+25,Yishun,Lower Seletar,"Khatib (1.1 km), Springleaf (2.0 km)",,-19.315,-27.167,-11.491,0.005,1.385,-0.403,-0.500,-0.302,-29.061,False,31028
+26,Yishun,Springleaf,"Springleaf (1.3 km), Khatib (1.5 km)",Madrasah At-Tahzibiah Al-Islamiah,-19.263,-30.224,-8.398,0.008,0.738,-0.214,-0.286,-0.142,-29.003,False,30028
+27,Bukit Panjang,Nature Reserve,"Hillview (1.3 km), Hume (1.4 km)",Dairy Farm Mall; German European School Singapore (Physical Education Complex); German European School Singapore,-19.177,-30.056,-7.401,0.008,0.789,-0.216,-0.298,-0.127,-27.419,False,25023
+28,Paya Lebar,Plab,"Hougang (1.7 km), Kovan (2.3 km)",,-18.590,-26.364,-10.239,0.005,1.288,-0.375,-0.463,-0.278,-29.141,False,39023
+29,Bukit Panjang,Nature Reserve,"Beauty World (0.5 km), King Albert Park (1.1 km)",Bukit Timah Shopping Center; Beauty World Centre; Beauty World Plaza,-18.466,-25.051,-12.117,0.005,2.375,-0.653,-0.792,-0.501,-27.474,False,25021
+30,Newton,Monk's Hill,"Newton (0.6 km), Little India (0.8 km)",Cuppage Plaza; KK Women's and Children's Hospital; KKH@Halifax,-18.082,-23.110,-13.001,0.005,5.268,-1.497,-1.741,-1.209,-28.418,True,32017
+31,Jurong West,Kian Teck,"Boon Lay (0.4 km), Pioneer (1.1 km)",Jurong Point; Jurong Medical Centre; Jurong West Secondary School,-17.869,-25.019,-10.886,0.005,2.313,-0.568,-0.722,-0.404,-24.557,False,17020
+32,Bukit Batok,Bukit Batok South,"Beauty World (1.8 km), Bukit Batok (2.0 km)",Bukit Timah Primary School,-17.539,-25.746,-9.039,0.005,1.900,-0.494,-0.645,-0.338,-26.011,False,23020
+33,Central Water Catchment,Central Water Catchment,"Woodlands South (2.3 km), Segar (3.0 km)","River Safari Singapore; Night Safari, Singapore; Singapore Zoo: Attractions & Things to Do",-17.427,-29.679,-3.297,0.054,1.589,-0.426,-0.604,-0.216,-26.811,False,26028
+34,Clementi,Faber,"Jurong East (1.3 km), Clementi (1.9 km)",,-17.412,-25.966,-8.639,0.005,1.289,-0.334,-0.435,-0.227,-25.897,False,22019
+35,Central Water Catchment,Central Water Catchment,"Bangkit (0.7 km), Pending (1.0 km)",Beacon Primary School,-17.040,-27.309,-5.114,0.005,1.267,-0.334,-0.451,-0.197,-26.366,False,25025
+36,Queenstown,Kent Ridge,"Pasir Panjang (0.8 km), Labrador Park (1.2 km)",Reflections at Bukit Chandu: Singapore War Memorial; HortPark; The Interlace,-16.818,-29.559,-4.803,0.015,0.675,-0.180,-0.254,-0.109,-26.593,False,27014
+37,Woodlands,Woodlands South,"Woodlands South (0.3 km), Woodlands (1.7 km)",Vista Point; Woodlands Hospital; Woodlands Health Medical Centre,-16.455,-23.180,-9.380,0.005,6.521,-1.643,-2.016,-1.261,-25.192,True,27030
+38,Bukit Timah,Swiss Club,"King Albert Park (0.4 km), Sixth Avenue (1.1 km)",Happy Art Loft; Methodist Girls' School,-15.664,-24.819,-6.227,0.008,0.972,-0.243,-0.321,-0.158,-25.009,False,26020
+39,Central Water Catchment,Central Water Catchment,"Pending (1.0 km), Bangkit (1.2 km)",,-15.540,-23.362,-7.966,0.005,1.506,-0.377,-0.495,-0.268,-25.033,False,25024
+40,Downtown Core,City Hall,"City Hall (0.3 km), Clarke Quay (0.5 km)",Old Supreme Court Singapore; National Gallery Singapore; Raffles Statue – Sir Stamford Raffles Landing Site,-15.468,-21.447,-9.409,0.005,11.668,-3.040,-3.663,-2.413,-26.051,True,33015
+41,Southern Islands,Sentosa,"HarbourFront (1.3 km), Keppel (2.0 km)","Universal Studios Singapore Theme Park; Resorts World Sentosa, Singapore; Adventure Cove Waterpark Singapore",-15.392,-20.955,-9.600,0.005,6.021,-1.529,-1.873,-1.184,-25.401,True,30011
+42,Boon Lay,Liu Fang,"Pioneer (2.2 km), Boon Lay (2.5 km)",,-15.359,-34.740,6.383,0.281,0.610,-0.140,-0.247,-0.020,-22.891,False,16018
+43,Downtown Core,Central Subzone,"Prince Edward Road (0.4 km), Marina Bay (0.5 km)",Marina One; Downtown Gallery; OUE Downtown,-15.342,-26.036,-3.928,0.008,2.061,-0.548,-0.732,-0.351,-26.597,False,33013
+44,Changi,Changi West,"Tampines East (1.5 km), Upper Changi (1.5 km)",Liv@Changi; The Japanese Primary School; East Spring Primary School,-15.292,-23.518,-6.996,0.005,6.552,-1.633,-2.100,-1.174,-24.924,True,46022
+45,Sungei Kadut,Gali Batu,"Yew Tee (0.5 km), Choa Chu Kang (1.8 km)",Yew Tee Square; YewTee Point; Yew Tee Primary School,-15.275,-21.001,-9.547,0.005,4.882,-1.192,-1.441,-0.936,-24.418,True,22027
+46,Yishun,Lower Seletar,"Lentor (1.6 km), Springleaf (1.7 km)",,-15.005,-27.822,-0.357,0.110,0.777,-0.196,-0.283,-0.091,-25.272,False,31027
+47,Tanglin,Tyersall,"Napier (0.5 km), Orchard Boulevard (1.2 km)",Singapore Botanic Gardens; Gleneagles Hospital; Gleneagles Medical Centre,-14.742,-23.597,-4.536,0.015,1.054,-0.262,-0.352,-0.161,-24.868,False,29017
+48,Bukit Merah,City Terminals,"Cantonment (0.6 km), Prince Edward Road (0.6 km)",Pinnacle@Duxton; 100AM; Don Don Donki,-14.600,-21.204,-8.512,0.005,5.080,-1.279,-1.569,-1.009,-25.180,True,32013
+49,Central Water Catchment,Central Water Catchment,"Beauty World (1.9 km), King Albert Park (2.0 km)",,-14.411,-25.284,-2.210,0.065,0.680,-0.162,-0.228,-0.088,-23.780,False,26022
+50,Boon Lay,Tukang,"Pioneer (1.2 km), Boon Lay (1.6 km)",,-14.125,-25.674,-2.878,0.037,0.801,-0.169,-0.253,-0.087,-21.118,False,16019
+51,Queenstown,Port,"Haw Par Villa (1.5 km), Kent Ridge (1.6 km)",AS5; AS7 - Shaw Foundation Building; LT 8,-13.698,-22.733,-5.864,0.008,1.144,-0.258,-0.354,-0.172,-22.521,False,24015
+52,Jurong East,Jurong Gateway,"Jurong East (0.3 km), Chinese Garden (1.4 km)",Westgate; JEM; Muji,-13.677,-18.729,-8.282,0.005,7.450,-1.674,-2.070,-1.277,-22.471,True,21020
+53,Jurong West,Wenya,"Boon Lay (1.7 km), Lakeside (1.8 km)",Corporation Primary School; Westwood Secondary School,-13.515,-20.469,-6.517,0.005,2.999,-0.616,-0.804,-0.424,-20.557,False,17022
+54,Tengah,Brickland,"South View (1.0 km), Keat Hong (1.0 km)",Keat Hong Shopping Centre,-13.205,-21.542,-5.695,0.008,1.167,-0.268,-0.352,-0.183,-22.926,False,21024
+55,Novena,Dunearn,"Botanic Gardens (0.4 km), Tan Kah Kee (0.8 km)",Cluny Court; Serene Centre; Crown Centre,-13.161,-19.918,-5.804,0.005,1.832,-0.415,-0.534,-0.283,-22.637,False,29019
+56,Bukit Panjang,Nature Reserve,"Hume (0.1 km), Hillview (1.0 km)",Old Ford Factory Singapore Museum,-13.146,-23.287,-3.034,0.043,1.082,-0.247,-0.345,-0.145,-22.849,False,24022
+57,Choa Chu Kang,Yew Tee,"Yew Tee (0.5 km), Choa Chu Kang (1.5 km)",Yew Tee Square; YewTee Point; Yew Tee Hawker Centre,-13.123,-18.570,-7.409,0.005,4.532,-1.000,-1.229,-0.739,-22.070,True,21027
+58,Rochor,Victoria,"Bencoolen (0.1 km), Bras Basah (0.3 km)",Maghain Aboth Synagogue; Singapore Art Museum; SAM at 8Q & Singapore Art Museum,-12.980,-17.870,-8.733,0.005,14.846,-3.544,-4.222,-2.933,-23.875,True,33016
+59,Boon Lay,Liu Fang,"Boon Lay (2.6 km), Lakeside (3.0 km)",,-12.944,-28.819,4.303,0.272,0.563,-0.116,-0.201,-0.029,-20.691,False,18018
+60,Novena,Balestier,"Novena (0.7 km), Toa Payoh (0.9 km)",Sun Yat Sen Memorial Hall; Zhongshan Mall; Royal Square at Novena,-12.721,-18.319,-6.970,0.005,4.408,-1.063,-1.285,-0.813,-24.122,True,32019
+61,Choa Chu Kang,Choa Chu Kang North,"Choa Chu Kang (1.0 km), Yew Tee (1.0 km)",Jurong Pioneer Junior College; Regent Secondary School; Teck Whye Primary School,-12.363,-19.354,-5.037,0.005,1.982,-0.438,-0.557,-0.306,-22.088,False,22026
+62,Sengkang,Lorong Halus North,"Kangkar (0.5 km), Bakau (0.8 km)",Rivervale Plaza,-12.232,-17.400,-6.604,0.005,6.166,-1.429,-1.721,-1.125,-23.167,True,39025
+63,Queenstown,One North,"one-north (0.1 km), Kent Ridge (0.8 km)","Fusionopolis 1; Singapore Advanced Medicine Proton Therapy; National University Centre for Oral Health, Singapore",-12.136,-22.658,-0.741,0.102,3.882,-0.837,-1.199,-0.440,-21.568,False,26016
+64,Pasir Ris,Loyang West,"Changi Airport (2.9 km), Pasir Ris (3.2 km)",,-11.992,-30.484,7.761,0.391,0.627,-0.145,-0.243,-0.039,-23.178,False,47025
+65,Southern Islands,Sentosa,"HarbourFront (1.5 km), Telok Blangah (1.9 km)","S.E.A. Aquarium; Adventure Cove Waterpark Singapore; Resorts World Sentosa, Singapore",-11.973,-24.934,-0.122,0.114,0.767,-0.172,-0.258,-0.090,-22.386,False,29011
+66,Mandai,Mandai East,"Admiralty (0.9 km), Woodlands South (1.6 km)",Spectra Secondary School; Greenwood Primary School; Woodlands Ring Secondary School,-11.688,-19.170,-4.388,0.008,2.390,-0.500,-0.654,-0.343,-20.924,False,28031
+67,Woodlands,Woodlands West,"Marsiling (0.5 km), Kranji (1.4 km)",Marsiling Primary School; Marsiling Secondary School,-11.648,-19.267,-4.351,0.015,2.570,-0.526,-0.704,-0.345,-20.482,False,24031
+68,Bukit Batok,Gombak,"Teck Whye (0.6 km), Keat Hong (0.9 km)",Delta Senior School; ITE College West,-11.572,-22.662,-1.947,0.058,1.044,-0.224,-0.326,-0.130,-21.477,False,22024
+69,Clementi,Clementi North,"Clementi (0.6 km), Dover (1.1 km)",Grantral Mall @ Clementi; The Clementi Mall; Clementi Ave 2 Market/Cooked Food Centre,-11.489,-15.820,-6.844,0.005,7.403,-1.515,-1.830,-1.157,-20.469,True,24018
+70,Jurong West,Boon Lay Place,"Lakeside (0.5 km), Boon Lay (1.3 km)",Boon Lay Shopping Centre; Boon Lay Place Market and Food Village; Jurong West Street 52 Blk 505,-11.322,-16.957,-6.190,0.005,5.082,-1.014,-1.268,-0.736,-19.958,True,18021
+71,Straits View,Straits View,"Marina South Pier (0.3 km), Marina Bay (0.7 km)",,-11.212,-21.789,0.448,0.139,3.407,-0.793,-1.107,-0.468,-23.261,False,34013
+72,Clementi,Faber,"Clementi (0.5 km), Dover (2.0 km)",The Clementi Mall; Grantral Mall @ Clementi; Clementi Ave 3 Blk 448,-11.175,-15.899,-6.649,0.005,4.406,-0.863,-1.078,-0.644,-19.586,True,23018
+73,Mandai,Mandai Estate,"Yishun (1.3 km), Khatib (1.4 km)",Yishun Secondary School,-11.112,-19.117,-2.919,0.021,3.357,-0.734,-0.958,-0.506,-21.849,False,30030
+74,Yishun,Nee Soon,"Springleaf (0.3 km), Lentor (2.9 km)",,-11.047,-22.303,-0.876,0.078,1.060,-0.226,-0.332,-0.130,-21.310,False,29027
+75,Ang Mo Kio,Tagore,"Lentor (1.5 km), Mayflower (1.7 km)",,-10.987,-22.826,1.193,0.178,0.566,-0.116,-0.177,-0.052,-20.435,False,30025
+76,Bukit Batok,Bukit Batok South,"Bukit Batok (1.4 km), Hume (1.4 km)",St. Andrew's Mission School; Keming Primary School,-10.967,-16.487,-4.998,0.008,4.158,-0.834,-1.052,-0.574,-20.065,True,23021
+77,Pioneer,Joo Koon,"Joo Koon (0.3 km), Pioneer (2.3 km)",Fairprice Hub,-10.918,-24.686,3.447,0.256,1.555,-0.264,-0.457,-0.064,-16.948,False,14019
+78,Rochor,Farrer Park,"Little India (0.3 km), Rochor (0.5 km)",Sri Veeramakaliamman Temple: Hindu Temple in Singapore; Little India Singapore: History & Culture; Institute of Contemporary Arts Singapore,-10.882,-16.416,-5.503,0.005,11.688,-2.659,-3.258,-2.048,-22.751,True,33017
+79,Kallang,Tanjong Rhu,"Tanjong Rhu (0.5 km), Nicoll Highway (0.6 km)",Kallang Wave Mall; Hotel Traveltine,-10.718,-17.563,-2.855,0.015,2.150,-0.488,-0.617,-0.352,-22.703,False,35016
+80,Outram,Chinatown,"Outram Park (0.2 km), Maxwell (0.2 km)",Kreta Ayer Square; Chinatown Singapore: History & Culture; Chinatown Food Street,-10.656,-18.002,-3.655,0.005,13.807,-3.012,-3.871,-2.166,-21.816,True,32014
+81,Bukit Batok,Bukit Batok South,"Bukit Batok (0.6 km), Bukit Gombak (1.6 km)",Harvey Norman; Bukit View Secondary School; Bukit View Primary School,-10.610,-16.141,-5.137,0.008,6.055,-1.201,-1.524,-0.837,-19.835,True,22021
+82,Hougang,Lorong Halus,"Hougang (1.4 km), Kangkar (1.4 km)",Serangoon Secondary School,-10.565,-20.640,-1.099,0.087,0.974,-0.211,-0.302,-0.123,-21.707,False,39024
+83,Geylang,Kampong Ubi,"Ubi (0.7 km), Eunos (0.8 km)",Eunos Crescent Blk 4A; Eunos Primary School; Manjusri Secondary School,-10.561,-15.498,-5.634,0.005,8.246,-1.904,-2.287,-1.496,-23.085,True,39019
+84,Downtown Core,Nicoll,"Nicoll Highway (0.4 km), Bugis (0.5 km)","Kampong Glam & Malay Culture in Singapore; Sultan Mosque (Masjid Sultan) Singapore; Malay Heritage Centre, Singapore",-9.995,-14.692,-5.425,0.005,14.567,-3.193,-3.870,-2.487,-21.916,True,34016
+85,Downtown Core,Marina Centre,"Promenade (0.4 km), Esplanade (0.6 km)",Singapore Flyer; ArtScience Museum Singapore; Esplanade Theatres on the Bay,-9.801,-16.801,-2.374,0.033,9.356,-2.034,-2.639,-1.397,-21.735,True,34015
+86,Jurong East,Lakeside (Leisure),"Lakeside (1.1 km), Chinese Garden (1.1 km)",Chinese Garden Singapore; Taman Jurong Shopping Centre; West Point Hospital,-9.791,-16.430,-2.403,0.033,2.042,-0.379,-0.515,-0.234,-18.576,False,19020
+87,Kallang,Lavender,"Lavender (0.3 km), Jalan Besar (0.6 km)","Malay Heritage Centre, Singapore; Hajjah Fatimah Mosque; Kampong Glam & Malay Culture in Singapore",-9.699,-14.454,-5.545,0.005,16.526,-3.620,-4.319,-2.976,-21.908,True,34017
+88,Queenstown,Pasir Panjang 2,"Pasir Panjang (0.7 km), Haw Par Villa (0.7 km)",K2 Guesthouse; Pasir Panjang Food Centre; National Community Leadership Institute,-9.574,-22.638,2.978,0.226,0.871,-0.167,-0.271,-0.064,-19.144,False,26014
+89,Woodlands,Woodlands East,"Admiralty (0.8 km), Woodlands South (0.9 km)",888 Plaza; Vista Point; Kampung Admiralty Hawker Centre,-9.557,-15.243,-4.362,0.005,4.823,-0.917,-1.181,-0.664,-19.016,True,27031
+90,Jurong East,Yuhua West,"Chinese Garden (0.3 km), Lakeside (1.5 km)",Yuhua Market and Hawker Centre; Yuhua Village Market and Food Centre; Jurong Primary School,-9.518,-13.926,-5.187,0.005,6.919,-1.268,-1.566,-0.959,-18.329,True,20021
+91,Bedok,Siglap,"Siglap (0.3 km), Bayshore (1.3 km)",Victoria School; East Coast Lagoon Food Village; St Andrew's Autism School,-9.494,-17.027,-2.153,0.058,2.226,-0.489,-0.642,-0.331,-21.970,False,42017
+92,Tanglin,Nassim,"Stevens (0.4 km), Botanic Gardens (1.1 km)",Institute of Policy Studies; National University of Singapore (Bukit Timah); C J Koh Law Library,-9.291,-16.890,-1.306,0.058,1.641,-0.336,-0.443,-0.220,-20.496,False,30018
+93,Serangoon,Lorong Chuan,"Lorong Chuan (0.4 km), Bishan (1.3 km)",NTP+; St Gabriel's Primary School; Australian International School Singapore,-9.060,-15.394,-2.542,0.015,2.800,-0.565,-0.721,-0.386,-20.175,False,34022
+94,Bedok,Bedok South,"Tanah Merah (0.4 km), Bayshore (1.7 km)",Q Loft Hotels@Bedok; Bedok South Secondary School,-9.025,-17.997,0.388,0.145,1.576,-0.314,-0.445,-0.165,-19.939,False,44019
+95,Bukit Timah,Coronation Road,"Tan Kah Kee (0.2 km), Farrer Road (1.0 km)",Coronation Shopping Plaza; King's Arcade; Crown Centre,-8.995,-18.792,0.561,0.142,1.079,-0.204,-0.299,-0.113,-18.926,False,28019
+96,Geylang,Kallang Way,"Mattar (0.6 km), Geylang Bahru (0.8 km)",MacPherson Mall; St Andrew's Nursing Home (Aljunied); ibis Styles Singapore on Macpherson,-8.882,-15.950,-1.599,0.062,2.888,-0.618,-0.797,-0.441,-21.413,False,36019
+97,Mandai,Mandai West,"Woodlands South (1.2 km), Woodlands (2.5 km)",,-8.611,-21.280,4.231,0.321,0.499,-0.095,-0.152,-0.035,-18.998,False,27029
+98,Bukit Batok,Hong Kah North,"Bukit Gombak (1.0 km), Bukit Batok (1.7 km)",Parc Point; Eden School  (Campus 2); Dunearn Secondary School,-8.563,-14.711,-1.873,0.033,3.741,-0.699,-0.907,-0.471,-18.681,False,21023
+99,Woodlands,Woodlands Regional Centre,"Woodlands (0.3 km), Woodlands South (1.1 km)",STELLAR@TE2; Causeway Point; Metro,-8.556,-14.397,-2.427,0.015,5.304,-1.034,-1.337,-0.725,-19.485,True,26031
+100,Yishun,Yishun South,"Yishun (0.9 km), Khatib (1.4 km)",Northpoint City; Khoo Teck Puat Hospital; Yishun Community Hospital,-8.519,-13.474,-3.895,0.008,10.133,-1.976,-2.397,-1.527,-19.502,True,32030
+101,Sengkang,Sengkang Town Centre,"Cheng Lim (0.4 km), Compassvale (0.7 km)",Sengkang General Hospital; Sengkang General & Community Hospital; Sengkang Community Hospital,-8.515,-13.372,-3.512,0.005,9.555,-1.903,-2.336,-1.451,-19.913,True,38027
+102,Jurong East,Teban Gardens,"Jurong East (1.8 km), Clementi (2.5 km)",Teban Gardens Market and Food Centre; Commonwealth Secondary School,-8.367,-17.685,2.113,0.180,1.841,-0.325,-0.476,-0.156,-17.638,False,21018
+103,Ang Mo Kio,Cheng San,"Ang Mo Kio (1.2 km), Yio Chu Kang (2.0 km)",Ang Mo Kio Joint Testing & Vaccination Centre; Chong Boon Market and Food Centre; Cheng San Market and Cooked Food Centre,-8.344,-12.409,-4.297,0.005,7.698,-1.353,-1.689,-1.006,-17.578,True,34024
+104,Bukit Timah,Hillcrest,"Tan Kah Kee (1.1 km), Sixth Avenue (1.1 km)",National Junior College; Raffles Girls' Primary School; Nanyang Girls' High School,-8.321,-20.344,3.481,0.334,0.657,-0.120,-0.194,-0.049,-18.326,False,28020
+105,Geylang,Kampong Ubi,"Ubi (0.7 km), Tai Seng (0.9 km)",Oxley bizhub 2; ComfortDelGro Driving Centre,-8.204,-16.913,0.926,0.170,4.620,-0.938,-1.322,-0.525,-20.309,False,38020
+106,Jurong West,Chin Bee,"Lakeside (1.1 km), Boon Lay (1.2 km)",Taman Jurong Shopping Centre; Taman Jurong Market and Food Centre; Lakeside Primary School,-8.099,-21.500,5.567,0.422,0.818,-0.139,-0.240,-0.038,-17.049,False,18020
+107,Tanglin,Nassim,"Napier (0.6 km), Orchard Boulevard (0.6 km)",Tanglin Mall; Delfi Orchard; Forum The Shopping Mall,-8.043,-14.172,-2.022,0.008,3.566,-0.673,-0.874,-0.466,-18.858,False,30017
+108,Geylang,Aljunied,"Mountbatten (0.6 km), Stadium (0.7 km)",Leisure Park Kallang; Hotel 81 - Hollywood; Taipei Hotel (2000),-8.030,-14.291,-1.105,0.069,7.479,-1.535,-2.000,-1.003,-20.519,True,36017
+109,Tanglin,Ridout,"Farrer Road (1.1 km), Commonwealth (1.1 km)",Commonwealth Crescent Market,-8.002,-18.187,2.460,0.267,1.571,-0.294,-0.435,-0.153,-18.728,False,28017
+110,Jurong East,Lakeside (Business),"Chinese Garden (0.8 km), Jurong East (0.9 km)",Singapore Science Centre; Chinese Garden Singapore; Fuhua Primary School,-7.989,-17.570,2.463,0.246,1.255,-0.213,-0.329,-0.085,-16.949,False,20020
+111,Yishun,Yishun South,"Khatib (0.1 km), Yishun (1.4 km)",Peiying Primary School; Naval Base Secondary School; Chung Cheng High School (Yishun),-7.945,-14.013,-1.982,0.015,8.231,-1.564,-1.989,-1.108,-18.998,True,31029
+112,Sembawang,Sembawang Central,"Sembawang (0.8 km), Canberra (1.6 km)",Sun Plaza; Sembawang Secondary School; Sembawang Primary School,-7.944,-15.002,-0.132,0.110,2.780,-0.488,-0.677,-0.287,-17.572,False,29032
+113,Jurong West,Yunnan,"Pioneer (0.8 km), Boon Lay (1.1 km)",Pioneer Mall; Gek Poh Shopping Centre; Jurong West Hawker Centre,-7.837,-12.812,-2.939,0.015,6.834,-1.048,-1.371,-0.710,-15.342,True,16021
+114,Bukit Timah,Anak Bukit,"Beauty World (0.7 km), Hume (1.1 km)",Bukit Timah Shopping Center; Dimensions International College; Bukit Timah Interim Hawker Centre and Market,-7.805,-16.314,0.573,0.152,1.833,-0.330,-0.470,-0.193,-17.991,False,24021
+115,Newton,Orange Grove,"Orchard (0.6 km), Newton (0.8 km)","Orchard Road, Singapore: Asia's Most Famous Shopping Street; Far East Plaza; Pacific Plaza",-7.792,-13.271,-2.892,0.008,8.867,-1.723,-2.189,-1.273,-19.426,True,31017
+116,Clementi,Toh Tuck,"Clementi (1.3 km), Jurong East (2.2 km)",,-7.743,-17.520,1.689,0.226,1.190,-0.203,-0.301,-0.103,-17.103,False,23019
+117,Bedok,Bedok North,"Bedok Reservoir (1.0 km), Tanah Merah (1.1 km)",85 Fengshan Centre; St Anthony's Canossian Primary School; St Anthony's Canossian Secondary School,-7.726,-13.575,-2.076,0.037,4.075,-0.820,-1.030,-0.609,-20.120,True,43020
+118,Geylang,Aljunied,"Aljunied (0.5 km), Geylang Bahru (0.8 km)",St Andrew's Nursing Home (Aljunied); ECM Building; James Cook University Singapore,-7.620,-12.620,-2.714,0.008,8.239,-1.704,-2.115,-1.277,-20.686,True,36018
+119,Woodlands,Woodlands East,"Admiralty (0.6 km), Woodlands (1.4 km)",Admiralty Place; Kampung Admiralty Hawker Centre; Evergreen Primary School,-7.603,-12.373,-2.439,0.005,14.328,-2.474,-3.114,-1.823,-17.266,True,27032
+120,Pasir Ris,Loyang East,"Changi Airport (2.0 km), Tampines East (3.0 km)",,-7.570,-29.938,15.605,0.635,0.686,-0.132,-0.263,0.005,-19.318,False,47024
+121,Queenstown,Queensway,"Queenstown (1.1 km), Commonwealth (1.4 km)",Block 22 - Mortuary; Block 24 - Clinic L [Active Centre]; Alexandra Hospital,-7.530,-14.769,-0.378,0.090,2.366,-0.434,-0.595,-0.274,-18.342,False,27015
+122,Serangoon,Serangoon Garden,"Ang Mo Kio (2.2 km), Kovan (2.2 km)",Serangoon Garden Secondary School; International French School (Singapore); Rosyth School,-7.482,-11.512,-3.162,0.005,9.050,-1.722,-2.075,-1.306,-19.024,True,35024
+123,Jurong East,Lakeside (Leisure),"Lakeside (0.5 km), Chinese Garden (0.8 km)",Canadian International School; Fuhua Secondary School; Yuhua Secondary School,-7.455,-15.022,0.735,0.135,2.264,-0.373,-0.526,-0.203,-16.467,False,19021
+124,Clementi,West Coast,"Clementi (1.5 km), Jurong East (2.1 km)",,-7.444,-15.220,0.670,0.162,1.488,-0.250,-0.365,-0.134,-16.809,False,22018
+125,Choa Chu Kang,Choa Chu Kang North,"Choa Chu Kang (0.6 km), Yew Tee (1.0 km)",Limbang Shopping Centre; Lot One Shoppers' Mall; Kranji Secondary School,-7.340,-12.310,-2.007,0.033,4.887,-0.831,-1.066,-0.569,-17.007,True,21026
+126,Sengkang,Anchorvale,"Tongkang (0.1 km), Renjong (0.5 km)",Anchor Green Primary School; Nan Chiau High School; Nan Chiau Primary School,-7.262,-13.852,-0.796,0.065,5.286,-0.995,-1.322,-0.670,-18.816,True,37026
+127,Central Water Catchment,Central Water Catchment,"Segar (2.4 km), Kranji (2.7 km)",,-7.262,-19.191,5.637,0.436,0.857,-0.153,-0.252,-0.045,-17.810,False,25028
+128,Singapore River,Robertson Quay,"Fort Canning (0.3 km), Clarke Quay (0.6 km)",Hong San See Temple Singapore; Singapore River: History & Culture Tours; PARKROYAL on Pickering,-7.061,-12.824,-1.850,0.021,13.123,-2.450,-3.134,-1.844,-18.670,True,32015
+129,Woodlands,Woodlands East,"Admiralty (0.7 km), Sembawang (1.7 km)",Admiralty Place; Admiralty Secondary School; Greenwood Primary School,-6.752,-11.485,-1.654,0.028,8.388,-1.384,-1.766,-0.978,-16.504,True,28032
+130,Clementi,Toh Tuck,"Jurong East (1.1 km), Bukit Batok (1.5 km)",IMM; Jurong Community Hospital,-6.751,-18.569,4.683,0.434,0.869,-0.142,-0.238,-0.047,-16.332,False,22020
+131,Serangoon,Seletar Hills,"Ang Mo Kio (1.6 km), Yio Chu Kang (1.7 km)",Ang Mo Kio Joint Testing & Vaccination Centre; ITE College Central,-6.722,-13.955,1.744,0.240,1.722,-0.282,-0.405,-0.139,-16.398,False,34025
+132,Bedok,Kembangan,"Kembangan (0.6 km), Bedok North (1.0 km)",Minds - Towner Gardens School; Telok Kurau Primary School; LTA Rail Academy,-6.631,-14.657,0.420,0.170,3.292,-0.634,-0.874,-0.405,-19.248,False,40019
+133,Yishun,Yishun West,"Yishun (0.6 km), Canberra (1.0 km)",Chong Pang Market and Food Centre; Chong Pang Hawker Centre & Market; Ahmad Ibrahim Primary School,-6.446,-11.132,-1.153,0.037,6.887,-1.222,-1.510,-0.899,-17.747,True,31031
+134,Jurong East,Penjuru Crescent,"Clementi (3.0 km), Jurong East (3.7 km)",,-6.426,-20.958,8.419,0.527,0.992,-0.142,-0.272,-0.008,-14.306,False,21016
+135,Jurong East,Lakeside (Business),"Jurong East (0.8 km), Chinese Garden (2.1 km)",Teban Gardens Market and Food Centre,-6.376,-13.363,0.896,0.176,2.364,-0.378,-0.532,-0.218,-15.995,False,21019
+136,Southern Islands,Sentosa,"Keppel (3.1 km), HarbourFront (3.1 km)",Quayside Isle; W Singapore Sentosa Cove Hotel; ONE15 Marina Club,-6.249,-20.052,9.315,0.573,0.546,-0.092,-0.162,-0.015,-16.835,False,32010
+137,Bedok,Frankel,"Kembangan (0.4 km), Marine Terrace (1.2 km)",Parkway East Hospital; Hotel 81 - Changi; Bethesda Kindergarten,-6.243,-14.660,2.089,0.272,2.426,-0.457,-0.643,-0.263,-18.838,False,40018
+138,Bukit Merah,City Terminals,"Keppel (0.3 km), Cantonment (0.5 km)",SGH Emergency/ NNI Building; Outram Community Hospital; Harbour Ville Hotel,-6.177,-14.895,1.920,0.267,1.837,-0.327,-0.476,-0.193,-17.802,False,31013
+139,Jurong West,Safti,"Pioneer (0.9 km), Joo Koon (1.5 km)",Juying Secondary School; Juying Primary School,-6.092,-19.317,9.356,0.573,0.811,-0.103,-0.205,0.015,-12.653,False,15020
+140,Pasir Ris,Pasir Ris Central,"Pasir Ris (0.9 km), Tampines (2.1 km)",PARKTOWN; Tampines Meridian Junior College; Tampines North Hawker Centre,-5.979,-12.720,0.728,0.160,3.276,-0.615,-0.812,-0.418,-18.788,False,43024
+141,Queenstown,Kent Ridge,"Kent Ridge (0.5 km), one-north (1.0 km)",The Oasis; Medical Centre; NUHS Tower Block,-5.919,-20.423,10.701,0.619,3.877,-0.613,-1.114,-0.050,-15.805,False,26015
+142,Woodlands,Woodlands West,"Woodlands North (0.9 km), Woodlands (1.1 km)",Singapore Institute of Technology @ RP (SIT@RP); Republic Polytechnic; Marsiling Lane Blk 20/21,-5.919,-11.974,0.289,0.145,10.135,-1.702,-2.284,-1.110,-16.794,False,25032
+143,Yishun,Yishun East,"Yishun (1.8 km), Khatib (2.2 km)",XCL World Academy; XWA Innovation Hub; XCL American Academy,-5.914,-11.824,0.719,0.169,4.692,-0.807,-1.058,-0.528,-17.210,False,33030
+144,Sembawang,Admiralty,"Sembawang (0.6 km), Canberra (1.2 km)",Bukit Canberra Hawker Centre; Wellington Primary School,-5.896,-11.003,-0.651,0.090,5.012,-0.789,-1.016,-0.525,-15.738,True,30033
+145,Jurong West,Yunnan,"Pioneer (1.2 km), Boon Lay (2.0 km)","Chinese Heritage Centre, Singapore; Nanyang House; School of Humanities and Social Sciences",-5.768,-11.004,-0.251,0.102,6.475,-0.800,-1.121,-0.463,-12.352,False,15021
+146,Serangoon,Seletar Hills,"Fernvale (1.8 km), Yio Chu Kang (1.9 km)",KLC International Institute,-5.682,-14.752,4.149,0.402,1.659,-0.257,-0.404,-0.097,-15.466,False,34026
+147,Tampines,Tampines East,"Tampines East (0.8 km), Pasir Ris (1.6 km)",Temasek Junior College; Dunman Secondary School; White Sands Primary School,-5.637,-11.064,-0.566,0.074,8.872,-1.631,-2.069,-1.231,-18.381,True,45023
+148,Novena,Balestier,"Toa Payoh (0.8 km), Novena (1.1 km)",Sun Yat Sen Memorial Hall; Balestier Plaza; Shaw Plaza,-5.600,-9.947,-1.227,0.028,7.276,-1.324,-1.650,-1.020,-18.192,True,33019
+149,Sengkang,Sengkang Town Centre,"Sengkang (0.2 km), Ranggung (0.6 km)",Compass One; Sengkang Specialist Clinic; Sengkang General & Community Hospital,-5.556,-9.805,-1.559,0.028,11.828,-2.049,-2.546,-1.582,-17.323,True,38026
+150,Hougang,Trafalgar,"Buangkok (0.7 km), Renjong (0.8 km)",Hougang Green Shopping Mall; Sengkang Grand Mall; Buangkok Green Medical Park,-5.509,-10.041,-0.995,0.062,7.064,-1.222,-1.531,-0.902,-17.303,True,37025
+151,Sengkang,Rivervale,"Bakau (0.2 km), Rumbia (0.2 km)",Rivervale Mall; Rivervale Plaza; Sengkang Joint Testing & Vaccination Centre,-5.505,-9.858,-1.146,0.062,13.488,-2.283,-2.885,-1.699,-16.922,True,39026
+152,Yishun,Lower Seletar,"Khatib (1.0 km), Yishun (1.6 km)",Wisteria Mall; Orchid Country Club; Naval Base Primary School,-5.463,-11.809,0.777,0.162,8.995,-1.512,-2.030,-0.980,-16.814,False,32029
+153,Toa Payoh,Pei Chun,"Potong Pasir (1.1 km), Woodleigh (1.3 km)",Kwong Wai Shiu Hospital @ Potong Pasir; St Andrew's Junior College; Kim Keat Palm Market and Food Centre,-5.390,-9.874,-0.391,0.090,5.780,-0.999,-1.257,-0.717,-17.289,True,34020
+154,Boon Lay,Tukang,"Boon Lay (1.8 km), Lakeside (2.0 km)",,-5.315,-18.487,6.958,0.581,0.864,-0.119,-0.228,-0.016,-13.741,False,18019
+155,Mandai,Mandai East,"Canberra (1.1 km), Yishun (1.4 km)",Chong Pang Market and Food Centre; Sir Manasseh Meyer International School; Star Learners Childcare Centre,-5.311,-12.349,1.811,0.226,1.963,-0.299,-0.434,-0.176,-15.214,False,30031
+156,Tampines,Tampines East,"Tampines East (0.5 km), Simei (1.3 km)",Tampines Mart; Temasek Junior College; Ngee Ann Secondary School,-5.286,-10.009,-0.987,0.058,9.048,-1.636,-1.998,-1.266,-18.077,True,45022
+157,Tampines,Tampines East,"Simei (0.4 km), Tampines (1.1 km)",East Point; Simei Plaza /Blk 248; Saint Andrew's Community Hospital,-5.226,-9.826,-0.916,0.033,7.800,-1.392,-1.751,-1.067,-17.841,True,44021
+158,Pasir Ris,Pasir Ris Wafer Fab Park,"Riviera (1.7 km), Coral Edge (1.9 km)",,-5.216,-13.900,4.010,0.422,1.329,-0.218,-0.320,-0.111,-16.416,False,41025
+159,River Valley,Leonie Hill,"Orchard (0.5 km), Great World (0.5 km)","Orchard Road, Singapore: Asia's Most Famous Shopping Street; Ngee Ann City; Takashimaya",-5.009,-12.632,2.006,0.301,7.264,-1.209,-1.730,-0.711,-16.648,False,31016
+160,Western Water Catchment,Murai,"South View (1.2 km), Choa Chu Kang (1.2 km)",Sunshine Place; Concord Primary School; Bukit Panjang Government High School,-4.999,-11.366,1.505,0.266,4.173,-0.593,-0.839,-0.314,-14.219,False,20025
+161,Sungei Kadut,Pang Sua,"Yew Tee (1.3 km), Kranji (2.2 km)",,-4.961,-14.086,3.701,0.427,1.081,-0.161,-0.247,-0.073,-14.941,False,22028
+162,Mandai,Mandai East,"Woodlands South (1.7 km), Springleaf (2.5 km)",,-4.929,-17.662,8.535,0.619,0.588,-0.093,-0.161,-0.020,-15.734,False,28029
+163,Sengkang,Lorong Halus North,"Bakau (1.2 km), Kangkar (1.4 km)",,-4.923,-14.281,4.939,0.469,1.087,-0.178,-0.260,-0.088,-16.410,False,40025
+164,Toa Payoh,Sennett,"Bartley (0.8 km), Woodleigh (0.9 km)",MacPherson Mall; Bidadari Polyclinic & Nursing Home; ibis Styles Singapore on Macpherson,-4.806,-13.197,3.506,0.422,2.708,-0.470,-0.678,-0.257,-17.359,False,36020
+165,Central Water Catchment,Central Water Catchment,"Sixth Avenue (1.8 km), Tan Kah Kee (2.1 km)",,-4.659,-18.397,10.151,0.654,0.520,-0.079,-0.142,-0.010,-15.172,False,28021
+166,Tanglin,Ridout,"Napier (1.0 km), Orchard Boulevard (1.1 km)",Invictus International School; Melbourne Specialist International School; MINDS Headquarters,-4.649,-17.336,9.141,0.607,0.913,-0.142,-0.248,-0.029,-15.497,False,29016
+167,Pasir Ris,Pasir Ris Drive,"Pasir Ris (1.1 km), Tampines East (1.8 km)",E! Hub; Pasir Ris Crest Secondary School; Casuarina Primary School,-4.624,-9.654,0.458,0.176,10.031,-1.763,-2.249,-1.269,-17.571,False,45024
+168,Straits View,Straits View,"Marina South Pier (1.0 km), Marina Bay (1.5 km)",,-4.619,-36.133,34.378,0.891,0.572,-0.093,-0.249,0.111,-16.203,False,34012
+169,Bukit Timah,Holland Road,"King Albert Park (0.6 km), Beauty World (0.8 km)",Ngee Ann Polytechnic; Bukit Timah Market; Sports Hall Blk 20,-4.619,-12.893,3.828,0.443,1.726,-0.262,-0.389,-0.124,-15.156,False,25020
+170,Changi,Changi Airport,"Changi Airport (0.7 km), Tampines East (3.5 km)",Changi Airport Terminal 1; Jewel Changi Airport; Jewel Changi Basement,-4.579,-10.946,1.732,0.336,43.075,-6.865,-9.406,-4.042,-15.936,False,48023
+171,Bukit Merah,City Terminals,"HarbourFront (0.3 km), Keppel (1.1 km)","HarbourFront, Singapore; M&S Outlet; VivoCity",-4.501,-13.839,5.964,0.520,5.393,-0.852,-1.320,-0.329,-15.798,False,30012
+172,Geylang,Geylang East,"Paya Lebar (0.4 km), Eunos (0.8 km)",Tanjong Katong Complex; SingPost Centre; Kinex,-4.271,-10.681,3.145,0.369,9.585,-1.626,-2.251,-0.917,-16.962,False,38018
+173,Tanglin,Nassim,"Newton (0.8 km), Stevens (0.9 km)",Balmoral Plaza; VIP Hotel; Novotel Singapore On Stevens,-4.000,-12.288,4.290,0.478,1.866,-0.299,-0.437,-0.172,-16.043,False,31018
+174,Tengah,Plantation,"Chinese Garden (1.2 km), Bukit Batok (1.8 km)",Plantation Plaza; Pioneer Primary School; Dulwich College,-3.897,-11.040,3.707,0.478,2.603,-0.345,-0.528,-0.161,-13.256,False,20022
+175,Sungei Kadut,Gali Batu,"Kranji (2.1 km), Segar (2.2 km)",,-3.896,-14.510,6.312,0.601,0.834,-0.124,-0.206,-0.041,-14.823,False,24028
+176,Serangoon,Serangoon Garden,"Lorong Chuan (1.4 km), Serangoon (1.5 km)",myVillage; Serangoon Garden Market; Chomp Chomp Food Centre,-3.671,-10.517,3.447,0.441,2.131,-0.318,-0.441,-0.186,-14.944,False,35023
+177,Yishun,Yishun West,"Yishun (0.5 km), Khatib (0.9 km)",Northpoint City; Yishun Community Hospital; Khoo Teck Puat Hospital,-3.624,-9.576,2.358,0.386,15.510,-2.368,-3.287,-1.469,-15.265,False,31030
+178,Choa Chu Kang,Keat Hong,"South View (0.2 km), Choa Chu Kang (0.5 km)",Keat Hong Shopping Centre; Lot One Shoppers' Mall; Sunshine Place,-3.422,-8.009,1.406,0.263,11.265,-1.521,-2.011,-0.981,-13.498,False,21025
+179,Bukit Timah,Leedon Park,"Holland Village (1.0 km), Buona Vista (1.1 km)",Ghim Moh Road Blk 20; Henry Park Primary School; Singapore Centre for Chinese Language,-3.421,-13.535,5.836,0.621,0.970,-0.137,-0.222,-0.057,-14.091,False,26018
+180,Toa Payoh,Boon Teck,"Toa Payoh (0.5 km), Braddell (0.7 km)",Courts; HDB Hub; 新加坡中医学院,-3.411,-8.692,1.563,0.367,7.272,-1.126,-1.504,-0.751,-15.483,False,33020
+181,Punggol,Punggol Field,"Coral Edge (0.5 km), Riviera (0.6 km)",Punggol Plaza; Global Indian International School; One World International School,-3.306,-9.595,3.861,0.528,3.400,-0.515,-0.709,-0.282,-15.144,False,40026
+182,Sembawang,Sembawang Springs,"Canberra (0.6 km), Sembawang (0.7 km)",Sembawang Shopping Centre; Sun Plaza; Bukit Canberra Hawker Centre,-3.101,-9.218,2.594,0.440,3.044,-0.403,-0.576,-0.224,-13.235,False,30032
+183,Kallang,Kampong Bugis,"Kallang (0.4 km), Lavender (0.7 km)",Aperia Mall; Kallang Wave Mall; Coziee Lodge,-3.045,-7.889,2.099,0.403,5.526,-0.887,-1.163,-0.587,-16.059,False,35017
+184,Toa Payoh,Joo Seng,"Tai Seng (0.1 km), MacPherson (1.0 km)",18 Tai Seng; Oxley bizhub 2,-3.024,-10.443,4.900,0.604,2.774,-0.439,-0.638,-0.228,-15.812,False,37020
+185,Marine Parade,Katong,"Marine Parade (0.6 km), Marine Terrace (1.1 km)",Joo Chiat/Katong: Singapore Peranakan Neighbourhood; Katong Antique House Singapore: Peranakan Heritage; Eurasian Heritage Centre: Singapore Attraction,-3.015,-10.816,6.002,0.584,3.246,-0.526,-0.780,-0.244,-16.195,False,39017
+186,Serangoon,Serangoon Central,"Lorong Chuan (0.7 km), Serangoon (0.7 km)",nex; Isetan; Nanyang Junior College,-3.011,-7.554,1.952,0.386,8.620,-1.281,-1.678,-0.834,-14.865,False,35022
+187,Bedok,Bayshore,"Bayshore (1.0 km), Tanah Merah (2.1 km)",,-3.010,-18.407,13.710,0.819,0.759,-0.116,-0.220,-0.006,-15.223,False,44017
+188,Geylang,Aljunied,"Aljunied (0.5 km), Paya Lebar (0.6 km)",Kian Joo Vegetarian Food Supply Centre 健裕斋料供应商.; Grandlink Square; Paya Lebar Square,-3.002,-7.818,1.657,0.382,9.849,-1.647,-2.106,-1.142,-16.720,False,37018
+189,Tampines,Simei,"Simei (0.9 km), Tanah Merah (1.0 km)",Changi General Hospital; Integrated Building (CGH-SACH); ITE College East,-2.985,-11.678,5.386,0.621,2.754,-0.438,-0.651,-0.233,-15.899,False,44020
+190,Bukit Panjang,Saujana,"Segar (0.2 km), Fajar (0.6 km)",Greenridge Shopping Centre; Fajar Shopping Centre; West Spring Primary School,-2.932,-9.566,3.632,0.562,5.442,-0.753,-1.089,-0.409,-13.844,False,24026
+191,Hougang,Kovan,"Kovan (0.8 km), Serangoon (1.5 km)",The Japanese Cemetery Park; Idea Minds Employment Development Centre; Dimensions,-2.847,-11.189,6.047,0.657,1.417,-0.212,-0.328,-0.083,-15.001,False,36023
+192,Hougang,Hougang West,"Hougang (0.6 km), Kovan (1.3 km)",Ci Yuan Hawker Centre; Monfort Secondary School; Montfort Junior School,-2.796,-6.980,1.821,0.386,10.853,-1.620,-2.041,-1.155,-14.929,False,37024
+193,Hougang,Kovan,"Kovan (0.4 km), Hougang (1.2 km)",myCK; Heartland Mall; Anderson Serangoon Junior College,-2.780,-8.826,3.581,0.547,5.617,-0.839,-1.144,-0.533,-14.942,False,37023
+194,Bedok,Bayshore,"Tanah Merah (1.8 km), Bayshore (1.9 km)",Bedok Food Centre,-2.770,-16.103,10.601,0.797,0.977,-0.147,-0.258,-0.030,-15.014,False,45018
+195,Woodlands,Greenwood Park,"Woodlands North (0.6 km), Woodlands (0.8 km)",Woodlands North Plaza; Republic Polytechnic; Singapore Institute of Technology @ RP (SIT@RP),-2.648,-8.141,2.688,0.474,6.146,-0.878,-1.180,-0.562,-14.283,False,26032
+196,Pasir Ris,Pasir Ris Wafer Fab Park,"Pasir Ris (2.1 km), Riviera (2.3 km)",Meridian Primary School,-2.642,-10.373,5.063,0.607,2.917,-0.453,-0.648,-0.257,-15.543,False,42025
+197,Mandai,Mandai West,"Marsiling (0.9 km), Woodlands (1.5 km)",The Woodgrove; Fuchun Primary School; Singapore American School,-2.636,-9.140,3.977,0.581,4.560,-0.562,-0.832,-0.289,-12.330,False,25030
+198,Bishan,Bishan East,"Lorong Chuan (0.9 km), Woodleigh (1.3 km)",BCA Academy of the Built Environment; Australian International School Singapore; St Gabriel's Primary School,-2.572,-6.738,1.373,0.377,10.630,-1.539,-2.009,-1.062,-14.480,False,34021
+199,Punggol,Punggol Field,"Cove (0.1 km), Meridian (0.5 km)",Edgefield Secondary School; Edgefield Primary School; Rivervale Primary School,-2.541,-7.907,2.579,0.444,10.680,-1.471,-2.025,-0.950,-13.769,False,39027
+200,Toa Payoh,Woodleigh,"Potong Pasir (0.5 km), Woodleigh (0.5 km)",The Poiz Centre; The Woodleigh Mall; Kwong Wai Shiu Hospital @ Potong Pasir,-2.476,-9.038,4.481,0.607,3.257,-0.506,-0.705,-0.283,-15.536,False,35020
+201,Choa Chu Kang,Teck Whye,"Keat Hong (0.4 km), Teck Whye (0.5 km)",Jurong Pioneer Junior College; Former Choa Chu Kang Secondary School Campus; Former Teck Whye Primary School Campus,-2.436,-6.789,1.989,0.478,6.282,-0.842,-1.107,-0.548,-13.402,False,22025
+202,Jurong West,Jurong West Central,"Pioneer (0.3 km), Boon Lay (0.9 km)",Jurong West Hawker Centre; Frontier Primary School; Jurong West Primary School,-2.392,-8.317,3.792,0.607,3.181,-0.329,-0.518,-0.135,-10.340,False,16020
+203,Bukit Panjang,Senja,"Jelapang (0.5 km), Senja (0.8 km)",Senja Hawker Centre; West Spring Secondary School; Zhenghua Secondary School,-2.366,-9.062,4.357,0.657,3.132,-0.418,-0.607,-0.216,-13.339,False,23026
+204,Clementi,Clementi Woods,"Clementi (0.9 km), Dover (1.0 km)",West Coast Plaza; Cendana College; NUS College,-2.341,-7.602,3.042,0.581,5.748,-0.649,-0.944,-0.337,-11.290,False,24017
+205,Boon Lay,Tukang,"Boon Lay (1.4 km), Pioneer (1.7 km)",,-2.327,-18.751,14.806,0.841,0.655,-0.072,-0.170,0.027,-11.019,False,17019
+206,Simpang,Simpang North,"Canberra (1.4 km), Yishun (1.8 km)",Chongfu Primary School,-2.217,-10.189,4.931,0.663,2.637,-0.370,-0.561,-0.192,-14.029,False,32032
+207,Jurong West,Hong Kah,"Lakeside (1.1 km), Chinese Garden (1.5 km)",Jurong West Joint Testing & Vaccination Centre; Hua Yi Secondary School; Jurongville Secondary School,-2.206,-7.851,3.180,0.581,5.408,-0.634,-0.911,-0.352,-11.730,False,19022
+208,Bukit Panjang,Fajar,"Bangkit (0.3 km), Fajar (0.4 km)",Fajar Shopping Centre; Bukit Panjang Plaza; Greenridge Shopping Centre,-2.165,-6.996,2.656,0.574,10.116,-1.331,-1.782,-0.851,-13.161,False,24025
+209,Jurong West,Hong Kah,"Lakeside (1.1 km), Boon Lay (2.0 km)",Jurong West Street 52 Blk 505; Hua Yi Secondary School,-2.096,-8.805,4.327,0.635,5.500,-0.640,-0.996,-0.297,-11.630,False,18022
+210,Geylang,Macpherson,"MacPherson (0.4 km), Mattar (0.5 km)",80 Circuit Road Market and Food Centre; Circuit Road Blk 79/79A; Circuit Road Blk 89,-2.054,-6.822,2.694,0.581,6.812,-1.058,-1.364,-0.717,-15.524,False,37019
+211,Woodlands,Woodlands West,"Marsiling (0.6 km), Woodlands (0.9 km)",Marsiling Mall; The Woodgrove; Marsiling Mall Hawker Centre,-1.981,-8.530,4.706,0.663,5.023,-0.669,-1.001,-0.329,-13.311,False,25031
+212,Tampines,Tampines West,"Tampines West (0.3 km), Tampines (1.1 km)",Pinery Mall; Tampines Round Market and Food Centre; Pathlight School (Tampines Campus),-1.896,-7.215,3.527,0.618,6.224,-0.931,-1.237,-0.618,-14.952,False,43021
+213,Hougang,Hougang East,"Hougang (0.4 km), Buangkok (1.3 km)",The Midtown; Kang Kar Mall; Hougang Mall,-1.866,-7.037,3.257,0.607,9.110,-1.284,-1.733,-0.817,-14.092,False,38024
+214,Tampines,Simei,"Upper Changi (0.4 km), Simei (0.6 km)",Simei Plaza /Blk 248; East Point; SUTD Parcel D,-1.848,-7.979,4.016,0.663,5.274,-0.787,-1.069,-0.503,-14.913,False,45021
+215,Bedok,Bedok Reservoir,"Bedok North (0.5 km), Bedok Reservoir (1.0 km)",Eastern General Hospital; Bedok North Street 3 Blk 538; Damai Primary School,-1.781,-7.632,4.496,0.663,4.632,-0.680,-0.935,-0.400,-14.685,False,41020
+216,Bukit Timah,Leedon Park,"Holland Village (0.5 km), Commonwealth (0.7 km)",Holland Road Shopping Centre; Holland Piazza; One Holland Village,-1.731,-6.101,2.901,0.607,6.235,-0.835,-1.103,-0.531,-13.393,False,27017
+217,Jurong West,Boon Lay Place,"Boon Lay (0.7 km), Pioneer (1.3 km)",Jurong Point; Boon Lay Shopping Centre; Jurong Medical Centre,-1.684,-5.880,2.405,0.581,7.743,-0.750,-1.071,-0.426,-9.689,False,17021
+218,Sungei Kadut,Turf Club,"Marsiling (0.9 km), Kranji (0.9 km)",Singapore American School,-1.584,-8.855,5.945,0.746,2.803,-0.335,-0.530,-0.126,-11.970,False,24030
+219,Serangoon,Serangoon Garden,"Lorong Chuan (1.3 km), Ang Mo Kio (1.4 km)",myVillage; Teck Ghee Square; Pathlight School Campus 2,-1.579,-6.167,3.301,0.660,6.483,-0.849,-1.160,-0.522,-13.096,False,34023
+220,Punggol,Northshore,"Punggol Point (0.2 km), Samudera (0.3 km)",Northshore Plaza I; Northshore Plaza II; Muji,-1.482,-13.317,12.328,0.891,1.005,-0.129,-0.234,0.003,-12.832,False,39029
+221,Bukit Timah,Ulu Pandan,"Dover (0.7 km), Clementi (1.6 km)",Henry Park Primary School,-1.223,-11.200,9.993,0.898,0.815,-0.092,-0.168,-0.008,-11.245,False,25018
+222,Pasir Ris,Flora Drive,"Tampines East (1.6 km), Pasir Ris (2.4 km)",Changi Museum Singapore; Liv@Changi; Loyang Point,-1.107,-8.216,6.820,0.841,2.555,-0.371,-0.526,-0.199,-14.531,False,46023
+223,Bukit Timah,Anak Bukit,"Beauty World (0.9 km), King Albert Park (1.6 km)",Ngee Ann Polytechnic; Bukit Timah Primary School; SIT@NP,-1.082,-12.016,9.825,0.897,0.768,-0.092,-0.166,-0.018,-12.010,False,24020
+224,Sengkang,Anchorvale,"Farmway (0.3 km), Kupang (0.6 km)",Sengkang Community Hospital; Anchorvale Village Hawker Centre; Muz Art,-0.912,-8.056,6.549,0.885,2.578,-0.361,-0.534,-0.173,-13.986,False,37027
+225,Bukit Panjang,Senja,"Senja (0.3 km), Bukit Panjang (0.3 km)",Junction 10; Bukit Panjang Plaza; Hillion Mall,-0.856,-5.792,4.302,0.811,8.736,-1.048,-1.454,-0.596,-11.999,False,23025
+226,Bishan,Bishan East,"Bishan (0.4 km), Lorong Chuan (1.4 km)",BHG; Junction 8; MOE Language Centre,-0.850,-6.663,4.793,0.833,3.915,-0.508,-0.729,-0.281,-12.968,False,33022
+227,Yishun,Lower Seletar,"Khatib (2.0 km), Yishun (2.3 km)",,-0.765,-12.400,10.809,0.923,1.706,-0.216,-0.388,-0.039,-12.680,False,33029
+228,Sembawang,Senoko South,"Admiralty (1.5 km), Sembawang (1.6 km)",,-0.746,-11.779,12.064,0.916,1.610,-0.179,-0.341,0.001,-11.126,False,28033
+229,Novena,Moulmein,"Novena (0.3 km), Newton (0.6 km)",United Square; Velocity @ Novena Square; Royal Square at Novena,-0.693,-8.091,5.890,0.904,4.749,-0.634,-0.965,-0.336,-13.358,False,32018
+230,Sembawang,Sembawang North,"Sembawang (0.7 km), Canberra (1.9 km)",Canberra Secondary School; Canberra Primary School; Endeavour Primary School,-0.669,-6.747,5.049,0.875,6.966,-0.770,-1.128,-0.424,-11.057,False,29033
+231,Bedok,Frankel,"Bedok (1.1 km), Siglap (1.1 km)",Opera Estate Primary School; Global Indian International School; Bethesda Kindergarten,-0.630,-10.105,10.387,0.916,1.462,-0.203,-0.337,-0.059,-13.875,False,41018
+232,Jurong West,Yunnan,"Pioneer (1.8 km), Boon Lay (1.9 km)",Gek Poh Shopping Centre; Westwood Secondary School,-0.522,-6.632,5.895,0.924,3.256,-0.281,-0.462,-0.097,-8.622,False,16022
+233,Ang Mo Kio,Tagore,"Lentor (0.7 km), Yio Chu Kang (1.6 km)",Lentor Modern,-0.514,-11.987,11.771,0.937,0.689,-0.076,-0.151,0.008,-10.987,False,31026
+234,Toa Payoh,Toa Payoh West,"Caldecott (0.3 km), Toa Payoh (0.7 km)",Toa Payoh West Market and Food Court; CHIJ (Toa Payoh) Primary School; Solomon Block,-0.474,-7.763,6.270,0.926,2.973,-0.380,-0.597,-0.179,-12.794,False,32020
+235,Jurong East,Yuhua East,"Bukit Batok (0.9 km), Chinese Garden (1.2 km)",St Luke’s Hospital; Yuhua Village Market and Food Centre; Crest Secondary School,-0.369,-4.580,3.950,0.904,7.195,-0.761,-1.072,-0.462,-10.582,False,21021
+236,Bedok,Siglap,"Siglap (0.8 km), Marine Terrace (0.9 km)",Victoria Junior College; Victoria School; V Block,-0.235,-9.250,9.265,1.000,2.355,-0.326,-0.516,-0.120,-13.862,False,41017
+237,Sengkang,Compassvale,"Ranggung (0.4 km), Buangkok (0.4 km)",Sengkang Grand Mall; Buangkok Hawker Centre; North Vista Primary School,-0.211,-5.471,5.012,0.964,6.658,-0.842,-1.174,-0.520,-12.644,False,38025
+238,Bedok,Bedok North,"Tanah Merah (0.6 km), Bedok (1.2 km)",New Upper Changi Road Blk 58; 85 Fengshan Centre; Bedok View Secondary School,-0.164,-5.514,4.946,0.926,9.351,-1.267,-1.767,-0.802,-13.547,False,43019
+239,Bedok,Bedok North,"Bedok Reservoir (0.1 km), Bedok (1.3 km)",Kaki Bukit 511 Market and Food Centre; Yu Neng Primary School; Red Swastika School,-0.117,-4.104,4.383,0.926,6.032,-0.816,-1.101,-0.524,-13.533,False,42020
+240,Tampines,Xilin,"Expo (0.4 km), Upper Changi (0.7 km)",Changi City Point; ITE College East; Cameron Hotel,-0.047,-12.239,12.360,0.936,2.924,-0.350,-0.671,-0.031,-11.958,False,45020
+241,Bedok,Bayshore,"Bayshore (1.0 km), Tanah Merah (1.2 km)",Temasek Secondary School; Temasek Primary School,0.010,-11.898,12.353,0.985,1.186,-0.142,-0.273,-0.015,-11.988,False,44018
+242,Sengkang,Fernvale,"Thanggam (0.8 km), Fernvale (1.1 km)",,0.018,-9.708,8.085,0.991,1.501,-0.206,-0.342,-0.098,-13.740,False,35027
+243,Kallang,Geylang Bahru,"Potong Pasir (0.5 km), Geylang Bahru (0.6 km)",The Poiz Centre; Blk 69 Geylang Bahru Market and Food Centre; Singapore Examinations and Assessment Board,0.113,-4.443,5.494,0.978,6.713,-0.912,-1.202,-0.587,-13.591,False,35019
+244,Hougang,Lorong Halus,"Hougang (1.1 km), Kovan (1.3 km)",Holy Innocents' Primary School,0.303,-5.176,6.027,0.923,5.419,-0.663,-0.934,-0.373,-12.245,False,38023
+245,Punggol,Waterway East,"Kadaloor (0.3 km), Oasis (0.4 km)",Punggol Plaza; Horizon Primary School; Greendale Secondary School,0.320,-5.471,6.561,0.941,6.843,-0.769,-1.162,-0.354,-11.238,False,40027
+246,Punggol,Punggol Town Centre,"Soo Teck (0.3 km), Sumang (0.3 km)",Waterway Point; Yusof Ishak Secondary School; Valour Primary School,0.469,-8.775,9.721,0.926,1.551,-0.172,-0.310,-0.046,-11.106,False,38028
+247,Bukit Batok,Hillview,"Hume (0.9 km), Hillview (1.2 km)",,0.583,-5.790,6.953,0.900,2.878,-0.306,-0.463,-0.130,-10.646,False,23022
+248,Bishan,Upper Thomson,"Bright Hill (0.1 km), Upper Thomson (0.9 km)",Buddhist College of Singapore; Ai Tong School; Peirce Secondary School,0.726,-7.236,8.307,0.923,2.158,-0.217,-0.389,-0.047,-10.037,False,31023
+249,Central Water Catchment,Central Water Catchment,"Marymount (0.8 km), Caldecott (1.1 km)",Mount Alvernia Hospital,0.827,-11.194,13.504,0.920,0.722,-0.073,-0.152,0.012,-10.127,False,31021
+250,Jurong West,Taman Jurong,"Chinese Garden (2.0 km), Jurong East (2.0 km)",West Point Hospital; Yuvabharathi International School; Jurong Secondary School,0.840,-7.251,9.109,0.926,2.870,-0.238,-0.459,-0.010,-8.299,False,19019
+251,Bukit Merah,Bukit Ho Swee,"Havelock (0.3 km), Great World (0.5 km)",SIT Flats Singapore; Concorde Shopping Centre; Great World City,0.933,-5.948,7.468,0.889,6.181,-0.719,-1.102,-0.350,-11.628,False,31015
+252,Sengkang,Fernvale,"Thanggam (0.3 km), Kupang (0.4 km)",Fern Green Primary School,0.936,-5.708,7.182,0.871,3.491,-0.452,-0.663,-0.239,-12.948,False,36027
+253,Kallang,Bendemeer,"Boon Keng (0.3 km), Bendemeer (0.5 km)",Kwong Wai Shiu Hospital; Gap Year Hostel; The Hive Singapore Hostel,1.280,-3.651,6.318,0.723,11.552,-1.407,-1.957,-0.751,-12.180,False,34018
+254,Tampines,Tampines West,"Tampines West (1.2 km), Tampines (1.5 km)",United World College of South East Asia (East); Junyuan Secondary School; Springfield Secondary School,1.303,-3.636,6.072,0.746,7.421,-0.904,-1.259,-0.555,-12.178,False,42022
+255,Queenstown,Pasir Panjang 1,"Kent Ridge (0.7 km), Haw Par Villa (0.9 km)",Haw Par Villa: Singapore Theme Park; NUHS Tower Block; Khoo Teck Puat National University Children's Medical Institute,1.451,-11.826,15.226,0.904,0.928,-0.088,-0.201,0.034,-9.435,False,25015
+256,Pasir Ris,Pasir Ris Central,"Pasir Ris (0.2 km), Tampines East (1.8 km)",White Sands; Pasir Ris Mall; Aranda Country Club,1.452,-4.256,7.153,0.692,6.342,-0.783,-1.128,-0.433,-12.342,False,44024
+257,Bukit Merah,Maritime Square,"Telok Blangah (0.6 km), HarbourFront (1.1 km)",Henderson Waves Bridge; Cable Car Singapore & Mount Faber; Fragrance Hotel - Viva,1.658,-5.110,8.491,0.759,3.887,-0.406,-0.666,-0.144,-10.448,False,29013
+258,Bukit Batok,Gombak,"Bukit Gombak (0.4 km), Bukit Batok (1.5 km)",Swiss Cottage Secondary School; Saint Anthony's Primary School; Dazhong Primary School,1.790,-4.314,8.052,0.666,4.636,-0.446,-0.728,-0.159,-9.611,False,22023
+259,Paya Lebar,Paya Lebar East,"Bedok North (1.2 km), Kaki Bukit  (1.2 km)",,1.811,-8.863,12.147,0.871,1.904,-0.208,-0.394,-0.026,-10.917,False,40021
+260,Jurong East,Jurong River,"Jurong East (1.2 km), Chinese Garden (1.8 km)",,1.829,-10.996,15.179,0.900,0.506,-0.043,-0.104,0.023,-8.546,False,20019
+261,Bukit Merah,Telok Blangah Drive,"Labrador Park (0.4 km), Telok Blangah (0.5 km)",Contemporary Arts Center; Gillman Barracks – YourSingapore; Alexandra Retail Centre,1.919,-3.599,8.156,0.663,4.320,-0.441,-0.698,-0.196,-10.205,False,28013
+262,Pioneer,Joo Koon,"Joo Koon (0.8 km), Gul Circle (1.4 km)",,1.924,-19.089,23.584,0.904,0.620,-0.030,-0.151,0.095,-4.779,False,13019
+263,Kallang,Kampong Java,"Farrer Park (0.6 km), Novena (0.9 km)",National Skin Centre; Department of Clinical Epidemiology; Communicable Disease Centre,1.948,-3.689,7.807,0.620,9.237,-1.050,-1.557,-0.540,-11.369,False,33018
+264,Sengkang,Fernvale,"Fernvale (0.3 km), Layar (0.4 km)",The Seletar Mall; Fernvale Hawker Centre & Market; Pei Hwa Secondary School,2.127,-4.145,9.088,0.657,4.650,-0.494,-0.763,-0.214,-10.621,False,36026
+265,Toa Payoh,Toa Payoh West,"Marymount (0.6 km), Braddell (0.7 km)",Mount Alvernia Hospital; Raffles Institution; Raffles Girls' School (Secondary),2.144,-4.776,9.190,0.648,3.502,-0.368,-0.588,-0.152,-10.500,False,32021
+266,Queenstown,Singapore Polytechnic,"Dover (0.4 km), Buona Vista (1.3 km)",University of Glasgow; Singapore Polytechnic; DigiPen Singapore,2.206,-6.225,11.861,0.723,1.612,-0.141,-0.262,0.002,-8.729,False,25017
+267,Queenstown,Tanglin Halt,"Commonwealth (0.4 km), one-north (1.1 km)",Singapore Advanced Medicine Proton Therapy; MDIS; Tanglin Halt Hawker Centre & Market,2.221,-6.558,12.602,0.773,3.082,-0.299,-0.567,0.011,-9.697,False,27016
+268,Bedok,Bedok North,"Bedok (0.3 km), Bedok Reservoir (1.1 km)",Djitsun Mall Bedok; Bedok Mall; Bedok North Street 1 Blk 216,2.242,-2.265,6.747,0.497,10.708,-1.241,-1.709,-0.774,-11.589,False,42019
+269,Ang Mo Kio,Townsville,"Ang Mo Kio (0.8 km), Bishan (1.3 km)",Teck Ghee Court; Teck Ghee Square; Teck Ghee Primary School,2.264,-2.458,6.851,0.505,7.549,-0.732,-1.113,-0.359,-9.703,False,33023
+270,Queenstown,Mei Chin,"Queenstown (0.5 km), Redhill (1.2 km)",Anchorpoint; Alexandra Central; Queensway Shopping Centre,2.399,-3.499,7.821,0.581,7.976,-0.738,-1.203,-0.301,-9.252,False,28015
+271,Clementi,Clementi West,"Clementi (0.9 km), Dover (2.0 km)",Clementi 321; Ayer Rajah Food Centre; Ayer Rajah Market,2.466,-1.938,7.719,0.473,6.091,-0.431,-0.731,-0.105,-7.076,False,23017
+272,Tampines,Tampines East,"Tampines (0.5 km), Tampines East (0.6 km)",Tampines 1; Muji; Isetan,2.522,-2.217,7.384,0.478,10.028,-1.115,-1.579,-0.655,-11.121,False,44022
+273,Pasir Ris,Pasir Ris West,"Pasir Ris (1.3 km), Tampines (3.0 km)",Elias Mall; Tampines Meridian Junior College; Overseas Family School,2.564,-4.301,9.555,0.649,4.095,-0.455,-0.713,-0.184,-11.102,False,43025
+274,Ang Mo Kio,Yio Chu Kang North,"Lentor (0.8 km), Yio Chu Kang (0.9 km)",Ang Mo Kio Community Hospital; Anderson Primary School,2.616,-6.314,11.141,0.663,1.574,-0.120,-0.247,0.013,-7.600,False,32026
+275,Changi,Changi Airport,"Changi Airport (1.5 km), Upper Changi (2.7 km)",,2.638,-7.525,12.268,0.695,16.993,-1.544,-3.098,0.108,-9.088,False,48021
+276,Ang Mo Kio,Kebun Bahru,"Mayflower (0.4 km), Bright Hill (0.9 km)",Jalan Leban Food Centre; CHIJ St Nicholas Girls' School; Mayflower Secondary School,2.660,-3.399,9.655,0.577,3.698,-0.303,-0.527,-0.065,-8.183,False,31024
+277,Yishun,Northland,"Yishun (1.0 km), Canberra (1.7 km)",Junction Nine; Northland Secondary School; iMatter Learning Centre,2.700,-2.133,7.538,0.408,5.709,-0.550,-0.808,-0.283,-9.631,False,32031
+278,Ang Mo Kio,Cheng San,"Ang Mo Kio (0.2 km), Yio Chu Kang (1.3 km)",Jubilee Square; Ang Mo Kio Hub; myCK,2.854,-1.043,6.592,0.260,13.477,-1.012,-1.564,-0.407,-7.508,False,33024
+279,Bedok,Kembangan,"Bedok (0.8 km), Bedok North (1.1 km)",Bedok North Street 3 Blk 538; LTA Rail Academy,2.856,-2.141,7.732,0.403,9.365,-1.029,-1.441,-0.638,-10.987,False,41019
+280,Bukit Merah,Telok Blangah Drive,"Labrador Park (1.0 km), Telok Blangah (1.2 km)",The Interlace; Gillman Barracks – YourSingapore; Depot Heights Shopping Centre,2.912,-5.528,11.841,0.622,2.355,-0.220,-0.407,-0.030,-9.331,False,28014
+281,Sengkang,Sengkang West,"Thanggam (1.7 km), Fernvale (2.0 km)",,2.980,-7.430,14.024,0.666,1.142,-0.117,-0.214,-0.007,-10.240,False,34027
+282,Bukit Timah,Hillcrest,"Tan Kah Kee (1.3 km), Botanic Gardens (1.4 km)",Hollandse Club,2.994,-6.742,14.196,0.660,1.110,-0.092,-0.190,0.022,-8.246,False,29020
+283,Bukit Merah,Singapore General Hospital,"Havelock (0.7 km), Outram Park (0.8 km)",SIT Flats Singapore; NUS Baba House - Singapore Peranakan Architecture; Shophouses,3.033,-7.517,13.652,0.690,11.435,-1.119,-2.197,-0.082,-9.789,False,31014
+284,Changi,Changi Airport,"Changi Airport (0.5 km), Upper Changi (3.0 km)",Changi Airport Terminal 3; Changi Airport Terminal 2; Crowne Plaza Changi Airport,3.147,-4.231,11.160,0.573,83.371,-7.084,-13.010,-0.470,-8.497,False,48022
+285,Pioneer,Gul Circle,"Gul Circle (0.3 km), Tuas Crescent (1.5 km)",,3.232,-11.034,19.725,0.861,0.771,-0.027,-0.129,0.096,-3.557,False,12018
+286,Serangoon,Seletar Hills,"Fernvale (1.5 km), Layar (1.8 km)",,3.280,-7.367,14.048,0.663,1.043,-0.100,-0.198,-0.000,-9.605,False,35025
+287,Queenstown,National University Of S'Pore,"Dover (1.6 km), Kent Ridge (1.7 km)","NUS University Museum, Singapore; West Coast Plaza; E1A",3.394,-6.950,13.801,0.627,1.470,-0.089,-0.227,0.059,-6.080,False,24016
+288,Tampines,Tampines North,"Tampines East (0.9 km), Tampines (1.1 km)",Tampines North Primary School; Meridian Secondary School; Gongshang Primary School,3.473,-2.040,8.491,0.334,7.115,-0.747,-1.098,-0.402,-10.501,False,44023
+289,Novena,Balestier,"Boon Keng (0.7 km), Potong Pasir (1.1 km)",National Kidney Foundation Dialysis Centre; Whampoa Drive Makan Place/Whampoa Food Centre; Bendemeer Secondary School,3.485,-1.670,8.421,0.323,8.251,-0.851,-1.278,-0.424,-10.318,False,34019
+290,Hougang,Tai Seng,"Bartley (0.8 km), Tai Seng (1.1 km)",Paya Lebar Methodist Girls' Secondary School; Paya Lebar Methodist Girls' Primary School; Bartley Secondary School,3.513,-6.751,13.460,0.663,1.502,-0.153,-0.290,-0.020,-10.167,False,37021
+291,Bishan,Upper Thomson,"Bright Hill (1.0 km), Ang Mo Kio (1.2 km)",Eunoia Junior College; Buddhist College of Singapore; Kebun Baru Food Centre,3.573,-2.167,9.574,0.403,7.702,-0.658,-1.116,-0.208,-8.547,False,32023
+292,Bukit Batok,Brickworks,"Bukit Batok (0.9 km), Bukit Gombak (1.1 km)",Le Quest Mall; St Luke’s Hospital; Millennia Institute,3.691,-1.086,8.558,0.226,6.540,-0.519,-0.832,-0.199,-7.944,False,21022
+293,Jurong East,Jurong River,"Jurong East (2.0 km), Chinese Garden (2.8 km)",,3.740,-8.333,16.239,0.621,0.987,-0.057,-0.162,0.054,-5.725,False,20018
+294,Queenstown,Port,"Clementi (1.8 km), Dover (2.4 km)",Singapore Polytechnic (Poly Marina); Clementi West Street 2 Blk 726; Kent Ridge Secondary School,3.845,-8.224,16.342,0.663,1.354,-0.077,-0.224,0.073,-5.670,False,23016
+295,Geylang,Geylang East,"Eunos (0.3 km), Kembangan (1.0 km)",Parkway East Hospital; Eunos Crescent Blk 4A; Al-Khairiah Islamic School,3.987,-2.248,10.376,0.386,5.285,-0.536,-0.834,-0.219,-10.144,False,39018
+296,Pioneer,Pioneer Sector,"Gul Circle (1.3 km), Tuas Crescent (2.0 km)",,4.274,-11.387,20.500,0.737,0.844,-0.022,-0.150,0.105,-2.564,False,12017
+297,Sengkang,Sengkang West,"Fernvale (0.9 km), Thanggam (1.1 km)",Greenwich V; Jan & Elly English Language School; Hua Language Centre,4.308,-1.201,9.660,0.218,4.458,-0.388,-0.619,-0.165,-8.712,False,35026
+298,Bedok,Frankel,"Bedok (0.8 km), Siglap (0.8 km)",St. Andrew's Community Hospital (Bedok); Bedok South Road Blk 16,4.323,-3.490,11.889,0.448,3.947,-0.402,-0.677,-0.140,-10.177,False,42018
+299,Tampines,Tampines West,"Tampines West (0.8 km), Bedok Reservoir (0.9 km)",Temasek Polytechnic; Springfield Secondary School,4.378,-6.805,16.049,0.619,1.444,-0.138,-0.276,0.008,-9.523,False,42021
+300,Hougang,Lorong Ah Soo,"Kovan (0.8 km), Bartley (1.4 km)",myCK; Heartland Mall; Hougang 105 Hainanese Village Centre,4.488,-0.785,10.418,0.226,6.806,-0.584,-0.951,-0.185,-8.584,False,37022
+301,Tampines,Tampines North,"Tampines (1.1 km), Pasir Ris (1.5 km)",PARKTOWN; Tampines North Hawker Centre; Angsana Primary School,4.676,-4.008,13.758,0.478,2.899,-0.274,-0.495,-0.044,-9.460,False,43023
+302,Hougang,Hougang West,"Kovan (1.5 km), Hougang (1.6 km)",Hougang 1; Bright Vision Hospital; Ci Yuan Hawker Centre,4.724,-1.059,10.713,0.240,10.372,-0.866,-1.431,-0.250,-8.347,False,36024
+303,Boon Lay,Liu Fang,"Boon Lay (2.3 km), Pioneer (2.5 km)","Jurong Bird Park, Singapore: Attractions & Things to Do",4.776,-16.183,26.971,0.775,0.578,-0.026,-0.134,0.087,-4.548,False,17018
+304,Changi,Changi Airport,"Upper Changi (1.8 km), Expo (1.9 km)",,4.856,-8.025,17.410,0.601,0.747,-0.053,-0.137,0.030,-7.124,False,47021
+305,Tuas,Tuas North,"Tuas West Road (0.6 km), Tuas Crescent (0.8 km)",,4.906,-12.828,22.661,0.699,0.534,-0.010,-0.097,0.080,-1.912,False,10019
+306,Bedok,Kaki Bukit,"Bedok North (0.5 km), Kaki Bukit  (0.6 km)",Bee Huat Department Store; Lim Aik Seng Departmental Store; Eastern General Hospital,4.942,-1.496,11.115,0.246,5.046,-0.492,-0.798,-0.189,-9.745,False,40020
+307,Tuas,Tuas North,"Tuas Crescent (0.6 km), Gul Circle (0.8 km)",,4.954,-14.119,25.506,0.723,0.885,-0.017,-0.171,0.152,-1.929,False,11018
+308,Bukit Batok,Guilin,"Bukit Batok (0.6 km), Bukit Gombak (0.6 km)",West Mall; Harvey Norman; Hillgrove Secondary School,4.988,0.498,9.601,0.078,5.933,-0.402,-0.673,-0.129,-6.771,True,22022
+309,Tampines,Xilin,"Expo (2.1 km), Tanah Merah (2.6 km)",,5.096,-7.185,18.008,0.578,0.846,-0.069,-0.156,0.027,-8.138,False,46018
+310,Geylang,Aljunied,"Dakota (0.2 km), Mountbatten (0.5 km)",Old Airport Road Food Centre & Shopping Mall; Jade Hotel; AL Asia Hotel,5.188,-0.703,11.050,0.169,5.190,-0.463,-0.752,-0.165,-8.927,False,37017
+311,Hougang,Lorong Ah Soo,"Serangoon (0.6 km), Kovan (1.1 km)",Upper Serangoon Shopping Centre; Isetan; Fragrance Hotel - Kovan,5.249,-0.767,11.463,0.195,4.829,-0.382,-0.700,-0.067,-7.918,False,36022
+312,Bukit Merah,Alexandra Hill,"Redhill (0.2 km), Queenstown (1.1 km)",Dawson Place; Redhill Market; Redhill Food Centre,5.275,-1.634,11.861,0.258,5.788,-0.381,-0.746,-0.011,-6.587,False,29015
+313,Tuas,Tuas View,"Tuas Crescent (3.5 km), Tuas West Road (3.7 km)",,5.292,-11.466,22.545,0.665,0.494,-0.008,-0.087,0.072,-1.614,False,8016
+314,Bukit Batok,Gombak,"Hillview (0.7 km), Cashew (0.9 km)",HillV2 Mall,5.433,-7.950,19.251,0.581,0.601,-0.038,-0.107,0.038,-6.376,False,23023
+315,Tanglin,Chatsworth,"Orchard Boulevard (0.4 km), Orchard (1.0 km)",Tanglin Mall; JEN Singapore Tanglin by Shangri-La; Conrad Singapore Orchard,5.769,-2.392,14.621,0.338,1.246,-0.091,-0.191,0.014,-7.289,False,30016
+316,Bedok,Frankel,"Marine Terrace (0.2 km), Marine Parade (1.2 km)",The Snooze Hotel @ Marine Parade; 50A Marine Terrace; Saint Patrick's School,5.819,-1.966,14.471,0.240,3.672,-0.314,-0.560,-0.021,-8.562,False,40017
+317,Novena,Mount Pleasant,"Stevens (1.1 km), Novena (1.4 km)",Catholic Junior College; Catholic Junior College Hostel; Chapel,5.908,-8.532,20.403,0.581,0.552,-0.035,-0.107,0.043,-6.409,False,31019
+318,Bukit Merah,Telok Blangah Rise,"Keppel (0.8 km), HarbourFront (0.8 km)",Cable Car Singapore & Mount Faber; Harbour Ville Hotel; Travelodge Harbourfront Singapore,6.298,-1.129,13.410,0.224,5.777,-0.392,-0.797,-0.007,-6.779,False,30013
+319,Tampines,Tampines West,"Tampines (0.5 km), Tampines West (0.9 km)",Century Square; Eastlink Mall; Tampines Mall,6.379,0.296,12.587,0.102,7.933,-0.617,-1.094,-0.156,-7.778,False,43022
+320,Bukit Timah,Swiss Club,"King Albert Park (1.1 km), Beauty World (1.4 km)",Hollandse School Singapore; Institition of Engineers; Singapore Korean International School,6.451,-7.970,19.375,0.573,0.586,-0.031,-0.106,0.041,-5.344,False,26021
+321,Ang Mo Kio,Yio Chu Kang West,"Yio Chu Kang (0.4 km), Lentor (0.8 km)",Ang Mo Kio Community Hospital; Ang Mo Kio 628 Market; Yio Chu Kang Secondary School,6.473,1.899,11.233,0.005,8.137,-0.339,-0.730,0.082,-4.166,True,32025
+322,Serangoon,Lorong Chuan,"Woodleigh (0.6 km), Serangoon (0.8 km)",Woodleigh Village Hawker Centre; Bethel Preschool; Singapore Power Training Institute,6.544,-0.758,13.646,0.170,2.705,-0.176,-0.363,0.013,-6.506,False,35021
+323,Geylang,Kampong Ubi,"Ubi (0.5 km), MacPherson (0.7 km)",Dcpro Bike; AQUEEN Hotel - Paya Lebar; Manjusri Secondary School,7.307,-0.223,14.409,0.135,3.462,-0.258,-0.501,-0.003,-7.450,False,38019
+324,Pioneer,Joo Koon,"Joo Koon (1.2 km), Pioneer (1.5 km)",,7.329,-7.951,21.383,0.540,0.495,-0.001,-0.071,0.065,-0.171,False,15019
+325,Bedok,Bayshore,"Bayshore (0.6 km), Siglap (1.2 km)",East Coast Lagoon Food Village,7.417,-5.880,21.901,0.469,1.355,-0.098,-0.250,0.063,-7.254,False,43017
+326,Hougang,Trafalgar,"Fernvale (1.3 km), Layar (1.3 km)",Hougang 1; Buangkok Square Mall; Hougang Primary School,7.429,1.698,13.298,0.037,6.695,-0.400,-0.781,-0.010,-5.980,True,36025
+327,Queenstown,Ghim Moh,"Buona Vista (0.3 km), Holland Village (0.9 km)",The Star Vista; Rochester Mall; NTU@one-north,7.432,1.285,13.476,0.065,6.612,-0.337,-0.734,0.055,-5.094,True,26017
+328,Bukit Merah,Henderson Hill,"Tiong Bahru (0.6 km), Redhill (0.8 km)",Valley Point Shopping Centre; Tiong Bahru Plaza; ValueHub,7.593,1.746,13.380,0.033,7.549,-0.430,-0.862,-0.031,-5.690,True,30015
+329,Marine Parade,Mountbatten,"Katong Park (0.2 km), Mountbatten (0.9 km)",AQ @ Mountbatten; Blk 4A Jalan Batu Hawker Centre/Market; Montessori for Children,7.776,0.688,15.441,0.094,2.992,-0.205,-0.419,0.031,-6.859,False,37016
+330,Tampines,Tampines North,"Tampines (1.8 km), Tampines West (2.0 km)",United World College of South East Asia (East); Poi Ching School,7.784,-1.890,17.274,0.224,2.099,-0.143,-0.311,0.030,-6.803,False,42023
+331,Hougang,Defu Industrial Park,"Tai Seng (1.4 km), Ubi (1.7 km)",,8.393,-2.859,18.940,0.266,1.031,-0.065,-0.165,0.032,-6.331,False,38021
+332,Bukit Timah,Coronation Road,"Sixth Avenue (0.5 km), Tan Kah Kee (1.2 km)",SIM University; Hwa Chong International School; High School Section,8.413,-3.449,21.003,0.266,0.769,-0.028,-0.107,0.061,-3.640,False,27019
+333,Bishan,Bishan East,"Braddell (0.6 km), Bishan (0.8 km)",Toa Payoh Lorong 8 Blk 210; Toa Payoh Lorong 4 Blk 93; Guangyang Secondary School,8.425,3.865,12.757,0.005,9.360,-0.474,-0.914,-0.022,-5.064,True,33021
+334,Paya Lebar,Airport Road,"Kovan (1.4 km), Hougang (2.1 km)",Hougang 105 Hainanese Village Centre,8.548,-8.767,26.589,0.501,0.555,-0.031,-0.114,0.056,-5.519,False,38022
+335,Queenstown,National University Of S'Pore,"Kent Ridge (0.9 km), one-north (0.9 km)","Service Block; National University Centre for Oral Health, Singapore; Main Building",8.554,-0.522,18.230,0.152,1.919,-0.059,-0.216,0.103,-3.095,False,25016
+336,Bedok,Bedok South,"Bayshore (0.5 km), Tanah Merah (1.3 km)",Bedok South Road Blk 16; Singapore Hokkien Huay Kuan; Temasek Primary School,8.731,1.213,16.540,0.065,3.683,-0.218,-0.467,0.058,-5.923,False,43018
+337,Tampines,Xilin,"Upper Changi (0.8 km), Expo (1.2 km)",Singapore University of Technology and Design Campus; SUTD Parcel D; SUTD Parcel D Building,8.765,-0.729,18.914,0.162,4.349,-0.182,-0.550,0.213,-4.175,False,46021
+338,Marine Parade,Mountbatten,"Tanjong Katong (0.2 km), Marine Parade (1.1 km)",AQ @ Mountbatten; ISA HOTEL; International Service Apartments Hotel,8.777,-0.869,18.078,0.176,2.179,-0.127,-0.313,0.065,-5.819,False,38016
+339,Bukit Merah,Kampong Tiong Bahru,"Tiong Bahru (0.7 km), Redhill (1.2 km)",Tiong Bahru Plaza; SMF Institute of Higher Learning; East Asia Institute of Management,8.878,4.043,13.330,0.005,13.321,-0.608,-1.264,-0.029,-4.564,True,30014
+340,Changi,Changi Point,"Changi Airport (3.6 km), Pasir Ris (4.5 km)",Village Hotel Changi; The Bus Collective; Changi Village Blk 2 and 3,9.138,-7.422,26.529,0.478,1.469,-0.065,-0.281,0.149,-4.423,False,48026
+341,Bishan,Marymount,"Marymount (0.6 km), Bishan (0.7 km)",Shunfu Mart; Whitley Secondary School; Catholic High School,9.371,0.162,18.359,0.106,2.550,-0.110,-0.333,0.125,-4.308,False,32022
+342,Changi,Changi Airport,"Changi Airport (2.4 km), Expo (2.6 km)",,9.405,-1.585,20.183,0.180,7.205,-0.238,-0.971,0.475,-3.308,False,48020
+343,Punggol,Punggol Town Centre,"Sam Kee (0.2 km), Punggol (0.4 km)",Waterway Point; One Punggol Hawker Centre; my first skool EYC,9.581,2.446,16.967,0.037,3.416,-0.104,-0.334,0.144,-3.044,False,39028
+344,Tampines,Xilin,"Expo (0.6 km), Upper Changi (1.0 km)",Plaza 8; Changi City Point; Dorsett Changi City Singapore,10.085,1.431,19.071,0.065,5.028,-0.157,-0.548,0.260,-3.120,True,46020
+345,Punggol,Punggol Canal,"Oasis (0.6 km), Damai (0.7 km)",Kwek Leng Beng University Tower; Oasis Primary School,11.171,-2.831,25.325,0.240,0.813,-0.013,-0.116,0.097,-1.637,False,40028
+346,Bukit Panjang,Dairy Farm,"Pending (0.5 km), Cashew (0.7 km)",Bukit Panjang Primary School; The Perse School; The ART (Assumption Restaurant for Training),11.315,2.528,19.888,0.037,2.230,-0.027,-0.203,0.154,-1.197,False,24024
+347,Bedok,Kaki Bukit,"Kaki Bukit  (0.4 km), Ubi (0.9 km)",,11.465,4.064,19.839,0.008,2.675,-0.121,-0.313,0.100,-4.536,False,39020
+348,Tampines,Xilin,"Expo (1.6 km), Upper Changi (1.9 km)",,11.597,3.608,19.889,0.005,4.258,-0.072,-0.378,0.264,-1.680,True,47020
+349,Queenstown,Margaret Drive,"Queenstown (0.5 km), Commonwealth (0.9 km)",MDIS; Margaret Drive Hawker Centre; aquaDucks (Queenstown),11.613,1.256,22.554,0.090,2.256,-0.032,-0.232,0.172,-1.400,False,28016
+350,Tampines,Tampines North,"Pasir Ris (1.9 km), Tampines (2.5 km)",Meridian Primary School,11.617,1.944,20.972,0.037,2.798,-0.091,-0.332,0.155,-3.255,False,42024
+351,Ang Mo Kio,Kebun Bahru,"Mayflower (0.6 km), Ang Mo Kio (0.9 km)",Broadway Plaza; Sprout @ AMK; myCK,11.839,6.853,16.723,0.005,8.900,0.059,-0.458,0.577,0.664,True,32024
+352,Pasir Ris,Loyang West,"Pasir Ris (2.1 km), Tampines East (2.2 km)",Loyang Point; Pasir Ris Primary School; Greenview Secondary School,12.312,2.795,22.092,0.054,2.857,-0.056,-0.307,0.191,-1.964,False,46024
+353,Marine Parade,Katong,"Dakota (0.8 km), Tanjong Katong (1.0 km)",Eurasian Heritage Centre: Singapore Attraction; Venue Hotel The Lily; Betel Box Backpackers Hostel,12.750,1.421,23.533,0.065,2.275,-0.054,-0.266,0.162,-2.393,False,38017
+354,Kallang,Geylang Bahru,"Geylang Bahru (0.6 km), Kallang (0.7 km)",Blk 17 Upper Boon Keng Market and Food Centre; Blk 69 Geylang Bahru Market and Food Centre; Bendemeer Market and Food Centre,12.915,6.943,19.215,0.005,6.234,-0.130,-0.502,0.244,-2.091,True,35018
+355,Bukit Merah,Depot Road,"Redhill (1.0 km), Telok Blangah (1.3 km)",Singapore Garden & Singapore Park; Henderson Waves Bridge; Depot Heights Shopping Centre,12.951,5.732,20.136,0.005,6.018,-0.060,-0.469,0.298,-0.994,True,29014
+356,Bishan,Upper Thomson,"Upper Thomson (0.1 km), Marymount (0.9 km)",Thomson Plaza; Shunfu Mart; MMI Preschool,13.178,1.912,24.369,0.069,1.826,0.021,-0.178,0.223,1.176,False,31022
+357,Clementi,Sunset Way,"Clementi (1.4 km), Beauty World (1.8 km)",,14.343,0.678,29.138,0.083,0.719,0.020,-0.072,0.117,2.742,False,24019
+358,Pioneer,Benoi Sector,"Joo Koon (1.2 km), Gul Circle (2.2 km)",,15.020,-0.350,31.740,0.132,0.966,0.074,-0.066,0.226,7.701,False,14018
+359,Mandai,Mandai West,"Woodlands South (0.7 km), Woodlands (1.3 km)",Ren Ci @ Woodlands; Woodlands Health Medical Centre; Innova Junior College,15.303,7.210,22.980,0.005,3.639,0.055,-0.179,0.280,1.522,False,26030
+360,Ang Mo Kio,Sembawang Hills,"Lentor (0.6 km), Mayflower (1.0 km)",Lentor Modern,16.859,7.594,26.616,0.005,1.615,0.073,-0.064,0.226,4.516,False,31025
+361,Serangoon,Upper Paya Lebar,"Bartley (0.4 km), Serangoon (0.8 km)",Maris Stella High School; St. Gabriel's Secondary School; Bartley Secondary School,16.914,5.879,27.760,0.015,1.868,0.027,-0.153,0.209,1.463,False,36021
+362,Marine Parade,East Coast,"Marine Parade (0.4 km), Tanjong Katong (0.8 km)",Parkway Parade; M&S Outlet; Muji,17.011,8.052,26.663,0.005,3.138,0.035,-0.230,0.333,1.110,False,39016
+363,Tampines,Xilin,"Expo (1.9 km), Upper Changi (2.4 km)",,17.313,4.123,31.897,0.043,0.909,0.029,-0.073,0.144,3.241,False,47019
+364,Bukit Timah,Farrer Court,"Farrer Road (0.2 km), Tan Kah Kee (0.9 km)",Empress Road Market and Food Centre; Nanyang Primary School; St. Margaret's School (Secondary),17.478,5.866,28.169,0.008,1.247,0.058,-0.080,0.189,4.658,False,28018
+365,Kallang,Tanjong Rhu,"Stadium (0.5 km), Tanjong Rhu (0.5 km)",Leisure Park Kallang; Dunman High School,19.414,1.301,41.390,0.087,1.794,0.057,-0.224,0.423,3.197,False,36016
+366,Marine Parade,East Coast,"Marine Terrace (0.8 km), Marine Parade (1.1 km)",East Coast Park Singapore,19.841,6.949,34.209,0.015,1.158,0.041,-0.090,0.190,3.555,False,40016
+367,Ang Mo Kio,Yio Chu Kang East,"Yio Chu Kang (0.7 km), Ang Mo Kio (1.2 km)",Nanyang Polytechnic; Block K - School of Health Sciences; Block J - School of Health Sciences,19.935,12.944,26.569,0.005,17.821,1.399,0.216,2.568,7.852,True,33025
+368,Ang Mo Kio,Yio Chu Kang East,"Yio Chu Kang (1.1 km), Lentor (1.7 km)",KLC International Institute,23.891,16.334,32.301,0.005,3.782,0.418,0.152,0.695,11.039,False,33026
+369,Changi,Changi Airport,"Expo (3.3 km), Upper Changi (3.8 km)",,27.413,-3.543,64.548,0.178,0.714,0.077,-0.116,0.302,10.820,False,48018
+370,Changi,Changi Airport,"Changi Airport (0.9 km), Upper Changi (4.4 km)",Changi Airport Terminal 1; Jewel Changi Basement; Jewel Changi Airport,28.336,15.221,43.117,0.005,1.281,0.167,0.014,0.332,13.062,False,49023
+371,Changi,Changi Airport,"Changi Airport (0.8 km), Upper Changi (4.0 km)",Changi Airport Terminal 2,31.283,10.042,53.446,0.021,1.056,0.174,-0.032,0.380,16.437,False,49022
+372,Tuas,Tuas View,"Tuas Crescent (2.1 km), Tuas West Road (2.4 km)",,33.828,12.720,56.506,0.008,0.562,0.140,0.026,0.261,24.848,False,9017
+373,Woodlands,Senoko West,"Woodlands North (1.4 km), Admiralty (1.4 km)",Singapore Safety Driving Centre,37.453,28.411,46.136,0.005,7.951,1.672,1.061,2.285,21.025,True,27033
+374,Tampines,Xilin,"Expo (1.2 km), Upper Changi (1.8 km)",Dusit Thani Laguna Singapore,50.135,17.481,87.884,0.005,2.954,0.949,0.108,1.921,32.123,False,46019
