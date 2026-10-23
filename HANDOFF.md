@@ -10,6 +10,11 @@ Full plan document (for humans, version 3): https://claude.ai/artifact/FDvZw8SNQ
 
 ---
 
+**Status 23 Oct 2026:** steps 0-8 done and the section 7 deliverables are written: `outputs/summary.md`,
+`outputs/recommendation_inputs.md`, `outputs/figures/report/`, `sim/index.html`, `outputs/requirements-lock.txt`,
+`outputs/rerun_check.csv`, `outputs/wording_check.txt`, `outputs/test_scoring_log.csv`. Every choice is in
+`outputs/decisions.md`. Step 9 (LTA trip data) waits for the data.
+
 ## 1. The project in one paragraph
 
 Client: ComfortDelGro (CDG). Research question: **How does rainfall affect the spatial and temporal

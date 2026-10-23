@@ -17,3 +17,4 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T16:23:03,06_forecast.py --part evaluate,primary,primary test-year metrics (corrected top-K workload and lead time; retrospective labels),,
 2026-10-23T16:24:59,06d_label_versions.py,disclosed additional scoring,"primary and S1 test-year predictions scored against retrospective and issue-time labels (top-K workload, corrected lead time)",,
 2026-10-23T16:30:18,07_policy.py --part labels,step 7,policy targeting re-scored with issue-time labels,,
+2026-10-23T16:42:44,07_policy.py --part diagnose,step 7 follow-up,policy variants (a)/(b)/(c) targeting on test-year decisions,,

@@ -1,0 +1,52 @@
+# Manual review (23 Oct 2026): every hit below is a disclaimer ('not demand', 'association, not cause'),
+# the labelled demand-surge SCENARIO of the simulation, or software validation of the estimator against pyfixest.
+# No result is described as demand, waiting time, revenue or cause.
+outputs/summary.md:8 [demand] gauges and 2-hour forecasts. Vacant taxis are supply, not demand: the results say nothing directly about unmet
+outputs/summary.md:8 [unmet] gauges and 2-hour forecasts. Vacant taxis are supply, not demand: the results say nothing directly about unmet
+outputs/summary.md:9 [demand] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
+outputs/summary.md:9 [waiting time] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
+outputs/summary.md:9 [revenue] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
+outputs/summary.md:9 [cause] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
+outputs/summary.md:48 [demand] 8. **Simulation.** A storm simulator (`sim/index.html`) shows how demand surges, drivers going offline, or both,
+outputs/recommendation_inputs.md:4 [cause] operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
+outputs/recommendation_inputs.md:44 [demand] - Modelled expected shortfall reductions are model quantities, not observed demand or service.
+outputs/recommendation_inputs.md:67 [demand] - Vacant taxis at the rain peak relative to the start: about 0.6-0.9 of the start level in demand-surge or
+outputs/recommendation_inputs.md:72 [demand] These are simulation quantities; they are not observed demand, waiting times or revenue.
+outputs/recommendation_inputs.md:72 [waiting time] These are simulation quantities; they are not observed demand, waiting times or revenue.
+outputs/recommendation_inputs.md:72 [revenue] These are simulation quantities; they are not observed demand, waiting times or revenue.
+sim/page_template.html:64 [validation] <p class="sub">How vacant taxis might move through a Singapore storm under different assumptions. Every number on this page is <b>simulated, conditional on the 
+sim/page_template.html:71 [demand] <select id="mech"><option value="demand">More requests (demand surge)</option><option value="supply">Fewer taxis on the road (supply drop)</option><option value
+sim/page_template.html:72 [demand] <div><label for="dl">Demand level</label><select id="dl"><option value="0.8">0.8x</option><option value="1" selected>1.0x</option><option value="1.2">1.2x</opti
+sim/page_template.html:102 [demand] <p class="note">Sources: data.gov.sg taxi availability (LTA), NEA rainfall, LTA fleet statistics. Cell model on 374 analysed 1 km cells; requests, waits and aba
+analysis/02_describe.py:192 [cause] fig.text(0.01, 0.005, "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Association, not cause.",
+analysis/03_effects.py:4 [validation] Estimator: Poisson PML with fixed effects and day-clustered errors (analysis/fepois_hd.py, validated against
+analysis/03_effects.py:5 [validation] pyfixest on 2023 with --validate). Effects are 100 * (exp(b) - 1) % with 95% CI.
+analysis/03_effects.py:21 [validation] Usage: .venv/bin/python -m analysis.03_effects [--validate]
+analysis/03_effects.py:151 [cause] "Poisson with fixed effects, 95% CI clustered by day. Association, not cause.")
+analysis/03_effects.py:220 [validation] # ----------------------------------------------------------------------------- validation
+analysis/03_effects.py:221 [validation] def validate():
+analysis/03_effects.py:243 [validation] ap.add_argument("--validate", action="store_true")
+analysis/03_effects.py:246 [validation] if a.validate:
+analysis/03_effects.py:247 [validation] validate()
+analysis/07_policy.py:9 [demand] "expected shortfall reduction" is a model quantity, not served demand.
+analysis/07_policy.py:495 [cause] "Association, not cause; numbers in brackets: % vs no-rain model.")
+analysis/08_simulation.py:3 [validation] A scenario-based operational model, never "validation". Engine: analysis/sim_engine.py (Python) and
+analysis/08_simulation.py:35 [demand] COMBOS = list(itertools.product(["demand", "supply", "mix"], ["mrt", "landuse"], ["dry", "rain"], ["nearest", "widening"]))
+analysis/08_simulation.py:133 [demand] "beta_dem": trial.suggest_float("beta_dem", 0.0, 2.0) if mech in ("demand", "mix") else 0.0,
+analysis/08_simulation.py:253 [demand] levels = {"mechanism": ["demand", "supply", "mix"], "dest": ["mrt", "landuse"], "travel": ["dry", "rain"],
+analysis/08_simulation.py:266 [demand] t.insert(0, "label", LABEL + " (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)")
+analysis/08_simulation.py:391 [validation] "Scenario-based operational model, not validation.")
+analysis/08_simulation.py:399 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).
+analysis/99_wording_check.py:1 [cause] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).
+analysis/99_wording_check.py:15 [demand] "demand": r"\bdemand\b", "unmet": r"\bunmet\b", "lost riders": r"lost (riders|trips|passengers)",
+analysis/99_wording_check.py:15 [unmet] "demand": r"\bdemand\b", "unmet": r"\bunmet\b", "lost riders": r"lost (riders|trips|passengers)",
+analysis/99_wording_check.py:15 [lost riders] "demand": r"\bdemand\b", "unmet": r"\bunmet\b", "lost riders": r"lost (riders|trips|passengers)",
+analysis/99_wording_check.py:16 [waiting time] "waiting time": r"wait(ing)? time", "revenue": r"\brevenue\b|\bfares?\b", "cause": r"\bcaus(e|es|ed|al)\b",
+analysis/99_wording_check.py:16 [revenue] "waiting time": r"wait(ing)? time", "revenue": r"\brevenue\b|\bfares?\b", "cause": r"\bcaus(e|es|ed|al)\b",
+analysis/99_wording_check.py:16 [cause] "waiting time": r"wait(ing)? time", "revenue": r"\brevenue\b|\bfares?\b", "cause": r"\bcaus(e|es|ed|al)\b",
+analysis/99_wording_check.py:17 [rain reduces] "rain reduces": r"rain (reduces|cuts|drives|makes)", "leads to": r"\bleads? to\b", "validation": r"\bvalidat",
+analysis/99_wording_check.py:17 [leads to] "rain reduces": r"rain (reduces|cuts|drives|makes)", "leads to": r"\bleads? to\b", "validation": r"\bvalidat",
+analysis/99_wording_check.py:17 [validation] "rain reduces": r"rain (reduces|cuts|drives|makes)", "leads to": r"\bleads? to\b", "validation": r"\bvalidat",
+analysis/99_wording_check.py:18 [weather adds no value] "weather adds no value": r"no (early-warning )?value", "guarantee": r"\bguarantee",
+analysis/99_wording_check.py:18 [guarantee] "weather adds no value": r"no (early-warning )?value", "guarantee": r"\bguarantee",

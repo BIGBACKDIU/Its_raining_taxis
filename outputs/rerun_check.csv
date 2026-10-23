@@ -1,0 +1,22 @@
+quantity,committed,rerun,abs_diff,identical
+regimes (non-spell),18.0,18.0,0.0,True
+spell days,41.0,41.0,0.0,True
+audit: snapshots_usable,118136.0,118136.0,0.0,True
+audit: dropped_glitch_spike,462.0,462.0,0.0,True
+audit: dropped_glitch_dip,74.0,74.0,0.0,True
+audit: unusual_feed_outage,17.0,17.0,0.0,True
+audit: days_excluded_main,100.0,100.0,0.0,True
+panel rows (all years),31802342.0,31802342.0,0.0,True
+panel duplicate keys,0.0,0.0,0.0,True
+effect abs light (%),-7.6672,-7.6672,0.0,True
+effect abs moderate (%),-10.8244,-10.8244,0.0,True
+effect abs heavy (%),-12.904,-12.904,0.0,True
+effect share light (%),-1.9222,-1.9222,0.0,True
+effect share moderate (%),-4.4867,-4.4867,0.0,True
+effect share heavy (%),-5.73,-5.73,0.0,True
+effect offset light (%),-0.9066,-0.9066,0.0,True
+effect offset moderate (%),-2.6288,-2.6288,0.0,True
+effect offset heavy (%),-3.671,-3.671,0.0,True
+event study abs +30 min (%),-5.5969,-5.5969,0.0,True
+ratio statistic heavy (%),-14.2329,-14.2329,0.0,True
+hotspot cells significantly lower,299.0,299.0,0.0,True

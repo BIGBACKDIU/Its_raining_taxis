@@ -110,7 +110,7 @@ def solve(snap: pd.DataFrame, cells, share, N, lam, h, congestion, weights, rain
     dx, dy = cells.loc[dest, "x"].values, cells.loc[dest, "y"].values
     T = DETOUR * np.hypot(ox[:, None] - dx[None, :], oy[:, None] - dy[None, :]) / v
     pos = {c: k for k, c in enumerate(s.index)}
-    w = cells.loc[dest, f"w_{weights}"].values
+    w = (s.risk.loc[dest].values.astype(float) if weights == "risk" else cells.loc[dest, f"w_{weights}"].values)
     prob = pulp.LpProblem("reposition", pulp.LpMaximize)
     pairs = [(a, b) for a in range(len(orig)) for b in range(len(dest)) if T[a, b] <= h and orig.index[a] != dest[b]]
     if not pairs:
@@ -286,6 +286,107 @@ def part_labels():
              "targeted_low_rate_issue", "candidates_low_rate_issue"]].round(3).to_string())
 
 
+def part_diagnose():
+    """Why the policy dilutes the forecast (decision 93). Calibration first (choice), then the test year once."""
+    cells, shares = cells_info(), cdg_share()
+    out = []
+    for split, n in (("calib", 75), ("test", 150)):
+        if split == "test":
+            log_test_scoring("07_policy.py --part diagnose", "policy variants (a)/(b)/(c) targeting on test-year "
+                             "decisions", "step 7 follow-up")
+        d = decision_frame(60, split, False)
+        sc = pd.read_parquet(INTERIM / f"fc_pred_h60_{split}.parquet", columns=["ts", "cell", "score_lgb_no_weather"])
+        d = d.merge(sc, on=["ts", "cell"], how="left").rename(columns={"score_lgb_no_weather": "risk"})
+        d["low_issue"] = np.where(d.base_j >= 4, ((d.base_j - d.y_count) / np.maximum(1, d.base_j) >= 0.5).astype(float),
+                                  np.nan)
+        wet, dry = sample_times(d, n, n)
+        stage = cells.taxi_stands_300m.reindex(d.cell.unique()).fillna(0) > 0
+        for t in np.r_[wet, dry]:
+            snap = d[d.ts == t]
+            sh = float(shares.asof(pd.Timestamp(t)))
+            rain_now = bool(snap.mmh_island.fillna(0).iloc[0] > 0)
+            s = snap.set_index("cell")
+            y = s.y_low.astype(float)
+            yi = s.low_issue
+
+            def prec(cs):
+                cs = list(cs)
+                return (float(y.reindex(cs).fillna(0).mean()) if cs else np.nan,
+                        float(yi.reindex(cs).fillna(0).mean()) if cs else np.nan, len(cs))
+
+            rows = {}
+            for name, wts in (("(a) policy as designed", "equal"), ("(b) policy, weights = forecast risk", "risk")):
+                res = solve(snap, cells, sh, BASE["N"], BASE["lam"], 60, "observed", wts, rain_now)
+                got = pd.Series(res["dest"], dtype=float)
+                rows[name] = prec(got.index)
+                rows[name + ", 19 cells with most taxis"] = prec(got.sort_values(ascending=False).index[:19])
+            el = s[s.base_j >= 4]
+            rows["(c) top-19 forecast ranking, no constraints"] = prec(el.risk.nlargest(19).index)
+            st = el[stage.reindex(el.index).values]
+            rows["(c) restricted to cells with a staging point"] = prec(st.risk.nlargest(19).index)
+            S, _ = shortfall_values(st.base_j.values, st.mu.values)
+            st2 = st[S[:, 0] >= S0_MIN]
+            rows["(c) ... and modelled shortfall S(0) >= 0.05"] = prec(st2.risk.nlargest(19).index)
+            movable = np.floor(sh * np.maximum(0, s.vacant - s.base_i))
+            orig = movable[movable > 0].index
+            v = SPEED_KMH["rain" if rain_now else "dry"] * 1000 / 60
+            if len(orig) and len(st2):
+                ox, oy = cells.loc[orig, "x"].values, cells.loc[orig, "y"].values
+                dx, dy = cells.loc[st2.index, "x"].values, cells.loc[st2.index, "y"].values
+                T = DETOUR * np.hypot(ox[:, None] - dx[None, :], oy[:, None] - dy[None, :]) / v
+                reach = st2.index[(T <= 60).any(0)]
+                rows["(c) ... and reachable from a surplus cell within 60 min"] = prec(st2.loc[reach].risk.nlargest(19).index)
+            rows["all candidate cells (expected >= 4)"] = prec(el.index)
+            for k, (pr_, pi_, n_) in rows.items():
+                out.append({"split": split, "ts": t, "rain_at_t": rain_now, "variant": k, "precision_retrospective": pr_,
+                            "precision_issue_time": pi_, "cells": n_})
+        print(split, "done", flush=True)
+    R = pd.DataFrame(out)
+    R.to_csv(TABLES / "policy_diagnosis_runs.csv", index=False, float_format="%.5f")
+    g = R.groupby(["split", "variant"]).agg(precision_retrospective=("precision_retrospective", "mean"),
+                                            precision_issue_time=("precision_issue_time", "mean"),
+                                            cells_per_decision=("cells", "mean"), decisions=("ts", "nunique")).reset_index()
+    ca = g[g.split == "calib"].set_index("variant").precision_retrospective
+    adopt = bool(ca["(b) policy, weights = forecast risk"] - ca["(a) policy as designed"] >= 0.02)
+    g["adopt_risk_weights_rule"] = adopt
+    g.to_csv(TABLES / "policy_diagnosis.csv", index=False, float_format="%.4f")
+    print(g.round(3).to_string())
+    print("adopt (b) on calibration rule:", adopt)
+
+
+def part_plans_risk():
+    """Ranked staging plans for the adopted variant (b) (risk weights), built from the CALIBRATION period
+    (Apr - Sep 2025, 150 decision times) so the test year is not scored again."""
+    cells, shares = cells_info(), cdg_share()
+    d = decision_frame(60, "calib", False)
+    sc = pd.read_parquet(INTERIM / "fc_pred_h60_calib.parquet", columns=["ts", "cell", "score_lgb_no_weather"])
+    d = d.merge(sc, on=["ts", "cell"], how="left").rename(columns={"score_lgb_no_weather": "risk"})
+    wet, dry = sample_times(d, 75, 75)
+    rows = []
+    for t in np.r_[wet, dry]:
+        snap = d[d.ts == t]
+        rain_now = bool(snap.mmh_island.fillna(0).iloc[0] > 0)
+        res = solve(snap, cells, float(shares.asof(pd.Timestamp(t))), BASE["N"], BASE["lam"], 60, "observed", "risk",
+                    rain_now)
+        rows += [{"ts": t, "rain_at_decision": rain_now, "cell": j, "taxis": n} for j, n in res["dest"].items()]
+    P = pd.DataFrame(rows)
+    n_dec = {True: len(wet), False: len(dry)}
+    out = []
+    for rain in (True, False):
+        z = P[P.rain_at_decision == rain].groupby("cell").agg(times_targeted=("ts", "nunique"), taxis=("taxis", "sum"))
+        z["share_of_decisions"] = z.times_targeted / n_dec[rain]
+        z["taxis_per_decision"] = z.taxis / n_dec[rain]
+        z = z.sort_values("taxis", ascending=False).head(15).reset_index()
+        z["planning_area"] = z.cell.map(cells.planning_area)
+        z.insert(0, "rank", np.arange(1, len(z) + 1))
+        z.insert(0, "rain_at_decision", rain)
+        z.insert(0, "scenario", "(b) weights = forecast risk; calibration period Apr-Sep 2025")
+        out.append(z)
+    o = pd.concat(out)
+    o.to_csv(TABLES / "policy_staging_plans_risk_weights.csv", index=False, float_format="%.4f")
+    print(o.round(3).to_string())
+
+
 def part_planning(n_boot=500):
     inf = importlib.import_module("analysis.04_inference")
     from analysis.common import load_panel
@@ -397,9 +498,10 @@ def charts():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", required=True, choices=["choose", "evaluate", "labels", "planning", "charts"])
+    ap.add_argument("--part", required=True, choices=["choose", "evaluate", "labels", "diagnose", "plans_risk", "planning", "charts"])
     a = ap.parse_args()
-    {"choose": part_choose, "evaluate": part_evaluate, "labels": part_labels, "planning": part_planning,
+    {"choose": part_choose, "evaluate": part_evaluate, "labels": part_labels, "diagnose": part_diagnose,
+     "plans_risk": part_plans_risk, "planning": part_planning,
      "charts": charts}[a.part]()
 
 

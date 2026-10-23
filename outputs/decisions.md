@@ -458,3 +458,29 @@ results stay as they are and remain the pre-specified result.
     **Choice rule (calibration period only, 150 decision times):** adopt (b) for the test year if its targeting
     precision (retrospective label, all targeted cells) is at least 2 percentage points higher than (a); otherwise
     keep (a). The test year is then scored once for (a), (b) and (c) and logged.
+94. **Step 7 follow-up result.** Calibration (150 decision times): risk weights (b) 38.9% of targeted cells low vs
+    23.2% as designed (a) - rule met, (b) adopted. Test year, scored once (`policy_diagnosis.csv`; retrospective /
+    issue-time label): (a) 30.6% / 31.0% over ~76 cells per decision; (b) 43.4% / 44.2% over ~16 cells; (c) top-19
+    forecast ranking without constraints 50.8% / 51.5%; requiring a staging point 47.8% / 48.1%; adding the
+    shortfall and 60-minute reachability limits changes nothing further. Diagnosis: most of the dilution comes from
+    equal weights, which spread taxis over many large-baseline cells by expected shortfall; the staging-point
+    requirement costs about 3 points; the remaining gap between (b) and the constrained ranking (about 4 points)
+    comes from the LP's travel cost and supply allocation. Trade-off: on 40 calibration decisions (b) moves about
+    38 taxis to about 20 cells per decision (183 taxi-minutes), (a) about 118 taxis to 66 cells (659 taxi-minutes).
+    Ranked staging plans for (b) are built from the calibration period only
+    (`policy_staging_plans_risk_weights.csv`), so the test year is not scored again. Precision here counts cells
+    with an undefined label as not low (slightly lower than in decision 92, which dropped them).
+95. **Final checks.** `analysis/99_rerun_check.py` reruns the core pipeline from the raw files (feed regimes, audit,
+    30-minute panel, main association models and event study, inference) and compares key numbers with the
+    committed values (`outputs/rerun_check.csv`). Not rerun: the downloads (raw data fixed in git), the 15-minute
+    and 500 m robustness panels, `03_effects_more`, `05_risk`, and steps 6-8 (rerunning the forecasting would score
+    the test year again; the simulation is seeded and its Python/JS parity is checked separately).
+    `outputs/requirements-lock.txt` = pip freeze of the analysis environment (Python 3.11.9, macOS arm64).
+    `analysis/99_wording_check.py` lists every risky phrase in the deliverables and chart titles for a manual check
+    (`outputs/wording_check.txt`).
+96. **Final check results.** Rerun from raw (`outputs/rerun_check.csv`): all 21 key quantities identical (regimes,
+    audit counts, panel rows and keys, nine main effects, event study, ratio statistic, hotspot count). The
+    by-regime heterogeneity statistics differ only in the 4th decimal (heavy Q 32.7521 vs 32.7516) from the
+    estimator's convergence tolerance. Wording check: 49 hits, all disclaimers, the labelled simulation scenario
+    "demand surge", or software validation; none describes results as demand, waits, revenue or causes.
+    Final figure set: 14 charts in `outputs/figures/report/` (PNG + SVG, index in README.md).

@@ -31,15 +31,23 @@ coverage level of the previous 7 days, known when the forecast is made) gives th
 
 - Model: move idle CDG taxis (62% of surplus vacant taxis in over-supplied cells) to cells forecast to fall short
   of their normal level, where a taxi stop or stand is within 300 m, within 60 minutes' modelled travel.
-- Test year, base case (200 taxis per decision): about 150-170 taxis moved to 73-78 cells per half-hour decision.
-  Targeted cells were unusually low 31-32% of the time vs 28% for all candidate cells (retrospective label);
-  30-32% vs 27-28% with the issue-time label. A 50-taxi budget picks clearer cases (35-39%).
-- Modelled expected shortfall at targeted cells falls by about 34-39% (a model quantity).
-- Cells most often targeted when it rains (equal weights): Tampines (2 cells), Geylang, Sengkang (2), Ang Mo Kio,
-  Woodlands, Clementi, Hougang - see `policy_staging_plans.csv` for the ranked lists by weighting scenario
-  (equal, MRT-station activity, land-use proxy).
-- Sensitivity: travel cost (lambda) and budget N matter most; congestion and weighting scenario matter little
-  (`policy_sensitivity.csv`).
+- **Recommended variant: weight destinations by the forecast risk of low availability** (chosen on the
+  calibration period, Apr - Sep 2025). Test year, scored once: 43% of targeted cells were really unusually low
+  60 minutes later, against 31% for the first design (equal weights) and 28% for all candidate cells
+  (issue-time label: 44% vs 31% vs 28%).
+- **Trade-off, stated plainly.** The forecast alone, ranking the 19 riskiest cells with no operational limits,
+  reaches 51%. The policy's limits cost targeting precision: requiring a taxi stop or stand nearby costs about
+  3 points (48%), and the travel-cost / supply allocation about 4 more (43%). The first design lost most
+  (down to 31%) because it spread taxis over about 76 cells chosen by expected shortfall rather than risk.
+  The risk-weighted plan is sharper but moves fewer taxis: about 38 taxis to about 20 cells per half-hour
+  decision (183 taxi-minutes), against about 118 taxis to 66 cells (659 taxi-minutes) for the first design.
+- Modelled expected shortfall reductions are model quantities, not observed demand or service.
+- Cells most often targeted by the risk-weighted plan (calibration period; `policy_staging_plans_risk_weights.csv`):
+  when it rains - Geylang, Tampines, Downtown Core, Sembawang, Novena, Sengkang, Woodlands; when dry - Bukit Merah
+  (4 cells), Geylang, Tampines, Novena, Changi, Downtown Core. Equal-weight plans by weighting scenario remain in
+  `policy_staging_plans.csv`.
+- Sensitivity of the first design: travel cost (lambda) and budget N matter most; congestion and weighting
+  scenario matter little (`policy_sensitivity.csv`).
 
 ## 3. Planning layer - `outputs/tables/planning_*.csv`, figure `planning_forecast_rain.png`
 
