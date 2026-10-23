@@ -16,3 +16,6 @@ data/interim/*.joblib
 data/static/phase2/landuse.parquet
 data/static/phase2/osm_drive_*.parquet
 data/static/phase2/hdb_existing_building.geojson
+data/interim/sim_grid_parts/
+data/interim/sim_tuning_parts/
+data/interim/sim2_tuning_parts/
