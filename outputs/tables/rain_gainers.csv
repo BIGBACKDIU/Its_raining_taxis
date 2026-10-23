@@ -1,0 +1,41 @@
+rank,planning_area,subzone,nearest_mrt,landmarks,share_pct,share_lo,share_hi,abs_pct,abs_lo,abs_hi,cell
+1,Tampines,Xilin,"Expo (1.2 km), Upper Changi (1.8 km)",Dusit Thani Laguna Singapore,50.13,17.48,87.88,32.12,3.66,65.02,46019
+2,Woodlands,Senoko West,"Woodlands North (1.4 km), Admiralty (1.4 km)",,37.45,28.41,46.14,21.03,13.34,28.75,27033
+3,Tuas,Tuas View,"Tuas Crescent (2.1 km), Tuas West Road (2.4 km)",,33.83,12.72,56.51,24.85,4.58,46.41,9017
+4,Changi,Changi Airport,"Changi Airport (0.8 km), Upper Changi (4.0 km)",Changi Airport Terminal 2,31.28,10.04,53.45,16.44,-3.01,36.02,49022
+5,Changi,Changi Airport,"Changi Airport (0.9 km), Upper Changi (4.4 km)",Changi Airport Terminal 1; Jewel Changi Basement; Jewel Changi Airport,28.34,15.22,43.12,13.06,1.07,25.93,49023
+6,Ang Mo Kio,Yio Chu Kang East,"Yio Chu Kang (1.1 km), Lentor (1.7 km)",,23.89,16.33,32.30,11.04,4.03,18.38,33026
+7,Ang Mo Kio,Yio Chu Kang East,"Yio Chu Kang (0.7 km), Ang Mo Kio (1.2 km)",Nanyang Polytechnic,19.93,12.94,26.57,7.85,1.21,14.41,33025
+8,Marine Parade,East Coast,"Marine Terrace (0.8 km), Marine Parade (1.1 km)",East Coast Park Singapore,19.84,6.95,34.21,3.55,-7.74,16.40,40016
+9,Kallang,Tanjong Rhu,"Stadium (0.5 km), Tanjong Rhu (0.5 km)",Leisure Park Kallang,19.41,1.30,41.39,3.20,-12.48,23.61,36016
+10,Bukit Timah,Farrer Court,"Farrer Road (0.2 km), Tan Kah Kee (0.9 km)",Empress Road Blk 7 (Empress Road Market and Food Centre),17.48,5.87,28.17,4.66,-6.39,15.20,28018
+11,Tampines,Xilin,"Expo (1.9 km), Upper Changi (2.4 km)",,17.31,4.12,31.90,3.24,-8.07,15.84,47019
+12,Marine Parade,East Coast,"Marine Parade (0.4 km), Tanjong Katong (0.8 km)",Parkway Parade; M&S Outlet; Muji,17.01,8.05,26.66,1.11,-7.31,10.62,39016
+13,Serangoon,Upper Paya Lebar,"Bartley (0.4 km), Serangoon (0.8 km)",,16.91,5.88,27.76,1.46,-8.20,11.22,36021
+14,Ang Mo Kio,Sembawang Hills,"Lentor (0.6 km), Mayflower (1.0 km)",Lentor Modern,16.86,7.59,26.62,4.52,-3.98,14.00,31025
+15,Mandai,Mandai West,"Woodlands South (0.7 km), Woodlands (1.3 km)",Ren Ci @ Woodlands; Woodlands Health Medical Centre; Innova Junior College,15.30,7.21,22.98,1.52,-4.91,7.68,26030
+16,Clementi,Sunset Way,"Clementi (1.4 km), Beauty World (1.8 km)",Block C,14.34,0.68,29.14,2.74,-9.99,16.22,24019
+17,Bishan,Upper Thomson,"Upper Thomson (0.1 km), Marymount (0.9 km)",Thomson Plaza; Shunfu Road Blk 320 (Shunfu Mart),13.18,1.91,24.37,1.18,-9.77,12.21,31022
+18,Bukit Merah,Depot Road,"Redhill (1.0 km), Telok Blangah (1.3 km)",Singapore Garden & Singapore Park; Henderson Waves Bridge; Depot Heights Shopping Centre,12.95,5.73,20.14,-0.99,-7.79,4.94,29014
+19,Kallang,Geylang Bahru,"Geylang Bahru (0.6 km), Kallang (0.7 km)",Upper Boon Keng Road Blk 17 (Blk 17 Upper Boon Keng Market and Food Centre); Geylang Bahru Blk 69 (Blk 69 Geylang Bahru Market and Food Centre); Bendemeer Road Blk 29 (Bendemeer Market and Food Centre),12.92,6.94,19.22,-2.09,-8.05,3.91,35018
+20,Marine Parade,Katong,"Dakota (0.8 km), Tanjong Katong (1.0 km)",Eurasian Heritage Centre: Singapore Attraction; Venue Hotel The Lily; Betel Box Backpackers Hostel,12.75,1.42,23.53,-2.39,-11.69,7.13,38017
+21,Pasir Ris,Loyang West,"Pasir Ris (2.1 km), Tampines East (2.2 km)",Loyang Point,12.31,2.79,22.09,-1.96,-10.74,6.70,46024
+22,Ang Mo Kio,Kebun Bahru,"Mayflower (0.6 km), Ang Mo Kio (0.9 km)",Broadway Plaza; Sprout @ AMK; myCK,11.84,6.85,16.72,0.66,-5.15,6.48,32024
+23,Tampines,Tampines North,"Pasir Ris (1.9 km), Tampines (2.5 km)",,11.62,1.94,20.97,-3.26,-11.85,5.54,42024
+24,Queenstown,Margaret Drive,"Queenstown (0.5 km), Commonwealth (0.9 km)",MDIS; Margaret Drive Hawker Centre,11.61,1.26,22.55,-1.40,-10.30,7.63,28016
+25,Tampines,Xilin,"Expo (1.6 km), Upper Changi (1.9 km)",,11.60,3.61,19.89,-1.68,-8.87,6.19,47020
+26,Bedok,Kaki Bukit,"Kaki Bukit  (0.4 km), Ubi (0.9 km)",,11.47,4.06,19.84,-4.54,-11.70,3.73,39020
+27,Bukit Panjang,Dairy Farm,"Pending (0.5 km), Cashew (0.7 km)",,11.31,2.53,19.89,-1.20,-9.10,6.91,24024
+28,Tampines,Xilin,"Expo (0.6 km), Upper Changi (1.0 km)",Plaza 8; Changi City Point; Dorsett Changi City Singapore,10.08,1.43,19.07,-3.12,-10.89,5.18,46020
+29,Punggol,Punggol Town Centre,"Sam Kee (0.2 km), Punggol (0.4 km)",Waterway Point; Block W5; One Punggol Hawker Centre,9.58,2.45,16.97,-3.04,-9.78,4.21,39028
+30,Bishan,Marymount,"Marymount (0.6 km), Bishan (0.7 km)",Shunfu Road Blk 320 (Shunfu Mart),9.37,0.16,18.36,-4.31,-13.07,4.92,32022
+31,Bukit Merah,Kampong Tiong Bahru,"Tiong Bahru (0.7 km), Redhill (1.2 km)",Tiong Bahru Plaza; SMF Institute of Higher Learning; East Asia Institute of Management,8.88,4.04,13.33,-4.56,-9.48,-0.22,30014
+32,Bedok,Bedok South,"Bayshore (0.5 km), Tanah Merah (1.3 km)",Bedok South Road Blk 16,8.73,1.21,16.54,-5.92,-12.69,1.57,43018
+33,Bishan,Bishan East,"Braddell (0.6 km), Bishan (0.8 km)",Toa Payoh Lorong 8 Blk 210; Toa Payoh Lorong 4 Blk 93,8.43,3.87,12.76,-5.06,-9.76,-0.24,33021
+34,Marine Parade,Mountbatten,"Katong Park (0.2 km), Mountbatten (0.9 km)",AQ @ Mountbatten; Jalan Batu Blk 4A (Blk 4A Jalan Batu Hawker Centre/Market),7.78,0.69,15.44,-6.86,-13.99,1.04,37016
+35,Bukit Merah,Henderson Hill,"Tiong Bahru (0.6 km), Redhill (0.8 km)",Valley Point Shopping Centre; Tiong Bahru Plaza; ValueHub,7.59,1.75,13.38,-5.69,-11.41,-0.41,30015
+36,Queenstown,Ghim Moh,"Buona Vista (0.3 km), Holland Village (0.9 km)",The Star Vista; Rochester Mall; NTU@one-north,7.43,1.28,13.48,-5.09,-11.10,0.83,26017
+37,Hougang,Trafalgar,"Fernvale (1.3 km), Layar (1.3 km)",Hougang 1; Buangkok Square Mall; Block 2,7.43,1.70,13.30,-5.98,-11.67,-0.16,36025
+38,Ang Mo Kio,Yio Chu Kang West,"Yio Chu Kang (0.4 km), Lentor (0.8 km)",Ang Mo Kio Community Hospital; Ang Mo Kio Ave 4 Blk 628 (Ang Mo Kio 628 Market),6.47,1.90,11.23,-4.17,-8.97,1.01,32025
+39,Tampines,Tampines West,"Tampines (0.5 km), Tampines West (0.9 km)",Century Square; Eastlink Mall; Tampines Mall,6.38,0.30,12.59,-7.78,-13.79,-1.97,43022
+40,Bukit Batok,Guilin,"Bukit Batok (0.6 km), Bukit Gombak (0.6 km)",West Mall; Harvey Norman,4.99,0.50,9.60,-6.77,-11.34,-2.17,22022

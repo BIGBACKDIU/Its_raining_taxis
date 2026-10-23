@@ -484,3 +484,105 @@ results stay as they are and remain the pre-specified result.
     estimator's convergence tolerance. Wording check: 49 hits, all disclaimers, the labelled simulation scenario
     "demand surge", or software validation; none describes results as demand, waits, revenue or causes.
     Final figure set: 14 charts in `outputs/figures/report/` (PNG + SVG, index in README.md).
+
+# Phase 2 (steps 10-20)
+
+97. **Data for phase 2** (`analysis/prep_phase2_data.py`, `data/static/phase2/SOURCES.csv`): URA MP2019 subzones
+    and land use; Census of Population 2020 residents by subzone and age group and by dwelling type (SingStat's
+    June 2025 subzone tables returned HTTP 404 from this machine, so the 2020 census is the latest usable source);
+    HDB property information geocoded with the OneMap search API; HDB resale prices (Jan 2017 on); private
+    transactions 2020-2025 (earlier repo, SHA-256 checked) with project coordinates; destinations from data.gov.sg
+    (hotels, tourist attractions, hawker centres, LTA bus stops) and OpenStreetMap (malls, hospitals, offices,
+    schools, nightlife / food, taxi points); OSM drivable road network (osmnx); NEA 24-hour forecasts by date.
+    Pick-up bays: LTA DataMall needs an API key we do not have; OSM `amenity=taxi` points are used as a partial
+    proxy next to the 371 LTA taxi stops / stands.
+
+## Step 10 pre-registration: names and supply geography
+
+98. **Land grid and names.** Land cells = 1 km cells whose centre lies inside an MP2019 subzone (the 374 eligible
+    cells are a subset). Each cell gets the planning area and subzone containing its centre (nearest subzone if
+    the centre is on a boundary gap), the two nearest MRT/LRT stations with distances, and up to 3 landmarks:
+    named destinations within 700 m of the centre, chosen by category priority (tourist attraction, mall,
+    hospital, university, hotel, hawker centre) and then by distance.
+99. **Rain-hit rankings (fit period, main sample, cells with >= 100 heavy-rain rows).** Absolute: heavy-rain
+    ratio statistic per cell against the no-rain model fit0 (step 4) as % change and as taxis per heavy-rain half
+    hour (sum fit0 - sum vacant, divided by heavy-rain half hours). Share: the same with fit0 rescaled to the
+    observed citywide total at each snapshot. 95% CIs from 1,000 day-bootstrap draws. Top 30 by taxis lost
+    (absolute) and by share % change. "Rain-sensitive areas" = rain-response type 0 (step 5); "areas that gain" =
+    cells whose share % change CI lies above 0 (and the absolute hotspots "significantly higher").
+100. **Dry-weather supply maps.** Mean vacant taxis per cell with no rain at the cell for the past 90 minutes, fit
+    period, normal-coverage regimes (0.8-1.25x), by time band 07-10, 10-17, 17-20, 20-24, 00-07 (all days). Maps
+    label the 8 highest-supply cells per band by landmark or subzone.
+101. **Taxi deserts.** Residents per land cell: Census 2020 subzone residents allocated to cells in proportion to
+    MP2019 residential land-use area (subzone x cell intersection); HDB dwelling units per cell from geocoded
+    blocks. Supply = mean vacant taxis over all fit-period snapshots (cells never seen in the feed = 0). Taxi
+    desert ranking: cells with >= 5,000 residents or >= 2,000 HDB units, ranked by vacant taxis per 10,000
+    residents (lowest first); top 25 named.
+
+## Step 11 pre-registration: road network and minutes to the nearest vacant taxi
+
+102. **Graph.** OSM drivable network (osmnx, network_type "drive"), largest strongly connected component. Edge
+    speed = OSM maxspeed where tagged, else by road class: motorway 80, trunk 70, primary 60, secondary 50,
+    tertiary 40, *_link 40, unclassified / residential 30, service / living street 20 km/h. Dry travel time =
+    length / speed x 1.25 (signals and normal congestion); rain-congestion scenario = dry time x 1.25 (speeds 20%
+    lower). Both are modelled assumptions, not observed speeds.
+103. **Matrices.** 500 m land cells (centre inside an MP2019 subzone) snapped to their nearest graph node; drive-time
+    matrices 500 m x 500 m (dry, rain) saved for the simulation (not in git); and from every eligible 1 km cell
+    centre to every 500 m cell.
+104. **Minutes to the nearest vacant taxi.** For every main-sample snapshot in the fit period: taxi locations = 500 m
+    cells with >= 1 vacant taxi (cells off the land grid snap to the nearest land 500 m cell); outcome = dry drive
+    time (minutes) from each eligible 1 km cell centre to the nearest such cell (0.5 minute floor). Dry times are
+    used so the outcome reflects where taxis are, not assumed congestion. Model: Poisson PML with the main
+    specification (light / moderate / heavy + lags | cell + how^month + ym^regime, CRV1 by day), reported as %
+    change in minutes; check with log(citywide count) added (coverage). Per-cell heavy-rain effects on minutes
+    (ratio of observed to no-rain-model minutes, day bootstrap, as in step 10), named. Processed year by year.
+
+## Step 12 pre-registration: why some areas lose more vacant taxis in heavy rain
+
+105. **Characteristics** (all land cells + other cells seen in the feed; `cell_characteristics.csv`): MRT - distance
+    to the nearest station, exits within 500 m of the cell centre, distinct lines and interchange within 800 m,
+    a station opened Oct 2021 - Sep 2026 within 800 m (opening dates are only known for those, so "years since
+    opening" is replaced by this flag); bus stops in the cell; housing - HDB dwelling units, private projects and
+    private transactions 2020-2025 in the cell, share private = private projects' transactions / (that + HDB units)
+    as a rough mix indicator, HDB resale median price per sq ft (Jan 2017 on) and private median psf in the cell;
+    residents and share 65+ (Census 2020, step 10 allocation); MP2019 land-use shares (residential, commercial incl.
+    hotel / white, business, institution, park) and URA Central Area flag; destinations in the cell (malls,
+    hospitals, hotels, offices, schools incl. tertiary, nightlife, food outlets, attractions); LTA taxi stops /
+    stands and OSM taxi points within 300 m of the cell square; road length per km2 by class (expressway,
+    arterial = trunk / primary, other), distance to the nearest expressway node, betweenness (networkx sampled
+    betweenness, k = 500 sources, on the expressway-to-secondary skeleton; cell value = max over its nodes);
+    distance to Raffles Place and to Changi Airport.
+106. **Outcome.** Per eligible cell, the step-10 heavy-rain effects as log ratios: abs = log(1 + abs_pct/100),
+    share = log(1 + share_pct/100), with SE = (log upper - log lower) / 3.92 from the day-bootstrap CI.
+107. **Design (i), cell level.** Weighted least squares of each outcome on standardised characteristics (count
+    variables as log(1 + x)); variables with VIF > 10 are dropped one at a time (highest first); weights =
+    1 / (SE^2 + tau^2), tau^2 by method of moments. Moran's I of residuals with 8-nearest-neighbour weights; if
+    p < 0.05, a spatial error model (spreg, ML) is reported next to WLS. Random forest (500 trees, min leaf 5,
+    seed 2702) with spatial block cross-validation (5 km blocks, 5 folds) and SHAP values for the importance
+    ranking. Rain-response type (step 5: type 0 vs 1) predicted by logistic regression and random forest with the
+    same spatial CV (AUC).
+108. **Design (ii), panel.** Poisson FE (main specification, fit period, CRV1 by day) with heavy rain interacted
+    with: MRT distance bands (< 300 m, 300-1000 m; reference >= 1000 m), URA Central Area, taxi stop / stand within
+    300 m, any mall in the cell, log HDB units (standardised), distance to Raffles Place (standardised). Absolute and
+    share versions. Plain-English contrasts are computed from these coefficients with delta-method CIs.
+
+## Step 13 pre-registration: natural experiment from new MRT stations
+
+109. **Cohorts.** Station openings with at least 9 months of panel data before and after: TEL3 (13 Nov 2022), TEL4
+    (23 Jun 2024), Punggol Coast (10 Dec 2024), Hume (28 Feb 2025). TEL2 (Aug 2021) has no pre-period in the data
+    and CCL6 (12 Jul 2026) only 2.5 months after; both are excluded. Treated cells: eligible 1 km cells whose centre
+    is within 800 m of a station of the cohort. Controls: eligible cells more than 2 km from any station opened
+    Oct 2021 - Sep 2026, 3 nearest neighbours per treated cell (Mahalanobis, without replacement within a cohort)
+    on the pre-period (12 months) mean log dry vacant taxis, distance to Raffles Place, URA Central Area and distance
+    to the nearest existing MRT station.
+110. **Outcomes and models (stacked by cohort, window -12 to +12 months around opening).**
+    (a) Dry-weather supply: cell-month log(mean vacant + 0.1) in dry snapshots (no rain for 90 minutes); event study
+    with event-month bins (-12 ... -2, 0 ... +12; reference -1) x treated, FE cell x cohort and month x cohort, SE
+    clustered by cell; pre-trend test = joint Wald test of the pre-period coefficients; DiD = average post minus
+    pre. (b) Heavy-rain effect: Poisson FE on the stacked cell-snapshot panel (main sample rows of treated and
+    control cells), regressors light, moderate, heavy and heavy x post, heavy x treated, heavy x treated x post, FE
+    cell x cohort, how^month x cohort, ym^regime x cohort, CRV1 by day. The triple interaction is the DiD in the
+    heavy-rain effect. Post-period months after Sep 2025 are in the test year: that use is logged.
+111. **What it can show.** Whether vacant supply near a new station, and its drop in heavy rain, changed after
+    opening relative to similar cells. It cannot separate taxi supply from changes in rider demand, other
+    contemporaneous changes near the stations, or feed-coverage changes that differ by area; few treated cells.

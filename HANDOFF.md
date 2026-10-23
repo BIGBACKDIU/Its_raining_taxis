@@ -212,6 +212,42 @@ pulp, optuna. Use a virtualenv. Save intermediate tables as Parquet under `data/
    rain x channel, empty distance and idle time per vehicle, taxi vs private-hire share; recalibrate the
    simulation. Pickups are served demand, not unmet requests.
 
+### Phase 2 (added 23 Oct 2026): where exactly and why
+
+Rules for every phase-2 step: pre-register the specification in `outputs/decisions.md` before running; make
+choices on fit / calibration data only; log any test-year use in `outputs/test_scoring_log.csv`; describe results
+as supply associations (not demand, waiting time, revenue or causes, unless a design supports more - then say how
+strongly); append a plain-English summary to `outputs/phase2_progress.md` after each step and commit.
+Extra data: earlier repo `../DAO2702_project` (MRT openings, private-housing transactions, project coordinates)
+and static layers in `data/static/` (URA MP2019 subzones and land use, HDB blocks and resale prices, Census 2020
+population by subzone and age, destinations, OSM drive network, NEA 24-hour forecasts).
+
+10. **Names and supply geography** (`10_names.py`): every cell gets planning area, subzone, nearest MRT stations
+    and 1-3 landmarks; named tables of the most rain-hit areas (absolute and share, with CI), rain-sensitive
+    areas (type 0), areas that gain vacant taxis in rain; dry-weather supply maps by time band; named "taxi
+    deserts" (many residents / HDB units, low dry supply).
+11. **Road network** (`11_roads.py`): OSM drivable graph with travel times by road class / speed limit; drive-time
+    matrix between 500 m land-cell centroids (dry and rain-congestion); rider-centric availability = drive time
+    from each eligible 1 km cell centroid to the nearest vacant taxi per snapshot; rain effects on those minutes.
+12. **Why some areas lose more** (`12_factors.py`): per-cell characteristics (MRT, bus stops, housing, residents,
+    land use, destinations, stands, road access, distances); (i) cell-level heavy-rain effects on standardised
+    characteristics (weighted regression, VIF, Moran's I, spatial error model if needed, random forest + SHAP with
+    spatial block CV); (ii) rain band x key characteristic interactions in the Poisson FE panel; type prediction.
+13. **Natural experiment: new MRT stations** (`13_mrt_did.py`): difference-in-differences / event study for cells
+    within 800 m of stations opened Oct 2021 - Sep 2026 vs matched cells; dry supply and heavy-rain effect.
+14. **Taxi stands and planning map** (`14_stands.py`): rain effect with vs without a stand nearby; ranked candidate
+    stand locations; predicted rain sensitivity for every land cell, by planning area and subzone.
+15. **Planning value of morning forecasts** (`15_morning.py`): does the 24-hour forecast issued before 09:00 add to
+    usual patterns in predicting low-availability hours by planning area and time band later that day?
+16. **Dose, duration, after-effects** (`16_dose.py`): spline intensity-response, spell length, post-rain hangover,
+    recovery by rain-response type.
+17. **Redistribution and spillovers** (`17_spillover.py`): areas that gain / lose share in island-wide rain; own vs
+    neighbours' rain together.
+18. **Measurement error** (`18_gauges.py`): effects near vs far from a working gauge; attenuation.
+19. **Fleet trend** (`19_fleet.py`): monthly heavy-rain effect vs LTA fleet size and feed regime.
+20. **Simulation v2** (`20_sim_v2.py`, `sim/`): diagnose the plausibility failure; rebuild on the road graph with
+    step-12 characteristics; re-run plausibility; dispatcher panel on the page (historical replay demonstration).
+
 ## 7. Deliverables for the team
 
 - `outputs/figures/`: ~10-12 report-ready charts (PNG + SVG), consistent style.

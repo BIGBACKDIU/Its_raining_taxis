@@ -1,0 +1,17 @@
+file,source,fetched,detail
+subzone.geojson,data.gov.sg dataset d_8594ae9ff96d0c708bc2af633048edfb,2026-10-23,3.2 MB
+landuse.geojson,data.gov.sg dataset d_90d86daa5bfaa371668b84fa5f01424f,2026-10-23,174.3 MB
+pop_age.csv,data.gov.sg dataset d_d95ae740c0f8961a0b10435836660ce0,2026-10-23,0.1 MB
+pop_dwelling.csv,data.gov.sg dataset d_7f243956483d5901f237e6f87b096636,2026-10-23,0.0 MB
+pop_age.csv,Census of Population 2020 (via data.gov.sg),2026-10-23,SingStat June 2025 subzone tables returned HTTP 404; Census 2020 used instead
+private_projects_psf.csv,"DAO2702_project: properties_2020_2025_clean.csv (11 parts, SHA-256 checked) + project_coords.csv",2026-10-23,2298 projects with coordinates; 108351 of 108717 transactions matched
+mrt_station_openings.csv,DAO2702_project repository,2026-10-23,
+hotels.geojson,data.gov.sg dataset d_654e22f14e5bb817423f0e0c9ac4f632,2026-10-23,0.2 MB
+attractions.geojson,data.gov.sg dataset d_0f2f47515425404e6c9d2a040dd87354,2026-10-23,0.1 MB
+hawker.geojson,data.gov.sg dataset d_4a086da0a5553be1d89383cd90d07ecd,2026-10-23,0.1 MB
+bus_stops.geojson,data.gov.sg dataset d_3f172c6feb3f4f92a2f47d93eed2908a,2026-10-23,1.9 MB
+nea_24h_forecast.csv,data.gov.sg v1 environment/24-hour-weather-forecast (historical by date),2026-10-23,"14458 issues, 1826 days requested, 0 days failed"
+osm_pois.parquet,Geofabrik malaysia-singapore-brunei-latest.osm.pbf parsed with pyosmium (Overpass API unavailable),2026-10-23,"16093 features in bbox (103.59, 1.2, 104.06, 1.48)"
+osm_drive_edges.parquet,Geofabrik malaysia-singapore-brunei-latest.osm.pbf parsed with pyosmium (Overpass API unavailable),2026-10-23,"331835 nodes, 521961 directed edges"
+hdb_info.csv,data.gov.sg dataset d_17f5382f26140b1fdae0ba2ef6239d2f,2026-10-23,0.9 MB
+hdb_resale.csv,data.gov.sg dataset d_8b84c4ee58e3cfc0ece0d773c8ca6abc,2026-10-23,24.1 MB

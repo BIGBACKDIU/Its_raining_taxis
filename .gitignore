@@ -7,3 +7,11 @@ artifacts/
 data/interim/*.parquet
 data/interim/fc_*
 .claude/
+data/static/phase2/osm_cache/
+data/static/phase2/*.graphml
+data/static/phase2/landuse.geojson
+data/static/phase2/osm/
+data/interim/*.npy
+data/interim/*.joblib
+data/static/phase2/landuse.parquet
+data/static/phase2/osm_drive_*.parquet

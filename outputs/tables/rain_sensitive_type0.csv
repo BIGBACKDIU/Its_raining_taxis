@@ -1,0 +1,122 @@
+rank,planning_area,subzone,nearest_mrt,landmarks,abs_pct,abs_lo,abs_hi,share_pct,taxis_lost_per_heavy_half_hour,cell
+1,Paya Lebar,Plab,"Kaki Bukit  (2.1 km), Kovan (2.3 km)",,-54.62,-62.81,-45.58,-47.86,0.99,39022
+2,Marina South,Marina South,"Gardens by the Bay (0.2 km), Bayfront (1.0 km)",Marina Barrage; Gardens by the Bay,-42.98,-51.76,-32.41,-34.04,0.93,35014
+3,Seletar,Seletar Aerospace Park,"Thanggam (2.1 km), Fernvale (2.5 km)",,-39.76,-49.33,-30.34,-30.89,0.29,34028
+4,Bukit Timah,Swiss Club,"Sixth Avenue (0.5 km), King Albert Park (1.4 km)",,-36.55,-45.02,-27.46,-28.62,0.33,27020
+5,Downtown Core,Bayfront Subzone,"Bayfront (0.2 km), Downtown (0.8 km)","Marina Bay SandsÂ® SkyPark; Marina Bay SandsÂ®; Marina Bay Sands, Singapore",-36.42,-41.30,-31.02,-26.44,4.76,34014
+6,Yishun,Lower Seletar,"Yio Chu Kang (2.0 km), Lentor (2.2 km)",,-36.23,-46.17,-24.69,-29.22,0.21,33027
+7,Sembawang,Sembawang North,"Sembawang (1.5 km), Canberra (2.6 km)",,-35.87,-43.01,-28.62,-28.38,0.81,29034
+8,Museum,Dhoby Ghaut,"Dhoby Ghaut (0.3 km), Somerset (0.4 km)",Fort Canning Park; Hong San See Temple Singapore; Orchard Plaza,-34.87,-39.07,-30.65,-25.49,3.75,32016
+9,Changi,Changi Airport,"Changi Airport (3.1 km), Tampines East (6.1 km)",,-34.17,-49.54,-18.56,-25.31,0.41,50025
+10,Seletar,Seletar Aerospace Park,"Thanggam (1.4 km), Kupang (1.7 km)",,-34.16,-43.85,-24.55,-24.41,0.25,35028
+11,Sembawang,Sembawang East,"Canberra (0.4 km), Sembawang (1.6 km)",Canberra Plaza,-34.07,-39.05,-28.68,-25.02,1.75,31032
+12,Queenstown,Port,"Labrador Park (0.6 km), Pasir Panjang (0.8 km)",Alexandra Retail Centre; Labrador Villa,-33.06,-42.67,-23.58,-24.09,0.59,27013
+13,Novena,Dunearn,"Stevens (0.7 km), Botanic Gardens (1.0 km)",,-33.05,-39.84,-26.44,-23.65,0.58,30019
+14,Woodlands,North Coast,"Marsiling (1.3 km), Woodlands North (1.8 km)",,-33.01,-38.84,-27.28,-25.60,2.46,24032
+15,Western Water Catchment,Murai,"Lakeside (3.1 km), South View (3.4 km)",,-32.56,-44.30,-19.96,-24.96,0.19,18024
+16,Sungei Kadut,Kranji,"Kranji (0.1 km), Marsiling (1.6 km)",,-32.26,-39.52,-24.19,-24.27,0.40,23030
+17,Simpang,Simpang South,"Yishun (2.8 km), Khatib (3.1 km)",,-31.63,-40.63,-21.73,-21.56,0.21,34030
+18,Bukit Batok,Gombak,"Cashew (0.4 km), Bukit Panjang (0.8 km)",,-31.44,-40.13,-22.58,-22.75,0.38,23024
+19,Bukit Timah,Swiss Club,"Sixth Avenue (1.5 km), King Albert Park (1.7 km)",,-31.19,-42.66,-18.60,-22.61,0.19,27021
+20,Downtown Core,Raffles Place,"Telok Ayer (0.3 km), Downtown (0.3 km)","Lau Pa Sat Singapore; Fuk Tak Chi Museum & Places of Interest; Thian Hock Keng Temple, Singapore",-30.83,-38.19,-23.46,-21.13,4.90,33014
+21,Bukit Merah,Maritime Square,"HarbourFront (0.9 km), Telok Blangah (1.0 km)","HarbourFront, Singapore; Equarius Villas; Equarius Hotel",-30.41,-38.51,-22.29,-20.99,0.36,29012
+22,Yishun,Khatib,"Khatib (1.0 km), Yishun (1.9 km)",,-29.64,-40.08,-19.14,-19.97,0.20,30029
+23,Paya Lebar,Plab,"Hougang (1.7 km), Kovan (2.3 km)",,-29.14,-35.96,-21.61,-18.59,0.38,39023
+24,Yishun,Lower Seletar,"Khatib (1.1 km), Springleaf (2.0 km)",,-29.06,-36.07,-21.82,-19.31,0.40,31028
+25,Yishun,Springleaf,"Springleaf (1.3 km), Khatib (1.5 km)",,-29.00,-38.78,-19.23,-19.26,0.21,30028
+26,Bukit Panjang,Nature Reserve,"Hillview (0.3 km), Hume (0.9 km)",HillV2 Mall; Dairy Farm Mall; Trinity Theological College,-28.79,-35.58,-22.17,-19.80,0.43,24023
+27,Newton,Monk'S Hill,"Newton (0.6 km), Little India (0.8 km)",Cuppage Plaza; KK Women's and Children's Hospital; KKH@Halifax,-28.42,-33.05,-22.95,-18.08,1.50,32017
+28,Bukit Panjang,Nature Reserve,"Beauty World (0.5 km), King Albert Park (1.1 km)",Bukit Timah Shopping Center; Beauty World Centre; Beauty World Plaza,-27.47,-33.33,-21.08,-18.47,0.65,25021
+29,Bukit Panjang,Nature Reserve,"Hillview (1.3 km), Hume (1.4 km)",Dairy Farm Mall,-27.42,-37.72,-16.07,-19.18,0.22,25023
+30,Central Water Catchment,Central Water Catchment,"Woodlands South (2.3 km), Segar (3.0 km)","River Safari Singapore; Night Safari, Singapore; Singapore Zoo: Attractions & Things to Do",-26.81,-38.03,-13.57,-17.43,0.43,26028
+31,Downtown Core,Central Subzone,"Prince Edward Road (0.4 km), Marina Bay (0.5 km)",Marina One; Downtown Gallery; OUE Downtown,-26.60,-35.53,-17.01,-15.34,0.55,33013
+32,Queenstown,Kent Ridge,"Pasir Panjang (0.8 km), Labrador Park (1.2 km)",Reflections at Bukit Chandu: Singapore War Memorial; HortPark; The Interlace,-26.59,-37.64,-16.14,-16.82,0.18,27014
+33,Central Water Catchment,Central Water Catchment,"Bangkit (0.7 km), Pending (1.0 km)",,-26.37,-35.61,-15.57,-17.04,0.33,25025
+34,Downtown Core,City Hall,"City Hall (0.3 km), Clarke Quay (0.5 km)",Old Supreme Court Singapore; National Gallery Singapore; Raffles Statue â€“ Sir Stamford Raffles Landing Site,-26.05,-31.39,-20.68,-15.47,3.04,33015
+35,Bukit Batok,Bukit Batok South,"Beauty World (1.8 km), Bukit Batok (2.0 km)",,-26.01,-33.94,-17.78,-17.54,0.49,23020
+36,Clementi,Faber,"Jurong East (1.3 km), Clementi (1.9 km)",,-25.90,-33.72,-17.59,-17.41,0.33,22019
+37,Southern Islands,Sentosa,"HarbourFront (1.3 km), Keppel (2.0 km)","Universal Studios Singaporeâ„¢ Theme Park; Resorts World Sentosa, Singapore; Adventure Cove Waterparkâ„¢ Singapore",-25.40,-31.10,-19.67,-15.39,1.53,30011
+38,Yishun,Lower Seletar,"Lentor (1.6 km), Springleaf (1.7 km)",,-25.27,-36.40,-11.73,-15.00,0.20,31027
+39,Woodlands,Woodlands South,"Woodlands South (0.3 km), Woodlands (1.7 km)",Vista Point; Woodlands Hospital; Woodlands Health Medical Centre,-25.19,-30.92,-19.34,-16.45,1.64,27030
+40,Bukit Merah,City Terminals,"Cantonment (0.6 km), Prince Edward Road (0.6 km)",Pinnacle@Duxton; 100AM; Don Don Donki,-25.18,-30.88,-19.87,-14.60,1.28,32013
+41,Central Water Catchment,Central Water Catchment,"Pending (1.0 km), Bangkit (1.2 km)",,-25.03,-32.85,-17.80,-15.54,0.38,25024
+42,Bukit Timah,Swiss Club,"King Albert Park (0.4 km), Sixth Avenue (1.1 km)",,-25.01,-33.04,-16.22,-15.66,0.24,26020
+43,Changi,Changi West,"Tampines East (1.5 km), Upper Changi (1.5 km)",Liv@Changi,-24.92,-32.05,-17.92,-15.29,1.63,46022
+44,Tanglin,Tyersall,"Napier (0.5 km), Orchard Boulevard (1.2 km)",Singapore Botanic Gardens; Gleneagles Hospital; Gleneagles Medical Centre,-24.87,-33.43,-15.25,-14.74,0.26,29017
+45,Jurong West,Kian Teck,"Boon Lay (0.4 km), Pioneer (1.1 km)",Jurong Point; Jurong Medical Centre,-24.56,-31.23,-17.47,-17.87,0.57,17020
+46,Sungei Kadut,Gali Batu,"Yew Tee (0.5 km), Choa Chu Kang (1.8 km)",Yew Tee Square; YewTee Point,-24.42,-29.52,-19.18,-15.27,1.19,22027
+47,Novena,Balestier,"Novena (0.7 km), Toa Payoh (0.9 km)",Sun Yat Sen Memorial Hall; Zhongshan Mall; Royal Square at Novena,-24.12,-29.15,-18.43,-12.72,1.06,32019
+48,Rochor,Victoria,"Bencoolen (0.1 km), Bras Basah (0.3 km)",Maghain Aboth Synagogue; Singapore Art Museum; SAM at 8Q & Singapore Art Museum,-23.87,-28.44,-19.76,-12.98,3.54,33016
+49,Central Water Catchment,Central Water Catchment,"Beauty World (1.9 km), King Albert Park (2.0 km)",,-23.78,-33.52,-12.97,-14.41,0.16,26022
+50,Pasir Ris,Loyang West,"Changi Airport (2.9 km), Pasir Ris (3.2 km)",,-23.18,-38.82,-6.18,-11.99,0.15,47025
+51,Sengkang,Lorong Halus North,"Kangkar (0.5 km), Bakau (0.8 km)",Rivervale Plaza,-23.17,-27.91,-18.25,-12.23,1.43,39025
+52,Geylang,Kampong Ubi,"Ubi (0.7 km), Eunos (0.8 km)",Eunos Crescent Blk 4A,-23.09,-27.73,-18.14,-10.56,1.90,39019
+53,Tengah,Brickland,"South View (1.0 km), Keat Hong (1.0 km)",Keat Hong Shopping Centre,-22.93,-30.18,-15.70,-13.20,0.27,21024
+54,Boon Lay,Liu Fang,"Pioneer (2.2 km), Boon Lay (2.5 km)",,-22.89,-40.58,-3.31,-15.36,0.14,16018
+55,Bukit Panjang,Nature Reserve,"Hume (0.1 km), Hillview (1.0 km)",Old Ford Factory Singapore Museum,-22.85,-31.86,-13.40,-13.15,0.25,24022
+56,Kallang,Tanjong Rhu,"Tanjong Rhu (0.5 km), Nicoll Highway (0.6 km)",Kallang Wave Mall; Hotel Traveltine,-22.70,-28.67,-16.37,-10.72,0.49,35016
+57,Novena,Dunearn,"Botanic Gardens (0.4 km), Tan Kah Kee (0.8 km)",Cluny Court; Serene Centre; Crown Centre,-22.64,-29.16,-15.47,-13.16,0.41,29019
+58,Queenstown,Port,"Haw Par Villa (1.5 km), Kent Ridge (1.6 km)",AS5; AS7 - Shaw Foundation Building; LT 8,-22.52,-30.95,-15.01,-13.70,0.26,24015
+59,Jurong East,Jurong Gateway,"Jurong East (0.3 km), Chinese Garden (1.4 km)",Westgate; JEM; Muji,-22.47,-27.78,-17.14,-13.68,1.67,21020
+60,Southern Islands,Sentosa,"HarbourFront (1.5 km), Telok Blangah (1.9 km)","S.E.A. Aquarium; Adventure Cove Waterparkâ„¢ Singapore; Resorts World Sentosa, Singapore",-22.39,-33.68,-11.68,-11.97,0.17,29011
+61,Choa Chu Kang,Choa Chu Kang North,"Choa Chu Kang (1.0 km), Yew Tee (1.0 km)",Jurong Pioneer Junior College,-22.09,-28.12,-15.41,-12.36,0.44,22026
+62,Choa Chu Kang,Yew Tee,"Yew Tee (0.5 km), Choa Chu Kang (1.5 km)",Yew Tee Square; YewTee Point; Yew Tee Hawker Centre,-22.07,-27.12,-16.30,-13.12,1.00,21027
+63,Downtown Core,Nicoll,"Nicoll Highway (0.4 km), Bugis (0.5 km)","Kampong Glam & Malay Culture in Singapore; Sultan Mosque (Masjid Sultan) Singapore; Malay Heritage Centre, Singapore",-21.92,-26.57,-17.07,-10.00,3.19,34016
+64,Kallang,Lavender,"Lavender (0.3 km), Jalan Besar (0.6 km)","Malay Heritage Centre, Singapore; Hajjah Fatimah Mosque; Kampong Glam & Malay Culture in Singapore",-21.91,-26.14,-18.01,-9.70,3.62,34017
+65,Mandai,Mandai Estate,"Yishun (1.3 km), Khatib (1.4 km)",,-21.85,-28.53,-15.06,-11.11,0.73,30030
+66,Outram,Chinatown,"Outram Park (0.2 km), Maxwell (0.2 km)",Kreta Ayer Square; Chinatown Singapore: History & Culture; Chinatown Food Street,-21.82,-28.04,-15.69,-10.66,3.01,32014
+67,Downtown Core,Marina Centre,"Promenade (0.4 km), Esplanade (0.6 km)",Singapore Flyer; ArtScience Museum Singapore; Esplanade Theatres on the Bay,-21.73,-28.20,-14.93,-9.80,2.03,34015
+68,Hougang,Lorong Halus,"Hougang (1.4 km), Kangkar (1.4 km)",,-21.71,-30.98,-12.61,-10.56,0.21,39024
+69,Queenstown,One North,"one-north (0.1 km), Kent Ridge (0.8 km)","Fusionopolis 1; Singapore Advanced Medicine Proton Therapy; National University Centre for Oral Health, Singapore",-21.57,-30.90,-11.32,-12.14,0.84,26016
+70,Geylang,Kallang Way,"Mattar (0.6 km), Geylang Bahru (0.8 km)",MacPherson Mall; St Andrew's Nursing Home (Aljunied); ibis Styles Singapore on Macpherson,-21.41,-27.58,-15.25,-8.88,0.62,36019
+71,Yishun,Nee Soon,"Springleaf (0.3 km), Lentor (2.9 km)",,-21.31,-31.34,-12.27,-11.05,0.23,29027
+72,Boon Lay,Tukang,"Pioneer (1.2 km), Boon Lay (1.6 km)",,-21.12,-31.61,-10.90,-14.13,0.17,16019
+73,Mandai,Mandai East,"Admiralty (0.9 km), Woodlands South (1.6 km)",,-20.92,-27.36,-14.35,-11.69,0.50,28031
+74,Boon Lay,Liu Fang,"Boon Lay (2.6 km), Lakeside (3.0 km)",,-20.69,-35.67,-5.23,-12.94,0.12,18018
+75,Geylang,Aljunied,"Aljunied (0.5 km), Geylang Bahru (0.8 km)",St Andrew's Nursing Home (Aljunied); ECM Building; James Cook University Singapore,-20.69,-25.67,-15.50,-7.62,1.70,36018
+76,Jurong West,Wenya,"Boon Lay (1.7 km), Lakeside (1.8 km)",,-20.56,-26.80,-14.13,-13.52,0.62,17022
+77,Geylang,Aljunied,"Mountbatten (0.6 km), Stadium (0.7 km)",Leisure Park Kallang; Hotel 81 - Hollywood; Taipei Hotel (2000),-20.52,-26.74,-13.41,-8.03,1.53,36017
+78,Tanglin,Nassim,"Stevens (0.4 km), Botanic Gardens (1.1 km)",Institute of Policy Studies; National University of Singapore (Bukit Timah); C J Koh Law Library,-20.50,-26.96,-13.38,-9.29,0.34,30018
+79,Woodlands,Woodlands West,"Marsiling (0.5 km), Kranji (1.4 km)",,-20.48,-27.37,-13.42,-11.65,0.53,24031
+80,Clementi,Clementi North,"Clementi (0.6 km), Dover (1.1 km)",Grantral Mall @ Clementi; The Clementi Mall; Clementi Ave 2 Blk 353 (Clementi Ave 2 Market/Cooked Food Centre),-20.47,-24.71,-15.63,-11.49,1.52,24018
+81,Geylang,Kampong Ubi,"Ubi (0.7 km), Tai Seng (0.9 km)",Oxley bizhub 2,-20.31,-28.63,-11.38,-8.20,0.94,38020
+82,Serangoon,Lorong Chuan,"Lorong Chuan (0.4 km), Bishan (1.3 km)",NTP+,-20.18,-25.76,-13.78,-9.06,0.56,34022
+83,Bedok,Bedok North,"Bedok Reservoir (1.0 km), Tanah Merah (1.1 km)",Bedok North Street 4 Blk 85 (85 Fengshan Centre),-20.12,-25.29,-14.95,-7.73,0.82,43020
+84,Bukit Batok,Bukit Batok South,"Bukit Batok (1.4 km), Hume (1.4 km)",,-20.07,-25.30,-13.81,-10.97,0.83,23021
+85,Jurong West,Boon Lay Place,"Lakeside (0.5 km), Boon Lay (1.3 km)",Boon Lay Shopping Centre; Boon Lay Place Blk 221A/B (Boon Lay Place Market and Food Village); Jurong West Street 52 Blk 505,-19.96,-24.96,-14.49,-11.32,1.01,18021
+86,Sengkang,Sengkang Town Centre,"Cheng Lim (0.4 km), Compassvale (0.7 km)",Sengkang General Hospital; Sengkang General & Community Hospital; Sengkang Community Hospital,-19.91,-24.45,-15.19,-8.51,1.90,38027
+87,Bukit Batok,Bukit Batok South,"Bukit Batok (0.6 km), Bukit Gombak (1.6 km)",Harvey Norman,-19.84,-25.17,-13.82,-10.61,1.20,22021
+88,Clementi,Faber,"Clementi (0.5 km), Dover (2.0 km)",The Clementi Mall; Grantral Mall @ Clementi; Clementi Ave 3 Blk 448,-19.59,-24.47,-14.61,-11.18,0.86,23018
+89,Queenstown,Pasir Panjang 2,"Pasir Panjang (0.7 km), Haw Par Villa (0.7 km)",K2 Guesthouse; Pasir Panjang Food Centre,-19.14,-31.14,-7.40,-9.57,0.17,26014
+90,Serangoon,Serangoon Garden,"Ang Mo Kio (2.2 km), Kovan (2.2 km)",,-19.02,-22.92,-14.43,-7.48,1.72,35024
+91,Yishun,Yishun South,"Khatib (0.1 km), Yishun (1.4 km)",,-19.00,-24.16,-13.46,-7.95,1.56,31029
+92,Bedok,Frankel,"Kembangan (0.4 km), Marine Terrace (1.2 km)",Parkway East Hospital; Hotel 81 - Changi,-18.84,-26.49,-10.84,-6.24,0.46,40018
+93,Sengkang,Anchorvale,"Tongkang (0.1 km), Renjong (0.5 km)",Block 6,-18.82,-25.00,-12.67,-7.26,0.99,37026
+94,Singapore River,Robertson Quay,"Fort Canning (0.3 km), Clarke Quay (0.6 km)",Hong San See Temple Singapore; Singapore River: History & Culture Tours; PARKROYAL on Pickering,-18.67,-23.88,-14.05,-7.06,2.45,32015
+95,Queenstown,Queensway,"Queenstown (1.1 km), Commonwealth (1.4 km)",Block 22 - Mortuary; Block 4; Block 24 - Clinic L [Active Centre],-18.34,-25.14,-11.59,-7.53,0.43,27015
+96,Jurong East,Yuhua West,"Chinese Garden (0.3 km), Lakeside (1.5 km)",Jurong East Ave 1 Blk 347 (Yuhua Market and Hawker Centre); Jurong East Street 24 Blk 254 (Yuhua Village Market and Food Centre),-18.33,-22.63,-13.85,-9.52,1.27,20021
+97,Bukit Timah,Hillcrest,"Tan Kah Kee (1.1 km), Sixth Avenue (1.1 km)",,-18.33,-29.53,-7.47,-8.32,0.12,28020
+98,Bukit Timah,Anak Bukit,"Beauty World (0.7 km), Hume (1.1 km)",Bukit Timah Shopping Center; Dimensions International College; Bukit Timah Interim Hawker Centre and Market,-17.99,-25.64,-10.52,-7.81,0.33,24021
+99,Bukit Merah,City Terminals,"Keppel (0.3 km), Cantonment (0.5 km)",SGH Emergency/ NNI Building; Outram Community Hospital; Harbour Ville Hotel,-17.80,-25.91,-10.50,-6.18,0.33,31013
+100,Ang Mo Kio,Cheng San,"Ang Mo Kio (1.2 km), Yio Chu Kang (2.0 km)",Ang Mo Kio Joint Testing & Vaccination Centre; Ang Mo Kio Ave 10 Blk 453A (Chong Boon Market and Food Centre); Ang Mo Kio Ave 10 Blk 527 (Cheng San Market and Cooked Food Centre),-17.58,-21.94,-13.07,-8.34,1.35,34024
+101,Toa Payoh,Sennett,"Bartley (0.8 km), Woodleigh (0.9 km)",MacPherson Mall; Bidadari Polyclinic & Nursing Home; ibis Styles Singapore on Macpherson,-17.36,-25.05,-9.50,-4.81,0.47,36020
+102,Toa Payoh,Pei Chun,"Potong Pasir (1.1 km), Woodleigh (1.3 km)",Kwong Wai Shiu Hospital @ Potong Pasir; St Andrew's Junior College; Toa Payoh Lorong 7 Blk 22 (Kim Keat Palm Market and Food Centre),-17.29,-21.74,-12.40,-5.39,1.00,34020
+103,Clementi,Toh Tuck,"Clementi (1.3 km), Jurong East (2.2 km)",,-17.10,-25.31,-8.65,-7.74,0.20,23019
+104,Jurong East,Lakeside (Business),"Chinese Garden (0.8 km), Jurong East (0.9 km)",Singapore Science Centre; Chinese Garden Singapore,-16.95,-26.17,-6.76,-7.99,0.21,20020
+105,Sengkang,Rivervale,"Bakau (0.2 km), Rumbia (0.2 km)",Rivervale Mall; Rivervale Plaza; Sengkang Joint Testing & Vaccination Centre,-16.92,-21.39,-12.60,-5.51,2.28,39026
+106,Pasir Ris,Pasir Ris Wafer Fab Park,"Riviera (1.7 km), Coral Edge (1.9 km)",,-16.42,-24.08,-8.34,-5.22,0.22,41025
+107,Sengkang,Lorong Halus North,"Bakau (1.2 km), Kangkar (1.4 km)",,-16.41,-23.94,-8.06,-4.92,0.18,40025
+108,Serangoon,Seletar Hills,"Ang Mo Kio (1.6 km), Yio Chu Kang (1.7 km)",Ang Mo Kio Joint Testing & Vaccination Centre; ITE College Central,-16.40,-23.53,-8.10,-6.72,0.28,34025
+109,Tanglin,Nassim,"Newton (0.8 km), Stevens (0.9 km)",Balmoral Plaza; VIP Hotel; Mercure Singapore on Stevens,-16.04,-23.44,-9.22,-4.00,0.30,31018
+110,Jurong East,Lakeside (Business),"Jurong East (0.8 km), Chinese Garden (2.1 km)",Teban Gardens Road Blk 37A (Teban Gardens Market and Food Centre),-15.99,-22.53,-9.24,-6.38,0.38,21019
+111,Toa Payoh,Joo Seng,"Tai Seng (0.1 km), MacPherson (1.0 km)",18 Tai Seng; Oxley bizhub 2,-15.81,-22.98,-8.22,-3.02,0.44,37020
+112,Serangoon,Seletar Hills,"Fernvale (1.8 km), Yio Chu Kang (1.9 km)",,-15.47,-24.36,-5.86,-5.68,0.26,34026
+113,Central Water Catchment,Central Water Catchment,"Sixth Avenue (1.8 km), Tan Kah Kee (2.1 km)",,-15.17,-27.27,-2.00,-4.66,0.08,28021
+114,Bukit Timah,Holland Road,"King Albert Park (0.6 km), Beauty World (0.8 km)",Ngee Ann Polytechnic; Bukit Timah Market,-15.16,-22.52,-7.19,-4.62,0.26,25020
+115,Punggol,Punggol Field,"Coral Edge (0.5 km), Riviera (0.6 km)",Punggol Plaza,-15.14,-20.86,-8.28,-3.31,0.51,40026
+116,Sungei Kadut,Pang Sua,"Yew Tee (1.3 km), Kranji (2.2 km)",,-14.94,-22.88,-6.72,-4.96,0.16,22028
+117,Bishan,Bishan East,"Lorong Chuan (0.9 km), Woodleigh (1.3 km)",BCA Academy of the Built Environment,-14.48,-18.90,-9.99,-2.57,1.54,34021
+118,Jurong East,Penjuru Crescent,"Clementi (3.0 km), Jurong East (3.7 km)",,-14.31,-27.46,-0.79,-6.43,0.14,21016
+119,Bukit Panjang,Saujana,"Segar (0.2 km), Fajar (0.6 km)",Greenridge Shopping Centre; Fajar Shopping Centre,-13.84,-20.02,-7.52,-2.93,0.75,24026
+120,Boon Lay,Tukang,"Boon Lay (1.8 km), Lakeside (2.0 km)",,-13.74,-26.35,-1.84,-5.32,0.12,18019
+121,Jurong West,Safti,"Pioneer (0.9 km), Joo Koon (1.5 km)",,-12.65,-25.29,1.79,-6.09,0.10,15020
