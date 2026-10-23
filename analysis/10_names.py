@@ -212,13 +212,13 @@ def short(text, n=34):
     return cut + ("...)" if cut.count("(") > cut.count(")") else "...")
 
 
-def label(ax, df, text_col, n, fs=6.5, loc="upper left"):
+def label(ax, df, text_col, n, fs=6.5, loc="upper left", width=40):
     """Numbered markers on the map and a numbered key in a corner box (no overlapping place labels)."""
     rows = list(df.head(n).itertuples())
     for k, r in enumerate(rows, 1):
         ax.plot(r.lon, r.lat, "o", ms=7, mfc="white", mec=INK, mew=0.8, zorder=5)
         ax.annotate(str(k), (r.lon, r.lat), ha="center", va="center", fontsize=fs - 1.5, color=INK, zorder=6)
-    key = "\n".join(f"{k}  {short(getattr(r, text_col), 40)}" for k, r in enumerate(rows, 1))
+    key = "\n".join(f"{k}  {short(getattr(r, text_col), width)}" for k, r in enumerate(rows, 1))
     x, ha = (0.01, "left") if "left" in loc else (0.99, "right")
     y, va = (0.01, "bottom") if "lower" in loc else (0.99, "top")
     ax.text(x, y, key, transform=ax.transAxes, ha=ha, va=va, fontsize=fs, color=INK, zorder=7, linespacing=1.35,

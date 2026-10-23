@@ -311,7 +311,13 @@ def charts():
     save(fig, "sim2_heldout_storms", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, OpenStreetMap roads. "
          "Dashed: rain peak; dotted: baseline x main-model rain effects. Scenario-based operational model, not validation.")
     plt.close(fig)
-    # diagnosis chart (step-8 combinations): where the mismatch is
+    diag_chart()
+
+
+def diag_chart():
+    """Diagnosis chart from the saved tables (step-8 combinations): where the mismatch is."""
+    import matplotlib.pyplot as plt
+    style()
     d = pd.read_csv(TABLES / "sim2_diagnosis_by_storm.csv")
     R = pd.read_csv(TABLES / "sim2_noise_floor.csv")
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.6))
@@ -330,8 +336,10 @@ def charts():
     axes[0].plot([], [], color=ORANGE, lw=6, alpha=0.35, label="10 held-out storms")
     axes[0].legend(fontsize=7)
     sp = R.groupby("period").stat_path_passes.sum()
-    fig.suptitle(f"Why step-8 scenarios fail: level too low, weak timing and spatial change; even the statistical path "
-                 f"passes only {sp.get('test', 0)}/10 held-out storms", x=0.01, ha="left", fontsize=9.5)
+    lb = d.groupby("period").level_bias.mean()
+    fig.suptitle(f"Why step-8 scenarios fail: average level gap {100 * lb['fit']:+.0f}% (training) / {100 * lb['test']:+.0f}% "
+                 f"(held-out), but timing and which cells lose taxis match weakly; the statistical path passes only "
+                 f"{sp.get('test', 0)}/10 held-out storms", x=0.01, ha="left", fontsize=9)
     fig.tight_layout()
     save(fig, "sim2_diagnosis", "Sources: step-8 simulation, data.gov.sg taxi availability (LTA), NEA rainfall. "
          "Each box: 8 tuned combinations x storms.")

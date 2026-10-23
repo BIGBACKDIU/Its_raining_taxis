@@ -20,6 +20,11 @@ figures 15-27 in `outputs/figures/report/`, and the road-network simulation with
 `sim/v2/index.html` (illustration only: it does not pass the plausibility check). Large derived files (drive-time
 matrices, OSM extracts, HDB footprints, fitted models) are rebuilt by `analysis/prep_osm.py`,
 `analysis/prep_phase2_data.py`, `analysis/11_roads.py --part graph` and `analysis/12_factors.py` and are not in git.
+A second independent review (of commit 37081c1) led to fixes recorded as decisions 123-136 and summarised at the
+end of `outputs/phase2_progress.md`: stricter HDB matching, MRT line and exit parsing, the stored random-forest
+transform, step-15 timing, step-13 matching and terms, step-19 errors, presentation filters (>= 4 expected taxis,
+FDR 10%), dry-only deserts, and a request/taxi conservation fix in both simulators (all earlier simulation numbers
+are void; `tests/test_sim_conservation.py`).
 
 ## 1. The project in one paragraph
 

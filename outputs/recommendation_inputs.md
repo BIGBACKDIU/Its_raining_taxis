@@ -2,8 +2,8 @@
 
 Steps 7 and 8 of the analysis, plus phase-2 inputs (steps 10-20, section 5). All numbers describe **vacant-taxi availability** in the public feed (all
 operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
-conditional on a scenario**, and no simulation scenario passed the pre-registered plausibility check on held-out
-storms, so they are illustrations of mechanisms, not predictions.
+conditional on a scenario**, and no simulation scenario (before or after the conservation fix) passes the
+pre-registered plausibility check on held-out storms, so they are illustrations of mechanisms, not predictions.
 
 ## 1. What the forecasting result means for the recommendation
 
@@ -62,13 +62,16 @@ Use these to time rain incentives (e.g. driver bonuses) for forecast rainy perio
 
 ## 4. Simulation ranges (step 8) - `outputs/tables/sim_*.csv`, page `sim/index.html`
 
-Simulated, conditional on scenario; none of the 24 tuned scenario combinations passed the held-out plausibility
-rule (best 5 of 10 storms; the road-network version v2 also fails, best 1 of 10 - section 5). Read as "what could happen under assumption X":
-- Vacant taxis at the rain peak relative to the start: about 0.6-0.9 of the start level in demand-surge or
-  supply-drop scenarios (5-95% ranges roughly 0.4-1.4); much lower (about 0.06-0.65) when both happen together.
-- Simulated share of requests abandoned during rain: about 1-10% depending on the scenario.
-- Step-7 repositioning in the simulation: abandoned requests during rain -1.3 percentage points on average
-  (range 0 to -4.7), vacant taxis at the peak -4 points (taxis are in transit), waits essentially unchanged.
+Simulated, conditional on scenario. The first version of these ranges came from a simulator with a matching bug
+(requests could be served more than once) and is void; the numbers below are from the fixed, retuned simulator.
+No tuned combination passes the held-out plausibility rule (best 4 of 10 storms; the road-network version v2
+best 3 of 10 - section 5). Read as "what could happen under assumption X":
+- Vacant taxis at the rain peak relative to the start: about 0.7-1.0 of the start level in demand-surge or
+  supply-drop scenarios (5-95% ranges roughly 0.5-1.5); about 0.5-0.8 when both happen together (5-95% roughly
+  0.3-1.25).
+- Simulated share of requests abandoned during rain: about 0.1-6% depending on the scenario.
+- Step-7 repositioning in the simulation: abandoned requests during rain -0.4 percentage points on average
+  (range 0 to -2.6), vacant taxis at the peak -2 points (taxis are in transit), waits essentially unchanged.
 These are simulation quantities; they are not observed demand, waiting times or revenue.
 
 ## 5. Phase-2 inputs: where to act and what to expect (steps 10-20)

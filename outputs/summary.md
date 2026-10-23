@@ -147,11 +147,12 @@ correction is applied to the headline.
 - **Strong (for the tested setups):** the weather gain in forecasting is negligible. Wider labels, scales and
   horizons were checked in a pre-registered secondary analysis; the conclusion is limited to the models, labels and
   horizons we tried.
-- **Moderate (phase 2):** the named rankings of places (cell-level CIs from a day bootstrap) and the Central Area
-  contrast (robust across designs). **Weak:** which characteristics explain the rest (low out-of-area R2), the MRT
-  natural experiment (pre-trends fail), the fleet trend (coverage confound) and predictions for cells without
+- **Moderate (phase 2):** the named rankings of places (day-bootstrap CIs; presented lists pass a 10%
+  false-discovery rate and need >= 4 expected taxis) and the Central Area contrast (all three designs). **Weak:**
+  which characteristics explain the rest (low out-of-area R2; most associations hold in only one design), the
+  MRT natural experiment (pre-trends fail), the fleet trend (no clear relation) and predictions for cells without
   reliable taxi data (extrapolations).
-- **Weak:** simulation numbers (failed plausibility, both versions) and modelled travel times / shortfall
+- **Weak:** simulation numbers (both versions fail the plausibility check after the conservation fix) and modelled travel times / shortfall
   reductions in the plan.
 
 ## 4. Caveats
@@ -161,11 +162,12 @@ correction is applied to the headline.
   and allowed for them in every model; some excluded days (100) and missing months (Jun 2025 mostly) remain.
 - **Retrospective labels.** "Unusually low" in the test year uses each feed regime's normal level estimated from
   that regime's own data. A second scoring with a label knowable at forecast time gives the same conclusions.
-- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 26 runs that scored or used
+- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 37 runs that scored or used
   test-year outcomes (13 reconstructed from file times): the pre-specified primary scoring, a pre-registered
   secondary analysis, post-hoc checks (marked as such), the policy evaluation, the simulation's held-out storms,
   re-scorings after an independent review, and phase-2 uses (morning-forecast scoring once, test-year months in the
-  fleet-trend and MRT analyses as associations, simulation v2 held-out check). No forecasting model was refitted
+  fleet-trend and MRT analyses as associations, simulation v2 held-out check, and re-runs after the second review:
+  morning-forecast re-scoring once, simulation retuning checks and grid). No forecasting model was refitted
   after its first scoring.
 - **Not available:** company field (CDG vs others), trip / booking data (requested from LTA), observed road
   speeds, LTA pick-up bay locations (need a DataMall key; OpenStreetMap taxi points used as a partial proxy).

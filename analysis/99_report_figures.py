@@ -28,20 +28,20 @@ SET = [
     ("s1_weather_gain", "Weather's added skill across 36 scale x horizon x label comparisons (none material)."),
     ("planning_forecast_rain", "Planning view: availability under an NEA rain forecast by area and hour."),
     ("policy_diagnosis", "Repositioning plan vs forecast ranking: what the constraints cost in targeting."),
-    ("sim_heldout_storms", "Simulation vs observed on held-out storms (scenario-based; did not pass plausibility)."),
+    ("sim_heldout_storms", "Step-8 simulation vs observed on held-out storms (after the conservation fix; does not pass)."),
     ("names_rain_hit_map", "Named places where heavy rain goes with the most taxis lost and the largest share losses."),
     ("minutes_to_taxi_maps", "Drive minutes to the nearest vacant taxi, dry, and the extra in heavy rain, by place."),
     ("dry_supply_by_band", "Dry-weather vacant-taxi supply by time band, best-supplied places named."),
-    ("taxi_deserts_map", "Taxi deserts: residential areas with the fewest dry-weather vacant taxis per resident."),
+    ("taxi_deserts_map", "Dry-weather taxi deserts: residential areas with the fewest dry-weather vacant taxis per resident."),
     ("factors_contrasts", "Why: heavy-rain effect by place type (Central Area, MRT, taxi stand, mall) in the panel model."),
     ("factors_shap", "Which characteristics separate places that lose more (random forest; weak out-of-area fit)."),
     ("dose_intensity_hangover", "Intensity-response curve and the after-rain shortfall."),
     ("mrt_did_event_study", "New MRT stations: dry-weather supply nearby before and after opening (pre-trends fail)."),
     ("fleet_trend", "Monthly heavy-rain effect against the LTA fleet size."),
     ("stands_predicted_sensitivity", "Predicted heavy-rain sensitivity for every land cell (planning map)."),
-    ("spillover_islandwide_map", "Island-wide rain: which named places gain or lose share of vacant taxis."),
-    ("sim2_diagnosis", "Why the step-8 simulation failed its plausibility check: level, timing, spatial pattern."),
-    ("sim2_heldout_storms", "Simulation v2 vs observed on held-out storms (illustration only; did not pass)."),
+    ("spillover_islandwide_map", "Island-wide rain: share of vacant taxis by place (almost every cell still loses taxis)."),
+    ("sim2_diagnosis", "Why the step-8 simulation fails its plausibility check: level, timing, spatial pattern."),
+    ("sim2_heldout_storms", "Simulation v2 vs observed on held-out storms (illustration only; does not pass)."),
 ]
 
 
@@ -140,14 +140,16 @@ def spillover_map():
     d02.draw_base(ax)
     div = LinearSegmentedColormap.from_list("d", ["#b8431c", ORANGE, "#f2f1ed", "#7fb0e8", BLUE_DARK])
     norm = TwoSlopeNorm(vcenter=0, vmin=-40, vmax=30)
-    sig = r[r.direction != "no clear change"]
+    sig = r[r.presentable & (r.direction != "no clear change")]
     N.draw_cells(ax, r.cell.values, np.where(r.direction == "no clear change", 0, r.share_pct.clip(-40, 30)), div, norm)
     lab = pd.concat([sig.nsmallest(6, "share_pct"), sig.nlargest(6, "share_pct")])
-    lab = lab.assign(short=[f"{v:+.0f}%  {p}" for p, v in zip(lab.place, lab.share_pct)])
-    N.label(ax, lab, "short", 12)
+    lab = lab.assign(short=[f"{v:+.0f}% share, {a:+.1f} taxis  {p}" for p, v, a in
+                            zip(lab.place, lab.share_pct, lab.abs_change_per_half_hour)])
+    N.label(ax, lab, "short", 12, width=62)
     fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=div), ax=ax, orientation="horizontal", fraction=0.05, pad=0.02,
                  label="% change in the cell's share of citywide vacant taxis in island-wide rain (grey-white: no clear change)")
-    ax.set_title("Island-wide rain: taxis gather at the airport and in suburbs, thin out in the centre", fontsize=10)
+    ax.set_title(f"Island-wide rain: {int((r.absolute == 'fewer taxis').sum())} of {len(r)} cells have fewer vacant taxis; "
+                 "the centre loses share most (labels: >= 4 expected taxis, FDR q < 0.10)", fontsize=9.5)
     fig.tight_layout()
     save(fig, "spillover_islandwide_map", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, URA MP2019, OSM. "
          "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")

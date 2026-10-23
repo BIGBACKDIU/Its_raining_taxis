@@ -351,3 +351,8 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   within 5% or 0.01 absolute): all pass; largest gaps 0.3% (mean) and 1.4% (peak).
 - Pages rebuilt and republished: `sim/index.html` and `sim/v2/index.html` (dispatcher panel unchanged in
   design, illustration banner with the new diagnosis). The step-8 scenario grid (50 seeds) is re-run.
+- Step-8 grid re-run (24 combinations x 3 demand levels x 2 policies x 10 held-out storms x 50 seeds = 72,000
+  runs; logged): vacant taxis at the rain peak about 0.7-1.0 of the start in demand or supply scenarios and
+  0.5-0.8 when both act; simulated abandonment during rain 0.1-6%; step-7 repositioning changes abandonment
+  during rain by -0.4 points on average (0 to -2.6). Before the fix the same summary read 1-10% abandonment and
+  -1.3 points (0 to -4.7); those numbers are void. `recommendation_inputs.md` section 4 is updated.
