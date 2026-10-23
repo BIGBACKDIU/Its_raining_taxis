@@ -586,3 +586,62 @@ results stay as they are and remain the pre-specified result.
 111. **What it can show.** Whether vacant supply near a new station, and its drop in heavy rain, changed after
     opening relative to similar cells. It cannot separate taxi supply from changes in rider demand, other
     contemporaneous changes near the stations, or feed-coverage changes that differ by area; few treated cells.
+
+## Step 14 pre-registration: taxi stands and planning map
+
+112. (a) Poisson FE panel (fit period, main specification, abs and share, CRV1 by day) with heavy rain x "LTA taxi
+    stop / stand or OSM taxi point within 300 m of the cell" and the step-12 controls (heavy x MRT distance bands,
+    Central Area, mall, HDB units, distance to Raffles Place). (b) Candidate stand locations: eligible cells with no
+    LTA stop / stand and no OSM taxi point within 300 m that are either among the 100 most rain-hit cells (taxis
+    lost per heavy half hour) or taxi deserts (step 10 list), ranked by taxis lost per heavy half hour (rain-hit)
+    and by residents (deserts); feasibility notes are qualitative only (arterial road in the cell, MRT exit within
+    300 m, mall / hospital in the cell, residential share) - no cost or kerb-space data. (c) Predicted heavy-rain
+    effect for every land cell from the step-12 random forest (absolute version); cells outside the 374 analysed
+    cells are marked "predicted"; summarised by planning area and subzone (resident-weighted mean).
+
+## Step 15 pre-registration: planning value of morning forecasts
+
+113. Unit: planning area x time band (10-17, 17-20, 20-24) x day; outcome = number of low-availability
+    cell-half-hours (deficit >= 0.5, baseline >= 4, retrospective label; the issue-time label as a check).
+    Information by 09:00: weekday / day type / month, climatology (fit-period mean for area x band x day type), the
+    area-band mean over the previous 7 days and the previous day's value, citywide trailing coverage level; forecast
+    features = the latest NEA 24-hour forecast issued before 09:00 that day: general forecast category and the
+    category for the area's region in the 12-18 and 18-06 periods (codes: fair 0, cloudy 1, showers 2, thundery 3),
+    max relative humidity and temperature. Models: Poisson GLM and LightGBM (poisson) with and without the forecast
+    features; fit Apr 2022 - Mar 2025; LightGBM rounds by early stopping on Apr - Sep 2025; test year scored once
+    and logged. Material if the test-year Poisson deviance falls by >= 2% with the forecast AND the 95% day-block
+    bootstrap CI of the improvement excludes 0.
+
+## Step 16 pre-registration: dose, duration and after-effects
+
+114. (a) Intensity-response: natural cubic spline of mm/h (knots 1, 2.5, 5, 10, 20, 40; boundary 0 and 80, values
+    above 80 capped) replacing the bands in the main abs and share models, plus lags; curve relative to dry with
+    delta-method CIs. (b) Duration: current band x wet-spell length bins (<= 30, 31-60, 61-120, > 120 min at the
+    nearest gauge). (c) Hangover: in rows with no rain now, dummies for minutes since rain ended at the cell (bins
+    of 30 min up to 180) against rows dry for >= 6 hours; current rain bands kept, lags dropped (they overlap).
+    (d) Recovery by rain-response type: the step-3 event study run separately for type 0 and type 1 cells; recovery
+    time = first event bin after onset from which every later bin's CI includes 0.
+
+## Step 17 pre-registration: redistribution and spillovers
+
+115. (a) Island-wide rain = at least half of the working gauges record rain in (t-30, t]. Per-cell share change
+    during island-wide rain vs the share benchmark (step 10 method), day-bootstrap CIs; named gainers and losers
+    (CI excludes 0) and their characteristics compared with WLS on the step-12 kept characteristics. (b) Spillover
+    model: own band + rain within 2 km (dry / light / heavier, cut at 2.5 mm/h) + 2-5 km ring (same bins) together,
+    abs and share.
+
+## Step 18 pre-registration: rain measurement error
+
+116. Distance from each cell centre to its nearest working gauge, per day. Main abs and share models estimated
+    separately for cell-days <= 1 km and > 1 km from the nearest working gauge, and with heavy x far
+    interactions. Attenuation indicator = far / near coefficient ratio. Reliability ratio of the cell rain measure
+    = cov(nearest gauge, second-nearest gauge) / var(nearest gauge) over cell-snapshots (classical error
+    assumption); headline effects divided by it give an indicative corrected size (log-linear approximation).
+
+## Step 19 pre-registration: fleet trend
+
+117. Heavy-rain effect per calendar month, Oct 2021 - Sep 2026 (test-year months included, logged; association
+    only): abs model (cell + how + regime FE) and share model (cell + snapshot FE) per month, months with >= 2,000
+    heavy-rain cell-snapshots. Meta-regression of the monthly log effect on the LTA total taxi fleet (thousands),
+    log feed coverage level (regime), and season, weights 1 / (SE^2 + tau^2), HC1 errors; slope reported as the
+    change in the heavy-rain effect per 1,000 fewer taxis.
