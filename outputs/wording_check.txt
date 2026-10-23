@@ -1,6 +1,3 @@
-# Manual review (23 Oct 2026): every hit below is a disclaimer ('not demand', 'association, not cause'),
-# the labelled demand-surge SCENARIO of the simulation, or software validation of the estimator against pyfixest.
-# No result is described as demand, waiting time, revenue or cause.
 outputs/summary.md:8 [demand] gauges and 2-hour forecasts. Vacant taxis are supply, not demand: the results say nothing directly about unmet
 outputs/summary.md:8 [unmet] gauges and 2-hour forecasts. Vacant taxis are supply, not demand: the results say nothing directly about unmet
 outputs/summary.md:9 [demand] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
@@ -8,6 +5,7 @@ outputs/summary.md:9 [waiting time] demand, waiting times or revenue. All rain r
 outputs/summary.md:9 [revenue] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:9 [cause] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:48 [demand] 8. **Simulation.** A storm simulator (`sim/index.html`) shows how demand surges, drivers going offline, or both,
+outputs/summary.md:64 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes.
 outputs/recommendation_inputs.md:4 [cause] operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
 outputs/recommendation_inputs.md:44 [demand] - Modelled expected shortfall reductions are model quantities, not observed demand or service.
 outputs/recommendation_inputs.md:67 [demand] - Vacant taxis at the rain peak relative to the start: about 0.6-0.9 of the start level in demand-surge or
@@ -37,6 +35,20 @@ analysis/08_simulation.py:253 [demand] levels = {"mechanism": ["demand", "supply
 analysis/08_simulation.py:266 [demand] t.insert(0, "label", LABEL + " (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)")
 analysis/08_simulation.py:391 [validation] "Scenario-based operational model, not validation.")
 analysis/08_simulation.py:399 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/10_names.py:207 [cause] "Apr 2022 - Mar 2025; cells with >= 100 heavy-rain rows. Association, not cause.")
+analysis/11_roads.py:250 [cause] "(modelled speeds). Apr 2022 - Mar 2025. Association, not cause.")
+analysis/12_factors.py:9 [cause] Supply associations only: characteristics describe places, they are not shown to cause the rain effect.
+analysis/16_dose.py:160 [cause] "Poisson FE, 95% CI clustered by day. Association, not cause.")
+analysis/19_fleet.py:89 [cause] "Sep 2026; meta-regression controls feed coverage level and season. Association, not cause.")
+analysis/20_sim_v2.py:1 [validation] """Step 20: simulation v2 (pre-registration: decisions 119-122). Scenario-based operational model, never "validation".
+analysis/20_sim_v2.py:33 [demand] COMBOS = list(itertools.product(["demand", "supply", "mix"], ["characteristics", "observed"], ["dry", "rain"],
+analysis/20_sim_v2.py:219 [demand] "beta_dem": trial.suggest_float("beta_dem", 0.0, 2.0) if mech in ("demand", "mix") else 0.0,
+analysis/20_sim_v2.py:310 [validation] "Dashed: rain peak; dotted: baseline x main-model rain effects. Scenario-based operational model, not validation.")
+analysis/20_sim_v2.py:320 [demand] for j, mech in enumerate(["demand", "supply", "mix"]):
+analysis/20_sim_v2.py:324 [demand] ax.set_xticks([0.5, 3.5, 6.5], ["demand", "supply", "mix"])
+analysis/20_sim_v2.py:396 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/99_report_figures.py:129 [cause] "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
+analysis/99_report_figures.py:153 [cause] "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
 analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).
 analysis/99_wording_check.py:1 [cause] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).
 analysis/99_wording_check.py:15 [demand] "demand": r"\bdemand\b", "unmet": r"\bunmet\b", "lost riders": r"lost (riders|trips|passengers)",

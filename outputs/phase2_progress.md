@@ -51,9 +51,9 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   3,132 500 m land cells (dry and rain) are kept outside git.
 - Rider-centric availability for every 30-minute snapshot Apr 2022 - Mar 2025 (19.2 million cell-snapshots):
   median 1.6 drive minutes from an eligible cell centre to the nearest vacant taxi in dry weather.
-- Heavy rain lengthens that drive by 2.5% (CI 1.9 to 3.0%; light 2.0%, moderate 2.2%). With the citywide
-  vacant count added as a regressor the effect is about zero (heavy +0.05%, CI -0.26 to +0.37%): rain moves the
-  nearest taxi further away through the citywide drop in vacant taxis, not through a separate local gap.
+- Heavy rain goes with a 2.5% longer drive (CI 1.9 to 3.0%; light 2.0%, moderate 2.2%). With the citywide
+  vacant count added as a regressor the effect is about zero (heavy +0.05%, CI -0.26 to +0.37%): the longer drive in rain goes with
+  the citywide drop in vacant taxis, not with a separate local gap.
 - Most extra minutes in heavy rain (named): Changi Airport (+0.8 min, +22.6%), Plab / Paya Lebar (+12.5%),
   Swiss Club / Chatsworth International School (+16.1%), Changi Point / Changi Village (+14.3%), Sentosa
   (Quayside Isle, +8.5%; S.E.A. Aquarium, +6.3%), Seletar Aerospace Park (+13.4%).

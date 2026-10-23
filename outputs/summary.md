@@ -47,9 +47,77 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
    (`policy_diagnosis.csv`, fig 13; details for Nat in `recommendation_inputs.md`)
 8. **Simulation.** A storm simulator (`sim/index.html`) shows how demand surges, drivers going offline, or both,
    could play out. It is scenario-based and **none of the 24 tuned scenarios passed the plausibility check we fixed
-   in advance** on 10 held-out storms (best: 5 of 10). Use it to explain mechanisms, not to predict. (fig 14)
+   in advance** on 10 held-out storms (best: 5 of 10). A rebuilt version on real road times (`sim/v2/index.html`,
+   with a dispatcher panel) matches *where* taxis are much better but drains the citywide level, and also fails
+   (best 1 of 10). Even a non-simulation path built from our estimated rain effects meets the rule on only 3 of the
+   10 held-out storms: those storms are deeper and noisier than the feed's usual behaviour. Use the pages to explain
+   mechanisms, not to predict. (figs 14, 26-27)
+9. **Morning planning.** Information available by 09:00 - usual patterns plus the NEA 24-hour forecast - predicts
+   how many low-availability half-hours a planning area will have later that day. Adding the forecast cut the
+   test-year error by 6.6% (CI 5.7-7.5%) in the more flexible model, meeting the materiality rule fixed in
+   advance; it did not help the simpler regression or the issue-time label. Modest, model-dependent support for
+   planning the day around the morning forecast. (`morning_forecast_value.csv`)
 
-## 2. How sure are we?
+## 2. Where and why (phase 2)
+
+All numbers are heavy rain (> 10 mm/h) vs the no-rain expectation for the same cell and time, Apr 2022 - Mar
+2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes.
+
+**Where heavy rain takes the most taxis away** (`rain_hit_top30_absolute.csv`, fig 15). In taxis lost per
+heavy-rain half-hour: Changi Airport T3/T2 (7.1 taxis; -8.5%) and T1/Jewel (6.9; -15.9%) - large because the
+airport holds so many taxis, not because it loses a big share; then the CBD and its fringe: Raffles Place / Lau
+Pa Sat (4.9; -30.8% [-38.2, -23.5]), Bayfront / Marina Bay Sands (4.8; -36.4%), Dhoby Ghaut / Fort Canning (3.7;
+-34.9%), Lavender and Victoria (Bugis; about -22% to -24%), Nicoll (Kampong Glam), City Hall and Chinatown. The
+median analysed cell loses 14.9%; 293 of 374 cells have a CI below zero.
+
+**Where the local share collapses** (`rain_hit_top30_share.csv`). Relative to the citywide drop: Plab (Paya Lebar)
+-47.9%, Marina South -34.0%, Seletar Aerospace Park -30.9%, Lower Seletar (Yishun) -29.2%, Swiss Club (Bukit
+Timah) -28.6%, Sembawang North -28.4% - isolated places where a few taxis normally wait and then leave.
+
+**Where taxis gather in rain** (`rain_gainers.csv`, `spillover_islandwide_share.csv`, fig 25). 40 cells clearly gain
+share in heavy rain: Xilin (Tampines, Changi City Point side) +50%, Senoko West +37%, Tuas View +34%, the Changi
+terminals (+31%), Yio Chu Kang East (Nanyang Polytechnic) +24%. In island-wide rain the airport terminals,
+Tampines West, Katong and Bedok South gain, while the CBD, Plab, the Zoo / Night Safari edge and Kampong Ubi lose.
+
+**Why: what distinguishes places that lose more** (step 12; figs 19-20).
+- **The city centre is the one strong factor.** Inside the panel model, heavy rain goes with -24.3% [-27.4,
+  -21.1] vacant taxis in the URA Central Area vs -11.9% [-13.4, -10.4] elsewhere (share: -18.7% vs -4.9%). Across
+  cells, with spatial clustering modelled, Central Area cells lose 9.2% [0.4, 17.2] more than otherwise similar
+  cells.
+- **MRT, taxi stands and malls make no clear difference.** Within 300 m of an MRT exit: -12.9% vs -11.9% for
+  cells 1 km or more away (difference -1.1% [-2.9, +0.6]). A taxi stop/stand or taxi point within 300 m: -12.3% vs
+  -11.5% without (difference -1.0% [-2.5, +0.5]). A mall in the cell: -12.1%.
+- **Smaller, consistent associations:** more business/industrial land (+3.5% smaller loss per SD), more HDB
+  homes (+4.0% per SD) and, for share, closeness to Changi Airport (2.6% smaller loss per SD nearer).
+- **Characteristics explain only part of it.** A random forest on all 35 characteristics predicts the cell
+  effects weakly in areas it has not seen (spatial-CV R2 0.12-0.15) and separates rain-sensitive from other cells
+  with AUC 0.70. Much of where rain bites is not captured by these place descriptions.
+
+**Why: rain is regional, and the drop is mostly citywide.** Rain 2-5 km away goes with -6.7% [-7.9, -5.4]
+vacant taxis even with the cell's own rain in the model (own heavy rain then -5.6%). The extra drive time to the
+nearest vacant taxi in heavy rain (+2.5% [1.9, 3.0]; median dry drive 1.6 min) disappears once the citywide
+vacant count is controlled (+0.05%): the nearest vacant taxi is further away in rain in step with the citywide thinning of the fleet, most at Changi
+Airport (+22.6% drive time), Plab (+12.5%), Swiss Club (+16.1%), Changi Village (+14.3%) and Sentosa. (figs 16, 25)
+
+**How rain bites: onset, duration, after-effects** (fig 21). The first millimetre matters most (-9.7% at 1 mm/h;
+-13% from 20 mm/h, no further deepening). Long spells bite harder: heavy rain -11.4% in its first 30 minutes,
+-18.0% [-21.2, -14.6] after 2 hours. After rain stops, vacant taxis stay 5.3% below normal for the next half hour
+and about 2% below for up to 3 hours - a citywide shortfall (no local share hangover). Rain-sensitive cells take
+150 minutes to recover vs 120 for others.
+
+**Taxi deserts in dry weather** (`taxi_deserts.csv`, figs 17-18). Fewest vacant taxis per resident among
+residential cells: Upper Thomson, Waterway East and Punggol Town Centre (23,600 residents, 0.67 vacant taxis per
+10,000), Punggol Canal, Pasir Ris Park, Sembawang Straits, Simpang South, Brickland (Tengah) and Gombak.
+
+**Over time and other checks.** As the LTA fleet shrank from 15,400 to 11,900 taxis, the local share effect of
+heavy rain grew by 2.2 log-points per 1,000 fewer taxis [0.3, 4.1] (absolute: 1.0 [-0.5, 2.6], not clear); feed
+coverage changes are a competing explanation (fig 23). New MRT stations (Thomson-East Coast Line stages 3-4,
+Punggol Coast, Hume) show no clear change in nearby dry-weather supply (+2.3% [-6.6, +12.0]) or in the
+heavy-rain effect, but pre-opening trends differ, so this is not a clean test (fig 22). Cells far from a working
+rain gauge show slightly larger, not smaller, effects; a classical-error correction would put heavy rain nearer
+-17.5%, so the headline -12.9% may be somewhat understated.
+
+## 3. How sure are we?
 
 - **Strong:** rain is associated with fewer vacant taxis. The sign and size hold across three model types, 3-gauge
   rain, each fiscal year, 500 m cells, 15-minute snapshots, negative binomial models, a sample with excluded days put
@@ -60,20 +128,29 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
 - **Strong (for the tested setups):** the weather gain in forecasting is negligible. Wider labels, scales and
   horizons were checked in a pre-registered secondary analysis; the conclusion is limited to the models, labels and
   horizons we tried.
-- **Weak:** simulation numbers (failed plausibility) and modelled travel times / shortfall reductions in the plan.
+- **Moderate (phase 2):** the named rankings of places (cell-level CIs from a day bootstrap) and the Central Area
+  contrast (robust across designs). **Weak:** which characteristics explain the rest (low out-of-area R2), the MRT
+  natural experiment (pre-trends fail), the fleet trend (coverage confound) and predictions for cells without
+  reliable taxi data (extrapolations).
+- **Weak:** simulation numbers (failed plausibility, both versions) and modelled travel times / shortfall
+  reductions in the plan.
 
-## 3. Caveats
+## 4. Caveats
 
 - **The feed's coverage changes.** The number of taxis in the feed jumps between periods (about half in Aug - Nov
   2022, about double in Oct 2025 - Jan 2026, with duplicate records). We found 18 such regimes and 8 short outages
   and allowed for them in every model; some excluded days (100) and missing months (Jun 2025 mostly) remain.
 - **Retrospective labels.** "Unusually low" in the test year uses each feed regime's normal level estimated from
   that regime's own data. A second scoring with a label knowable at forecast time gives the same conclusions.
-- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 19 runs that scored or used
+- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 26 runs that scored or used
   test-year outcomes (13 reconstructed from file times): the pre-specified primary scoring, a pre-registered
-  secondary analysis, post-hoc checks (marked as such), the policy evaluation, the simulation's held-out storms, and
-  re-scorings after an independent review. No forecasting model was refitted after the first scoring.
-- **Not available:** company field (CDG vs others), trip / booking data (requested from LTA), road speeds.
-  Travel times and destination patterns in the plan and simulation are assumptions.
+  secondary analysis, post-hoc checks (marked as such), the policy evaluation, the simulation's held-out storms,
+  re-scorings after an independent review, and phase-2 uses (morning-forecast scoring once, test-year months in the
+  fleet-trend and MRT analyses as associations, simulation v2 held-out check). No forecasting model was refitted
+  after its first scoring.
+- **Not available:** company field (CDG vs others), trip / booking data (requested from LTA), observed road
+  speeds, LTA pick-up bay locations (need a DataMall key; OpenStreetMap taxi points used as a partial proxy).
+  Road times come from OpenStreetMap road classes and speed limits (rain = x 1.25); destination patterns in the
+  plan and simulation are assumptions. Residents are Census 2020 (2025 subzone tables were not downloadable).
 - Rain is measured at the nearest working gauge; snapshots are taken about 19 seconds before the rain window ends
   (checked: shifting the window by 15 minutes does not change the conclusions).

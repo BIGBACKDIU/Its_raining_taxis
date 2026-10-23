@@ -1,4 +1,4 @@
-"""Final report figure set (HANDOFF section 7): builds two summary charts from saved tables and copies the chosen
+"""Final report figure set (HANDOFF section 7): builds four summary charts from saved tables and copies the chosen
 charts (PNG + SVG) into outputs/figures/report/ with numbered names and an index of captions.
 
 Usage: .venv/bin/python -m analysis.99_report_figures
@@ -29,6 +29,19 @@ SET = [
     ("planning_forecast_rain", "Planning view: availability under an NEA rain forecast by area and hour."),
     ("policy_diagnosis", "Repositioning plan vs forecast ranking: what the constraints cost in targeting."),
     ("sim_heldout_storms", "Simulation vs observed on held-out storms (scenario-based; did not pass plausibility)."),
+    ("names_rain_hit_map", "Named places where heavy rain goes with the most taxis lost and the largest share losses."),
+    ("minutes_to_taxi_maps", "Drive minutes to the nearest vacant taxi, dry, and the extra in heavy rain, by place."),
+    ("dry_supply_by_band", "Dry-weather vacant-taxi supply by time band, best-supplied places named."),
+    ("taxi_deserts_map", "Taxi deserts: residential areas with the fewest dry-weather vacant taxis per resident."),
+    ("factors_contrasts", "Why: heavy-rain effect by place type (Central Area, MRT, taxi stand, mall) in the panel model."),
+    ("factors_shap", "Which characteristics separate places that lose more (random forest; weak out-of-area fit)."),
+    ("dose_intensity_hangover", "Intensity-response curve and the after-rain shortfall."),
+    ("mrt_did_event_study", "New MRT stations: dry-weather supply nearby before and after opening (pre-trends fail)."),
+    ("fleet_trend", "Monthly heavy-rain effect against the LTA fleet size."),
+    ("stands_predicted_sensitivity", "Predicted heavy-rain sensitivity for every land cell (planning map)."),
+    ("spillover_islandwide_map", "Island-wide rain: which named places gain or lose share of vacant taxis."),
+    ("sim2_diagnosis", "Why the step-8 simulation failed its plausibility check: level, timing, spatial pattern."),
+    ("sim2_heldout_storms", "Simulation v2 vs observed on held-out storms (illustration only; did not pass)."),
 ]
 
 
@@ -86,10 +99,67 @@ def policy_diagnosis():
     plt.close(fig)
 
 
+def factors_contrasts():
+    t = pd.read_csv(TABLES / "factors_panel_interactions.csv")
+    t = t[t.term.str.startswith("CONTRAST")].copy()
+    t["label"] = t.term.str.replace("CONTRAST: heavy, ", "", regex=False).str.replace(" (vs >= 1 km reference)", "",
+                                                                                         regex=False)
+    order = ["Central Area", "MRT < 300 m", "MRT 300-1000 m", "MRT >= 1 km (reference)", "taxi stand within 300 m",
+             "mall in cell"]
+    nice = {"Central Area": "URA Central Area", "MRT < 300 m": "MRT exit < 300 m", "MRT 300-1000 m": "MRT exit 300-1,000 m",
+            "MRT >= 1 km (reference)": "MRT exit >= 1 km (reference)", "taxi stand within 300 m": "Taxi stand within 300 m",
+            "mall in cell": "Mall in cell"}
+    fig, axes = plt.subplots(1, 2, figsize=(11, 3.8), sharey=True)
+    for ax, kind, col in ((axes[0], "abs", BLUE_DARK), (axes[1], "share", BLUE)):
+        q = t[t.model == kind].set_index("label").reindex(order)
+        y = np.arange(len(q))[::-1]
+        ax.errorbar(q.pct, y, xerr=[q.pct - q.pct_lo, q.pct_hi - q.pct], fmt="o", color=col, capsize=3, ms=6)
+        for yy, v in zip(y, q.pct):
+            ax.text(v, yy + 0.22, f"{v:.1f}%", ha="center", fontsize=7.5, color=MUTED)
+        ref = q.loc["MRT >= 1 km (reference)", "pct"]
+        ax.axvline(ref, color=MUTED, lw=0.8, ls=":")
+        ax.axvline(0, color=MUTED, lw=0.8)
+        ax.set_yticks(y, [nice[o] for o in order], fontsize=8.5)
+        ax.set_xlabel("Heavy rain vs dry: % vacant taxis" if kind == "abs" else "Heavy rain: % change in share of citywide")
+        ax.set_title("Absolute" if kind == "abs" else "Share of citywide vacant taxis", fontsize=9.5)
+    fig.suptitle("Why some places lose more: the city centre stands out; MRT, taxi stands and malls make no clear "
+                 "difference", x=0.01, ha="left", fontsize=10.5)
+    fig.tight_layout()
+    save(fig, "factors_contrasts", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, URA MP2019, LTA, OSM. "
+         "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
+    plt.close(fig)
+
+
+def spillover_map():
+    import importlib
+    from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+    N = importlib.import_module("analysis.10_names")
+    d02 = importlib.import_module("analysis.02_describe")
+    r = pd.read_csv(TABLES / "spillover_islandwide_share.csv")
+    fig, ax = plt.subplots(figsize=(9, 5.4))
+    d02.draw_base(ax)
+    div = LinearSegmentedColormap.from_list("d", ["#b8431c", ORANGE, "#f2f1ed", "#7fb0e8", BLUE_DARK])
+    norm = TwoSlopeNorm(vcenter=0, vmin=-40, vmax=30)
+    sig = r[r.direction != "no clear change"]
+    N.draw_cells(ax, r.cell.values, np.where(r.direction == "no clear change", 0, r.share_pct.clip(-40, 30)), div, norm)
+    lab = pd.concat([sig.nsmallest(6, "share_pct"), sig.nlargest(6, "share_pct")])
+    lab = lab.assign(short=[f"{v:+.0f}%  {p}" for p, v in zip(lab.place, lab.share_pct)])
+    N.label(ax, lab, "short", 12)
+    fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=div), ax=ax, orientation="horizontal", fraction=0.05, pad=0.02,
+                 label="% change in the cell's share of citywide vacant taxis in island-wide rain (grey-white: no clear change)")
+    ax.set_title("Island-wide rain: taxis gather at the airport and in suburbs, thin out in the centre", fontsize=10)
+    fig.tight_layout()
+    save(fig, "spillover_islandwide_map", "Sources: data.gov.sg taxi availability (LTA), NEA rainfall, URA MP2019, OSM. "
+         "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
+    plt.close(fig)
+
+
 def main():
     style()
     forecast_topk()
     policy_diagnosis()
+    factors_contrasts()
+    spillover_map()
     REPORT.mkdir(parents=True, exist_ok=True)
     lines = ["# Report figures", "", "PNG and SVG; numbered in suggested report order. Sources and notes are printed "
              "under each chart.", ""]

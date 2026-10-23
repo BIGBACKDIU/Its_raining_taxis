@@ -14,6 +14,12 @@ Full plan document (for humans, version 3): https://claude.ai/artifact/FDvZw8SNQ
 `outputs/recommendation_inputs.md`, `outputs/figures/report/`, `sim/index.html`, `outputs/requirements-lock.txt`,
 `outputs/rerun_check.csv`, `outputs/wording_check.txt`, `outputs/test_scoring_log.csv`. Every choice is in
 `outputs/decisions.md`. Step 9 (LTA trip data) waits for the data.
+Phase 2 (steps 10-20) done the same day: results step by step in `outputs/phase2_progress.md` (decisions
+97-122), a "where and why" section in `outputs/summary.md`, section 5 of `outputs/recommendation_inputs.md`,
+figures 15-27 in `outputs/figures/report/`, and the road-network simulation with a dispatcher panel in
+`sim/v2/index.html` (illustration only: it does not pass the plausibility check). Large derived files (drive-time
+matrices, OSM extracts, HDB footprints, fitted models) are rebuilt by `analysis/prep_osm.py`,
+`analysis/prep_phase2_data.py`, `analysis/11_roads.py --part graph` and `analysis/12_factors.py` and are not in git.
 
 ## 1. The project in one paragraph
 
