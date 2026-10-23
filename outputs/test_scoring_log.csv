@@ -23,3 +23,5 @@ timestamp,script,analysis,description,rows,note
 2026-10-23T21:18:08,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
 2026-10-23T21:19:01,19_fleet.py,step 19,monthly heavy-rain effects incl. test-year months (association only),,
 2026-10-23T21:27:46,15_morning.py,step 15,morning-forecast models scored on the test year (once),,
+2026-10-23T21:54:34,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
+2026-10-23T21:57:04,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,

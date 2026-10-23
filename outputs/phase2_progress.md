@@ -123,6 +123,27 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - Chart: `dose_intensity_hangover`. Tables: `dose_spline_curve.csv`, `dose_duration_hangover.csv`,
   `dose_recovery_by_type.csv`.
 
+## Step 17 - Redistribution and spillovers (decision 115)
+
+- Island-wide rain (at least half the working gauges wet): 2,394 snapshots on 423 days in the fit period.
+  Against the share benchmark, 100 cells clearly lose share, 100 clearly gain and 174 show no clear change.
+- Biggest share losers in island-wide rain: Plab (Paya Lebar) -40%, a Changi Airport cell without terminals
+  (cargo / airside side) -35%, Central Water Catchment edge (Zoo, Night Safari, River Safari) -33%, Seletar
+  Aerospace Park -22%, Bayfront / Marina Bay Sands -22%, Dhoby Ghaut / Fort Canning -20%, Kampong Ubi -19%.
+- Biggest gainers: Changi Airport terminal cells (+28% and, at T1/Jewel, +22%), Senoko West +27%, Tuas View
+  +25%, Xilin (Tampines) +24%, Tampines West (Temasek Polytechnic) +17%, Katong +17%, Bedok South +15%. During
+  island-wide rain, vacant taxis concentrate at the airport terminals and in east and west suburban/industrial
+  areas, and thin out in the CBD and isolated non-residential places.
+- Characteristics of gainers (weighted regression on the step-12 set): more HDB units (+2.7% share per SD), a
+  new MRT station within 800 m (+4.9%), further from Raffles Place (+1.7%); losers have more commercial land
+  (-1.0%), more expressway and through-roads (betweenness -1.1%) and are further from the airport (-1.3%).
+- Spillovers (own rain and neighbours' rain together): with rain recorded 2-5 km away, a cell has -6.7% vacant
+  taxis (heavier rain, CI -7.9 to -5.4) and with heavier rain within 2 km -2.3%, on top of its own heavy rain
+  (-5.6%, CI -6.9 to -4.2; the own-cell effect shrinks from -12.9% once neighbours' rain is included). In share
+  terms: own heavy -2.8%, within 2 km -1.9%, 2-5 km -2.2%. Much of what looks like a local rain effect is the
+  regional storm: taxis thin out across the whole wet area, not just under the cloud.
+- Tables: `spillover_islandwide_share.csv`, `spillover_islandwide_characteristics.csv`, `spillover_model.csv`.
+
 ## Step 18 - Rain measurement error (decision 116)
 
 - 64% of cell-days are more than 1 km from the nearest working rain gauge.
@@ -185,3 +206,33 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   weak model (spatial-CV R2 0.12) and lean on distance to the airport; treat them as rough.
 - Chart: `stands_predicted_sensitivity`. Tables: `stands_effect.csv`, `stands_candidates.csv`,
   `stands_predicted_sensitivity_cells.csv`, `stands_predicted_by_planning_area.csv`, `stands_predicted_by_subzone.csv`.
+
+## Step 20 - Simulation v2 (decisions 119-122)
+
+- Diagnosis of why all 24 step-8 combinations failed (re-run on the 20 training storms, and on the 10 held-out
+  storms for reporting, logged):
+  - Level: the simulated citywide path sat on average 19% below the observed one on training storms (13% on
+    held-out); the "mix" mechanism drained taxis most (-36%).
+  - Timing: correlation over time between simulated and observed paths 0.62 (training) and 0.49 (held-out);
+    the simulated minimum was typically 30 minutes off.
+  - Spatial pattern: which cells hold taxis was matched moderately (r = 0.56 / 0.64), which cells lose taxis
+    in the storm poorly (r = 0.25 / 0.14).
+  - Noise floor: two non-simulation references (the normal time-of-day path, and baseline x the estimated rain
+    effects) pass the same +-20% / 70% rule on only 10-11 of 20 training storms and 1-3 of 10 held-out storms.
+    Held-out (test-year) storms have deeper drops and twice the snapshot-to-snapshot noise (median jump 9.3% vs
+    4.6%). The rule is close to unattainable for these storms with the information we have; it was not changed.
+- v2 (OpenStreetMap drive times between cells, drive-time dispatch rings, place-characteristics or observed
+  supply patterns, per-cell rain sensitivity from step 12), tuned exactly as before: the cell pattern matches
+  much better (cell correlation 0.80-0.86 on training storms vs 0.28-0.79 in v1, 0.86-0.92 held-out), but the
+  citywide level drains further (held-out level gap -12% to -53%); the tuned demand scale and initial occupied
+  share sit at the lower edges of the pre-registered ranges, i.e. longer road trips tie up more taxis than the
+  fixed ranges let the model offset. Plausibility: no combination passes (best 1/10 storms; signs at the peak
+  match in 8-9 of 10).
+- So the page is presented as an illustration only, with the reason on the page. Python/JavaScript parity:
+  within 5% on 3 scenario-storm pairs.
+- Dispatcher panel added to `sim/v2/index.html`: at every 30-minute step of a replayed storm it lists the top
+  staging moves (from subzone/planning area -> named place, taxis, drive minutes, reason: rain approaching /
+  rain-sensitive area / forecast risk), labelled "demonstration on historical replays, not a live system".
+- Charts: `sim2_diagnosis`, `sim2_heldout_storms`. Tables: `sim2_diagnosis_by_storm.csv`,
+  `sim2_diagnosis_summary.csv`, `sim2_noise_floor.csv`, `sim2_cell_inputs.csv`, `sim2_tuning.csv`,
+  `sim2_plausibility.csv`, `sim2_plausibility_by_storm.csv`, `sim2_parity_check.csv`.
