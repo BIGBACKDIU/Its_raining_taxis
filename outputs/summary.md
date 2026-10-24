@@ -16,8 +16,9 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
    moderate rain and 12.9% in heavy rain (> 10 mm/h). Part of this is citywide: comparing each cell with all other
    cells at the same moment (the "share" model), the extra local drop is 1.9%, 4.5% and 5.7%.
    (`effects_main.csv`, fig 4)
-2. **The drop starts before rain arrives and fades within about two hours.** Vacant taxis are about 5% lower in
-   the first hour after rain starts in a cell, and back near normal after about 2.5 hours. When heavier rain falls
+2. **The drop starts before rain arrives and fades within about two and a half hours.** Vacant taxis are about 5% lower in
+   the first hour after rain starts in a cell; by the registered statistical recovery criterion (every later
+   event-study CI includes zero) the drop is no longer detectable after about 2.5 hours. When heavier rain falls
    2-5 km away while a cell is still dry, it already has 7% fewer vacant taxis; an NEA "thundery showers" forecast
    goes with 5% fewer before any rain falls. (`effects_event_study.csv`, `effects_approach.csv`,
    `effects_forecast.csv`; figs 5-6)
@@ -172,13 +173,14 @@ correction is applied to the headline.
   and allowed for them in every model; some excluded days (100) and missing months (Jun 2025 mostly) remain.
 - **Retrospective labels.** "Unusually low" in the test year uses each feed regime's normal level estimated from
   that regime's own data. A second scoring with a label knowable at forecast time gives the same conclusions.
-- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 45 runs that scored or used
+- **The test year was used more than once.** `outputs/test_scoring_log.csv` lists 70 runs that scored or used
   test-year outcomes (13 reconstructed from file times): the pre-specified primary scoring, a pre-registered
   secondary analysis, post-hoc checks (marked as such), the policy evaluation, the simulation's held-out storms,
   re-scorings after an independent review, and phase-2 uses (morning-forecast scoring once, test-year months in the
   fleet-trend and MRT analyses as associations, simulation v2 held-out check, and re-runs after the second review:
-  morning-forecast re-scoring once, simulation retuning checks and grid). No forecasting model was refitted
-  after its first scoring.
+  morning-forecast re-scoring once, simulation retuning checks and grid). The morning models were refitted
+  once after the reviewer-required feature fixes (a corrective refit, decision 131) and re-scored, plus one
+  re-scoring of the same models for the block-bootstrap sensitivity; no model was tuned on test-year outcomes.
 - **Not available:** company field (CDG vs others), trip / booking data (requested from LTA), observed road
   speeds, LTA pick-up bay locations (need a DataMall key; OpenStreetMap taxi points used as a partial proxy).
   Road times come from OpenStreetMap road classes and speed limits (rain = x 1.25); destination patterns in the

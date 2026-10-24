@@ -819,3 +819,8 @@ results stay as they are and remain the pre-specified result.
     deviance gains are correlated across adjacent days (lag-1 autocorrelation 0.37 retrospective / 0.24 issue-time
     for the flexible model), so a moving-block bootstrap with 7-day blocks is added as a sensitivity. Point
     estimates are unchanged (same models and seeds); the re-run is logged as a test-year use.
+146. **Wording after the third review.** The withdrawn measurement-error correction is reduced to one line in the
+    progress log; stands are described as supported in both cell-level designs but not the panel, hence not
+    robust; recovery uses the registered statistical criterion; the summary states that the morning models were
+    refitted once after the reviewer-required feature fixes (corrective refit) and that no model was tuned on
+    test-year outcomes.

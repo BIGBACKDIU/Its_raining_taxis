@@ -154,10 +154,7 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   attenuation that pure measurement error would cause, so distance to the gauge does not visibly weaken the
   estimates (far cells also differ in other ways, so this is not a clean test).
 - Reliability ratio of the cell rain measure (nearest gauge vs the 2nd/3rd nearest): 0.72 (correlation 0.79).
-  [Withdrawn in review fix B5 below: the next sentence's correction rests on an unsupported assumption.]
-  Under the classical-error assumption the headline heavy-rain effect (-12.9%) could be understated, with an
-  indicative corrected size of about -17.5%; because the near/far comparison shows no attenuation, the true
-  understatement is probably smaller. Table: `gauges_measurement_error.csv`.
+  A corrected effect size derived from this ratio was withdrawn (decision 132). Table: `gauges_measurement_error.csv`.
 
 ## Step 19 - Fleet trend (decision 117)
 
@@ -409,3 +406,10 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - Step 15: registered day-bootstrap CIs unchanged ([9.4, 10.8] retrospective, [4.9, 7.5] issue-time, flexible
   model). Sensitivity with 7-day moving blocks: [8.9, 11.4] and [4.4, 8.1]; both still exclude 0 and the
   materiality conclusion does not change. Lag-1 autocorrelation of daily gains 0.37 / 0.24.
+
+## Group 3 - wording (decision 146)
+
+- Measurement-error correction paragraph replaced by one line (withdrawn, decision 132); stands wording in
+  `recommendation_inputs.md` (cell-level designs only, not the panel: not robust); recovery wording in
+  `summary.md` item 2; the summary now states the corrective refit of the morning models and that no model was
+  tuned on test-year outcomes. Wording check and all tests re-run.

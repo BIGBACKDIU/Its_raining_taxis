@@ -4,8 +4,8 @@ outputs/summary.md:9 [demand] demand, waiting times or revenue. All rain results
 outputs/summary.md:9 [waiting time] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:9 [revenue] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:9 [cause] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
-outputs/summary.md:49 [demand] dispatcher panel) show how demand surges, drivers going offline, or both, could play out. A review found a
-outputs/summary.md:70 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes. Named places are
+outputs/summary.md:50 [demand] dispatcher panel) show how demand surges, drivers going offline, or both, could play out. Reviews found and
+outputs/summary.md:72 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes. Named places are
 outputs/recommendation_inputs.md:4 [cause] operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
 outputs/recommendation_inputs.md:44 [demand] - Modelled expected shortfall reductions are model quantities, not observed demand or service.
 outputs/recommendation_inputs.md:69 [demand] - Vacant taxis at the rain peak relative to the start: about 0.7-1.0 of the start level in demand-surge or
@@ -33,8 +33,8 @@ analysis/08_simulation.py:35 [demand] COMBOS = list(itertools.product(["demand",
 analysis/08_simulation.py:131 [demand] "beta_dem": trial.suggest_float("beta_dem", 0.0, 2.0) if mech in ("demand", "mix") else 0.0,
 analysis/08_simulation.py:256 [demand] levels = {"mechanism": ["demand", "supply", "mix"], "dest": ["mrt", "landuse"], "travel": ["dry", "rain"],
 analysis/08_simulation.py:269 [demand] t.insert(0, "label", LABEL + " (reference: mix, MRT pattern, rain congestion, nearest, demand 1.0, as usual)")
-analysis/08_simulation.py:394 [validation] "Scenario-based operational model, not validation.")
-analysis/08_simulation.py:402 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/08_simulation.py:396 [validation] "Scenario-based operational model, not validation.")
+analysis/08_simulation.py:404 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
 analysis/10_names.py:250 [cause] "Apr 2022 - Mar 2025; cells with >= 100 heavy-rain rows. Association, not cause.")
 analysis/11_roads.py:252 [cause] "(modelled speeds). Apr 2022 - Mar 2025. Association, not cause.")
 analysis/12_factors.py:9 [cause] Supply associations only: characteristics describe places, they are not shown to cause the rain effect.
@@ -46,7 +46,7 @@ analysis/20_sim_v2.py:221 [demand] "beta_dem": trial.suggest_float("beta_dem", 0
 analysis/20_sim_v2.py:312 [validation] "Dashed: rain peak; dotted: baseline x main-model rain effects. Scenario-based operational model, not validation.")
 analysis/20_sim_v2.py:328 [demand] for j, mech in enumerate(["demand", "supply", "mix"]):
 analysis/20_sim_v2.py:332 [demand] ax.set_xticks([0.5, 3.5, 6.5], ["demand", "supply", "mix"])
-analysis/20_sim_v2.py:406 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/20_sim_v2.py:408 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
 analysis/99_report_figures.py:129 [cause] "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
 analysis/99_report_figures.py:155 [cause] "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
 analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).

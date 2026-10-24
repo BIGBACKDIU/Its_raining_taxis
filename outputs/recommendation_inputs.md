@@ -89,8 +89,9 @@ incentives or staging aimed at the CBD and its fringe in forecast heavy rain add
 
 **What not to expect from stands, MRT or malls.** A taxi stop/stand or taxi point within 300 m, an MRT exit
 within 300 m or a mall shows no clear difference in the heavy-rain drop in the panel model (differences within
-about +-1 point, CIs crossing 0; `stands_effect.csv`, `factors_panel_interactions.csv`); a small association with
-stands appears only in the cell-level spatial model and is not robust. New stands are a dry-weather convenience
+about +-1 point, CIs crossing 0; `stands_effect.csv`, `factors_panel_interactions.csv`). Stands are supported in
+the final cell-level weighted regression (+2.46% smaller loss per SD, CI 0.28 to 4.68) and the spatial-error model,
+but not in the panel, so the association is not robust. New stands are a dry-weather convenience
 and coverage measure, not a proven rain fix.
 
 **Candidate stand / staging locations** (no stand or taxi point within 300 m; `stands_candidates.csv`; qualitative
