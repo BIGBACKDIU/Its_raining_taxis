@@ -158,12 +158,38 @@ function greedyPlan(world, vac, baseNow, baseNext, mu, rain, share, travel, N = 
   return moves;
 }
 
-// systematic rounding: each entry floor or ceil of x, total floor(sum + u) - floor(u)
-function sysRound(x, u) {
-  const out = new Int32Array(x.length);
-  let c = 0, prev = Math.floor(u);
-  for (let i = 0; i < x.length; i++) { c += x[i]; const k = Math.floor(c + u); out[i] = k - prev; prev = k; }
-  return out;
+// Allocation within one ring (same algorithm as analysis/sim_alloc.py, decision 139): proportional fluid flow on
+// every permitted edge (taxi cell i -> request cell j in adj[i]), floored (feasible by construction); the remaining
+// units go one at a time along permitted edges in a seeded random order weighted by the fractional parts, never
+// exceeding the taxis left at i or the requests left at j. Totals are the row / column sums of the edge flows.
+function allocateRing(adj, Q, V, rng) {
+  const C = Q.length, ei = [], ej = [];
+  for (let i = 0; i < C; i++) for (const j of adj[i]) { ei.push(i); ej.push(j); }
+  const E = ei.length, P = new Float64Array(C), g = new Float64Array(C), inc = new Float64Array(C), sj = new Float64Array(C);
+  for (let e = 0; e < E; e++) P[ei[e]] += Q[ej[e]];
+  for (let i = 0; i < C; i++) if (P[i] > 0) g[i] = Math.min(V[i], P[i]) / P[i];
+  for (let e = 0; e < E; e++) inc[ej[e]] += g[ei[e]];
+  for (let j = 0; j < C; j++) { const R = Q[j] * inc[j]; if (R > 0) sj[j] = Math.min(Q[j], R) / R; }
+  const ri = Int32Array.from(V), rj = Int32Array.from(Q), F = new Int32Array(E), fr = new Float64Array(E);
+  let tot = 0;
+  for (let e = 0; e < E; e++) {
+    const i = ei[e], j = ej[e], f = g[i] * Q[j] * sj[j];
+    let fl = Math.min(Math.floor(f), ri[i], rj[j]);
+    F[e] = fl; ri[i] -= fl; rj[j] -= fl; fr[e] = Math.max(0, f - fl); tot += fr[e];
+  }
+  let K = Math.floor(tot + rng.random());
+  const pos = [], keys = [];
+  if (K > 0) for (let e = 0; e < E; e++) if (fr[e] > 1e-12) { pos.push(e); keys.push(Math.pow(rng.random(), 1 / fr[e])); }
+  const order = pos.map((e, k) => k).sort((a, b) => keys[b] - keys[a]);
+  for (const k of order) {
+    const e = pos[k];
+    if (K <= 0) break;
+    const i = ei[e], j = ej[e];
+    if (ri[i] > 0 && rj[j] > 0) { F[e]++; ri[i]--; rj[j]--; K--; }
+  }
+  const d = new Int32Array(C), q = new Int32Array(C);
+  for (let i = 0; i < C; i++) { d[i] = V[i] - ri[i]; q[i] = Q[i] - rj[i]; }
+  return { d, q, F, ei, ej };
 }
 
 // ---------------------------------------------------------------- one seed
@@ -208,10 +234,7 @@ class Sim {
     }
   }
   match(Q, nRings, speedArr) {
-    // Requests Q hold integers. Proportional allocation within each ring (decision 127): taxi cell i offers
-    // min(V_i, P_i) over the requests it reaches; request cell j accepts at most Q_j of the offers it receives
-    // (incoming adjacency); both sides are rounded with the same systematic offset, so taxis dispatched equal
-    // requests served and no request or taxi is used twice.
+    // Requests Q hold integers. Own cell first, then each ring by integer edge flows (allocateRing, decision 139).
     const C = this.C, V = this.V;
     let served = 0;
     let meanF = 0; for (let i = 0; i < C; i++) meanF += speedArr[i]; meanF /= C;
@@ -224,26 +247,10 @@ class Sim {
       for (let i = 0; i < C; i++) { anyQ += Q[i]; anyV += V[i]; }
       if (anyQ === 0 || anyV === 0) break;
       const { adj, mid } = this.w.rings[r];
-      const g = new Float64Array(C), inc = new Float64Array(C);
+      const al = allocateRing(adj, Q, V, this.rng);       // integer edge flows (decision 139)
       for (let i = 0; i < C; i++) {
-        let P = 0; for (const j of adj[i]) P += Q[j];
-        if (P > 0) { g[i] = Math.min(V[i], P) / P; for (const j of adj[i]) inc[j] += g[i]; }
-      }
-      const srv = new Float64Array(C), sj = new Float64Array(C), used = new Float64Array(C);
-      for (let j = 0; j < C; j++) { const R = Q[j] * inc[j]; srv[j] = Math.min(Q[j], R); sj[j] = R > 0 ? srv[j] / R : 0; }
-      for (let i = 0; i < C; i++) {
-        if (g[i] === 0) continue;
-        let t = 0; for (const j of adj[i]) t += Q[j] * sj[j];
-        used[i] = Math.min(V[i], g[i] * t);
-      }
-      const u = this.rng.random();
-      const d = sysRound(used, u), q = sysRound(srv, u);
-      let gap = 0; for (let i = 0; i < C; i++) gap += d[i] - q[i];
-      for (let i = 0; i < C && gap > 0; i++) if (d[i] > 0) { d[i]--; gap--; }
-      for (let j = 0; j < C && gap < 0; j++) if (q[j] > 0) { q[j]--; gap++; }
-      for (let i = 0; i < C; i++) {
-        if (d[i] > 0) { V[i] -= d[i]; served += d[i]; }
-        if (q[i] > 0) { Q[i] -= q[i]; this.startTrips(q[i], i, mid / meanF * 60, speedArr); }   // trips start at the request cell
+        if (al.d[i] > 0) { V[i] -= al.d[i]; served += al.d[i]; }
+        if (al.q[i] > 0) { Q[i] -= al.q[i]; this.startTrips(al.q[i], i, mid / meanF * 60, speedArr); }   // trips start at the request cell
       }
     }
     return served;
@@ -343,4 +350,4 @@ function runSeeds(world, storm, scen, params, S, seed, opts = {}) {
   return city;
 }
 
-if (typeof module !== "undefined") module.exports = { World, Sim, RNG, runSeeds, greedyPlan };
+if (typeof module !== "undefined") module.exports = { World, Sim, RNG, runSeeds, greedyPlan, allocateRing };

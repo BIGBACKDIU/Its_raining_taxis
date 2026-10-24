@@ -135,10 +135,10 @@ supports planning the day around the morning forecast with a flexible model.
 LTA fleet size once the regime coverage level is controlled and errors allow for autocorrelation (share: -2.0
 log-points per 1,000 fewer taxis, CI -4.3 to +0.3).
 
-**Simulation v2 and dispatcher (`sim/v2/index.html`).** Both simulators had a matching bug that let requests be
-served more than once; after the fix and retuning, no scenario of either version passes the held-out plausibility
-rule (step 8 best 4 of 10 storms, v2 best 3 of 10), while a statistical non-simulation path passes 3 of 10. v2
-places taxis well (cell correlation 0.87-0.92) but its timing is weak (0.38-0.54). The dispatcher panel lists
-staging moves per 30 minutes (from area -> named place, taxis, reason) as a **demonstration on historical
-replays, not a live system**; present it as an illustration of how a plan would read, not as evidence of its
-effect.
+**Simulation v2 and dispatcher (`sim/v2/index.html`).** After the matching fixes (final version: integer flows on
+permitted ring edges) and retuning, no scenario of either version passes the held-out plausibility rule (step 8
+best 4 of 10 storms, v2 best 3 of 10); a non-simulation benchmark built from the estimated rain effects also fails
+(3 of 10). v2 places taxis well (cell correlation 0.89-0.92) but its timing is weak (0.39-0.55). The dispatcher
+panel lists staging moves per 30 minutes (from area -> named place, taxis, reason) as a **demonstration on
+historical replays, not a live system**; present it as an illustration of how a plan would read, not as evidence
+of its effect.

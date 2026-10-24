@@ -218,7 +218,7 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
     the simulated minimum was typically 30 minutes off.
   - Spatial pattern: which cells hold taxis was matched moderately (r = 0.56 / 0.64), which cells lose taxis
     in the storm poorly (r = 0.25 / 0.14).
-  - Noise floor: two non-simulation references (the normal time-of-day path, and baseline x the estimated rain
+  - Benchmarks (renamed from "noise floor", decision 142): two non-simulation references (the normal time-of-day path, and baseline x the estimated rain
     effects) pass the same +-20% / 70% rule on only 10-11 of 20 training storms and 1-3 of 10 held-out storms.
     Held-out (test-year) storms have deeper drops and twice the snapshot-to-snapshot noise (median jump 9.3% vs
     4.6%). The rule is close to unattainable for these storms with the information we have; it was not changed.
@@ -345,7 +345,7 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - Redone diagnosis (step-8 combinations, fixed engine): level gap now small (-9% training, -3% held-out on
   average; demand +2.5%, supply -11%, mix -18% on training storms); timing still moderate (correlation 0.65
   training, 0.46 held-out); which cells lose taxis still matches poorly (0.27 / 0.18); which cells hold taxis
-  matches well in v2 (0.87-0.92). The noise floor is unchanged: a non-simulation path from the estimated rain
+  matches well in v2 (0.87-0.92). The non-simulation benchmark (a path from the estimated rain
   effects passes 11 of 20 training and 3 of 10 held-out storms.
 - Parity (Python vs JavaScript, 50 seeds, 3 scenario-storm pairs per version; tolerance: mean within 5%, peak
   within 5% or 0.01 absolute): all pass; largest gaps 0.3% (mean) and 1.4% (peak).
@@ -373,3 +373,27 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   combination passes (step 8 best 4 of 10 storms, v2 best 3 of 10); diagnosis and parity (within 5% or 0.01;
   largest gap 1.9% at the peak) unchanged in substance. Grid: abandonment during rain 0.1-5%, repositioning
   -0.3 points on average (0 to -2.3).
+
+# Third independent review (commit 078c8bc)
+
+## Group 1 - simulation, final iteration (decisions 139-143)
+
+- Allocation now uses integer edge flows (floored fluid flows on permitted taxi-cell -> request-cell edges, then
+  single units along permitted edges in a seeded random order), in Python (`analysis/sim_alloc.py`, shared by both
+  engines) and both JavaScript ports. 3,000 random asymmetric rings agree with an exact max-flow; every dispatch
+  has a permitted partner; a constructed five-cell world with overlapping rings fails on the 37081c1 engine (745
+  requests, 823 trips) and passes now; the old real-data test, which passed on the old engine, is removed. A
+  first rerun with this allocator drew a random number for every ring edge and was too slow (stopped at 6 of 48
+  grid cells per mechanism; its plausibility, diagnosis and partial grid runs are in the scoring log); the final
+  allocator draws only for edges with a fractional flow. 12 tests pass.
+- `sim/v2/data.json` rebuilt from the final step-12 bundle (decision 140). Both versions retuned with unchanged
+  settings (best training loss 0.232 step 8, 0.231 v2).
+- Unchanged plausibility rule (logged): no combination passes. Step 8 best 4 of 10 storms (mix, land-use proxy,
+  dry roads, nearest), v2 best 3 of 10 (demand, characteristics pattern, dry roads, nearest); signs at the peak
+  7-9 of 10. These are the reported simulation results.
+- Diagnosis (step-8 combinations): level gap -9% training / -3% held-out; timing correlation 0.65 / 0.47; which
+  cells lose taxis 0.27 / 0.19. The non-simulation benchmark also fails the rule (11 of 20 training, 3 of 10
+  held-out storms); it is a benchmark, not a noise floor (decision 142).
+- Parity (now logged as test-year storm inputs only, no observed outcomes; six earlier runs added): within 5% or
+  0.01; largest gaps 0.3% mean, 1.7% peak. Grid (72,000 runs): abandonment during rain 0.1-5%; repositioning -0.3
+  points on average (0 to -2.3). Pages rebuilt.

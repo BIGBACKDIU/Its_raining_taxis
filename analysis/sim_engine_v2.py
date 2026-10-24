@@ -13,6 +13,8 @@ from __future__ import annotations
 import numpy as np
 from scipy import sparse
 
+from analysis.sim_alloc import allocate
+
 RING_MIN = [0.0, 4.0, 7.0, 10.0, 15.0, 20.0]       # drive minutes; rings 1-3 = nearest dispatch, 4-5 = widening
 PATIENCE_MIN = 6.0
 RAIN_FACTOR = 1.25                                      # step-11 rain-congestion matrix = dry x 1.25
@@ -52,45 +54,6 @@ def sample_dest(world, dest, origins, rng):
     u = rng.random(len(origins))
     idx = np.searchsorted(world.cum[dest], origins + u, side="left")
     return np.clip(idx - origins * world.C, 0, world.C - 1)
-
-
-def systematic_round(x, u):
-    """Integer vector per row with each entry floor(x) or ceil(x), row total floor(sum + u) - floor(u) (u in [0, 1)
-    per row): unbiased, keeps every entry within its bounds and gives two vectors with equal sums equal totals."""
-    c = np.cumsum(x, 1)
-    k = np.floor(c + u[:, None])
-    return np.diff(np.concatenate([np.floor(u)[:, None], k], 1), axis=1).astype(np.int64)
-
-
-def allocate(A, Q, V, u):
-    """Match waiting requests Q (integers, S x C) to vacant taxis V (S x C) within one ring.
-    A[i, j] = 1 when request cell j is in the ring of taxi cell i (outgoing adjacency of i; incoming of j).
-    Proportional fluid flows: taxi cell i offers min(V_i, P_i) over its reachable requests P_i = sum_j A_ij Q_j;
-    request cell j accepts at most Q_j of what it receives (incoming sum over i). Both sides are rounded with the
-    same systematic offset, so taxis dispatched = requests served exactly, no request is served twice and no
-    taxi leaves twice. Returns (taxis dispatched per taxi cell, requests served per request cell)."""
-    P = (A @ Q.T).T
-    o = np.minimum(V, P)
-    with np.errstate(divide="ignore", invalid="ignore"):
-        g = np.where(P > 0, o / P, 0.0)
-    R = Q * (A.T @ g.T).T                                       # offers received by request cell j (incoming)
-    served = np.minimum(Q, R)
-    with np.errstate(divide="ignore", invalid="ignore"):
-        sj = np.where(R > 0, served / R, 0.0)
-    used = g * (A @ (Q * sj).T).T                               # taxis used per taxi cell; sums equal served
-    used = np.minimum(used, V)
-    d = systematic_round(used, u)
-    q = systematic_round(served, u)
-    gap = d.sum(1) - q.sum(1)                                   # floating-point ties only
-    for s in np.flatnonzero(gap):
-        k = int(abs(gap[s]))
-        if gap[s] > 0:
-            idx = np.flatnonzero(d[s] > 0)[:k]
-            d[s, idx] -= 1
-        else:
-            idx = np.flatnonzero(q[s] > 0)[:k]
-            q[s, idx] -= 1
-    return d, q
 
 
 def stochastic_round(a, rng):
@@ -204,7 +167,7 @@ def simulate(world, storm, scen, params, S=10, seed=2702, policy=False, rain_mul
         for A, mid in rings:
             if not Q.any() or not V.any():
                 break
-            d, q = allocate(A, Q, V, rng.random(S))
+            d, q = allocate(A, Q, V, rng)
             V[:] -= d
             Q -= q
             served_total += d.sum(1)

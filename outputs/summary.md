@@ -46,14 +46,14 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
    stop nearby, travel time, available spare taxis) cost precision: the unconstrained forecast ranking reaches 51%.
    (`policy_diagnosis.csv`, fig 13; details for Nat in `recommendation_inputs.md`)
 8. **Simulation.** Two storm simulators (`sim/index.html`; `sim/v2/index.html` on OpenStreetMap road times, with a
-   dispatcher panel) show how demand surges, drivers going offline, or both, could play out. A review found a
-   matching bug (requests could be served more than once); after the fix and retuning, **no tuned scenario of
-   either version passes the plausibility check we fixed in advance** on 10 held-out storms (best: 4 of 10 and 3
-   of 10). The citywide level now matches on average, but timing matches only moderately and which cells lose
-   taxis poorly. Both versions fail the rule. A non-simulation path built from the estimated rain effects
-   themselves also passes only 3 of the 10 held-out storms, so the pre-registered rule is stricter than the
-   observed rain effects meet on these storms; the rule stays unchanged. Use the pages to explain mechanisms, not
-   to predict. (figs 14, 26-27)
+   dispatcher panel) show how demand surges, drivers going offline, or both, could play out. Reviews found and
+   fixed matching errors (requests served more than once; then totals that no matching could achieve); the final
+   version allocates taxis to requests by integer flows on permitted ring edges, checked against an exact
+   max-flow. After the fix and retuning, **no tuned scenario of either version passes the plausibility check we
+   fixed in advance** on 10 held-out storms (best: 4 of 10 and 3 of 10); this is the reported result. The
+   citywide level matches on average, but timing matches only moderately and which cells lose taxis poorly. A
+   non-simulation benchmark (baseline x estimated rain effects) also fails the rule, passing 3 of the 10 held-out
+   storms; the rule stays unchanged. Use the pages to explain mechanisms, not to predict. (figs 14, 26-27)
 9. **Morning planning.** Information available by 09:00 - recent issue-time labels, usual patterns and the
    single latest NEA 24-hour forecast issued before 09:00 - predicts how many low-availability half-hours a
    planning area will have later that day. This is the second scoring of the test year, made after the timing

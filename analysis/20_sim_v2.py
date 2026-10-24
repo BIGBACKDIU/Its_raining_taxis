@@ -1,7 +1,7 @@
 """Step 20: simulation v2 (pre-registration: decisions 119-122). Scenario-based operational model, never "validation".
 
 Parts:
-  diagnose      why the 24 step-8 combinations fail the plausibility rule (level, timing, spatial, noise floor)
+  diagnose      why the 24 step-8 combinations fail the plausibility rule (level, timing, spatial, benchmark paths)
   prep          v2 inputs: drive-time matrices between eligible 1 km cells, request/destination weights,
                 per-cell rain sensitivity, place names -> sim/v2/data.json
   tune          Optuna per combination on the 20 fit storms (same settings as step 8)
@@ -116,7 +116,7 @@ def diagnose():
     d = pd.DataFrame(rows)
     d.to_csv(TABLES / "sim2_diagnosis_by_storm.csv", index=False, float_format="%.4f")
     R = pd.DataFrame(refs)
-    R.to_csv(TABLES / "sim2_noise_floor.csv", index=False, float_format="%.4f")
+    R.to_csv(TABLES / "sim2_benchmark_paths.csv", index=False, float_format="%.4f")
     s = d.groupby(["period"]).agg(level_bias=("level_bias", "mean"), abs_level_bias=("level_bias", lambda x: x.abs().mean()),
                                   rmse=("rmse", "mean"), time_corr=("time_corr", "median"),
                                   min_gap_abs=("min_gap_minutes", lambda x: x.abs().median()),
@@ -297,7 +297,7 @@ def charts():
         tm = np.array(st["snap_minutes"]) / 60
         ax.fill_between(tm, np.quantile(sr, 0.05, 0), np.quantile(sr, 0.95, 0), color=BLUE, alpha=0.2, lw=0)
         ax.plot(tm, sr.mean(0), color=BLUE, lw=1.5, label="Simulated v2 (mean, 5-95%)")
-        ax.plot(tm, reference_paths(st, beta)[1] * 100, color=MUTED, lw=1, ls=":", label="Statistical path")
+        ax.plot(tm, reference_paths(st, beta)[1] * 100, color=MUTED, lw=1, ls=":", label="Benchmark: baseline x rain effects")
         ax.plot(tm, rel(st["obs_city"]) * 100, color="black", lw=1.2, label="Observed feed")
         ax.axvline(st["peak_minute"] / 60, color=ORANGE, lw=1, ls="--")
         ax.set_title(st["date"], fontsize=8.5)
@@ -319,7 +319,7 @@ def diag_chart():
     import matplotlib.pyplot as plt
     style()
     d = pd.read_csv(TABLES / "sim2_diagnosis_by_storm.csv")
-    R = pd.read_csv(TABLES / "sim2_noise_floor.csv")
+    R = pd.read_csv(TABLES / "sim2_benchmark_paths.csv")
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.6))
     for ax, col, lab in ((axes[0], "level_bias", "Level: mean(sim - observed), relative units"),
                          (axes[1], "time_corr", "Timing: correlation over time"),
@@ -338,8 +338,8 @@ def diag_chart():
     sp = R.groupby("period").stat_path_passes.sum()
     lb = d.groupby("period").level_bias.mean()
     fig.suptitle(f"Why step-8 scenarios fail: average level gap {100 * lb['fit']:+.0f}% (training) / {100 * lb['test']:+.0f}% "
-                 f"(held-out), but timing and which cells lose taxis match weakly; the statistical path passes only "
-                 f"{sp.get('test', 0)}/10 held-out storms", x=0.01, ha="left", fontsize=9)
+                 f"(held-out), but timing and which cells lose taxis match weakly; a non-simulation benchmark also "
+                 f"fails ({sp.get('test', 0)}/10 held-out storms)", x=0.01, ha="left", fontsize=9)
     fig.tight_layout()
     save(fig, "sim2_diagnosis", "Sources: step-8 simulation, data.gov.sg taxi availability (LTA), NEA rainfall. "
          "Each box: 8 tuned combinations x storms.")
@@ -352,13 +352,13 @@ def diag_text():
     d = pd.read_csv(TABLES / "sim2_diagnosis_summary.csv").set_index("period")
     pl = pd.read_csv(TABLES / "sim2_plausibility.csv")
     f, t = d.loc["fit"], d.loc["test"]
-    return (f"Why: in the step-8 version the simulated citywide path sat on average {abs(100 * f.level_bias):.0f}% below the "
-            f"observed one on training storms, its timing matched only moderately (correlation {f.time_corr:.2f} training, "
-            f"{t.time_corr:.2f} held-out) and the pattern of which cells lost taxis matched poorly (correlation "
-            f"{f.cell_change_corr:.2f} / {t.cell_change_corr:.2f}). Held-out storms show deeper, noisier drops: even a "
-            f"non-simulation path (baseline x estimated rain effects) meets the rule on only {int(t.stat_passes)} of 10. "
-            f"v2 (road times, place characteristics) reaches a mean level gap of {100 * pl.level_bias.mean():+.0f}% on held-out "
-            f"storms. Use the page to explore mechanisms, not to read off numbers.")
+    return (f"Why: in the step-8 version the simulated citywide path sat on average {abs(100 * f.level_bias):.0f}% "
+            f"{'below' if f.level_bias < 0 else 'above'} the observed one on training storms, its timing matched only "
+            f"moderately (correlation {f.time_corr:.2f} training, {t.time_corr:.2f} held-out) and the pattern of which cells "
+            f"lost taxis matched poorly (correlation {f.cell_change_corr:.2f} / {t.cell_change_corr:.2f}). A non-simulation "
+            f"benchmark (baseline x estimated rain effects) also fails the rule, passing {int(t.stat_passes)} of 10 held-out "
+            f"storms. v2 (road times, place characteristics) has a mean level gap of {100 * pl.level_bias.mean():+.0f}% on "
+            f"held-out storms. Use the page to explore mechanisms, not to read off numbers.")
 
 
 def page():
@@ -380,6 +380,8 @@ def parity(S=50):
     world, storms, _ = load2()
     tun = pd.read_csv(TABLES / "sim2_tuning.csv")
     held = [s for s in storms if s["period"] == "test"]
+    log_test_scoring("20_sim_v2.py --part parity", "Python/JavaScript parity on held-out storms: test-year storm "
+                     "inputs only, no observed outcomes", "step 20")
     cases = [(tun.iloc[0], held[0]), (tun.iloc[len(tun) // 2], held[3]), (tun.iloc[-1], held[7])]
     rows = []
     for r, st in cases:

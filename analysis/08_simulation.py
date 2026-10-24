@@ -339,6 +339,8 @@ def parity(S=50):
     world, storms, _ = load()
     tun = pd.read_csv(TABLES / "sim_tuning.csv")
     held = [s for s in storms if s["period"] == "test"]
+    log_test_scoring("08_simulation.py --part parity", "Python/JavaScript parity on held-out storms: test-year storm "
+                     "inputs only, no observed outcomes", "step 8")
     cases = [(tun.iloc[0], held[0]), (tun.iloc[len(tun) // 2], held[3]), (tun.iloc[-1], held[7])]
     rows = []
     for r, st in cases:

@@ -786,3 +786,29 @@ results stay as they are and remain the pre-specified result.
     more than 1% (largest 1.44%; seed-to-seed noise at most 0.45%), so, as agreed, both versions were retuned
     with unchanged settings and the unchanged plausibility rule was re-run (logged), followed by the step-8
     grid, the step-20 diagnosis, charts, pages and parity.
+
+## Third independent review (of commit 078c8bc)
+
+139. **Allocation by integer edge flows (review item 1).** The decision-127 allocation rounded taxis dispatched
+    and requests served separately, so its totals were sometimes not achievable by any matching within the ring
+    (the reviewer found 121 of 3,000 small cases, shortfall up to 2). Now (`analysis/sim_alloc.py`, same algorithm
+    in `sim/engine.js` and `sim/v2/engine_v2.js`): the proportional fluid flow on every permitted taxi-cell ->
+    request-cell edge is floored (feasible by construction); the remaining units, as many as the summed fractional
+    parts rounded with one uniform offset, are placed one at a time along permitted edges in a seeded random order
+    weighted by the fractional parts, never exceeding the taxis left at i or the requests left at j. Taxis
+    dispatched and requests served are the row and column sums of these integer edge flows. Tests: 3,000 random
+    asymmetric rings checked against an exact max-flow (scipy maximum_flow), a per-ring partner check, and a
+    constructed five-cell world with overlapping rings that fails on the 37081c1 engine (745 requests, 823 trips
+    on seed 1) and passes now; the old real-data integration test, which passed on the old engine, is removed.
+140. **Simulation-v2 inputs from the final step-12 bundle.** `sim/v2/data.json` (characteristic weights through the
+    stored training transform, per-cell offline scales from the step-14 predictions of the final random forest)
+    is rebuilt after decision 137's step-12 rerun.
+141. **Parity runs are logged.** Python/JavaScript parity runs use held-out (test-year) storm inputs only, no
+    observed outcomes; they are now logged in `test_scoring_log.csv`, and the six earlier parity runs are added
+    with times reconstructed from the commits that changed the parity tables.
+142. **Benchmark wording.** The non-simulation path (baseline x estimated rain effects) that passes 3 of 10
+    held-out storms is a benchmark that also fails the rule. It is not called a noise floor and is not taken as
+    proof that the rule is too strict (table renamed `sim2_benchmark_paths.csv`).
+143. **Final simulation iteration.** Both versions retuned with unchanged settings, the unchanged plausibility rule
+    re-run, then the diagnosis, step-8 grid, parity and both pages. These are the reported simulation results;
+    no further simulation changes follow.

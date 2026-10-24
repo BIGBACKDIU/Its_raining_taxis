@@ -44,3 +44,28 @@ timestamp,script,analysis,description,rows,note
 2026-10-24T06:09:00,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
 2026-10-24T06:27:19,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
 2026-10-24T06:28:22,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,
+2026-10-23T02:38:39,08_simulation.py --part parity,step 8,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-23T23:35:43,08_simulation.py --part parity,step 8 review fix,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-24T06:32:25,08_simulation.py --part parity,step 8 follow-up,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-23T21:58:56,20_sim_v2.py --part parity,step 20,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-23T23:35:43,20_sim_v2.py --part parity,step 20 review fix,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-24T06:32:25,20_sim_v2.py --part parity,step 20 follow-up,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,"reconstructed from the commit time of the parity table (logged late, decision 141)"
+2026-10-24T17:03:01,15_morning.py,step 15 sensitivity,morning-forecast models re-scored on the test year (same models and seeds as the corrective refit) to add the 7-day block-bootstrap sensitivity,,
+2026-10-24T17:46:06,08_simulation.py --part plausibility,step 8,held-out test-year storms: simulated vs observed,,
+2026-10-24T17:46:06,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
+2026-10-24T17:46:06,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
+2026-10-24T18:03:08,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T18:03:08,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T18:03:08,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T18:03:08,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
+2026-10-24T18:46:00,20_sim_v2.py --part parity,step 20,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
+2026-10-24T23:45:46,08_simulation.py --part plausibility,step 8,held-out test-year storms: simulated vs observed,,
+2026-10-24T23:45:46,20_sim_v2.py --part diagnose,step 20,step-8 combinations re-run on held-out storms for the failure diagnosis (no tuning),,
+2026-10-24T23:45:46,20_sim_v2.py --part plausibility,step 20,"simulation v2 on held-out test-year storms: simulated vs observed (pre-registered rule, no tuning)",,
+2026-10-24T23:49:06,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T23:49:06,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T23:49:06,08_simulation.py --part grid,step 8,scenario grid on held-out test-year storm inputs,,simulated outputs only; no observed outcomes
+2026-10-24T23:49:06,20_sim_v2.py --part charts,step 20,held-out chart: simulation v2 vs observed feed,,
+2026-10-24T23:49:33,20_sim_v2.py --part parity,step 20,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
+2026-10-25T00:14:10,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,
+2026-10-25T00:14:26,08_simulation.py --part parity,step 8,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
