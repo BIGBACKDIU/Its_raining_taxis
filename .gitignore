@@ -19,3 +19,5 @@ data/static/phase2/hdb_existing_building.geojson
 data/interim/sim_grid_parts/
 data/interim/sim_tuning_parts/
 data/interim/sim2_tuning_parts/
+data/static/phase3/radar/
+data/interim/radar_*/

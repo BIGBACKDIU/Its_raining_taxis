@@ -824,3 +824,80 @@ results stay as they are and remain the pre-specified result.
     robust; recovery uses the registered statistical criterion; the summary states that the morning models were
     refitted once after the reviewer-required feature fixes (corrective refit) and that no model was tuned on
     test-year outcomes.
+
+## Step 21 pre-registration: radar rainfall measurement check (25 Oct 2026)
+
+147. **Separate analysis; frozen results unchanged.** The requested number 139 is already occupied by the final
+    simulation fixes, so this specification uses the next free number, 147. This entry and the step-21 code are
+    committed before any step-21 taxi outcome model is fitted. No frozen model is retuned or re-scored, and no
+    test-year data are read. The frozen gauge-based estimates remain the headline.
+
+    **Data and attribution.** Zhuang, Q., Peleg, N., Prein, A., Babovic, V., & Fatichi, S. (2026),
+    *High-Resolution Radar–Gauge Merged Rainfall Dataset over Singapore (100 m, 5-min and hourly)*, v1, Zenodo,
+    https://doi.org/10.5281/zenodo.19642566, Creative Commons Attribution 4.0 International (CC BY 4.0).
+    Archive `5min_SG.zip`, 10,087,581,305 bytes, expected MD5 `5d97d0700c23d028fa6e6977485359f7`, stored in
+    gitignored `data/static/phase3/radar/`. The entire archive checksum must match before production preparation
+    and fitting. This is a radar–gauge merged KED product, not independent radar truth: agreement with gauges
+    can partly reflect the gauges used to build it. Frozen gauge processing is not changed.
+
+    **Inspection before fitting.** Selected daily files contain `rainfall(time, lat, lon)` float32, `lat`, `lon`,
+    and `time`; 288 steps/day, 311 latitudes and 532 longitudes. Rainfall has NaN `_FillValue` and no units
+    attribute; the publisher specifies mm per five-minute interval and UTC+8. Time units are minutes since
+    local midnight, values 0, 5, ..., 1435. Latitude decreases by 0.000904356172 degrees and longitude increases
+    by 0.000909397338 degrees (nominal 100 m pixels). No CRS/datum or EPSG metadata are supplied; coordinates
+    are geographic longitude/latitude over Singapore and are compared directly to gauge coordinates, without
+    inventing a native projected CRS. Range inspection lists all 1,827 calendar days, 2020-01-01 to 2024-12-31;
+    full-archive inventory and in-scope missing-value/day audits will be saved before fitting.
+
+    **Clock identification, not a guess.** Fix five storm days spanning the sample: 2022-12-11, 2023-07-20,
+    2023-12-25, 2024-05-14, 2024-12-29 (existing fit-storm list, no taxi outcomes used in this check). Compare
+    nearest gauge pixels with our five-minute gauge depths, shifting radar labels by -10/-5/0/+5/+10 minutes.
+    Initial checks give the largest correlation at zero shift on all five days (0.969-0.994; adjacent shifts
+    0.826-0.874). This supports interpreting radar labels as interval ends, aligned with gauge end labels.
+    Repeat and save the checks from the checksum-verified archive; stop rather than fit if alignment disagrees.
+
+    **Preparation.** `analysis/prep_radar.py` averages equally weighted nominal 100 m pixel centres inside
+    each of the same 374 eligible 1 km cells. Land support is the intersection of the repaired existing
+    Singapore coastline polygons and the product's fixed finite footprint; no sea-pixel rainfall is used.
+    Prepare the four nested 500 m subcells of each eligible 1 km cell, plus a 2-5 km annulus and a within-2-km
+    neighbouring-land control (own 1 km cell excluded), using the project's existing metric grid. Save land
+    pixel counts and zero-support cells. Require all selected land pixels per step and all six five-minute
+    depths per half hour; any missing value gives a missing window, never zero. Include 31 Mar 2022 as warm-up
+    only. mm/h = 2 times summed depths in (t-30, t]; lag windows (t-60, t-30] and (t-90, t-60]. Save local
+    five-minute means and half-hour Parquet files under `data/interim/`, gitignored.
+
+    **Sample and paired fits.** Apr 2022-Dec 2024 inclusive, same eligible cells, regimes and main exclusions
+    as step 3. Use the intersection of finite gauge/radar current and lagged own rain, annulus rain and
+    neighbouring rain, and report all sample losses. Every source/model pair uses identical taxi observations;
+    all five model designs use this common sample. No calibration or test-year files are loaded. Standard
+    errors cluster by calendar day. Main absolute Poisson FE: cell + half-hour-of-week x month + year-month x
+    regime; share model: cell + snapshot FE. Both include current light/moderate/heavy dummies and two
+    continuous source-specific own-rain lags. Bands: dry 0; light (0,2.5]; moderate (2.5,10]; heavy >10 mm/h.
+    Repeat all designs with values <=0.1 mm/h recoded dry in current/lagged rain and onset dry histories;
+    thresholds are not selected from outcome results.
+
+    **Other registered designs, each gauge vs radar.** (c) Absolute main model plus heavy x URA MP2019 Central
+    Area flag from frozen step-12 characteristics; report inside/outside contrasts and interaction with their
+    covariance. (d) Absolute approaching-rain model: own cell dry for 90 minutes, interacted with annulus
+    light/moderate/heavy bands, controlling the analogous within-2-km bands and main regressors. The requested
+    annulus-heavy term is >10 mm/h (not the older >2.5 mm/h combined category). (e) Absolute event study with
+    the frozen onset algorithm separately on each source: >=1 mm/h after four dry half-hours, merge onsets
+    within 180 min; bins -60 to +180 min, reported relative to -30 min. Radar defines the radar onsets; gauge
+    defines the gauge onsets. Otherwise identical outcome rows and FE; holding onsets fixed across both would
+    give identical regressions and would not test the rainfall measurements.
+
+    **Measurement agreement.** At nearest grid pixels to available gauge coordinates, report correlation,
+    additive bias, total ratio, wet/dry agreement and heavy-rain agreement, with confusion counts, sensitivity
+    and precision. Report five-minute rates and half-hour rates (>10 mm/h heavy), wet thresholds 0 and 0.1.
+    Restrict to working, non-stuck gauge-days with >=287 archived readings. Midnight, generally absent from
+    the gauge daily archive, is missing rather than assumed dry; half-hour comparisons require all six bins.
+    This diagnostic is not an independent validation of a gauge-merged product.
+
+    **Interpretation and outputs fixed now.** Report all designs and the dry-threshold check side by side,
+    regardless of sign or significance, in `outputs/tables/radar_*.csv`; one effect/CI figure covers rain bands,
+    share and Central Area. Gauge/radar differences also reflect spatial averaging and the merging procedure.
+    Absolute-model effects are also expressed as a change per 10 no-rain expected vacant taxis, with observed
+    counts by source and rain band in a separate frequency table; share changes are not relabelled count gains.
+    A larger radar association is consistent with gauge measurement error weakening estimates, but does not
+    identify attenuation or justify a correction. Append results to the progress log and a labelled radar
+    subsection under summary uncertainty; do not replace any frozen table, figure, threshold or conclusion.

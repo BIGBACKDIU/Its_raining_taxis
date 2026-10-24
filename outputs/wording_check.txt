@@ -47,6 +47,10 @@ analysis/20_sim_v2.py:312 [validation] "Dashed: rain peak; dotted: baseline x ma
 analysis/20_sim_v2.py:328 [demand] for j, mech in enumerate(["demand", "supply", "mix"]):
 analysis/20_sim_v2.py:332 [demand] ax.set_xticks([0.5, 3.5, 6.5], ["demand", "supply", "mix"])
 analysis/20_sim_v2.py:408 [demand] ap.add_argument("--mechanism", nargs="*", default=["demand", "supply", "mix"])
+analysis/21_radar.py:37 [validation] p = p.merge(q, on=['ts', 'cell'], how='left', validate='one_to_one')
+analysis/21_radar.py:80 [demand] # A stated count scale, not an estimate of demand or of realised lost trips.
+analysis/21_radar.py:80 [lost riders] # A stated count scale, not an estimate of demand or of realised lost trips.
+analysis/21_radar.py:203 [validation] '95% day-clustered CIs. Radar–gauge merged product; agreement is not independent validation. '
 analysis/99_report_figures.py:129 [cause] "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
 analysis/99_report_figures.py:155 [cause] "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
 analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).

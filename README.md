@@ -11,6 +11,16 @@ NUS DAO2702 group project: how rainfall affects the availability of vacant taxis
 
 Data sources: data.gov.sg (Singapore Open Data Licence), NEA, LTA.
 
+### Step 21: radar rainfall measurement check
+
+Zhuang, Q., Peleg, N., Prein, A., Babovic, V., & Fatichi, S. (2026).
+*High-Resolution Radar–Gauge Merged Rainfall Dataset over Singapore (100 m, 5-min and hourly)* (v1).
+Zenodo. https://doi.org/10.5281/zenodo.19642566.
+Licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+The 2020–2024 five-minute product combines radar and gauges; comparisons with gauges are not independent validation.
+Step 21 aggregates its 100 m pixels to the project grid and compares measurements on an identical sample.
+Frozen gauge results remain the headline. The 10.1 GB archive and derived data are local, gitignored files.
+
 ## Data and plan
 
 - **Start here:** [HANDOFF.md](HANDOFF.md) – full plan, decisions and next steps.
