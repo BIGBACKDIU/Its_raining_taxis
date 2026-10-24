@@ -9,7 +9,6 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
-import os
 from pathlib import Path
 import time
 import zipfile
@@ -23,7 +22,10 @@ from scipy.spatial import cKDTree
 import shapely
 from shapely.geometry import Polygon
 
-from analysis import geo
+if __package__ in (None, ''):
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from pipeline.grid import cell_centre, cell_ids, to_xy
 
 ROOT = Path('data/static/phase3/radar')
@@ -105,8 +107,11 @@ def download(workers=16):
     print('Full archive MD5 verified:', MD5, flush=True)
 
 
-def read_day(z, name):
+def read_day(z, name, expected_grid=None):
     with netCDF4.Dataset('radar.nc', memory=z.read(name)) as d:
+        if expected_grid is not None:
+            assert np.array_equal(d['lon'][:], expected_grid[0]) and np.array_equal(d['lat'][:], expected_grid[1]), \
+                f'Coordinates changed in {name}'
         rain = np.asarray(d['rainfall'][:].filled(np.nan), dtype='float32')
         ts = pd.DatetimeIndex(netCDF4.num2date(d['time'][:], d['time'].units,
                                              only_use_cftime_datetimes=False, only_use_python_datetimes=True))
@@ -262,6 +267,22 @@ def clock_check(read, lon, lat):
     return out
 
 
+def grid_audit(z, files, lon, lat):
+    rows = []
+    for day, name in sorted(files.items()):
+        if not START - pd.Timedelta(days=1) <= day <= END:
+            continue
+        with netCDF4.Dataset('grid-audit', memory=z.read(name)) as d:
+            rows.append({'date': str(day.date()), 'same_lon': np.array_equal(d['lon'][:], lon),
+                         'same_lat': np.array_equal(d['lat'][:], lat),
+                         'same_shape': d['rainfall'].shape == (288, len(lat), len(lon))})
+    out = pd.DataFrame(rows)
+    out.to_csv(TABLES / 'radar_grid_audit.csv', index=False)
+    if not out[['same_lon', 'same_lat', 'same_shape']].all().all():
+        raise ValueError('Daily grid coordinates or shape changed; inspect before aggregation')
+    return len(out)
+
+
 def inspect_archive():
     if digest(ARCHIVE) != MD5:
         raise ValueError('Full archive MD5 must match before production inspection/aggregation')
@@ -283,6 +304,7 @@ def inspect_archive():
                         'bounds_centres': [float(lon.min()), float(lat.min()), float(lon.max()), float(lat.max())]}
         missing = pd.date_range(min(names), max(names)).difference(pd.DatetimeIndex(names))
         metadata['missing_archive_days'] = [str(t.date()) for t in missing]
+        metadata['daily_coordinate_arrays_checked'] = grid_audit(z, names, lon, lat)
         clock = clock_check(lambda day: read_day(z, names[day]), lon, lat)
         metadata['timestamp_convention'] = 'Interval end; zero-shift cross-correlation wins on all five fixed storm days'
         clock.to_csv(TABLES / 'radar_clock_check.csv', index=False)
@@ -332,7 +354,7 @@ def aggregate():
             current_month = mon
             index = pd.date_range(day, periods=288, freq='5min')
             if day in files:
-                ts, rain = read_day(z, files[day])
+                ts, rain = read_day(z, files[day], expected_grid=(lon, lat))
                 assert ts.equals(index), f'Unexpected timestamps: {day}'
                 assert rain.shape == (288, len(lat), len(lon)), f'Unexpected grid: {day}'
                 if np.any(rain < 0):

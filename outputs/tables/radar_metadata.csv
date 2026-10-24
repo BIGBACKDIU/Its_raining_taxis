@@ -1,0 +1,17 @@
+field,value
+md5,"""5d97d0700c23d028fa6e6977485359f7"""
+archive_size_bytes,10087581305
+daily_files,1827
+first_date,"""2020-01-01"""
+last_date,"""2024-12-31"""
+variables,"{""rainfall"": {""dimensions"": [""time"", ""lat"", ""lon""], ""shape"": [288, 311, 532], ""dtype"": ""float32"", ""attributes"": {""_FillValue"": ""nan""}}, ""lat"": {""dimensions"": [""lat""], ""shape"": [311], ""dtype"": ""float64"", ""attributes"": {""_FillValue"": ""nan""}}, ""lon"": {""dimensions"": [""lon""], ""shape"": [532], ""dtype"": ""float64"", ""attributes"": {""_FillValue"": ""nan""}}, ""time"": {""dimensions"": [""time""], ""shape"": [288], ""dtype"": ""int64"", ""attributes"": {""units"": ""minutes since 2020-01-01 00:00:00"", ""calendar"": ""proleptic_gregorian""}}}"
+global_attributes,{}
+time_zone,"""UTC+8 (Zenodo metadata)"""
+rainfall_units,"""mm per five-minute interval (Zenodo metadata; no variable units attribute)"""
+crs,"""Geographic longitude/latitude axes; no CRS variable or datum/EPSG metadata supplied"""
+latitude_step_degrees,-0.0009043561718368462
+longitude_step_degrees,0.0009093973377287089
+bounds_centres,"[103.6054389808669, 1.1896119705530783, 104.08832896720084, 1.4699623838225007]"
+missing_archive_days,[]
+timestamp_convention,"""Interval end; zero-shift cross-correlation wins on all five fixed storm days"""
+daily_coordinate_arrays_checked,1007

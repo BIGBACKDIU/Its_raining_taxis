@@ -901,3 +901,22 @@ results stay as they are and remain the pre-specified result.
     A larger radar association is consistent with gauge measurement error weakening estimates, but does not
     identify attenuation or justify a correction. Append results to the progress log and a labelled radar
     subsection under summary uncertainty; do not replace any frozen table, figure, threshold or conclusion.
+
+148. **Verified radar data audit, before taxi model fitting.** The complete 10,087,581,305-byte archive matches
+    MD5 `5d97d0700c23d028fa6e6977485359f7`. All 1,827 daily NetCDF files from 2020-01-01 through 2024-12-31 are
+    present; there are no absent archive dates. All 1,007 daily coordinate arrays and shapes in the analysis
+    period plus the 31 Mar warm-up match exactly. Variable, axis, fill-value, units and CRS details are in
+    `radar_metadata.csv`; no undocumented projected CRS has been assigned. NaN encodes the fixed offshore
+    mask and potentially missing values, never dry weather. The fixed product footprint has 71,558 pixels;
+    intersecting it with the repaired frozen coastline leaves 71,209 land pixels. Each of the 374 eligible
+    1 km cells has 4-100 land pixels. Eight of their 1,496 nested 500 m cells have no land pixels, so their
+    rainfall is missing, not imputed. Pixel counts are in `radar_land_pixel_coverage.csv`.
+
+    The checksum-verified archive repeats the five-day clock check using the registered near-complete,
+    working-gauge restriction: zero-shift correlations are 0.9882, 0.9956, 0.9679, 0.9902 and 0.9790 in date
+    order; all exceed both adjacent shifts (0.8173-0.8718) and the +/-10-minute shifts. Five-minute radar/gauge
+    total ratios are 1.007, 1.004, 1.051, 1.002 and 1.038, also consistent with the publisher's mm-depth units
+    rather than rates in mm/h. Accordingly labels are treated as interval ends, with no clock adjustment.
+    `radar_clock_check.csv` preserves all shifts, including the losing ones. Full daily missing-value coverage
+    is audited during preparation before fitting. Additional code guards check daily grid coordinates on
+    rerun; direct script execution is supported. These are input checks, not choices based on taxi outcomes.

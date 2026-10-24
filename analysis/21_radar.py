@@ -14,6 +14,10 @@ import time
 import numpy as np
 import pandas as pd
 
+if __package__ in (None, ''):
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from analysis.common import BLUE, ORANGE, MUTED, rain_band, save, style
 from analysis.fepois_hd import fepois, pct
 from analysis.prep_radar import START, END, TABLES
@@ -26,7 +30,8 @@ ROOT = Path('data/interim/radar_models')
 def load():
     parts = []
     for year in (2022, 2023, 2024):
-        cols = list(dict.fromkeys(E.COLS + ['rain_ring', 'rain_2km']))
+        cols = ['ts', 'cell', 'vacant', 'rain_band', 'mmh', 'mmh_lag1', 'mmh_lag2', 'how', 'month', 'ym',
+                'regime_id', 'drop_main', 'rain_ring', 'rain_2km']
         p = pd.read_parquet(f'data/interim/panel30_{year}.parquet', columns=cols,
                             filters=[('ts', '>=', START - pd.Timedelta(days=1)), ('ts', '<=', END)])
         p = p.rename(columns={c: f'gauge_{c}' for c in ['mmh', 'mmh_lag1', 'mmh_lag2', 'rain_ring', 'rain_2km']})
@@ -199,9 +204,10 @@ def chart():
     axes[0].legend()
     fig.suptitle('Radar rainfall measurement check — identical sample, Apr 2022–Dec 2024', x=.01, ha='left')
     fig.tight_layout(rect=(0, .09, 1, .94))
-    save(fig, 'radar_measurement_check', 'Sources: data.gov.sg/NEA, Zhuang et al. (2026), Zenodo 19642566, CC BY 4.0. '
-         '95% day-clustered CIs. Radar–gauge merged product; agreement is not independent validation. '
-         'Frozen gauge headline results unchanged.')
+    save(fig, 'radar_measurement_check', 'Sources: data.gov.sg/NEA; Zhuang et al. (2026), Zenodo 19642566, CC BY 4.0. '
+         '95% day-clustered CIs.\nRadar–gauge merged product; agreement is not independent validation. '
+         'Frozen gauge headline results unchanged.\nAbsolute-model -10% = 1 fewer vacant taxi per 10 expected; '
+         'share changes are not count gains.')
     plt.close(fig)
 
 
