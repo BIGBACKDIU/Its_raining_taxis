@@ -910,7 +910,8 @@ results stay as they are and remain the pre-specified result.
     mask and potentially missing values, never dry weather. The fixed product footprint has 71,558 pixels;
     intersecting it with the repaired frozen coastline leaves 71,209 land pixels. Each of the 374 eligible
     1 km cells has 4-100 land pixels. Eight of their 1,496 nested 500 m cells have no land pixels, so their
-    rainfall is missing, not imputed. Pixel counts are in `radar_land_pixel_coverage.csv`.
+    rainfall is missing, not imputed; this includes one of the 793 frozen eligible 500 m cells (60024).
+    Pixel counts are in `radar_land_pixel_coverage.csv`; all 793 eligible 500 m cells are included in preparation.
 
     The checksum-verified archive repeats the five-day clock check using the registered near-complete,
     working-gauge restriction: zero-shift correlations are 0.9882, 0.9956, 0.9679, 0.9902 and 0.9790 in date
@@ -920,3 +921,15 @@ results stay as they are and remain the pre-specified result.
     `radar_clock_check.csv` preserves all shifts, including the losing ones. Full daily missing-value coverage
     is audited during preparation before fitting. Additional code guards check daily grid coordinates on
     rerun; direct script execution is supported. These are input checks, not choices based on taxi outcomes.
+    The completed daily audit finds no missing files, all-missing five-minute steps, or missing selected land
+    values on any of the 1,007 prepared dates (including warm-up). The zero-support 500 m cells remain missing
+    by definition; they are not missing-data days. The gauge-pixel comparison is retained as a non-independent
+    measurement diagnostic: half-hour r = 0.98864, radar/gauge total ratio 1.01820, wet agreement 97.70% at zero
+    and 99.17% at 0.1 mm/h, heavy agreement 99.9278% (sensitivity 96.30%, precision 95.74%).
+
+149. **Post-fit support diagnostic, labelled as such.** The primary radar approaching-heavy-rain CI is wide,
+    so the existing registered contrast was counted by source and both registered dry thresholds, with no
+    additional model or sample filter. At zero there are 5,708 gauge cell-snapshots on 375 days but only 52
+    radar cell-snapshots on 29 days; at 0.1 mm/h there are 210 radar rows on 78 days. All counts are reported
+    in `radar_approach_support.csv`, rather than omitting this imprecise contrast or choosing a dry threshold
+    after seeing it. The point estimates, estimator, controls and full common sample are unchanged.

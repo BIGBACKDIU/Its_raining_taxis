@@ -1,6 +1,6 @@
 """Separately registered step 21: paired radar/gauge rainfall associations, never replacements for frozen results.
 
-Usage: python -m analysis.21_radar --part fit|chart [--dry-threshold 0|0.1] [--models main central approach event]
+Usage: python -m analysis.21_radar --part fit|chart|support [--dry-threshold 0|0.1] [--models main central approach event]
 The only taxi panels read are 2022-2024; every paired model uses exactly the same observations.
 """
 from __future__ import annotations
@@ -201,25 +201,47 @@ def chart():
     for ax in axes:
         ax.axvline(0, color=MUTED, lw=.8)
         ax.set_xlabel('Associated change (%)')
-    axes[0].legend()
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(.99, .98), ncol=2, frameon=False)
     fig.suptitle('Radar rainfall measurement check — identical sample, Apr 2022–Dec 2024', x=.01, ha='left')
     fig.tight_layout(rect=(0, .09, 1, .94))
     save(fig, 'radar_measurement_check', 'Sources: data.gov.sg/NEA; Zhuang et al. (2026), Zenodo 19642566, CC BY 4.0. '
-         '95% day-clustered CIs.\nRadar–gauge merged product; agreement is not independent validation. '
+         '95% day-clustered CIs; primary dry = 0 mm/h.\nRadar–gauge merged product; agreement is not independent validation. '
          'Frozen gauge headline results unchanged.\nAbsolute-model -10% = 1 fewer vacant taxi per 10 expected; '
          'share changes are not count gains.')
     plt.close(fig)
 
 
+def support():
+    """Describe support for the pre-registered approaching-heavy-rain contrast; do not change any fit."""
+    full = load()
+    p = full[full.paired_sample].reset_index(drop=True)
+    rows = []
+    for source in ['gauge', 'radar']:
+        ring = p['gauge_rain_ring' if source == 'gauge' else 'radar_ring_mmh'].values
+        for threshold in [0, .1]:
+            dry = np.logical_and.reduce([p[f'{source}_{c}'].values <= threshold
+                                         for c in ['mmh', 'mmh_lag1', 'mmh_lag2']])
+            mask = dry & (ring > 10)
+            q = p.loc[mask]
+            rows.append({'source': source, 'dry_threshold_mmh': threshold, 'term': 'ring_heavy_owndry',
+                         'rows': len(q), 'days': q.ts.dt.normalize().nunique(), 'snapshots': q.ts.nunique(),
+                         'cells': q.cell.nunique(), 'mean_observed_vacant': q.vacant.mean(),
+                         'total_observed_vacant': q.vacant.sum()})
+    pd.DataFrame(rows).to_csv(TABLES / 'radar_approach_support.csv', index=False)
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--part', required=True, choices=['fit', 'chart'])
+    parser.add_argument('--part', required=True, choices=['fit', 'chart', 'support'])
     parser.add_argument('--dry-threshold', type=float, choices=[0, .1], default=0)
     parser.add_argument('--models', nargs='+', choices=['main', 'central', 'approach', 'event'],
                         default=['main', 'central', 'approach', 'event'])
     args = parser.parse_args()
     if args.part == 'fit':
         fit(args.dry_threshold, args.models)
+    elif args.part == 'support':
+        support()
     else:
         chart()
 

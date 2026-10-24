@@ -1,0 +1,5 @@
+source,dry_threshold_mmh,term,rows,days,snapshots,cells,mean_observed_vacant,total_observed_vacant
+gauge,0.0,ring_heavy_owndry,5708,375,812,372,3.917659425367905,22362
+gauge,0.1,ring_heavy_owndry,5708,375,812,372,3.917659425367905,22362
+radar,0.0,ring_heavy_owndry,52,29,29,50,4.173076923076923,217
+radar,0.1,ring_heavy_owndry,210,78,94,141,4.742857142857143,996

@@ -6,6 +6,7 @@ outputs/summary.md:9 [revenue] demand, waiting times or revenue. All rain result
 outputs/summary.md:9 [cause] demand, waiting times or revenue. All rain results are **associations**, not causes - the feed cannot tell whether
 outputs/summary.md:50 [demand] dispatcher panel) show how demand surges, drivers going offline, or both, could play out. Reviews found and
 outputs/summary.md:72 [cause] 2025, unless stated; 95% CIs in brackets. Associations with vacant-taxi supply, not causes. Named places are
+outputs/summary.md:181 [validation] is 0.989, but the product already merges gauges, so this agreement is not independent validation. Spatial
 outputs/recommendation_inputs.md:4 [cause] operators; CDG cannot be separated). They are associations, not causes. Simulation numbers are **simulated,
 outputs/recommendation_inputs.md:44 [demand] - Modelled expected shortfall reductions are model quantities, not observed demand or service.
 outputs/recommendation_inputs.md:69 [demand] - Vacant taxis at the rain peak relative to the start: about 0.7-1.0 of the start level in demand-surge or
@@ -50,7 +51,7 @@ analysis/20_sim_v2.py:408 [demand] ap.add_argument("--mechanism", nargs="*", def
 analysis/21_radar.py:42 [validation] p = p.merge(q, on=['ts', 'cell'], how='left', validate='one_to_one')
 analysis/21_radar.py:85 [demand] # A stated count scale, not an estimate of demand or of realised lost trips.
 analysis/21_radar.py:85 [lost riders] # A stated count scale, not an estimate of demand or of realised lost trips.
-analysis/21_radar.py:208 [validation] '95% day-clustered CIs.\nRadar–gauge merged product; agreement is not independent validation. '
+analysis/21_radar.py:209 [validation] '95% day-clustered CIs; primary dry = 0 mm/h.\nRadar–gauge merged product; agreement is not independent validation. '
 analysis/99_report_figures.py:129 [cause] "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
 analysis/99_report_figures.py:155 [cause] "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
 analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).

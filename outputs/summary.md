@@ -166,6 +166,25 @@ correction is applied to the headline.
 - **Weak:** simulation numbers (both versions fail the plausibility check after the conservation fix) and modelled travel times / shortfall
   reductions in the plan.
 
+### Radar rainfall check (step 21; separate analysis)
+
+With exact-zero dry windows and the same 16,925,334 cell-snapshots in Apr 2022-Dec 2024, gauge/radar absolute
+associations are -7.9%/-5.2% in light rain, -10.5%/-9.3% in moderate rain and -12.1%/-12.0% in heavy rain.
+These correspond to 0.79/0.52,
+1.05/0.93 and 1.21/1.20 fewer vacant taxis per 10 no-rain expected taxis. Heavy-rain local-share associations
+are -5.1%/-5.9%; Central Area counts are -23.3%/-24.0% (2.33/2.40 fewer per 10 expected). At 30 minutes after
+source-specific onsets, counts are -5.3%/-4.7% relative to the preceding dry half-hour. Thus the heavy-rain and
+Central Area findings hold across the two measurements, while the light-rain association is smaller with radar.
+
+The radar approaching-heavy-rain estimate is imprecise (-16.9%, CI -38.8 to +13.0, against gauge -7.5%, CI
+-10.9 to -3.9): only 52 radar cell-snapshots on 29 days meet that contrast. Gauge-pixel half-hour correlation
+is 0.989, but the product already merges gauges, so this agreement is not independent validation. Spatial
+averaging and merging also change the exposures; the comparison does not identify an attenuation correction.
+With <=0.1 mm/h classed as dry, radar light rain is -6.6% (0.66 fewer per 10 expected), heavy rain stays -12.1%
+and the Central Area -23.9%; the approaching-rain CI still includes zero. Radar has many exact zeros (87.1% of
+cell-windows), but trace-rain classification affects the light-rain estimate.
+Frozen full-period gauge estimates remain the headline. Tables: `radar_*.csv`; figure `radar_measurement_check`.
+
 ## 4. Caveats
 
 - **The feed's coverage changes.** The number of taxis in the feed jumps between periods (about half in Aug - Nov

@@ -1,0 +1,5 @@
+stage,rows,snapshots,cells
+taxi panel within dates,17668882,47243.0,374.0
+frozen main exclusions removed,17006154,,
+paired finite measurements and main exclusions,16925334,45270.0,374.0
+otherwise-main rows removed for measurement support,80820,,

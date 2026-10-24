@@ -413,3 +413,63 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   `recommendation_inputs.md` (cell-level designs only, not the panel: not robust); recovery wording in
   `summary.md` item 2; the summary now states the corrective refit of the morning models and that no model was
   tuned on test-year outcomes. Wording check and all tests re-run.
+
+# Step 21 - Radar rainfall measurement check (separate analysis; decisions 147-149)
+
+- Registration: specification and code committed and pushed as `ed4e4ba` before any taxi outcome fit; verified
+  data audit committed as `0ada6ac`. Decisions 139-146 were already occupied, so the new specification is 147.
+  Frozen outputs and headline estimates remain unchanged. No test-year taxi panels are used.
+- Data: Zhuang et al. (2026), Zenodo 19642566, CC BY 4.0; the full 10,087,581,305-byte `5min_SG.zip` matches
+  MD5 `5d97d0700c23d028fa6e6977485359f7`. All 1,827 archive dates are present. There are no missing selected
+  land values or five-minute steps on the 1,007 prepared dates (including the warm-up day). All daily grids
+  match: rainfall(time,lat,lon), 288 x 311 x 532, mm per five-minute interval, NaN fill, geographic axes with
+  no explicit CRS/datum metadata. Code and metadata record these limitations.
+- Timing: UTC+8, interval-end labels. On all five fixed storm days, zero shift gives the largest gauge-pixel
+  correlation (0.968-0.996); the +/-5-minute alternatives give 0.817-0.872. All -10/-5/0/+5/+10-minute results
+  remain in `radar_clock_check.csv`. Land pixels are aggregated before constructing (t-30,t] and both lags;
+  checks across a year boundary match direct sums exactly. Pixel-weighted 500 m reconstruction agrees with
+  the 1 km means within 0.0000024 mm per five minutes. All 374 main cells have land support; eight nested
+  500 m cells have none and remain missing, including one frozen eligible 500 m cell (60024). All 793
+  frozen eligible 500 m cells are included in the prepared files.
+- Agreement at gauge pixels (not independent validation of a radar-gauge merged product): five-minute r =
+  0.9802, half-hour r = 0.9886; radar/gauge totals 1.0182 at both scales. Half-hour wet/dry agreement is 97.70%
+  at zero and 99.17% at 0.1 mm/h. Heavy agreement is 99.9278%, sensitivity 96.30%, precision 95.74%. These
+  diagnostics use near-complete, working gauge-days and exclude unknown midnight gauge observations.
+- Paired sample: 16,925,334 cell-snapshots, 374 cells, Apr 2022-Dec 2024. This is exactly the original step-3
+  valid sample within those dates: radar/common support removes zero further observations. The 80,820 rows
+  between main exclusions and the final sample already lack valid gauge measurements/lags.
+- Primary (dry = 0) absolute estimates (gauge / radar, percentages with 95% day-clustered CIs): light -7.92 [-9.41,-6.41] /
+  -5.19 [-6.22,-4.15]; moderate -10.52 [-11.98,-9.03] / -9.30 [-10.65,-7.94]; heavy -12.12 [-13.58,-10.64] /
+  -12.01 [-13.50,-10.50]. Per 10 expected vacant taxis these are -0.79/-0.52, -1.05/-0.93 and -1.21/-1.20.
+  Heavy local-share estimates -5.10 [-6.39,-3.79] / -5.86 [-7.16,-4.54]. Central Area heavy counts -23.32
+  [-27.04,-19.40] / -23.97 [-27.70,-20.04] (about 2.3/2.4 fewer per 10 expected); outside Central Area
+  -11.07/-10.84% (about 1.1 fewer per 10 expected).
+- Approaching rain uses the registered >10 mm/h annulus category, own cell dry for 90 minutes and neighbouring
+  controls. Gauge -7.47% [-10.94,-3.87], radar -16.88% [-38.85,+12.99]. The radar contrast has only 52
+  cell-snapshots across 29 days; gauge has 5,708 across 375 days. The large radar uncertainty is retained.
+- Event study: gauge/radar onset associations -5.00%/-3.33%; at +30 minutes -5.32%/-4.74% (about 0.53/0.47
+  fewer per 10 at the reference level). Both later CIs include zero at 150 and 180 minutes, a statistical
+  detectability statement. There are 148,353/88,634 source-defined onsets on the full grid including warm-up.
+  All nine bins and the registered dry-threshold sensitivity are reported in tables.
+- Registered dry-threshold check (<=0.1 mm/h): radar absolute light -6.65% [-7.86,-5.42], moderate -9.27%
+  [-10.60,-7.92], heavy -12.07% [-13.55,-10.57] (0.66, 0.93, 1.21 fewer per 10 expected); share light -1.84%,
+  moderate -4.05%, heavy -5.88%. Central Area -23.91% [-27.65,-19.98] (2.39 fewer per 10 expected).
+  Approaching-heavy rain remains imprecise: radar -5.93% [-20.21,+10.91] with 210 cases on 78 days; gauge
+  -7.94% [-11.40,-4.34]. Main gauge fits are identical; the gauge approaching term changes slightly because
+  the same dry rule also recodes trace values in neighbouring controls. Event estimates remain similar:
+  radar -3.60% at onset and -4.70% at +30 minutes; 136,811 full-grid radar onsets, with CIs including zero
+  at 150 and 180 minutes.
+- Unexpected: radar is not rarely zero on this sample: 87.08% of cell-windows are exactly dry, versus 93.68%
+  with gauges; the 0.1 rule raises radar dry share to 91.12%. The wider trace-light category helps explain why
+  the primary radar light association is smaller. The post-fit contrast-count diagnostic is labelled in
+  decision 149; no model or row filter was changed after inspecting its uncertainty.
+- Reading: the matched heavy-rain and Central Area estimates are similar across measurement representations;
+  there is no uniform strengthening of effects with radar and no basis for a blanket attenuation correction.
+  The radar approaching-heavy contrast does not give a precise confirmation. Agreement at gauge pixels is
+  non-independent because gauges are part of the merged product. Frozen full-period gauge estimates remain
+  the headline; this is a separately labelled measurement check, not a forecasting or intervention result.
+- Final checks: all 20 registered fits use n = 16,925,334; absolute/share fits have 956 day clusters.
+  The 108 coefficient rows, 36 event rows and 8 Central Area contrasts have finite CIs; all 20 covariance
+  matrices are finite and positive semidefinite. All 15 tests pass (14 existing dependency/test warnings).
+  Wording scanner completes with 69 hits; new hits are negated validation claims or code terminology, reviewed
+  in context. All 267 frozen table/figure hashes match, and the summary outside the new subsection is identical.
