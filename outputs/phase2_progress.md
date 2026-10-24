@@ -134,6 +134,8 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   +25%, Xilin (Tampines) +24%, Tampines West (Temasek Polytechnic) +17%, Katong +17%, Bedok South +15%. During
   island-wide rain, vacant taxis concentrate at the airport terminals and in east and west suburban/industrial
   areas, and thin out in the CBD and isolated non-residential places.
+- [First-run wording, superseded by the review fixes below: absolute counts show almost every cell loses taxis in
+  island-wide rain, and the characteristic regression was regenerated (decision 144).]
 - Characteristics of gainers (weighted regression on the step-12 set): more HDB units (+2.7% share per SD), a
   new MRT station within 800 m (+4.9%), further from Raffles Place (+1.7%); losers have more commercial land
   (-1.0%), more expressway and through-roads (betweenness -1.1%) and are further from the airport (-1.3%).
@@ -397,3 +399,13 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
 - Parity (now logged as test-year storm inputs only, no observed outcomes; six earlier runs added): within 5% or
   0.01; largest gaps 0.3% mean, 1.7% peak. Grid (72,000 runs): abandonment during rain 0.1-5%; repositioning -0.3
   points on average (0 to -2.3). Pages rebuilt.
+
+## Group 2 - analysis (decisions 144-145)
+
+- Step 17: characteristic regression regenerated with the final characteristics. Share gainers in island-wide rain
+  go with a new MRT station within 800 m (+4.9% per SD), more business land (+1.4%), share 65+ (+1.1%) and distance
+  from Raffles Place (+1.8%); losers with commercial land (-1.0%), expressways (-0.8%), through-road betweenness
+  (-1.2%) and distance from the airport (-1.3%). MRT lines nearby is no longer significant.
+- Step 15: registered day-bootstrap CIs unchanged ([9.4, 10.8] retrospective, [4.9, 7.5] issue-time, flexible
+  model). Sensitivity with 7-day moving blocks: [8.9, 11.4] and [4.4, 8.1]; both still exclude 0 and the
+  materiality conclusion does not change. Lag-1 autocorrelation of daily gains 0.37 / 0.24.

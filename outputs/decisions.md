@@ -812,3 +812,10 @@ results stay as they are and remain the pre-specified result.
 143. **Final simulation iteration.** Both versions retuned with unchanged settings, the unchanged plausibility rule
     re-run, then the diagnosis, step-8 grid, parity and both pages. These are the reported simulation results;
     no further simulation changes follow.
+144. **Step 17 characteristic regression regenerated** with the final characteristics (decision 137) and the
+    current share results; MRT lines within 800 m is no longer significant there (it was p = 0.039 in the review-B
+    run), so no wording relies on it.
+145. **Step 15 block-bootstrap sensitivity.** The registered day-bootstrap CIs stay the reported ones. Daily
+    deviance gains are correlated across adjacent days (lag-1 autocorrelation 0.37 retrospective / 0.24 issue-time
+    for the flexible model), so a moving-block bootstrap with 7-day blocks is added as a sensitivity. Point
+    estimates are unchanged (same models and seeds); the re-run is logged as a test-year use.

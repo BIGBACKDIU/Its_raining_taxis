@@ -59,7 +59,8 @@ taxis disappear because they are booked, go off shift, move away or are stuck in
    planning area will have later that day. This is the second scoring of the test year, made after the timing
    fixes the reviewer required (the first scoring met the materiality rule only on the retrospective label).
    Adding the forecast cut the test-year deviance by 10.1% [9.4, 10.8] (retrospective label) and 6.3% [4.9, 7.5]
-   (issue-time label) in the flexible model, meeting the materiality rule fixed in advance for both labels. In the
+   (issue-time label) in the flexible model, meeting the materiality rule fixed in advance for both labels (adjacent
+   days are correlated, so as a sensitivity a 7-day block bootstrap gives wider CIs: [8.9, 11.4] and [4.4, 8.1]). In the
    linear regression the forecast made essentially no difference on the retrospective label and made it 4.5%
    worse on the issue-time label. Support for planning the day around the morning forecast, from a flexible
    model. (`morning_forecast_value.csv`)

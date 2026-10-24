@@ -17,6 +17,27 @@ M = importlib.import_module("analysis.03_effects_more")
 F = importlib.import_module("analysis.12_factors")
 
 
+def characteristics(r=None):
+    """Characteristics of island-wide share gainers vs losers: WLS on the current step-12 characteristics."""
+    import statsmodels.api as sm
+    if r is None:
+        r = pd.read_csv(TABLES / "spillover_islandwide_share.csv")
+    c = pd.read_csv(TABLES / "cell_characteristics.csv")
+    d = r.merge(c, on="cell", suffixes=("", "_c"))
+    keep = [k for k in pd.read_csv(TABLES / "factors_cell_wls.csv").query("outcome == 'share'").characteristic.unique()]
+    X = F.design_matrix(d, [k for k in keep if k in F.NUM])
+    for bcol in [k for k in keep if k in F.BOOL]:
+        X[bcol] = d[bcol].astype(float).values
+    y = np.log1p(d.share_pct / 100)
+    se = (np.log1p(d.hi / 100) - np.log1p(d.lo / 100)) / 3.92
+    good = np.isfinite(y) & np.isfinite(se) & (se > 0)
+    m = sm.WLS(y[good], sm.add_constant(X[good]), weights=1 / se[good] ** 2).fit(cov_type="HC1")
+    ct = pd.DataFrame({"coef_log_per_sd": m.params, "se": m.bse, "p": m.pvalues})
+    ct["pct_per_sd"] = 100 * (np.exp(ct.coef_log_per_sd) - 1)
+    ct.to_csv(TABLES / "spillover_islandwide_characteristics.csv", float_format="%.5f")
+    print(ct[ct.p < 0.05].round(3).to_string())
+
+
 def main():
     style()
     inf = importlib.import_module("analysis.04_inference")
@@ -68,22 +89,7 @@ def main():
     print(pr.sort_values("share_pct", ascending=False).head(10)[["planning_area", "subzone", "share_pct", "lo", "hi",
                                                                  "abs_change_per_half_hour", "abs_change_lo",
                                                                  "abs_change_hi"]].round(1).to_string(index=False))
-    # characteristics of gainers vs losers (WLS on kept step-12 characteristics)
-    import statsmodels.api as sm
-    c = pd.read_csv(TABLES / "cell_characteristics.csv")
-    d = r.merge(c, on="cell", suffixes=("", "_c"))
-    keep = [k for k in pd.read_csv(TABLES / "factors_cell_wls.csv").query("outcome == 'share'").characteristic.unique()]
-    X = F.design_matrix(d, [k for k in keep if k in F.NUM])
-    for bcol in [k for k in keep if k in F.BOOL]:
-        X[bcol] = d[bcol].astype(float).values
-    y = np.log1p(d.share_pct / 100)
-    se = (np.log1p(d.hi / 100) - np.log1p(d.lo / 100)) / 3.92
-    good = np.isfinite(y) & np.isfinite(se) & (se > 0)
-    m = sm.WLS(y[good], sm.add_constant(X[good]), weights=1 / se[good] ** 2).fit(cov_type="HC1")
-    ct = pd.DataFrame({"coef_log_per_sd": m.params, "se": m.bse, "p": m.pvalues})
-    ct["pct_per_sd"] = 100 * (np.exp(ct.coef_log_per_sd) - 1)
-    ct.to_csv(TABLES / "spillover_islandwide_characteristics.csv", float_format="%.5f")
-    print(ct[ct.p < 0.05].round(3).to_string())
+    characteristics(r)
     # (b) spillover model: own + within 2 km + 2-5 km ring together
     near, ring = p.rain_2km.fillna(0).values, p.rain_ring.fillna(0).values
     cols = M.base_X(p) + [(near > 0) & (near <= 2.5), near > 2.5, (ring > 0) & (ring <= 2.5), ring > 2.5]
@@ -97,4 +103,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    characteristics() if sys.argv[1:] == ["characteristics"] else main()

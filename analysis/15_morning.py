@@ -138,8 +138,8 @@ def main():
             Xg = sm.add_constant(Xg)
             g = sm.GLM(tr[label], Xg.loc[tr.index], family=sm.families.Poisson(), offset=off["tr"]).fit()
             preds[(label, "glm", with_fc)] = np.asarray(g.predict(Xg.loc[te.index], offset=off["te"]))
-    log_test_scoring("15_morning.py", "morning-forecast models re-scored on the test year after the timing fixes "
-                     "(issue-time history, scheduled exposure, train-only imputation, one forecast issue)", "step 15 fix")
+    log_test_scoring("15_morning.py", "morning-forecast models re-scored on the test year (same models and seeds as the "
+                     "corrective refit) to add the 7-day block-bootstrap sensitivity", "step 15 sensitivity")
 
     def dev(y, mu):
         mu = np.maximum(mu, 1e-9)
@@ -151,18 +151,30 @@ def main():
         ud = np.sort(np.unique(days))
         di = np.searchsorted(ud, days)
         W = np.random.default_rng(SEED).multinomial(len(ud), np.full(len(ud), 1 / len(ud)), size=1000).astype(float)
+        # sensitivity (decision 145): moving-block bootstrap with 7-day blocks, as adjacent days are correlated
+        rb = np.random.default_rng(SEED + 7)
+        nb = int(np.ceil(len(ud) / 7))
+        WB = np.zeros((1000, len(ud)))
+        for k in range(1000):
+            for st_ in rb.integers(0, len(ud) - 6, nb):
+                WB[k, st_:st_ + 7] += 1
         for name in ("lgb", "glm"):
             y = te[label].values
             d0_, d1_ = dev(y, preds[(label, name, False)]), dev(y, preds[(label, name, True)])
             D0, D1 = np.bincount(di, d0_, len(ud)), np.bincount(di, d1_, len(ud))
             imp = 1 - d1_.sum() / d0_.sum()
             bimp = 1 - (W @ D1) / (W @ D0)
+            bblk = 1 - (WB @ D1) / (WB @ D0)
+            dd = D0 - D1
+            lag1 = float(np.corrcoef(dd[:-1], dd[1:])[0, 1])
             rows.append({"label": "retrospective" if label == "y" else "issue-time", "model": name,
                          "deviance_without": d0_.sum(), "deviance_with": d1_.sum(), "deviance_improvement_pct": 100 * imp,
                          "lo": 100 * np.quantile(bimp, 0.025), "hi": 100 * np.quantile(bimp, 0.975),
                          "mae_without": np.mean(np.abs(y - preds[(label, name, False)])),
                          "mae_with": np.mean(np.abs(y - preds[(label, name, True)])), "test_rows": len(te),
-                         "material_rule_met": bool(imp >= 0.02 and np.quantile(bimp, 0.025) > 0)})
+                         "material_rule_met": bool(imp >= 0.02 and np.quantile(bimp, 0.025) > 0),
+                         "lo_block7": 100 * np.quantile(bblk, 0.025), "hi_block7": 100 * np.quantile(bblk, 0.975),
+                         "lag1_autocorr_daily_gain": lag1})
     r = pd.DataFrame(rows)
     r.to_csv(TABLES / "morning_forecast_value.csv", index=False, float_format="%.5f")
     print(r.round(4).to_string(index=False))
