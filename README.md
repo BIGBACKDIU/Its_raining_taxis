@@ -67,3 +67,11 @@ four registered sample days, every issue's timing, naive future-issue rejections
 The date/calendar adapter supplies unknown depths for wholly missing rain days and preserves the frozen feature mathematics; 2019 calendar sources and retrieval
 limitations are recorded under `data/static/phase3/s22b/`. All results use the separate `s22b_` prefix.
 2019 had a different fleet and market; a failed confirmation may reflect an era shift.
+
+### Storm Builder — presentation only
+
+[`sim/v3/index.html`](sim/v3/index.html) is a self-contained interactive synthetic-storm presentation:
+real OpenStreetMap road paths, animated model taxis, storm controls and a same-seed policy comparison.
+It retains the failed-realism-check banner and the frozen v2 model numbers and parameters.
+The original simulation pages remain unchanged. See [`sim/v3/README.md`](sim/v3/README.md) for the build,
+checks, road attribution (OpenStreetMap contributors, ODbL) and presentation simplifications.

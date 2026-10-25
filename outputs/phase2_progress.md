@@ -666,3 +666,54 @@ Verification: **32 tests pass** (14 existing dependency warnings); wording check
 (the three new code hits are the synthetic-check function/CLI name). All **326 existing output table and
 figure files** retain their pre-step-23 SHA-256 hashes. The test-scoring log has no new row because no
 new test-year use occurred. Main sample constraints, expected-count thresholds and frozen results remain intact.
+
+## Storm Builder — presentation-only v3 with real road animation
+
+Registered as decision 159 (`9725a3e`) before implementation; checked choices/results are decision 160.
+`sim/v3/index.html` is a **1.64 MB standalone HTML artifact**, with no external script, image, font or
+network dependency. It adds four synthetic-storm presets, size/strength/duration/drift controls, weekday/
+weekend time profiles, three assumed rain mechanisms, a request multiplier, policy toggle, advanced
+settings, timeline, smooth taxi dots, request pulses, count chart and same-seed comparison. The phone
+controls become a bottom sheet and comparisons stack at 400 px. The permanent failed-realism banner
+stays visible on scroll; every counter is labelled simulated. This is not a new empirical analysis.
+
+Roads use the local step-11 OSM GraphML, filtered to motorway/trunk/primary/secondary/tertiary and
+links. Mixed edges containing excluded classes are dropped. Largest strongly connected component:
+**14,880 nodes / 21,651 directed edges / 612,734 inlined bytes**, below 3 MB. Geometry is simplified
+at 15 m and quantised to integer metres in the existing local projection. Each eligible cell has an ID
+mapping to its nearest node (`storm_builder_cell_nodes.csv`); snap distances median 147.75 m, max
+764.03 m. Cached directed A* routes occupied trips, pickup approaches and repositioning. There are
+**zero path fallbacks** in tested scenarios; the missing-path unit test confirms the counted straight-line
+fallback. One-way cruise loops remain local (max 1,120.85 m); 84 cells without a short legal loop wait
+for an engine move. These trajectories and identities are illustrations, not recovered vehicles or speeds.
+
+The v2 engine gains optional observational callbacks only. No model RNG calls, integer allocation,
+arrival times, parameters or realism rules change. Twelve fixed-seed cases match the original engine
+and match hooks off/on exactly at every minute and in final scheduled arrivals. Six existing conservation
+tests pass. The three existing 50-seed Python/JS parity cases pass their unchanged rule (max peak gap
+0.707%) and are written to `storm_builder_parity.csv`; the frozen parity table stays unchanged.
+Their held-out input-only use is logged once; no observed outcomes are scored or used for choices.
+The 96 typical calendar profiles reuse saved fit-period step-5 predictions with normal feed scaling;
+there is no baseline refit or new test-year choice. `sim/index.html` and `sim/v2/index.html` are unchanged.
+
+Headless Chromium 156 on this Apple M2 Pro records **60 fps with 2,500 moving road dots** and
+2.7 ms p95 drawing time; ordinary 16x playback also stays near 60 fps. The 400 px emulation runs near
+60 fps on the same machine, without horizontal scroll; this is not a real-phone hardware claim.
+Both policy versions have zero per-cell animation/count discrepancies across 241 engine minutes.
+Independent hooks-off checks reproduce initial, mid-storm, end, mobile policy and reduced-motion
+counters. Default end totals: **1,742 vacant / 8,103 hired trips / 1 offline / 0 waiting / 10 abandoned**, with
+8,113 simulated requests. Worker-blocked fallback, a nonzero 30-minute light shower, permanent banner,
+stacked split view and no external requests all pass. **No console errors.** Required 1440/400 px
+before/mid-storm screenshots include roads; extra phone sheet/split screenshots are also saved.
+
+Full build and browser reports: `storm_builder_build.json`, `storm_builder_browser_check.json`.
+Build/check instructions, provenance, OSM/ODbL credit and simplifications: `sim/v3/README.md`.
+Frozen v2 data, tuning/plausibility/parity tables and both earlier HTML pages retain their original hashes.
+The wording checker now scans the v3 template; new demand/lost-passenger matches describe explicitly
+simulated assumptions or state that those quantities are not measured.
+
+Final gates: **35 tests pass** (14 existing dependency warnings). Wording check: **76 reviewed hits**;
+the four new v3 hits are scenario controls/identifiers and explicit negations of measured demand or
+lost-passenger claims. `storm_builder_hook_check.json` records all 12 exact old/new/on/off cases;
+`storm_builder_preservation.json` records the unchanged frozen hashes. No existing result table or
+figure is modified. A local preview is available on port 8765; the HTML also works directly from disk.

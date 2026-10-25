@@ -186,6 +186,8 @@ class Sim {
   constructor(world, storm, scen, params, seed, opts = {}) {
     this.w = world; this.st = storm; this.scen = scen; this.p = params;
     this.rng = new RNG(seed);
+    // Optional presentation observers: primitive event copies only; no RNG calls.
+    this.hooks = opts.hooks || null;
     this.policy = !!opts.policy; this.rainMult = opts.rainMult ?? 1.0;
     const C = world.C, M = storm.minutes;
     this.C = C; this.M = M; this.m = 0;
@@ -213,13 +215,16 @@ class Sim {
     this.inflight = 0;
   }
   rainAt(slot) { const r = this.st.rain[Math.min(slot, this.st.rain.length - 1)]; return r.map((v) => v * this.rainMult); }
-  startTrips(cnt, i, approach, facArr) {
+  emit(name, ...args) { if (this.hooks && this.hooks[name]) this.hooks[name](...args); }
+  startTrips(cnt, i, approach, facArr, origins = null) {
     const C = this.C, cum = this.w.cum[this.scen.dest];
     for (let k = 0; k < cnt; k++) {
       const d = this.rng.choiceCum(cum, i * C, C);
       const dur = approach + this.w.T[i * C + d] * facArr[i] + 2;
       const ta = Math.min(this.m + Math.ceil(dur), this.M + HORIZON_PAD - 1);
       this.ARR[ta][d]++;
+      this.emit("onHire", i, d, this.m, ta,
+        { taxiCell: origins ? origins[k] : i, pickupMin: this.m + approach });
     }
   }
   match(Q, nRings, facArr) {
@@ -237,9 +242,14 @@ class Sim {
       if (anyQ === 0 || anyV === 0) break;
       const { adj, mid } = this.w.rings[r];
       const al = allocateRing(adj, Q, V, this.rng);       // integer edge flows (decision 139)
+      let origins = null;
+      if (this.hooks) {
+        origins = Array.from({ length: C }, () => []);
+        for (let e = 0; e < al.F.length; e++) for (let k = 0; k < al.F[e]; k++) origins[al.ej[e]].push(al.ei[e]);
+      }
       for (let i = 0; i < C; i++) {
         if (al.d[i] > 0) { V[i] -= al.d[i]; served += al.d[i]; }
-        if (al.q[i] > 0) { Q[i] -= al.q[i]; this.startTrips(al.q[i], i, mid * meanF, facArr); }   // trips start at the request cell
+        if (al.q[i] > 0) { Q[i] -= al.q[i]; this.startTrips(al.q[i], i, mid * meanF, facArr, origins ? origins[i] : null); }   // trips start at the request cell
       }
     }
     return served;
@@ -250,7 +260,10 @@ class Sim {
     const r = this.rainAt(slot);
     const facArr = new Float64Array(C);
     for (let i = 0; i < C; i++) facArr[i] = (r[i] > 0 && scen.travel === "rain") ? RAIN_FACTOR : 1.0;
-    const arr = this.ARR[m]; for (let i = 0; i < C; i++) V[i] += arr[i];
+    const arr = this.ARR[m]; for (let i = 0; i < C; i++) {
+      V[i] += arr[i];
+      for (let k = 0; this.hooks && k < arr[i]; k++) this.emit("onReturn", i, m, { kind: "arrival" });
+    }
     // normal time-of-day path
     if (m % 30 === 0 && m > 0) {
       let onroad = 0; for (let i = 0; i < C; i++) onroad += V[i] + this.OFF[i];
@@ -260,13 +273,15 @@ class Sim {
       let diff = Math.round(target - onroad);
       if (diff > 0) {
         const cum = new Float64Array(C); let s = 0; for (let i = 0; i < C; i++) { s += b[i]; cum[i] = s; }
-        for (let k = 0; k < diff; k++) V[this.rng.choiceCum(cum, 0, C)]++;
+        for (let k = 0; k < diff; k++) {
+          const i = this.rng.choiceCum(cum, 0, C); V[i]++; this.emit("onStockAdjust", i, 1, m);
+        }
       } else if (diff < 0) {
         let vs = 0; for (let i = 0; i < C; i++) vs += V[i];
         let n = Math.min(-diff, vs);
         while (n > 0) {
           const cum = new Float64Array(C); let s = 0; for (let i = 0; i < C; i++) { s += V[i]; cum[i] = s; }
-          const i = this.rng.choiceCum(cum, 0, C); V[i]--; n--;
+          const i = this.rng.choiceCum(cum, 0, C); V[i]--; n--; this.emit("onStockAdjust", i, -1, m);
         }
       }
     }
@@ -276,11 +291,13 @@ class Sim {
         const pOff = Math.min(1, this.p.beta_off * Math.min(r[i], 30) / 30 * this.w.offScale[i]);
         const off = this.rng.binomial(V[i], pOff);
         V[i] -= off; this.OFF[i] += off;
+        for (let k = 0; this.hooks && k < off; k++) this.emit("onOffline", i, m);
       }
     }
     for (let i = 0; i < C; i++) {
       const back = this.rng.binomial(this.OFF[i], r[i] > 0 ? 0 : 1 / 30);
       this.OFF[i] -= back; V[i] += back;
+      for (let k = 0; this.hooks && k < back; k++) this.emit("onReturn", i, m, { kind: "duty" });
     }
     // policy every 30 minutes
     if (this.policy && m % 30 === 0 && m > 0) {
@@ -294,13 +311,18 @@ class Sim {
         V[mv.i] -= n;
         this.ARR[Math.min(m + Math.ceil(mv.t), this.M + HORIZON_PAD - 1)][mv.j] += n;
         this.lastMoves.push({ i: mv.i, j: mv.j, n });
+        for (let k = 0; this.hooks && k < n; k++) this.emit("onReposition", mv.i, mv.j, m,
+          Math.min(m + Math.ceil(mv.t), this.M + HORIZON_PAD - 1));
       }
     }
     // waiting requests
     let rmean = 0; for (const v of r) rmean += v; rmean /= C;
     const rainCity = rmean > 0.5;
     let ab = 0;
-    for (let i = 0; i < C; i++) { const a = this.rng.binomial(this.Qw[i], 1 / PATIENCE_MIN); this.Qw[i] -= a; ab += a; }
+    for (let i = 0; i < C; i++) {
+      const a = this.rng.binomial(this.Qw[i], 1 / PATIENCE_MIN); this.Qw[i] -= a; ab += a;
+      for (let k = 0; this.hooks && k < a; k++) this.emit("onAbandon", i, m);
+    }
     this.stats.abandoned += ab; if (rainCity) this.stats.abandoned_rain += ab;
     this.stats.served += this.match(this.Qw, scen.dispatch === "widening" ? 5 : 3, facArr);
     let wq = 0; for (let i = 0; i < C; i++) wq += this.Qw[i]; this.stats.wait_minutes += wq;
@@ -314,6 +336,7 @@ class Sim {
       nw[i] = this.rng.poisson(lam) + Math.round(this.extra[i]);
       this.extra[i] = 0;
       nreq += nw[i];
+      for (let k = 0; this.hooks && k < nw[i]; k++) this.emit("onRequest", i, m);
     }
     this.stats.requests += nreq; if (rainCity) this.stats.requests_rain += nreq;
     const servedNew = this.match(nw, 3, facArr);

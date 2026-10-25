@@ -1,0 +1,25 @@
+{
+  "source_nodes": 26090,
+  "source_edges": 49808,
+  "nodes": 14880,
+  "directed_edges": 21651,
+  "geometry_points_before": 122799,
+  "geometry_points_after": 47292,
+  "inlined_road_bytes": 612734,
+  "max_snap_metres": 764.0255475867096,
+  "median_snap_metres": 147.75021259979314,
+  "disconnected_cell_pairs": 0,
+  "source_sha256": "ed23326888e4d83972236464625f8296e983128093a9ad5e1405268d33e06cf9",
+  "html_bytes": 1641254,
+  "data_bytes": 1569187,
+  "baseline": {
+    "source": "frozen step-5 predictions; cell ratios and how\u00d7month pattern, no refit",
+    "calendar": "equal-month mean of Monday-Friday / Saturday-Sunday half-hours",
+    "normal_regime_multiplier": 1.0010005001667084,
+    "reference_cell": 8016,
+    "profiles": 96,
+    "fit_start": "2022-04-01",
+    "fit_end": "2025-03-31"
+  },
+  "engine_sha256": "00c4a46022086b42db9515ac946e0bafeb835d6ac2a7bbf317cc9297f45f3021"
+}

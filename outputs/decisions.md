@@ -1457,3 +1457,49 @@ results stay as they are and remain the pre-specified result.
     bytes, path fallbacks, headless performance, screenshots at 1440/400 px, console errors and exact
     display/engine counter agreement. Target road data <3 MB and complete HTML <10 MB; respect
     reduced motion and reduce phone trails/cruising. Run wording check and tests before commits.
+
+160. **Storm Builder presentation checks and disclosed drawing choices (no analysis change).**
+    The standalone `sim/v3/index.html` is 1,641,254 bytes. The road payload is 612,734 bytes:
+    14,880 nodes and 21,651 directed edges in the largest strongly connected major-road component.
+    Eighteen mixed-class source edges containing an excluded minor-road class were conservatively
+    omitted before component selection. Source geometry drops from 122,799 to 47,292 vertices after
+    15 m simplification. All 374 cells have explicit ID/node mappings; median snapping distance is
+    147.75 m, maximum 764.03 m. All tested point-to-point routes exist: **zero straight-line fallbacks**.
+    Cached directed A* minimises metre distance; its heuristic is Euclidean and edge costs round up.
+
+    The normal pattern is exported from existing step-5 predictions on fit rows only, stripping the
+    existing regime level, averaging each calendar month and weekday/weekend equally, and restoring
+    the median normal-regime multiplier 1.0010005001667084. There are 96 half-hour profiles; initial
+    supply rounds those expectations to integers. The policy share remains 0.6355 from the first frozen
+    v2 storm input. No baseline, model, parameter or realism threshold is re-estimated. Synthetic rain
+    averages six five-minute midpoint values per engine half-hour; visual radar interpolation does not
+    change those slots. The original model still saturates above 30 mm/h for the 60 mm/h extreme field.
+
+    Separate visual RNG and event metadata track every cell's vacant/offline inventory. Hooks include
+    actual allocated taxi origins, pickup times, arrivals and normal stock changes. All 12 fixed-seed
+    cases have identical minute states and final arrival schedules with hooks off/on AND against the
+    original JavaScript engine from commit 1819163. The existing three Python/JS parity cases at 50
+    seeds all pass the unchanged 5% rule (largest relative peak discrepancy 0.707%); results go to the
+    NEW storm_builder_parity.csv. The held-out storm INPUT-only compatibility run is logged once;
+    no observed outcomes are scored, no choices use them, and the frozen parity CSV is unchanged.
+
+    Headless system Chromium 156 on this Apple M2 Pro records about **60 fps** both through the default
+    16x four-hour run and with 2,500 moving dots on road paths; stress p95 drawing time is 2.7 ms.
+    A 400 px emulation on the same machine also records about 60 fps (not a physical-phone benchmark).
+    All 241 engine minutes agree with animated per-cell vacant/offline counts in both policy versions.
+    At the default end: 1,742 vacant, 8,103 hired trips, 1 offline, 0 waiting, 10 abandoned, from 8,113
+    simulated requests; an independent hooks-off replay matches all displayed counters exactly.
+    Checks cover initial/mid/end states, phone policy switching, a nonzero 30-minute shower, stacked
+    comparison, reduced motion, and a worker-blocked artifact fallback. No console errors, external
+    requests or horizontal scroll at 400 px. Four required road-inclusive screenshots plus phone
+    controls/comparison screenshots are saved as storm_builder_*.png.
+
+    Drawing simplifications: paths and identities are illustrative; speed preserves engine arrival
+    times rather than estimating traffic. Short cruising loops stay local (maximum observed radius
+    1,120.85 m); in 84 cells no short directed loop exists, so vacant taxis wait until an engine move.
+    This avoids long one-way-road detours or reversing a one-way edge. Small views omit trails and
+    quantise cruising; reduced motion freezes cruising and slows pulses. The realism banner stays
+    visible while scrolling. OSM/ODbL attribution is in each map corner and the v3 README. v1/v2 HTML,
+    frozen v2 data, tuned parameters, plausibility results and frozen parity results remain byte-identical.
+    The wording checker now includes the new v3 template; reviewed new hits are explicitly simulated
+    demand controls and negations of measured demand/lost-passenger claims.

@@ -10,7 +10,7 @@ import re
 from pathlib import Path
 
 FILES = [Path("outputs/summary.md"), Path("outputs/recommendation_inputs.md"), Path("outputs/tables/forecast_README.md"),
-         Path("sim/page_template.html")] + sorted(Path("analysis").glob("[0-9]*.py"))
+         Path("sim/page_template.html"), Path("sim/v3/template.html")] + sorted(Path("analysis").glob("[0-9]*.py"))
 PATTERNS = {
     "demand": r"\bdemand\b", "unmet": r"\bunmet\b", "lost riders": r"lost (riders|trips|passengers)",
     "waiting time": r"wait(ing)? time", "revenue": r"\brevenue\b|\bfares?\b", "cause": r"\bcaus(e|es|ed|al)\b",

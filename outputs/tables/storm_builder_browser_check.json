@@ -1,0 +1,266 @@
+{
+  "platform": "darwin",
+  "architecture": "arm64",
+  "cpu": "Apple M2 Pro",
+  "screenshots": [
+    "storm_builder_1440_before.png",
+    "storm_builder_1440_mid.png",
+    "storm_builder_400_before.png",
+    "storm_builder_400_mid.png",
+    "storm_builder_400_controls.png",
+    "storm_builder_400_split.png"
+  ],
+  "checks": [
+    {
+      "label": "desktop initial",
+      "time": -0.001,
+      "expected": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 0,
+      "served": 0,
+      "drawnVacant": 2058,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "desktop mid storm",
+      "time": 30,
+      "expected": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 1076,
+      "served": 1076,
+      "drawnVacant": 1830,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "desktop 16x end",
+      "time": 240,
+      "expected": {
+        "vacant": 1742,
+        "hired": 8103,
+        "offline": 1,
+        "waiting": 0,
+        "abandoned": 10
+      },
+      "displayed": {
+        "vacant": 1742,
+        "hired": 8103,
+        "offline": 1,
+        "waiting": 0,
+        "abandoned": 10
+      },
+      "requests": 8113,
+      "served": 8103,
+      "drawnVacant": 1742,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "phone initial",
+      "time": -0.001,
+      "expected": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 0,
+      "served": 0,
+      "drawnVacant": 2058,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "phone mid storm",
+      "time": 30,
+      "expected": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 1076,
+      "served": 1076,
+      "drawnVacant": 1830,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "phone repositioning counters",
+      "time": 30,
+      "expected": {
+        "vacant": 1756,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 1756,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 1076,
+      "served": 1076,
+      "drawnVacant": 1756,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "reduced motion",
+      "time": 30,
+      "expected": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 1830,
+        "hired": 1076,
+        "offline": 20,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 1076,
+      "served": 1076,
+      "drawnVacant": 1830,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    },
+    {
+      "label": "worker-blocked artifact fallback",
+      "time": -0.001,
+      "expected": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "displayed": {
+        "vacant": 2058,
+        "hired": 0,
+        "offline": 0,
+        "waiting": 0,
+        "abandoned": 0
+      },
+      "requests": 0,
+      "served": 0,
+      "drawnVacant": 2058,
+      "cellErrors": [
+        0,
+        0
+      ],
+      "fallbacks": 0
+    }
+  ],
+  "browser": "156.0.8078.47",
+  "desktopBuildSeconds": 3.792,
+  "cruising": {
+    "uniquePaths": 1774,
+    "maxRadiusMetres": 1120.854138592529,
+    "stationaryCells": 84
+  },
+  "permanentBannerVisible": true,
+  "desktopPlayback": {
+    "fps": 60.0026044536157,
+    "frames": 600,
+    "drawP95Ms": 2.300000011920929,
+    "drawnDots": 2482,
+    "drawnVacant": 1742,
+    "pathFallbacks": 0
+  },
+  "desktopStress2500": {
+    "fps": 60.00200006666889,
+    "frames": 361,
+    "drawP95Ms": 2.699999988079071,
+    "drawnDots": 2500,
+    "drawnVacant": 2500,
+    "pathFallbacks": 0
+  },
+  "emulatedPhoneStress2500": {
+    "fps": 60.00400026668444,
+    "frames": 181,
+    "drawP95Ms": 2.199999988079071,
+    "drawnDots": 2500,
+    "drawnVacant": 2500,
+    "pathFallbacks": 0
+  },
+  "phoneHorizontalOverflow": false,
+  "phoneSplitColumns": "374px",
+  "smallShower": {
+    "duration": 30,
+    "firstSlotRain": 4.072465589383842,
+    "laterRain": 0
+  },
+  "reducedMotion": true,
+  "workerBlockedFallback": true,
+  "consoleErrors": [],
+  "externalRequests": []
+}
