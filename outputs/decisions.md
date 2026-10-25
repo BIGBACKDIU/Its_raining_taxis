@@ -1526,3 +1526,10 @@ results stay as they are and remain the pre-specified result.
     moving dots, headless desktop and 400 px emulation remain about 60 fps (desktop p95 draw 2.2 ms).
     This is the same laptop benchmark, not a physical-phone claim. Refresh the six presentation
     screenshots; no frozen analysis figure changes. The standalone HTML is 1,644,590 bytes.
+162. **Storm Builder visual polish (presentation only).** Restyled `sim/v3`: higher-contrast palette for taxi
+    states (vacant teal, hired amber, repositioning lilac, abandoned coral; checked for colour-blind separation
+    and contrast on the dark map), larger dots, a stronger rain layer with its own legend key, readable type
+    sizes (no text under 10.5 px on desktop), map height following the island's aspect ratio, a taller chart
+    whose y-axis spans the data range with the rain window labelled, and a tidier phone layout. Engine,
+    random streams, scenario inputs and counters are unchanged; `analysis/check_storm_builder.cjs` passes
+    (exact counter agreement, no console errors, no external requests).

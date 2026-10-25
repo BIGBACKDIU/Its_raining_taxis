@@ -10,7 +10,7 @@
   "median_snap_metres": 147.75021259979314,
   "disconnected_cell_pairs": 0,
   "source_sha256": "ed23326888e4d83972236464625f8296e983128093a9ad5e1405268d33e06cf9",
-  "html_bytes": 1644590,
+  "html_bytes": 1648498,
   "data_bytes": 1569187,
   "baseline": {
     "source": "frozen step-5 predictions; cell ratios and how\u00d7month pattern, no refit",

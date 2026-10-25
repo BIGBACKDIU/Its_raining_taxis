@@ -733,3 +733,9 @@ Default/shower/policy brief changes pass browser checks. Desktop and 400 px emul
 60 fps with 2,500 road dots; no console errors, network requests, path fallbacks or horizontal overflow.
 The six presentation screenshots are refreshed. Wording check: 76 reviewed hits, all tests: 35 passed
 (with the existing dependency warnings). No new held-out data use or analysis results.
+
+## Storm Builder visual polish
+
+- Presentation-only restyle of `sim/v3/index.html` (palette, dot size, rain layer, type sizes, map aspect, chart
+  range and labels, phone layout). The browser checker passes with exact counter agreement; screenshots in
+  `outputs/figures/storm_builder_*.png` are refreshed. No model or number changed.
