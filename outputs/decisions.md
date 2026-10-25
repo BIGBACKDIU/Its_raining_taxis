@@ -933,3 +933,105 @@ results stay as they are and remain the pre-specified result.
     radar cell-snapshots on 29 days; at 0.1 mm/h there are 210 radar rows on 78 days. All counts are reported
     in `radar_approach_support.csv`, rather than omitting this imprecise contrast or choosing a dry threshold
     after seeing it. The point estimates, estimator, controls and full common sample are unchanged.
+
+## Step 22: regional storm forecasting on a fresh holdout (registered before download)
+
+150. **Specification and execution order, fixed before downloading October 2026 or fitting step-22 models.**
+    Why: steps 6 and S1 found no material weather gain for individual cells, 2 km cells or planning areas.
+    Step 3 found about 7% fewer vacant taxis when rain was 2-5 km away before local rain arrived, and most
+    of the drop is regional or citywide. Step 22 tests regional targets, approaching-rain features and storm
+    windows on genuinely new data, 1-24 October 2026. It is a separate analysis; all frozen results remain.
+
+    **Order and boundaries.** Commit this specification first. Then download only 1-24 October 2026 with
+    `pipeline.fetch_month` and audit snapshot presence, timestamp offsets and gauge completeness; do not
+    construct October targets, labels or scores. Develop using April 2022-March 2025 for fitting and
+    April-September 2025 for calibration/model choice. October 2025-September 2026 outcomes cannot inform
+    any choice. After all settings and scoring code are fixed, refit on April 2022-September 2026, save
+    models and preprocessing, record SHA-256 hashes here, and commit AND push the freeze before opening
+    October targets. Score October once, log "fresh holdout, scored once", and report every registered
+    combination without changing methods or models after seeing its results. Log the final fixed-setting
+    refit on the old test year separately; it is training for this new analysis, not a new tuning sample.
+
+    **Units and timing.** Six overlapping units: URA Central Area and the five URA regions (Central, East,
+    North, North-East, West), using the same 374 analysed 1 km cells, joined by cell ID to URA geography.
+    The Central Area is also part of Central Region; do not treat the six results as independent.
+    Use only :00/:30 snapshots. Historical taxi exclusions stay as registered. On October use only the
+    audit's missing/invalid timestamp exclusions, without estimating new regimes or dropping low counts.
+    The final model uses recent levels to adapt to a possible new coverage regime. An evaluation pair
+    needs valid issue and target snapshots and exact 30/60/90-minute count lags. Targets must lie inside
+    their split (no training targets in calibration and no targets beyond 24 October).
+
+    **Issue-time expected levels and targets.** Fit the step-5 Poisson baseline structure (cell +
+    half-hour-of-week x month + training feed-regime effects) using each fitting window only. Strip regime
+    levels to obtain the seasonal pattern; sum cells for each unit. Refit this baseline inside every
+    time-ordered fold, and refit it again at the final freeze. With complete common cell panels its
+    balanced-data Poisson fit can be computed from cell totals and citywide slot/regime totals, which
+    is algebraically the same model. The coverage factor at issue time t is the trailing 7-calendar-day
+    median of eligible-cell citywide count divided by its seasonal pattern, using only snapshots <=t.
+    Expected count at t+h is seasonal pattern(t+h) times that factor FROZEN AT t, never a future
+    regime level or target-time rolling estimate. Use at least 48 valid trailing snapshots; unavailable
+    patterns/history mean missing, not zero. T1 = log(max(Y(t+h),1)/max(expected(t+h|t),1)); the floor
+    prevents undefined logs and its use count is reported. T2 = Y(t+h) <= (1-d)*expected(t+h|t), with
+    d=0.15 primary and d=0.10,0.20 checks. Horizons are 30 and 60 minutes. Historical training labels are
+    built by the same issue-time rule, with no target-time level. Calendar baselines are fitted using
+    training data only, including during folds; no future regime levels, dispersion or thresholds enter.
+
+    **Features.** Without weather: current regional and eligible-cell citywide counts, their deviations
+    from expected, exact 30/60/90-minute lags, half-hour of week (cyclic plus categorical time indicators),
+    month, day type, public/school holidays, the trailing 7-day level, and known target calendar/pattern.
+    With weather adds regional rain now and 30/60/90-minute lags, regional gauge wet share, gauge-mean
+    rain 2-5 km and 5-10 km OUTSIDE the unit's URA boundary in EPSG:3414, island-wide wet-share change
+    over 30 minutes, and summaries of the SINGLE latest NEA 2-hour issue strictly before t over areas
+    assigned to the unit (mean/max rain category and issue age; require forecast validity at t).
+    Gauge depths become mm/h over (t-30,t], with exact earlier windows as lags. Gauge coordinates and
+    membership are keyed by station ID; no row-order joins. Gauge health uses preceding-day completeness,
+    not future readings in the current day; sparse raw readings encode reported zeros, with gauge gaps
+    documented. Missing weather is imputed using fitting-window medians and missing indicators, unchanged
+    on calibration and holdout. Empty geographic rings remain missing. No radar data are used.
+
+    **Models and choices.** Report persistence, seasonal, linear and LightGBM, each without/with weather,
+    for T1 and all three T2 thresholds at both horizons. Pool units with unit indicators and report each
+    unit as well as the pooled sample. Persistence T1 carries the current log-relative level forward;
+    seasonal T1 predicts zero. Their T2 risks use empirical training residual CDFs around those forecasts.
+    Their weather versions add a ridge-fitted weather-only residual adjustment (T2 uses the same training
+    residual CDF); this makes the two weather-adjusted benchmarks explicit rather than duplicating them.
+    Linear means ridge for T1 and logistic regression for T2, with training-only median imputation and
+    standardisation. LightGBM uses regression L1/binary objectives, seed 2702, fixed single-threaded
+    deterministic settings. Tune small, disclosed grids of ridge/logistic penalties and LightGBM leaf/
+    minimum-leaf settings with expanding time folds ending March and September 2024 and March 2025
+    (validation is the preceding six months, training is everything earlier). Compare mean fold MAE
+    or PR-AUC, not holdout performance. Calibration April-September 2025 supplies early stopping and
+    final choice among the two best fold settings; minimise MAE/maximise PR-AUC, ties prefer simpler.
+    The final refit uses the chosen penalties/tree counts unchanged; no early stopping on the old test
+    year or October. Probability calibration is not added. Baseline residual distributions are training
+    only. All preprocessing, baseline coefficients, features, settings and model bytes are hash-frozen.
+
+    **Storms and evaluation.** At each half-hour, compare the same gauges' (t-60,t-30] and (t-30,t]
+    rates: an onset candidate has >=25% of working island-wide gauges change from exactly dry to
+    >=1 mm/h. Require at least 20 working gauges in both windows; merge candidates within 180 minutes
+    of the preceding retained onset. Count onsets dated 1-24 October; storm issue windows extend from
+    -60 to +120 minutes around those onsets and are clipped to the holdout. Storm detection is an
+    evaluation subset only, not a future-known predictor. Report onsets, working gauges, sample sizes,
+    vacant counts, expected counts and event base rates. All times and storm windows: T1 MAE and
+    MAE skill versus corresponding no-weather persistence; T2 PR-AUC (average precision), precision
+    and recall at an alert fraction equal to that unit/horizon/threshold's CALIBRATION base rate,
+    fixed before final refitting (pooled workload is the pooled calibration rate). Report actual
+    holdout base rates too. Rank scores within each reported evaluation subset, with chronological
+    tie-breaking, and ceil(rate*n) alerts; this evaluates fixed workload without tuning on October.
+    Confidence intervals are paired 1,000-draw day-block percentile bootstraps, resampling issue days
+    with every unit/time/model together. AP uses exact score ranks (ties grouped), with day-frequency
+    weights; no score binning. Report undefined metrics rather than replacing empty classes with zero.
+
+    **Decision rule and power.** The primary materiality comparison pools the six units at each horizon:
+    in storm windows LightGBM-with-weather must lower T1 MAE by >=5% or raise primary (15%) T2 PR-AUC
+    by >=0.02, with the paired 95% CI excluding zero. Either horizon qualifies. Report all six unit
+    contrasts and both threshold checks regardless of direction; these do not create additional primary
+    success criteria. Pooled observations overlap through Central Area and Central Region, so bootstrap
+    them jointly. If October has fewer than EIGHT onsets, storm-window results are DESCRIPTIVE ONLY:
+    report numerical threshold crossings but do not claim confirmed materiality. These are pointwise
+    CIs over a short period, not a general guarantee. Vacant taxis measure supply, not passenger demand.
+
+    **Deliverables.** `outputs/tables/s22_*.csv`; one new figure (PNG/SVG) showing paired weather gains
+    with CIs by region, horizon and target, all times versus storm windows; append progress and a short
+    "Regional storm forecasting (fresh holdout)" summary item. Run wording check and tests before
+    each commit. No frozen tables, figures, registered thresholds or models are changed.
