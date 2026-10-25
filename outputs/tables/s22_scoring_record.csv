@@ -1,0 +1,2 @@
+commit,description,started,completed,prediction_sha256,storms
+cc12a0ef9d14f5284b6e302e3fcb94df09e0c2e9,"fresh holdout, scored once",2026-10-25T11:28:03.669667+08:00,2026-10-25T11:28:27.768561+08:00,3651b89464fb8a40354edddcb8d5c87084d1deac1aa76db1d282c92ecf1b9df5,2

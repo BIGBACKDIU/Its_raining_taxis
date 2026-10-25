@@ -185,6 +185,23 @@ and the Central Area -23.9%; the approaching-rain CI still includes zero. Radar 
 cell-windows), but trace-rain classification affects the light-rain estimate.
 Frozen full-period gauge estimates remain the headline. Tables: `radar_*.csv`; figure `radar_measurement_check`.
 
+### Regional storm forecasting (fresh holdout)
+
+A separately registered analysis forecasts the Central Area and five URA regions 30/60 minutes ahead,
+using approaching rain as well as local weather. It scores 1-24 October 2026 once after a pushed model
+freeze. There are 2 storm onsets (descriptive only: fewer than eight onsets); the registered pooled materiality threshold is **met numerically; confirmation unavailable (fewer than eight storms)**.
+At 30 min, T1 MAE weather gain is +3.62% [+0.42, +6.56].
+At 30 min, 15%-shortfall PR-AUC weather gain is +0.0333 [-0.0029, +0.0394].
+At 60 min, T1 MAE weather gain is +2.26% [+0.93, +3.95].
+At 60 min, 15%-shortfall PR-AUC weather gain is +0.0238 [+0.0123, +0.0787].
+The pooled target has 382.0 observed versus 381.8 expected vacant taxis on average (overlapping regions).
+Storm comparisons contain only 84 region forecasts on two days; pooled CIs use 893 nonempty draws of 1,000.
+Across all times, primary PR-AUC gains are only +0.00146 (30 min) and +0.00043 (60 min), with both CIs including zero.
+This adds two logged uses: the fixed refit of the old test year, then the fresh holdout scoring.
+All models, regions, thresholds and subsets are reported in `s22_*.csv`; paired day-block 95% CIs and `s22_weather_gain`.
+This short holdout tests regional supply forecasts, with no model changes after scoring. Alert workload is fixed to calibration base rates.
+Earlier frozen forecasting results keep their original scope.
+
 ## 4. Caveats
 
 - **The feed's coverage changes.** The number of taxis in the feed jumps between periods (about half in Aug - Nov

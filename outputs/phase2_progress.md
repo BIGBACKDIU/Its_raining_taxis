@@ -473,3 +473,49 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   matrices are finite and positive semidefinite. All 15 tests pass (14 existing dependency/test warnings).
   Wording scanner completes with 69 hits; new hits are negated validation claims or code terminology, reviewed
   in context. All 267 frozen table/figure hashes match, and the summary outside the new subsection is identical.
+
+## Step 22: regional storm forecasting (fresh holdout; decision 150)
+
+- Frozen model/code commit: `cc12a0ef9d14f5284b6e302e3fcb94df09e0c2e9`, pushed before any October labels, storm counts or scores.
+- Development used only Apr 2022-Mar 2025 and calibration Apr-Sep 2025. Settings and tree counts
+  were fixed before refitting Apr 2022-Sep 2026. The old test year entered only that final refit,
+  which is separately logged; frozen analyses and their outputs remain unchanged.
+- Fresh holdout: 1-24 October 2026, scored once. Storm onsets: **2**; power: **descriptive only: fewer than eight onsets**.
+- Onsets require >=25% of the same working gauges to change from dry to >=1 mm/h within 30 min;
+  candidates within three hours are merged. Storm issue windows are -60 to +120 minutes.
+- Paired 1,000-draw issue-day bootstrap CIs. Six overlapping units; the pooled comparison is primary.
+  T1 is log(count / issue-time expected); T2 is a 15% shortfall, with 10%/20% checks reported.
+- Fixed alert workloads equal calibration base rates, not October base rates. All model x weather x
+  horizon x target x unit x subset combinations are retained; no holdout model selection occurred.
+- **Pooled LightGBM storm comparisons** (positive gain favours weather):
+  - 30 min T1: 0.18648 without / 0.17973 with weather; gain +3.6178 % lower MAE, CI [+0.4155, +6.5643].
+  - 30 min T2_15: 0.72376 without / 0.75710 with weather; gain +0.0333 PR-AUC, CI [-0.0029, +0.0394].
+  - 60 min T1: 0.21974 without / 0.21476 with weather; gain +2.2646 % lower MAE, CI [+0.9345, +3.9503].
+  - 60 min T2_15: 0.73240 without / 0.75616 with weather; gain +0.0238 PR-AUC, CI [+0.0123, +0.0787].
+- Registered materiality threshold: **met numerically; confirmation unavailable (fewer than eight storms)**. Numerical crossings are reported separately from the
+  eight-onset power requirement; 10%/20% labels and individual regions are checks, not extra primary tests.
+- Absolute supply and expected counts, base rates, alert counts and sample sizes are in s22_support.csv.
+  MAE is measured on a log ratio, not taxis. CIs are pointwise and the 24-day period cannot establish
+  general performance across seasons or feed regimes. Multiple-day dependence can widen uncertainty.
+- Sparse gauge archives omit zeros and observation timestamps: preceding-day health is causal, but
+  cannot prove intraday completeness. Unknown midnight intervals remain missing and are imputed from
+  fitting data. Seven coastal cell centres use their frozen planning-area region; Central Area keeps
+  the URA centre-within definition. Neither eligibility nor membership is selected using holdout outcomes.
+- Outputs: s22_audit_*.csv, s22_unit_cells.csv, s22_development.csv, s22_alert_rates.csv,
+  s22_model_manifest.csv, s22_storm_onsets.csv, s22_metrics.csv, s22_weather_gains.csv,
+  s22_materiality.csv, s22_support.csv; one figure s22_weather_gain.png/.svg.
+- These results concern vacant-taxi supply. Frozen gauge associations and earlier forecasting conclusions
+  remain as originally reported for their own targets, periods and spatial scales.
+
+- Additional reporting of the fixed scores (no new scoring): storm windows have 84 region forecasts
+  on two days, with 31 primary shortfall events at each horizon. Of 1,000 day draws, 107 contain
+  neither storm day, leaving 893 defined primary pooled storm comparisons. These CIs are conditional
+  on a nonempty resample and cannot support confirmation from two storms. At 60 minutes the fixed
+  workload has 23 alerts: 16 are correct without weather and 18 with weather; at 30 minutes both
+  have 16/23 correct alerts. All-time pooled primary PR-AUC gains are +0.001458 [-0.000106,+0.003208]
+  at 30 minutes and +0.000430 [-0.002387,+0.002757] at 60 minutes; T1 gains are +0.0518% and -0.0961%.
+  No method, fitted model, label, sample definition or score changed after opening October.
+- Final checks: all 22 tests pass (14 existing warnings); wording check completes with 69 reviewed hits.
+  All 287 earlier table/figure hashes and all 72 freeze hashes still match after scoring. The original
+  summary is unchanged outside the new subsection. The scoring log has exactly one fresh-holdout entry;
+  the saved prediction SHA-256 is repeated in s22_scoring_record.csv. No model or executable source changed.
