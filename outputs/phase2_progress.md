@@ -739,3 +739,5 @@ The six presentation screenshots are refreshed. Wording check: 76 reviewed hits,
 - Presentation-only restyle of `sim/v3/index.html` (palette, dot size, rain layer, type sizes, map aspect, chart
   range and labels, phone layout). The browser checker passes with exact counter agreement; screenshots in
   `outputs/figures/storm_builder_*.png` are refreshed. No model or number changed.
+- City-builder restyle of the Storm Builder (decision above): full-screen light map with floating panels and a tool
+  bar. Presentation only; the browser checker passes with exact counter agreement.

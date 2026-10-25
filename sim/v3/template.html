@@ -1,159 +1,204 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Storm Builder</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0a1220">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#dfe9ef">
 <style>
-/* Layout: slim top bar + sticky notice, then a two-column workspace (controls | stage). Single dark look by design. */
-:root{color-scheme:dark;
-  --bg:#0a1220;--panel:#101a2b;--panel-2:#152238;--raise:#1b2a43;--line:#22324b;--line-2:#2f4363;
-  --ink:#edf2f9;--ink-2:#c6d2e3;--muted:#8fa1bb;
-  --accent:#7aa7ff;--accent-ink:#0b1424;
-  --vacant:#1fa0bd;--hired:#c4851c;--moving:#9479e0;--pickup:#dfe7f2;--abandoned:#d86b58;--rain:#4c8dff;
+/* Layout: a full-screen city view (the map) with frosted floating panels on top - stats bar (top), storm tool
+   panel (left), info panel (right), time controls (bottom left), tool bar (bottom centre). Single light look. */
+:root{color-scheme:light;
+  --ground:#dfe7e3;--water:#b7dbe8;--land:#eef1ea;
+  --glass:rgba(250,252,253,.86);--glass-strong:rgba(255,255,255,.95);--glass-line:rgba(28,52,74,.12);
+  --ink:#16273a;--ink-2:#3c5167;--muted:#6c8095;--line:#d5dee6;--soft:#eef3f7;--hover:#e3ecf3;
+  --accent:#1593d1;--accent-2:#0c78ae;--accent-soft:#d8eef9;
+  --vacant:#0e8fa8;--hired:#c97f12;--moving:#7a5cd6;--pickup:#22344a;--offline:#8796a7;--abandoned:#d2563e;
+  --shadow:0 10px 30px rgba(20,45,70,.16),0 2px 6px rgba(20,45,70,.10);
   --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.45 var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
 button,input{font:inherit}button{color:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
-button:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-button{border:1px solid var(--line-2);background:var(--panel-2);border-radius:8px;padding:8px 12px;transition:background .15s,border-color .15s,color .15s}
-button:hover{background:var(--raise);border-color:#3f5678}
-button[aria-pressed=true]{background:#1d3357;color:#fff;border-color:var(--accent);box-shadow:inset 0 0 0 1px #7aa7ff40}
-h1,h2,p{margin:0}a{color:var(--accent)}
-.top{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px;padding:0 max(24px,env(safe-area-inset-left,0px)) 0 max(24px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line);background:var(--bg)}
-.brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:650;letter-spacing:-.2px}
-.brandmark{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(160deg,#4c8dff,#1fa0bd);color:#06101e;font-size:17px;font-weight:700}
-.edition{font-size:12px;color:var(--muted)}
-.pill{border:1px solid #c4851c66;background:#c4851c1a;color:#f0c27a;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:550}
-.notice{position:sticky;top:0;z-index:22;padding:9px max(24px,env(safe-area-inset-left,0px));background:#121c2e;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:13px}
-.notice strong{color:#f0c27a;font-weight:600}
-.heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:22px 24px 16px;max-width:1900px;margin:auto}
-.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:600}
-h1{font-size:30px;line-height:1.15;letter-spacing:-.6px;font-weight:700;text-wrap:balance}
-.intro{color:var(--muted);margin-top:6px;font-size:14px;max-width:62ch}
-.status{max-width:300px;color:var(--muted);font-size:13px;text-align:right}.status b{color:var(--ink);font-weight:600}
-.workspace{display:grid;grid-template-columns:316px minmax(0,1fr);gap:20px;align-items:start;padding:0 24px 28px;max-width:1900px;margin:auto}
-/* controls */
-.controls{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
-.control-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 12px;border-bottom:1px solid var(--line)}
-h2{font-size:15px;font-weight:650;letter-spacing:-.1px}.control-head span{font-size:12px;color:var(--muted)}
-.control-body{padding:16px 18px 18px}
-.group{margin-bottom:18px}
-.label{display:flex;align-items:baseline;justify-content:space-between;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
-.label .dim{font-size:12px;font-weight:400;color:var(--muted);font-variant-numeric:tabular-nums}
-.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{font-size:12.5px;padding:7px 8px;flex:1;white-space:nowrap}
-.chips.presets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.chips[data-control=direction]{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.chips[data-control=direction] button{padding:7px 2px}
-.presets button{text-align:left;line-height:1.35;padding:10px 11px;white-space:normal;font-size:13px;font-weight:600}
-.presets button span{display:block;color:var(--muted);font-size:11.5px;font-weight:400;margin-top:3px}
-.presets button[aria-pressed=true] span{color:#c6d6f2}
-.mini{font-size:12px;color:var(--muted);margin-top:7px}
-.segments{display:flex;gap:6px;margin-bottom:6px}.segments button{flex:1;padding:7px 6px;font-size:12.5px}
-.range{width:100%;accent-color:var(--accent);height:20px;margin:2px 0}
-.switchrow{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--ink-2);gap:12px}
-.toggle{min-width:44px;padding:3px;border-radius:999px;background:#1a2638;border:1px solid var(--line-2);height:24px}
-.toggle::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:transform .15s}
-.toggle[aria-pressed=true]::before{transform:translateX(18px);background:#fff}.toggle[aria-pressed=true]{background:var(--accent);border-color:var(--accent)}
-.advanced{border-top:1px solid var(--line);padding-top:12px}.advanced summary{cursor:pointer;font-size:13px;color:var(--muted);padding-bottom:10px}
-.advanced .group{margin-top:6px;margin-bottom:12px}
-.seed{width:100%;background:#0c1524;color:var(--ink);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;font-family:var(--mono);font-size:13px}
-.reset-build{width:100%;margin-top:14px;background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;font-size:14px;padding:11px}
-.reset-build:hover{background:#9bbdff;border-color:#9bbdff;color:var(--accent-ink)}
-.sheet-button,.close-sheet{display:none}
-/* stage */
-.stage{min-width:0;display:flex;flex-direction:column;gap:12px}
-.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--line)}
-.metric{padding:13px 16px 12px;background:var(--panel);position:relative}
-.metric::before{content:"";position:absolute;left:16px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--swatch,var(--muted))}
-.metric .name{font-size:13px;color:var(--ink-2);margin-bottom:2px;padding-left:15px}
-.metric .value{font-size:28px;font-family:var(--mono);font-variant-numeric:tabular-nums;line-height:1.25;letter-spacing:-.5px;color:var(--ink);font-weight:500}
-.metric .unit{font-size:11px;letter-spacing:.04em;color:var(--muted)}
-.metric:nth-child(1){--swatch:var(--vacant)}.metric:nth-child(2){--swatch:var(--hired)}.metric:nth-child(3){--swatch:#6c7a90}.metric:nth-child(4){--swatch:var(--pickup)}.metric:nth-child(5){--swatch:var(--abandoned)}
-.scenario-brief{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 18px}
-.brief-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
-.brief-heading h2{font-size:14px}.brief-heading span{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-.scenario-brief p{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:110ch}
-.scenario-brief .brief-setup{color:var(--ink);margin-bottom:3px;font-weight:600}
-.scenario-brief .counter-note{border-top:1px solid var(--line);padding-top:8px;margin-top:10px;font-size:12px}
-.map-shell{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#08101c;position:relative}
-.map-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 16px;background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap}
-.map-title{font-size:13px;font-weight:650;color:var(--ink);letter-spacing:.02em}.map-title small{color:var(--muted);margin-left:8px;font-size:12px;font-weight:400;letter-spacing:0}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink-2);align-items:center}
-.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 6px 1px 0;vertical-align:middle;background:var(--vacant)}
-.legend .occupied{background:var(--hired)}.legend .move{background:var(--moving)}.legend .pickup{background:var(--pickup)}
-.legend .rainkey{width:28px;height:9px;border-radius:5px;background:linear-gradient(90deg,#4c8dff22,#4c8dffaa,#8fd3ff)}
-.maps{display:grid;grid-template-columns:1fr;position:relative}.maps.split{grid-template-columns:1fr 1fr}
-.map-view{position:relative;min-width:0;aspect-ratio:62/34;max-height:72vh;min-height:300px;overflow:hidden}
-.maps.split .map-view{aspect-ratio:31/24}
-.maps.split .map-view:first-child{border-right:1px solid var(--line-2)}.map-view[hidden]{display:none}
+button:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,p{margin:0}a{color:var(--accent-2)}
+button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;transition:background .12s,border-color .12s,box-shadow .12s}
+button:hover{background:var(--hover);border-color:#c3d1dd}
+button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(21,147,209,.35)}
+.glass{background:var(--glass);border:1px solid var(--glass-line);border-radius:16px;box-shadow:var(--shadow);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2)}
+.app{position:fixed;inset:0;display:flex;flex-direction:column}
+/* permanent notice strip */
+.notice{position:relative;z-index:30;flex:none;display:flex;align-items:center;gap:10px;padding:7px max(16px,env(safe-area-inset-left,0px));background:#16273a;color:#dbe6ef;font-size:12.5px}
+.notice strong{color:#ffd27a;font-weight:650}
+.notice .pill{margin-left:auto;flex:none;border:1px solid #ffd27a66;color:#ffd27a;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:600}
+/* city view */
+.world{position:relative;flex:1;min-height:0}
+.maps{position:absolute;inset:0;display:grid;grid-template-columns:1fr}
+.maps.split{grid-template-columns:1fr 1fr}
+.map-view{position:relative;min-width:0;min-height:0;overflow:hidden}
+.maps.split .map-view:first-child{border-right:2px solid #fff}
+.map-view[hidden]{display:none}
 .map-view canvas{display:block;width:100%;height:100%;touch-action:manipulation;cursor:crosshair}
-.map-caption{position:absolute;top:12px;left:12px;background:#0b1424e6;border:1px solid var(--line-2);border-radius:8px;padding:5px 9px;pointer-events:none;font-size:12.5px;font-weight:600}
-.map-caption em{font-style:normal;color:var(--muted);padding-left:6px;font-weight:400}
-.map-hint{position:absolute;bottom:12px;left:12px;font-size:12px;color:var(--ink-2);pointer-events:none;background:#0b1424e6;border:1px solid var(--line);border-radius:8px;padding:4px 9px}
-.credit{position:absolute;right:10px;bottom:8px;font-size:10.5px;color:var(--muted);background:#0a1220d9;padding:2px 6px;border-radius:4px;pointer-events:none}
-.comp-counter{position:absolute;right:12px;top:12px;background:#0b1424e6;border:1px solid var(--line-2);border-radius:8px;padding:5px 9px;font-size:12.5px;color:#7fd6ea;font-family:var(--mono)}
-.busy{position:absolute;inset:46px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#08101ce6;z-index:4;gap:12px;color:var(--ink-2);font-size:14px;backdrop-filter:blur(3px)}
-.busy[hidden]{display:none}
-.spinner{height:28px;width:28px;border:2px solid var(--line-2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-.playbar{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-.play{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;min-width:88px;font-size:14px}
-.play:hover{color:var(--accent-ink);background:#9bbdff;border-color:#9bbdff}
-.clock{font-family:var(--mono);font-size:15px;min-width:52px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.timeline{flex:1;min-width:30px;accent-color:var(--accent)}
-.speed{display:flex;gap:4px}.speed button{font-size:12.5px;padding:6px 9px;font-family:var(--mono)}
-.icon{padding:6px 10px;font-size:14px}
-.split-control{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2);white-space:nowrap}.split-control input{accent-color:var(--accent);width:16px;height:16px}
-.chartbox{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px 16px 10px}
-.chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted);margin-bottom:4px;flex-wrap:wrap}
-.chart-head strong{font-weight:650;color:var(--ink);font-size:13.5px}
-.chart-legend{display:flex;gap:14px;font-size:12px;color:var(--ink-2)}
-.chart-legend span:before{content:"";display:inline-block;width:16px;height:2px;background:var(--vacant);margin-right:6px;vertical-align:middle}
-.chart-legend .base:before{background:repeating-linear-gradient(90deg,#8fa1bb 0 4px,transparent 4px 7px)}
-.chart-legend .rainband:before{height:9px;width:14px;border-radius:2px;background:#4c8dff33}
+.map-caption{position:absolute;left:50%;transform:translateX(-50%);top:84px;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:650;pointer-events:none;z-index:2}
+.map-caption em{font-style:normal;color:var(--muted);font-weight:500;padding-left:6px}
+.comp-counter{position:absolute;left:50%;transform:translateX(-50%);top:118px;padding:3px 10px;border-radius:999px;font-size:12px;font-family:var(--mono);color:var(--vacant);pointer-events:none;z-index:2}
+.map-hint{position:absolute;right:16px;bottom:16px;padding:6px 11px;border-radius:999px;font-size:12px;color:var(--ink-2);pointer-events:none;z-index:2}
+.credit{position:absolute;right:16px;bottom:52px;font-size:10.5px;color:var(--muted);pointer-events:none;z-index:2}
+.maps.split .map-hint{display:none}
+/* top stats bar */
+.topbar{position:absolute;top:12px;left:12px;right:12px;z-index:10;display:flex;align-items:center;gap:10px;pointer-events:none}
+.topbar>*{pointer-events:auto}
+.citycard{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px}
+.brandmark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(150deg,#27a9e1,#0c78ae);color:#fff;font-size:18px;font-weight:700}
+.cityname{font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.1}
+.citysub{font-size:11.5px;color:var(--muted)}
+.metrics{display:flex;align-items:stretch;padding:5px;gap:2px}
+.metric{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:center;padding:4px 12px;border-radius:11px}
+.metric+.metric{border-left:1px solid var(--line);border-radius:0}
+.metric .icon-dot{grid-row:span 2;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--soft)}
+.metric .icon-dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--swatch)}
+.metric .value{font-family:var(--mono);font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;color:var(--ink)}
+.metric .name{font-size:11px;color:var(--muted);line-height:1.15;white-space:nowrap}
+.metric .unit{display:none}
+.metric:nth-child(1){--swatch:var(--vacant)}.metric:nth-child(2){--swatch:var(--hired)}.metric:nth-child(3){--swatch:var(--offline)}
+.metric:nth-child(4){--swatch:var(--pickup)}.metric:nth-child(5){--swatch:var(--abandoned)}
+.status{margin-left:auto;padding:8px 14px;font-size:12.5px;color:var(--ink-2);text-align:right;max-width:280px}
+.status b{color:var(--ink);font-weight:650}
+/* panels */
+.panel-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:linear-gradient(#ffffffb3,#ffffff00)}
+.panel-head .badge{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent-2);font-size:15px;font-weight:700;flex:none}
+h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
+.panel-head .sub{font-size:11.5px;color:var(--muted);line-height:1.2}
+.panel-head .x{margin-left:auto;width:28px;height:28px;padding:0;border-radius:8px;font-size:16px;line-height:1}
+.controls{position:absolute;z-index:9;left:12px;top:78px;bottom:84px;width:318px;display:flex;flex-direction:column;overflow:hidden}
+.controls[hidden]{display:none}
+.control-body{padding:12px 14px 14px;overflow-y:auto;scrollbar-width:thin}
+.group{margin-bottom:14px}
+.label{display:flex;align-items:baseline;justify-content:space-between;font-size:12.5px;font-weight:650;color:var(--ink);margin-bottom:6px}
+.label .dim{font-size:12px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:5px}.chips button{font-size:12.5px;padding:6px 7px;flex:1;white-space:nowrap}
+.chips.presets{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.presets button{text-align:left;line-height:1.3;padding:9px 10px;white-space:normal;font-size:12.5px;font-weight:650;background:#fff}
+.presets button span{display:block;color:var(--muted);font-size:11.5px;font-weight:500;margin-top:3px}
+.presets button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}.presets button[aria-pressed=true] span{color:#e6f4fc}
+.chips[data-control=direction]{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.chips[data-control=direction] button{padding:6px 2px}
+.mini{font-size:11.5px;color:var(--muted);margin-top:6px}
+.segments{display:flex;gap:5px;margin-bottom:5px}.segments button{flex:1;padding:6px 5px;font-size:12.5px}
+.range{width:100%;accent-color:var(--accent);height:20px;margin:2px 0}
+.switchrow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:650;gap:12px}
+.toggle{min-width:42px;padding:3px;border-radius:999px;background:#d9e2ea;border:1px solid #c6d3de;height:24px}
+.toggle::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px #0003;transition:transform .15s}
+.toggle[aria-pressed=true]::before{transform:translateX(17px)}.toggle[aria-pressed=true]{background:var(--accent);border-color:var(--accent);box-shadow:none}
+.advanced{border-top:1px solid var(--line);padding-top:10px}.advanced summary{cursor:pointer;font-size:12.5px;color:var(--ink-2);font-weight:600;padding-bottom:8px}
+.advanced .group{margin-top:6px;margin-bottom:10px}
+.seed{width:100%;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-family:var(--mono);font-size:13px}
+.reset-build{width:100%;margin-top:10px;background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;font-size:14px;padding:10px;box-shadow:0 3px 10px rgba(21,147,209,.35)}
+.reset-build:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.sheet-button,.close-sheet{display:none}
+.info{position:absolute;z-index:9;right:12px;top:78px;width:360px;max-height:calc(100% - 162px);display:flex;flex-direction:column;overflow:hidden}
+.info[hidden]{display:none}
+.info-body{overflow-y:auto;padding:12px 14px 14px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
+.scenario-brief{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.brief-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+.brief-heading h2{font-size:13px}.brief-heading span{font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;font-weight:600}
+.scenario-brief p{font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.scenario-brief .brief-setup{color:var(--ink);margin-bottom:4px;font-weight:650}
+.scenario-brief .counter-note{border-top:1px solid var(--line);padding-top:7px;margin-top:8px;font-size:11.5px;color:var(--muted)}
+.chartbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px 8px}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.chart-head strong{font-weight:700;font-size:13px}
+.chart-legend{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2)}
+.chart-legend span:before{content:"";display:inline-block;width:14px;height:2px;background:var(--vacant);margin-right:5px;vertical-align:middle}
+.chart-legend .base:before{background:repeating-linear-gradient(90deg,#8796a7 0 4px,transparent 4px 7px)}
+.chart-legend .rainband:before{height:9px;width:12px;border-radius:2px;background:#1593d12e}
 .chartbox canvas{display:block;width:100%;height:150px}
-.explain{color:var(--muted);font-size:13px;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px 16px}
-.explain summary{cursor:pointer;color:var(--ink);font-size:13.5px;font-weight:600}
-.explain p{margin-top:9px;max-width:95ch;font-size:13px;line-height:1.6}.explain b{font-weight:600;color:var(--ink-2)}
-.footer{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);padding:2px 4px}
-.error{color:#f0a493}
-@media(min-width:1600px){.workspace{grid-template-columns:340px minmax(0,1fr)}}
-@media(max-width:1000px){.workspace{grid-template-columns:280px minmax(0,1fr);padding-left:16px;padding-right:16px;gap:14px}.metric{padding:10px 10px}.metric::before{left:10px;top:13px}.metric .name{padding-left:13px;font-size:12px}.metric .value{font-size:22px}.map-title small{display:none}.split-control span{display:none}.controls .control-body{padding:14px}}
-@media(max-width:700px){body{padding-bottom:72px;font-size:13px}.top{height:50px;padding:0 16px}.edition{display:none}.pill{font-size:11px;padding:3px 9px}.notice{padding:8px 16px;font-size:12px}.heading{padding:16px 16px 12px;align-items:flex-start;flex-direction:column;gap:8px}h1{font-size:26px}.intro{font-size:13px}.status{max-width:none;text-align:left;font-size:12px}
-.workspace{display:block;padding:0 12px 18px}.stage{gap:10px}.metrics{grid-template-columns:repeat(6,minmax(0,1fr))}.metric{grid-column:span 2}.metric:nth-child(n+4){grid-column:span 3}.metric{padding:9px 8px}.metric::before{display:none}.metric .name{padding-left:0;font-size:11px;line-height:1.3;min-height:28px}.metric .value{font-size:19px}.metric .unit{font-size:10px}
-.map-top{padding:9px 12px}.map-title{font-size:12px}.legend{font-size:11px;gap:9px}.legend .pickup-label,.legend .rain-label{display:none}.map-view{aspect-ratio:auto;height:260px;min-height:0}.maps.split{grid-template-columns:1fr}.maps.split .map-view{height:240px;aspect-ratio:auto}.maps.split .map-view:first-child{border-right:0;border-bottom:1px solid var(--line-2)}
-.credit{font-size:9px;right:6px;bottom:6px}.map-hint{bottom:6px;left:6px;font-size:10.5px;padding:3px 7px}.map-caption{top:8px;left:8px}.playbar{gap:8px;flex-wrap:wrap;padding:10px}.play{min-width:70px;padding:7px 10px}.clock{font-size:13px;min-width:44px}.speed button{padding:5px 7px}.split-control{margin-left:auto;font-size:12px}.split-control span{display:inline}.chartbox{padding:10px}.chartbox canvas{height:120px}.footer{font-size:11px;flex-wrap:wrap}
-.scenario-brief{padding:12px}.scenario-brief p{font-size:12.5px}
-.controls{display:none;position:fixed;z-index:20;left:8px;right:8px;bottom:8px;top:auto;max-height:82dvh;overflow:auto;border-color:var(--line-2);box-shadow:0 -20px 80px #000b;border-radius:18px}.controls.open{display:block}.control-head{position:sticky;top:0;background:var(--panel);z-index:2}.controls .control-body{padding:16px}.close-sheet{display:block;padding:4px 10px}
-.sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:10;justify-content:space-between;background:var(--accent);color:var(--accent-ink);border-color:var(--accent);padding:13px 16px;font-weight:700;box-shadow:0 -6px 30px #0a1220cc}
-.sheet-backdrop{position:fixed;inset:0;background:#0009;z-index:19}.sheet-backdrop[hidden]{display:none}.busy{inset:40px 0 0}.map-caption{font-size:11.5px}.comp-counter{font-size:11px}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 6px 1px 0;vertical-align:middle;background:var(--vacant);box-shadow:0 0 0 2px #fff,0 0 0 3px #0001}
+.legend .occupied{background:var(--hired)}.legend .move{background:var(--moving)}.legend .pickup{background:var(--pickup)}
+.legend .rainkey{width:26px;height:10px;border-radius:5px;background:linear-gradient(90deg,#1593d11a,#1593d199,#0c5fa8)}
+.explain{font-size:12.5px;color:var(--ink-2)}
+.explain summary{cursor:pointer;color:var(--ink);font-weight:650}
+.explain p{margin-top:8px;line-height:1.55}.explain b{font-weight:650;color:var(--ink)}
+.footer{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.error{color:#c0392b}
+/* time controls (bottom left) */
+.playbar{position:absolute;z-index:11;left:12px;bottom:12px;width:min(560px,calc(100% - 24px));display:flex;align-items:center;gap:8px;padding:8px 10px}
+.play{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;min-width:84px;font-size:13.5px;border-radius:999px;box-shadow:0 3px 10px rgba(21,147,209,.35)}
+.play:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.clock{font-family:var(--mono);font-size:16px;font-weight:600;min-width:52px;font-variant-numeric:tabular-nums}
+.timeline{flex:1;min-width:30px;accent-color:var(--accent)}
+.speed{display:flex;gap:2px;padding:2px;border-radius:999px;background:var(--soft)}
+.speed button{font-size:12px;padding:4px 9px;border-radius:999px;border-color:transparent;background:transparent;font-family:var(--mono);font-weight:600}
+.speed button[aria-pressed=true]{background:#fff;color:var(--accent-2);border-color:var(--line);box-shadow:0 1px 3px #0002}
+.icon{padding:5px 9px;font-size:14px;border-radius:999px}
+.split-control{display:none}
+/* tool bar (bottom centre) */
+.toolbar{position:absolute;z-index:11;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:6px;padding:6px 8px;border-radius:999px}
+.tool{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;padding:6px 8px;border-radius:14px;border-color:transparent;background:transparent;font-size:11px;font-weight:650;color:var(--ink-2)}
+.tool .glyph{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:16px;color:var(--ink);box-shadow:0 1px 3px #0001}
+.tool[aria-pressed=true]{background:transparent;color:var(--accent-2);box-shadow:none;border-color:transparent}
+.tool[aria-pressed=true] .glyph{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 3px 10px rgba(21,147,209,.4)}
+.tool:hover{background:#ffffff80}
+/* loading */
+.busy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#dfe7e3cc;z-index:8;gap:12px;color:var(--ink);font-size:14px;font-weight:600;backdrop-filter:blur(2px)}
+.busy[hidden]{display:none}
+.spinner{height:30px;width:30px;border:3px solid #c8d6e0;border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.heading{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:1180px){.metric .name{display:none}.metric{padding:4px 9px}.info{width:320px}.controls{width:296px}.status{display:none}}
+/* phone: a scrolling stack; storm tools open as a bottom sheet */
+@media(max-width:760px){
+  body{overflow:auto}.app{position:static;display:block;padding-bottom:76px}
+  .notice{position:sticky;top:0;font-size:11.5px;padding:7px 12px}.notice .pill{display:none}
+  .world{position:relative;height:auto;display:flex;flex-direction:column}.topbar{order:1}.maps{order:2}.playbar{order:3}.info{order:4}
+  .topbar{position:static;flex-wrap:wrap;padding:10px 10px 0;gap:8px}
+  .citycard{flex:1}.status{display:block;margin:0;max-width:none;text-align:left;flex-basis:100%;padding:6px 12px;font-size:12px}
+  .metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));flex-basis:100%;padding:6px;gap:4px}
+  .metric{grid-column:span 2;display:block;padding:5px 6px;border-left:0!important;border-radius:10px;background:#fff}.metric:nth-child(n+4){grid-column:span 3}
+  .metric .icon-dot{display:none}.metric .name{display:block;font-size:11px;white-space:normal}.metric .value{font-size:16px}
+  .maps{position:relative;inset:auto;margin:10px;height:280px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .maps.split{grid-template-columns:1fr;height:480px}.maps.split .map-view:first-child{border-right:0;border-bottom:2px solid #fff}
+  .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{right:8px;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:38px;font-size:9.5px}
+  .busy{border-radius:16px}
+  .playbar{position:static;width:auto;margin:0 10px 10px;flex-wrap:wrap}.split-control{display:flex;align-items:center;gap:6px;font-size:12px;margin-left:auto}.split-control input{accent-color:var(--accent);width:16px;height:16px}
+  .info{position:static;width:auto;max-height:none;margin:0 10px 10px}.info-body{overflow:visible}
+  .toolbar{display:none}
+  .controls{display:none;position:fixed;z-index:40;left:8px;right:8px;bottom:8px;top:auto;width:auto;max-height:82dvh;background:var(--glass-strong)}
+  .controls.open{display:flex}.controls[hidden]{display:none!important}.control-head{position:sticky;top:0;z-index:2}.close-sheet{display:grid}
+  .sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:35;justify-content:space-between;align-items:center;background:var(--accent);color:#fff;border-color:var(--accent);padding:13px 16px;font-weight:700;border-radius:14px;box-shadow:0 6px 24px rgba(21,147,209,.45)}
+  .sheet-backdrop{position:fixed;inset:0;background:#16273a55;z-index:39}.sheet-backdrop[hidden]{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.spinner{animation:none}}
 </style></head><body>
-<header class="top"><div class="brand"><span class="brandmark" aria-hidden="true">≋</span>Storm Builder</div><div class="edition">Singapore taxi supply · scenario model</div><span class="pill">Presentation only</span></header>
-<div class="notice" role="note"><strong>Simulated scenario, not a forecast.</strong> Taxis are an animation of the model's counts, not real vehicles. The model does not pass our realism check on real storms (best 3 of 10).</div>
-<div class="heading"><div><div class="eyebrow">Singapore · Taxi supply simulation</div><h1>Explore a storm.</h1><p class="intro">Set the conditions. Explore how the scenario changes taxi availability.</p></div><p class="status" id="status" role="status" aria-live="polite">Preparing your storm…</p></div>
-<main class="workspace">
-<aside class="controls" id="controls" aria-label="Storm controls"><div class="control-head"><h2>Build a storm</h2><span>Changes rebuild automatically</span><button class="close-sheet" id="close-sheet" aria-label="Close storm controls">×</button></div><div class="control-body">
-<div class="group"><div class="label">Storm presets</div><div class="chips presets" id="presets"><button data-preset="cbd">Afternoon thunderstorm over the CBD<span>Heavy · drifting east</span></button><button data-preset="monsoon">Monsoon surge<span>Island-wide · long and steady</span></button><button data-preset="west">Small shower in the west<span>Jurong · light · stationary</span></button><button data-preset="rush">Evening rush downpour<span>City centre · heavy · 18:00</span></button></div></div>
-<div class="group"><div class="label">How big?</div><div class="chips" data-control="size" aria-label="Storm size"><button data-value="small">Small</button><button data-value="medium">Medium</button><button data-value="large">Large</button><button data-value="island">Island-wide</button></div><p class="mini" id="size-note">About 8 km across</p></div>
-<div class="group"><div class="label">How strong?<span class="dim" id="strength-note">Peak 25 mm/h</span></div><div class="chips" data-control="strength" aria-label="Rain strength"><button data-value="2">Light</button><button data-value="8">Moderate</button><button data-value="25">Heavy</button><button data-value="60">Extreme</button></div></div>
-<div class="group"><div class="label">How long?</div><div class="chips" data-control="duration" aria-label="Storm duration"><button data-value="30">30 min</button><button data-value="60">1 h</button><button data-value="120">2 h</button><button data-value="180">3 h</button></div></div>
-<div class="group"><div class="label">Which way?</div><div class="chips" data-control="direction" aria-label="Storm movement"><button data-value="still">Still</button><button data-value="east">W → E</button><button data-value="west">E → W</button><button data-value="south">N → S</button><button data-value="north">S → N</button></div><div class="segments" data-control="driftSpeed" aria-label="Storm drift speed" style="margin-top:6px"><button data-value="10">Slow · 10 km/h</button><button data-value="25">Fast · 25 km/h</button></div></div>
-<div class="group"><div class="label">When?</div><div class="segments" data-control="weekend" aria-label="Day type"><button data-value="false">Weekday</button><button data-value="true">Weekend</button></div><div class="chips" data-control="hour" aria-label="Time of day"><button data-value="8">08:00</button><button data-value="13">13:00</button><button data-value="18">18:00</button><button data-value="23">23:00</button></div><p class="mini">Morning rush · midday · evening rush · late night</p></div>
+<div class="app">
+<div class="notice" role="note"><span><strong>Simulated scenario, not a forecast.</strong> Taxis are an animation of the model's counts, not real vehicles. The model does not pass our realism check on real storms (best 3 of 10).</span><span class="pill">Presentation only</span></div>
+<div class="heading"><h1>Storm Builder: explore a storm over Singapore</h1><p class="intro">Set the conditions. Explore how the scenario changes taxi availability.</p></div>
+<main class="world" aria-label="Simulation map and results">
+<div class="maps" id="maps"><div class="map-view" id="view0"><canvas id="map0" tabindex="0" role="img" aria-label="Singapore road map. Click to place the storm; arrow keys move its starting centre."></canvas><div class="map-caption glass" id="caption0">As usual <em>same seed</em></div><div class="comp-counter glass" id="compare0" hidden></div><div class="map-hint glass" id="location">Starting centre · CBD</div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div><div class="map-view" id="view1" hidden><canvas id="map1" tabindex="0" role="img" aria-label="Singapore road map with repositioning, same storm and seed"></canvas><div class="map-caption glass">With repositioning <em>same seed</em></div><div class="comp-counter glass" id="compare1"></div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div>
+<div class="busy" id="busy" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="busy-text">Laying out the city…</span></div></div>
+<div class="topbar">
+<div class="citycard glass"><span class="brandmark" aria-hidden="true">≋</span><div><div class="cityname">Singapore</div><div class="citysub">Storm Builder · taxi supply</div></div></div>
+<div class="metrics glass" aria-label="Simulated counters"><div class="metric"><span class="icon-dot"></span><div class="value" id="vacant">—</div><div class="name">Vacant taxis</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><span class="icon-dot"></span><div class="value" id="hired">—</div><div class="name">Hired trips (total)</div><div class="unit">SIMULATED · TOTAL</div></div><div class="metric"><span class="icon-dot"></span><div class="value" id="offline">—</div><div class="name">Off duty</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><span class="icon-dot"></span><div class="value" id="waiting">—</div><div class="name">Waiting requests</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><span class="icon-dot"></span><div class="value" id="abandoned">—</div><div class="name">Abandoned (total)</div><div class="unit">SIMULATED · TOTAL</div></div></div>
+<p class="status glass" id="status" role="status" aria-live="polite">Preparing your storm…</p>
+</div>
+<aside class="controls glass" id="controls" aria-label="Storm controls"><div class="control-head panel-head"><span class="badge" aria-hidden="true">☂</span><div><h2>Storm tool</h2><div class="sub">Changes rebuild automatically</div></div><button class="close-sheet x" id="close-sheet" aria-label="Close storm controls">×</button></div><div class="control-body">
+<div class="group"><div class="label">Presets</div><div class="chips presets" id="presets"><button data-preset="cbd">Afternoon thunderstorm over the CBD<span>Heavy · drifting east</span></button><button data-preset="monsoon">Monsoon surge<span>Island-wide · long and steady</span></button><button data-preset="west">Small shower in the west<span>Jurong · light · stationary</span></button><button data-preset="rush">Evening rush downpour<span>City centre · heavy · 18:00</span></button></div></div>
+<div class="group"><div class="label">Size</div><div class="chips" data-control="size" aria-label="Storm size"><button data-value="small">Small</button><button data-value="medium">Medium</button><button data-value="large">Large</button><button data-value="island">Island-wide</button></div><p class="mini" id="size-note">About 8 km across</p></div>
+<div class="group"><div class="label">Strength<span class="dim" id="strength-note">Peak 25 mm/h</span></div><div class="chips" data-control="strength" aria-label="Rain strength"><button data-value="2">Light</button><button data-value="8">Moderate</button><button data-value="25">Heavy</button><button data-value="60">Extreme</button></div></div>
+<div class="group"><div class="label">Duration</div><div class="chips" data-control="duration" aria-label="Storm duration"><button data-value="30">30 min</button><button data-value="60">1 h</button><button data-value="120">2 h</button><button data-value="180">3 h</button></div></div>
+<div class="group"><div class="label">Movement</div><div class="chips" data-control="direction" aria-label="Storm movement"><button data-value="still">Still</button><button data-value="east">W → E</button><button data-value="west">E → W</button><button data-value="south">N → S</button><button data-value="north">S → N</button></div><div class="segments" data-control="driftSpeed" aria-label="Storm drift speed" style="margin-top:5px"><button data-value="10">Slow · 10 km/h</button><button data-value="25">Fast · 25 km/h</button></div></div>
+<div class="group"><div class="label">Day and time</div><div class="segments" data-control="weekend" aria-label="Day type"><button data-value="false">Weekday</button><button data-value="true">Weekend</button></div><div class="chips" data-control="hour" aria-label="Time of day"><button data-value="8">08:00</button><button data-value="13">13:00</button><button data-value="18">18:00</button><button data-value="23">23:00</button></div><p class="mini">Morning rush · midday · evening rush · late night</p></div>
 <div class="group"><div class="label">What happens in rain?</div><div class="chips" data-control="mechanism" aria-label="Rain mechanism scenario"><button data-value="demand">More bookings</button><button data-value="supply">Drivers stop</button><button data-value="mix">Both</button></div><p class="mini">Choose an assumption, not a finding.</p></div>
 <div class="group"><label class="label" for="demand">Request level <span class="dim" id="demand-note">1.00×</span></label><input class="range" id="demand" type="range" min="0.8" max="1.2" step="0.05" value="1" aria-label="Simulated demand multiplier, 0.8 to 1.2"></div>
-<div class="group switchrow"><span id="policy-label">Repositioning on</span><button class="toggle" id="policy" aria-pressed="false" aria-labelledby="policy-label"></button></div>
+<div class="group switchrow"><span id="policy-label">Repositioning</span><button class="toggle" id="policy" aria-pressed="false" aria-labelledby="policy-label"></button></div>
 <details class="advanced"><summary>Advanced settings</summary><div class="group"><div class="label">Destination pattern</div><div class="segments" data-control="dest" aria-label="Destination assumptions"><button data-value="characteristics">Place features</button><button data-value="observed">Dry supply</button></div></div><div class="group"><div class="label">Dispatch reach</div><div class="segments" data-control="dispatch" aria-label="Dispatch range"><button data-value="nearest">Nearest · ≤10 min</button><button data-value="widening">Widening · ≤20 min</button></div><p class="mini">Widening applies to waiting requests.</p></div><div class="group"><label class="label" for="seed">Random seed</label><input id="seed" class="seed" type="number" min="1" max="2147483646" step="1" value="2702"></div><p class="mini">Extreme rain is illustrative; the model's response saturates above 30 mm/h. Roads change the drawing, not trip timing.</p></details>
 <button class="reset-build" id="apply">Build this storm</button><p class="mini">Click or tap the map to move the starting centre.</p></div></aside>
-<section class="stage" aria-label="Simulation map and results">
-<div class="metrics" aria-label="Simulated counters"><div class="metric"><div class="name">Vacant taxis</div><div class="value" id="vacant">—</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><div class="name">Hired trips</div><div class="value" id="hired">—</div><div class="unit">SIMULATED · TOTAL</div></div><div class="metric"><div class="name">Off duty</div><div class="value" id="offline">—</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><div class="name">Waiting requests</div><div class="value" id="waiting">—</div><div class="unit">SIMULATED · NOW</div></div><div class="metric"><div class="name">Abandoned</div><div class="value" id="abandoned">—</div><div class="unit">SIMULATED · TOTAL</div></div></div>
+<aside class="info glass" id="info" aria-label="Scenario information"><div class="panel-head"><span class="badge" aria-hidden="true">i</span><div><h2>Info view</h2><div class="sub">Simulated taxi supply</div></div></div><div class="info-body">
+<div class="legend" aria-label="Map legend"><span><i></i>Vacant</span><span><i class="occupied"></i>Hired</span><span><i class="move"></i>Repositioning</span><span class="pickup-label"><i class="pickup"></i>To pickup</span><span class="rain-label"><i class="rainkey"></i>Rain</span></div>
+<div class="chartbox"><div class="chart-head"><strong>Vacant taxis · simulated</strong><div class="chart-legend"><span>Scenario</span><span class="base">Normal</span><span class="rainband">Raining</span></div></div><canvas id="chart" role="img" aria-label="Simulated vacant taxis and the frozen normal baseline over four hours"></canvas></div>
 <section class="scenario-brief" aria-labelledby="brief-title"><div class="brief-heading"><h2 id="brief-title">Scenario brief</h2><span>MODEL ASSUMPTIONS</span></div><div aria-live="polite" aria-atomic="true"><p class="brief-setup" id="storm-setup">Preparing your scenario…</p><p id="storm-effect">The explanation updates when your storm is ready.</p></div><p class="counter-note">Hired trips and abandoned requests are running totals. Other counters show the current state.</p></section>
-<div class="map-shell"><div class="map-top"><div class="map-title">SINGAPORE <small>Synthetic storm · 1 km model squares</small></div><div class="legend"><span><i></i>Vacant</span><span><i class="occupied"></i>Hired</span><span><i class="move"></i>Repositioning</span><span class="pickup-label"><i class="pickup"></i>To pickup</span><span class="rain-label"><i class="rainkey"></i>Rain</span></div></div>
-<div class="maps" id="maps"><div class="map-view" id="view0"><canvas id="map0" tabindex="0" role="img" aria-label="Singapore road map. Click to place the storm; arrow keys move its starting centre."></canvas><div class="map-caption" id="caption0">As usual <em>same seed</em></div><div class="comp-counter" id="compare0" hidden></div><div class="map-hint" id="location">Starting centre · CBD</div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div><div class="map-view" id="view1" hidden><canvas id="map1" tabindex="0" role="img" aria-label="Singapore road map with repositioning, same storm and seed"></canvas><div class="map-caption">With repositioning <em>same seed</em></div><div class="comp-counter" id="compare1"></div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div></div>
-<div class="busy" id="busy" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="busy-text">Laying out the city…</span></div></div>
-<div class="playbar"><button class="play" id="play" aria-label="Play simulation">▶ Play</button><output class="clock" id="clock" for="timeline">13:00</output><input class="timeline" id="timeline" type="range" min="0" max="240" value="0" step="0.1" aria-label="Simulation timeline, storm start to four hours"><div class="speed" data-control="speed" aria-label="Playback speed"><button data-value="1" aria-pressed="false">1×</button><button data-value="4" aria-pressed="true">4×</button><button data-value="16" aria-pressed="false">16×</button></div><button class="icon" id="reset" aria-label="Reset timeline to storm start">↺</button><label class="split-control"><input type="checkbox" id="split"><span>Compare</span></label></div>
-<div class="chartbox"><div class="chart-head"><strong>Vacant taxis · simulated</strong><div class="chart-legend"><span>Scenario</span><span class="base">Normal baseline</span><span class="rainband">Raining</span></div></div><canvas id="chart" role="img" aria-label="Simulated vacant taxis and the frozen normal baseline over four hours"></canvas></div>
-<details class="explain"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Blue dots represent vacant taxis, amber dots hired trips, and lilac dots repositioning. Pale dots approach a pickup first. Dots follow real OSM roads, but their speed is chosen to preserve the model's arrival times. Taxi identities and individual paths are illustrative.</p><p>Rain comes from your settings. “More bookings”, “Drivers stop” and “Both” are alternative assumptions. Hired trips and abandoned requests are simulated, not measured demand or lost passengers. The engine uses 30-minute rain slots; the radar layer interpolates the synthetic storm for display. Starting supply and the normal line use the frozen typical weekday/weekend half-hour pattern, averaged across months at normal feed coverage. The public feed covers the whole market.</p><p>The model failed its fixed realism check: its best setting passed 3 of 10 real storms. Use this page to explore assumptions, not to make operating decisions. Major roads only; cell centres snap to this connected road network. 1× playback means one simulated minute per second. Grey fading dots leave service; returning dots fade in.</p></details>
+<details class="explain" id="help"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Teal dots represent vacant taxis, amber dots hired trips, and violet dots repositioning. Dark dots approach a pickup first. Dots follow real OSM roads, but their speed is chosen to preserve the model's arrival times. Taxi identities and individual paths are illustrative.</p><p>Rain comes from your settings. “More bookings”, “Drivers stop” and “Both” are alternative assumptions. Hired trips and abandoned requests are simulated, not measured demand or lost passengers. The engine uses 30-minute rain slots; the radar layer interpolates the synthetic storm for display. Starting supply and the normal line use the frozen typical weekday/weekend half-hour pattern, averaged across months at normal feed coverage. The public feed covers the whole market.</p><p>The model failed its fixed realism check: its best setting passed 3 of 10 real storms. Use this page to explore assumptions, not to make operating decisions. Major roads only; cell centres snap to this connected road network. 1× playback means one simulated minute per second. Grey fading dots leave service; returning dots fade in.</p></details>
 <div class="footer"><span>Built for NUS DAO2702 · A presentation of the frozen v2 model</span><span id="performance">Roads loading…</span></div>
-</section></main>
+</div></aside>
+<div class="playbar glass"><button class="play" id="play" aria-label="Play simulation">▶ Play</button><output class="clock" id="clock" for="timeline">13:00</output><input class="timeline" id="timeline" type="range" min="0" max="240" value="0" step="0.1" aria-label="Simulation timeline, storm start to four hours"><div class="speed" data-control="speed" aria-label="Playback speed"><button data-value="1" aria-pressed="false">1×</button><button data-value="4" aria-pressed="true">4×</button><button data-value="16" aria-pressed="false">16×</button></div><button class="icon" id="reset" aria-label="Reset timeline to storm start">↺</button><label class="split-control"><input type="checkbox" id="split"><span>Compare</span></label></div>
+<nav class="toolbar glass" aria-label="Tools"><button class="tool" id="tool-storm" aria-pressed="true"><span class="glyph" aria-hidden="true">☂</span>Storm</button><button class="tool" id="tool-info" aria-pressed="true"><span class="glyph" aria-hidden="true">i</span>Info view</button><button class="tool" id="tool-compare" aria-pressed="false"><span class="glyph" aria-hidden="true">◫</span>Compare</button><button class="tool" id="tool-help" aria-pressed="false"><span class="glyph" aria-hidden="true">?</span>Help</button></nav>
+</main></div>
 <div class="sheet-backdrop" id="backdrop" hidden></div><button class="sheet-button" id="open-sheet" aria-controls="controls" aria-expanded="false">Build your storm <span>Size · rain · movement ↑</span></button>
 <script id="data">/*__DATA__*/</script>
 <script id="engine">/*__ENGINE__*/</script>

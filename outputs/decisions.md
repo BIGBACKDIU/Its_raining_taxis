@@ -1533,3 +1533,10 @@ results stay as they are and remain the pre-specified result.
     whose y-axis spans the data range with the rain window labelled, and a tidier phone layout. Engine,
     random streams, scenario inputs and counters are unchanged; `analysis/check_storm_builder.cjs` passes
     (exact counter agreement, no console errors, no external requests).
+163. **Storm Builder city-builder look (presentation only).** At the user's request the page is restyled in
+    the spirit of a modern city-building game (own design; no game names, logos or assets): a full-screen light
+    map (pale land, light-blue water, white roads with grey casing and a yellow expressway line, faint 1 km grid)
+    with frosted floating panels - stats bar on top, storm tool on the left, info view (legend, chart, scenario
+    brief, help) on the right, time controls bottom-left and a round-icon tool bar bottom-centre. The map is fitted
+    into the area the panels leave free. Taxi colours re-validated for the light map. Phones get a scrolling stack
+    with the storm tool as a bottom sheet. Engine, inputs and counters are unchanged; the browser checker passes.
