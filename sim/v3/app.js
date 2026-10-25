@@ -9,10 +9,9 @@ let config={...defaults},result=null,worker=null,playing=false,time=-.001,speed=
 let generation=0,dirty=true,frameKey='',buildTimer=null,stress=null;
 const views=[0,1].map(i=>({canvas:$('map'+i),context:$('map'+i).getContext('2d'),base:document.createElement('canvas'),w:0,h:0}));
 const perf={frames:0,drawMs:[],times:[],drawnDots:0,drawnVacant:0};
-const colors=['#8aefcb','#f6c271','#c5abff','#d3fff0','#78929a','#78929a'];
+const colors=['#98b5db','#c5ae88','#aaa0c2','#d0dbe9','#78889e','#78889e'];
 const sprites=colors.map(color=>{const c=document.createElement('canvas');c.width=c.height=24;const x=c.getContext('2d');
-  const g=x.createRadialGradient(12,12,0,12,12,11);g.addColorStop(0,color);g.addColorStop(.15,color);g.addColorStop(.3,color+'80');g.addColorStop(1,color+'00');
-  x.fillStyle=g;x.fillRect(0,0,24,24);return c;});
+  x.fillStyle=color;x.beginPath();x.arc(12,12,9,0,2*Math.PI);x.fill();return c;});
 function transform(v){
   const bounds=[3000,65000,3000,38000],pad=v.w<500?12:18;
   v.scale=Math.min((v.w-2*pad)/(bounds[1]-bounds[0]),(v.h-2*pad)/(bounds[3]-bounds[2]));
@@ -21,18 +20,18 @@ function transform(v){
   v.xy=(x,y)=>[v.tx+x*v.scale,v.ty-y*v.scale];
 }
 function drawBase(v){
-  const c=v.base.getContext('2d');c.setTransform(v.dpr,0,0,v.dpr,0,0);c.fillStyle='#091821';c.fillRect(0,0,v.w,v.h);
+  const c=v.base.getContext('2d');c.setTransform(v.dpr,0,0,v.dpr,0,0);c.fillStyle='#0d192b';c.fillRect(0,0,v.w,v.h);
   const land=new Path2D();for(const ring of DATA.land){ring.forEach((p,i)=>{const q=v.xy(p[0],p[1]);i?land.lineTo(...q):land.moveTo(...q);});land.closePath();}
-  c.fillStyle='#132b33';c.fill(land);c.strokeStyle='#29434b';c.lineWidth=.7;c.stroke(land);
-  c.strokeStyle='#a1c1c608';c.lineWidth=.5;c.beginPath();
+  c.fillStyle='#1a2b42';c.fill(land);c.strokeStyle='#34465f';c.lineWidth=.7;c.stroke(land);
+  c.strokeStyle='#a1b5d008';c.lineWidth=.5;c.beginPath();
   for(let x=3000;x<=65000;x+=1000){c.moveTo(...v.xy(x,3000));c.lineTo(...v.xy(x,38000));}
   for(let y=3000;y<=38000;y+=1000){c.moveTo(...v.xy(3000,y));c.lineTo(...v.xy(65000,y));}c.stroke();
   const paths=Array.from({length:5},()=>new Path2D()),nodes=DATA.road.nodes;
   for(const e of DATA.road.edges){const p=paths[e[2]];p.moveTo(...v.xy(nodes[e[0]*2],nodes[e[0]*2+1]));
     for(let j=4;j<e.length;j+=2)p.lineTo(...v.xy(e[j],e[j+1]));p.lineTo(...v.xy(nodes[e[1]*2],nodes[e[1]*2+1]));}
-  const colors=['#7babbc','#5f8a9c','#426470','#34505b','#2b424c'],widths=[1.1,.85,.65,.5,.4];
+  const colors=['#7187a6','#596f8d','#405675','#344962','#2b3d55'],widths=[1.1,.85,.65,.5,.4];
   for(let i=4;i>=0;i--){c.strokeStyle=colors[i];c.lineWidth=widths[i];c.stroke(paths[i]);}
-  c.font=`${v.w<500?7:8}px system-ui`;c.textAlign='center';c.fillStyle='#92aab4';
+  c.font=`${v.w<500?7:8}px system-ui`;c.textAlign='center';c.fillStyle='#92a3bb';
   const labels=[['TUAS',103.65,1.31],['WOODLANDS',103.79,1.435],['CHANGI',103.98,1.365],['CBD',103.85,1.277]];
   for(const [label,lon,lat] of labels)c.fillText(label,...v.xy(...project(lon,lat)));
 }
@@ -64,17 +63,17 @@ function rain(v,c,t){
   const [x,y]=v.xy(config.x+d[0]*velocity*t,config.y+d[1]*velocity*t);
   const radius={small:1500,medium:4000,large:10000,island:36000}[config.size];
   const rx=(config.size==='island'?70000:radius)*v.scale,ry=(config.size==='island'?30000:radius)*v.scale;
-  const amp=Math.pow(Math.sin(Math.PI*t/config.duration),.75),alpha=(.18+Math.min(config.strength,60)/160)*amp;
+  const amp=Math.pow(Math.sin(Math.PI*t/config.duration),.75),alpha=(.12+Math.min(config.strength,60)/240)*amp;
   c.save();c.translate(x,y);c.scale(rx,ry);
-  const g=c.createRadialGradient(0,0,0,0,0,1);g.addColorStop(0,`rgba(98,174,255,${alpha})`);g.addColorStop(.45,`rgba(63,133,245,${alpha*.7})`);g.addColorStop(1,'rgba(54,113,220,0)');
+  const g=c.createRadialGradient(0,0,0,0,0,1);g.addColorStop(0,`rgba(119,151,197,${alpha})`);g.addColorStop(.45,`rgba(88,122,173,${alpha*.7})`);g.addColorStop(1,'rgba(72,105,157,0)');
   c.fillStyle=g;c.beginPath();c.arc(0,0,1,0,Math.PI*2);c.fill();c.restore();
-  c.save();c.strokeStyle=`rgba(137,195,255,${amp*.2})`;c.lineWidth=.6;
+  c.save();c.strokeStyle=`rgba(147,174,210,${amp*.2})`;c.lineWidth=.6;
   for(const f of [.35,.65,.95]){c.beginPath();c.ellipse(x,y,rx*f,ry*f,0,0,Math.PI*2);c.stroke();}c.restore();
 }
 function drawMap(v,output,t){
   const c=v.context,mobile=v.w<600;c.setTransform(1,0,0,1,0,0);c.drawImage(v.base,0,0);c.setTransform(v.dpr,0,0,v.dpr,0,0);
   rain(v,c,t);
-  const cp=v.xy(config.x,config.y);c.strokeStyle='#a8d3e957';c.setLineDash([2,4]);c.lineWidth=.8;c.beginPath();c.arc(cp[0],cp[1],6,0,2*Math.PI);c.stroke();c.setLineDash([]);
+  const cp=v.xy(config.x,config.y);c.strokeStyle='#a1b5d057';c.setLineDash([2,4]);c.lineWidth=.8;c.beginPath();c.arc(cp[0],cp[1],6,0,2*Math.PI);c.stroke();c.setLineDash([]);
   let dots=0,vacant=0;
   const source=stress?stress.actors:output.actors,st=stress?(performance.now()-stress.start)/1000*5:t;
   for(const actor of source){const leg=stress?actor.legs[0]:legAt(actor,st);if(!leg)continue;
@@ -84,14 +83,14 @@ function drawMap(v,output,t){
     const p=position(leg,st,actor.id,mobile),q=v.xy(p[0],p[1]);
     if(!mobile&&!reduced&&leg.kind>0&&leg.kind<4&&(actor.id%3===0||leg.kind===2)){
       const before=position(leg,Math.max(leg.from,st-.3),actor.id,false),r=v.xy(before[0],before[1]);
-      c.globalAlpha=.45;c.strokeStyle=colors[leg.kind];c.lineWidth=leg.kind===2?1.1:.75;
+      c.globalAlpha=.24;c.strokeStyle=colors[leg.kind];c.lineWidth=leg.kind===2?1.1:.75;
       c.setLineDash(leg.kind===2?[3,3]:[]);c.beginPath();c.moveTo(...r);
       const path=result.paths[leg.route],duration=Math.max(.001,(leg.arrive??leg.to)-leg.from);
       const d0=path.length*Math.max(0,(st-.3-leg.from)/duration),d1=path.length*Math.min(1,(st-leg.from)/duration);
       for(let k=1;k<path.cumulative.length-1;k++)if(path.cumulative[k]>d0&&path.cumulative[k]<d1)c.lineTo(...v.xy(path.xy[k*2],path.xy[k*2+1]));
       c.lineTo(...q);c.stroke();c.setLineDash([]);
     }
-    c.globalAlpha=alpha;const radius=leg.kind===0?3.2:3.5;
+    c.globalAlpha=alpha;const radius=leg.kind===0?1.65:1.85;
     c.drawImage(sprites[leg.kind],q[0]-radius,q[1]-radius,radius*2,radius*2);dots++;
   }
   c.globalAlpha=1;
@@ -99,7 +98,7 @@ function drawMap(v,output,t){
     while(lo<hi){const k=(lo+hi)>>1;if(output.pulses[k].m<t-duration)lo=k+1;else hi=k;}
     for(let i=lo;i<output.pulses.length&&output.pulses[i].m<=t;i++){
       const p=output.pulses[i],age=t-p.m,node=DATA.road.cellNodes[p.cell],xy=v.xy(DATA.road.nodes[node*2],DATA.road.nodes[node*2+1]);
-      c.globalAlpha=Math.max(0,1-age/duration)*.6;c.strokeStyle=p.kind?'#ff817a':'#e1fff4';c.lineWidth=.8;
+      c.globalAlpha=Math.max(0,1-age/duration)*.6;c.strokeStyle=p.kind?'#c48e87':'#c4d2e4';c.lineWidth=.8;
       c.beginPath();c.arc(xy[0],xy[1],reduced?2:1+age*3,0,Math.PI*2);c.stroke();
     }}c.globalAlpha=1;
   return {dots,vacant};
@@ -119,18 +118,39 @@ function drawChart(){
   const maximum=Math.max(...frames.map(f=>Math.max(f.vacant,f.expected)))*1.08;
   const x=t=>33+t/240*(w-45),y=v=>h-18-v/maximum*(h-26);
   c.fillStyle='#538cc917';c.fillRect(x(0),4,x(Math.min(config.duration,240))-x(0),h-22);
-  c.font='8px system-ui';c.fillStyle='#899faa';c.strokeStyle='#2b3b45';c.lineWidth=.5;
+  c.font='8px system-ui';c.fillStyle='#9aaac0';c.strokeStyle='#2a3a52';c.lineWidth=.5;
   for(const f of [0,.5,1]){const value=maximum*f;c.beginPath();c.moveTo(32,y(value));c.lineTo(w-5,y(value));c.stroke();c.fillText(Math.round(value).toLocaleString(),1,y(value)+3);}
   for(let t=0;t<=240;t+=60)c.fillText(`+${t/60}h`,x(t)-7,h-3);
-  c.strokeStyle='#8296a3';c.setLineDash([4,4]);c.lineWidth=1;c.beginPath();frames.forEach((f,i)=>{const p=[x(i),y(f.expected)];i?c.lineTo(...p):c.moveTo(...p);});c.stroke();c.setLineDash([]);
-  c.strokeStyle='#8aefcb';c.lineWidth=1.5;c.beginPath();const end=Math.max(0,Math.floor(time));
+  c.strokeStyle='#8b9bb0';c.setLineDash([4,4]);c.lineWidth=1;c.beginPath();frames.forEach((f,i)=>{const p=[x(i),y(f.expected)];i?c.lineTo(...p):c.moveTo(...p);});c.stroke();c.setLineDash([]);
+  c.strokeStyle='#98b5db';c.lineWidth=1.5;c.beginPath();const end=Math.max(0,Math.floor(time));
   frames.slice(0,end+1).forEach((f,i)=>{const p=[x(i),y(f.vacant)];i?c.lineTo(...p):c.moveTo(...p);});c.stroke();
-  c.strokeStyle='#d1e6ec55';c.beginPath();c.moveTo(x(Math.max(0,time)),4);c.lineTo(x(Math.max(0,time)),h-17);c.stroke();
+  c.strokeStyle='#c4d2e455';c.beginPath();c.moveTo(x(Math.max(0,time)),4);c.lineTo(x(Math.max(0,time)),h-17);c.stroke();
 }
 function play(){if(!result)return;if(time>=240)time=-.001;playing=!playing;$('play').textContent=playing?'Ⅱ Pause':'▶ Play';$('play').setAttribute('aria-label',playing?'Pause simulation':'Play simulation');lastFrame=performance.now();dirty=true;}
+// Describe the prepared scenario, never an unbuilt draft or an inferred empirical effect.
+function updateDescription(){
+  if(!result)return;
+  const c=result.config;
+  let nearest=0,distance=Infinity;
+  for(let i=0;i<DATA.cells.cell.length;i++){const d=Math.hypot(c.x-DATA.cells.x[i],c.y-DATA.cells.y[i]);if(d<distance){distance=d;nearest=i;}}
+  const strength={2:'Light',8:'Moderate',25:'Heavy',60:'Extreme'}[c.strength];
+  const area={small:'3 km',medium:'8 km',large:'20 km',island:'Island-wide'}[c.size];
+  const movement=c.direction==='still'?'stationary':`drifting ${c.direction} at ${c.driftSpeed} km/h`;
+  $('storm-setup').textContent=`${strength} rain · ${area}${c.size==='island'?'':' across'} · ${c.duration} min · ${movement}. ${c.weekend?'Weekend':'Weekday'} at ${String(c.hour).padStart(2,'0')}:00${c.size==='island'?'':`, starting near ${DATA.cells.place[nearest]}`}.`;
+  const mechanism={demand:'Rain raises simulated requests, so more taxis can leave the vacant pool for hires.',
+    supply:'Rain moves some simulated drivers off duty, reducing the vacant pool until they return after rain clears.',
+    mix:'Rain raises simulated requests and moves some drivers off duty; both can reduce the vacant pool.'}[c.mechanism];
+  const clauses=[mechanism,'Wet-area travel takes 25% longer, delaying taxi arrivals.'];
+  if(c.demand!==1)clauses.push(`The request setting scales new requests to ${Math.round(c.demand*100)}% of the model’s usual rate, before any rain multiplier.`);
+  if(c.strength>30)clauses.push('The model’s rain response caps at 30 mm/h.');
+  if(split)clauses.push('Compare the same storm and seed with and without repositioning; taxis in transit are temporarily unavailable.');
+  else if(config.policy)clauses.push('Repositioning sends surplus taxis towards modelled shortages; they are unavailable while travelling.');
+  $('storm-effect').textContent=clauses.join(' ');
+}
 function build(){
   clearTimeout(buildTimer);if(worker)worker.terminate();const token=++generation;playing=false;time=-.001;result=null;stress=null;frameKey='';
   $('play').textContent='▶ Play';$('busy').hidden=false;$('busy-text').textContent='Setting the city in motion…';
+  $('storm-setup').textContent='Building your scenario…';$('storm-effect').textContent='The explanation updates when your storm is ready.';
   $('status').textContent='Building your scenario…';$('play').disabled=true;$('apply').disabled=true;
   const source=['engine','router','scenario','planner'].map(id=>$(id).textContent).join('\n')+
     '\nonmessage=e=>{try {const r=prepareSimulation(e.data.data,e.data.config,p=>postMessage({progress:p}));postMessage({result:r});}catch(error){postMessage({error:error.stack||String(error)});}};';
@@ -140,7 +160,7 @@ function build(){
     result=e.data.result;if(worker)worker.terminate();worker=null;$('busy').hidden=true;$('play').disabled=false;$('apply').disabled=false;
     $('status').innerHTML=`<b>Ready when you are.</b><br>${config.weekend?'Weekend':'Weekday'} · ${String(config.hour).padStart(2,'0')}:00 · 4 simulated hours`;
     $('performance').textContent=reduced?'Reduced motion enabled':'Real road paths · Illustrative taxi journeys';
-    window.StormBuilder.ready=true;resize();updateCounters();dirty=true;
+    window.StormBuilder.ready=true;updateDescription();resize();updateCounters();dirty=true;
   };
   window.StormBuilder.ready=false;
   const fallback=()=>{if(token!==generation)return;if(worker)worker.terminate();worker=null;
@@ -159,7 +179,7 @@ function refreshControls(){
   $('size-note').textContent={small:'About 3 km across',medium:'About 8 km across',large:'About 20 km across',island:'A broad band over the island'}[config.size];
   $('caption0').innerHTML=`${!split&&config.policy?'With repositioning':'As usual'} <em>same seed</em>`;
 }
-function setSplit(value){split=value;$('split').checked=value;$('maps').classList.toggle('split',value);$('view1').hidden=!value;$('compare0').hidden=!value;frameKey='';refreshControls();resize();updateCounters();dirty=true;}
+function setSplit(value){split=value;$('split').checked=value;$('maps').classList.toggle('split',value);$('view1').hidden=!value;$('compare0').hidden=!value;frameKey='';refreshControls();updateDescription();resize();updateCounters();dirty=true;}
 function sheet(open){$('controls').classList.toggle('open',open);$('backdrop').hidden=!open;$('open-sheet').setAttribute('aria-expanded',String(open));
   if(open)$('close-sheet').focus();else $('open-sheet').focus();}
 document.querySelectorAll('[data-control]').forEach(group=>group.addEventListener('click',e=>{
@@ -177,7 +197,7 @@ $('presets').addEventListener('click',e=>{const b=e.target.closest('[data-preset
 $('demand').addEventListener('input',()=>{config.demand=Number($('demand').value);$('demand-note').textContent=config.demand.toFixed(2)+'×';});
 $('demand').addEventListener('change',scheduleBuild);
 $('seed').addEventListener('change',()=>{config.seed=Math.max(1,Math.min(2147483646,Math.round(Number($('seed').value)||2702)));refreshControls();scheduleBuild();});
-$('policy').addEventListener('click',()=>{config.policy=!config.policy;frameKey='';refreshControls();updateCounters();dirty=true;});
+$('policy').addEventListener('click',()=>{config.policy=!config.policy;frameKey='';refreshControls();updateDescription();updateCounters();dirty=true;});
 $('play').addEventListener('click',play);$('split').addEventListener('change',()=>setSplit($('split').checked));
 $('timeline').addEventListener('input',()=>{time=Number($('timeline').value)||-.001;dirty=true;updateCounters();});
 $('reset').addEventListener('click',()=>{playing=false;time=-.001;frameKey='';$('play').textContent='▶ Play';dirty=true;updateCounters();});

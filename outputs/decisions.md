@@ -1503,3 +1503,26 @@ results stay as they are and remain the pre-specified result.
     frozen v2 data, tuned parameters, plausibility results and frozen parity results remain byte-identical.
     The wording checker now includes the new v3 template; reviewed new hits are explicitly simulated
     demand controls and negations of measured demand/lost-passenger claims.
+
+161. **Storm Builder navy restyle and dynamic scenario brief (presentation only).** At the user's
+    request, replace neon mint/glowing taxi sprites with navy surfaces, muted blue/amber/lilac markers,
+    flat dots and quieter trails/rain shading. Keep roads and the permanent realism notice visible;
+    move the mobile OSM credit to the top corner so the fixed controls launcher does not cover it.
+    The heading and preset labels use a calmer presentation style. No engine, baseline, tuned parameter,
+    rain input, routing rule or outcome is changed, and no historical holdout is used.
+
+    Add a short scenario brief derived from the prepared result's settings, rather than an unbuilt
+    control draft. It changes after each storm build and when policy/comparison is switched. It states
+    the size, peak strength category, duration, drift, calendar and nearest named location, then explains
+    the chosen request/off-duty assumption, the existing 25% wet travel multiplier, any non-default
+    request multiplier and the existing 30 mm/h response cap. Repositioning text discloses that taxis
+    in transit are unavailable. A counter note distinguishes cumulative hires/abandonments from current
+    stocks. These statements explain model assumptions; they do not claim observed mechanisms or
+    isolate a real-world rainfall effect. Text uses DOM textContent and a polite build-time live region.
+
+    Browser checks verify changing the default storm to the small stationary shower updates the brief,
+    and switching repositioning updates its explanation. All prior exact display/engine checks pass,
+    with zero per-cell discrepancies, console errors, external requests or road fallbacks. At 2,500
+    moving dots, headless desktop and 400 px emulation remain about 60 fps (desktop p95 draw 2.2 ms).
+    This is the same laptop benchmark, not a physical-phone claim. Refresh the six presentation
+    screenshots; no frozen analysis figure changes. The standalone HTML is 1,644,590 bytes.

@@ -17,10 +17,10 @@ sim/page_template.html:64 [validation] <p class="sub">How vacant taxis might mov
 sim/page_template.html:71 [demand] <select id="mech"><option value="demand">More requests (demand surge)</option><option value="supply">Fewer taxis on the road (supply drop)</option><option value
 sim/page_template.html:72 [demand] <div><label for="dl">Demand level</label><select id="dl"><option value="0.8">0.8x</option><option value="1" selected>1.0x</option><option value="1.2">1.2x</opti
 sim/page_template.html:102 [demand] <p class="note">Sources: data.gov.sg taxi availability (LTA), NEA rainfall, LTA fleet statistics. Cell model on 374 analysed 1 km cells; requests, waits and aba
-sim/v3/template.html:29 [demand] <div class="group"><div class="label">What happens in rain?</div><div class="chips" data-control="mechanism" aria-label="Rain mechanism scenario"><button data-v
-sim/v3/template.html:30 [demand] <div class="group"><label class="label" for="demand">Request level <span class="dim" id="demand-note">1.00×</span></label><input class="range" id="demand" type=
-sim/v3/template.html:41 [demand] <details class="explain"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Mint dots represent vacant taxis,
-sim/v3/template.html:41 [lost riders] <details class="explain"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Mint dots represent vacant taxis,
+sim/v3/template.html:31 [demand] <div class="group"><div class="label">What happens in rain?</div><div class="chips" data-control="mechanism" aria-label="Rain mechanism scenario"><button data-v
+sim/v3/template.html:32 [demand] <div class="group"><label class="label" for="demand">Request level <span class="dim" id="demand-note">1.00×</span></label><input class="range" id="demand" type=
+sim/v3/template.html:44 [demand] <details class="explain"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Blue dots represent vacant taxis,
+sim/v3/template.html:44 [lost riders] <details class="explain"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Blue dots represent vacant taxis,
 analysis/02_describe.py:192 [cause] fig.text(0.01, 0.005, "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Association, not cause.",
 analysis/03_effects.py:4 [validation] Estimator: Poisson PML with fixed effects and day-clustered errors (analysis/fepois_hd.py, validated against
 analysis/03_effects.py:5 [validation] pyfixest on 2023 with --validate). Effects are 100 * (exp(b) - 1) % with 95% CI.

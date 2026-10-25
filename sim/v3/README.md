@@ -81,3 +81,12 @@ playback still uses the same prepared data.
 
 Road data © OpenStreetMap contributors, ODbL. Attribution remains visible in each map corner.
 The embedded road database is derived from the local step-11 OpenStreetMap graph.
+
+## Scenario brief and visual style
+
+The navy interface uses muted blue, amber and lilac markers without glow. The scenario brief updates
+from the prepared storm's settings after every build, and when repositioning or comparison is switched.
+It explains the selected mechanism, the existing 25% wet-area travel multiplier, non-default request
+levels and the existing 30 mm/h response cap. These are model assumptions, not estimated real-world
+effects. The counter note distinguishes running totals from current stocks. Presentation text and
+colours do not change the engine, its random stream, parameters, rain slots or numeric results.

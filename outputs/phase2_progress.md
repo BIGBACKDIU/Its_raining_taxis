@@ -717,3 +717,19 @@ the four new v3 hits are scenario controls/identifiers and explicit negations of
 lost-passenger claims. `storm_builder_hook_check.json` records all 12 exact old/new/on/off cases;
 `storm_builder_preservation.json` records the unchanged frozen hashes. No existing result table or
 figure is modified. A local preview is available on port 8765; the HTML also works directly from disk.
+
+### Storm Builder visual refinement and scenario explanation (decision 161; presentation only)
+
+The v3 presentation now uses a professional navy palette, muted blue accents, flat taxi markers and
+quieter rain/trails. A short **Scenario brief** changes with each prepared storm, explaining its selected
+conditions and how the request/off-duty assumptions, wet travel time, request multiplier and
+repositioning affect model counts. It also distinguishes cumulative counters from current counts.
+The brief describes assumptions rather than claiming empirical mechanisms or an isolated rain effect.
+The realism notice remains visible; phone OSM attribution moves above the fixed controls launcher.
+
+The engine and numeric inputs are unchanged. Exact independent counter checks and all 241 per-cell
+frames pass; default end totals remain 1,742 vacant / 8,103 hired / 1 offline / 0 waiting / 10 abandoned.
+Default/shower/policy brief changes pass browser checks. Desktop and 400 px emulation remain about
+60 fps with 2,500 road dots; no console errors, network requests, path fallbacks or horizontal overflow.
+The six presentation screenshots are refreshed. Wording check: 76 reviewed hits, all tests: 35 passed
+(with the existing dependency warnings). No new held-out data use or analysis results.

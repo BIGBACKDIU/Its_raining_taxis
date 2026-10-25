@@ -221,44 +221,47 @@
     }
   ],
   "browser": "156.0.8078.47",
-  "desktopBuildSeconds": 3.792,
+  "desktopBuildSeconds": 3.837,
   "cruising": {
     "uniquePaths": 1774,
     "maxRadiusMetres": 1120.854138592529,
     "stationaryCells": 84
   },
   "permanentBannerVisible": true,
+  "defaultBrief": "Scenario brief\nMODEL ASSUMPTIONS\n\nHeavy rain · 8 km across · 60 min · drifting east at 10 km/h. Weekday at 13:00, starting near City Hall (Old Supreme Court Singapore).\n\nRain raises simulated requests and moves some drivers off duty; both can reduce the vacant pool. Wet-area travel takes 25% longer, delaying taxi arrivals.\n\nHired trips and abandoned requests are running totals. Other counters show the current state.",
   "desktopPlayback": {
-    "fps": 60.0026044536157,
+    "fps": 60.00200340578984,
     "frames": 600,
-    "drawP95Ms": 2.300000011920929,
+    "drawP95Ms": 2.5,
     "drawnDots": 2482,
     "drawnVacant": 1742,
     "pathFallbacks": 0
   },
   "desktopStress2500": {
-    "fps": 60.00200006666889,
-    "frames": 361,
-    "drawP95Ms": 2.699999988079071,
+    "fps": 60.00233992411962,
+    "frames": 360,
+    "drawP95Ms": 2.199999988079071,
     "drawnDots": 2500,
     "drawnVacant": 2500,
     "pathFallbacks": 0
   },
   "emulatedPhoneStress2500": {
-    "fps": 60.00400026668444,
-    "frames": 181,
-    "drawP95Ms": 2.199999988079071,
+    "fps": 60.00067039855193,
+    "frames": 180,
+    "drawP95Ms": 2.399999976158142,
     "drawnDots": 2500,
     "drawnVacant": 2500,
     "pathFallbacks": 0
   },
   "phoneHorizontalOverflow": false,
   "phoneSplitColumns": "374px",
+  "policyBrief": "Rain raises simulated requests and moves some drivers off duty; both can reduce the vacant pool. Wet-area travel takes 25% longer, delaying taxi arrivals. Repositioning sends surplus taxis towards modelled shortages; they are unavailable while travelling.",
   "smallShower": {
     "duration": 30,
     "firstSlotRain": 4.072465589383842,
     "laterRain": 0
   },
+  "smallShowerBrief": "Scenario brief\nMODEL ASSUMPTIONS\n\nLight rain · 3 km across · 30 min · stationary. Weekday at 13:00, starting near Yunnan (Pioneer Mall).\n\nRain raises simulated requests and moves some drivers off duty; both can reduce the vacant pool. Wet-area travel takes 25% longer, delaying taxi arrivals.\n\nHired trips and abandoned requests are running totals. Other counters show the current state.",
   "reducedMotion": true,
   "workerBlockedFallback": true,
   "consoleErrors": [],

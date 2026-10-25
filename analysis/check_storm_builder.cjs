@@ -42,6 +42,10 @@ async function counters(page,label){
   });assert(report.cruising.maxRadiusMetres<=1250.01);
   await page.evaluate(()=>scrollTo(0,500));report.permanentBannerVisible=await page.locator('.notice').evaluate(e=>e.getBoundingClientRect().top>=0&&e.getBoundingClientRect().bottom<=innerHeight);
   assert(report.permanentBannerVisible);await page.evaluate(()=>scrollTo(0,0));
+  report.defaultBrief=await page.locator('.scenario-brief').innerText();
+  assert(report.defaultBrief.includes('Heavy rain · 8 km across · 60 min'));
+  assert(report.defaultBrief.includes('Rain raises simulated requests and moves some drivers off duty'));
+  assert(report.defaultBrief.includes('25% longer'));
   await screenshot(page,'storm_builder_1440_before.png');await counters(page,'desktop initial');
   await page.evaluate(()=>StormBuilder.seek(30));await page.waitForTimeout(150);await screenshot(page,'storm_builder_1440_mid.png');await counters(page,'desktop mid storm');
   await page.evaluate(()=>{StormBuilder.seek(0);StormBuilder.setSpeed(16);StormBuilder.resetPerformance();});
@@ -63,9 +67,14 @@ async function counters(page,label){
   report.phoneSplitColumns=await phone.locator('#maps').evaluate(e=>getComputedStyle(e).gridTemplateColumns);assert(!report.phoneSplitColumns.includes(' '));
   await phone.locator('#split').uncheck();await phone.locator('#open-sheet').click();await phone.locator('#policy').click();await phone.locator('#close-sheet').click();
   await phone.waitForTimeout(100);await counters(phone,'phone repositioning counters');
+  report.policyBrief=await phone.locator('#storm-effect').textContent();assert(report.policyBrief.includes('Repositioning sends surplus taxis'));
   await phone.locator('#open-sheet').click();await phone.locator('[data-preset=west]').click();
   await phone.waitForFunction(()=>StormBuilder.ready&&StormBuilder.result.config.size==='small',null,{timeout:120000});
   report.smallShower=await phone.evaluate(()=>({duration:StormBuilder.result.config.duration,firstSlotRain:StormBuilder.result.storm.rain[0].reduce((a,b)=>a+b,0),laterRain:StormBuilder.result.storm.rain.slice(1).flat().reduce((a,b)=>a+b,0)}));
+  report.smallShowerBrief=await phone.locator('.scenario-brief').innerText();
+  assert(report.smallShowerBrief.includes('Light rain · 3 km across · 30 min · stationary'));
+  assert(!report.smallShowerBrief.includes('Repositioning sends surplus taxis'));
+  assert.notEqual(report.smallShowerBrief,report.defaultBrief);
   assert(report.smallShower.firstSlotRain>0&&report.smallShower.laterRain===0);await phone.locator('#close-sheet').click();
   const reduced=await browser.newPage({viewport:{width:400,height:900},reducedMotion:'reduce'});observe(reduced);await reduced.goto(url);await ready(reduced);
   report.reducedMotion=await reduced.evaluate(()=>StormBuilder.reducedMotion);assert(report.reducedMotion);await reduced.evaluate(()=>StormBuilder.seek(30));await reduced.waitForTimeout(100);await counters(reduced,'reduced motion');
