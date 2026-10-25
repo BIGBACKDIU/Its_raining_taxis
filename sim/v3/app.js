@@ -188,7 +188,7 @@ function drawChart(){
   const step=Math.pow(10,Math.floor(Math.log10(Math.max(1,(hi-lo)/3)))),top=Math.ceil(hi*1.04/step)*step,bottom=Math.max(0,Math.floor(lo*.96/step)*step);
   const left=46,right=22,x=t=>left+t/240*(w-left-right),y=v=>h-22-(v-bottom)/(top-bottom)*(h-34);
   c.font='11px ui-sans-serif,system-ui,sans-serif';
-  c.fillStyle='rgba(58,109,150,.12)';c.fillRect(x(0),8,x(Math.min(config.duration,240))-x(0),h-30);
+  c.fillStyle='rgba(43,120,201,.12)';c.fillRect(x(0),8,x(Math.min(config.duration,240))-x(0),h-30);
   c.strokeStyle='#e3e9ee';c.lineWidth=1;c.fillStyle='#6c8095';c.textAlign='right';
   for(const f of [0,1/3,2/3,1]){const value=bottom+(top-bottom)*f;c.beginPath();c.moveTo(left,Math.round(y(value))+.5);c.lineTo(w-right,Math.round(y(value))+.5);c.stroke();c.fillText(Math.round(value).toLocaleString('en-SG'),left-8,y(value)+4);}
   c.textAlign='center';for(let t=0;t<=240;t+=60)c.fillText(t?`+${t/60} h`:'start',x(t),h-5);
