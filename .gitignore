@@ -25,3 +25,6 @@ data/interim/radar_*/
 data/interim/s22/
 
 data/interim/s22b/
+
+data/raw_minute/
+data/interim/s23/

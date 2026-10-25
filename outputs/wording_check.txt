@@ -52,6 +52,9 @@ analysis/21_radar.py:42 [validation] p = p.merge(q, on=['ts', 'cell'], how='left
 analysis/21_radar.py:85 [demand] # A stated count scale, not an estimate of demand or of realised lost trips.
 analysis/21_radar.py:85 [lost riders] # A stated count scale, not an estimate of demand or of realised lost trips.
 analysis/21_radar.py:209 [validation] '95% day-clustered CIs; primary dry = 0 mm/h.\nRadar–gauge merged product; agreement is not independent validation. '
+analysis/23_flows.py:34 [validation] def validate():
+analysis/23_flows.py:225 [validation] p.add_argument("part", choices=["validate", "flows"])
+analysis/23_flows.py:227 [validation] validate() if args.part == "validate" else run()
 analysis/99_report_figures.py:129 [cause] "Apr 2022 - Mar 2025; Poisson FE with heavy-rain interactions, 95% CI clustered by day. Association, not cause.")
 analysis/99_report_figures.py:155 [cause] "Apr 2022 - Mar 2025; island-wide = >= 50% of working gauges wet; day-bootstrap 95% CI. Association, not cause.")
 analysis/99_wording_check.py:1 [demand] """Final wording check against HANDOFF section 2 (supply not demand; associations not causes; simulation labels).

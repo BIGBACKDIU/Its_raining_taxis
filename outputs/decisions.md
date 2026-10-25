@@ -1351,3 +1351,36 @@ results stay as they are and remain the pre-specified result.
     progress and a short summary item, run wording check and all tests, commit and push. All effects
     are associations in vacant supply. The pilot-dependent numerical interval/threshold will be recorded
     and committed in the next decision before main-sample minute data or flow analysis.
+
+156. **Step 23 pilot findings and frozen operational details, before the main minute sample.**
+    Decision 155 was committed as eca91cd and pushed before the first pilot request. Both fixed pilot
+    days have 1,081/1,081 usable requests, no future timestamps or offsets beyond ten minutes, and
+    median timestamp AND content refresh of **60 seconds**. Distinct timestamps/contents are
+    1,078 on 12 July 2023 and 1,080 on 17 April 2024. Median requested/actual offsets are -19 and
+    -17 seconds. The analysis therefore uses **one-minute requests**, with actual elapsed seconds
+    determining distances and speeds. Exact within-snapshot coordinate multiplicities account for
+    13,552/1,954,854 and 7,245/2,274,987 points respectively; they are retained, not assumed duplicated
+    vehicles. Isolated mutual-nearest pairs within 20 m have conditional displacement medians 0 and
+    0.105 m and 95th percentiles 14.389 and 14.539 m. The pooled registered movement threshold is
+    **14.483501936905611 m**. This is apparent stationary displacement, contaminated by slow motion;
+    anonymous coordinates cannot establish true GPS jitter or true vehicle identities.
+
+    Operational definitions fixed before main analysis: evaluate onsets on the same :00/:30 grid as
+    step 22. The candidate wet window is (t-30,t]; the three preceding dry hours are (t-210,t-30].
+    Requiring three dry hours through t itself would contradict a wet onset window. Match controls
+    on the same named regime (including a named regime resumed after an excluded spell), not on
+    its arbitrary segment row number. Use minimum-total-calendar-distance maximum-cardinality
+    day matching with seed-based tie breaking. Disappearance events are dated at the next actual
+    snapshot, with their location at the last observed origin; appearance events use the destination.
+    Event counts are scaled to 15 minutes of observed exposure; stocks are duration-weighted and
+    speeds are medians of moving links. Excluding dense zones drops events/edges touching them;
+    it does not fit a different assignment. Both paired days need at least seven of eight usable bins
+    for a first-two-hour comparison. Cell expected counts for the naming filter come from the
+    unchanged step-5 baseline in those paired two-hour windows. Map p-values use paired-day
+    one-sample t-tests on differences, BH across every eligible cell within each D/A family, alongside
+    day-pair bootstrap CIs. Citywide refers to the full observed feed; cell tables use the fixed eligible
+    grid. Apply the storm-day start-of-pair wet mask to both endpoints and to its dry control.
+    The synthetic matching diagnostics, all three radii and both dense-zone versions are reported
+    irrespective of their performance. Poor synthetic recovery prevents a mechanism interpretation;
+    the registered R thresholds remain only conditional proxy descriptions. All numerical settings
+    above are fixed now. Pilot raw files remain gitignored; s23_pilot.csv is the derived audit.
