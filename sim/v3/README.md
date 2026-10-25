@@ -1,8 +1,8 @@
 # Storm Builder
 
-Live site: **https://storm-builder-sg.vercel.app** (Vercel project `storm-builder-sg`, deployed from this folder;
-`.vercelignore` keeps `template.html` and local env files out of the deploy). Redeploy after a rebuild with
-`cd sim/v3 && npx vercel@65.2.0 deploy --prod --scope mhfurui-7256s-projects`.
+Live site: **https://storm-builder-sg.vercel.app** (Vercel project `storm-builder-sg`). The project is connected to this
+GitHub repository with root directory `sim/v3` and no build step, so every push to `main` redeploys the site.
+`.vercelignore` keeps `template.html` and local env files out of the deploy.
 
 Open `index.html` directly in a browser, or paste that **single file** into an HTML artifact.
 It contains every script, style, baseline and road coordinate. There are no external requests, images,
