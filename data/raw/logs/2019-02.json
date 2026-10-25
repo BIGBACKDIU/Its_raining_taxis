@@ -1,0 +1,27 @@
+{
+  "month": "2019-02",
+  "end_date": null,
+  "snapshots": 1344,
+  "snapshots_ok": 1330,
+  "median_taxis": 3821.5,
+  "median_offset_min": -0.25,
+  "taxi_seconds": 49.6,
+  "total_seconds": 77.2,
+  "calls_per_second": 18.14,
+  "workers": 4,
+  "client": {
+    "calls": 1400,
+    "ok": 1400,
+    "retries": 0,
+    "rate_limited": 0,
+    "failed": 0
+  },
+  "rain_days_v1": 28,
+  "rain_days_v2": 0,
+  "rain_days_error": 0,
+  "rain_readings_total": 387005,
+  "rain_stations_max": 52,
+  "forecast_rows": 66505,
+  "forecast_issues": 1415,
+  "errors": []
+}

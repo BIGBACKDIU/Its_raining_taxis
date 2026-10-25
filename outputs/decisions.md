@@ -1208,3 +1208,68 @@ results stay as they are and remain the pre-specified result.
     regression is NOT undertaken in this run: this confirmation is limited to the unchanged forecast
     models, avoiding extra fitted analyses. Final report: fewer than 12 lines, storm count, primary
     and omnibus materiality, key numbers and audit problems.
+
+153. **2019 audit and adapter freeze, before any scoring.**
+    No step-22 model or transform was fitted or changed. All 72 cc12a0e hashes match.
+    November weather retrieval was resumed without repeating its already-saved taxi requests:
+    the original process was waiting through repeated missing-archive errors. The separate
+    s22b_fetch_weather.py client returns immediately on non-retriable 400/404/410 responses;
+    transient 429/5xx retries, parsing and file formats are unchanged. The original pipeline
+    source stays hash-frozen. The November log identifies weather-only request counts.
+    The date-only weather adapter executes the frozen feature function with its raw start date
+    changed from March 2022 to January 2019. Scheduled 2019 calendar bits are supplied separately;
+    all other feature mathematics, trailing levels, weather gates and transformations are unchanged.
+    Public holidays follow the MOM release archived by NAS; the school vacations follow the MOE
+    15 August 2018 release reproduced under its author byline, with official URL and retrieval
+    limitations documented in data/static/phase3/s22b/calendar_sources.md. No extra school-only
+    dates are added, matching the frozen four-vacation convention. Audit metrics follow:
+    - requested: 17520
+    - expected: 17520
+    - usable: 16989
+    - invalid_status: 525
+    - bad_offsets: 6
+    - median_offset: -0.26666666666666666
+    - max_abs_offset: 2008.5333333333333
+    - positive_offsets: 0
+    - glitch_flags: 245
+    - regimes: 5
+    - short_spells: 0
+    - gauge_days: 18055
+    - complete_gauge_days: 17034
+    - unique_gauges: 54
+    - min_daily_gauges: 0
+    - max_daily_gauges: 54
+    - days_without_complete_gauges: 16
+    - days_without_rain_readings: 11
+    - days_without_forecast_records: 3
+    - gauge_records_outside_2019: 0
+    - forecast_issue_records_after_2019: 47
+    - forecast_area_rows: 988363
+    - forecast_area_records_issued_at_or_after_end: 1269
+    - forecast_area_records_issued_after_valid_start: 988363
+    - forecast_issues: 21029
+    - issued_at_or_after_end: 27
+    - issued_after_valid_start: 21029
+    - naive_future_issue_rejections: 16412
+    - strict_forecast_slots: 16819
+    - unavailable_forecast_slots: 701
+    - stage: audit only; no targets, storm counts or model scores
+    Regime/glitch diagnostics are not new exclusions or fitted forecast levels. Only invalid
+    snapshot statuses/offsets are excluded, as registered. The input and executable adapter
+    SHA-256 hashes are frozen in s22b_input_manifest.csv; its own SHA-256 is
+    `6eff5c2a2724f99ae7ca2706d091080da359971e19e12a1954854fc07985b9db`. Commit and push before opening labels or scores.
+
+154. **Pre-scoring raw-availability correction after the 2019 audit.** The audit identifies 11 days
+    with no archived rain observations. A sparse positive-only file with no matching completeness
+    records is an unavailable input, not a dry day. The step-22 frozen preprocessing initializes sparse
+    zeros for available reporting days; passing a wholly absent archive unchanged would invent dry
+    readings on a day after healthy gauges. The separate input adapter now supplies NaN depths for
+    every unobserved five-minute interval on those 11 dates, before the UNCHANGED frozen rolling-window
+    function. Known complete dry days remain sparse zeros. This is raw observation availability, not
+    a current-day completeness threshold or a retrospective numerical rain filter: no future rain
+    values or taxi outcomes determine it. Previous-day gauge health and all feature mathematics,
+    saved imputers, calibration workloads and model bytes are unchanged. A synthetic test distinguishes
+    absent archives from complete, genuinely dry days. No 2019 targets, onsets or scores have been opened.
+    This supersedes only the date-only adapter description and adapter/input manifest hash in decision
+    153; its audit counts and the full registered specification in 152 remain unchanged. The FINAL
+    s22b_input_manifest.csv SHA-256 is `ad1146e2ff8da84b9038b038db765ceb172ed1eb1ec4dcbcc5263696672543bd`. Commit and push before scoring.

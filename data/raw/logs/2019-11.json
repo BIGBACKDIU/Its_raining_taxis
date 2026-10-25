@@ -1,0 +1,28 @@
+{
+  "month": "2019-11",
+  "end_date": null,
+  "snapshots": 1440,
+  "snapshots_ok": 1135,
+  "median_taxis": 2723.0,
+  "median_offset_min": -0.31666666666666665,
+  "resumed_weather_only": true,
+  "nonretriable_4xx_fail_fast": true,
+  "note": "Original taxi files retained. Original November month job was interrupted before completion; client counts below cover resumed weather only.",
+  "weather_seconds": 229.5,
+  "workers": 4,
+  "client": {
+    "calls": 96,
+    "ok": 71,
+    "retries": 8,
+    "rate_limited": 12,
+    "failed": 6
+  },
+  "rain_days_v1": 29,
+  "rain_days_v2": 1,
+  "rain_days_error": 0,
+  "rain_readings_total": 356061,
+  "rain_stations_max": 53,
+  "forecast_rows": 83942,
+  "forecast_issues": 1786,
+  "errors": []
+}

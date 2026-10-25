@@ -49,3 +49,21 @@ fixed inputs. Scoring verifies hashes, a clean committed tree and the pushed com
 marker before opening holdout targets. Outputs are `s22_*.csv` and `s22_weather_gain.png/.svg`. The weather
 adjustments to persistence/seasonal benchmarks and the primary pooled materiality rule are explicit in decision
 150. Calibration base rates fix alert fractions; October base rates do not set the workload.
+
+### Step 22b: confirmatory backward holdout in 2019
+
+Decision 152 is committed and pushed before download. This analysis applies the unchanged step-22 models
+from cc12a0e to 2019, without fitting or tuning. It reuses their seasonal pattern, transformations, residual
+CDFs and calibration workloads. The primary outcome is pooled 60-minute storm PR-AUC weather gain for the
+15% shortfall label; the original omnibus rule is also reported, with at least eight storm onsets required.
+
+Download January-December 2019 with `pipeline.fetch_month` (30-minute taxi snapshots by default for 2019),
+then execute `analysis/22b_backward.py --part audit`. Commit and push the audit and adapter/input hashes
+before the single `--part score` invocation. The scorer verifies all original 72 freeze hashes and every
+new input hash, then writes a marker before accessing targets. It never fits a forecast model.
+
+Forecast validity is not evidence of availability: late updates are not backdated. Audit tables show the
+four registered sample days, every issue's timing, naive future-issue rejections and unavailable slots.
+The date/calendar adapter supplies unknown depths for wholly missing rain days and preserves the frozen feature mathematics; 2019 calendar sources and retrieval
+limitations are recorded under `data/static/phase3/s22b/`. All results use the separate `s22b_` prefix.
+2019 had a different fleet and market; a failed confirmation may reflect an era shift.
