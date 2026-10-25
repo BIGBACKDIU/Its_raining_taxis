@@ -184,8 +184,17 @@ def develop():
 
 
 def freeze():
+    from concurrent.futures import ThreadPoolExecutor,as_completed
     assert not (LOCAL/'freeze.json').exists()
     selected=json.loads((LOCAL/'selection.json').read_text())
+    assert len(selected)==32, 'development must finish before final refitting'
+    choices=[]
+    for key,value in sorted(selected.items()):
+        parts=key.split('_')
+        choices.append(dict(horizon=int(parts[0]),target='_'.join(parts[1:-2]),weather=int(parts[-2]),
+                            model=parts[-1],setting=json.dumps(value['setting']),iterations=value['iterations'],
+                            calibration_loss=value['calibration_loss']))
+    pd.DataFrame(choices).to_csv(TABLES/'s22_selected.csv',index=False)
     log_test_scoring('22_regional.py --part freeze','Fixed-setting final refit on Apr 2022-Sep 2026; old test becomes training, no tuning',
                      analysis='step 22',note='Choices and alert rates fixed using fit/calibration only; fresh October outcomes unopened')
     c,w=histories(FINAL_END); pattern=fit_pattern(c,FINAL_END)
@@ -195,17 +204,28 @@ def freeze():
         for weather in (False,True):
             for kind in ('persistence','seasonal'):
                 joblib.dump(baseline_fit(d,kind,weather),LOCAL/f'{h}_{int(weather)}_{kind}.joblib')
-            for target in TARGETS:
-                for kind in ('linear','lightgbm'):
-                    key=f'{h}_{target}_{int(weather)}_{kind}'; s=selected[key]
-                    b=fit_model(d,None,target,weather,kind,s['setting'],iterations=s['iterations'] if kind=='lightgbm' else None)
-                    joblib.dump(b,LOCAL/f'{key}.joblib')
+        def fit_and_save(job):
+            target,weather,kind=job
+            key=f'{h}_{target}_{int(weather)}_{kind}'; s=selected[key]
+            b=fit_model(d,None,target,weather,kind,s['setting'],iterations=s['iterations'] if kind=='lightgbm' else None)
+            joblib.dump(b,LOCAL/f'{key}.joblib')
+            return key
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            jobs=[(target,weather,kind) for weather in (False,True) for target in TARGETS for kind in ('linear','lightgbm')]
+            for future in as_completed([pool.submit(fit_and_save,job) for job in jobs]):
+                print('saved',future.result(),flush=True)
         print('frozen horizon',h,'rows',len(d),flush=True)
     # Include preprocessing, settings, rates and every byte of executable step-22/pipeline source in freeze.
-    paths=sorted(LOCAL.glob('*.joblib'))+[LOCAL/'selection.json',TABLES/'s22_alert_rates.csv']
+    from importlib.metadata import version
+    environment=[dict(package=name,version=version(name)) for name in ['numpy','pandas','scipy','scikit-learn','lightgbm','joblib','geopandas','shapely','pyarrow']]
+    environment.append(dict(package='python',version=sys.version.split()[0]))
+    pd.DataFrame(environment).to_csv(TABLES/'s22_environment.csv',index=False)
+    paths=sorted(LOCAL.glob('*.joblib'))+[LOCAL/'selection.json',TABLES/'s22_alert_rates.csv',TABLES/'s22_environment.csv',TABLES/'s22_selected.csv']
     paths += [LOCAL/'counts_20260930.parquet',LOCAL/'weather_20260930.parquet']
     paths += [ROOT/p for p in ['analysis/s22_data.py','analysis/22_regional.py','analysis/s22_metrics.py','pipeline/fetch_month.py','analysis/common.py','analysis/geo.py','analysis/01_panel.py',
-        'pipeline/grid.py','data/static/holidays.csv','data/static/phase2/subzone.geojson','outputs/tables/s22_unit_cells.csv']]
+        'pipeline/grid.py','data/static/holidays.csv','data/static/phase2/subzone.geojson','outputs/tables/s22_unit_cells.csv','data/interim/cells.parquet',
+        'analysis/s22_audit.py','outputs/tables/s22_audit_snapshots.csv','outputs/tables/s22_audit_summary.csv',
+        'outputs/tables/s22_audit_gauges.csv','outputs/tables/s22_audit_gauge_days.csv']]
     paths += sorted(RAWFILE for folder in ['taxi','rain','forecast','logs'] for RAWFILE in (ROOT/'data/raw'/folder).glob('2026-10*'))
     manifest=pd.DataFrame([dict(path=str(p.relative_to(ROOT)),sha256=sha(p),bytes=p.stat().st_size) for p in paths])
     manifest.to_csv(TABLES/'s22_model_manifest.csv',index=False)

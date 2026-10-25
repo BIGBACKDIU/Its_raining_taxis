@@ -1,0 +1,11 @@
+package,version
+numpy,2.4.6
+pandas,3.1.0
+scipy,1.17.1
+scikit-learn,1.9.1
+lightgbm,4.7.0
+joblib,1.6.0
+geopandas,1.2.0
+shapely,2.2.0
+pyarrow,26.0.0
+python,3.11.9

@@ -69,3 +69,4 @@ timestamp,script,analysis,description,rows,note
 2026-10-24T23:49:33,20_sim_v2.py --part parity,step 20,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
 2026-10-25T00:14:10,08_simulation.py --part charts,step 8,held-out chart: simulated vs observed feed,,
 2026-10-25T00:14:26,08_simulation.py --part parity,step 8,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
+2026-10-25T11:23:52,22_regional.py --part freeze,step 22,"Fixed-setting final refit on Apr 2022-Sep 2026; old test becomes training, no tuning",,Choices and alert rates fixed using fit/calibration only; fresh October outcomes unopened

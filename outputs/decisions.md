@@ -1035,3 +1035,90 @@ results stay as they are and remain the pre-specified result.
     with CIs by region, horizon and target, all times versus storm windows; append progress and a short
     "Regional storm forecasting (fresh holdout)" summary item. Run wording check and tests before
     each commit. No frozen tables, figures, registered thresholds or models are changed.
+
+151. **Step-22 audit, development and frozen refit (before fresh-holdout scoring).**
+    October audit: 2,304/2,304 requested snapshots present; 2,302 have offsets within 10 minutes.
+    There are 2,130 complete gauge-days of 2,143 across all 24 dates. No October labels, storm
+    counts or scores were computed during this audit or development. Seven coastal cell centres
+    use their frozen planning-area name to join URA regions; Central Area remains the 16 cells
+    whose centres fall within URA Central Area. Due to the sparse archive,
+    unknown midnight gauge intervals are missing, not treated as dry; current-day gauge health
+    uses only previous-day completeness. This limitation is retained in all periods.
+    Settings in s22_development.csv and calibration alert fractions in s22_alert_rates.csv were
+    chosen using data through September 2025 only. Final refitting uses April 2022-September 2026
+    with no further selection or early stopping; this old-test-year use is logged. The baseline
+    is refitted with the same registered step-5 structure; no October regime level is fitted.
+    All models, transforms and executable source are frozen by the following SHA-256 hashes.
+    s22_model_manifest.csv repeats the hashes and byte lengths. This commit must be pushed before scoring.
+    - `data/interim/s22/30_0_persistence.joblib`: `96e785615e93df181222d59cef4a75c7e837c384061ab08e789ba502959cae3c`
+    - `data/interim/s22/30_0_seasonal.joblib`: `5027eeb45d014fb0e73e7349662791d787c51bba9b84b776ce82a6f5e8ede647`
+    - `data/interim/s22/30_1_persistence.joblib`: `8682018e3e2f15337ae3a203582b06c807881286a367dc1fb0aa01d0b774b464`
+    - `data/interim/s22/30_1_seasonal.joblib`: `a58cf0059258aae9c513fb9c66c25510d5356c5cb3f4983a051aef9a3826f2c7`
+    - `data/interim/s22/30_T1_0_lightgbm.joblib`: `cfd7f81198d563d317233b22e8259e30309d8adf0a1725f18db826bd60e12c41`
+    - `data/interim/s22/30_T1_0_linear.joblib`: `18aaaa6e95f748636caa15a4a635e80d339bf2bcb4ebee60c0fabd609490f542`
+    - `data/interim/s22/30_T1_1_lightgbm.joblib`: `97b12211e95a4c34abc216c5df7e4fbe73ec2b584b2a3a8a69c36e71994fd7db`
+    - `data/interim/s22/30_T1_1_linear.joblib`: `18d040da1ce4c5ab8679f60fcb29c37218a3ae4654cbdef5e979bfb79e5d8d74`
+    - `data/interim/s22/30_T2_10_0_lightgbm.joblib`: `242e5c1ec4e586475163a1664bea6b78e74f268d6df5a9fe6718f3541c9444fa`
+    - `data/interim/s22/30_T2_10_0_linear.joblib`: `25e67691d5896822d968762f6a19992f22cb7dc1cf3883ecb17ff57e36720e4a`
+    - `data/interim/s22/30_T2_10_1_lightgbm.joblib`: `f452c7fead7fe41fabd7beb43d83a0484e461e2a93acb5fa1e2410117417e7c5`
+    - `data/interim/s22/30_T2_10_1_linear.joblib`: `50e1a2ca5de7d362897b62460a4d6e804b347c74073c0c3986295bcc3a039b4f`
+    - `data/interim/s22/30_T2_15_0_lightgbm.joblib`: `8d10100d9fc7586035bdf54eca5d0ac915cbeb0e66b8b9615fc153f7a6037c0b`
+    - `data/interim/s22/30_T2_15_0_linear.joblib`: `ed3074a6e74bd487a8221a1006a1f5e0c47741cbf47413bd58818358a60981aa`
+    - `data/interim/s22/30_T2_15_1_lightgbm.joblib`: `cbf382bbe2d67cc5b1dd00505434b33bfda4f931410e3ea28f0a928bc88260b3`
+    - `data/interim/s22/30_T2_15_1_linear.joblib`: `ab2ca584d7ed3b0df40fa113849cde2798742a986c35556b55dc5d1ce4f0936e`
+    - `data/interim/s22/30_T2_20_0_lightgbm.joblib`: `c6f6dbac947ed9ed99b4b961e7d5c354621d957887570e048217cc4ea1bd31a1`
+    - `data/interim/s22/30_T2_20_0_linear.joblib`: `d74a146b5e259bd4ff50d704e45bd5e912704be935cb780cd5a5f3d6b897682e`
+    - `data/interim/s22/30_T2_20_1_lightgbm.joblib`: `1a232203bb53ab11326823034c4e22fc11893b3e7ece2541de0625fc7560ce71`
+    - `data/interim/s22/30_T2_20_1_linear.joblib`: `72a503c428897c50856c704e25922d5f8eca5138acd25364fc844579b2e40cd5`
+    - `data/interim/s22/60_0_persistence.joblib`: `8a801e7850a757a34531b0c60fe05b5c844820c0523cc7a5a1faea922ec403aa`
+    - `data/interim/s22/60_0_seasonal.joblib`: `7784d465c9ef069e8aceb20c5ce1679c2f489b391b04cc194a383044210170b0`
+    - `data/interim/s22/60_1_persistence.joblib`: `73d9db5080f04fabd38a02a13687ecea10fc65873dc0346c8d7176e9e44035b3`
+    - `data/interim/s22/60_1_seasonal.joblib`: `2bae1fe568cd7211c376eac9d6134a284c3efc5e976b701899b6723c17ac981f`
+    - `data/interim/s22/60_T1_0_lightgbm.joblib`: `f551c6dd0cdb3b30c3d03424306fecd1650e6db7dd1b8ca93fac1fb775e63138`
+    - `data/interim/s22/60_T1_0_linear.joblib`: `eda31b49a9f6e5d266177023274f00e08c1ec1b0a46a63453e03c735f93513a9`
+    - `data/interim/s22/60_T1_1_lightgbm.joblib`: `6b75cd3c61fe862afb44ab5accdf13f237debad54f32d28bc5b55185555f521e`
+    - `data/interim/s22/60_T1_1_linear.joblib`: `f07ea4d50d36b68522fd7a87218f0acaea1c8b2a5304a067276b17ff29ef6df1`
+    - `data/interim/s22/60_T2_10_0_lightgbm.joblib`: `eb1efd81b00f57edb7945048b2b40415012d7ea9174922e502cdf7c6da15acc4`
+    - `data/interim/s22/60_T2_10_0_linear.joblib`: `a23664641670c26e1850a7f5ffcc19730b9a8bc99f2a0b17218a4e7ccf66f8b6`
+    - `data/interim/s22/60_T2_10_1_lightgbm.joblib`: `8072f92c631d8da922c6f03563583c0ee31bb9cbfef707c4d5fd5cac64a356db`
+    - `data/interim/s22/60_T2_10_1_linear.joblib`: `74a37584dbb15b0b8c64c21b35d0eb0f3649432ec94cf3b711088798ccaae6fb`
+    - `data/interim/s22/60_T2_15_0_lightgbm.joblib`: `5378739e50039c4957fe288ee0a882edc30044f0af272d1b60f578b80c04981e`
+    - `data/interim/s22/60_T2_15_0_linear.joblib`: `d409bde499912d16c79a09233516cec7bde760086e9aad691b99fbd589243ab1`
+    - `data/interim/s22/60_T2_15_1_lightgbm.joblib`: `a3e6207935443d6786ad5f3a2d425184920ef8748626aef12cd2ae94f69fec3b`
+    - `data/interim/s22/60_T2_15_1_linear.joblib`: `28d93d2a42eee485405371538ed4064ab61e859a51ad99ea90a239eb41b6591c`
+    - `data/interim/s22/60_T2_20_0_lightgbm.joblib`: `de0dc860c68361b4a0001ba40db8d45142d3389f8ddd7d78cf50050d5e121ee6`
+    - `data/interim/s22/60_T2_20_0_linear.joblib`: `36e5c3f7d4f6eb8ba5ad206c081a6210760510c1797ceea04afc1d5353e2e5e5`
+    - `data/interim/s22/60_T2_20_1_lightgbm.joblib`: `1b0242b72c76f6ace136caaae2246471a8ca60c92426461ca120b896cdef0c60`
+    - `data/interim/s22/60_T2_20_1_linear.joblib`: `db528c5966fd87e28b19e50dd6feaf684679c61605bda61e1908b0b15ff396da`
+    - `data/interim/s22/pattern.joblib`: `d2d3c2b9478365fb9c751bbf9bf67887d53e1714289f2aa3ad78afea4ecbb691`
+    - `data/interim/s22/selection.json`: `863307d081f5a2ba869aadd80b43ca191321d0070f70bf304876fd11dbfb1622`
+    - `outputs/tables/s22_alert_rates.csv`: `fabcbfaaf60377ee6de42f50d35c94a3112b10ac0b40c9f78eb3deffbbadb25c`
+    - `outputs/tables/s22_environment.csv`: `7e31c2fa05506d7f1d3b3b9b5bc214f1c77080533e6ed1405243658594c32799`
+    - `outputs/tables/s22_selected.csv`: `996dc510dd89931819f0886132e24215f764699c4c6f4265e40859705c0c6955`
+    - `data/interim/s22/counts_20260930.parquet`: `ed5cc9f26f6f3fc88484c6f7de572a06a165844c1642ccc7ecc54d735399456f`
+    - `data/interim/s22/weather_20260930.parquet`: `37642ed6d71e7643ef04885fa9f8817dfb6e48be3fbfb5e45239d8b827defe88`
+    - `analysis/s22_data.py`: `156d8588c197b7e048e826900001af62fa92f446deb72ee4ae1b681a0467ed61`
+    - `analysis/22_regional.py`: `1d1fa7477435d8d23f7126f7d4995b32a0c1e4d69d76f110a18d5bb3ccc4a73a`
+    - `analysis/s22_metrics.py`: `f53e1b5bdf2b343b816f0c344a5d582527c11f33fbc0945a11d574c0fd3fa157`
+    - `pipeline/fetch_month.py`: `4cf9dc6102971c14961b404f96ec7841c7f8857ddcb770b1289695e2cf4030d2`
+    - `analysis/common.py`: `bc3ed7bec15283308009c9afd3e3e2e6fde3cfc61405c9652b8a2fd9f6f76cd3`
+    - `analysis/geo.py`: `1e9775229541a730d8a162ffd9497718e8480e5ea0d75e354827a7961f602ca1`
+    - `analysis/01_panel.py`: `a2691e305ad024d42c40f00f7b49554146da1f4c8b92f3fd0c94d3e0b6759e23`
+    - `pipeline/grid.py`: `99ef2697c94182853ec2113a84273d165c73611b9abc3182ede342cfbfcb8b41`
+    - `data/static/holidays.csv`: `08b42727c7362a3b63fe690b85cbe2b5c2271b6ae93c74e58a84101729bd4cdd`
+    - `data/static/phase2/subzone.geojson`: `77e30aa02b1784b649d9b6f23e3b2ebb825af787de554f3a3fb76bbee3013c42`
+    - `outputs/tables/s22_unit_cells.csv`: `55791d66e6a6d1bcba6b28e29f94b465b1f45946d06f4c64b1e5324563aec9d2`
+    - `data/interim/cells.parquet`: `d3ea92fb1ff80b3ab31df627f98d0fafb8a7cfaeffba60b569d75919b3f8bb96`
+    - `analysis/s22_audit.py`: `177c289d66394e45323491b49c10f0f43f0a3477ec677528a899e99cb7744e19`
+    - `outputs/tables/s22_audit_snapshots.csv`: `b20ee3094721ea8866410cb27796d8a500f3e11151214fe70108ce165c5b3e4c`
+    - `outputs/tables/s22_audit_summary.csv`: `a14595e30b888f77c7dc9e6f66eac81723dd4d744d241cbe5a21ae012b0a097c`
+    - `outputs/tables/s22_audit_gauges.csv`: `32b3eef0e7296d6f76062e8dbd33a095c93ecd516e00f6fc77eb9bda8f813119`
+    - `outputs/tables/s22_audit_gauge_days.csv`: `d44c592133e3f4a107ac14f2cf04bb20ffd3c335b7bf414099663007229bb239`
+    - `data/raw/forecast/2026-10_areas.csv.gz`: `b27e3ac868c256b8ca1798a62b8929cddd45ad40c0b945bf466e6e16a870b311`
+    - `data/raw/forecast/2026-10_forecast.csv.gz`: `58fe5ac140d9903bd31e10d4c3b8762e8e2cc8beb084765ea0c84eb4d83ccdd4`
+    - `data/raw/logs/2026-10.json`: `cd07fc3e1247aebb67752ff4b8964e710afc980d90235684a98639a8914bffd9`
+    - `data/raw/rain/2026-10_completeness.csv.gz`: `141ed1f5ec0c3e6104839fb530aaf1fe3144ca6cb17a8f6d1e1c095db9361c0a`
+    - `data/raw/rain/2026-10_readings.csv.gz`: `3942a39dd1084c2aa1c87e37803bbddb101d8441cb2d9bfa80c26528814e80aa`
+    - `data/raw/rain/2026-10_stations.csv.gz`: `f6f2c42937e9fc12bf1705063dc5cab7aa2c4b1fdee5f5ef85a7459a9f66a835`
+    - `data/raw/taxi/2026-10_cells500.npz`: `559463ef2addff4a696a5f4100b0d691093dd2f82f41248e5c90ca22539ce237`
+    - `data/raw/taxi/2026-10_snapshots.csv.gz`: `0a823604dcc579e22414b43cc7c0e22a48670ecf555a1b8e0c51b1bcfae752e7`

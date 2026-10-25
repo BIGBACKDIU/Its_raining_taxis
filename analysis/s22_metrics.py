@@ -55,7 +55,15 @@ def evaluate(predictions):
             a=part if unit=='Pooled' else part[part.unit.eq(unit)]
             for subset in ['all','storm']:
                 d=(a if subset=='all' else a[a.storm]).sort_values(['ts','unit'],kind='stable')
-                if d.empty: continue
+                if d.empty:
+                    for model in ['persistence','seasonal','linear','lightgbm']:
+                        for weather in (0,1):
+                            rows.append(dict(horizon=h,target=target,unit=unit,subset=subset,model=model,weather=weather,
+                                             n=0,days=0,mean_vacant=np.nan,mean_expected=np.nan,floor_count=0))
+                        gains.append(dict(horizon=h,target=target,unit=unit,subset=subset,model=model,n=0,
+                                          no_weather=np.nan,with_weather=np.nan,gain=np.nan,lo=np.nan,hi=np.nan,
+                                          defined_bootstraps=0,gain_unit='percent lower MAE' if target=='T1' else 'PR-AUC difference'))
+                    continue
                 y=d.truth.to_numpy(); day=d.ts.dt.normalize().map(day_index).to_numpy(int)
                 base=mae_days(y,d.persistence_0.to_numpy(),day,W) if target=='T1' else None
                 for model in ['persistence','seasonal','linear','lightgbm']:
@@ -122,7 +130,8 @@ def write_report(stats,gains,onsets,commit,predictions):
     primary.to_csv(TABLES/'s22_materiality.csv',index=False)
     support=stats[(stats.model=='persistence')&stats.weather.eq(0)].copy()
     support.to_csv(TABLES/'s22_support.csv',index=False)
-    status='met' if primary.materiality_confirmed.any() else 'not met'
+    numeric_status='met' if primary.numerical_rule.any() else 'not met'
+    status=numeric_status if len(onsets)>=8 else f'{numeric_status} numerically; confirmation unavailable (fewer than eight storms)'
     power='adequate under the registered >=8-onset rule' if len(onsets)>=8 else 'descriptive only: fewer than eight onsets'
     lines=[f'\n## Step 22: regional storm forecasting (fresh holdout; decision 150)\n',
       f'- Frozen model/code commit: `{commit}`, pushed before any October labels, storm counts or scores.',
@@ -141,7 +150,7 @@ def write_report(stats,gains,onsets,commit,predictions):
         unit='% lower MAE' if row.target=='T1' else 'PR-AUC'
         lines.append(f'  - {row.horizon} min {row.target}: {row.no_weather:.5f} without / {row.with_weather:.5f} with weather; '
                      f'gain {row.gain:+.4f} {unit}, CI [{row.lo:+.4f}, {row.hi:+.4f}].')
-    lines += [f'- Registered materiality rule: **{status}**. Numerical crossings are reported separately from the',
+    lines += [f'- Registered materiality threshold: **{status}**. Numerical crossings are reported separately from the',
       '  eight-onset power requirement; 10%/20% labels and individual regions are checks, not extra primary tests.',
       '- Absolute supply and expected counts, base rates, alert counts and sample sizes are in s22_support.csv.',
       '  MAE is measured on a log ratio, not taxis. CIs are pointwise and the 24-day period cannot establish',
@@ -159,14 +168,15 @@ def write_report(stats,gains,onsets,commit,predictions):
     summary=[f'### Regional storm forecasting (fresh holdout)\n',
       f'A separately registered analysis forecasts the Central Area and five URA regions 30/60 minutes ahead,',
       f'using approaching rain as well as local weather. It scores 1-24 October 2026 once after a pushed model',
-      f'freeze. There are {len(onsets)} storm onsets ({power}); the registered pooled materiality rule is **{status}**.']
+      f'freeze. There are {len(onsets)} storm onsets ({power}); the registered pooled materiality threshold is **{status}**.']
     for row in primary.itertuples():
         summary.append(f'At {row.horizon} min, '+(f'T1 MAE weather gain is {row.gain:+.2f}% [{row.lo:+.2f}, {row.hi:+.2f}].' if row.target=='T1'
              else f'15%-shortfall PR-AUC weather gain is {row.gain:+.4f} [{row.lo:+.4f}, {row.hi:+.4f}].'))
     q=support[(support.unit=='Pooled')&support.subset.eq('all')&support.target.eq('T1')]
     if len(q):
         x=q.iloc[0]; summary.append(f'The pooled target has {x.mean_vacant:.1f} observed versus {x.mean_expected:.1f} expected vacant taxis on average (overlapping regions).')
-    summary.append('All models, regions, thresholds and subsets are reported in `s22_*.csv`; paired day-block 95% CIs and `s22_weather_gain`.\n'
+    summary.append('This adds two logged uses: the fixed refit of the old test year, then the fresh holdout scoring.\n'
+      'All models, regions, thresholds and subsets are reported in `s22_*.csv`; paired day-block 95% CIs and `s22_weather_gain`.\n'
       'This short holdout tests regional supply forecasts, with no model changes after scoring. Alert workload is fixed to calibration base rates.\n'
       'Earlier frozen forecasting results keep their original scope.\n')
     p=ROOT/'outputs/summary.md'; text=p.read_text(); assert '### Regional storm forecasting (fresh holdout)' not in text

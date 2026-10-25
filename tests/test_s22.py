@@ -76,3 +76,17 @@ def test_rain_window_and_issued_forecast_boundaries():
     assert pd.isna(picked.iloc[0])
     assert picked.iloc[1]==pd.Timestamp('2022-04-01 08:00')
     assert picked.iloc[2]==pd.Timestamp('2022-04-01 09:00')
+
+
+def test_no_storms_still_reports_every_model(monkeypatch,tmp_path):
+    import analysis.s22_metrics as metrics
+    monkeypatch.setattr(metrics,'TABLES',tmp_path)
+    pd.DataFrame(columns=['horizon','target','unit','alert_rate']).to_csv(tmp_path/'s22_alert_rates.csv',index=False)
+    d=pd.DataFrame(dict(ts=pd.date_range('2025-09-01',periods=4,freq='12h'),unit='Central',storm=False,
+                        horizon=30,target_name='T1',truth=[.1,.2,.1,-.1],target_count=100.,target_expected=100.))
+    for model in ('persistence','seasonal','linear','lightgbm'):
+        for weather in (0,1): d[f'{model}_{weather}']=0.
+    stats,gains=metrics.evaluate(d)
+    assert len(stats)==7*2*4*2 and len(gains)==7*2*4
+    assert stats[stats.subset=='storm'].n.eq(0).all()
+    assert gains[gains.subset=='storm'].gain.isna().all()
