@@ -29,20 +29,27 @@ from .sources import Client, forecast_day, rain_day, taxi_snapshot
 FINE_START = pd.Timestamp("2024-10-01")   # 15-minute snapshots from here, 30-minute before
 
 
-def month_days(month: str):
+def month_days(month: str, end_date: str | None = None):
     start = pd.Timestamp(month + "-01")
-    return pd.date_range(start, start + pd.offsets.MonthEnd(0), freq="D")
+    end = start + pd.offsets.MonthEnd(0)
+    if end_date is not None:
+        bound = pd.Timestamp(end_date)
+        if bound != bound.normalize() or bound < start or bound > end:
+            raise ValueError("--end-date must be a calendar date inside --month")
+        end = bound
+    return pd.date_range(start, end, freq="D")
 
 
-def snapshot_times(month: str):
+def snapshot_times(month: str, end_date: str | None = None):
     start = pd.Timestamp(month + "-01")
-    end = start + pd.offsets.MonthBegin(1)
+    end = month_days(month, end_date)[-1] + pd.Timedelta(days=1)
     step = "15min" if start >= FINE_START else "30min"
     return pd.date_range(start, end, freq=step, inclusive="left")
 
 
-def fetch_taxi(client: Client, month: str, out: Path, workers: int, limit: int | None = None):
-    times = snapshot_times(month)
+def fetch_taxi(client: Client, month: str, out: Path, workers: int, limit: int | None = None,
+               end_date: str | None = None):
+    times = snapshot_times(month, end_date)
     if limit:
         times = times[:limit]
     with ThreadPoolExecutor(workers) as ex:
@@ -76,8 +83,8 @@ def _safe(fn, empty):
     return run
 
 
-def fetch_weather(client: Client, month: str, out: Path, workers: int):
-    days = month_days(month)
+def fetch_weather(client: Client, month: str, out: Path, workers: int, end_date: str | None = None):
+    days = month_days(month, end_date)
     empty_rain = lambda: (pd.DataFrame(columns=["ts", "station_id", "mm"]),
                           pd.DataFrame(columns=["date", "station_id", "name", "lat", "lon"]), "error")
     empty_fc = lambda: (pd.DataFrame(columns=["issued", "item_ts", "valid_start", "valid_end", "area", "forecast"]),
@@ -120,17 +127,19 @@ def main(argv=None):
     p.add_argument("--workers", type=int, default=4)
     p.add_argument("--limit", type=int, default=None, help="only the first N snapshots (testing)")
     p.add_argument("--skip-weather", action="store_true")
+    p.add_argument("--end-date", help="inclusive last calendar date inside the requested month")
     a = p.parse_args(argv)
     out = Path(a.out)
     client = Client()
     t0 = time.time()
-    sn = fetch_taxi(client, a.month, out, a.workers, a.limit)
+    month_days(a.month, a.end_date)  # validate the bound before making any request
+    sn = fetch_taxi(client, a.month, out, a.workers, a.limit, a.end_date)
     t_taxi = time.time() - t0
     try:
-        weather = {} if a.skip_weather else fetch_weather(client, a.month, out, a.workers)
+        weather = {} if a.skip_weather else fetch_weather(client, a.month, out, a.workers, a.end_date)
     except Exception as e:
         weather = {"weather_error": f"{type(e).__name__}: {e}"}
-    log = {"month": a.month, "snapshots": int(len(sn)), "snapshots_ok": int((sn.status == "ok").sum()),
+    log = {"month": a.month, "end_date": a.end_date, "snapshots": int(len(sn)), "snapshots_ok": int((sn.status == "ok").sum()),
            "median_taxis": float(sn.n_points[sn.status == "ok"].median()) if (sn.status == "ok").any() else None,
            "median_offset_min": float(((pd.to_datetime(sn.act_ts) - pd.to_datetime(sn.req_ts)).dt.total_seconds() / 60).median())
            if (sn.status == "ok").any() else None,

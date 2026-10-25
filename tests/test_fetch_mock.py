@@ -85,3 +85,16 @@ def test_grid():
 
 if __name__ == "__main__":
     test_grid(); test_month(); print("all tests passed")
+
+
+def test_bounded_month():
+    """A fresh holdout download cannot silently include later days."""
+    import pytest
+    assert len(fetch_month.month_days('2026-10', '2026-10-24')) == 24
+    times = fetch_month.snapshot_times('2026-10', '2026-10-24')
+    assert len(times) == 24 * 96
+    assert times.max() == pd.Timestamp('2026-10-24 23:45')
+    assert len(fetch_month.snapshot_times('2026-09')) == 30 * 96
+    for end in ('2026-09-30','2026-11-01','2026-10-24 12:00'):
+        with pytest.raises(ValueError):
+            fetch_month.month_days('2026-10', end)

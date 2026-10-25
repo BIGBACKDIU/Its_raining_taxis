@@ -1,0 +1,27 @@
+{
+  "month": "2026-10",
+  "end_date": "2026-10-24",
+  "snapshots": 2304,
+  "snapshots_ok": 2304,
+  "median_taxis": 2084.0,
+  "median_offset_min": -0.3,
+  "taxi_seconds": 47.3,
+  "total_seconds": 88.3,
+  "calls_per_second": 26.64,
+  "workers": 6,
+  "client": {
+    "calls": 2352,
+    "ok": 2352,
+    "retries": 0,
+    "rate_limited": 0,
+    "failed": 0
+  },
+  "rain_days_v1": 24,
+  "rain_days_v2": 0,
+  "rain_days_error": 0,
+  "rain_readings_total": 613090,
+  "rain_stations_max": 90,
+  "forecast_rows": 65095,
+  "forecast_issues": 1385,
+  "errors": []
+}

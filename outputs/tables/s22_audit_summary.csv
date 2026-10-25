@@ -1,0 +1,12 @@
+metric,value
+expected_snapshots,2304
+requested,2304
+usable,2302
+absent_requests,0
+status,"{""ok"": 2304}"
+median_offset_min,-0.3
+max_abs_offset_min,32.766666666666666
+gauge_days,2143
+complete_gauge_days,2130
+rain_dates,24
+stage,"audit only: no October targets, labels, storm counts or model scores computed"

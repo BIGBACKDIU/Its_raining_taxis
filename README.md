@@ -26,3 +26,26 @@ Frozen gauge results remain the headline. The 10.1 GB archive and derived data a
 - **Start here:** [HANDOFF.md](HANDOFF.md) – full plan, decisions and next steps.
 - `.github/workflows/download.yml` downloads Oct 2021 – Sep 2026 (months in `pipeline/months.json`) on GitHub Actions and commits each month to `data/raw/`.
 - `data/static/` – Singapore coastline and planning areas (URA 2014, via yinshanyang/singapore) and MRT/LRT stations, exits and lines (cheeaun/sgraildata).
+### Step 22: regional storm forecasting on a fresh holdout
+
+Decision 150 registers a separate analysis of the Central Area and five URA regions. Development stops at
+September 2025. Only after settings are fixed are models refitted through September 2026; model and code
+hashes are committed and pushed before 1-24 October 2026 is scored once. Frozen analyses remain unchanged.
+
+Execution order (the last command must never be rerun):
+
+```sh
+.venv/bin/python -m pipeline.fetch_month --month 2026-10 --end-date 2026-10-24 --out data/raw
+.venv/bin/python analysis/s22_audit.py
+.venv/bin/python analysis/22_regional.py --part develop
+.venv/bin/python analysis/22_regional.py --part freeze
+# Run tests/wording checks, commit and push the freeze before proceeding.
+.venv/bin/python analysis/22_regional.py --part score
+```
+
+Local derived inputs, fitted models, preprocessing and saved predictions are in `data/interim/s22/` (ignored).
+Tracked `outputs/tables/s22_model_manifest.csv` records their SHA-256 hashes alongside executable sources and
+fixed inputs. Scoring verifies hashes, a clean committed tree and the pushed commit, then creates a write-once
+marker before opening holdout targets. Outputs are `s22_*.csv` and `s22_weather_gain.png/.svg`. The weather
+adjustments to persistence/seasonal benchmarks and the primary pooled materiality rule are explicit in decision
+150. Calibration base rates fix alert fractions; October base rates do not set the workload.
