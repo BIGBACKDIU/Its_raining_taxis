@@ -150,7 +150,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .heading{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media(max-width:1180px){.metric .name{display:none}.metric{padding:4px 9px}.info{width:320px}.controls{width:296px}.status{display:none}}
 /* phone: a scrolling stack; storm tools open as a bottom sheet */
-@media(max-width:760px){
+@media(max-width:1024px){
   body{overflow:auto;background:linear-gradient(180deg,#c9e3ee 0%,#dfeee9 45%,#e8efe6 100%) fixed}.app{position:static;display:block;padding-bottom:76px}
   .world{position:relative;height:auto;display:flex;flex-direction:column}.topbar{order:1}.maps{order:2}.playbar{order:3}.info{order:4}
   .topbar{position:static;flex-wrap:wrap;padding:10px 10px 0;gap:8px}
@@ -158,8 +158,8 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
   .metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));flex-basis:100%;padding:6px;gap:4px}
   .metric{grid-column:span 2;display:block;padding:5px 6px;border-left:0!important;border-radius:10px;background:#fff}.metric:nth-child(n+4){grid-column:span 3}
   .metric .icon-dot{display:none}.metric .name{display:block;font-size:11px;white-space:normal}.metric .value{font-size:16px}
-  .maps{position:relative;inset:auto;margin:10px;height:280px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-  .maps.split{grid-template-columns:1fr;height:480px}.maps.split .map-view:first-child{border-right:0;border-bottom:2px solid #fff}
+  .maps{position:relative;inset:auto;margin:10px;height:clamp(280px,62vw,620px);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .maps.split{grid-template-columns:1fr;height:clamp(480px,110vw,1100px)}.maps.split .map-view:first-child{border-right:0;border-bottom:2px solid #fff}
   .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{left:8px;right:auto;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:52px;font-size:9.5px}.zoombar{right:8px;bottom:8px;padding:3px;gap:2px}.zoombar button{width:28px;height:28px}.zoombar output{min-width:32px;font-size:11px}
   .busy{border-radius:16px}
   .playbar{position:static;width:auto;margin:0 10px 10px;flex-wrap:wrap}.split-control{display:flex;align-items:center;gap:6px;font-size:12px;margin-left:auto}.split-control input{accent-color:var(--accent);width:16px;height:16px}

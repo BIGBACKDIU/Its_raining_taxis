@@ -1551,3 +1551,7 @@ results stay as they are and remain the pre-specified result.
     pinch, keyboard (+/-/0) and on-screen buttons, and drag to pan; the cached base map is reprojected during a
     gesture and redrawn when it ends. Selected controls use a matte steel blue without glow; the frosted panels are
     greyer and more opaque so the sea no longer tints them. Engine, inputs and counters unchanged; checker passes.
+166. **Storm Builder public website.** At the user's request the page is deployed publicly on Vercel at
+    https://storm-builder-sg.vercel.app (static files from `sim/v3`; `template.html` and env files excluded). The page
+    and all the data it uses (`sim/v3/data.json`, scripts, build and check scripts) are in this repository. Below
+    1024 px the page uses the stacked layout so the panels never cover the map. Engine, inputs and counters unchanged.
