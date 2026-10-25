@@ -1547,3 +1547,7 @@ results stay as they are and remain the pre-specified result.
     notice strip removed. The disclosure moves to the city card ("simulated scenario") and stays in the help text
     (failed realism check, best 3 of 10); the browser checker now tests those instead of the strip. Engine,
     inputs and counters unchanged; checker passes.
+165. **Storm Builder zoom/pan and matte styling (presentation only).** Map zoom (1-8x) by scroll wheel,
+    pinch, keyboard (+/-/0) and on-screen buttons, and drag to pan; the cached base map is reprojected during a
+    gesture and redrawn when it ends. Selected controls use a matte steel blue without glow; the frosted panels are
+    greyer and more opaque so the sea no longer tints them. Engine, inputs and counters unchanged; checker passes.

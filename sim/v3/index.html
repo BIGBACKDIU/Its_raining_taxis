@@ -7,12 +7,12 @@
    panel (left), info panel (right), time controls (bottom left), tool bar (bottom centre). Single light look. */
 :root{color-scheme:light;
   --ground:#dfe7e3;--water:#b7dbe8;--land:#eef1ea;
-  --glass:rgba(255,255,255,.42);--glass-strong:rgba(255,255,255,.9);--glass-line:rgba(255,255,255,.7);--tile:rgba(255,255,255,.5);--tile-line:rgba(255,255,255,.75);
+  --glass:rgba(243,244,245,.80);--glass-strong:rgba(246,247,248,.96);--glass-line:rgba(255,255,255,.55);--tile:rgba(255,255,255,.62);--tile-line:rgba(30,40,50,.08);
   --ink:#16273a;--ink-2:#3c5167;--muted:#6c8095;--line:#d5dee6;--soft:#eef3f7;--hover:#e3ecf3;
-  --accent:#1593d1;--accent-2:#0c78ae;--accent-soft:rgba(21,147,209,.14);--accent-grad:linear-gradient(180deg,#45b9f0 0%,#1593d1 55%,#0f80bd 100%);
+  --accent:#3a6d96;--accent-2:#2f5b7e;--accent-soft:rgba(58,109,150,.12);--accent-grad:linear-gradient(180deg,#42759d,#38698f);
   --vacant:#0e8fa8;--hired:#c97f12;--moving:#7a5cd6;--pickup:#22344a;--offline:#8796a7;--abandoned:#d2563e;
-  --shadow:0 18px 50px rgba(20,50,80,.20),0 3px 10px rgba(20,50,80,.10);
-  --rim:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(255,255,255,.35),inset 1px 0 1px rgba(255,255,255,.35),inset -1px 0 1px rgba(255,255,255,.35);
+  --shadow:0 14px 40px rgba(28,34,40,.16),0 2px 6px rgba(28,34,40,.08),0 0 0 1px rgba(28,34,40,.05);
+  --rim:inset 0 1px 0 rgba(255,255,255,.75);
   --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
@@ -21,11 +21,11 @@ body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.45 var(--san
 button,input{font:inherit}button{color:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
 button:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 h1,h2,p{margin:0}a{color:var(--accent-2)}
-button{border:1px solid var(--tile-line);background:var(--tile);border-radius:11px;padding:7px 11px;box-shadow:var(--rim),0 1px 2px rgba(20,50,80,.06);transition:background .14s,box-shadow .14s,transform .08s}
-button:hover{background:rgba(255,255,255,.78)}
+button{border:1px solid var(--tile-line);background:rgba(255,255,255,.7);border-radius:10px;padding:7px 11px;box-shadow:var(--rim),0 1px 1px rgba(28,34,40,.05);transition:background .14s,box-shadow .14s,transform .08s}
+button:hover{background:rgba(255,255,255,.95)}
 button:active{transform:scale(.97)}
-button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,255,255,.55);color:#fff;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 12px rgba(21,147,209,.38)}
-.glass{background:linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,0) 42%),linear-gradient(145deg,rgba(255,255,255,.58),rgba(255,255,255,.30));border:1px solid var(--glass-line);border-radius:22px;box-shadow:var(--rim),var(--shadow);backdrop-filter:blur(24px) saturate(1.9) brightness(1.05);-webkit-backdrop-filter:blur(24px) saturate(1.9) brightness(1.05)}
+button[aria-pressed=true]{background:var(--accent-grad);border-color:#335f84;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 30%),var(--glass);border:1px solid var(--glass-line);border-radius:20px;box-shadow:var(--rim),var(--shadow);backdrop-filter:blur(30px) saturate(1.05);-webkit-backdrop-filter:blur(30px) saturate(1.05)}
 .app{position:fixed;inset:0;display:flex;flex-direction:column}
 /* permanent notice strip */
 .notice-unused{position:relative;z-index:30;flex:none;display:flex;align-items:center;gap:10px;padding:7px max(16px,env(safe-area-inset-left,0px));background:#16273a;color:#dbe6ef;font-size:12.5px}
@@ -38,23 +38,26 @@ button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,25
 .map-view{position:relative;min-width:0;min-height:0;overflow:hidden}
 .maps.split .map-view:first-child{border-right:2px solid #fff}
 .map-view[hidden]{display:none}
-.map-view canvas{display:block;width:100%;height:100%;touch-action:manipulation;cursor:crosshair}
+.map-view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.zoombar{position:absolute;z-index:6;right:16px;bottom:16px;display:flex;align-items:center;gap:4px;padding:5px;border-radius:14px}
+.zoombar button{width:32px;height:32px;padding:0;font-size:17px;line-height:1;border-radius:9px}
+.zoombar output{min-width:40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
 .map-caption{position:absolute;left:50%;transform:translateX(-50%);top:84px;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:650;pointer-events:none;z-index:2}
 .map-caption em{font-style:normal;color:var(--muted);font-weight:500;padding-left:6px}
 .comp-counter{position:absolute;left:50%;transform:translateX(-50%);top:118px;padding:3px 10px;border-radius:999px;font-size:12px;font-family:var(--mono);color:var(--vacant);pointer-events:none;z-index:2}
-.map-hint{position:absolute;right:16px;bottom:16px;padding:6px 11px;border-radius:999px;font-size:12px;color:var(--ink-2);pointer-events:none;z-index:2}
-.credit{position:absolute;right:16px;bottom:52px;font-size:10.5px;color:var(--muted);pointer-events:none;z-index:2}
+.map-hint{position:absolute;right:196px;bottom:20px;padding:6px 11px;border-radius:999px;font-size:12px;color:var(--ink-2);pointer-events:none;z-index:2}
+.credit{position:absolute;right:16px;bottom:62px;font-size:10.5px;color:var(--muted);pointer-events:none;z-index:2}
 .maps.split .map-hint{display:none}
 /* top stats bar */
 .topbar{position:absolute;top:12px;left:12px;right:12px;z-index:10;display:flex;align-items:center;gap:10px;pointer-events:none}
 .topbar>*{pointer-events:auto}
 .citycard{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px}
-.brandmark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(150deg,#5cc6f4,#1593d1 55%,#0b6ea3);color:#fff;font-size:18px;font-weight:700;box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 4px 12px rgba(21,147,209,.4)}
+.brandmark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--accent-grad);color:#fff;font-size:18px;font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .cityname{font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.1}
 .citysub{font-size:11.5px;color:var(--muted)}
 .metrics{display:flex;align-items:stretch;padding:5px;gap:2px}
 .metric{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:center;padding:4px 12px;border-radius:11px}
-.metric+.metric{border-left:1px solid rgba(255,255,255,.65);border-radius:0}
+.metric+.metric{border-left:1px solid rgba(30,40,50,.08);border-radius:0}
 .metric .icon-dot{grid-row:span 2;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--swatch) 16%,rgba(255,255,255,.7));box-shadow:inset 0 1px 1px rgba(255,255,255,.9)}
 .metric .icon-dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--swatch)}
 .metric .value{font-family:var(--mono);font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;color:var(--ink)}
@@ -65,9 +68,9 @@ button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,25
 .status{margin-left:auto;padding:8px 14px;font-size:12.5px;color:var(--ink-2);text-align:right;max-width:280px}
 .status b{color:var(--ink);font-weight:650}
 /* panels */
-.panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,.6)}
-.panel-head .badge{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--accent-grad);color:#fff;font-size:16px;font-weight:700;flex:none;box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 10px rgba(21,147,209,.35)}
-.info .panel-head .badge{background:linear-gradient(180deg,#34d0b8,#0e8fa8);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 10px rgba(14,143,168,.35)}
+.panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(30,40,50,.08)}
+.panel-head .badge{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--accent-grad);color:#fff;font-size:16px;font-weight:700;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
+.info .panel-head .badge{background:linear-gradient(180deg,#3f8a91,#367a80);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .panel-head .sub{font-size:11.5px;color:var(--muted);line-height:1.2}
 .panel-head .x{margin-left:auto;width:28px;height:28px;padding:0;border-radius:8px;font-size:16px;line-height:1}
@@ -89,11 +92,11 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .switchrow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:650;gap:12px}
 .toggle{min-width:46px;padding:3px;border-radius:999px;background:rgba(120,140,160,.28);border:1px solid rgba(255,255,255,.6);height:26px}
 .toggle::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px #0003;transition:transform .15s}
-.toggle::before{width:18px;height:18px}.toggle[aria-pressed=true]::before{transform:translateX(19px)}.toggle[aria-pressed=true]{background:#34c759;border-color:rgba(255,255,255,.6);box-shadow:none}
+.toggle::before{width:18px;height:18px}.toggle[aria-pressed=true]::before{transform:translateX(19px)}.toggle[aria-pressed=true]{background:var(--accent);border-color:rgba(255,255,255,.6);box-shadow:none}
 .advanced{border-top:1px solid var(--line);padding-top:10px}.advanced summary{cursor:pointer;font-size:12.5px;color:var(--ink-2);font-weight:600;padding-bottom:8px}
 .advanced .group{margin-top:6px;margin-bottom:10px}
 .seed{width:100%;background:var(--tile);box-shadow:var(--rim);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-family:var(--mono);font-size:13px}
-.reset-build{width:100%;margin-top:10px;background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;font-size:14px;padding:11px;border-radius:14px;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 6px 16px rgba(21,147,209,.38)}
+.reset-build{width:100%;margin-top:10px;background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;font-size:14px;padding:11px;border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .reset-build:hover{filter:brightness(1.06);background:var(--accent-grad)}
 .sheet-button,.close-sheet{display:none}
 .info{position:absolute;z-index:9;right:12px;top:78px;width:360px;max-height:calc(100% - 162px);display:flex;flex-direction:column;overflow:hidden}
@@ -111,7 +114,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .chart-legend{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2)}
 .chart-legend span:before{content:"";display:inline-block;width:14px;height:2px;background:var(--vacant);margin-right:5px;vertical-align:middle}
 .chart-legend .base:before{background:repeating-linear-gradient(90deg,#8796a7 0 4px,transparent 4px 7px)}
-.chart-legend .rainband:before{height:9px;width:12px;border-radius:2px;background:#1593d12e}
+.chart-legend .rainband:before{height:9px;width:12px;border-radius:2px;background:rgba(58,109,150,.18)}
 .chartbox canvas{display:block;width:100%;height:150px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--ink-2)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 6px 1px 0;vertical-align:middle;background:var(--vacant);box-shadow:0 0 0 2px #fff,0 0 0 3px #0001}
@@ -124,7 +127,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .error{color:#c0392b}
 /* time controls (bottom left) */
 .playbar{position:absolute;z-index:11;left:12px;bottom:12px;width:min(560px,calc(100% - 24px));display:flex;align-items:center;gap:8px;padding:8px 10px}
-.play{background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;min-width:84px;font-size:13.5px;border-radius:999px;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 12px rgba(21,147,209,.38)}
+.play{background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;min-width:84px;font-size:13.5px;border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .play:hover{filter:brightness(1.06);background:var(--accent-grad)}
 .clock{font-family:var(--mono);font-size:16px;font-weight:600;min-width:52px;font-variant-numeric:tabular-nums}
 .timeline{flex:1;min-width:30px;accent-color:var(--accent)}
@@ -136,9 +139,9 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 /* tool bar (bottom centre) */
 .toolbar{position:absolute;z-index:11;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:4px;padding:6px 10px;border-radius:30px}
 .tool{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;padding:6px 8px;border-radius:14px;border-color:transparent;background:transparent;font-size:11px;font-weight:650;color:var(--ink-2)}
-.tool{box-shadow:none}.tool .glyph{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.85);font-size:17px;color:var(--ink);box-shadow:var(--rim),0 2px 6px rgba(20,50,80,.12)}
+.tool{box-shadow:none}.tool .glyph{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.75);border:1px solid var(--tile-line);font-size:17px;color:var(--ink);box-shadow:var(--rim),0 2px 6px rgba(20,50,80,.12)}
 .tool[aria-pressed=true]{background:transparent;color:var(--accent-2);box-shadow:none;border-color:transparent}
-.tool[aria-pressed=true] .glyph{background:var(--accent-grad);border-color:rgba(255,255,255,.6);color:#fff;box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 5px 14px rgba(21,147,209,.45)}
+.tool[aria-pressed=true] .glyph{background:var(--accent-grad);border-color:rgba(255,255,255,.6);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .tool:hover{background:rgba(255,255,255,.35)}
 /* loading */
 .busy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#dfe7e3cc;z-index:8;gap:12px;color:var(--ink);font-size:14px;font-weight:600;backdrop-filter:blur(2px)}
@@ -157,14 +160,14 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
   .metric .icon-dot{display:none}.metric .name{display:block;font-size:11px;white-space:normal}.metric .value{font-size:16px}
   .maps{position:relative;inset:auto;margin:10px;height:280px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
   .maps.split{grid-template-columns:1fr;height:480px}.maps.split .map-view:first-child{border-right:0;border-bottom:2px solid #fff}
-  .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{right:8px;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:38px;font-size:9.5px}
+  .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{left:8px;right:auto;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:52px;font-size:9.5px}.zoombar{right:8px;bottom:8px;padding:3px;gap:2px}.zoombar button{width:28px;height:28px}.zoombar output{min-width:32px;font-size:11px}
   .busy{border-radius:16px}
   .playbar{position:static;width:auto;margin:0 10px 10px;flex-wrap:wrap}.split-control{display:flex;align-items:center;gap:6px;font-size:12px;margin-left:auto}.split-control input{accent-color:var(--accent);width:16px;height:16px}
   .info{position:static;width:auto;max-height:none;margin:0 10px 10px}.info-body{overflow:visible}
   .toolbar{display:none}
   .controls{display:none;position:fixed;z-index:40;left:8px;right:8px;bottom:8px;top:auto;width:auto;max-height:82dvh;background:var(--glass-strong)}
   .controls.open{display:flex}.controls[hidden]{display:none!important}.control-head{position:sticky;top:0;z-index:2}.close-sheet{display:grid}
-  .sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:35;justify-content:space-between;align-items:center;background:var(--accent);color:#fff;border-color:var(--accent);padding:13px 16px;font-weight:700;border-radius:14px;box-shadow:0 6px 24px rgba(21,147,209,.45)}
+  .sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:35;justify-content:space-between;align-items:center;background:var(--accent);color:#fff;border-color:var(--accent);padding:13px 16px;font-weight:700;border-radius:14px;box-shadow:0 6px 20px rgba(20,35,50,.25)}
   .sheet-backdrop{position:fixed;inset:0;background:#16273a55;z-index:39}.sheet-backdrop[hidden]{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.spinner{animation:none}}
 </style></head><body>
@@ -173,6 +176,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 <div class="heading"><h1>Storm Builder: explore a storm over Singapore</h1><p class="intro">Set the conditions. Explore how the scenario changes taxi availability.</p></div>
 <main class="world" aria-label="Simulation map and results">
 <div class="maps" id="maps"><div class="map-view" id="view0"><canvas id="map0" tabindex="0" role="img" aria-label="Singapore road map. Click to place the storm; arrow keys move its starting centre."></canvas><div class="map-caption glass" id="caption0">As usual <em>same seed</em></div><div class="comp-counter glass" id="compare0" hidden></div><div class="map-hint glass" id="location">Starting centre · CBD</div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div><div class="map-view" id="view1" hidden><canvas id="map1" tabindex="0" role="img" aria-label="Singapore road map with repositioning, same storm and seed"></canvas><div class="map-caption glass">With repositioning <em>same seed</em></div><div class="comp-counter glass" id="compare1"></div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div>
+<div class="zoombar glass" role="group" aria-label="Map zoom"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-level" aria-live="polite">1.0×</output><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-reset" aria-label="Reset map view" disabled>⤢</button></div>
 <div class="busy" id="busy" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="busy-text">Laying out the city…</span></div></div>
 <div class="topbar">
 <div class="citycard glass"><span class="brandmark" aria-hidden="true">≋</span><div><div class="cityname">Singapore</div><div class="citysub">Storm Builder · simulated scenario</div></div></div>
@@ -190,7 +194,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 <div class="group"><label class="label" for="demand">Request level <span class="dim" id="demand-note">1.00×</span></label><input class="range" id="demand" type="range" min="0.8" max="1.2" step="0.05" value="1" aria-label="Simulated demand multiplier, 0.8 to 1.2"></div>
 <div class="group switchrow"><span id="policy-label">Repositioning</span><button class="toggle" id="policy" aria-pressed="false" aria-labelledby="policy-label"></button></div>
 <details class="advanced"><summary>Advanced settings</summary><div class="group"><div class="label">Destination pattern</div><div class="segments" data-control="dest" aria-label="Destination assumptions"><button data-value="characteristics">Place features</button><button data-value="observed">Dry supply</button></div></div><div class="group"><div class="label">Dispatch reach</div><div class="segments" data-control="dispatch" aria-label="Dispatch range"><button data-value="nearest">Nearest · ≤10 min</button><button data-value="widening">Widening · ≤20 min</button></div><p class="mini">Widening applies to waiting requests.</p></div><div class="group"><label class="label" for="seed">Random seed</label><input id="seed" class="seed" type="number" min="1" max="2147483646" step="1" value="2702"></div><p class="mini">Extreme rain is illustrative; the model's response saturates above 30 mm/h. Roads change the drawing, not trip timing.</p></details>
-<button class="reset-build" id="apply">Build this storm</button><p class="mini">Click or tap the map to move the starting centre.</p></div></aside>
+<button class="reset-build" id="apply">Build this storm</button><p class="mini">Click or tap the map to move the starting centre. Scroll or pinch to zoom; drag to pan.</p></div></aside>
 <aside class="info glass" id="info" aria-label="Scenario information"><div class="panel-head"><span class="badge" aria-hidden="true">i</span><div><h2>Info view</h2><div class="sub">Simulated taxi supply</div></div></div><div class="info-body">
 <div class="legend" aria-label="Map legend"><span><i></i>Vacant</span><span><i class="occupied"></i>Hired</span><span><i class="move"></i>Repositioning</span><span class="pickup-label"><i class="pickup"></i>To pickup</span><span class="rain-label"><i class="rainkey"></i>Rain</span></div>
 <div class="chartbox"><div class="chart-head"><strong>Vacant taxis · simulated</strong><div class="chart-legend"><span>Scenario</span><span class="base">Normal</span><span class="rainband">Raining</span></div></div><canvas id="chart" role="img" aria-label="Simulated vacant taxis and the frozen normal baseline over four hours"></canvas></div>
@@ -833,11 +837,27 @@ function transform(v){
     const top=document.querySelector('.topbar').getBoundingClientRect();T=Math.max(T,top.bottom-r.top+8);
     const low=Math.min(...['.playbar','.toolbar'].map(q=>document.querySelector(q).getBoundingClientRect().top));B=Math.max(B,r.bottom-low+8);
     if(v.w-L-R<v.w*.45){L=R=pad;}if(v.h-T-B<v.h*.4){T=B=pad;}}
-  v.scale=Math.min((v.w-L-R)/(bounds[1]-bounds[0]),(v.h-T-B)/(bounds[3]-bounds[2]));
-  v.tx=L+((v.w-L-R)-(bounds[1]-bounds[0])*v.scale)/2-bounds[0]*v.scale;
-  v.ty=T+(v.h-T-B)/2+(bounds[3]+bounds[2])/2*v.scale;
+  v.s0=Math.min((v.w-L-R)/(bounds[1]-bounds[0]),(v.h-T-B)/(bounds[3]-bounds[2]));
+  v.cx=L+(v.w-L-R)/2;v.cy=T+(v.h-T-B)/2;
+  // zoom and pan: the view's focus (world metres) sits at the centre of the free area
+  const fx=view.fx??(bounds[0]+bounds[1])/2,fy=view.fy??(bounds[2]+bounds[3])/2;
+  v.scale=v.s0*view.zoom;v.tx=v.cx-fx*v.scale;v.ty=v.cy+fy*v.scale;
   v.xy=(x,y)=>[v.tx+x*v.scale,v.ty-y*v.scale];
 }
+const view={zoom:1,fx:null,fy:null},ZOOM_MAX=8;let baseTimer=null;
+function setView(zoom,fx,fy){
+  view.zoom=Math.min(ZOOM_MAX,Math.max(1,zoom));
+  if(view.zoom<=1.0001){view.zoom=1;view.fx=view.fy=null;}
+  else{view.fx=Math.min(65000,Math.max(3000,fx));view.fy=Math.min(38000,Math.max(3000,fy));}
+  for(const v of views)if(v.w)transform(v);
+  $('zoom-level').textContent=`${view.zoom.toFixed(view.zoom<2?1:0)}×`;$('zoom-reset').disabled=view.zoom===1;
+  dirty=true;clearTimeout(baseTimer);baseTimer=setTimeout(()=>{for(const v of views)if(v.w)drawBase(v);dirty=true;},140);
+}
+function zoomAt(v,px,py,factor){
+  const wx=(px-v.tx)/v.scale,wy=(v.ty-py)/v.scale,z=Math.min(ZOOM_MAX,Math.max(1,view.zoom*factor)),s=v.s0*z;
+  setView(z,(v.cx-(px-wx*s))/s,((py+wy*s)-v.cy)/s);
+}
+function panBy(v,dx,dy){if(view.zoom===1)return;const fx=(v.cx-v.tx)/v.scale,fy=(v.ty-v.cy)/v.scale;setView(view.zoom,fx-dx/v.scale,fy+dy/v.scale);}
 function seeded(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
 function polyPath(v,polys){const p=new Path2D();for(const poly of polys)for(const r of poly){for(let i=0;i<r.length;i+=2){const q=v.xy(r[i],r[i+1]);i?p.lineTo(...q):p.moveTo(...q);}p.closePath();}return p;}
 function speckle(c,v,path,count,colours,size,seed){                              // tree canopy / ground texture
@@ -846,6 +866,7 @@ function speckle(c,v,path,count,colours,size,seed){                             
   c.restore();
 }
 function drawBase(v){
+  v.baseT={scale:v.scale,tx:v.tx,ty:v.ty};
   const c=v.base.getContext('2d');c.setTransform(v.dpr,0,0,v.dpr,0,0);
   const sea=c.createLinearGradient(0,0,v.w*.3,v.h);sea.addColorStop(0,'#a8d4e6');sea.addColorStop(1,'#8fc3da');c.fillStyle=sea;c.fillRect(0,0,v.w,v.h);
   const rw=seeded(7);c.fillStyle='rgba(255,255,255,.05)';for(let i=0;i<900;i++){c.fillRect(rw()*v.w,rw()*v.h,6+rw()*14,1);}      // faint ripples
@@ -931,7 +952,10 @@ function rain(v,c,t){
   c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.globalAlpha=.92;c.drawImage(radarCanvas,x0,y0,pw,ph);c.restore();
 }
 function drawMap(v,output,t){
-  const c=v.context,mobile=v.w<600;c.setTransform(1,0,0,1,0,0);c.drawImage(v.base,0,0);c.setTransform(v.dpr,0,0,v.dpr,0,0);
+  const c=v.context,mobile=v.w<600,b=v.baseT;c.setTransform(1,0,0,1,0,0);
+  if(b&&(b.scale!==v.scale||b.tx!==v.tx||b.ty!==v.ty)){const k=v.scale/b.scale;c.fillStyle='#98cbe0';c.fillRect(0,0,v.canvas.width,v.canvas.height);
+    c.setTransform(k,0,0,k,(v.tx-b.tx*k)*v.dpr,(v.ty-b.ty*k)*v.dpr);}
+  c.drawImage(v.base,0,0);c.setTransform(v.dpr,0,0,v.dpr,0,0);
   rain(v,c,t);
   const cp=v.xy(config.x,config.y);c.strokeStyle='#16273acc';c.setLineDash([3,3]);c.lineWidth=1.4;c.beginPath();c.arc(cp[0],cp[1],9,0,2*Math.PI);c.stroke();c.setLineDash([]);c.fillStyle='#16273a';c.beginPath();c.arc(cp[0],cp[1],2,0,2*Math.PI);c.fill();
   let dots=0,vacant=0;
@@ -950,7 +974,7 @@ function drawMap(v,output,t){
       for(let k=1;k<path.cumulative.length-1;k++)if(path.cumulative[k]>d0&&path.cumulative[k]<d1)c.lineTo(...v.xy(path.xy[k*2],path.xy[k*2+1]));
       c.lineTo(...q);c.stroke();c.setLineDash([]);
     }
-    c.globalAlpha=alpha;const radius=(leg.kind===0?2.6:2.9)*(mobile?.8:1);
+    c.globalAlpha=alpha;const radius=(leg.kind===0?2.6:2.9)*(mobile?.8:1)*Math.min(1.9,1+(view.zoom-1)*.15);
     c.drawImage(sprites[leg.kind],q[0]-radius,q[1]-radius,radius*2,radius*2);dots++;
   }
   c.globalAlpha=1;
@@ -979,7 +1003,7 @@ function drawChart(){
   const step=Math.pow(10,Math.floor(Math.log10(Math.max(1,(hi-lo)/3)))),top=Math.ceil(hi*1.04/step)*step,bottom=Math.max(0,Math.floor(lo*.96/step)*step);
   const left=46,right=22,x=t=>left+t/240*(w-left-right),y=v=>h-22-(v-bottom)/(top-bottom)*(h-34);
   c.font='11px ui-sans-serif,system-ui,sans-serif';
-  c.fillStyle='rgba(21,147,209,.13)';c.fillRect(x(0),8,x(Math.min(config.duration,240))-x(0),h-30);
+  c.fillStyle='rgba(58,109,150,.12)';c.fillRect(x(0),8,x(Math.min(config.duration,240))-x(0),h-30);
   c.strokeStyle='#e3e9ee';c.lineWidth=1;c.fillStyle='#6c8095';c.textAlign='right';
   for(const f of [0,1/3,2/3,1]){const value=bottom+(top-bottom)*f;c.beginPath();c.moveTo(left,Math.round(y(value))+.5);c.lineTo(w-right,Math.round(y(value))+.5);c.stroke();c.fillText(Math.round(value).toLocaleString('en-SG'),left-8,y(value)+4);}
   c.textAlign='center';for(let t=0;t<=240;t+=60)c.fillText(t?`+${t/60} h`:'start',x(t),h-5);
@@ -1079,8 +1103,25 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('controls').class
 function place(v,x,y){config.x=Math.max(4000,Math.min(64000,x));config.y=Math.max(4000,Math.min(37000,y));
   let nearest=0,distance=Infinity;for(let i=0;i<DATA.cells.cell.length;i++){const d=Math.hypot(config.x-DATA.cells.x[i],config.y-DATA.cells.y[i]);if(d<distance){nearest=i;distance=d;}}
   $('location').textContent=`Starting centre · ${DATA.cells.place[nearest]}`;dirty=true;scheduleBuild();}
-for(const v of views){v.canvas.addEventListener('click',e=>{const r=v.canvas.getBoundingClientRect();place(v,(e.clientX-r.left-v.tx)/v.scale,(v.ty-(e.clientY-r.top))/v.scale);});
-  v.canvas.addEventListener('keydown',e=>{const d={ArrowLeft:[-1000,0],ArrowRight:[1000,0],ArrowUp:[0,1000],ArrowDown:[0,-1000]}[e.key];if(d){e.preventDefault();place(v,config.x+d[0],config.y+d[1]);}});}
+for(const v of views){
+  const pts=new Map();let moved=false,last=null,pinch=null;
+  const local=e=>{const r=v.canvas.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];};
+  v.canvas.addEventListener('pointerdown',e=>{v.canvas.setPointerCapture(e.pointerId);pts.set(e.pointerId,local(e));if(pts.size===1){moved=false;last=local(e);}
+    if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:view.zoom};}});
+  v.canvas.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=local(e);pts.set(e.pointerId,p);
+    if(pts.size===2&&pinch){const [a,b]=[...pts.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);moved=true;
+      zoomAt(v,(a[0]+b[0])/2,(a[1]+b[1])/2,pinch.z*d/pinch.d/view.zoom);return;}
+    const dx=p[0]-last[0],dy=p[1]-last[1];if(!moved&&Math.hypot(dx,dy)<4)return;
+    moved=true;v.canvas.style.cursor=view.zoom>1?'grabbing':'crosshair';panBy(v,dx,dy);last=p;});
+  const end=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(pts.size===1)last=[...pts.values()][0];v.canvas.style.cursor='';};
+  v.canvas.addEventListener('pointerup',end);v.canvas.addEventListener('pointercancel',end);
+  v.canvas.addEventListener('click',e=>{if(moved){moved=false;return;}const r=v.canvas.getBoundingClientRect();place(v,(e.clientX-r.left-v.tx)/v.scale,(v.ty-(e.clientY-r.top))/v.scale);});
+  v.canvas.addEventListener('wheel',e=>{e.preventDefault();const [px,py]=local(e);zoomAt(v,px,py,Math.exp(-e.deltaY*(e.ctrlKey?.01:.0018)));},{passive:false});
+  v.canvas.addEventListener('keydown',e=>{const d={ArrowLeft:[-1000,0],ArrowRight:[1000,0],ArrowUp:[0,1000],ArrowDown:[0,-1000]}[e.key];if(d){e.preventDefault();place(v,config.x+d[0],config.y+d[1]);}
+    if(e.key==='+'||e.key==='='){e.preventDefault();zoomAt(v,v.cx,v.cy,1.4);}if(e.key==='-'){e.preventDefault();zoomAt(v,v.cx,v.cy,1/1.4);}if(e.key==='0'){e.preventDefault();setView(1);}});}
+$('zoom-in').addEventListener('click',()=>zoomAt(views[0],views[0].cx,views[0].cy,1.5));
+$('zoom-out').addEventListener('click',()=>zoomAt(views[0],views[0].cx,views[0].cy,1/1.5));
+$('zoom-reset').addEventListener('click',()=>setView(1));
 new ResizeObserver(resize).observe($('maps'));window.addEventListener('resize',resize);
 function tick(now){const dt=Math.min(.1,(now-lastFrame)/1000);lastFrame=now;
   if(playing&&result){time=Math.min(240,Math.max(0,time)+dt*speed);if(time>=240){playing=false;$('play').textContent='▶ Play';}dirty=true;}

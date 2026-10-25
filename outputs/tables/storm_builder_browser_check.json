@@ -221,7 +221,7 @@
     }
   ],
   "browser": "156.0.8078.47",
-  "desktopBuildSeconds": 4.028,
+  "desktopBuildSeconds": 3.956,
   "cruising": {
     "uniquePaths": 1774,
     "maxRadiusMetres": 1120.854138592529,
@@ -231,9 +231,9 @@
   "simulatedLabel": "Storm Builder · simulated scenario",
   "defaultBrief": "Scenario brief\nMODEL ASSUMPTIONS\n\nHeavy rain · 8 km across · 60 min · drifting east at 10 km/h. Weekday at 13:00, starting near City Hall (Old Supreme Court Singapore).\n\nRain raises simulated requests and moves some drivers off duty; both can reduce the vacant pool. Wet-area travel takes 25% longer, delaying taxi arrivals.\n\nHired trips and abandoned requests are running totals. Other counters show the current state.",
   "desktopPlayback": {
-    "fps": 60.00260445361569,
+    "fps": 60.002604453615675,
     "frames": 600,
-    "drawP95Ms": 2.300000011920929,
+    "drawP95Ms": 2.400000035762787,
     "drawnDots": 2482,
     "drawnVacant": 1742,
     "pathFallbacks": 0
@@ -241,15 +241,15 @@
   "desktopStress2500": {
     "fps": 60.003000150007495,
     "frames": 361,
-    "drawP95Ms": 1.899999976158142,
+    "drawP95Ms": 2,
     "drawnDots": 2500,
     "drawnVacant": 2500,
     "pathFallbacks": 0
   },
   "emulatedPhoneStress2500": {
-    "fps": 60.00400026668444,
-    "frames": 181,
-    "drawP95Ms": 2.299999952316284,
+    "fps": 60.00067039855193,
+    "frames": 180,
+    "drawP95Ms": 2.200000047683716,
     "drawnDots": 2500,
     "drawnVacant": 2500,
     "pathFallbacks": 0

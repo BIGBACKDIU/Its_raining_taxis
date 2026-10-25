@@ -7,12 +7,12 @@
    panel (left), info panel (right), time controls (bottom left), tool bar (bottom centre). Single light look. */
 :root{color-scheme:light;
   --ground:#dfe7e3;--water:#b7dbe8;--land:#eef1ea;
-  --glass:rgba(255,255,255,.42);--glass-strong:rgba(255,255,255,.9);--glass-line:rgba(255,255,255,.7);--tile:rgba(255,255,255,.5);--tile-line:rgba(255,255,255,.75);
+  --glass:rgba(243,244,245,.80);--glass-strong:rgba(246,247,248,.96);--glass-line:rgba(255,255,255,.55);--tile:rgba(255,255,255,.62);--tile-line:rgba(30,40,50,.08);
   --ink:#16273a;--ink-2:#3c5167;--muted:#6c8095;--line:#d5dee6;--soft:#eef3f7;--hover:#e3ecf3;
-  --accent:#1593d1;--accent-2:#0c78ae;--accent-soft:rgba(21,147,209,.14);--accent-grad:linear-gradient(180deg,#45b9f0 0%,#1593d1 55%,#0f80bd 100%);
+  --accent:#3a6d96;--accent-2:#2f5b7e;--accent-soft:rgba(58,109,150,.12);--accent-grad:linear-gradient(180deg,#42759d,#38698f);
   --vacant:#0e8fa8;--hired:#c97f12;--moving:#7a5cd6;--pickup:#22344a;--offline:#8796a7;--abandoned:#d2563e;
-  --shadow:0 18px 50px rgba(20,50,80,.20),0 3px 10px rgba(20,50,80,.10);
-  --rim:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(255,255,255,.35),inset 1px 0 1px rgba(255,255,255,.35),inset -1px 0 1px rgba(255,255,255,.35);
+  --shadow:0 14px 40px rgba(28,34,40,.16),0 2px 6px rgba(28,34,40,.08),0 0 0 1px rgba(28,34,40,.05);
+  --rim:inset 0 1px 0 rgba(255,255,255,.75);
   --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
@@ -21,11 +21,11 @@ body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.45 var(--san
 button,input{font:inherit}button{color:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
 button:focus-visible,input:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 h1,h2,p{margin:0}a{color:var(--accent-2)}
-button{border:1px solid var(--tile-line);background:var(--tile);border-radius:11px;padding:7px 11px;box-shadow:var(--rim),0 1px 2px rgba(20,50,80,.06);transition:background .14s,box-shadow .14s,transform .08s}
-button:hover{background:rgba(255,255,255,.78)}
+button{border:1px solid var(--tile-line);background:rgba(255,255,255,.7);border-radius:10px;padding:7px 11px;box-shadow:var(--rim),0 1px 1px rgba(28,34,40,.05);transition:background .14s,box-shadow .14s,transform .08s}
+button:hover{background:rgba(255,255,255,.95)}
 button:active{transform:scale(.97)}
-button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,255,255,.55);color:#fff;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 12px rgba(21,147,209,.38)}
-.glass{background:linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,0) 42%),linear-gradient(145deg,rgba(255,255,255,.58),rgba(255,255,255,.30));border:1px solid var(--glass-line);border-radius:22px;box-shadow:var(--rim),var(--shadow);backdrop-filter:blur(24px) saturate(1.9) brightness(1.05);-webkit-backdrop-filter:blur(24px) saturate(1.9) brightness(1.05)}
+button[aria-pressed=true]{background:var(--accent-grad);border-color:#335f84;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 30%),var(--glass);border:1px solid var(--glass-line);border-radius:20px;box-shadow:var(--rim),var(--shadow);backdrop-filter:blur(30px) saturate(1.05);-webkit-backdrop-filter:blur(30px) saturate(1.05)}
 .app{position:fixed;inset:0;display:flex;flex-direction:column}
 /* permanent notice strip */
 .notice-unused{position:relative;z-index:30;flex:none;display:flex;align-items:center;gap:10px;padding:7px max(16px,env(safe-area-inset-left,0px));background:#16273a;color:#dbe6ef;font-size:12.5px}
@@ -38,23 +38,26 @@ button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,25
 .map-view{position:relative;min-width:0;min-height:0;overflow:hidden}
 .maps.split .map-view:first-child{border-right:2px solid #fff}
 .map-view[hidden]{display:none}
-.map-view canvas{display:block;width:100%;height:100%;touch-action:manipulation;cursor:crosshair}
+.map-view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.zoombar{position:absolute;z-index:6;right:16px;bottom:16px;display:flex;align-items:center;gap:4px;padding:5px;border-radius:14px}
+.zoombar button{width:32px;height:32px;padding:0;font-size:17px;line-height:1;border-radius:9px}
+.zoombar output{min-width:40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
 .map-caption{position:absolute;left:50%;transform:translateX(-50%);top:84px;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:650;pointer-events:none;z-index:2}
 .map-caption em{font-style:normal;color:var(--muted);font-weight:500;padding-left:6px}
 .comp-counter{position:absolute;left:50%;transform:translateX(-50%);top:118px;padding:3px 10px;border-radius:999px;font-size:12px;font-family:var(--mono);color:var(--vacant);pointer-events:none;z-index:2}
-.map-hint{position:absolute;right:16px;bottom:16px;padding:6px 11px;border-radius:999px;font-size:12px;color:var(--ink-2);pointer-events:none;z-index:2}
-.credit{position:absolute;right:16px;bottom:52px;font-size:10.5px;color:var(--muted);pointer-events:none;z-index:2}
+.map-hint{position:absolute;right:196px;bottom:20px;padding:6px 11px;border-radius:999px;font-size:12px;color:var(--ink-2);pointer-events:none;z-index:2}
+.credit{position:absolute;right:16px;bottom:62px;font-size:10.5px;color:var(--muted);pointer-events:none;z-index:2}
 .maps.split .map-hint{display:none}
 /* top stats bar */
 .topbar{position:absolute;top:12px;left:12px;right:12px;z-index:10;display:flex;align-items:center;gap:10px;pointer-events:none}
 .topbar>*{pointer-events:auto}
 .citycard{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px}
-.brandmark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(150deg,#5cc6f4,#1593d1 55%,#0b6ea3);color:#fff;font-size:18px;font-weight:700;box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 4px 12px rgba(21,147,209,.4)}
+.brandmark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--accent-grad);color:#fff;font-size:18px;font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .cityname{font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.1}
 .citysub{font-size:11.5px;color:var(--muted)}
 .metrics{display:flex;align-items:stretch;padding:5px;gap:2px}
 .metric{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:center;padding:4px 12px;border-radius:11px}
-.metric+.metric{border-left:1px solid rgba(255,255,255,.65);border-radius:0}
+.metric+.metric{border-left:1px solid rgba(30,40,50,.08);border-radius:0}
 .metric .icon-dot{grid-row:span 2;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--swatch) 16%,rgba(255,255,255,.7));box-shadow:inset 0 1px 1px rgba(255,255,255,.9)}
 .metric .icon-dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--swatch)}
 .metric .value{font-family:var(--mono);font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;color:var(--ink)}
@@ -65,9 +68,9 @@ button[aria-pressed=true]{background:var(--accent-grad);border-color:rgba(255,25
 .status{margin-left:auto;padding:8px 14px;font-size:12.5px;color:var(--ink-2);text-align:right;max-width:280px}
 .status b{color:var(--ink);font-weight:650}
 /* panels */
-.panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,.6)}
-.panel-head .badge{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--accent-grad);color:#fff;font-size:16px;font-weight:700;flex:none;box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 10px rgba(21,147,209,.35)}
-.info .panel-head .badge{background:linear-gradient(180deg,#34d0b8,#0e8fa8);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 10px rgba(14,143,168,.35)}
+.panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(30,40,50,.08)}
+.panel-head .badge{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--accent-grad);color:#fff;font-size:16px;font-weight:700;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
+.info .panel-head .badge{background:linear-gradient(180deg,#3f8a91,#367a80);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .panel-head .sub{font-size:11.5px;color:var(--muted);line-height:1.2}
 .panel-head .x{margin-left:auto;width:28px;height:28px;padding:0;border-radius:8px;font-size:16px;line-height:1}
@@ -89,11 +92,11 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .switchrow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:650;gap:12px}
 .toggle{min-width:46px;padding:3px;border-radius:999px;background:rgba(120,140,160,.28);border:1px solid rgba(255,255,255,.6);height:26px}
 .toggle::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px #0003;transition:transform .15s}
-.toggle::before{width:18px;height:18px}.toggle[aria-pressed=true]::before{transform:translateX(19px)}.toggle[aria-pressed=true]{background:#34c759;border-color:rgba(255,255,255,.6);box-shadow:none}
+.toggle::before{width:18px;height:18px}.toggle[aria-pressed=true]::before{transform:translateX(19px)}.toggle[aria-pressed=true]{background:var(--accent);border-color:rgba(255,255,255,.6);box-shadow:none}
 .advanced{border-top:1px solid var(--line);padding-top:10px}.advanced summary{cursor:pointer;font-size:12.5px;color:var(--ink-2);font-weight:600;padding-bottom:8px}
 .advanced .group{margin-top:6px;margin-bottom:10px}
 .seed{width:100%;background:var(--tile);box-shadow:var(--rim);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-family:var(--mono);font-size:13px}
-.reset-build{width:100%;margin-top:10px;background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;font-size:14px;padding:11px;border-radius:14px;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 6px 16px rgba(21,147,209,.38)}
+.reset-build{width:100%;margin-top:10px;background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;font-size:14px;padding:11px;border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .reset-build:hover{filter:brightness(1.06);background:var(--accent-grad)}
 .sheet-button,.close-sheet{display:none}
 .info{position:absolute;z-index:9;right:12px;top:78px;width:360px;max-height:calc(100% - 162px);display:flex;flex-direction:column;overflow:hidden}
@@ -111,7 +114,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .chart-legend{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2)}
 .chart-legend span:before{content:"";display:inline-block;width:14px;height:2px;background:var(--vacant);margin-right:5px;vertical-align:middle}
 .chart-legend .base:before{background:repeating-linear-gradient(90deg,#8796a7 0 4px,transparent 4px 7px)}
-.chart-legend .rainband:before{height:9px;width:12px;border-radius:2px;background:#1593d12e}
+.chart-legend .rainband:before{height:9px;width:12px;border-radius:2px;background:rgba(58,109,150,.18)}
 .chartbox canvas{display:block;width:100%;height:150px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--ink-2)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 6px 1px 0;vertical-align:middle;background:var(--vacant);box-shadow:0 0 0 2px #fff,0 0 0 3px #0001}
@@ -124,7 +127,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 .error{color:#c0392b}
 /* time controls (bottom left) */
 .playbar{position:absolute;z-index:11;left:12px;bottom:12px;width:min(560px,calc(100% - 24px));display:flex;align-items:center;gap:8px;padding:8px 10px}
-.play{background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;min-width:84px;font-size:13.5px;border-radius:999px;text-shadow:0 1px 1px rgba(0,60,100,.25);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 4px 12px rgba(21,147,209,.38)}
+.play{background:var(--accent-grad);color:#fff;border-color:rgba(255,255,255,.55);font-weight:700;min-width:84px;font-size:13.5px;border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .play:hover{filter:brightness(1.06);background:var(--accent-grad)}
 .clock{font-family:var(--mono);font-size:16px;font-weight:600;min-width:52px;font-variant-numeric:tabular-nums}
 .timeline{flex:1;min-width:30px;accent-color:var(--accent)}
@@ -136,9 +139,9 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 /* tool bar (bottom centre) */
 .toolbar{position:absolute;z-index:11;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:4px;padding:6px 10px;border-radius:30px}
 .tool{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;padding:6px 8px;border-radius:14px;border-color:transparent;background:transparent;font-size:11px;font-weight:650;color:var(--ink-2)}
-.tool{box-shadow:none}.tool .glyph{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.85);font-size:17px;color:var(--ink);box-shadow:var(--rim),0 2px 6px rgba(20,50,80,.12)}
+.tool{box-shadow:none}.tool .glyph{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.75);border:1px solid var(--tile-line);font-size:17px;color:var(--ink);box-shadow:var(--rim),0 2px 6px rgba(20,50,80,.12)}
 .tool[aria-pressed=true]{background:transparent;color:var(--accent-2);box-shadow:none;border-color:transparent}
-.tool[aria-pressed=true] .glyph{background:var(--accent-grad);border-color:rgba(255,255,255,.6);color:#fff;box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 5px 14px rgba(21,147,209,.45)}
+.tool[aria-pressed=true] .glyph{background:var(--accent-grad);border-color:rgba(255,255,255,.6);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(20,35,50,.2)}
 .tool:hover{background:rgba(255,255,255,.35)}
 /* loading */
 .busy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#dfe7e3cc;z-index:8;gap:12px;color:var(--ink);font-size:14px;font-weight:600;backdrop-filter:blur(2px)}
@@ -157,14 +160,14 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
   .metric .icon-dot{display:none}.metric .name{display:block;font-size:11px;white-space:normal}.metric .value{font-size:16px}
   .maps{position:relative;inset:auto;margin:10px;height:280px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
   .maps.split{grid-template-columns:1fr;height:480px}.maps.split .map-view:first-child{border-right:0;border-bottom:2px solid #fff}
-  .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{right:8px;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:38px;font-size:9.5px}
+  .map-caption{top:10px;font-size:11.5px}.comp-counter{top:40px;font-size:11px}.map-hint{left:8px;right:auto;bottom:8px;font-size:11px;padding:4px 9px}.credit{right:10px;bottom:auto;top:auto;bottom:52px;font-size:9.5px}.zoombar{right:8px;bottom:8px;padding:3px;gap:2px}.zoombar button{width:28px;height:28px}.zoombar output{min-width:32px;font-size:11px}
   .busy{border-radius:16px}
   .playbar{position:static;width:auto;margin:0 10px 10px;flex-wrap:wrap}.split-control{display:flex;align-items:center;gap:6px;font-size:12px;margin-left:auto}.split-control input{accent-color:var(--accent);width:16px;height:16px}
   .info{position:static;width:auto;max-height:none;margin:0 10px 10px}.info-body{overflow:visible}
   .toolbar{display:none}
   .controls{display:none;position:fixed;z-index:40;left:8px;right:8px;bottom:8px;top:auto;width:auto;max-height:82dvh;background:var(--glass-strong)}
   .controls.open{display:flex}.controls[hidden]{display:none!important}.control-head{position:sticky;top:0;z-index:2}.close-sheet{display:grid}
-  .sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:35;justify-content:space-between;align-items:center;background:var(--accent);color:#fff;border-color:var(--accent);padding:13px 16px;font-weight:700;border-radius:14px;box-shadow:0 6px 24px rgba(21,147,209,.45)}
+  .sheet-button{display:flex;position:fixed;bottom:10px;left:12px;right:12px;width:calc(100% - 24px);z-index:35;justify-content:space-between;align-items:center;background:var(--accent);color:#fff;border-color:var(--accent);padding:13px 16px;font-weight:700;border-radius:14px;box-shadow:0 6px 20px rgba(20,35,50,.25)}
   .sheet-backdrop{position:fixed;inset:0;background:#16273a55;z-index:39}.sheet-backdrop[hidden]{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.spinner{animation:none}}
 </style></head><body>
@@ -173,6 +176,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 <div class="heading"><h1>Storm Builder: explore a storm over Singapore</h1><p class="intro">Set the conditions. Explore how the scenario changes taxi availability.</p></div>
 <main class="world" aria-label="Simulation map and results">
 <div class="maps" id="maps"><div class="map-view" id="view0"><canvas id="map0" tabindex="0" role="img" aria-label="Singapore road map. Click to place the storm; arrow keys move its starting centre."></canvas><div class="map-caption glass" id="caption0">As usual <em>same seed</em></div><div class="comp-counter glass" id="compare0" hidden></div><div class="map-hint glass" id="location">Starting centre · CBD</div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div><div class="map-view" id="view1" hidden><canvas id="map1" tabindex="0" role="img" aria-label="Singapore road map with repositioning, same storm and seed"></canvas><div class="map-caption glass">With repositioning <em>same seed</em></div><div class="comp-counter glass" id="compare1"></div><div class="credit">Map data © OpenStreetMap contributors (ODbL)</div></div>
+<div class="zoombar glass" role="group" aria-label="Map zoom"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-level" aria-live="polite">1.0×</output><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-reset" aria-label="Reset map view" disabled>⤢</button></div>
 <div class="busy" id="busy" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="busy-text">Laying out the city…</span></div></div>
 <div class="topbar">
 <div class="citycard glass"><span class="brandmark" aria-hidden="true">≋</span><div><div class="cityname">Singapore</div><div class="citysub">Storm Builder · simulated scenario</div></div></div>
@@ -190,7 +194,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.1px}
 <div class="group"><label class="label" for="demand">Request level <span class="dim" id="demand-note">1.00×</span></label><input class="range" id="demand" type="range" min="0.8" max="1.2" step="0.05" value="1" aria-label="Simulated demand multiplier, 0.8 to 1.2"></div>
 <div class="group switchrow"><span id="policy-label">Repositioning</span><button class="toggle" id="policy" aria-pressed="false" aria-labelledby="policy-label"></button></div>
 <details class="advanced"><summary>Advanced settings</summary><div class="group"><div class="label">Destination pattern</div><div class="segments" data-control="dest" aria-label="Destination assumptions"><button data-value="characteristics">Place features</button><button data-value="observed">Dry supply</button></div></div><div class="group"><div class="label">Dispatch reach</div><div class="segments" data-control="dispatch" aria-label="Dispatch range"><button data-value="nearest">Nearest · ≤10 min</button><button data-value="widening">Widening · ≤20 min</button></div><p class="mini">Widening applies to waiting requests.</p></div><div class="group"><label class="label" for="seed">Random seed</label><input id="seed" class="seed" type="number" min="1" max="2147483646" step="1" value="2702"></div><p class="mini">Extreme rain is illustrative; the model's response saturates above 30 mm/h. Roads change the drawing, not trip timing.</p></details>
-<button class="reset-build" id="apply">Build this storm</button><p class="mini">Click or tap the map to move the starting centre.</p></div></aside>
+<button class="reset-build" id="apply">Build this storm</button><p class="mini">Click or tap the map to move the starting centre. Scroll or pinch to zoom; drag to pan.</p></div></aside>
 <aside class="info glass" id="info" aria-label="Scenario information"><div class="panel-head"><span class="badge" aria-hidden="true">i</span><div><h2>Info view</h2><div class="sub">Simulated taxi supply</div></div></div><div class="info-body">
 <div class="legend" aria-label="Map legend"><span><i></i>Vacant</span><span><i class="occupied"></i>Hired</span><span><i class="move"></i>Repositioning</span><span class="pickup-label"><i class="pickup"></i>To pickup</span><span class="rain-label"><i class="rainkey"></i>Rain</span></div>
 <div class="chartbox"><div class="chart-head"><strong>Vacant taxis · simulated</strong><div class="chart-legend"><span>Scenario</span><span class="base">Normal</span><span class="rainband">Raining</span></div></div><canvas id="chart" role="img" aria-label="Simulated vacant taxis and the frozen normal baseline over four hours"></canvas></div>
