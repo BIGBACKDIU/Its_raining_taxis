@@ -40,8 +40,9 @@ async function counters(page,label){
     }
     return {uniquePaths:seen.size,maxRadiusMetres:maxRadius,stationaryCells:StormBuilder.result.stationaryCruiseCells};
   });assert(report.cruising.maxRadiusMetres<=1250.01);
-  await page.evaluate(()=>scrollTo(0,500));report.permanentBannerVisible=await page.locator('.notice').evaluate(e=>e.getBoundingClientRect().top>=0&&e.getBoundingClientRect().bottom<=innerHeight);
-  assert(report.permanentBannerVisible);await page.evaluate(()=>scrollTo(0,0));
+  // The top notice strip was removed at the user's request; the realism disclosure stays in the help text.
+  report.realismDisclosure=await page.locator('#help').evaluate(e=>e.textContent.includes('failed its fixed realism check'));
+  assert(report.realismDisclosure);report.simulatedLabel=await page.locator('.citysub').innerText();assert(/simulated/i.test(report.simulatedLabel));
   report.defaultBrief=await page.locator('.scenario-brief').innerText();
   assert(report.defaultBrief.includes('Heavy rain · 8 km across · 60 min'));
   assert(report.defaultBrief.includes('Rain raises simulated requests and moves some drivers off duty'));

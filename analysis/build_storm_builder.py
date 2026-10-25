@@ -118,6 +118,36 @@ def baseline(cells):
     return profile, report
 
 
+LANDUSE = {"green": {"PARK", "OPEN SPACE", "RESERVE SITE", "AGRICULTURE", "CEMETERY", "SPORTS & RECREATION"},
+           "sand": {"BEACH AREA"}, "water": {"WATERBODY"},
+           "industry": {"BUSINESS 1", "BUSINESS 2", "BUSINESS 1 - WHITE", "BUSINESS 2 - WHITE", "UTILITY",
+                        "PORT / AIRPORT", "SPECIAL USE"}}
+
+
+def landuse():
+    """URA Master Plan 2019 land use, dissolved into a few drawing classes and simplified (presentation only)."""
+    import geopandas as gpd
+    from shapely import ops
+    d = pd.read_parquet(ROOT / "data/static/phase2/landuse.parquet")
+    g = gpd.GeoDataFrame(d.drop(columns="geometry"), geometry=gpd.GeoSeries.from_wkb(d.geometry), crs=4326)
+    g = g[g.LU_DESC != "ROAD"]
+    cls = g.LU_DESC.map(lambda v: next((k for k, s in LANDUSE.items() if v in s), "urban"))
+    project = lambda x, y, z=None: to_xy(np.asarray(x), np.asarray(y))
+    out, report = {}, {}
+    for name in ("urban", "industry", "green", "sand", "water"):
+        geom = ops.transform(project, g[cls == name].geometry.buffer(0).union_all())
+        geom = geom.buffer(6).buffer(-6).simplify(18, preserve_topology=True)
+        polys = [p for p in getattr(geom, "geoms", [geom]) if p.area > 3000]
+        rings = []
+        for p in polys:
+            rings.append([np.rint(np.asarray(r.coords)[:-1]).astype(int).ravel().tolist()
+                          for r in [p.exterior, *[i for i in p.interiors if i.area > 3000]]])
+        out[name] = rings
+        report[name] = dict(polygons=len(rings), points=sum(len(r) // 2 for p in rings for r in p))
+    print("landuse", report, flush=True)
+    return out, report
+
+
 def main():
     OUT.mkdir(exist_ok=True)
     frozen = json.loads((ROOT / "sim/v2/data.json").read_text())
@@ -126,13 +156,14 @@ def main():
     cells["x"], cells["y"] = np.rint(cx).astype(int).tolist(), np.rint(cy).astype(int).tolist()
     road, road_report = roads(cells)
     profiles, baseline_report = baseline(cells)
+    landuse_layers, landuse_report = landuse()
     # World needs stands plus the cell ID. All tuned weights and drive times are reused unchanged.
     land = []
     for ring in frozen["land"]:
         r = np.asarray(ring); x, y = to_xy(r[:, 0], r[:, 1])
         land.append(np.rint(np.column_stack((x, y))).astype(int).tolist())
     data = dict(cells=cells, T=frozen["T"], weights=frozen["weights"], off_scale=frozen["off_scale"],
-                road=road, profiles=profiles, land=land,
+                road=road, profiles=profiles, land=land, landuse=landuse_layers,
                 tuned=pd.read_csv(TABLES / "sim2_tuning.csv").to_dict("records"),
                 share=float(frozen["storms"][0]["share"]), baselineNote=baseline_report,
                 projection=dict(lon0=LON0,lat0=LAT0,metresLon=M_PER_DEG_LON,metresLat=M_PER_DEG_LAT))
@@ -150,7 +181,7 @@ def main():
     size = len(html.encode())
     assert size < 10_000_000
     (OUT / "index.html").write_text(html)
-    report = {**road_report, "html_bytes": size, "data_bytes": len(data_json.encode()),
+    report = {**road_report, "landuse": landuse_report, "html_bytes": size, "data_bytes": len(data_json.encode()),
               "baseline": baseline_report, "engine_sha256": hashlib.sha256((ROOT / "sim/v2/engine_v2.js").read_bytes()).hexdigest()}
     (TABLES / "storm_builder_build.json").write_text(json.dumps(report, indent=2))
     print("HTML bytes", size, flush=True)

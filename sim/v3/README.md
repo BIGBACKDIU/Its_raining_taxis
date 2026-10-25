@@ -5,7 +5,7 @@ It contains every script, style, baseline and road coordinate. There are no exte
 fonts, storage requirements or dependencies. The other files here are editable build sources.
 
 This is a presentation of the frozen v2 scenario model, **not a forecast or a validated operating tool**.
-The permanent banner records the failed realism check. `sim/index.html` and `sim/v2/index.html` are unchanged.
+At the user's request there is no top banner; the city card says "simulated scenario" and the help text records the failed realism check. `sim/index.html` and `sim/v2/index.html` are unchanged.
 
 ## Rebuild
 
@@ -90,3 +90,12 @@ It explains the selected mechanism, the existing 25% wet-area travel multiplier,
 levels and the existing 30 mm/h response cap. These are model assumptions, not estimated real-world
 effects. The counter note distinguishes running totals from current stocks. Presentation text and
 colours do not change the engine, its random stream, parameters, rain slots or numeric results.
+
+## City-builder look
+
+The page is a full-screen light city view with frosted ("liquid glass") floating panels, in the spirit of a
+city-building game (own design; no game names, logos or assets). The base map adds URA Master Plan 2019 land use
+(urban, industry, green space, beaches, water bodies; dissolved and simplified at 18 m by the build script),
+shallow coastal water and seeded canopy texture. Rain is drawn as a radar-style field: seeded value noise inside
+the synthetic storm footprint, coloured light blue to red by display intensity. All of this changes the drawing
+only; the engine, rain slots and counters are unchanged.

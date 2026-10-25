@@ -27,26 +27,42 @@ function transform(v){
   v.ty=T+(v.h-T-B)/2+(bounds[3]+bounds[2])/2*v.scale;
   v.xy=(x,y)=>[v.tx+x*v.scale,v.ty-y*v.scale];
 }
+function seeded(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+function polyPath(v,polys){const p=new Path2D();for(const poly of polys)for(const r of poly){for(let i=0;i<r.length;i+=2){const q=v.xy(r[i],r[i+1]);i?p.lineTo(...q):p.moveTo(...q);}p.closePath();}return p;}
+function speckle(c,v,path,count,colours,size,seed){                              // tree canopy / ground texture
+  const rnd=seeded(seed);c.save();c.clip(path,'evenodd');
+  for(let i=0;i<count;i++){const x=rnd()*v.w,y=rnd()*v.h,r=size*(.5+rnd());c.fillStyle=colours[(rnd()*colours.length)|0];c.beginPath();c.arc(x,y,r,0,6.2832);c.fill();}
+  c.restore();
+}
 function drawBase(v){
   const c=v.base.getContext('2d');c.setTransform(v.dpr,0,0,v.dpr,0,0);
-  const sea=c.createLinearGradient(0,0,0,v.h);sea.addColorStop(0,'#bfe0ec');sea.addColorStop(1,'#a9d3e3');c.fillStyle=sea;c.fillRect(0,0,v.w,v.h);
+  const sea=c.createLinearGradient(0,0,v.w*.3,v.h);sea.addColorStop(0,'#a8d4e6');sea.addColorStop(1,'#8fc3da');c.fillStyle=sea;c.fillRect(0,0,v.w,v.h);
+  const rw=seeded(7);c.fillStyle='rgba(255,255,255,.05)';for(let i=0;i<900;i++){c.fillRect(rw()*v.w,rw()*v.h,6+rw()*14,1);}      // faint ripples
   const land=new Path2D();for(const ring of DATA.land){ring.forEach((p,i)=>{const q=v.xy(p[0],p[1]);i?land.lineTo(...q):land.moveTo(...q);});land.closePath();}
-  c.save();c.shadowColor='rgba(40,90,120,.25)';c.shadowBlur=10;c.fillStyle='#eef1e8';c.fill(land);c.restore();
-  c.save();c.clip(land);c.strokeStyle='rgba(120,140,120,.10)';c.lineWidth=1;c.beginPath();               // faint 1 km district grid
-  for(let x=3000;x<=65000;x+=1000){c.moveTo(...v.xy(x,3000));c.lineTo(...v.xy(x,38000));}
-  for(let y=3000;y<=38000;y+=1000){c.moveTo(...v.xy(3000,y));c.lineTo(...v.xy(65000,y));}c.stroke();c.restore();
-  c.strokeStyle='#cfd8cc';c.lineWidth=1;c.stroke(land);
+  c.save();c.strokeStyle='rgba(198,236,245,.85)';c.lineJoin='round';                                       // shallow coastal water
+  for(const [w,a] of [[22,.18],[12,.30],[5,.55]]){c.globalAlpha=a;c.lineWidth=w*(v.w<600?.6:1);c.stroke(land);}c.restore();
+  c.save();c.shadowColor='rgba(30,80,110,.28)';c.shadowBlur=8;c.fillStyle='#e7ead9';c.fill(land);c.restore();
+  const L=DATA.landuse,scale=v.w<600?.7:1;
+  const urban=polyPath(v,L.urban),industry=polyPath(v,L.industry),green=polyPath(v,L.green),sand=polyPath(v,L.sand),water=polyPath(v,L.water);
+  c.fillStyle='#ebe7df';c.fill(urban,'evenodd');speckle(c,v,urban,5000,['rgba(120,110,95,.07)','rgba(255,255,255,.35)'],.9*scale,11);
+  c.fillStyle='#e4e1ea';c.fill(industry,'evenodd');speckle(c,v,industry,2500,['rgba(110,110,135,.08)'],1.1*scale,13);
+  c.fillStyle='#c4dca6';c.fill(green,'evenodd');
+  speckle(c,v,green,16000,['rgba(86,140,70,.30)','rgba(110,160,85,.28)','rgba(150,190,110,.35)','rgba(70,120,60,.22)'],1.5*scale,17);
+  c.strokeStyle='rgba(120,165,95,.55)';c.lineWidth=.6;c.stroke(green);
+  c.fillStyle='#f1e6c6';c.fill(sand,'evenodd');
+  c.fillStyle='#9fcfe2';c.fill(water,'evenodd');c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=.8;c.stroke(water);
+  c.strokeStyle='rgba(150,165,140,.7)';c.lineWidth=.7;c.stroke(land);
   const paths=Array.from({length:5},()=>new Path2D()),nodes=DATA.road.nodes;
   for(const e of DATA.road.edges){const p=paths[e[2]];p.moveTo(...v.xy(nodes[e[0]*2],nodes[e[0]*2+1]));
     for(let j=4;j<e.length;j+=2)p.lineTo(...v.xy(e[j],e[j+1]));p.lineTo(...v.xy(nodes[e[1]*2],nodes[e[1]*2+1]));}
-  const k=v.w<600?.75:1,widths=[3.2,2.4,1.8,1.4,1.1],casing=['#b9c2c9','#c4ccd2','#ccd3d8','#d3d9dd','#d8dde0'],fill=['#ffffff','#ffffff','#fbfbfa','#f7f7f5','#f4f4f2'];
+  const k=v.w<600?.75:1,widths=[3.2,2.4,1.8,1.4,1.1],casing=['#a9b2b9','#b8c0c6','#c3c9ce','#cbd0d4','#d1d5d8'],fill=['#ffffff','#ffffff','#fcfcfb','#f9f9f7','#f6f6f4'];
   c.lineCap='round';c.lineJoin='round';
   for(let i=4;i>=0;i--){c.strokeStyle=casing[i];c.lineWidth=(widths[i]+1.4)*k;c.stroke(paths[i]);}
   for(let i=4;i>=0;i--){c.strokeStyle=fill[i];c.lineWidth=widths[i]*k;c.stroke(paths[i]);}
-  c.strokeStyle='#f3d27a';c.lineWidth=1.1*k;c.stroke(paths[0]);                                             // expressway centre line
+  c.strokeStyle='#f2c75c';c.lineWidth=1.1*k;c.stroke(paths[0]);                                            // expressway centre line
   c.font=`700 ${v.w<500?9:11.5}px ui-sans-serif,system-ui,sans-serif`;c.textAlign='center';c.lineJoin='round';
   const labels=[['TUAS',103.645,1.305],['JURONG',103.715,1.33],['WOODLANDS',103.79,1.445],['ANG MO KIO',103.85,1.375],['TAMPINES',103.945,1.355],['CHANGI',103.985,1.36],['CBD',103.85,1.272]];
-  for(const [label,lon,lat] of labels){const q=v.xy(...project(lon,lat));c.strokeStyle='rgba(255,255,255,.9)';c.lineWidth=4;c.strokeText(label,...q);c.fillStyle='#4a5d70';c.fillText(label,...q);}
+  for(const [label,lon,lat] of labels){const q=v.xy(...project(lon,lat));c.strokeStyle='rgba(255,255,255,.92)';c.lineWidth=4;c.strokeText(label,...q);c.fillStyle='#3f5263';c.fillText(label,...q);}
 }
 function resize(){
   for(const v of views){const r=v.canvas.getBoundingClientRect();if(!r.width||!r.height)continue;
@@ -69,21 +85,39 @@ function position(leg,t,id=0,mobile=false){
   const arrival=leg.arrive??leg.to, f=Math.min(1,Math.max(0,(t-leg.from)/Math.max(.001,arrival-leg.from)));
   return sample(leg.route,p.length*f);
 }
+// Radar-style rain: value-noise cells inside the storm's footprint, coloured like a weather radar (display only).
+const PERM=(()=>{const r=seeded(2702),p=Array.from({length:256},(_,i)=>i);for(let i=255;i>0;i--){const j=(r()*(i+1))|0;[p[i],p[j]]=[p[j],p[i]];}return Uint8Array.from([...p,...p]);})();
+function vnoise(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),w=yf*yf*(3-2*yf);
+  const h=(i,j)=>PERM[(PERM[(xi+i)&255]+yi+j)&255]/255;
+  return (h(0,0)*(1-u)+h(1,0)*u)*(1-w)+(h(0,1)*(1-u)+h(1,1)*u)*w;}
+function fbm(x,y){return .55*vnoise(x,y)+.27*vnoise(2.03*x+17,2.03*y+9)+.13*vnoise(4.1*x+3,4.1*y+31)+.05*vnoise(8.3*x+5,8.3*y+2);}
+const RADAR=[[0,[124,196,255,0]],[.08,[124,196,255,110]],[.25,[47,127,224,150]],[.45,[63,181,106,165]],[.62,[242,210,60,180]],[.78,[240,138,44,195]],[.92,[217,69,58,210]],[1,[176,40,90,220]]];
+const LUT=(()=>{const l=new Uint8ClampedArray(256*4);for(let i=0;i<256;i++){const t=i/255;let k=0;while(k<RADAR.length-2&&RADAR[k+1][0]<t)k++;
+  const [t0,c0]=RADAR[k],[t1,c1]=RADAR[k+1],f=Math.min(1,Math.max(0,(t-t0)/(t1-t0)));for(let j=0;j<4;j++)l[i*4+j]=c0[j]+(c1[j]-c0[j])*f;}return l;})();
+const radarCanvas=document.createElement('canvas'),radarCtx=radarCanvas.getContext('2d');
 function rain(v,c,t){
   if(t<0||t>=config.duration)return;
   const d={still:[0,0],east:[1,0],west:[-1,0],north:[0,1],south:[0,-1]}[config.direction];
-  const velocity=config.driftSpeed*1000/60;
-  const [x,y]=v.xy(config.x+d[0]*velocity*t,config.y+d[1]*velocity*t);
+  const velocity=config.driftSpeed*1000/60,wx=config.x+d[0]*velocity*t,wy=config.y+d[1]*velocity*t;
   const radius={small:1500,medium:4000,large:10000,island:36000}[config.size];
-  const rx=(config.size==='island'?70000:radius)*v.scale,ry=(config.size==='island'?30000:radius)*v.scale;
-  const amp=Math.pow(Math.sin(Math.PI*t/config.duration),.75),alpha=Math.min(.7,(.22+Math.min(config.strength,60)/110)*amp);
-  c.save();c.translate(x,y);c.scale(rx,ry);
-  const g=c.createRadialGradient(0,0,0,0,0,1);
-  g.addColorStop(0,`rgba(12,95,168,${alpha*.85})`);g.addColorStop(.35,`rgba(21,147,209,${alpha*.6})`);
-  g.addColorStop(.75,`rgba(90,180,230,${alpha*.28})`);g.addColorStop(1,'rgba(90,180,230,0)');
-  c.fillStyle=g;c.beginPath();c.arc(0,0,1,0,Math.PI*2);c.fill();c.restore();
-  c.save();c.strokeStyle=`rgba(12,95,168,${amp*.45})`;c.lineWidth=1.2;c.setLineDash([4,4]);
-  for(const f of [.4,.75]){c.beginPath();c.ellipse(x,y,rx*f,ry*f,0,0,Math.PI*2);c.stroke();}c.restore();
+  const RX=config.size==='island'?70000:radius*1.25,RY=config.size==='island'?30000:radius*1.25;
+  const amp=Math.pow(Math.sin(Math.PI*t/config.duration),.75),peak={2:.32,8:.55,25:.82,60:1}[config.strength]??.8;
+  const [x0,y0]=v.xy(wx-RX,wy+RY),[x1,y1]=v.xy(wx+RX,wy-RY),pw=x1-x0,ph=y1-y0;if(pw<2||ph<2)return;
+  const res=Math.max(40,Math.min(200,Math.round(pw/3))),rh=Math.max(20,Math.round(res*ph/pw));
+  radarCanvas.width=res;radarCanvas.height=rh;const img=radarCtx.createImageData(res,rh),px=img.data;
+  const evolve=reduced?0:t*.05,km=config.size==='island'?6000:config.size==='large'?3000:1500;
+  for(let j=0;j<rh;j++)for(let i=0;i<res;i++){
+    const u=(i+.5)/res*2-1,w=(j+.5)/rh*2-1,X=wx+u*RX,Y=wy-w*RY;
+    const n=fbm(X/km+evolve,Y/km-evolve*.6),m=fbm(X/(km*.45)-evolve*1.3,Y/(km*.45)+3.7),edge=Math.sqrt(u*u+w*w)+(n-.5)*.9;
+    let s=Math.max(0,1-Math.pow(Math.max(0,edge),1.8))*Math.min(1,.3+1.6*n*m)*peak*amp;
+    if(s<.06)continue;s=Math.min(1,s);const k=(s*255)|0,o=(j*res+i)*4;
+    px[o]=LUT[k*4];px[o+1]=LUT[k*4+1];px[o+2]=LUT[k*4+2];px[o+3]=LUT[k*4+3];
+  }
+  radarCtx.putImageData(img,0,0);
+  c.save();c.translate((x0+x1)/2+6,(y0+y1)/2+8);c.scale(pw*.5,ph*.5);                                      // soft cloud shadow
+  const sh=c.createRadialGradient(0,0,0,0,0,1);sh.addColorStop(0,`rgba(36,56,77,${.16*amp})`);sh.addColorStop(1,'rgba(36,56,77,0)');
+  c.fillStyle=sh;c.beginPath();c.arc(0,0,1,0,6.2832);c.fill();c.restore();
+  c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.globalAlpha=.92;c.drawImage(radarCanvas,x0,y0,pw,ph);c.restore();
 }
 function drawMap(v,output,t){
   const c=v.context,mobile=v.w<600;c.setTransform(1,0,0,1,0,0);c.drawImage(v.base,0,0);c.setTransform(v.dpr,0,0,v.dpr,0,0);

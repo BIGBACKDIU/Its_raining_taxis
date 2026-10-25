@@ -10,8 +10,30 @@
   "median_snap_metres": 147.75021259979314,
   "disconnected_cell_pairs": 0,
   "source_sha256": "ed23326888e4d83972236464625f8296e983128093a9ad5e1405268d33e06cf9",
-  "html_bytes": 1653145,
-  "data_bytes": 1569187,
+  "landuse": {
+    "urban": {
+      "polygons": 2478,
+      "points": 22108
+    },
+    "industry": {
+      "polygons": 972,
+      "points": 7881
+    },
+    "green": {
+      "polygons": 1254,
+      "points": 11513
+    },
+    "sand": {
+      "polygons": 25,
+      "points": 345
+    },
+    "water": {
+      "polygons": 394,
+      "points": 5045
+    }
+  },
+  "html_bytes": 2239857,
+  "data_bytes": 2150742,
   "baseline": {
     "source": "frozen step-5 predictions; cell ratios and how\u00d7month pattern, no refit",
     "calendar": "equal-month mean of Monday-Friday / Saturday-Sunday half-hours",

@@ -1540,3 +1540,10 @@ results stay as they are and remain the pre-specified result.
     brief, help) on the right, time controls bottom-left and a round-icon tool bar bottom-centre. The map is fitted
     into the area the panels leave free. Taxi colours re-validated for the light map. Phones get a scrolling stack
     with the storm tool as a bottom sheet. Engine, inputs and counters are unchanged; the browser checker passes.
+164. **Storm Builder detail pass and banner removal (presentation only).** At the user's request: frosted
+    "liquid glass" panels and buttons; a more natural base map (URA MP2019 land use for urban, industry, green
+    space, beaches and water bodies, shallow coastal water, canopy texture; the 1 km grid removed); a radar-style
+    rain field (seeded noise, light blue to red by display intensity) instead of concentric circles; and the top
+    notice strip removed. The disclosure moves to the city card ("simulated scenario") and stays in the help text
+    (failed realism check, best 3 of 10); the browser checker now tests those instead of the strip. Engine,
+    inputs and counters unchanged; checker passes.
