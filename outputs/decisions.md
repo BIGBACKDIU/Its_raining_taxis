@@ -1273,3 +1273,81 @@ results stay as they are and remain the pre-specified result.
     This supersedes only the date-only adapter description and adapter/input manifest hash in decision
     153; its audit counts and the full registered specification in 152 remain unchanged. The FINAL
     s22b_input_manifest.csv SHA-256 is `ad1146e2ff8da84b9038b038db765ceb172ed1eb1ec4dcbcc5263696672543bd`. Commit and push before scoring.
+
+155. **Step 23 pre-registration, including the archive-refresh pilot (before any minute-position request).**
+    This is a separately labelled fit-period flow analysis. All frozen results and models remain unchanged;
+    no test-year or either holdout outcome is used. Seed 2702. The feed supplies anonymous coordinates,
+    not vehicle identifiers: assignment is an inferred continuity proxy, and cannot distinguish hires,
+    booked vehicles travelling to a pickup, drivers leaving service, or arrivals coming on duty.
+    In particular the return ratio below is not an identified fraction of taxis hired.
+
+    **Pilot first.** Request the two calendar-fixed days 12 July 2023 and 17 April 2024, 06:00 through
+    24:00 inclusive, at one-minute resolution using pipeline.sources.taxi_snapshot. These dates are
+    excluded from the main sample. Save compressed daily positions locally, never in git. Audit status,
+    requested/actual offsets, changes in actual timestamps, order-invariant coordinate-multiset content
+    changes, and within-snapshot exact duplicate coordinates. Retain coordinate multiplicities; colocated
+    points cannot be declared duplicate vehicles. Apparent stationary jitter is measured on isolated
+    mutual-nearest points persisting within 20 m; without IDs this is conditional, not ground truth.
+    If the median interval between changed contents exceeds 120 seconds, use that median rounded to
+    the nearest whole minute (minimum one); otherwise use one minute. Report both timestamp and
+    content refresh intervals. Freeze the resulting interval and a movement threshold equal to the
+    larger of 2 m and the pilot's 95th percentile apparent stationary displacement, before the main
+    analysis. No storm-flow results are computed during the pilot.
+
+    **Sample fixed by gauges only.** From April 2022 through March 2025, select 60 distinct storm days:
+    an onset between 12:00 and 20:00, at least 25% of working gauges changing from dry to >=1 mm/h
+    in the last 30 minutes, after three hours of no rain at any working gauge. Use the earliest qualifying
+    onset per day, at least 20 working gauges, frozen main-sample day exclusions, normal coverage
+    (frozen regime level ratio 0.8-1.25), and no Singapore public holiday. School holidays are recorded,
+    not treated as public holidays. Gauge-days with <80% observations or frozen stuck-gauge flags are
+    unavailable, not zero; onset comparisons require the same working gauges throughout the lookback.
+    Match without replacement to dry days with the same weekday, same named coverage regime,
+    calendar month +/-1 (circular across December), and no working-gauge rain 06:00-24:00. Dry days
+    also satisfy the exclusions and public-holiday rule. Use maximum-cardinality bipartite matching,
+    prefer nearer calendar dates with seeded tie breaking, then seeded selection if more than 60 pairs
+    exist. If the strict rules yield fewer than 60 pairs, use every available pair and report the shortfall;
+    do not relax the rules or substitute outcome-selected days. Each dry day uses its storm partner's
+    onset clock time. Download 06:00-24:00 at the frozen pilot interval, with polite bounded concurrency,
+    retries and resumption, into gitignored data/raw_minute/. Commit only derived tables.
+
+    **Matching and measurement.** In analysis/23_flows.py, form KD-tree candidate pairs at a maximum
+    of 1.0 km per elapsed minute; repeat at 0.5 and 2.0 km/min. Use minimum-cost, maximum-cardinality
+    one-to-one assignment (scipy linear_sum_assignment within connected candidate components).
+    Unmatched origins are disappearances D; unmatched destinations are appearances A. Cancel a D
+    followed by an A within two actual minutes and 200 m, one-to-one, as a possible archive flicker;
+    this filter cannot recover sub-interval events if native refresh exceeds two minutes. Duplicate
+    actual snapshots are not flow observations. Reject future snapshots, offsets beyond ten minutes,
+    and pairs separated by more than twice the frozen interval. Label dense 500 m zones with >30
+    vacant points and report both all points and results excluding events/edges touching those zones.
+    Validate on real pilot positions with known synthetic movement (0, 15 and 30 km/h), 10% and 20%
+    removals/additions, at all radii; report identity accuracy, event recovery and speed error, including
+    ambiguity. No settings are selected on rain-flow results.
+
+    Aggregate D, A, vacant stock V, moving matched-point median speed (km/h), and boundary flow into
+    15-minute bins, citywide and for the original eligible 1 km cells. Use actual timestamps and rain
+    strictly in (t-30 min,t]; use a single wet-cell mask at each pair's start for both endpoints, so a moving
+    rain boundary is not counted as vehicle relocation. Apply that storm-day mask at the corresponding
+    clock time to its dry control too. Report raw stock-flow conservation separately from flicker-adjusted
+    counts. A valid bin requires >=80% duration coverage; otherwise it is missing, not zero.
+
+    **Registered comparisons.** Storm minus matched dry, aligned -120 to +240 minutes, resample
+    matched day pairs 1,000 times for percentile 95% CIs. H1: excess D after onset and later A;
+    R = cumulative excess A / cumulative excess D on [0,+120 min). R>=0.7 receives the registered
+    proxy description "mostly consistent with hires"; R<=0.4 "mostly consistent with taxis leaving
+    service"; intermediate values "mixed". These are conditional heuristics, not mechanism identification.
+    Do not clip signed excesses or R. If excess D<=0, R is undefined; report undefined bootstrap draws
+    and threshold-crossing uncertainty. H2: report 1-R and V plus the preceding 120 minutes' D count
+    as an event-inventory proxy, not a count of distinct active taxis (repeat disappearances can occur).
+    H3: matched moving-point speed change is material at >=10% slower with CI excluding zero;
+    report the lag from the D peak to the A peak. H4: excess net outward matched flow across wet-cell
+    boundaries, taxis per 15 minutes, with CI. Matching error can bias all these measures, particularly
+    speeds and the return ratio, and must accompany interpretation.
+
+    **Geography and outputs.** First-two-hour cell excess D/A maps use step-10 names. Presented
+    names require >=4 expected vacant taxis and Benjamini-Hochberg q<0.10, separately across all
+    eligible cells for D and A. Use paired day tests for map p-values and bootstrap CIs; no unfiltered
+    named ranking. Titles say disappearance/appearance proxies rather than identified pickups or
+    drop-offs. Produce s23_*.csv, three new figures (D/A curves; speed; paired excess maps), append
+    progress and a short summary item, run wording check and all tests, commit and push. All effects
+    are associations in vacant supply. The pilot-dependent numerical interval/threshold will be recorded
+    and committed in the next decision before main-sample minute data or flow analysis.
