@@ -1433,3 +1433,27 @@ results stay as they are and remain the pre-specified result.
     would thus be unsupported even if suitable controls existed. No matching settings were changed.
     The pilot's isolated-pair displacement is not an identified GPS-error distribution. Frozen tables,
     figures, models and test/holdout outcomes are unchanged. No new test-year use occurred.
+
+159. **Storm Builder: presentation-only v3, before implementation.** Build a self-contained dark interactive
+    page at sim/v3/index.html with synthetic storms and road-following dots. Keep sim/index.html and
+    sim/v2/index.html byte-identical. Reuse the fixed integer allocator, every tuned v2 parameter and
+    the frozen plausibility rule. Optional observational JavaScript hooks may expose events but must
+    consume no engine randomness and leave fixed-seed states and totals identical with hooks off/on.
+    Synthetic fields, calendar baseline exports, roads, visual random walks and display interpolation
+    are presentation inputs, not new fitted models or empirical mechanism evidence. Export only the
+    frozen step-5 fit-period baseline pattern, scaled to a normal-coverage level; no test outcomes are
+    used for design. Preserve all frozen result tables and figures. Re-run conservation and the existing
+    Python/JavaScript parity method into a NEW presentation-check table, logging any held-out storm
+    INPUT use without overwriting the frozen parity table. Never retune or re-score observed outcomes.
+
+    Roads use the local step-11 OSM drive GraphML: motorway/trunk/primary/secondary/tertiary and their
+    links only, largest strongly connected component (so directed routes exist), geometry simplified
+    at about 15 metres, coordinates quantised to integer metres in pipeline.grid's local projection.
+    Retain junction topology and directed edges; snap every simulated cell centre to its nearest retained
+    road node. Road-path animation uses shortest directed paths and a separate visual random stream,
+    never the engine RNG; all arrivals follow the engine's unchanged arrival minute. Cruising, pickup
+    approaches, hires and repositioning are illustrative trajectories, not reconstructed taxi movements.
+    Show OpenStreetMap attribution and the permanent realism-failure banner. Record graph/inline
+    bytes, path fallbacks, headless performance, screenshots at 1440/400 px, console errors and exact
+    display/engine counter agreement. Target road data <3 MB and complete HTML <10 MB; respect
+    reduced motion and reduce phone trails/cruising. Run wording check and tests before commits.
