@@ -1122,3 +1122,89 @@ results stay as they are and remain the pre-specified result.
     - `data/raw/rain/2026-10_stations.csv.gz`: `f6f2c42937e9fc12bf1705063dc5cab7aa2c4b1fdee5f5ef85a7459a9f66a835`
     - `data/raw/taxi/2026-10_cells500.npz`: `559463ef2addff4a696a5f4100b0d691093dd2f82f41248e5c90ca22539ce237`
     - `data/raw/taxi/2026-10_snapshots.csv.gz`: `0a823604dcc579e22414b43cc7c0e22a48670ecf555a1b8e0c51b1bcfae752e7`
+
+## Step 22b: confirmatory backward holdout in 2019 (registered before download)
+
+152. **Frozen-model confirmation in a different era, with registration and push before any download.**
+    Step 22 had only two qualifying October storms. Its 60-minute storm shortfall PR-AUC gain crossed
+    the numerical threshold but could not be confirmed under the eight-onset power rule. Step 22b
+    applies exactly the step-22 models frozen at commit cc12a0e to previously unused 2019 observations.
+    The 72 recorded hashes, including all 41 model/baseline files and saved transformations, have been
+    verified against that commit before this registration. No model, seasonal pattern, residual CDF,
+    penalty, tree count, imputation value, scale or calibration alert fraction will be refitted or tuned.
+
+    **Order.** Commit AND push this full specification before downloading any 2019 data or calendar.
+    Then use pipeline.fetch_month to download January-December 2019 at 30-minute taxi resolution with
+    five-minute rain gauges and archived NEA two-hour forecasts. Audit all inputs and commit the audit
+    and scoring adapter before any scoring. Freeze the adapter/input hashes and push; then score once,
+    logging exactly "backward holdout 2019, scored once". No choices, model changes, forecast corrections
+    based on predictive performance, or extra scorings follow. Save predictions once and derive all
+    registered metrics and reports from them. 2020-September 2021 are excluded; no such data are used.
+
+    **Units, targets and expected levels.** Reuse the six step-22 units and exact saved cell membership:
+    URA Central Area and Central/East/North/North-East/West, 374 eligible cells, with the same overlap
+    of Central Area and Central Region. Thin/use :00/:30 snapshots. Horizons 30/60 minutes. T1 is the
+    frozen step-22 log(count/expected), with the same max(1,.) floor; T2 is a count at least 15% below
+    issue-time expected, with 10%/20% checks. Reuse the saved step-5 seasonal cell pattern/region shares
+    unchanged. The only level adaptation is the trailing seven-day median citywide-to-pattern ratio
+    known at issue t, frozen at t for the target at t+h. No retrospective 2019 regime levels enter
+    targets or inputs. As in step 22, require 48 valid past snapshots, exact 30/60/90-minute lags and
+    valid issue/target observations; the first January observations provide wash-in, with that loss
+    reported. Do not import observations from 2018, 2020 or the COVID gap to fill history.
+
+    **Input audit, fixed before scores.** Report all requested/usable snapshots, requested-vs-actual
+    offsets and invalid statuses; apply the same <=10-minute offset limit. Reproduce step-0 glitch
+    flags and the daily index/PELT coverage-regime procedure (same penalty, merging and short-spell
+    rules) on 2019 alone as audit diagnostics. To preserve the fresh step-22 sample rule, no new
+    outcome-based glitch, short-spell or low-count exclusion is added. Report flagged periods and
+    why a changed feed can remain a limitation despite the causal trailing level. Audit daily gauge
+    counts/completeness; health uses previous-day >=80% completeness, never future current-day
+    readings. Retain the same unknown-midnight and sparse-archive limitations. Geography is keyed
+    by cell/station ID, EPSG:3414 rings; no row-order joins. Exogenous 2019 public and school holiday
+    calendars may be supplied from official records, with sources recorded; model transforms stay fixed.
+
+    **Forecast timestamp audit and safe use.** The reported 2019-06-14 18:00 example has a next-day
+    update_timestamp, so do not equate validity with availability. Inspect issued/item/valid timestamps
+    on prespecified dates 15 January, 14 June, 15 September and 15 December, and audit every issue.
+    Record counts of late updates, issue/validity inconsistencies and any candidates rejected at each
+    forecast time. At t use only ONE latest global issue strictly before t, and only if valid_start<=t
+    and valid_end>t; do not backdate updates to the validity start or fall back to older forecasts
+    when the selected issue is invalid. Late records may become eligible only when actually issued
+    and still valid. A validity-only naive candidate is counted for the audit but is NEVER a feature.
+    With no eligible issue, retain missing weather and apply the already-frozen training imputer.
+    This issue-time gate is fixed now and may not be relaxed to improve scores. Report unavailable
+    forecast slots and how many naive validity candidates the strict issue gate rejects.
+
+    **Features and models.** Exactly the step-22 count/history/calendar features and weather columns:
+    regional rain/lags, gauge wet share, 2-5/5-10 km exterior rain, island coverage change and the
+    issued NEA forecast summaries/age. Rain uses (t-30,t] and earlier windows only. Reuse persistence,
+    seasonal, linear and LightGBM, without/with weather; baseline residual distributions and weather
+    residual adjustments are the saved models, not re-estimated in 2019. Input adapters may only
+    supply historical dates/raw observations/calendar; they cannot change the frozen feature logic.
+
+    **Evaluation and confirmation.** Score all units, targets, thresholds, models, weather variants
+    and both horizons on all times and storm windows. Same onset: >=25% of the SAME >=20 working
+    gauges change from exactly dry to >=1 mm/h within 30 minutes, with retained onsets separated
+    by at least 180 minutes; storm issue windows -60 to +120 minutes. Count all 2019 onsets and
+    report which have usable forecast pairs. Same metrics: T1 MAE/skill versus no-weather persistence;
+    T2 exact average-precision PR-AUC plus precision/recall at the original CALIBRATION base-rate
+    alert fractions, never 2019-selected rates. Same chronological tie-break and ceil(rate*n)
+    workloads. Same paired 1,000-draw issue-day percentile bootstrap, seed 2702; undefined draws
+    stay missing and defined-draw counts are reported. No monthly best-case selection.
+
+    Primary outcome is the POOLED storm-window LightGBM weather PR-AUC gain at 60 minutes for 15%
+    shortfall. Primary confirmation requires >=0.02 gain with 95% CI excluding zero and >=8 onsets.
+    Report the original step-22 omnibus materiality rule unchanged as well: storm LightGBM weather
+    improves T1 MAE by >=5% (CI excludes zero) OR primary-label PR-AUC by >=0.02 (CI excludes zero),
+    at either horizon, with >=8 onsets. Distinguish primary confirmation from an omnibus crossing
+    elsewhere. Individual regions and 10%/20% labels do not add success criteria. Fewer than eight
+    onsets makes storm results descriptive only, regardless of point estimates. Even with sufficient
+    storms, generalisation is limited: 2019 had a different fleet, market and gauge/forecast archive;
+    a failed confirmation may reflect an era shift. Vacant taxis remain supply, not passenger demand.
+
+    **Outputs and optional scope.** Write s22b_*.csv, one separately labelled weather-gain figure,
+    append phase2_progress.md and a short summary subsection; retain all frozen results verbatim.
+    Run tests and wording checks before commits and push results. The optional 2019 step-3 heavy-rain
+    regression is NOT undertaken in this run: this confirmation is limited to the unchanged forecast
+    models, avoiding extra fitted analyses. Final report: fewer than 12 lines, storm count, primary
+    and omnibus materiality, key numbers and audit problems.
