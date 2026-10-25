@@ -1,0 +1,5 @@
+horizon,target,unit,subset,model,n,no_weather,with_weather,gain,lo,hi,defined_bootstraps,gain_unit,numerical_rule,adequate_storm_count,primary_outcome,materiality_confirmed
+30,T1,Pooled,storm,lightgbm,1974,0.1875865145815709,0.17991515200918576,4.089506428272223,2.443676748278494,5.9249066901125484,1000,percent lower MAE,False,True,False,False
+30,T2_15,Pooled,storm,lightgbm,1974,0.9072901776892861,0.9158157053783808,0.008525527689094647,0.0036816176512843245,0.014520825920045357,1000,PR-AUC difference,False,True,False,False
+60,T1,Pooled,storm,lightgbm,1968,0.23076672767817344,0.22425883307403355,2.8201182508493083,1.4202160340471177,4.445051943613935,1000,percent lower MAE,False,True,False,False
+60,T2_15,Pooled,storm,lightgbm,1968,0.860093820226791,0.8688410525244842,0.008747232297693142,0.0008070823034007442,0.017069791429182354,1000,PR-AUC difference,False,True,True,False

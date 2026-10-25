@@ -519,3 +519,81 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   All 287 earlier table/figure hashes and all 72 freeze hashes still match after scoring. The original
   summary is unchanged outside the new subsection. The scoring log has exactly one fresh-holdout entry;
   the saved prediction SHA-256 is repeated in s22_scoring_record.csv. No model or executable source changed.
+
+## Step 22b: confirmatory backward holdout in 2019 (decisions 152-153)
+
+- Model source: cc12a0e. Adapter/input freeze `0ca69d3b6a369a3ec0eb36cab41c99f3bcc0cafa` was pushed before scoring.
+- Registration f8dfda4 was pushed before downloading. No refitting, tuning or 2019-based
+  imputation, probability calibration, residual CDF, alert workload or seasonal pattern changes.
+- 2019 storm onsets: **49**. Power rule >=8: **True**.
+- Primary confirmation (60-minute pooled storm T2, 15% shortfall): **False**.
+  PR-AUC without/with weather: 0.860094/0.868841;
+  gain +0.008747, day-block 95% CI [+0.000807, +0.017070].
+- Original step-22 omnibus materiality rule: **False**. All primary-label storm contrasts:
+  - 30 min T1: gain +4.089506, CI [+2.443677,+5.924907]; n=1974, defined draws=1000.
+  - 30 min T2_15: gain +0.008526, CI [+0.003682,+0.014521]; n=1974, defined draws=1000.
+  - 60 min T1: gain +2.820118, CI [+1.420216,+4.445052]; n=1968, defined draws=1000.
+  - 60 min T2_15: gain +0.008747, CI [+0.000807,+0.017070]; n=1968, defined draws=1000.
+- Audit before scores (full tables s22b_audit_*.csv):
+  - requested: 17520
+  - expected: 17520
+  - usable: 16989
+  - invalid_status: 525
+  - bad_offsets: 6
+  - glitch_flags: 245
+  - regimes: 5
+  - short_spells: 0
+  - unique_gauges: 54
+  - min_daily_gauges: 0
+  - max_daily_gauges: 54
+  - complete_gauge_days: 17034
+  - gauge_days: 18055
+  - days_without_rain_readings: 11
+  - days_without_complete_gauges: 16
+  - days_without_forecast_records: 3
+  - forecast_issues: 21029
+  - forecast_area_records_issued_at_or_after_end: 1269
+  - issued_at_or_after_end: 27
+  - naive_future_issue_rejections: 16412
+  - strict_forecast_slots: 16819
+  - unavailable_forecast_slots: 701
+- Forecast issue times are never replaced by validity times. Naive validity-only candidates with
+  issue>=t are rejected. The latest actually issued forecast must also be valid at t; otherwise
+  saved training imputation supplies missing weather. Eleven entirely unobserved rain days supply
+  unknown five-minute depths, not dry zeros, before the unchanged frozen rolling windows.
+  All raw issue and slot counts and the four
+  prespecified sample days are reported. Missing archive forecasts can limit this era comparison.
+- Counts and labels use the unchanged seasonal pattern with the trailing seven-day level frozen
+  at issue time. The first January observations provide wash-in (minimum 48 past snapshots);
+  unavailable issue/target observations and exact lags are not filled using future data.
+- Six units overlap (Central Area within Central Region); day resampling keeps them together.
+  The 1,000 draws and undefined-draw handling are exactly step 22. CIs are pointwise; multi-day
+  dependence and this single historical year limit inference.
+- 2019 had a different fleet and market, and different archive coverage. A failed confirmation
+  may reflect an era shift; it does not revise frozen 2022-26 associations or earlier forecasts.
+  Vacant taxis measure supply only. The optional heavy-rain regression was not undertaken.
+- All 896 model/weather/horizon/target/unit/subset rows and 448 paired gains are in s22b_metrics.csv
+  and s22b_weather_gains.csv; s22b_support.csv includes observed/expected counts, base rates,
+  alert counts and sample days. One figure: s22b_weather_gain.png/.svg.
+
+- Interpretation of the fixed scores: weather provides a small positive pooled gain, including the primary
+  CI excluding zero, but its entire primary CI lies below +0.02. Neither the primary confirmation nor
+  pooled omnibus materiality rule is met. The 30-minute T1 interval includes a 5% improvement, so the
+  failure of its point-estimate rule does not rule out that magnitude. No claim of zero weather value.
+- Absolute alert counts at the registered 60-minute storm workload: 473/524 correct without weather,
+  482/524 with weather, against 972 shortfall events. All 49 onsets have usable pairs; storm comparisons
+  span 44 issue days. T1's max(1,.) floor is used in five/six region targets at 30/60 minutes, retained
+  as registered. No regime, glitch or low-count exclusion was added after the audit or scoring.
+- Snapshot audit: 525 invalid statuses and six offsets beyond 10 minutes; no positive offsets.
+  The 245 step-0 glitch flags are retained by the registered step-22 sample rule. The 11 entirely
+  missing rain dates stay unknown, not dry; another five dates have no complete gauges. Intraday
+  completeness cannot be reconstructed from sparse positive-only files. Three dates have no forecast
+  records. The 16,412 rejected naive candidate uses include ordinary publication delays, not only
+  retroactive corrections: 27 distinct issues (1,269 area records) were issued at/after expiry.
+  At 14 June 18:00 the selected known issue is 14 June 17:38:52; the 15 June 08:43:53 update is blocked.
+- Final checks: 27 tests pass (14 existing warnings); wording scanner completes with 69 reviewed hits.
+  All 72 original freeze hashes, 112 backward-holdout input/adapter hashes and 306 earlier table/figure
+  hashes still match after scoring. The previous summary is identical outside the new subsection.
+  Exactly one log entry says "backward holdout 2019, scored once"; the saved prediction hash matches
+  s22b_scoring_record.csv. No forecast model, transform, input definition or executable source changed
+  after scoring. No heavy-rain regression was added.

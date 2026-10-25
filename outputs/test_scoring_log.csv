@@ -71,3 +71,4 @@ timestamp,script,analysis,description,rows,note
 2026-10-25T00:14:26,08_simulation.py --part parity,step 8,"Python/JavaScript parity on held-out storms: test-year storm inputs only, no observed outcomes",,
 2026-10-25T11:23:52,22_regional.py --part freeze,step 22,"Fixed-setting final refit on Apr 2022-Sep 2026; old test becomes training, no tuning",,Choices and alert rates fixed using fit/calibration only; fresh October outcomes unopened
 2026-10-25T11:28:03,22_regional.py --part score,step 22,"fresh holdout, scored once",,1-24 Oct 2026; frozen commit cc12a0ef9d14f5284b6e302e3fcb94df09e0c2e9; all registered models/targets/horizons/subsets scored together
+2026-10-25T15:36:14,22b_backward.py --part score,step 22b,"backward holdout 2019, scored once",,Frozen step-22 models cc12a0e; no refitting/tuning; pushed adapter/input freeze 0ca69d3b6a369a3ec0eb36cab41c99f3bcc0cafa

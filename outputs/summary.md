@@ -202,6 +202,21 @@ All models, regions, thresholds and subsets are reported in `s22_*.csv`; paired 
 This short holdout tests regional supply forecasts, with no model changes after scoring. Alert workload is fixed to calibration base rates.
 Earlier frozen forecasting results keep their original scope.
 
+### Regional storm forecasting: backward holdout 2019 (step 22b)
+
+The unchanged step-22 models (cc12a0e) are scored once on 2019, after a separate registration,
+audit and pushed input freeze. There are 49 qualifying storm onsets (minimum eight required).
+Primary 60-minute storm PR-AUC is 0.8601 without and 0.8688 with weather:
+gain +0.0087, 95% day-block CI [+0.0008,+0.0171].
+The gain is positive but below the registered +0.02 threshold: **neither primary confirmation nor pooled omnibus materiality is met**.
+Storm MAE improves 4.09% (30 min) and 2.82% (60 min), both below the 5% point-estimate threshold.
+The pooled all-time target averages 651.1 observed/656.3 expected vacant taxis (overlapping units).
+Archive audit: 16412 validity-only forecast candidates have not yet been issued;
+701 half-hours have no eligible issued, still-valid forecast and use frozen imputation.
+Audit also finds 531 unusable snapshots, five feed regimes, 245 retained glitch flags, 11 days without rain records and 27 forecast issues arriving after expiry.
+2019 had a different fleet and market, so a failed confirmation may reflect an era shift. These are small positive forecast gains, not evidence of zero weather information.
+All combinations and audit problems are reported in `s22b_*.csv`; no frozen result or model changes.
+
 ## 4. Caveats
 
 - **The feed's coverage changes.** The number of taxis in the feed jumps between periods (about half in Aug - Nov
