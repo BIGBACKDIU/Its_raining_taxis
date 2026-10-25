@@ -597,3 +597,72 @@ were pre-registered in `outputs/decisions.md` (items 97 onwards) before each ste
   Exactly one log entry says "backward holdout 2019, scored once"; the saved prediction hash matches
   s22b_scoring_record.csv. No forecast model, transform, input definition or executable source changed
   after scoring. No heavy-rain regression was added.
+
+## Step 23 — Why taxis disappear: minute-flow feasibility and matching diagnostics
+
+**Status: registered design cannot produce a matched comparison; no mechanism effect estimated.**
+Decision 155 was committed/pushed as `eca91cd` before any minute-position request. Pilot-dependent
+settings and code were frozen in `cb7c53e` (decision 156). Gauge-only auditing then exposed an extra
+half-hour onset restriction; `a95e19b` corrected it to native five-minute gauges before any main-sample
+minute download or taxi-flow comparison (decision 157). Gauge eligibility counts had been seen when
+making that disclosed correction. No rain thresholds, regime rules or matching controls were relaxed.
+No frozen result, model or test/holdout outcome was used or changed.
+
+### Pilot and matching
+
+The two fixed pilot days, 12 July 2023 and 17 April 2024, each contain 1,081 valid requests from 06:00
+through 24:00. Median intervals between distinct timestamps and changed coordinate multisets are
+60 seconds on both days; there are 1,078 and 1,080 distinct observations. Median archive offsets are
+-19 and -17 seconds, with no future snapshots or offsets beyond ten minutes. One-minute sampling
+is retained. Exact coordinate multiplicities are 13,552/1,954,854 points (0.69%) and 7,245/2,274,987
+(0.32%); colocated taxis cannot be identified as duplicate vehicles, so multiplicities remain.
+
+Isolated mutual-nearest points within 20 m have displacement medians 0 and 0.105 m, and p95 values
+14.389 and 14.539 m. The registered pooled moving-point threshold is 14.4835 m. These are conditional
+apparent stationary displacements, including slow movement; without IDs they do not identify true GPS
+jitter. Minute raw positions are compressed NPZ locally in gitignored `data/raw_minute/`; hashes and
+sizes are in `s23_raw_manifest.csv`. No main matched-day minute sample was pulled.
+
+Synthetic checks use real pilot positions, known independent movements at 0/15/30 km/h, 10%/20%
+removals/entrants, and all 0.5/1/2 km-per-minute radii: 108 scenarios, all in
+`s23_matching_validation.csv`. At 1 km/min, mean correct-link precision is 77.9%, 23.0% and 9.8%
+respectively. True disappearance recall is 10.2%, 6.1% and 4.5%; appearance recall is 10.2%, 1.7%
+and 1.0%. The maximum-cardinality rule frequently matches unrelated entrants to departed taxis.
+With true speed zero, erroneous moving links alone produce a 37.0 km/h mean inferred moving-link
+median speed. Synthetic paths are illustrative validation cases, not a measured error rate on real roads;
+they nevertheless show that coordinate assignment does not establish vehicle identity or traffic speed.
+Algorithm tests check cardinality, one-to-one use, distance limits, multiplicities, flicker timing and the
+zero-pair guard. No greedy identity shortcut, matching-radius selection or tuning followed these results.
+
+### Sample audit and unavailable results
+
+Of 1,096 fit-period dates, 865 pass the frozen coverage/day exclusions and public-holiday/pilot rule.
+Only six dates meet the strict gauge-onset rule before those exclusions. Two are eligible:
+
+- **5 December 2023, 17:50:** 19/64 working gauges newly reach >=1 mm/h (29.69%).
+- **17 September 2024, 19:20:** 27/62 working gauges (43.55%).
+
+Direct sparse raw-record checks independently confirm the shares and zero positive readings in the
+preceding three-hour dry windows. There are 76 eligible dry days, 26 in R09. The only Tuesday dry days
+in R09 are 26 March and 23 July 2024, outside the allowed month +/-1 windows for BOTH storms.
+Thus neither storm has a qualifying control: **zero matched pairs**, regardless of random seed or cost.
+See `s23_sample_audit.csv`, `s23_storm_candidates.csv`, `s23_dry_candidates.csv`, `s23_match_audit.csv`
+and `s23_onset_validation.csv`. The empty `s23_sample.csv` retains its column schema.
+
+Consequently R and its CI, 1-R, the vacant-plus-recent-disappearance inventory, speed change,
+D/A peak lag, relocation flow, cell CIs/FDR and named rankings are **not estimated**. The planned
+1,000 day-pair bootstrap draws cannot be performed. No proxy threshold receives a hires/off-duty
+verdict, and there is no claim of zero rain effects. `s23_results.csv` records unavailable estimates for
+every radius/dense-zone combination. `s23_flows`, `s23_speed` and `s23_geography` explicitly show
+the failed design; the speed figure also displays the synthetic assignment warning. No pickup or
+drop-off places are ranked, because there are no tested effects satisfying the presentation filter.
+
+Disappearance can mean hire, a booked vehicle travelling to a pickup, or leaving duty; appearance can
+mean drop-off or coming on duty. Anonymous positions add substantial assignment ambiguity. The
+registered R thresholds are conditional heuristics, not identified mechanism shares. This design cannot
+answer why taxis disappear under its strict sample rule, and frozen supply associations remain unchanged.
+
+Verification: **32 tests pass** (14 existing dependency warnings); wording check has **72 reviewed hits**
+(the three new code hits are the synthetic-check function/CLI name). All **326 existing output table and
+figure files** retain their pre-step-23 SHA-256 hashes. The test-scoring log has no new row because no
+new test-year use occurred. Main sample constraints, expected-count thresholds and frozen results remain intact.

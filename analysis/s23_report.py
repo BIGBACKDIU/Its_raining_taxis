@@ -228,10 +228,81 @@ def figures(results, curves, geo):
 
 def main():
     sample = pd.read_csv(TABLES / "s23_sample.csv")
+    if sample.empty:
+        feasibility_report()
+        return
     results, curves = city_results(load_city(sample))
     geo = geography(sample)
     figures(results, curves, geo)
     print(results[(results.radius == 1) & ~results.dense_excluded].to_string(index=False))
+
+
+def feasibility_report():
+    """A failed sample is reported explicitly; no fabricated curves or effect estimates."""
+    reason = "not estimated: zero matched day pairs under registered rules"
+    metrics = ["R", "one_minus_R", "excess_D_per15", "excess_A_per15", "excess_V_per15",
+               "excess_event_inventory_per15", "speed_pct", "excess_speed_per15",
+               "excess_outflow_per15", "A_minus_D_peak_minutes"]
+    rows = [dict(radius=r, dense_excluded=d, metric=m, estimate=np.nan, lo=np.nan, hi=np.nan,
+                 pairs=0, bootstrap_defined=0, storm=np.nan, dry=np.nan, verdict=reason)
+            for r in (.5, 1., 2.) for d in (False, True) for m in metrics]
+    pd.DataFrame(rows).to_csv(TABLES / "s23_results.csv", index=False)
+    pd.DataFrame(columns=["radius", "dense_excluded", "metric", "relative_min", "storm", "dry",
+                          "excess", "lo", "hi", "pairs", "bootstrap_defined"]).to_csv(
+        TABLES / "s23_curves.csv", index=False)
+    pd.DataFrame(columns=["pair", "radius", "dense_excluded", "bins"]).to_csv(
+        TABLES / "s23_day_effects.csv", index=False)
+    names = pd.read_csv(TABLES / "names_cells.csv")
+    eligible = names[names.eligible]
+    geo = pd.concat([eligible[["cell", "place", "lon", "lat"]].assign(metric=m) for m in ("D", "A")])
+    for col in ("excess_two_hours", "lo", "hi", "p", "q", "expected_vacant"):
+        geo[col] = np.nan
+    geo["presentable"] = False
+    geo["status"] = reason
+    geo.to_csv(TABLES / "s23_geography.csv", index=False)
+    geo.iloc[:0].to_csv(TABLES / "s23_named_places.csv", index=False)
+    style()
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.8))
+    for ax, title in zip(axes, ("Disappearance proxies", "Appearance proxies")):
+        ax.set(xlim=(-120, 240), xlabel="Minutes from gauge-defined onset",
+               ylabel="Events per 15 minutes", title=title)
+        ax.set_yticks([])
+        ax.axvline(0, ls=":", color="grey")
+        ax.text(.5, .55, "Not estimated\n0 matched storm/dry pairs", transform=ax.transAxes,
+                ha="center", va="center", fontsize=12, bbox=dict(facecolor="white", edgecolor="none"))
+    fig.suptitle("Step 23 | Registered sample unavailable: 2 eligible storms, neither with a dry match", x=.01, ha="left")
+    fig.tight_layout(rect=(0, .035, 1, .92))
+    save(fig, "s23_flows")
+    plt.close(fig)
+    v = pd.read_csv(TABLES / "s23_matching_validation.csv")
+    primary = v[v.radius_km_min == 1]
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    axes[0].axis("off")
+    axes[0].text(.5, .55, "Storm/dry speed change: not estimated\n0 matched day pairs", transform=axes[0].transAxes,
+                 ha="center", va="center", fontsize=12)
+    speed = primary.groupby("true_speed_kmh").moving_speed_kmh.agg(["mean", "min", "max"])
+    axes[1].errorbar(speed.index, speed["mean"], yerr=[speed["mean"]-speed["min"], speed["max"]-speed["mean"]],
+                     fmt="o", color=BLUE, label="Inferred moving links: mean and range")
+    axes[1].plot([0, 30], [0, 30], ls=":", color=ORANGE, label="True synthetic speed")
+    axes[1].set(xlabel="Known synthetic speed (km/h)", ylabel="Inferred moving-link speed (km/h)",
+                title="Synthetic diagnostics only | 1 km/min radius")
+    axes[1].legend(fontsize=7)
+    fig.suptitle("Step 23 | Anonymous assignment does not identify traffic speed", x=.01, ha="left")
+    fig.tight_layout(rect=(0, .035, 1, .92))
+    save(fig, "s23_speed", "Source: synthetic movements, removals and entrants on the two registered pilot days. No storm effect estimated.")
+    plt.close(fig)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    for ax, title in zip(axes, ("Disappearance excess: not estimated", "Appearance excess: not estimated")):
+        ax.scatter(names.lon, names.lat, c=NOT_ANALYSED, s=8, marker="s")
+        ax.set_aspect(1/np.cos(np.deg2rad(1.35)))
+        ax.set(title=title, xlabel="Longitude", ylabel="Latitude")
+        ax.text(.5, .05, "Grey: no estimates\nNo cell tests or named rankings", transform=ax.transAxes,
+                ha="center", fontsize=8, bbox=dict(facecolor="white", edgecolor="none"))
+    fig.suptitle("Step 23 | No flow rankings: zero matched day pairs; no cell tests or FDR performed", x=.01, ha="left")
+    fig.tight_layout(rect=(0, .10, 1, .92))
+    save(fig, "s23_geography")
+    plt.close(fig)
+    print(reason, "| Three figures explicitly show the failed design; no effects fabricated.")
 
 
 if __name__ == "__main__":

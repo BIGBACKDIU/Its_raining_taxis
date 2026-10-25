@@ -210,6 +210,12 @@ def process(task):
 def run():
     LOCAL.mkdir(parents=True, exist_ok=True)
     sample = pd.read_csv(TABLES / "s23_sample.csv")
+    if sample.empty:
+        print("No matched day pairs under the registered rules; no flow estimation or minute downloads.")
+        pd.DataFrame(columns=["day", "radius", "requested", "valid", "analysed_pairs",
+                              "max_cell_balance_error", "raw_D", "raw_A", "flicker_bridges",
+                              "coverage_mean", "missing_bins"]).to_csv(TABLES / "s23_flow_audit.csv", index=False)
+        return
     tasks = []
     for s in sample.itertuples():
         for role, day in (("storm", s.storm_day), ("dry", s.dry_day)):

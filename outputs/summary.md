@@ -217,6 +217,18 @@ Audit also finds 531 unusable snapshots, five feed regimes, 245 retained glitch 
 2019 had a different fleet and market, so a failed confirmation may reflect an era shift. These are small positive forecast gains, not evidence of zero weather information.
 All combinations and audit problems are reported in `s22b_*.csv`; no frozen result or model changes.
 
+### Why taxis disappear (step 23: sample and matching check)
+
+The registered rules yield **two eligible storm days but zero matched dry days**, so no return ratio,
+speed change, relocation effect or place ranking is estimated. Only the two fixed pilot days were pulled
+at minute resolution; median archive refresh is **60 seconds**. Anonymous-coordinate assignment has
+poor synthetic identity recovery: mean correct-link precision is **23.0% at 15 km/h and 9.8% at 30 km/h**
+for the primary matching radius, with still lower recovery of true arrivals/disappearances.
+The onset grid was corrected from half-hourly to native five-minute gauges before main downloads
+(decision 157); the strict sample and matching thresholds were retained. This analysis cannot distinguish
+hires, booked taxis, drivers leaving/entering service, slower traffic or relocation. Three figures explicitly
+show which estimates are unavailable. Frozen findings are unchanged.
+
 ## 4. Caveats
 
 - **The feed's coverage changes.** The number of taxis in the feed jumps between periods (about half in Aug - Nov

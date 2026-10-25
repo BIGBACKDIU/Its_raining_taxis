@@ -1,0 +1,3 @@
+file,size_bytes,sha256,purpose
+data/raw_minute/2023-07-12_1min.npz,17724869,bdbd520c91eace3859e5dabcab9aafdc02bdb9729162856d952c1e512882f7eb,fixed-date pilot only; no main matched sample available
+data/raw_minute/2024-04-17_1min.npz,20594274,a47b2dadfab2ae9a3f7c1dd703dec5aaaf172a3bea828c9b74d776222d0b11e0,fixed-date pilot only; no main matched sample available

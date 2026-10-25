@@ -61,6 +61,24 @@ class Gauges:
         return rain[good[near]] > 0, True
 
 
+def validate_onsets(storms):
+    """Independently recheck selected onsets against sparse raw records, not rolling arrays."""
+    gd = pd.read_csv(ROOT / "data/interim/gauge_day_flags.csv.gz", parse_dates=["date"])
+    rows = []
+    for s in storms.itertuples():
+        r = pd.read_csv(ROOT / f"data/raw/rain/{s.day:%Y-%m}_readings.csv.gz", parse_dates=["ts"])
+        working = gd.loc[(gd.date == s.day) & gd.working, "station_id"]
+        r = r[r.station_id.isin(working)]
+        before = r[(r.ts > s.onset-pd.Timedelta(minutes=210)) & (r.ts <= s.onset-pd.Timedelta(minutes=30))]
+        now = r[(r.ts > s.onset-pd.Timedelta(minutes=30)) & (r.ts <= s.onset)].groupby("station_id").mm.sum()*2
+        share = (now >= 1).sum()/len(working)
+        assert before.empty and np.isclose(share, s.onset_share) and share >= .25
+        rows.append(dict(day=s.day, onset=s.onset, working_gauges=len(working),
+                         prior_3h_positive_records=len(before), wet_gauges_ge1=int((now >= 1).sum()),
+                         onset_share=share, registered_share=s.onset_share))
+    pd.DataFrame(rows).to_csv(TABLES / "s23_onset_validation.csv", index=False)
+
+
 def select():
     g = Gauges()
     # Three dry hours immediately before the first (possibly wet) 30-minute window.
@@ -88,7 +106,8 @@ def select():
         qualifying = selecttime & (n >= 20) & (share >= .25) & alldry
         ii = np.flatnonzero(qualifying)
         during = (g.times > day+pd.Timedelta(hours=6)) & (g.times <= day+pd.Timedelta(days=1))
-        dry_ok = bool(np.nanmax(g.B[during]) == 0 and np.all(np.isfinite(g.B[during]).sum(axis=1) >= 20))
+        enough = np.all(np.isfinite(g.B[during]).sum(axis=1) >= 20)
+        dry_ok = bool(enough and np.nanmax(g.B[during]) == 0)
         onset = g.times[ii[0]] if len(ii) else pd.NaT
         audit.append(dict(day=day.date(), usable=usable, regime=f.regime, normal=f.normal,
                           exclude_main=f.exclude_main, public=day in public, pilot=day in pilot,
@@ -102,6 +121,19 @@ def select():
     pd.DataFrame(audit).to_csv(TABLES / "s23_sample_audit.csv", index=False)
     if storms.empty or dry.empty:
         raise RuntimeError(f"No matched sample: {len(storms)} storms, {len(dry)} dry days")
+    dry.to_csv(TABLES / "s23_dry_candidates.csv", index=False)
+    match_audit = []
+    for s in storms.itertuples():
+        weekday = dry.day.dt.day_of_week == s.day.weekday()
+        monthdiff = abs(dry.day.dt.month-s.day.month)
+        month = np.minimum(monthdiff, 12-monthdiff) <= 1
+        regime = dry.regime == s.regime
+        match_audit.append(dict(storm_day=s.day, onset=s.onset, regime=s.regime,
+                                dry_candidates=len(dry), same_regime=int(regime.sum()),
+                                same_weekday=int(weekday.sum()), same_month_window=int(month.sum()),
+                                same_regime_and_weekday=int((regime & weekday).sum()),
+                                qualifying_controls=int((regime & weekday & month).sum())))
+    pd.DataFrame(match_audit).to_csv(TABLES / "s23_match_audit.csv", index=False)
     rng = np.random.default_rng(2702)
     cost = np.full((len(storms), len(dry)+len(storms)), 1e9)
     for i, s in storms.iterrows():
@@ -121,7 +153,9 @@ def select():
                          onset=str(s.onset), regime=s.regime, onset_share=s.onset_share, gauges=s.gauges))
     pd.DataFrame(audit).to_csv(TABLES / "s23_sample_audit.csv", index=False)
     storms.to_csv(TABLES / "s23_storm_candidates.csv", index=False)
-    pd.DataFrame(rows).to_csv(TABLES / "s23_sample.csv", index=False)
+    validate_onsets(storms)
+    pd.DataFrame(rows, columns=["pair", "storm_day", "dry_day", "onset", "regime", "onset_share", "gauges"]).to_csv(
+        TABLES / "s23_sample.csv", index=False)
     print("eligible storm days", len(storms), "dry days", len(dry), "matched pairs", len(rows), flush=True)
 
 

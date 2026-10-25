@@ -38,3 +38,16 @@ def test_flicker_is_one_to_one_and_time_limited():
 def test_dense_zones_use_count_and_500m_grid():
     xy = np.r_[np.zeros((31, 2)), [[500., 500.]]]
     assert dense_points(xy).sum() == 31
+
+
+def test_zero_pairs_never_opens_minute_data(tmp_path, monkeypatch):
+    import importlib
+    flow = importlib.import_module("analysis.23_flows")
+    (tmp_path / "s23_sample.csv").write_text("pair,storm_day,dry_day,onset,regime,onset_share,gauges\n")
+    monkeypatch.setattr(flow, "TABLES", tmp_path)
+    monkeypatch.setattr(flow, "LOCAL", tmp_path / "local")
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Empty design must not open or analyse minute positions")
+    monkeypatch.setattr(flow, "unpack", forbidden)
+    flow.run()
+    assert (tmp_path / "s23_flow_audit.csv").read_text().count("\n") == 1

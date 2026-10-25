@@ -1409,3 +1409,27 @@ results stay as they are and remain the pre-specified result.
     Maximum-cardinality assignment often links an entrant to an unrelated departed taxi. These
     diagnostics do not change matching settings. Report every scenario in s23_matching_validation.csv,
     and do not interpret the registered return ratio as an identified share hired or leaving service.
+
+158. **Step 23 feasibility result: retain the sample rule and report no estimable matched comparison.**
+    Across 1,096 fit-period dates, 865 satisfy the regime/day/holiday/pilot exclusions. Six dates satisfy
+    the native-grid rain/onset rules before these exclusions; only 5 December 2023 (17:50, 19/64 gauges)
+    and 17 September 2024 (19:20, 27/62 gauges) remain eligible. Independent direct raw-record checks
+    confirm zero positive readings in each preceding three-hour window and the same onset shares.
+    There are 76 eligible dry days in all regimes. In the required R09 regime the ONLY Tuesday dry
+    days are 26 March and 23 July 2024. Neither is within the permitted calendar month +/-1 window
+    for either storm. Both storms therefore have **zero qualifying controls**, before any assignment
+    cost or sampling seed can matter. Maximum-cardinality matching returns zero pairs.
+
+    No main-sample minute data were downloaded and no storm/dry flow, R, speed, relocation or cell
+    effect was estimated. Bootstrap intervals and FDR cannot be computed with zero pairs. The three
+    requested figures explicitly mark the missing comparisons (the speed figure additionally shows
+    synthetic diagnostics); tables contain explicit unavailable statuses, not invented zero effects.
+    Do not weaken the strict rain, dry-day, weekday, month or regime rules to force a sample of 60.
+    This is an infeasible matched design under the registered rule, not evidence that mechanisms
+    or rain effects are absent. The 108 synthetic scenarios at three radii remain fully reported.
+    At the primary radius true-link precision is 77.9% with no movement, 23.0% at 15 km/h and 9.8%
+    at 30 km/h (scenario means). Even without true movement the inferred moving-link median speed
+    averages 37.0 km/h because erroneous links create apparent movement. Main-mechanism conclusions
+    would thus be unsupported even if suitable controls existed. No matching settings were changed.
+    The pilot's isolated-pair displacement is not an identified GPS-error distribution. Frozen tables,
+    figures, models and test/holdout outcomes are unchanged. No new test-year use occurred.
