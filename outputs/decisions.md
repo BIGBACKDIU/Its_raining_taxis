@@ -1384,3 +1384,28 @@ results stay as they are and remain the pre-specified result.
     irrespective of their performance. Poor synthetic recovery prevents a mechanism interpretation;
     the registered R thresholds remain only conditional proxy descriptions. All numerical settings
     above are fixed now. Pilot raw files remain gitignored; s23_pilot.csv is the derived audit.
+
+157. **Step 23 onset-grid correction before main minute downloads or flow comparisons.**
+    The gauge-only feasibility audit exposed an unnecessary restriction introduced in decision 156:
+    the user specifies five-minute gauges and a change within 30 minutes, not onsets restricted to
+    :00/:30. On that coarse grid only two dates satisfy the rain rules, and both are abnormal regimes;
+    there are zero eligible storm days. At native five-minute resolution six dates satisfy the rain rules;
+    four are abnormal/excluded and two are eligible: 5 December 2023 at 17:50 and 17 September 2024
+    at 19:20. This correction is disclosed after inspecting gauge eligibility counts but BEFORE any
+    main-sample minute requests or taxi-flow outcomes; it uses no taxi outcomes to choose days.
+    Supersede only the :00/:30 sentence of decision 156 with the native five-minute onset grid.
+    Retain the same 30-minute rain window, preceding three dry hours, 25%, >=1 mm/h, normal regimes,
+    exclusions, holidays, matching, seed, all radii, thresholds and all tests. Evaluate the complete
+    native-grid rule, without selecting other storm definitions to increase sample size. Run the
+    unchanged maximum-cardinality dry-day matching and use all resulting pairs, as decision 155
+    prescribes when fewer than 60 exist. The 15-minute bins are anchored to the onset's minute modulo
+    15; partial 06:00/24:00 edge bins are omitted. Baseline values use the existing half-hour prediction
+    at each bin's start, with explicit time/cell joins. With at most two pairs, all intervals and proxy
+    classifications are descriptive: the requested population-level mechanism comparison is underpowered.
+
+    Synthetic pilot diagnostics also warn against identification: at the primary 1 km/min radius,
+    true disappearance recovery averages about 10.2% when remaining taxis do not move, 6.1% at
+    15 km/h and 4.5% at 30 km/h. True appearance recovery averages 10.2%, 1.7% and 1.0% respectively.
+    Maximum-cardinality assignment often links an entrant to an unrelated departed taxi. These
+    diagnostics do not change matching settings. Report every scenario in s23_matching_validation.csv,
+    and do not interpret the registered return ratio as an identified share hired or leaving service.

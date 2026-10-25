@@ -84,8 +84,7 @@ def select():
     for day in days:
         f = flags.loc[day]
         usable = bool(f.normal and not f.exclude_main and day not in public and day not in pilot)
-        selecttime = ((g.times >= day+pd.Timedelta(hours=12)) & (g.times <= day+pd.Timedelta(hours=20))
-                      & (g.times.minute % 30 == 0))
+        selecttime = (g.times >= day+pd.Timedelta(hours=12)) & (g.times <= day+pd.Timedelta(hours=20))
         qualifying = selecttime & (n >= 20) & (share >= .25) & alldry
         ii = np.flatnonzero(qualifying)
         during = (g.times > day+pd.Timedelta(hours=6)) & (g.times <= day+pd.Timedelta(days=1))
@@ -100,6 +99,7 @@ def select():
         if usable and dry_ok:
             dry.append(dict(day=day, regime=f.regime))
     storms, dry = pd.DataFrame(candidates), pd.DataFrame(dry)
+    pd.DataFrame(audit).to_csv(TABLES / "s23_sample_audit.csv", index=False)
     if storms.empty or dry.empty:
         raise RuntimeError(f"No matched sample: {len(storms)} storms, {len(dry)} dry days")
     rng = np.random.default_rng(2702)

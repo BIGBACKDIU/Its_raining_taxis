@@ -131,10 +131,12 @@ def geography(sample):
             d = pd.read_parquet(LOCAL / f"{day}_1.parquet", filters=[("cell", "!=", -1), ("dense_excluded", "==", False)])
             d = d[(d.ts >= onset) & (d.ts < onset+pd.Timedelta(hours=2))]
             per_role[role] = d.groupby("cell")[["D", "A"]].agg(["mean", "count"])
+            wanted = pd.date_range(onset, periods=8, freq="15min").floor("30min").value_counts()
             p = pd.read_parquet(ROOT / f"data/interim/panel30_{pd.Timestamp(day).year}.parquet",
-                                columns=["ts", "cell", "baseline"], filters=[("ts", ">=", onset),
-                                ("ts", "<", onset+pd.Timedelta(hours=2))])
-            expected.append(p.groupby("cell").baseline.mean())
+                                columns=["ts", "cell", "baseline"], filters=[("ts", ">=", wanted.index.min()),
+                                ("ts", "<=", wanted.index.max())])
+            p["weight"] = p.ts.map(wanted)
+            expected.append((p.baseline*p.weight).groupby(p.cell).sum()/p.groupby("cell").weight.sum())
         for cell in per_role["storm"].index:
             row = dict(pair=s.pair, cell=cell)
             for metric in ("D", "A"):

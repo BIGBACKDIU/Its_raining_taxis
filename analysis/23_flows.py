@@ -86,14 +86,14 @@ def counts(cells, eligible_cells):
 
 def process(task):
     global _gauges
-    pair, day, storm_day, role, radius = task
+    pair, day, storm_day, role, radius, onset = task
     path = LOCAL / f"{day}_{radius:g}.parquet"
     if path.exists():
         return str(path)
     if _gauges is None:
         _gauges = Gauges()
     cfg = settings(); ec = eligible(); nc = len(ec)+1
-    start = pd.Timestamp(day)+pd.Timedelta(hours=6)
+    start = pd.Timestamp(day)+pd.Timedelta(hours=6, minutes=pd.Timestamp(onset).minute % 15)
     raw = unpack(RAW / f"{day}_{cfg['interval_minutes']}min.npz")
     valid = [r for r in raw if r["status"] == "ok" and
              0 <= (r["req_ts"]-r["act_ts"]).total_seconds() <= 600]
@@ -214,7 +214,7 @@ def run():
     for s in sample.itertuples():
         for role, day in (("storm", s.storm_day), ("dry", s.dry_day)):
             for radius in RADII:
-                tasks.append((s.pair, day, s.storm_day, role, radius))
+                tasks.append((s.pair, day, s.storm_day, role, radius, s.onset))
     with ProcessPoolExecutor(max_workers=4) as pool:
         list(pool.map(process, tasks))
     pd.concat([pd.read_csv(p) for p in LOCAL.glob("*_audit.csv")]).to_csv(TABLES / "s23_flow_audit.csv", index=False)
