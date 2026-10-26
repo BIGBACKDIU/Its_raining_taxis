@@ -1,7 +1,7 @@
 {
   "presentation_only": true,
   "main_graphs": 15,
-  "presentation_scenes": 17,
+  "presentation_scenes": 26,
   "storm_frames": 15,
   "appendix_graphs": 44,
   "appendix_panels": 97,
@@ -31,6 +31,9 @@
     "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
     "outputs/figures/deck/data/deck_holdout_gain.csv": "0f5237718734a2e13a43284f60cc3373aa875e4c44a357ee15f54a26e5f11890",
     "outputs/tables/morning_forecast_value.csv": "7b0b6987c076574935e1a846f311bc19fdd3db2cda80fca3e2a33d26bd301dde",
+    "outputs/tables/forecast_eval_lead_both_labels.csv": "38b12b20544f76a014faae31cae466c65101e5b858e7abdd3dc33a4e87586354",
+    "outputs/tables/policy_diagnosis.csv": "43c2a679f1cd84ce4efdde59d516f9b3a021038f307657659f3d90a2eb561ab7",
+    "outputs/tables/forecast_conformal.csv": "c06ffb21fad190361f8261a1dfda61c188efb6f9fe7c75a1b2fe46884a3a2446",
     "outputs/tables/sim_plausibility.csv": "15d6cb69800883b884be386f53565310a1058729d4f66a7af0e9a9436a0e5717",
     "outputs/tables/sim2_plausibility.csv": "2ebfc74c88d5328fdc8b185226b5a14b2cff92d258adfd4d8d7fe3916967e88c",
     "outputs/tables/sim2_diagnosis_summary.csv": "374de873b7ddb81a0ce95849d60b9f89523533c1b462fc1305e587c29cae0bd9",
@@ -101,11 +104,12 @@
     "outputs/figures/deck/all/spillover_islandwide_map_part1.png": "8451407008911625c94ea53ce29f42226eb90468f3544ea8a546f3476548830d",
     "outputs/figures/deck/all/stands_predicted_sensitivity_part1.png": "20fb951b3fc932291089f10710457181601e211213558380c2f8bee15ff9e3de",
     "outputs/figures/deck/all/taxi_deserts_map_part1.png": "b663e6792af5338dbd89592fd99615af21b008bb75fac3f556461ba1ec425ef0",
+    "story/evidence_notes.json": "681e23f879d2fdeff0e880ae5c51bc6901195339744f267feaf804a7970381e6",
     "assets/fonts/poppins/Poppins-Regular.ttf": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba",
     "assets/fonts/poppins/Poppins-Medium.ttf": "90373e7d838d32468438fc3e152dca0bdb12edcab99ea639f158790b1ba1fd05",
     "assets/fonts/poppins/Poppins-SemiBold.ttf": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286",
     "assets/fonts/anton/Anton-Regular.ttf": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab"
   },
-  "html_sha256": "b6ccc86b2de67fc6925100100bc3521f03f0c8f7a75514eea2c7a7eb1af3cd5c",
-  "bytes": 12020088
+  "html_sha256": "991a9bfdfb7b8419f9ab159b5466b44a85fbf44b15010dcdb16f8343bd3e5848",
+  "bytes": 12062065
 }

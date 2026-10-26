@@ -1673,3 +1673,25 @@ results stay as they are and remain the pre-specified result.
     the selected observed frame. No frozen table, figure, model, rule or scoring log changes.
     Correct the cover's label to "taxi snapshots present": 120,017 is `snapshots_ok` in the audit,
     whereas the audit has a separate smaller count after exclusions. The number itself is unchanged.
+
+171. **Restore the research narrative and adopt the Storm Builder visual style (presentation only).**
+    The user requested a coherent explanatory presentation, a pale-blue/frosted-card aesthetic,
+    methods and implications beside every graph, and the actual deployed Storm Builder embed.
+    Expand Present from 17 to 26 scenes, retaining 15 main figures and the complete 44-figure
+    appendix. Add client questions, data/audit methods, definitions, forecasting chronology,
+    the daily-planning distinction, the constrained allocation process and recommendations.
+    Combine intensity/duration into one figure; retain place-factor evidence in the appendix.
+    Add charts of saved advance-warning and policy-diagnosis metrics to make the operational
+    argument explicit. Read only existing result tables; do not fit, score or access new holdouts.
+
+    Every main graph shows Method / Result / Practical meaning and bounded limitations. The
+    appendix viewer also shows explanatory notes, stored in `story/evidence_notes.json`. Keep
+    absolute/share interpretations, repeated scoring, failed power/realism rules, uncertainty,
+    naming filters and different policy denominators visible. Preserve all frozen outputs.
+
+    Embed `https://storm-builder-sg.vercel.app/` only after a user clicks Load. After the user
+    requested a larger window, give this scene the available presentation area with compact
+    controls and an Expand view toggle. Expanding/collapsing preserves the iframe and scenario;
+    leaving the scene unloads it. Its assumptions remain labelled as illustration only.
+    Validate desktop/phone layout, all 26 scenes, fonts, explanations and iframe behaviour;
+    rebuild with input-hash checks and run the existing wording/test gates before committing.

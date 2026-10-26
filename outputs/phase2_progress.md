@@ -821,3 +821,30 @@ playback progression/pause/scrubbing/peak, event/intensity point selection, moti
 visible. No browser warnings/errors. Final gates: 35 tests passed (14 existing warnings), the same
 76 wording-check hits, and unchanged source/panel hashes. New prose matches are only explicit
 supply/causality caveats. Updated screenshots are saved in `outputs/story/`.
+
+### Explanatory presentation and enlarged live demo (decision 171; presentation only)
+
+Rebuilt the story as 26 scenes with 15 main figures, using the Storm Builder's pale-blue background,
+frosted cards and compact controls. Added the client question, data/audit methods, definitions,
+forecasting chronology, the distinction between daily planning and short-term warning, constrained
+allocation, recommendations and limits. Each main graph now visibly explains its method, result
+and practical meaning. All 44 saved figures remain in the appendix, also with explanatory notes.
+
+Added saved advance-warning and policy-diagnosis charts. At 30/60 minutes the no-weather LightGBM
+warns before 6.65%/13.79% of low-supply runs, despite its higher alert precision. The policy chart
+shows both targeting precision and differing mean cell counts. Intensity/duration share one figure;
+place-factor results remain in the appendix. The sources, score disclosures and frozen results do
+not change. The builder verifies its inputs and records 26 scenes, 15 main figures and 44 appendix
+figures in provenance; no model, bootstrap or held-out score is rerun.
+
+The actual deployed Storm Builder loads on request. Following the user's size correction, its
+slide fills the available area: the iframe measures 1,384 × 810 px in a 1,440 × 1,000 px viewport.
+Expand view uses almost the entire window (1,412 × 979 px in that check). Expanding/collapsing
+preserves the running scenario; leaving the slide unloads it. Its failed realism rule remains visible.
+
+Browser checks cover 1,440 px desktop and 400 px phone layouts, all 26 scenes, all 15 explanation
+panels, no horizontal page overflow on phones, unique IDs and full scene restoration, Poppins/Anton
+loading, the horizon-dependent explanation, appendix explanation and live-demo controls. Updated
+JPG previews include the larger embed and methods slide. Final gates: 35 tests passed (14 existing
+warnings); wording check reports the same 76 reviewed hits. Separate scanning of new story prose
+finds scope/causality caveats and methodological terms, with no unsupported passenger-outcome claim.

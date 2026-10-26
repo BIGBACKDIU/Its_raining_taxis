@@ -46,6 +46,9 @@ def main():
  data['forecast']=records(read('forecast_eval_both_labels').query("analysis=='primary' and scale=='1km' and label_version=='issue-time' and subset=='all' and h in [30,60]"))
  hp=ROOT/'outputs/figures/deck/data/deck_holdout_gain.csv';HASHES[str(hp.relative_to(ROOT))]=sha(hp);data['holdout']=records(pd.read_csv(hp))
  data['morning']=records(read('morning_forecast_value'))
+ data['lead']=records(read('forecast_eval_lead_both_labels').query("analysis=='primary' and scale=='1km' and label_version=='issue-time' and model=='lgb_no_weather'"))
+ data['policy']=records(read('policy_diagnosis').query("split=='test'"))
+ data['conformal']=records(read('forecast_conformal').query("h==30 and model=='lgb_no_weather' and subset=='test all'"))
  data['simulation']=[{'name':'Simulator v1','passed':int(read('sim_plausibility').storms_passed.max())},{'name':'Simulator v2 · roads','passed':int(read('sim2_plausibility').storms_passed.max())},{'name':'Rain-effect benchmark','passed':int(read('sim2_diagnosis_summary').query("period=='test'").stat_passes.iloc[0])}]
  labels={
  'audit_unusual_days':('Feed outages and unusual days','Data checks'),'feed_regimes':('Feed coverage over time','Data checks'),
@@ -76,6 +79,9 @@ def main():
   if name not in gallery:gallery[name]={'id':name,'title':labels[name][0],'category':labels[name][1],'source':row['sourceFile'],'parts':[]}
   gallery[name]['parts'].append('data:image/png;base64,'+base64.b64encode(p.read_bytes()).decode())
  assert len(gallery)==44 and sum(len(v['parts']) for v in gallery.values())==67
+ notes_path=SOURCE/'evidence_notes.json';HASHES[str(notes_path.relative_to(ROOT))]=sha(notes_path)
+ evidence_notes=json.loads(notes_path.read_text());assert set(evidence_notes)==set(gallery)
+ for name,note in evidence_notes.items():gallery[name].update(note)
  data['gallery']=list(gallery.values())
  data['aliases']={48022:'Changi T3',48023:'Changi T1 / Jewel',33014:'Lau Pa Sat',34014:'Marina Bay Sands',32016:'Dhoby Ghaut',34017:'Lavender',33016:'Victoria',34016:'Nicoll',33015:'City Hall'}
  data['sources']=HASHES
@@ -86,9 +92,11 @@ def main():
    fonts.append(f"@font-face{{font-family:'{family}';font-style:normal;font-weight:{weight};font-display:swap;src:url(data:font/ttf;base64,{base64.b64encode(p.read_bytes()).decode()}) format('truetype')}}")
  template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
  html=template.replace('/*__FONTS__*/','\n'.join(fonts)).replace('/*__CSS__*/',css).replace('/*__DATA__*/','const DATA = '+json.dumps(data,separators=(',',':'),ensure_ascii=False).replace('</','<\\/')+';').replace('/*__JS__*/',js)
- assert len(re.findall(r'data-main-graph=',html))==15
+ assert len(re.findall(r'<figure[^>]*data-main-graph=',html))==15
+ assert len(re.findall(r'data-scene=',html))==26
+ assert len(re.findall(r'class="analysis-notes"',html))==15
  (OUT/'index.html').write_text(html)
  for relative,expected in HASHES.items():assert sha(ROOT/relative)==expected,relative
- (OUT/'provenance.json').write_text(json.dumps({'presentation_only':True,'main_graphs':15,'presentation_scenes':17,'storm_frames':len(data['stormFrames']),'appendix_graphs':44,'appendix_panels':97,'appendix_cards':67,'source_hashes':HASHES,'html_sha256':sha(OUT/'index.html'),'bytes':(OUT/'index.html').stat().st_size},indent=2)+'\n')
+ (OUT/'provenance.json').write_text(json.dumps({'presentation_only':True,'main_graphs':15,'presentation_scenes':26,'storm_frames':len(data['stormFrames']),'appendix_graphs':44,'appendix_panels':97,'appendix_cards':67,'source_hashes':HASHES,'html_sha256':sha(OUT/'index.html'),'bytes':(OUT/'index.html').stat().st_size},indent=2)+'\n')
  print('Built',OUT/'index.html',f'({(OUT/"index.html").stat().st_size:,} bytes); 15 main graphs, 44 appendix graphs; frozen inputs unchanged.')
 if __name__=='__main__':main()

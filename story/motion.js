@@ -92,13 +92,14 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)pausePlayer
 
 // Move the real figures into a stage: one scene, unique IDs, original controls and data.
 const present=$('#present-toggle'),stage=$('#presentation-stage'),scene=$('#scene-content'),viewport=$('#scene-viewport');
-const slides=[{node:$('#top'),title:'When it rains, where are the taxis?',chapter:'OVERVIEW'},...$$('figure[data-main-graph]').map((node,i)=>({node,title:node.querySelector('h3').textContent,chapter:`GRAPH ${String(i+1).padStart(2,'0')} / 15`})),{node:$('.closing'),title:'Use the geography. Test the response.',chapter:'CONCLUSION'}];
+const slides=$$('[data-scene]').map(node=>({node,title:(node.querySelector('h3')&&node.tagName==='FIGURE'?node.querySelector('h3'):node.querySelector('h1,h2')).textContent,chapter:node.dataset.chapter||'RESULTS'}));
 for(const slide of slides){slide.home=document.createComment('presentation home');slide.node.before(slide.home);}
 let presentIndex=0,presentEnabled=false,previousScroll=0,sceneAnimation=null;
 function restoreSlide(){const slide=slides[presentIndex];if(slide.node.parentElement===scene)slide.home.after(slide.node);}
 function fitScene(){
  if(!presentEnabled)return;
- scene.style.transform='none';scene.style.width='';
+ scene.style.transform='none';scene.style.width='';scene.style.height='';
+ if(slides[presentIndex].node.id==='simulation-demo'){scene.style.height='100%';viewport.style.overflowY='hidden';viewport.style.alignItems='stretch';return;}
  const mobile=innerWidth<700;
  if(mobile){scene.style.transform='';viewport.style.overflowY='auto';viewport.style.alignItems='flex-start';return;}
  const available=viewport.clientHeight-12,scaleBy=Math.min(1,available/scene.scrollHeight);
@@ -107,9 +108,10 @@ function fitScene(){
  viewport.style.overflowY=scaleBy<.8?'auto':'hidden';viewport.style.alignItems=scaleBy>=1?'center':'flex-start';
 }
 function showSlide(index,direction=1){
- pausePlayers();if(sceneAnimation)sceneAnimation.cancel();
+ pausePlayers();if(typeof stopLiveSimulation==='function')stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();
  restoreSlide();presentIndex=Math.max(0,Math.min(slides.length-1,index));const slide=slides[presentIndex];
- scene.replaceChildren(slide.node);stage.dataset.scene=slide.node.id==='top'?'cover':slide.node.classList.contains('closing')?'closing':'chart';
+ document.body.classList.toggle('demo-active',slide.node.id==='simulation-demo');
+ scene.replaceChildren(slide.node);stage.dataset.scene=slide.node.dataset.scene;
  $('#stage-chapter').textContent=slide.chapter;$('#stage-count').textContent=`${String(presentIndex+1).padStart(2,'0')} / ${slides.length}`;
  $('#slide-title').textContent=slide.title;$('#slide-progress').style.width=((presentIndex+1)/slides.length*100)+'%';
  $('#slide-prev').disabled=presentIndex===0;$('#slide-next').disabled=presentIndex===slides.length-1;
@@ -121,16 +123,17 @@ function setPresent(enabled){
  if(enabled===presentEnabled)return;
  pausePlayers();presentEnabled=enabled;
  if(enabled){previousScroll=scrollY;stage.hidden=false;document.body.classList.add('present-mode');$('#story').inert=true;showSlide(0);}
- else{if(sceneAnimation)sceneAnimation.cancel();restoreSlide();scene.replaceChildren();stage.hidden=true;document.body.classList.remove('present-mode');$('#story').inert=false;scene.style.transform='';renderCharts();refreshExplorers();window.scrollTo({top:previousScroll,behavior:'instant'});present.focus();}
+ else{stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();restoreSlide();scene.replaceChildren();stage.hidden=true;document.body.classList.remove('present-mode','demo-active');$('#story').inert=false;scene.style.transform='';renderCharts();refreshExplorers();window.scrollTo({top:previousScroll,behavior:'instant'});present.focus();}
  present.setAttribute('aria-pressed',String(enabled));present.textContent=enabled?'Exit presentation':'↗ Present';
 }
 present.addEventListener('click',()=>setPresent(!presentEnabled));
-$('.hero-link').addEventListener('click',e=>{if(presentEnabled){e.preventDefault();setPresent(false);$('#finding').scrollIntoView({behavior:motionEnabled?'smooth':'instant'});}});
+$('.hero-link').addEventListener('click',e=>{if(presentEnabled){e.preventDefault();setPresent(false);$('#brief').scrollIntoView({behavior:motionEnabled?'smooth':'instant'});}});
 $$('[data-start-presentation]').forEach(button=>button.addEventListener('click',()=>{if(presentEnabled)showSlide(1);else setPresent(true);}));
 $('#slide-prev').addEventListener('click',()=>showSlide(presentIndex-1,-1));$('#slide-next').addEventListener('click',()=>showSlide(presentIndex+1,1));
 $('#slide-replay').addEventListener('click',()=>revealChart(slides[presentIndex].node));
 document.addEventListener('keydown',e=>{
  if(dialog.open){if(e.key==='ArrowRight'&&state.part<state.modal.parts.length-1){state.part++;showPart();}if(e.key==='ArrowLeft'&&state.part>0){state.part--;showPart();}return;}
+ if(e.key==='Escape'&&document.body.classList.contains('demo-expanded')){setDemoExpanded(false);return;}
  if(e.key==='Escape'&&presentEnabled){setPresent(false);return;}
  if(!presentEnabled||e.altKey||e.metaKey||e.ctrlKey||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.target.closest('.segmented'))return;
  if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();showSlide(presentIndex+1,1);}
@@ -141,3 +144,9 @@ document.addEventListener('keydown',e=>{
 updateMotion();setStormFrame(0,false);refreshExplorers();
 
 addEventListener('beforeprint',()=>{if(presentEnabled)setPresent(false);pausePlayers();});
+
+function setDemoExpanded(enabled){document.body.classList.toggle('demo-expanded',enabled);const button=$('#expand-simulation');button.textContent=enabled?'↙ Back to presentation':'Expand view ↗';button.setAttribute('aria-pressed',String(enabled));if(presentEnabled)fitScene();}
+$('#expand-simulation').addEventListener('click',()=>setDemoExpanded(!document.body.classList.contains('demo-expanded')));
+function stopLiveSimulation(){setDemoExpanded(false);$('#expand-simulation').disabled=true;const frame=$('#simulation-frame');if(!frame)return;frame.removeAttribute('src');frame.hidden=true;$('#simulation-placeholder').hidden=false;$('#load-simulation').textContent='Load Storm Builder';}
+$('#load-simulation').addEventListener('click',()=>{const frame=$('#simulation-frame');if(frame.getAttribute('src')){stopLiveSimulation();return;}$('#expand-simulation').disabled=false;frame.src='https://storm-builder-sg.vercel.app/';frame.hidden=false;$('#simulation-placeholder').hidden=true;$('#load-simulation').textContent='Stop demo';});
+$('#conclusion a[href="#evidence"]').addEventListener('click',e=>{if(presentEnabled){e.preventDefault();setPresent(false);$('#evidence').scrollIntoView({behavior:motionEnabled?'smooth':'instant'});}});

@@ -1,53 +1,55 @@
-# It's Raining Taxis — HTML research story
+# It's Raining Taxis — interactive research presentation
 
-Open `index.html` in a modern browser. The page is self-contained: fonts, chart data and all appendix images are embedded. No server, internet connection or install is required to read it. External links to the repository and Storm Builder require internet access.
+Open `index.html` in a browser, or serve the repository and visit `/outputs/story/index.html`.
+The page embeds its fonts, saved chart values and appendix images. Only the optional live Storm
+Builder needs an internet connection.
 
-## Reading and presenting
+## Story and controls
 
-- The main story has **15 graphs**: rain bands, radar comparison, event timing, intensity, duration, named rain map, count-loss ranking, paired storm maps, island-wide redistribution, planning heatmap, place characteristics, alert precision, holdout weather gains, morning planning value, and simulation realism.
-- Scroll or use the chapter links. The map switches between absolute and citywide-share associations. Hover, tap or focus a coloured square for its counts and uncertainty.
-- Forecast controls switch between 30 and 60 minutes. Morning controls switch between the existing day-block and seven-day-block intervals.
-- Choose **Present**, then use left/right arrows to move through the cover, 15 main figures and conclusion. Escape exits presentation mode. Use the browser's own fullscreen command if desired.
-- The searchable evidence appendix retains **all 44 saved source figures**, covering **97 data panels** across **67 readable panel groups**. Open a card and use Previous/Next or arrow keys. Escape closes the viewer.
-- Expand methods for definitions, source filenames and embedded numeric tables. Chart labels use rounding; tooltips and tables give more precision.
+The presentation has **26 scenes and 15 main figures**. It follows the client question, data and
+methods, rain associations, geography, forecast accuracy and advance warning, daily planning,
+constrained targeting, measurement checks, simulation limits, and recommendations. Every main
+figure has visible **Method / Result / Practical meaning** notes. The complete **44-figure appendix**
+retains 97 data panels in 67 readable groups, with explanations in its viewer.
+
+Choose **Present**, then use next/back, left/right arrows, Page Up/Down, Home/End or chart replay.
+Escape returns to the scrolling view. On phones, tall scenes scroll while navigation remains visible.
+Motion can be disabled and respects the system reduced-motion preference.
+
+The storm player shows **15 observed half-hour snapshots**, 06:30–13:30 Singapore time on
+20 July 2023. Play, pause, scrub or jump to the saved 09:30 peak. Colour fades create no intermediate
+observations. The event player and intensity slider use only saved model estimates and intervals.
+Map controls change absolute/share measures; forecast controls change horizon; morning controls
+select saved day/seven-day intervals. Tooltips and expandable tables retain exact values.
+
+The live demonstration embeds `https://storm-builder-sg.vercel.app/`. Select **Load Storm Builder**.
+Its presentation scene uses almost the whole window, with compact controls. **Expand view** fills
+the window further; **Back to presentation** restores the slide without restarting the scenario.
+Leaving the demonstration slide unloads the app. The simulation remains an illustration: its
+unchanged realism rule fails. Opening the app separately is also supported.
 
 ## Rebuild and provenance
 
-From the repository root:
-
 ```sh
 .venv/bin/python -m analysis.build_story
 ```
 
-Editable sources are `story/template.html`, `story/story.css` and `story/story.js`. The builder reads existing CSVs and the already exported storm snapshot, and embeds the previously rendered appendix cards. `provenance.json` records SHA-256 hashes, graph counts and final HTML size. The builder checks naming thresholds, unique cell joins, figure coverage and unchanged input hashes. It performs no estimation, tuning, bootstrap, model scoring or holdout-data access.
+Editable sources are `story/template.html`, `story/story.css`, `story/story.js`, `story/motion.js`
+and `story/evidence_notes.json`. The builder reads saved CSVs and presentation exports, embeds
+fonts and images, and verifies input hashes. `provenance.json` records hashes, graph/scene counts
+and final HTML size. It performs no estimation, tuning, bootstrap, model scoring or holdout access.
+The storm export can be recreated with `python -m analysis.export_story_playback` from the
+existing local fit-period panel; its saved peak is checked against the original peak CSV.
 
-The navy design uses embedded Poppins and Anton fonts from `assets/fonts/` under the SIL Open Font License. Map changes share a red/white/blue scale capped at ±40%; rain uses a separate sequential blue scale. Signed planning values are retained, including gains. Expected counts accompany named percentages.
+The design uses a pale blue background and frosted white cards, with embedded Poppins and Anton
+fonts under the SIL Open Font License. Maps retain the common ±40% red/white/blue scale. Named
+places retain expected counts and the expected-count/q-value presentation filter.
 
-Important disclosures remain visible: associations describe supply; absolute and share models differ; October 2026 has two onsets and fails the power rule; the 1 km maximum is descriptive selection; the morning result follows a corrective refit and second scoring; simulation fails its unchanged realism rule; minute flows do not identify a mechanism.
+Visible limitations include supply/association scope, distinct absolute/share models, weak advance
+warning despite alert precision, differing policy group sizes, the selected 1 km maximum, October's
+two-onset power failure, the corrected morning analysis's repeated scoring, count-interval
+undercoverage, failed simulation realism and unidentifiable minute-flow mechanisms.
 
-Browser checks cover 1440 px desktop and 400 px phone layouts, SVG label bounds, map and horizon controls, saved interval switches, all 44 gallery entries, multi-panel navigation and presentation mode. Preview JPGs are visual records, not result figures.
-
-## Animation and the presentation stage
-
-**Start presentation** or **Present** opens 17 scenes: a cover, the same 15 main graphs, and the conclusion.
-Use next/back, left/right arrows, Page Up/Down, Home/End, or replay the chart entrance with ↻. Escape
-returns to the reading view and restores every figure to its original position. Charts retain their
-controls in the stage. On a phone, tall scenes scroll inside the stage while navigation stays visible.
-The Motion button disables visual transitions; the operating system's reduced-motion preference is
-respected. Data playback is always user initiated and stops when the player leaves view or the tab hides.
-
-Graph 8 replays **15 observed half-hour snapshots**, 06:30–13:30 Singapore time on 20 July 2023.
-Play, pause, scrub, or jump to the 09:30 rain peak. Counts, rain and tooltips track the selected frame.
-Colour fades are presentation effects, not interpolated observations. The event timeline plays through
-saved average model estimates; the intensity slider selects saved spline points, including their CIs.
-
-The replay export is `data/storm_2023-07-20.csv`; its JSON records source/export hashes and its exact
-match to the existing peak CSV. To recreate it from the existing local fit-period panel (no model run):
-
-```sh
-.venv/bin/python -m analysis.export_story_playback
-.venv/bin/python -m analysis.build_story
-```
-
-`story/motion.js` holds the presentation and playback interactions. The page remains one offline HTML
-file; the CSV and provenance are also retained separately for inspection. Frozen outputs are unchanged.
+Browser checks cover desktop 1440 px and phone 400 px, all scenes, graph explanations, fonts,
+chart controls, appendix navigation, unique IDs after leaving Present, and the live embed's
+expansion, state preservation and unloading. JPG previews are presentation QA records.

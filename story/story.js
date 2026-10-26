@@ -69,7 +69,7 @@ function drawCurve(id,rows,xkey,domainX,domainY,xticks,yticks,{band=true,event=f
  axisX(s,x,xticks,h-b,v=>v,event?'Minutes from local rain onset':'Rain intensity (mm/h)',w);
 }
 function horizontalBars(id,rows,{max=25,ticks=[0,5,10,15,20,25],axis='',height,rowHeight=60}={}){
- const{s,w,mobile}=chart(id,height||rows.length*rowHeight+90),l=mobile?108:180,r=mobile?70:105,x=scale([0,max],[l,w-r]);
+ const{s,w,mobile}=chart(id,height||rows.length*rowHeight+90),l=mobile?108:180,r=id==='chart-policy'?(mobile?105:145):(mobile?70:105),x=scale([0,max],[l,w-r]);
  for(const[i,row]of rows.entries()){
   const y=28+i*rowHeight;colorBar(s,row,y);
   function colorBar(s,row,y){
@@ -82,7 +82,7 @@ function horizontalBars(id,rows,{max=25,ticks=[0,5,10,15,20,25],axis='',height,r
  }
  axisX(s,x,ticks,rows.length*rowHeight+10,v=>v,axis,w);
 }
-function drawDuration(){horizontalBars('chart-duration',DATA.duration.map((r,i)=>({label:['First 30 min','31–60 min','61–120 min','Beyond 120 min'][i],value:-r.pct,lo:-r.pct_hi,hi:-r.pct_lo,color:i===3?C.red:C.navy,display:pct(r.pct),tip:`<strong>${esc(r.term)}</strong>${pct(r.pct,2)}<br>95% CI ${pct(r.pct_lo,2)} to ${pct(r.pct_hi,2)}`})),{max:25,axis:'Fewer vacant taxis (%)',rowHeight:58,height:320});}
+function drawDuration(){horizontalBars('chart-duration',DATA.duration.map((r,i)=>({label:['First 30 min','31–60 min','61–120 min','Over 120 min'][i],value:-r.pct,lo:-r.pct_hi,hi:-r.pct_lo,color:i===3?C.red:C.navy,display:pct(r.pct),tip:`<strong>${esc(r.term)}</strong>${pct(r.pct,2)}<br>95% CI ${pct(r.pct_lo,2)} to ${pct(r.pct_hi,2)}`})),{max:25,axis:'Fewer vacant taxis (%)',rowHeight:58,height:320});}
 function nameOf(r){const name=DATA.aliases[r.cell]||r.subzone||`Cell ${r.cell}`;return name===name.toUpperCase()?name.toLowerCase().replace(/(^|\s)\S/g,v=>v.toUpperCase()):name;}
 function drawPlaces(){horizontalBars('chart-places',DATA.places.map(r=>({label:nameOf(r),value:r.taxis_lost_per_heavy_half_hour,display:`${n(r.taxis_lost_per_heavy_half_hour)} / ${n(r.expected_vacant_heavy)}`,color:['Downtown Core','Museum','Rochor','Outram','Kallang'].includes(r.planning_area)?C.red:C.navy,tip:`<strong>${esc(nameOf(r))}</strong>${n(r.taxis_lost_per_heavy_half_hour,3)} fewer / ${n(r.expected_vacant_heavy,3)} expected<br>${pct(r.abs_pct,2)}; 95% CI ${pct(r.abs_lo,2)} to ${pct(r.abs_hi,2)}`})),{max:8,ticks:[0,2,4,6,8],axis:'Fewer taxis per heavy-rain half-hour',rowHeight:37,height:540});}
 function mix(a,b,f){const A=a.slice(1).match(/../g).map(x=>parseInt(x,16)),B=b.slice(1).match(/../g).map(x=>parseInt(x,16));return'#'+A.map((v,i)=>Math.round(v*(1-f)+B[i]*f).toString(16).padStart(2,'0')).join('');}
@@ -93,11 +93,11 @@ function mapChart(id,rows,{value,filter=()=>true,hero=false,callback,markers=[]}
  const X=v=>ox+(v-5)*k,Y=v=>oy-(v-6)*k;
  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:callback?'group':'img','aria-label':host.getAttribute('aria-label')||'Map of Singapore vacant-taxi supply'}),defs=add(svg,'defs',{}),clip=add(defs,'clipPath',{id:id+'-clip'});add(clip,'rect',{x:0,y:0,width:W,height:H});
  const g=add(svg,'g',{'clip-path':`url(#${id}-clip)`});
- for(const ring of DATA.land)add(g,'path',{d:ring.map(([x,y],i)=>(i?'L':'M')+X(x)+','+Y(y)).join('')+'Z',fill:hero?'#254174':C.land,stroke:hero?'#3c5785':C.land,'stroke-width':.6});
+ for(const ring of DATA.land)add(g,'path',{d:ring.map(([x,y],i)=>(i?'L':'M')+X(x)+','+Y(y)).join('')+'Z',fill:hero?'#a6ccd0':C.land,stroke:hero?'#c7e0e4':C.land,'stroke-width':.6});
  const byCell=new Map(rows.map(r=>[r.cell,r]));
  for(const cell of DATA.cells.filter(c=>c.land)){
-  const r=byCell.get(cell.cell),visible=r&&filter(r),v=visible?value(r):null,fill=v===null?(hero?'#1d3769':C.none):id==='map-rain'?sequential(v):change(v);
-  const rect=add(g,'rect',{x:X(Math.floor(cell.cell/1000)),y:Y(cell.cell%1000+1),width:k-.5,height:k-.5,fill,stroke:hero?'#14295b':'#fbfcfe','stroke-width':hero?.7:.4});
+  const r=byCell.get(cell.cell),visible=r&&filter(r),v=visible?value(r):null,fill=v===null?(hero?'#d7e8ea':C.none):id==='map-rain'?sequential(v):change(v);
+  const rect=add(g,'rect',{x:X(Math.floor(cell.cell/1000)),y:Y(cell.cell%1000+1),width:k-.5,height:k-.5,fill,stroke:hero?'#bed9df':'#fbfcfe','stroke-width':hero?.7:.4});
   if(r&&!hero){
    const named=id==='map-where'&&visible?nameOf(r):[48022,33014,33015].includes(r.cell)?(DATA.aliases[r.cell]):`Square ${r.cell}`;
    rect.dataset.cell=r.cell;
@@ -152,7 +152,20 @@ function drawForecast(){
  for(const[i,[label,key,color]]of rows.entries()){const y=47+i*63;txt(s,l-13,y+5,label==='LightGBM + weather'&&mobile?'LGBM + weather':label,{'text-anchor':'end',fill:C.ink,'font-size':mobile?11:13});add(s,'rect',{x:l,y:y-12,width:x(r[key]*100)-l,height:24,rx:3,fill:color});txt(s,w-2,y+5,pct(r[key]*100,2),{fill:color,'font-size':14,'font-weight':600,'text-anchor':'end'});}
  axisX(s,x,[0,20,40,60],285,v=>v+'%','Share of 19 alerts that are truly low',w);
  txt(s,l,352,`Base rate: ${pct(r.base_rate*100,2)} · dashed line`,{'font-size':10});
+ const result=$('[data-main-graph="forecast"] .analysis-notes>div:nth-child(2) p');if(result)result.textContent=`At ${state.horizon} minutes, LightGBM precision is ${pct(r.topk_precision_lgb_no_weather*100,2)}, versus ${pct(r.topk_precision_persistence*100,2)} for persistence. With weather it is ${pct(r.topk_precision_lgb_weather*100,2)}.`;
  $('#forecast-takeaway').innerHTML=`<strong>${pct(r.topk_precision_lgb_no_weather*100)} with LightGBM, versus ${pct(r.topk_precision_persistence*100)} with persistence.</strong> Adding weather gives ${pct(r.topk_precision_lgb_weather*100)}. The model gain comes mainly from taxi information.`;
+}
+function drawLead(){
+ const{s,w,mobile}=chart('chart-lead',350),l=mobile?54:95,r=20,x=scale([0,1],[l,w-r]);
+ const keys=['share_warned_before_onset','share_detected_at_or_after_onset_only','share_missed'],colors=[C.blue,C.light,C.pale];
+ DATA.lead.forEach((row,i)=>{const y=65+i*110;txt(s,l-12,y+25,row.h+' min',{'text-anchor':'end',fill:C.ink,'font-size':12});let start=0;
+ keys.forEach((key,j)=>{const value=row[key],end=start+value;add(s,'rect',{x:x(start),y,width:x(end)-x(start),height:44,fill:colors[j],rx:2});if(value>.12)txt(s,(x(start)+x(end))/2,y+27,pct(value*100,1),{'text-anchor':'middle',fill:j===0?C.white:C.ink,'font-size':13});start=end;});
+ txt(s,l,y-14,pct(row.share_warned_before_onset*100,2)+' warned before onset',{fill:C.blue,'font-size':14,'font-weight':600});});
+ axisX(s,x,[0,.25,.5,.75,1],275,v=>Math.round(v*100)+'%','Share of low-availability runs',w);
+}
+function drawPolicy(){
+ const choices=[['(c) top-19 forecast ranking, no constraints','Forecast ranking',C.navy],['(c) restricted to cells with a staging point','Eligible + staging',C.blue],['(b) policy, weights = forecast risk','Risk-weighted policy',C.red],['(a) policy as designed','Original policy',C.blue],['all candidate cells (expected >= 4)','All candidate cells',C.light]];
+ horizontalBars('chart-policy',choices.map(([variant,label,color])=>{const r=DATA.policy.find(r=>r.variant===variant);return{label,value:r.precision_issue_time*100,display:pct(r.precision_issue_time*100,2)+' / '+n(r.cells_per_decision,1),color,tip:`<strong>${label}</strong>${pct(r.precision_issue_time*100,2)} precision<br>${n(r.cells_per_decision,2)} selected cells per decision`};}),{max:60,ticks:[0,20,40,60],axis:'Targeted cells truly low (%)',rowHeight:58,height:390});
 }
 function drawHoldout(){dotRows('chart-holdout',DATA.holdout.map((r,i)=>({label:['1 km test-year maximum','October 2026 · storms','2019 · storms'][i],value:r.gain,lo:r.lo,hi:r.hi,display:sign(r.gain,4),color:i===1?C.red:C.navy,hollow:i===1,decimals:4})),{domain:[-.005,.09],ticks:[0,.02,.04,.06,.08],axis:'Weather gain in PR-AUC',rowHeight:78,height:335,thresholds:[{value:.01,label:'Cell bar +.01'},{value:.02,label:'Regional bar +.02'}]});}
 function drawMorning(){dotRows('chart-morning',DATA.morning.map(r=>({label:(r.model==='lgb'?'Flexible':'Linear')+' · '+r.label,value:r.deviance_improvement_pct,lo:state.morning==='week'?r.lo_block7:r.lo,hi:state.morning==='week'?r.hi_block7:r.hi,display:sign(r.deviance_improvement_pct)+'%',ciUnit:'%',color:r.deviance_improvement_pct<0?C.red:r.model==='lgb'?C.blue:C.navy})),{domain:[-7,13],ticks:[-5,0,5,10],axis:'Lower prediction deviance with weather (%)',rowHeight:65,height:355});}
@@ -167,7 +180,7 @@ function drawSimulation(){
 }
 function controls(id,update){$$('#'+id+' button').forEach(button=>button.addEventListener('click',()=>{$$('#'+id+' button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update(button.dataset.value);}));}
 controls('where-controls',v=>{state.where=v;drawWhere();morphHost($('#map-where'));});controls('forecast-controls',v=>{state.horizon=Number(v);drawForecast();morphHost($('#chart-forecast'));});controls('morning-controls',v=>{state.morning=v;drawMorning();morphHost($('#chart-morning'));});
-function renderCharts(){drawEffects();drawRadar();drawCurve('chart-event',DATA.event,'event_min',[-60,180],[-8,3],[-60,0,60,120,180],[-8,-4,0],{event:true});drawCurve('chart-dose',DATA.dose,'mmh',[0,60],[-18,2],[0,20,40,60],[-15,-10,-5,0]);drawDuration();drawPlaces();drawFactors();drawForecast();drawHoldout();drawMorning();drawSimulation();}
+function renderCharts(){drawEffects();drawRadar();drawCurve('chart-event',DATA.event,'event_min',[-60,180],[-8,3],[-60,0,60,120,180],[-8,-4,0],{event:true});drawCurve('chart-dose',DATA.dose,'mmh',[0,60],[-18,2],[0,20,40,60],[-15,-10,-5,0]);drawDuration();drawPlaces();drawForecast();drawLead();drawPolicy();drawHoldout();drawMorning();drawSimulation();}
 function buildTables(){
  for(const host of $$('[data-table]')){const rows=DATA[host.dataset.table],cols=[...new Set(rows.flatMap(Object.keys))],box=document.createElement('div');box.className='data-table';box.innerHTML=`<table><thead><tr>${cols.map(c=>'<th scope="col">'+esc(c)+'</th>').join('')}</tr></thead><tbody>${rows.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(r[c]??'')+'</td>').join('')+'</tr>').join('')}</tbody></table>`;host.replaceChildren(box);}
 }
@@ -180,7 +193,7 @@ function renderGallery(){
  if(!items.length)grid.innerHTML='<p class="muted">No matching figures. Try another topic or clear the search.</p>';
 }
 const dialog=$('#evidence-dialog');
-function showPart(){const item=state.modal;$('#modal-title').textContent=item.title;$('#modal-category').textContent=item.category;$('#modal-image').src=item.parts[state.part];$('#modal-image').alt=`${item.title}, panel group ${state.part+1} of ${item.parts.length}`;$('#modal-part').textContent=`${state.part+1} of ${item.parts.length}`;$('#modal-prev').disabled=state.part===0;$('#modal-next').disabled=state.part===item.parts.length-1;$('#modal-source').textContent=`Saved source: ${item.source}. Restyled from frozen evidence; no model was re-estimated.`;}
+function showPart(){const item=state.modal;$('#modal-title').textContent=item.title;$('#modal-analysis').innerHTML=[['Method',item.method],['Result',item.result],['Practical meaning',item.meaning]].map(([title,text])=>`<div><h3>${title}</h3><p>${esc(text)}</p></div>`).join('');$('#modal-category').textContent=item.category;$('#modal-image').src=item.parts[state.part];$('#modal-image').alt=`${item.title}, panel group ${state.part+1} of ${item.parts.length}`;$('#modal-part').textContent=`${state.part+1} of ${item.parts.length}`;$('#modal-prev').disabled=state.part===0;$('#modal-next').disabled=state.part===item.parts.length-1;$('#modal-source').textContent=`Saved source: ${item.source}. Restyled from frozen evidence; no model was re-estimated.`;}
 function openFigure(item){state.modal=item;state.part=0;showPart();dialog.showModal();}
 $('#modal-close').addEventListener('click',()=>dialog.close());$('#modal-prev').addEventListener('click',()=>{if(state.part>0){state.part--;showPart();}});$('#modal-next').addEventListener('click',()=>{if(state.part<state.modal.parts.length-1){state.part++;showPart();}});
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
@@ -192,4 +205,4 @@ addEventListener('scroll',onScroll,{passive:true});
 const chapterObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){$$('.masthead nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id));}},{rootMargin:'-10% 0px -65% 0px'});$$('[data-chapter]').forEach(s=>chapterObserver.observe(s));
 let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();if(typeof fitScene==='function')fitScene();},140);});
 buildTables();drawMaps();drawPlanning();renderGallery();renderCharts();
-document.fonts.ready.then(()=>{if(!document.fonts.check('16px Poppins')||!document.fonts.check('50px Anton'))throw Error('Required fonts did not load');renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();document.documentElement.dataset.ready='true';});
+document.fonts.ready.then(async()=>{await Promise.all([document.fonts.load('400 16px Poppins'),document.fonts.load('500 16px Poppins'),document.fonts.load('600 16px Poppins'),document.fonts.load('400 20px Anton')]);if(!document.fonts.check('16px Poppins')||!document.fonts.check('50px Anton'))throw Error('Required fonts did not load');renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();document.documentElement.dataset.ready='true';});

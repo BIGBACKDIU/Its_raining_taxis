@@ -1,0 +1,222 @@
+{
+  "audit_unusual_days": {
+    "method": "Feed audit and exclusion rules",
+    "result": "Daily coverage, offsets, glitches and missing data identify unusual feed days.",
+    "meaning": "Check coverage before interpreting an abrupt count change as a real supply shift."
+  },
+  "feed_regimes": {
+    "method": "Change-point audit of feed coverage",
+    "result": "The public feed has distinct coverage levels and excluded short spells.",
+    "meaning": "Use regime controls and citywide-share comparisons. Changes in feed counts need not be market changes."
+  },
+  "desc_profile_rain_bands": {
+    "method": "Descriptive ratios and day bootstrap",
+    "result": "Supply relative to its expected baseline is compared by time and rain band.",
+    "meaning": "This describes timing. Controlled regressions provide the adjusted association."
+  },
+  "desc_maps_dry_heavy": {
+    "method": "Cell aggregation relative to expected supply",
+    "result": "The maps compare dry and heavy-rain availability against the coverage-adjusted baseline.",
+    "meaning": "Read the units and expected counts before comparing places."
+  },
+  "desc_rain_band_frequency": {
+    "method": "Rain-band frequency tabulation",
+    "result": "The chart shows how common each rain exposure is in the analysed panel.",
+    "meaning": "Rare rain groups carry less information. Frequency is different from the size of an association."
+  },
+  "desc_storm_2023-07-20_peak": {
+    "method": "Observed snapshot versus saved baseline",
+    "result": "Rain and vacant supply are displayed at the same observed storm snapshot.",
+    "meaning": "Use it as a descriptive example. One storm cannot identify a general effect."
+  },
+  "desc_trend_vs_fleet": {
+    "method": "Monthly descriptive trend comparison",
+    "result": "Public feed counts and LTA fleet information describe different quantities over time.",
+    "meaning": "Coverage changes complicate direct comparisons. The separate adjusted fleet analysis is more informative."
+  },
+  "effects_main": {
+    "method": "Poisson fixed effects with day-clustered intervals",
+    "result": "Count, citywide-share and offset specifications compare rain associations.",
+    "meaning": "The share specification addresses relative local losses. Do not add its percentage to the absolute association."
+  },
+  "effects_event_study": {
+    "method": "Event study around local rain onset",
+    "result": "The average event profile is relative to the dry half-hour before onset.",
+    "meaning": "Recovery is a saved confidence-interval criterion. It does not mean every location physically returns to normal."
+  },
+  "effects_approach_forecast": {
+    "method": "Approaching-rain and issued-forecast regressions",
+    "result": "Nearby rain and issued forecasts can coincide with lower supply while the cell is dry.",
+    "meaning": "This is an association before local rain. It does not show that drivers reacted to a forecast."
+  },
+  "effects_interactions": {
+    "method": "Poisson fixed effects with rain interactions",
+    "result": "Rain associations differ across rush periods, place types and other groups.",
+    "meaning": "Read group contrasts with their intervals. A difference between places does not identify its mechanism."
+  },
+  "effects_by_regime": {
+    "method": "Separate share models by feed regime",
+    "result": "The direction is broadly consistent while the magnitude varies across coverage periods.",
+    "meaning": "Report variation in size. Avoid describing the effect as stable across regimes."
+  },
+  "effects_robustness": {
+    "method": "Saved alternative model and sample checks",
+    "result": "The chart compares estimates under different units, rain measures, samples and specifications.",
+    "meaning": "Agreement supports the association within the checked designs. It does not establish causality."
+  },
+  "inference_permutation": {
+    "method": "Whole-day permutations within month and day type",
+    "result": "The observed statistic is compared with shuffled rain-day patterns.",
+    "meaning": "This supports the association only under the stated exchangeability assumption. Clustered inference remains primary."
+  },
+  "inference_hotspots": {
+    "method": "No-rain ratio statistic, day bootstrap and BH FDR",
+    "result": "Cells are screened for unusual heavy-rain losses relative to fitted no-rain supply.",
+    "meaning": "FDR controls multiple testing. This ratio statistic differs from a separately fitted cell regression."
+  },
+  "risk_odds": {
+    "method": "Fixed-effects logistic regression",
+    "result": "Rain bands are associated with odds of low availability or zero taxis, with day-clustered intervals.",
+    "meaning": "An odds ratio is different from a percentage-point change in probability."
+  },
+  "risk_vulnerability": {
+    "method": "Cell-level probability differences with day bootstrap",
+    "result": "The map compares the probability of low availability in heavy rain and dry conditions.",
+    "meaning": "Prioritise changes supported by uncertainty. The outcome concerns supply, without observed passenger demand."
+  },
+  "risk_types": {
+    "method": "Exploratory clustering of rain-response patterns",
+    "result": "The groups summarise similarities between cells and their bootstrap stability.",
+    "meaning": "Treat groups as descriptive categories, without assuming fixed real-world types."
+  },
+  "forecast_pr_auc": {
+    "method": "Chronological forecast evaluation",
+    "result": "Saved PR-AUC compares persistence, regression and LightGBM with and without weather.",
+    "meaning": "PR-AUC measures ranking over thresholds. Use the saved materiality rule rather than significance alone."
+  },
+  "forecast_topk_both_labels": {
+    "method": "Fixed-workload precision under two label definitions",
+    "result": "The plot compares how many selected alerts are truly low under retrospective and issue-time labels.",
+    "meaning": "Label versions have different information sets. Keep workload and denominators explicit."
+  },
+  "s1_weather_gain": {
+    "method": "Registered secondary scales, labels and horizons",
+    "result": "Saved weather gains remain below the registered cell-level materiality threshold.",
+    "meaning": "The conclusion applies to the tested definitions and models. Secondary analyses followed the first primary test scoring."
+  },
+  "planning_forecast_rain": {
+    "method": "No-rain expected counts aggregated by place and time",
+    "result": "The heatmap shows signed supply gaps when issued NEA forecasts indicate rain.",
+    "meaning": "Positive gaps mean fewer taxis. Negative gaps mean more. These are associations, not intervention benefits."
+  },
+  "policy_diagnosis": {
+    "method": "Integer allocation and targeting evaluation",
+    "result": "The saved comparison separates ranking, eligibility and allocation constraints.",
+    "meaning": "Targeting precision does not measure the benefit of moving a taxi. Group sizes differ."
+  },
+  "policy_targeting": {
+    "method": "Policy targeting and sensitivity analysis",
+    "result": "The chart examines saved policy outcomes under constraints and scenario choices.",
+    "meaning": "Use modelled shortfall quantities as assumptions. Evaluate a real intervention separately."
+  },
+  "sim_heldout_storms": {
+    "method": "Scenario simulator checked on held-out storms",
+    "result": "No tuned v1 scenario passes the unchanged plausibility rule.",
+    "meaning": "Use simulation to explain conditional scenarios. Do not treat its quantities as validated forecasts."
+  },
+  "names_rain_hit_map": {
+    "method": "Cell estimates, day bootstrap and FDR filtering",
+    "result": "Named heavy-rain losses show percentages alongside expected counts and absolute changes.",
+    "meaning": "Presented names require at least four expected taxis and q below 0.10."
+  },
+  "minutes_to_taxi_maps": {
+    "method": "OSM drive-time model and Poisson rain associations",
+    "result": "The heavy-rain drive-time association becomes negligible after conditioning on citywide supply.",
+    "meaning": "These are modelled access times. They are not observed passenger waits or observed road speeds."
+  },
+  "dry_supply_by_band": {
+    "method": "Dry, normal-coverage snapshot aggregation",
+    "result": "Time-band maps describe where vacant supply is usually concentrated in dry weather.",
+    "meaning": "Use dry geography as context. It is a different question from rain sensitivity."
+  },
+  "taxi_deserts_map": {
+    "method": "Dry supply divided by allocated Census residents",
+    "result": "Residential areas are compared using dry vacant taxis per resident.",
+    "meaning": "A low supply-per-resident ratio does not measure unmet passenger demand. Census allocation is approximate."
+  },
+  "factors_contrasts": {
+    "method": "Poisson panel interactions and place-characteristic contrasts",
+    "result": "Central Area is the characteristic supported consistently across the separate designs.",
+    "meaning": "Taxi stands and housing traits do not have consistent support across designs. These are associations."
+  },
+  "factors_shap": {
+    "method": "Random forest with spatial block cross-validation and SHAP",
+    "result": "Out-of-area predictive performance is weak, and SHAP describes the fitted model.",
+    "meaning": "Feature importance is not a causal effect or reliable evidence for a new stand location."
+  },
+  "dose_intensity_hangover": {
+    "method": "Spline, spell-duration and post-rain regressions",
+    "result": "Supply associations differ with intensity, spell length and time since rain.",
+    "meaning": "The panels are separate conditional models. A citywide after-rain dip is not necessarily a local share loss."
+  },
+  "mrt_did_event_study": {
+    "method": "Cohort-matched difference-in-differences",
+    "result": "Pre-opening trends fail the required comparison check.",
+    "meaning": "The design does not support a clean causal claim about new MRT stations."
+  },
+  "fleet_trend": {
+    "method": "Monthly meta-regression with coverage controls and HAC errors",
+    "result": "The adjusted fleet-size relationship is not clearly distinguishable from zero.",
+    "meaning": "Do not extrapolate a shrinking fleet into a predicted rain effect."
+  },
+  "spillover_islandwide_map": {
+    "method": "Own/nearby rain and island-wide redistribution models",
+    "result": "Many cells lose counts even when their share of the remaining taxis rises.",
+    "meaning": "Check absolute supply before treating a relative share gainer as a donor area."
+  },
+  "stands_predicted_sensitivity": {
+    "method": "Random forest using the saved training transform",
+    "result": "The map predicts rain sensitivity beyond the cells used to estimate reliable effects.",
+    "meaning": "Spatial validation is weak. Predicted cell values should not be presented as measured effects."
+  },
+  "sim2_diagnosis": {
+    "method": "Saved simulation tracking and non-simulation benchmark",
+    "result": "Both the simulator and the rain-effect benchmark fail the unchanged rule.",
+    "meaning": "Keep the rule unchanged. Poor timing limits operational interpretation."
+  },
+  "sim2_heldout_storms": {
+    "method": "Road-based scenario simulator on ten held-out storms",
+    "result": "The best v2 setting passes three storms, below the required count and overall rule.",
+    "meaning": "Road geometry improves the illustration without validating the scenario assumptions."
+  },
+  "radar_measurement_check": {
+    "method": "Identical-sample gauge/radar sensitivity comparison",
+    "result": "Heavy-rain and Central Area associations agree more closely than light-rain associations.",
+    "meaning": "The radar product merges gauges, so this is not independent validation or an attenuation correction."
+  },
+  "s22_weather_gain": {
+    "method": "Frozen regional models on the October 2026 holdout",
+    "result": "Only two storm onsets are available, below the minimum eight.",
+    "meaning": "Storm-window gains remain descriptive, even when a numerical materiality condition is met."
+  },
+  "s22b_weather_gain": {
+    "method": "Unchanged regional models on the 2019 backward holdout",
+    "result": "There are 49 onsets. The primary gain is positive but below the regional materiality threshold.",
+    "meaning": "Different fleet and market conditions may cause an era shift. No model is retuned on this holdout."
+  },
+  "s23_flows": {
+    "method": "Registered sample selection and minute-level matching audit",
+    "result": "No matched dry controls meet the registered selection rules.",
+    "meaning": "A return ratio or storm-versus-dry flow effect cannot be estimated from this sample."
+  },
+  "s23_speed": {
+    "method": "Synthetic matching test using known taxi movements",
+    "result": "Anonymous-coordinate matching recovers identities poorly at moving-taxi speeds.",
+    "meaning": "Synthetic matching performance cannot establish a real rain-related speed change."
+  },
+  "s23_geography": {
+    "method": "Registered flow-geography feasibility check",
+    "result": "Pickup and drop-off excess maps are unavailable because the comparison sample fails.",
+    "meaning": "Do not substitute unregistered controls or name pickup hotspots from unsupported estimates."
+  }
+}
