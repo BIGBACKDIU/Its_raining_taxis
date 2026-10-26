@@ -7,6 +7,11 @@ const defaults={size:'medium',strength:25,duration:60,direction:'east',driftSpee
   mechanism:'mix',demand:1,policy:false,dest:'characteristics',dispatch:'nearest',seed:2702,x:cbd[0],y:cbd[1]};
 let config={...defaults},result=null,worker=null,playing=false,time=-.001,speed=4,split=false,lastFrame=performance.now();
 let generation=0,dirty=true,frameKey='',buildTimer=null,stress=null;
+// Presentation playback changes only the animation clock, never engine inputs or results.
+const presentationMode=new URLSearchParams(location.search).get('presentation')==='1'&&parent!==window;
+let presentationRunning=presentationMode&&!reduced;
+function presentationPlayback(running){presentationRunning=Boolean(running);if(!result)return;speed=4;if(playing!==presentationRunning)play();}
+addEventListener('message',event=>{if(!presentationMode||event.source!==parent||event.data?.type!=='storm-builder:presentation')return;if(['play','pause'].includes(event.data.action))presentationPlayback(event.data.action==='play');});
 const views=[0,1].map(i=>({canvas:$('map'+i),context:$('map'+i).getContext('2d'),base:document.createElement('canvas'),w:0,h:0}));
 const perf={frames:0,drawMs:[],times:[],drawnDots:0,drawnVacant:0};
 const colors=['#0e8fa8','#c97f12','#7a5cd6','#22344a','#8796a7','#8796a7'];   // vacant, hired, repositioning, to pickup, leaving, returning
@@ -242,9 +247,10 @@ function build(){
     if(e.data.progress){$('busy-text').textContent=`Planning ${e.data.progress.policy?'repositioning':'as usual'} · ${e.data.progress.minute}/240 min`;return;}
     if(e.data.error){console.error(e.data.error);$('busy-text').textContent='Could not build this scenario. Reset or reload to retry.';$('status').textContent='Scenario error';$('status').classList.add('error');$('apply').disabled=false;return;}
     result=e.data.result;if(worker)worker.terminate();worker=null;$('busy').hidden=true;$('play').disabled=false;$('apply').disabled=false;
-    $('status').innerHTML=`<b>Ready when you are.</b><br>${config.weekend?'Weekend':'Weekday'} · ${String(config.hour).padStart(2,'0')}:00 · 4 simulated hours`;
+    $('status').innerHTML=`<b>${presentationMode?'Automatic scenario replay.':'Ready when you are.'}</b><br>${config.weekend?'Weekend':'Weekday'} · ${String(config.hour).padStart(2,'0')}:00 · 4 simulated hours`;
     $('performance').textContent=reduced?'Reduced motion enabled':'Real road paths · Illustrative taxi journeys';
     window.StormBuilder.ready=true;updateDescription();resize();updateCounters();dirty=true;
+    if(presentationMode){presentationPlayback(presentationRunning);let target='*';try{target=new URL(document.referrer).origin;}catch{}parent.postMessage({type:'storm-builder:ready'},target);}
   };
   window.StormBuilder.ready=false;
   const fallback=()=>{if(token!==generation)return;if(worker)worker.terminate();worker=null;
@@ -321,7 +327,7 @@ $('zoom-out').addEventListener('click',()=>zoomAt(views[0],views[0].cx,views[0].
 $('zoom-reset').addEventListener('click',()=>setView(1));
 new ResizeObserver(resize).observe($('maps'));window.addEventListener('resize',resize);
 function tick(now){const dt=Math.min(.1,(now-lastFrame)/1000);lastFrame=now;
-  if(playing&&result){time=Math.min(240,Math.max(0,time)+dt*speed);if(time>=240){playing=false;$('play').textContent='▶ Play';}dirty=true;}
+  if(playing&&result){time=Math.min(240,Math.max(0,time)+dt*speed);if(time>=240){if(presentationMode&&presentationRunning)time=0;else{playing=false;$('play').textContent='▶ Play';}}dirty=true;}
   if(result&&(playing||dirty||stress)){
     const start=performance.now();let count={dots:0,vacant:0};
     if(split){count=drawMap(views[0],result.outputs[0],time);drawMap(views[1],result.outputs[1],time);}

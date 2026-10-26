@@ -848,3 +848,26 @@ loading, the horizon-dependent explanation, appendix explanation and live-demo c
 JPG previews include the larger embed and methods slide. Final gates: 35 tests passed (14 existing
 warnings); wording check reports the same 76 reviewed hits. Separate scanning of new story prose
 finds scope/causality caveats and methodological terms, with no unsupported passenger-outcome claim.
+
+### Full-window slide canvas and automatic playback (decision 172; presentation only)
+
+Every scene now uses the same full-window canvas rather than a differently sized website card.
+The website header is hidden in Present; a compact chapter/count header and navigation footer
+remain. The entire scene scales uniformly, with no internal scrolling. All 26 scenes, including
+Storm Builder, have identical bounds at 1,920 × 1,080, 1,440 × 900 and 400 × 860 viewport checks.
+Method/result/meaning notes remain visible without clipping. Main chart labels fit at 1,440 px.
+
+Saved storm observations and the event cursor start on slide entry; intensity points, map measures
+and forecast horizons advance automatically with explicit labels. Manual chart controls stay in
+reading mode. The presenter still chooses when to advance slides. Global Pause/Resume, reduced
+motion, tab hiding and slide exit stop playback. The storm replay holds briefly at the peak/end,
+then loops; it introduces no new observations. Phone scenes also fit one common canvas.
+
+The embedded live app loads on entry with an embed-only `?presentation=1` mode. Local browser
+checks confirm automatic 4× playback, parent Pause/Resume and unchanged manual standalone
+behaviour. The engine/router/scenario/planner scripts and embedded inputs are byte-identical;
+only the animation clock and message bridge change. Generated app HTML matches its template and
+editable scripts. The presentation build metadata changes only its recorded HTML byte count.
+
+Final gates: 35 tests passed (14 existing warnings), the same 76 reviewed wording hits, and matching
+provenance hashes for all frozen inputs. No model, score, analysis table or registered rule changes.

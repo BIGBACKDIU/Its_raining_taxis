@@ -90,7 +90,7 @@ def main():
   for filename,weight in weights:
    p=ROOT/f'assets/fonts/{folder}/{family}-{filename}.ttf';HASHES[str(p.relative_to(ROOT))]=sha(p)
    fonts.append(f"@font-face{{font-family:'{family}';font-style:normal;font-weight:{weight};font-display:swap;src:url(data:font/ttf;base64,{base64.b64encode(p.read_bytes()).decode()}) format('truetype')}}")
- template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
+ template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text()+'\n'+(SOURCE/'presentation.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
  html=template.replace('/*__FONTS__*/','\n'.join(fonts)).replace('/*__CSS__*/',css).replace('/*__DATA__*/','const DATA = '+json.dumps(data,separators=(',',':'),ensure_ascii=False).replace('</','<\\/')+';').replace('/*__JS__*/',js)
  assert len(re.findall(r'<figure[^>]*data-main-graph=',html))==15
  assert len(re.findall(r'data-scene=',html))==26

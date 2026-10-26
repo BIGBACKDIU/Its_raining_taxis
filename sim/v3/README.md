@@ -103,3 +103,12 @@ city-building game (own design; no game names, logos or assets). The base map ad
 shallow coastal water and seeded canopy texture. Rain is drawn as a radar-style field: seeded value noise inside
 the synthetic storm footprint, coloured light blue to red by display intensity. All of this changes the drawing
 only; the engine, rain slots and counters are unchanged.
+
+## Automatic presentation playback
+
+When embedded with `?presentation=1`, the app starts the existing 4× animation after its scenario
+is ready and loops its four-hour replay. The parent frame can send `storm-builder:presentation`
+messages with action `play` or `pause`; only messages from the parent are accepted. A
+`storm-builder:ready` message lets the presentation reapply its pause state after preparation.
+Reduced-motion users start paused. This changes only playback, not engine inputs, randomness,
+paths or simulated outputs. Opening the normal URL retains manual Play behaviour.

@@ -1,0 +1,169 @@
+/* A shared full-window canvas. The scene is scaled uniformly, never scrolled. */
+.present-mode .masthead{display:none!important}
+.present-mode #presentation-stage{inset:0!important;padding:0!important;background:#f5fafc;grid-template-rows:42px minmax(0,1fr) 54px;z-index:80}
+.present-mode .stage-heading{max-width:none;padding:0 32px;font-size:11px;align-items:center;height:42px;border-bottom:1px solid #dce8ee;background:#f5fafc}
+.present-mode #scene-viewport{position:relative;display:block;padding:0;overflow:hidden!important;background:linear-gradient(140deg,#f7fbfd,#ecf5f8)}
+.present-mode #scene-content{position:absolute;left:50%;top:50%;max-width:none;flex:none;transform-origin:center;will-change:opacity;min-width:0}
+.present-mode #scene-content>[data-scene]{width:100%;height:100%;min-height:0;margin:0!important;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;overflow:hidden;padding:35px 48px 27px}
+.present-mode #scene-content>.figure{display:flex;flex-direction:column}
+.present-mode #scene-content figcaption{padding-bottom:20px;gap:30px;flex-shrink:0;flex-wrap:nowrap}
+.present-mode #scene-content .figure h3{font-size:36px;max-width:1200px}
+.present-mode #scene-content .figure figcaption p{font-size:17px;max-width:1150px;margin-top:10px}
+.present-mode #scene-content .figure-number{font-size:12px;margin-bottom:10px}
+.present-mode #scene-content .stat-callout b{font-size:54px}
+.present-mode #scene-content .stat-callout small{font-size:13px}
+.present-mode #scene-content .evidence-layout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;padding:22px 0 0;align-items:stretch}
+.present-mode #scene-content .visual-panel{display:flex;flex-direction:column;min-height:0;gap:10px}
+.present-mode #scene-content .chart{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0}
+.present-mode #scene-content .chart svg{width:100%;height:100%;max-height:100%;flex:1;overflow:visible}
+.present-mode #scene-content .chart svg text{font-size:15px}
+.present-mode #scene-content .chart svg text[font-weight="600"]{font-size:17px}
+.present-mode #scene-content .chart svg text[font-size="10"],.present-mode #scene-content .chart svg text[font-size="9"]{font-size:12px}
+.present-mode #scene-content .analysis-notes{display:block;margin:0;padding:24px 25px;border-radius:18px;overflow:hidden;align-self:stretch;background:#e7f1f6;border:1px solid #d5e6ef}
+.present-mode #scene-content .analysis-notes>div>span{font-size:11px;margin-bottom:9px}
+.present-mode #scene-content .analysis-notes h4{font-size:20px;margin-bottom:12px;line-height:1.4}
+.present-mode #scene-content .analysis-notes p{font-size:16px;line-height:1.7;margin:0 0 22px}
+.present-mode #scene-content .analysis-notes .analysis-limit{font-size:13px;line-height:1.6;margin:0 0 14px}
+.present-mode #scene-content .analysis-notes .analysis-source{font-size:11px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+.present-mode #scene-content .methods,.present-mode #scene-content .hero-actions,.present-mode #scene-content .map-hint,.present-mode #scene-content .map-explorer+ .map-hint{display:none!important}
+.present-mode #scene-content .chart-key{font-size:14px;margin:0;gap:22px;flex-shrink:0}
+.present-mode #scene-content .map-scale,.present-mode #scene-content .rain-scale{font-size:12px;margin:8px 0}
+.present-mode #scene-content .scale-caption{font-size:12px;margin:0}
+.present-mode #scene-content .twin-maps{display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;min-height:0;padding:0}
+.present-mode #scene-content .twin-maps>div{display:flex;flex-direction:column;min-height:0}
+.present-mode #scene-content .twin-maps h4{font-size:17px;margin:0}
+.present-mode #scene-content .map-canvas{display:flex;align-items:center;justify-content:center;min-height:0;flex:1}
+.present-mode #scene-content .map-canvas svg{width:100%;height:100%;max-height:none}
+.present-mode #scene-content .playback-summary{font-size:14px;margin:0;padding:12px 16px;flex-shrink:0}
+.present-mode #scene-content .explorer-caption{font-size:11px;margin:0;flex-shrink:0}
+.present-mode #scene-content .storm-player,.present-mode #scene-content .curve-explorer{padding:13px 17px;margin:0;flex-shrink:0;border:0;background:#e5f0f5}
+.present-mode #scene-content .storm-player button,.present-mode #scene-content .curve-explorer button,.present-mode #scene-content .storm-player input,.present-mode #scene-content .curve-explorer input,.present-mode #scene-content .playback-ticks,.present-mode #scene-content .curve-explorer>label{display:none!important}
+.present-mode #scene-content .playback-label{margin:0;min-height:28px;justify-content:space-between}
+.present-mode #scene-content .storm-player .playback-label:before{content:'OBSERVED STORM REPLAY';font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.08em}
+.present-mode #scene-content .curve-explorer .playback-label:before{content:'SAVED MODEL ESTIMATES';font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.06em}
+.present-mode #scene-content .playback-label output{font-size:24px}
+.present-mode #scene-content .curve-explorer .playback-label output{font-size:17px}
+.present-mode #scene-content .annotation-strip{padding:12px 16px;margin:0;flex-shrink:0}
+.present-mode #scene-content .annotation-strip b{font-size:31px}
+.present-mode #scene-content .annotation-strip p{font-size:13px}
+.present-mode #scene-content .dual-evidence{display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;min-height:0}
+.present-mode #scene-content .dual-evidence>div{display:flex;flex-direction:column;min-height:0;margin:0}
+.present-mode #scene-content .dual-evidence h4{font-size:17px;margin-bottom:8px}
+.present-mode #scene-content .map-explorer{display:flex;flex-direction:column;min-height:0;flex:1}
+.present-mode #scene-content .map-explorer>div{display:flex;flex-direction:column;min-height:0;flex:1}
+.present-mode #scene-content .place-detail{display:block;margin-top:12px;padding:16px 20px;flex-shrink:0}
+.present-mode #scene-content .place-detail h4{font-size:24px}
+.present-mode #scene-content .place-value{font-size:35px}
+.present-mode #scene-content .place-count{font-size:14px}
+.present-mode #scene-content .segmented{pointer-events:none;background:transparent;border:0;padding:0;margin:0!important;align-self:flex-start}
+.present-mode #scene-content .segmented button{display:none!important}
+.present-mode #scene-content .segmented:after{content:attr(data-current-label);display:block;border-radius:8px;background:#e1edf4;padding:9px 14px;color:var(--blue);font-size:13px;font-weight:500;white-space:nowrap}
+.present-mode #scene-content .planning-heatmap{height:100%;width:100%;min-width:0;grid-template-columns:160px repeat(5,minmax(0,1fr))}
+.present-mode #scene-content .planning-heatmap>div{font-size:17px;padding:8px 4px}
+.present-mode #scene-content .planning-heatmap .heat-label{font-size:15px}
+.present-mode #scene-content .planning-heatmap .heat-head{font-size:14px}
+.present-mode #scene-content .holdout-notes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;flex-shrink:0}
+.present-mode #scene-content .holdout-notes p,.present-mode #scene-content .gainer-list p{font-size:13px}
+.present-mode #scene-content .explain-slide{display:flex;flex-direction:column;justify-content:center;padding:40px 58px}
+.present-mode #scene-content .explain-slide>h2{font-size:44px;max-width:1450px;margin-bottom:30px}
+.present-mode #scene-content .section-kicker{font-size:13px;margin-bottom:22px}
+.present-mode #scene-content .slide-deck{font-size:22px;max-width:1400px;line-height:1.7;margin-bottom:25px}
+.present-mode #scene-content .question-grid,.present-mode #scene-content .definition-grid,.present-mode #scene-content .recommend-grid{grid-template-columns:repeat(3,1fr);gap:26px}
+.present-mode #scene-content .question-grid article,.present-mode #scene-content .definition-grid article,.present-mode #scene-content .recommend-grid article,.present-mode #scene-content .comparison-grid article,.present-mode #scene-content .task-comparison article{padding:28px}
+.present-mode #scene-content .question-grid h3,.present-mode #scene-content .recommend-grid h3,.present-mode #scene-content .definition-grid h3{font-size:28px}
+.present-mode #scene-content .question-grid p,.present-mode #scene-content .recommend-grid p,.present-mode #scene-content .definition-grid p{font-size:21px;line-height:1.8}
+.present-mode #scene-content .scope-note{margin-top:35px;padding-top:23px;grid-template-columns:150px 1fr}
+.present-mode #scene-content .scope-note span{font-size:12px}
+.present-mode #scene-content .scope-note p{font-size:18px;line-height:1.8}
+.present-mode #scene-content .workflow-grid{grid-template-columns:repeat(5,1fr);gap:18px}
+.present-mode #scene-content .workflow-grid article{padding:25px 22px}
+.present-mode #scene-content .workflow-grid h3{font-size:24px}
+.present-mode #scene-content .workflow-grid p{font-size:19px;line-height:1.85}
+.present-mode #scene-content .policy-steps{grid-template-columns:repeat(4,1fr)}
+.present-mode #scene-content .data-method-grid{grid-template-columns:1.5fr 1fr;gap:48px}
+.present-mode #scene-content .source-row{margin-bottom:30px}
+.present-mode #scene-content .source-row h3{font-size:26px}
+.present-mode #scene-content .source-row p,.present-mode #scene-content .audit-card p{font-size:19px;line-height:1.8}
+.present-mode #scene-content .audit-card h3{font-size:28px}
+.present-mode #scene-content .audit-card strong{font-size:45px}
+.present-mode #scene-content .audit-card small{font-size:14px}
+.present-mode #scene-content .slide-footnote{font-size:13px}
+.present-mode #scene-content .comparison-grid,.present-mode #scene-content .task-comparison,.present-mode #scene-content .conclusion-grid{grid-template-columns:1fr 1fr;gap:30px}
+.present-mode #scene-content .comparison-grid p,.present-mode #scene-content .task-comparison p,.present-mode #scene-content .conclusion-grid p,.present-mode #scene-content .split-timeline p{font-size:20px;line-height:1.8}
+.present-mode #scene-content .split-timeline{grid-template-columns:repeat(3,1fr);gap:30px;margin:30px 0}
+.present-mode #scene-content .split-timeline h3{font-size:25px}
+.present-mode #scene-content .conclusion-grid h3,.present-mode #scene-content .task-comparison h3{font-size:29px}
+.present-mode #scene-content .closing-question{font-size:23px}
+.present-mode #scene-content .hero{display:grid;grid-template-columns:1fr 1fr;gap:35px;padding:55px 65px 25px;align-content:center}
+.present-mode #scene-content .hero h1{font-size:82px}
+.present-mode #scene-content .hero-deck{font-size:24px;max-width:650px;margin:30px 0}
+.present-mode #scene-content .hero-visual{padding:30px 0}
+.present-mode #scene-content .hero-map-caption{font-size:14px}
+.present-mode #scene-content .hero-map-caption small{font-size:15px}
+.present-mode #scene-content .hero-bottom{gap:35px;padding:26px 0 0;margin-top:30px}
+.present-mode #scene-content .hero-bottom strong{font-size:42px}
+.present-mode #scene-content .hero-bottom span,.present-mode #scene-content .hero-bottom p{font-size:16px}
+.present-mode .presentation-dock{width:100%;height:54px;max-width:none;margin:0;padding:0 22px;gap:12px;border:0;border-top:1px solid #dce8ee;border-radius:0;box-shadow:none;background:#f5fafc;backdrop-filter:none}
+.present-mode .presentation-dock button{height:32px;width:34px;border-radius:8px;font-size:17px}
+.present-mode #slide-title{font-size:11px;max-width:950px}
+.present-mode .slide-progress{margin-top:5px}
+.present-mode .presentation-dock #stage-animation-toggle,.present-mode .presentation-dock #stage-exit{width:auto;padding:0 12px;font-size:11px;background:#e1edf4;color:var(--blue)}
+.present-mode #scene-content #simulation-demo{display:flex;flex-direction:column;justify-content:flex-start;padding:12px 18px}
+.present-mode #scene-content #simulation-demo>.section-kicker,.present-mode #scene-content #simulation-demo>h2{display:none}
+.present-mode #scene-content .demo-toolbar{min-height:30px;display:flex;justify-content:space-between;margin:0 0 9px}
+.present-mode #scene-content .demo-toolbar p{font-size:15px;margin:0}
+.present-mode #scene-content .demo-toolbar button{display:none}
+.present-mode #scene-content .sim-frame-wrap{flex:1;min-height:0;height:auto!important;border-radius:12px}
+.present-mode #scene-content .demo-caveat{font-size:12px;margin:8px 0 0}
+.present-mode #scene-content .text-link{font-size:13px}
+/* Portrait keeps the same canvas on every scene, without internal scrollbars. */
+.present-mode.stage-portrait #scene-content>[data-scene]{padding:30px 35px}
+.present-mode.stage-portrait #scene-content .evidence-layout{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:25px}
+.present-mode.stage-portrait #scene-content .figure h3{font-size:38px}
+.present-mode.stage-portrait #scene-content .analysis-notes{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:22px}
+.present-mode.stage-portrait #scene-content .analysis-notes .method-note{grid-column:1/-1}
+.present-mode.stage-portrait #scene-content .analysis-notes p{font-size:22px;line-height:1.7;margin:0}
+.present-mode.stage-portrait #scene-content .analysis-notes h4{font-size:26px;margin-bottom:8px}
+.present-mode.stage-portrait #scene-content .analysis-notes>div>span{font-size:16px}
+.present-mode.stage-portrait #scene-content .analysis-notes .analysis-limit{grid-column:1/-1;font-size:17px}
+.present-mode.stage-portrait #scene-content .analysis-notes .analysis-source{grid-column:1/-1;font-size:14px}
+.present-mode.stage-portrait #scene-content .explain-slide{padding:40px;justify-content:center}
+.present-mode.stage-portrait #scene-content .explain-slide>h2{font-size:49px}
+.present-mode.stage-portrait #scene-content .question-grid,.present-mode.stage-portrait #scene-content .definition-grid,.present-mode.stage-portrait #scene-content .recommend-grid{grid-template-columns:1fr;gap:25px}
+.present-mode.stage-portrait #scene-content .question-grid h3,.present-mode.stage-portrait #scene-content .recommend-grid h3,.present-mode.stage-portrait #scene-content .definition-grid h3{font-size:32px}
+.present-mode.stage-portrait #scene-content .question-grid p,.present-mode.stage-portrait #scene-content .recommend-grid p,.present-mode.stage-portrait #scene-content .definition-grid p{font-size:25px}
+.present-mode.stage-portrait #scene-content .workflow-grid{grid-template-columns:1fr 1fr;gap:22px}
+.present-mode.stage-portrait #scene-content .workflow-grid h3{font-size:29px}
+.present-mode.stage-portrait #scene-content .workflow-grid p{font-size:24px}
+.present-mode.stage-portrait #scene-content .data-method-grid,.present-mode.stage-portrait #scene-content .conclusion-grid{grid-template-columns:1fr}
+.present-mode.stage-portrait #scene-content .source-row p,.present-mode.stage-portrait #scene-content .audit-card p{font-size:24px}
+.present-mode.stage-portrait #scene-content .split-timeline{grid-template-columns:1fr}
+.present-mode.stage-portrait #scene-content .comparison-grid,.present-mode.stage-portrait #scene-content .task-comparison{grid-template-columns:1fr}
+.present-mode.stage-portrait #scene-content .comparison-grid p,.present-mode.stage-portrait #scene-content .task-comparison p,.present-mode.stage-portrait #scene-content .conclusion-grid p{font-size:25px}
+.present-mode.stage-portrait #scene-content .hero{grid-template-columns:1fr;align-content:center}
+.present-mode.stage-portrait #scene-content .hero h1{font-size:90px}
+.present-mode.stage-portrait #scene-content .hero-visual{max-height:550px}
+.present-mode.stage-portrait #scene-content .hero-bottom{grid-template-columns:repeat(3,1fr)}
+.present-mode.stage-portrait #scene-content .hero-bottom p{grid-column:1/-1}
+.present-mode.stage-portrait #scene-content .chart svg text{font-size:19px}
+.present-mode.stage-portrait #scene-content .chart svg text[font-weight="600"]{font-size:21px}
+.present-mode.stage-portrait #scene-content .chart svg text[font-size="10"],.present-mode.stage-portrait #scene-content .chart svg text[font-size="9"]{font-size:16px}
+.present-mode.stage-portrait #slide-title{display:none}
+.present-mode.stage-portrait #stage-chapter{max-width:75%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+/* The paired storm maps use the whole slide width, with a compact methods strip below. */
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .evidence-layout{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:16px}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:12px 30px;padding:17px 22px}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes p{font-size:14px;line-height:1.65;margin:0}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes h4{font-size:17px;margin-bottom:8px}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes .analysis-limit{grid-column:1/3;font-size:11px}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes .analysis-source{font-size:10px}
+.present-mode.demo-active #presentation-stage{grid-template-rows:42px minmax(0,1fr) 54px!important;padding:0!important}
+.present-mode:not(.stage-portrait) #scene-content .evidence-layout{grid-template-columns:minmax(0,1fr) 430px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes{padding:20px 23px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes p{font-size:16px;line-height:1.6;margin-bottom:16px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes h4{font-size:19px;line-height:1.35;margin-bottom:9px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes>div>span{margin-bottom:7px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes .analysis-limit{font-size:12px;line-height:1.5;margin-bottom:10px}
+.present-mode:not(.stage-portrait) #scene-content .analysis-notes .analysis-source{font-size:10px;line-height:1.5;margin:0}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .evidence-layout{grid-template-columns:1fr}
+.present-mode:not(.stage-portrait) #scene-content [data-main-graph="storm"] .analysis-notes p{font-size:14px;margin:0}

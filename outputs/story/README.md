@@ -12,21 +12,28 @@ constrained targeting, measurement checks, simulation limits, and recommendation
 figure has visible **Method / Result / Practical meaning** notes. The complete **44-figure appendix**
 retains 97 data panels in 67 readable groups, with explanations in its viewer.
 
-Choose **Present**, then use next/back, left/right arrows, Page Up/Down, Home/End or chart replay.
-Escape returns to the scrolling view. On phones, tall scenes scroll while navigation remains visible.
-Motion can be disabled and respects the system reduced-motion preference.
+Choose **Present** for a consistent, full-window slide canvas. Every scene uses the same dimensions;
+there is no large website header, floating slide card or internal scrolling. Next/back, left/right
+arrows, Page Up/Down and Home/End advance slides. Escape or **Exit** returns to reading mode.
+The portrait layout uses the same canvas for every scene on a phone.
+
+On slide entry, the storm replay and event cursor play automatically. The intensity display steps
+through saved points, the map alternates absolute/share views, and forecasting alternates 30/60
+minutes with visible labels. Slides themselves advance at the presenter's pace. A compact **Pause**
+control stops playback; **Resume** continues. Playback also stops when a slide or tab is left.
+The system reduced-motion preference is respected; its static storm view uses the saved rain peak.
 
 The storm player shows **15 observed half-hour snapshots**, 06:30–13:30 Singapore time on
-20 July 2023. Play, pause, scrub or jump to the saved 09:30 peak. Colour fades create no intermediate
-observations. The event player and intensity slider use only saved model estimates and intervals.
-Map controls change absolute/share measures; forecast controls change horizon; morning controls
-select saved day/seven-day intervals. Tooltips and expandable tables retain exact values.
+20 July 2023. It pauses briefly at the saved 09:30 peak and the end before looping. Colour fades
+create no intermediate observations. The event cursor and intensity display use only saved model
+estimates and intervals. The morning slide shows the saved seven-day-block intervals. Reading
+mode retains manual play, scrubbing, map, horizon and interval controls, tooltips and numeric tables.
 
-The live demonstration embeds `https://storm-builder-sg.vercel.app/`. Select **Load Storm Builder**.
-Its presentation scene uses almost the whole window, with compact controls. **Expand view** fills
-the window further; **Back to presentation** restores the slide without restarting the scenario.
-Leaving the demonstration slide unloads the app. The simulation remains an illustration: its
-unchanged realism rule fails. Opening the app separately is also supported.
+The live demonstration embeds `https://storm-builder-sg.vercel.app/?presentation=1` and starts
+on entry. Its animation runs at the existing 4× playback rate and loops without changing engine
+inputs or results. The slide's Pause/Resume also controls the app; leaving the slide unloads it.
+The simulation remains an illustration: its unchanged realism rule fails. Reading mode retains
+**Load Storm Builder**, **Expand view** and opening separately.
 
 ## Rebuild and provenance
 
@@ -34,7 +41,7 @@ unchanged realism rule fails. Opening the app separately is also supported.
 .venv/bin/python -m analysis.build_story
 ```
 
-Editable sources are `story/template.html`, `story/story.css`, `story/story.js`, `story/motion.js`
+Editable sources are `story/template.html`, `story/story.css`, `story/story.js`, `story/motion.js`, `story/presentation.css`
 and `story/evidence_notes.json`. The builder reads saved CSVs and presentation exports, embeds
 fonts and images, and verifies input hashes. `provenance.json` records hashes, graph/scene counts
 and final HTML size. It performs no estimation, tuning, bootstrap, model scoring or holdout access.
@@ -52,4 +59,4 @@ undercoverage, failed simulation realism and unidentifiable minute-flow mechanis
 
 Browser checks cover desktop 1440 px and phone 400 px, all scenes, graph explanations, fonts,
 chart controls, appendix navigation, unique IDs after leaving Present, and the live embed's
-expansion, state preservation and unloading. JPG previews are presentation QA records.
+automatic playback, pause/resume and unloading. JPG previews are presentation QA records.

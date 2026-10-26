@@ -6,10 +6,11 @@ function updateMotion(){
  document.body.classList.toggle('motion-off',!motionEnabled);
  motionButton.textContent=motionEnabled?'Motion on':'Motion off';
  motionButton.setAttribute('aria-pressed',String(motionEnabled));
+ if(typeof updatePresentationPause==='function')updatePresentationPause();
  if(!motionEnabled)document.getAnimations().forEach(animation=>animation.finish());
 }
-motionButton.addEventListener('click',()=>{motionEnabled=!motionEnabled;updateMotion();if(!motionEnabled)pausePlayers();});
-motionPreference.addEventListener('change',e=>{motionEnabled=!e.matches;updateMotion();if(!motionEnabled)pausePlayers();});
+motionButton.addEventListener('click',()=>{motionEnabled=!motionEnabled;updateMotion();if(!motionEnabled)pausePlayers();else if(presentEnabled)startPresentationPlayback(false);});
+motionPreference.addEventListener('change',e=>{motionEnabled=!e.matches;updateMotion();if(!motionEnabled)pausePlayers();else if(presentEnabled)startPresentationPlayback(false);});
 function morphHost(host){if(motionEnabled)host.animate([{opacity:.35,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:360,easing:'cubic-bezier(.2,.8,.2,1)'});}
 function revealChart(host){
  if(!motionEnabled)return;
@@ -28,7 +29,8 @@ const revealObserver=new IntersectionObserver(entries=>{for(const entry of entri
 $$('figure[data-main-graph]').forEach(host=>revealObserver.observe(host));
 
 // Step through the original 15 half-hour snapshots, never synthetic in-between observations.
-let stormIndex=0,stormTimer=null,eventIndex=0,eventTimer=null;
+let stormIndex=0,stormTimer=null,eventIndex=0,eventTimer=null,sceneTimer=null;
+let presentationPaused=false;
 const stormTimes=DATA.stormFrames;
 $('#storm-scrub').max=stormTimes.length-1;
 $('#event-scrub').max=DATA.event.length-1;
@@ -38,7 +40,7 @@ $('#dose-scrub').value=doseIndex;
 function buttonState(id,running,label){const button=$(id);button.textContent=running?'Ⅱ Pause':`▶ ${label}`;button.setAttribute('aria-pressed',String(running));}
 function stopStorm(){clearInterval(stormTimer);stormTimer=null;buttonState('#storm-play',false,stormIndex===stormTimes.length-1?'Replay storm':'Play storm');}
 function stopEvent(){clearInterval(eventTimer);eventTimer=null;buttonState('#event-play',false,eventIndex===DATA.event.length-1?'Replay timeline':'Play timeline');}
-function pausePlayers(){stopStorm();stopEvent();tooltip.hidden=true;}
+function pausePlayers(){stopStorm();stopEvent();clearInterval(sceneTimer);sceneTimer=null;sendSimulationPlayback(false);tooltip.hidden=true;}
 function playerIsVisible(element){const r=element.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&r.width>0;}
 function setStormFrame(index,animate=true){
  stormIndex=Math.max(0,Math.min(stormTimes.length-1,index));
@@ -55,12 +57,11 @@ function setStormFrame(index,animate=true){
  $('#storm-scrub').setAttribute('aria-valuetext',frame.time.slice(11,16)+' Singapore time');
  tooltip.hidden=true;
 }
-$('#storm-play').addEventListener('click',()=>{
- if(stormTimer){stopStorm();return;}
- if(stormIndex>=stormTimes.length-1)setStormFrame(0,false);
- buttonState('#storm-play',true,'Play storm');
- stormTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#storm-play').closest('figure'))){stopStorm();return;}setStormFrame(stormIndex+1);if(stormIndex===stormTimes.length-1)stopStorm();},950);
-});
+function startStorm(loop=false){
+ stopStorm();if(stormIndex>=stormTimes.length-1)setStormFrame(0,false);buttonState('#storm-play',true,'Play storm');let hold=0;
+ stormTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#storm-play').closest('figure'))){stopStorm();return;}if(hold){hold--;return;}if(stormIndex===stormTimes.length-1){if(!loop){stopStorm();return;}setStormFrame(0);return;}setStormFrame(stormIndex+1);if(stormIndex===6||stormIndex===stormTimes.length-1)hold=2;},1200);
+}
+$('#storm-play').addEventListener('click',()=>{if(stormTimer)stopStorm();else startStorm();});
 $('#storm-scrub').addEventListener('input',e=>{stopStorm();setStormFrame(Number(e.target.value),false);});
 $('#storm-peak').addEventListener('click',()=>{stopStorm();setStormFrame(6);});
 function setCurveCursor(id,row,xvalue,domainX,domainY){
@@ -79,16 +80,12 @@ function showEvent(index){
  setCurveCursor('chart-event',row,row.event_min,[-60,180],[-8,3]);
 }
 $('#event-scrub').addEventListener('input',e=>{stopEvent();showEvent(Number(e.target.value));});
-$('#event-play').addEventListener('click',()=>{
- if(eventTimer){stopEvent();return;}
- if(eventIndex>=DATA.event.length-1)showEvent(0);
- buttonState('#event-play',true,'Play timeline');
- eventTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#event-play').closest('figure'))){stopEvent();return;}showEvent(eventIndex+1);if(eventIndex===DATA.event.length-1)stopEvent();},1050);
-});
+function startEvent(loop=false){stopEvent();if(eventIndex>=DATA.event.length-1)showEvent(0);buttonState('#event-play',true,'Play timeline');let hold=0;eventTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#event-play').closest('figure'))){stopEvent();return;}if(hold){hold--;return;}if(eventIndex===DATA.event.length-1){if(!loop){stopEvent();return;}showEvent(0);return;}showEvent(eventIndex+1);if(eventIndex===DATA.event.length-1)hold=2;},1500);}
+$('#event-play').addEventListener('click',()=>{if(eventTimer)stopEvent();else startEvent();});
 function showDose(index){doseIndex=index;const row=DATA.dose[doseIndex];$('#dose-value').textContent=`${row.mmh} mm/h · ${pct(row.pct)} vacant taxis · 95% CI ${pct(row.lo,1)} to ${pct(row.hi,1)}`;$('#dose-scrub').setAttribute('aria-valuetext',`${row.mmh} mm/h, ${pct(row.pct)}`);setCurveCursor('chart-dose',row,row.mmh,[0,60],[-18,2]);}
 $('#dose-scrub').addEventListener('input',e=>showDose(Number(e.target.value)));
 function refreshExplorers(){showEvent(eventIndex);showDose(doseIndex);}
-document.addEventListener('visibilitychange',()=>{if(document.hidden)pausePlayers();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pausePlayers();else if(presentEnabled)startPresentationPlayback(false);});
 
 // Move the real figures into a stage: one scene, unique IDs, original controls and data.
 const present=$('#present-toggle'),stage=$('#presentation-stage'),scene=$('#scene-content'),viewport=$('#scene-viewport');
@@ -98,14 +95,39 @@ let presentIndex=0,presentEnabled=false,previousScroll=0,sceneAnimation=null;
 function restoreSlide(){const slide=slides[presentIndex];if(slide.node.parentElement===scene)slide.home.after(slide.node);}
 function fitScene(){
  if(!presentEnabled)return;
- scene.style.transform='none';scene.style.width='';scene.style.height='';
- if(slides[presentIndex].node.id==='simulation-demo'){scene.style.height='100%';viewport.style.overflowY='hidden';viewport.style.alignItems='stretch';return;}
- const mobile=innerWidth<700;
- if(mobile){scene.style.transform='';viewport.style.overflowY='auto';viewport.style.alignItems='flex-start';return;}
- const available=viewport.clientHeight-12,scaleBy=Math.min(1,available/scene.scrollHeight);
- // Keep chart text readable; very tall scenes can scroll rather than shrink below 80%.
- const factor=Math.max(.8,scaleBy);scene.style.transform=`scale(${factor})`;scene.style.transformOrigin='center top';
- viewport.style.overflowY=scaleBy<.8?'auto':'hidden';viewport.style.alignItems=scaleBy>=1?'center':'flex-start';
+ const portrait=innerWidth<700&&innerHeight>innerWidth;
+ document.body.classList.toggle('stage-portrait',portrait);
+ const factor=Math.min(viewport.clientWidth/(portrait?900:1600),viewport.clientHeight/(portrait?1500:900));
+ scene.style.width=(viewport.clientWidth/factor)+'px';scene.style.height=(viewport.clientHeight/factor)+'px';
+ scene.style.transform=`translate(-50%,-50%) scale(${factor})`;
+ viewport.style.overflowY='hidden';
+}
+function setPresentationLabel(id,value){const host=$('#'+id);host.dataset.currentLabel=value;const selected={'where-controls':state.where,'forecast-controls':String(state.horizon),'morning-controls':state.morning}[id];host.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.value===selected)));}
+function updatePresentationPause(){const button=$('#stage-animation-toggle');button.disabled=!motionEnabled;button.textContent=!motionEnabled?'Motion off':presentationPaused?'▶ Resume':'Ⅱ Pause';button.setAttribute('aria-label',presentationPaused?'Resume slide animations':'Pause slide animations');button.setAttribute('aria-pressed',String(presentationPaused));}
+function startPresentationPlayback(restart=true){
+ if(!presentEnabled)return;
+ clearInterval(sceneTimer);sceneTimer=null;
+ const id=slides[presentIndex].node.id||slides[presentIndex].node.dataset.scene;
+ setPresentationLabel('where-controls',state.where==='absolute'?'Vacant count · heavy rain':'Citywide share · heavy rain');
+ setPresentationLabel('forecast-controls',state.horizon+'-minute horizon');
+ setPresentationLabel('morning-controls','7-day block confidence intervals');
+ if(id==='graph-morning'){state.morning='week';setPresentationLabel('morning-controls','7-day block confidence intervals');drawMorning();}
+ if(id==='simulation-demo'){if(!$('#simulation-frame').getAttribute('src'))loadLiveSimulation(true);sendSimulationPlayback(motionEnabled&&!presentationPaused);return;}
+ if(!motionEnabled||presentationPaused||document.hidden){if(restart&&id==='graph-storm')setStormFrame(6,false);return;}
+ if(id==='graph-storm'){if(restart)setStormFrame(0,false);startStorm(true);}
+ if(id==='graph-event'){if(restart)showEvent(0);startEvent(true);}
+ if(id==='graph-dose'){
+  const indices=[1,10,25,60].map(value=>DATA.dose.findIndex(row=>row.mmh===value)).filter(index=>index>=0);let cursor=0;
+  if(restart)showDose(indices[0]);sceneTimer=setInterval(()=>{cursor=(cursor+1)%indices.length;showDose(indices[cursor]);},3000);
+ }
+ if(id==='graph-where'){
+  if(restart){state.where='absolute';drawWhere();}setPresentationLabel('where-controls',state.where==='absolute'?'Vacant count · heavy rain':'Citywide share · heavy rain');
+  sceneTimer=setInterval(()=>{state.where=state.where==='absolute'?'share':'absolute';drawWhere();setPresentationLabel('where-controls',state.where==='absolute'?'Vacant count · heavy rain':'Citywide share · heavy rain');},9000);
+ }
+ if(id==='graph-forecast'){
+  if(restart){state.horizon=30;drawForecast();}setPresentationLabel('forecast-controls',state.horizon+'-minute horizon');
+  sceneTimer=setInterval(()=>{state.horizon=state.horizon===30?60:30;drawForecast();setPresentationLabel('forecast-controls',state.horizon+'-minute horizon');},8500);
+ }
 }
 function showSlide(index,direction=1){
  pausePlayers();if(typeof stopLiveSimulation==='function')stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();
@@ -115,7 +137,7 @@ function showSlide(index,direction=1){
  $('#stage-chapter').textContent=slide.chapter;$('#stage-count').textContent=`${String(presentIndex+1).padStart(2,'0')} / ${slides.length}`;
  $('#slide-title').textContent=slide.title;$('#slide-progress').style.width=((presentIndex+1)/slides.length*100)+'%';
  $('#slide-prev').disabled=presentIndex===0;$('#slide-next').disabled=presentIndex===slides.length-1;
- viewport.scrollTop=0;renderCharts();refreshExplorers();fitScene();
+ viewport.scrollTop=0;fitScene();renderCharts();refreshExplorers();startPresentationPlayback();
  if(motionEnabled){sceneAnimation=scene.animate([{opacity:0,translate:`${direction*28}px 9px`},{opacity:1,translate:'0px 0px'}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});revealChart(slide.node);}
  stage.setAttribute('aria-label',`Presentation slide ${presentIndex+1} of ${slides.length}: ${slide.title}`);
 }
@@ -123,14 +145,16 @@ function setPresent(enabled){
  if(enabled===presentEnabled)return;
  pausePlayers();presentEnabled=enabled;
  if(enabled){previousScroll=scrollY;stage.hidden=false;document.body.classList.add('present-mode');$('#story').inert=true;showSlide(0);}
- else{stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();restoreSlide();scene.replaceChildren();stage.hidden=true;document.body.classList.remove('present-mode','demo-active');$('#story').inert=false;scene.style.transform='';renderCharts();refreshExplorers();window.scrollTo({top:previousScroll,behavior:'instant'});present.focus();}
+ else{stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();restoreSlide();scene.replaceChildren();stage.hidden=true;document.body.classList.remove('present-mode','demo-active','stage-portrait');$('#story').inert=false;scene.style.transform='';renderCharts();refreshExplorers();window.scrollTo({top:previousScroll,behavior:'instant'});present.focus();}
  present.setAttribute('aria-pressed',String(enabled));present.textContent=enabled?'Exit presentation':'↗ Present';
 }
 present.addEventListener('click',()=>setPresent(!presentEnabled));
 $('.hero-link').addEventListener('click',e=>{if(presentEnabled){e.preventDefault();setPresent(false);$('#brief').scrollIntoView({behavior:motionEnabled?'smooth':'instant'});}});
 $$('[data-start-presentation]').forEach(button=>button.addEventListener('click',()=>{if(presentEnabled)showSlide(1);else setPresent(true);}));
 $('#slide-prev').addEventListener('click',()=>showSlide(presentIndex-1,-1));$('#slide-next').addEventListener('click',()=>showSlide(presentIndex+1,1));
-$('#slide-replay').addEventListener('click',()=>revealChart(slides[presentIndex].node));
+$('#slide-replay').addEventListener('click',()=>{pausePlayers();revealChart(slides[presentIndex].node);startPresentationPlayback();});
+$('#stage-exit').addEventListener('click',()=>setPresent(false));
+$('#stage-animation-toggle').addEventListener('click',()=>{presentationPaused=!presentationPaused;updatePresentationPause();if(presentationPaused)pausePlayers();else startPresentationPlayback(false);});
 document.addEventListener('keydown',e=>{
  if(dialog.open){if(e.key==='ArrowRight'&&state.part<state.modal.parts.length-1){state.part++;showPart();}if(e.key==='ArrowLeft'&&state.part>0){state.part--;showPart();}return;}
  if(e.key==='Escape'&&document.body.classList.contains('demo-expanded')){setDemoExpanded(false);return;}
@@ -141,12 +165,16 @@ document.addEventListener('keydown',e=>{
  if(e.key==='Home'){e.preventDefault();showSlide(0,-1);}
  if(e.key==='End'){e.preventDefault();showSlide(slides.length-1,1);}
 });
-updateMotion();setStormFrame(0,false);refreshExplorers();
+updateMotion();updatePresentationPause();setStormFrame(0,false);refreshExplorers();
 
 addEventListener('beforeprint',()=>{if(presentEnabled)setPresent(false);pausePlayers();});
 
 function setDemoExpanded(enabled){document.body.classList.toggle('demo-expanded',enabled);const button=$('#expand-simulation');button.textContent=enabled?'↙ Back to presentation':'Expand view ↗';button.setAttribute('aria-pressed',String(enabled));if(presentEnabled)fitScene();}
 $('#expand-simulation').addEventListener('click',()=>setDemoExpanded(!document.body.classList.contains('demo-expanded')));
 function stopLiveSimulation(){setDemoExpanded(false);$('#expand-simulation').disabled=true;const frame=$('#simulation-frame');if(!frame)return;frame.removeAttribute('src');frame.hidden=true;$('#simulation-placeholder').hidden=false;$('#load-simulation').textContent='Load Storm Builder';}
-$('#load-simulation').addEventListener('click',()=>{const frame=$('#simulation-frame');if(frame.getAttribute('src')){stopLiveSimulation();return;}$('#expand-simulation').disabled=false;frame.src='https://storm-builder-sg.vercel.app/';frame.hidden=false;$('#simulation-placeholder').hidden=true;$('#load-simulation').textContent='Stop demo';});
+function sendSimulationPlayback(running){const frame=$('#simulation-frame');if(frame?.getAttribute('src'))frame.contentWindow.postMessage({type:'storm-builder:presentation',action:running?'play':'pause'},'https://storm-builder-sg.vercel.app');}
+function loadLiveSimulation(automatic=false){const frame=$('#simulation-frame');$('#expand-simulation').disabled=false;frame.src='https://storm-builder-sg.vercel.app/'+(automatic?'?presentation=1':'');frame.hidden=false;$('#simulation-placeholder').hidden=true;$('#load-simulation').textContent='Stop demo';}
+$('#load-simulation').addEventListener('click',()=>{if($('#simulation-frame').getAttribute('src'))stopLiveSimulation();else loadLiveSimulation();});
+$('#simulation-frame').addEventListener('load',()=>{if(presentEnabled)sendSimulationPlayback(motionEnabled&&!presentationPaused&&!document.hidden);});
+addEventListener('message',event=>{if(event.origin!=='https://storm-builder-sg.vercel.app'||event.source!==$('#simulation-frame').contentWindow||event.data?.type!=='storm-builder:ready')return;sendSimulationPlayback(presentEnabled&&motionEnabled&&!presentationPaused&&!document.hidden);});
 $('#conclusion a[href="#evidence"]').addEventListener('click',e=>{if(presentEnabled){e.preventDefault();setPresent(false);$('#evidence').scrollIntoView({behavior:motionEnabled?'smooth':'instant'});}});

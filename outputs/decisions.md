@@ -1695,3 +1695,26 @@ results stay as they are and remain the pre-specified result.
     leaving the scene unloads it. Its assumptions remain labelled as illustration only.
     Validate desktop/phone layout, all 26 scenes, fonts, explanations and iframe behaviour;
     rebuild with input-hash checks and run the existing wording/test gates before committing.
+
+
+172. **Use a consistent full-window slide canvas and automatic playback (presentation only).**
+    The user corrected the website-like presentation: all slides should occupy the same space,
+    without a large header or a Play button needed to start a graph. Give every one of the 26
+    scenes the same full-window canvas, with a compact chapter/count header and navigation footer.
+    Scale the complete scene uniformly to the available viewport, with a portrait layout, rather
+    than changing card sizes or requiring internal scrolling. Keep all methods and limitations.
+
+    In Present, start the saved storm replay and event cursor on entry, step through saved intensity
+    points, and alternate the existing map measures and forecast horizons with explicit labels.
+    Hide manual chart controls in Present; retain them in the scrolling reading view. Keep manual
+    slide navigation, a global Pause/Resume control, reduced-motion support and pause/unload on
+    leaving the slide or hiding the tab. Playback changes no observations or estimates.
+
+    Load the deployed Storm Builder automatically with `?presentation=1`. Add an embed-only
+    playback mode to its app shell, starting/looping the existing 4× animation after preparation,
+    with parent-frame play/pause messages. Standalone use remains manual. Only playback changes:
+    embedded engine/router/scenario/planner scripts and simulation data must remain byte-identical.
+    Update the generated app HTML from existing presentation inputs, not a fresh analysis export.
+    The existing Git-connected production deployment receives this app-shell change on push.
+    Verify identical bounds and no clipped notes at desktop/phone sizes, autoplay/pause/resume,
+    reading-view restoration, frozen input hashes, tests and the wording gate before committing.
