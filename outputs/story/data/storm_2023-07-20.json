@@ -1,0 +1,16 @@
+{
+  "presentation_only": true,
+  "source": "data/interim/panel30_2023.parquet",
+  "source_sha256": "3e0a55d3e1bd5a38cac1c2e4201d092d92e6f6ac4b58a839fe96adbb911848a1",
+  "export_sha256": "6646d4521b5c661ef3f3c9d78d9912cf125a42146d3be10474e43b2903f5003b",
+  "rows": 5610,
+  "frames": 15,
+  "cells_per_frame": 374,
+  "timezone": "Asia/Singapore",
+  "start": "2023-07-20 06:30:00",
+  "end": "2023-07-20 13:30:00",
+  "selection": "Same existing step-2 storm animation: peak minus 3 hours through plus 4 hours.",
+  "formula": "100 * (vacant / max(1, baseline) - 1); existing float32 panel arithmetic.",
+  "peak_matches_existing_deck_csv": true,
+  "no_model_fit_or_scoring": true
+}

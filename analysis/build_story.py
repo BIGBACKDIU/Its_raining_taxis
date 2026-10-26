@@ -31,6 +31,13 @@ def main():
  coast=ROOT/'data/static/sg_map.json';HASHES[str(coast.relative_to(ROOT))]=sha(coast)
  data['land']=[np.round(np.array(to_xy(np.array(r)[:,0],np.array(r)[:,1])).T/1000,4).tolist() for r in json.loads(coast.read_text())['land']]
  storm=ROOT/'outputs/figures/deck/data/deck_storm_peak.csv';HASHES[str(storm.relative_to(ROOT))]=sha(storm);data['storm']=records(pd.read_csv(storm))
+ playback=ROOT/'outputs/story/data/storm_2023-07-20.csv'
+ metadata=playback.with_suffix('.json')
+ for path in [playback,metadata]:HASHES[str(path.relative_to(ROOT))]=sha(path)
+ replay=pd.read_csv(playback)
+ assert sha(playback)==json.loads(metadata.read_text())['export_sha256']
+ assert len(replay)==5610 and not replay.duplicated(['ts','cell']).any()
+ data['stormFrames']=[{'time':str(ts),'rows':records(group.drop(columns='ts'))} for ts,group in replay.groupby('ts',sort=True)]
  data['island']=records(read('spillover_islandwide_share'))
  plan=read('planning_rain_losses');plan=plan[plan.condition.str.startswith('NEA') & (plan.day=='weekday')]
  order=plan.groupby('planning_area').abs_loss_taxis_per_half_hour.max().sort_values(ascending=False).head(10).index
@@ -77,11 +84,11 @@ def main():
   for filename,weight in weights:
    p=ROOT/f'assets/fonts/{folder}/{family}-{filename}.ttf';HASHES[str(p.relative_to(ROOT))]=sha(p)
    fonts.append(f"@font-face{{font-family:'{family}';font-style:normal;font-weight:{weight};font-display:swap;src:url(data:font/ttf;base64,{base64.b64encode(p.read_bytes()).decode()}) format('truetype')}}")
- template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text();js=(SOURCE/'story.js').read_text()
+ template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
  html=template.replace('/*__FONTS__*/','\n'.join(fonts)).replace('/*__CSS__*/',css).replace('/*__DATA__*/','const DATA = '+json.dumps(data,separators=(',',':'),ensure_ascii=False).replace('</','<\\/')+';').replace('/*__JS__*/',js)
  assert len(re.findall(r'data-main-graph=',html))==15
  (OUT/'index.html').write_text(html)
  for relative,expected in HASHES.items():assert sha(ROOT/relative)==expected,relative
- (OUT/'provenance.json').write_text(json.dumps({'presentation_only':True,'main_graphs':15,'appendix_graphs':44,'appendix_panels':97,'appendix_cards':67,'source_hashes':HASHES,'html_sha256':sha(OUT/'index.html'),'bytes':(OUT/'index.html').stat().st_size},indent=2)+'\n')
+ (OUT/'provenance.json').write_text(json.dumps({'presentation_only':True,'main_graphs':15,'presentation_scenes':17,'storm_frames':len(data['stormFrames']),'appendix_graphs':44,'appendix_panels':97,'appendix_cards':67,'source_hashes':HASHES,'html_sha256':sha(OUT/'index.html'),'bytes':(OUT/'index.html').stat().st_size},indent=2)+'\n')
  print('Built',OUT/'index.html',f'({(OUT/"index.html").stat().st_size:,} bytes); 15 main graphs, 44 appendix graphs; frozen inputs unchanged.')
 if __name__=='__main__':main()

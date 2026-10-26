@@ -7,7 +7,7 @@ Open `index.html` in a modern browser. The page is self-contained: fonts, chart 
 - The main story has **15 graphs**: rain bands, radar comparison, event timing, intensity, duration, named rain map, count-loss ranking, paired storm maps, island-wide redistribution, planning heatmap, place characteristics, alert precision, holdout weather gains, morning planning value, and simulation realism.
 - Scroll or use the chapter links. The map switches between absolute and citywide-share associations. Hover, tap or focus a coloured square for its counts and uncertainty.
 - Forecast controls switch between 30 and 60 minutes. Morning controls switch between the existing day-block and seven-day-block intervals.
-- Choose **Present**, then use left/right arrows to move between the 15 main figures. Escape exits presentation mode. Use the browser's own fullscreen command if desired.
+- Choose **Present**, then use left/right arrows to move through the cover, 15 main figures and conclusion. Escape exits presentation mode. Use the browser's own fullscreen command if desired.
 - The searchable evidence appendix retains **all 44 saved source figures**, covering **97 data panels** across **67 readable panel groups**. Open a card and use Previous/Next or arrow keys. Escape closes the viewer.
 - Expand methods for definitions, source filenames and embedded numeric tables. Chart labels use rounding; tooltips and tables give more precision.
 
@@ -26,3 +26,28 @@ The navy design uses embedded Poppins and Anton fonts from `assets/fonts/` under
 Important disclosures remain visible: associations describe supply; absolute and share models differ; October 2026 has two onsets and fails the power rule; the 1 km maximum is descriptive selection; the morning result follows a corrective refit and second scoring; simulation fails its unchanged realism rule; minute flows do not identify a mechanism.
 
 Browser checks cover 1440 px desktop and 400 px phone layouts, SVG label bounds, map and horizon controls, saved interval switches, all 44 gallery entries, multi-panel navigation and presentation mode. Preview JPGs are visual records, not result figures.
+
+## Animation and the presentation stage
+
+**Start presentation** or **Present** opens 17 scenes: a cover, the same 15 main graphs, and the conclusion.
+Use next/back, left/right arrows, Page Up/Down, Home/End, or replay the chart entrance with ↻. Escape
+returns to the reading view and restores every figure to its original position. Charts retain their
+controls in the stage. On a phone, tall scenes scroll inside the stage while navigation stays visible.
+The Motion button disables visual transitions; the operating system's reduced-motion preference is
+respected. Data playback is always user initiated and stops when the player leaves view or the tab hides.
+
+Graph 8 replays **15 observed half-hour snapshots**, 06:30–13:30 Singapore time on 20 July 2023.
+Play, pause, scrub, or jump to the 09:30 rain peak. Counts, rain and tooltips track the selected frame.
+Colour fades are presentation effects, not interpolated observations. The event timeline plays through
+saved average model estimates; the intensity slider selects saved spline points, including their CIs.
+
+The replay export is `data/storm_2023-07-20.csv`; its JSON records source/export hashes and its exact
+match to the existing peak CSV. To recreate it from the existing local fit-period panel (no model run):
+
+```sh
+.venv/bin/python -m analysis.export_story_playback
+.venv/bin/python -m analysis.build_story
+```
+
+`story/motion.js` holds the presentation and playback interactions. The page remains one offline HTML
+file; the CSV and provenance are also retained separately for inspection. Frozen outputs are unchanged.

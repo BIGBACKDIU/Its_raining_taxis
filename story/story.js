@@ -1,6 +1,7 @@
 'use strict';
 const C={navy:'#14295b',blue:'#2c5eaa',light:'#8fb8f2',pale:'#dce6f4',red:'#c0453c',ink:'#14203a',muted:'#5a6683',grid:'#e4eaf4',land:'#e4eaf4',none:'#f2f4f7',white:'#ffffff'};
 const NS='http://www.w3.org/2000/svg';
+let currentStormRows=DATA.storm;
 const state={where:'absolute',cell:48022,horizon:30,morning:'day',category:'All',search:'',expanded:false,modal:null,part:0};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const n=(v,d=1)=>Number(v).toFixed(d).replace('-','−');
@@ -20,7 +21,7 @@ function axisY(s,y,ticks,xl,xr,format=v=>v){for(const v of ticks){line(s,xl,y(v)
 function ci(s,x,lo,hi,y,color,value,{hollow=false}={}){line(s,x(lo),y,x(hi),y,color,1.8);for(const v of[lo,hi])line(s,x(v),y-4,x(v),y+4,color,1.6);add(s,'circle',{cx:x(value),cy:y,r:4.5,fill:hollow?C.white:color,stroke:color,'stroke-width':1.7});}
 const tooltip=$('#tooltip');
 function showTip(event,html){tooltip.innerHTML=html;tooltip.hidden=false;const box=event.currentTarget.getBoundingClientRect(),px=event.clientX??(box.left+box.width/2),py=event.clientY??(box.top+box.height/2);tooltip.style.left=Math.max(9,Math.min(window.innerWidth-tooltip.offsetWidth-10,px+14))+'px';tooltip.style.top=Math.max(10,Math.min(window.innerHeight-tooltip.offsetHeight-10,py+14))+'px';}
-function bindTip(node,html){node.addEventListener('pointerenter',e=>showTip(e,html));node.addEventListener('pointermove',e=>showTip(e,html));node.addEventListener('pointerleave',()=>tooltip.hidden=true);node.addEventListener('focus',e=>showTip(e,html));node.addEventListener('blur',()=>tooltip.hidden=true);}
+function bindTip(node,content){const html=()=>typeof content==='function'?content():content;node.addEventListener('pointerenter',e=>showTip(e,html()));node.addEventListener('pointermove',e=>showTip(e,html()));node.addEventListener('pointerleave',()=>tooltip.hidden=true);node.addEventListener('focus',e=>showTip(e,html()));node.addEventListener('blur',()=>tooltip.hidden=true);}
 function pointTarget(s,x,y,label,html){const p=add(s,'circle',{cx:x,cy:y,r:13,fill:'transparent',tabindex:0,role:'img','aria-label':label});bindTip(p,html);}
 function drawEffects(){
  const{s,w}=chart('chart-effects',370),x=scale([-18,0],[w<550?93:145,w-82]);
@@ -64,6 +65,7 @@ function drawCurve(id,rows,xkey,domainX,domainY,xticks,yticks,{band=true,event=f
   if(event||row[xkey]===1){add(s,'circle',{cx:x(row[xkey]),cy:y(row.pct),r:row[xkey]===1?5:3.2,fill:row[xkey]===1?C.red:C.navy});}
   pointTarget(s,x(row[xkey]),y(row.pct),`${row[xkey]} ${event?'minutes':'mm/h'}: ${pct(row.pct)}`,`<strong>${row[xkey]} ${event?'minutes from onset':'mm/h'}</strong>${pct(row.pct,2)}<br>95% CI ${pct(row.pct_lo??row.lo,2)} to ${pct(row.pct_hi??row.hi,2)}`);
  }
+ const cursor=add(s,'g',{'data-curve-cursor':id});line(cursor,0,t,0,h-b,C.red,1,'3 4');add(cursor,'circle',{cx:0,cy:0,r:5,fill:C.red,stroke:C.white,'stroke-width':2});
  axisX(s,x,xticks,h-b,v=>v,event?'Minutes from local rain onset':'Rain intensity (mm/h)',w);
 }
 function horizontalBars(id,rows,{max=25,ticks=[0,5,10,15,20,25],axis='',height,rowHeight=60}={}){
@@ -103,7 +105,7 @@ function mapChart(id,rows,{value,filter=()=>true,hero=false,callback,markers=[]}
    else{
     rect.setAttribute('tabindex',r.cell===48022||markers.some(q=>q.cell===r.cell)?0:-1);
     const tip=id==='map-island'?`<strong>${r.presentable?esc(nameOf(r)):'Square '+r.cell}</strong>${sign(r.share_pct)}% citywide share<br>${sign(r.abs_change_per_half_hour,3)} taxis / ${n(r.expected_vacant,2)} expected`: `<strong>${esc(named)}</strong>${n(r.mmh)} mm/h in the preceding 30 min<br>${r.vacant} / ${n(r.baseline,2)} expected taxis<br>${sign(r.pct)}% vs expected`;
-    bindTip(rect,tip);
+    bindTip(rect,()=>{const row=id==='map-rain'||id==='map-storm'?currentStormRows.find(row=>row.cell===r.cell):r;return id==='map-rain'||id==='map-storm'?`<strong>${esc(named)}</strong>${n(row.mmh)} mm/h in the preceding 30 min<br>${row.vacant} / ${n(row.baseline,2)} expected taxis<br>${sign(row.pct)}% vs expected`:tip;});
    }
   }
  }
@@ -164,7 +166,7 @@ function drawSimulation(){
  line(s,x(7),12,x(7),203,C.blue,1.3,'4 4');txt(s,x(7),225,'At least 7 required',{fill:C.blue,'text-anchor':'middle','font-size':10});txt(s,l,263,mobile?'Full rule also checks direction.':'Storm-count condition only; the full rule also checks direction.',{'font-size':mobile?9:11});
 }
 function controls(id,update){$$('#'+id+' button').forEach(button=>button.addEventListener('click',()=>{$$('#'+id+' button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update(button.dataset.value);}));}
-controls('where-controls',v=>{state.where=v;drawWhere();});controls('forecast-controls',v=>{state.horizon=Number(v);drawForecast();});controls('morning-controls',v=>{state.morning=v;drawMorning();});
+controls('where-controls',v=>{state.where=v;drawWhere();morphHost($('#map-where'));});controls('forecast-controls',v=>{state.horizon=Number(v);drawForecast();morphHost($('#chart-forecast'));});controls('morning-controls',v=>{state.morning=v;drawMorning();morphHost($('#chart-morning'));});
 function renderCharts(){drawEffects();drawRadar();drawCurve('chart-event',DATA.event,'event_min',[-60,180],[-8,3],[-60,0,60,120,180],[-8,-4,0],{event:true});drawCurve('chart-dose',DATA.dose,'mmh',[0,60],[-18,2],[0,20,40,60],[-15,-10,-5,0]);drawDuration();drawPlaces();drawFactors();drawForecast();drawHoldout();drawMorning();drawSimulation();}
 function buildTables(){
  for(const host of $$('[data-table]')){const rows=DATA[host.dataset.table],cols=[...new Set(rows.flatMap(Object.keys))],box=document.createElement('div');box.className='data-table';box.innerHTML=`<table><thead><tr>${cols.map(c=>'<th scope="col">'+esc(c)+'</th>').join('')}</tr></thead><tbody>${rows.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(r[c]??'')+'</td>').join('')+'</tr>').join('')}</tbody></table>`;host.replaceChildren(box);}
@@ -184,20 +186,10 @@ $('#modal-close').addEventListener('click',()=>dialog.close());$('#modal-prev').
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 $('#evidence-search').addEventListener('input',e=>{state.search=e.target.value;state.expanded=false;renderGallery();});$('#show-all').addEventListener('click',()=>{state.expanded=true;renderGallery();});
 for(const category of['All',...new Set(DATA.gallery.map(g=>g.category))]){const b=document.createElement('button');b.textContent=category;b.setAttribute('aria-pressed',String(category==='All'));b.addEventListener('click',()=>{state.category=category;state.expanded=false;$$('#evidence-filters button').forEach(v=>v.setAttribute('aria-pressed',String(v===b)));renderGallery();});$('#evidence-filters').append(b);}
-const present=$('#present-toggle');let presentIndex=-1;
-function setPresent(enabled){document.body.classList.toggle('present-mode',enabled);present.setAttribute('aria-pressed',String(enabled));present.innerHTML=enabled?'Exit presentation':'<span aria-hidden="true">↗</span> Present';requestAnimationFrame(renderCharts);}
-present.addEventListener('click',()=>{setPresent(!document.body.classList.contains('present-mode'));if(document.body.classList.contains('present-mode')){$('#top').scrollIntoView({behavior:'instant'});presentIndex=-1;}});
-document.addEventListener('keydown',e=>{
- if(dialog.open){if(e.key==='ArrowRight'&&state.part<state.modal.parts.length-1){state.part++;showPart();}if(e.key==='ArrowLeft'&&state.part>0){state.part--;showPart();}return;}
- if(e.key==='Escape'&&document.body.classList.contains('present-mode'))setPresent(false);
- if(document.body.classList.contains('present-mode')&&['ArrowRight','ArrowLeft'].includes(e.key)&&!['INPUT','TEXTAREA'].includes(e.target.tagName)){
-  e.preventDefault();const charts=$$('figure[data-main-graph]');presentIndex=Math.max(-1,Math.min(charts.length-1,presentIndex+(e.key==='ArrowRight'?1:-1)));(presentIndex<0?$('#top'):charts[presentIndex]).scrollIntoView({block:'start',behavior:'instant'});
- }
-});
 const progress=$('.reading-progress i');let scrolling=false;
 function onScroll(){if(scrolling)return;scrolling=true;requestAnimationFrame(()=>{const total=document.documentElement.scrollHeight-innerHeight;progress.style.width=(total>0?scrollY/total*100:0)+'%';scrolling=false;tooltip.hidden=true;});}
 addEventListener('scroll',onScroll,{passive:true});
 const chapterObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){$$('.masthead nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id));}},{rootMargin:'-10% 0px -65% 0px'});$$('[data-chapter]').forEach(s=>chapterObserver.observe(s));
-let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(renderCharts,140);});
+let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();if(typeof fitScene==='function')fitScene();},140);});
 buildTables();drawMaps();drawPlanning();renderGallery();renderCharts();
-document.fonts.ready.then(()=>{if(!document.fonts.check('16px Poppins')||!document.fonts.check('50px Anton'))throw Error('Required fonts did not load');renderCharts();document.documentElement.dataset.ready='true';});
+document.fonts.ready.then(()=>{if(!document.fonts.check('16px Poppins')||!document.fonts.check('50px Anton'))throw Error('Required fonts did not load');renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();document.documentElement.dataset.ready='true';});

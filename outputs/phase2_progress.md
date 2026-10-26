@@ -798,3 +798,26 @@ Map positive/negative counts, map measure/horizon/interval controls, search, all
 multiple panel groups and keyboard presentation navigation work. Desktop/map/mobile JPG previews are
 saved beside the HTML. Final gates: 35 tests passed (14 existing warnings); the wording checker reports
 76 existing reviewed hits. Four additional story-prose matches are explicit supply/causality caveats.
+
+### Animated HTML presentation and real storm playback (decision 170; presentation only)
+
+Present now opens a single-scene, 17-slide stage: cover, 15 graphs and conclusion. Controls provide
+next/back, keyboard navigation, progress and chart replay; charts reveal on entry and scene changes
+use short fades/slides. The reading view and complete 44-figure evidence appendix remain available.
+A motion switch and the system reduced-motion preference disable visual transitions.
+
+Graph 8 now plays 15 existing half-hour snapshots from 06:30 to 13:30 on 20 July 2023, with pause,
+scrubbing, current counts, frame-specific tooltips and a jump to the 09:30 rain peak. The exported
+5,610 rows match the same original step-2 GIF window, and the peak matches every saved deck value.
+At that peak there are 1,473 vacant taxis across the 374 analysed cells versus 2,309.6 expected;
+347 of those cells have recent rain. These are descriptive, fit-period observations. Colour fades
+create no intermediate measurements. Graph 3 plays through saved average event-study points and
+CIs; graph 4 allows selection of saved intensity estimates. No model, score or holdout is rerun.
+The cover now correctly calls 120,017 the number of snapshots present, following the audit field.
+
+Browser checks cover all 17 scene transitions and restoration of all 15 figures with unique IDs,
+playback progression/pause/scrubbing/peak, event/intensity point selection, motion off, desktop
+1440 px and phone 400 px. Main chart labels fit; mobile scenes scroll internally with navigation
+visible. No browser warnings/errors. Final gates: 35 tests passed (14 existing warnings), the same
+76 wording-check hits, and unchanged source/panel hashes. New prose matches are only explicit
+supply/causality caveats. Updated screenshots are saved in `outputs/story/`.

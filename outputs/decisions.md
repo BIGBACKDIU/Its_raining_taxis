@@ -1649,3 +1649,27 @@ results stay as they are and remain the pre-specified result.
     before/after building, all 15 main figures and 44 appendix entries, font loading, mobile/desktop
     label bounds, chart controls, multi-panel navigation and presentation mode. Run the existing test
     and wording gates; additionally review the new story prose with the wording-check patterns.
+
+170. **Animated HTML presentation and observed storm replay (presentation only).** The user requested
+    more interaction, animation of actual data and fluid, presentation-like changes. Keep 15 main
+    graphs and the complete 44-figure appendix. Upgrade Present to 17 single-scene slides (cover,
+    15 graphs, conclusion), with next/back, keyboard navigation, progress, chart replay and restrained
+    transitions. Preserve a scrolling reading view. Respect reduced-motion preferences and provide
+    a motion switch; playback starts only on a user action and pauses when hidden or left.
+
+    Make graph 8 an inspectable replay of the same 20 July 2023 storm and seven-hour window already
+    shown in step 2's GIF: 06:30–13:30 Singapore time, 15 half-hour snapshots × 374 cells. Copy existing
+    `panel30_2023.parquet` values; use the unchanged descriptive formula
+    `100*(vacant/max(1,baseline)-1)`. Export presentation rows and provenance under `outputs/story/data/`;
+    hash the input before/after, verify cell/time uniqueness and all peak values against decision 167's
+    saved peak CSV. This is a fit-period rendering/export, not an analysis, re-estimate or score.
+    Time labels and counts always describe an observed frame. Colour fades create no intermediate
+    measurements. Controls support pause, scrubbing and return to the original 09:30 peak. Display
+    counts/expected counts for the analysed cells, without implying complete operator coverage.
+
+    Graph 3 plays a cursor through the saved average event-study estimates with their CIs; graph 4
+    selects only saved intensity estimates. Neither represents a newly measured individual trajectory.
+    Other animation reveals existing chart shapes without changing endpoint values. Tooltips follow
+    the selected observed frame. No frozen table, figure, model, rule or scoring log changes.
+    Correct the cover's label to "taxi snapshots present": 120,017 is `snapshots_ok` in the audit,
+    whereas the audit has a separate smaller count after exclusions. The number itself is unchanged.

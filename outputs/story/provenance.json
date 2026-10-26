@@ -1,6 +1,8 @@
 {
   "presentation_only": true,
   "main_graphs": 15,
+  "presentation_scenes": 17,
+  "storm_frames": 15,
   "appendix_graphs": 44,
   "appendix_panels": 97,
   "appendix_cards": 67,
@@ -21,6 +23,8 @@
     "outputs/tables/names_cells.csv": "1602ebb71381eecc10d1984cb790d337d95558827d07e39a9068c50d62478ea3",
     "data/static/sg_map.json": "2375b6865eaec2c0a0ce30f2016c667bd97c984cecfe95a1d89d91c6cac46d29",
     "outputs/figures/deck/data/deck_storm_peak.csv": "0f8f891ff20fcff3e8c0e264f01b6c1b69e62159e69c022b96e41453b43bcc85",
+    "outputs/story/data/storm_2023-07-20.csv": "6646d4521b5c661ef3f3c9d78d9912cf125a42146d3be10474e43b2903f5003b",
+    "outputs/story/data/storm_2023-07-20.json": "ee65b9346fbc094f0f073b1353796e7efb1b68e1165c64d659aedce0d50ea03c",
     "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
     "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd",
     "outputs/tables/factors_panel_interactions.csv": "28504c2bfa6e6670f3b30adf951bef07c6b31ae2fff6d3ae8a75e8f54cdf32d6",
@@ -102,6 +106,6 @@
     "assets/fonts/poppins/Poppins-SemiBold.ttf": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286",
     "assets/fonts/anton/Anton-Regular.ttf": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab"
   },
-  "html_sha256": "40122f3eb3e90c41e798734f9e2759d1c2077e2893fae504268cd5bd6f3164d2",
-  "bytes": 11459315
+  "html_sha256": "b6ccc86b2de67fc6925100100bc3521f03f0c8f7a75514eea2c7a7eb1af3cd5c",
+  "bytes": 12020088
 }
