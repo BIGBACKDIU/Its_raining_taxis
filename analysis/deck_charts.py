@@ -141,6 +141,8 @@ def save(fig, name):
         raise RuntimeError(f'{name}: text outside image: {bounds}')
     path = OUT / (name + '.png')
     fig.savefig(path, dpi=200, bbox_inches=None, pad_inches=0)
+    with plt.rc_context({'svg.fonttype':'none'}):
+        fig.savefig(OUT / (name + '.svg'), format='svg', bbox_inches=None, pad_inches=0)
     expected = tuple(2 * n for n in SIZES[name])
     with Image.open(path) as image:
         if image.size != expected:
@@ -481,12 +483,13 @@ def forecasting():
 
 def holdout():
     name='deck_holdout_gain';f=read('forecast_eval_both_labels')
+    october_onsets=len(read('s22_storm_onsets'))
     # The requested maximum is descriptive selection over every saved 1 km combination, explicitly labelled.
     r=f[f.scale=='1km'].nlargest(1,'weather_gain').iloc[0]
     rows=[{'test':'1 km test year max','gain':r.weather_gain,'lo':r.gain_lo,'hi':r.gain_hi,'details':f'{r.analysis}; {r.label}; {r.h} min; {r.label_version}; {r.subset}'}]
     for name_table,title in [('s22_materiality','Oct 2026 storms · 60 min'),('s22b_materiality','2019 storms · 60 min')]:
         v=read(name_table).query("target=='T2_15' and horizon==60").iloc[0]
-        rows.append({'test':title,'gain':v.gain,'lo':v.lo,'hi':v.hi,'details':'Pooled T2 15%; '+('descriptive: only 1 onset' if name_table=='s22_materiality' else 'confirmatory backward holdout')})
+        rows.append({'test':title,'gain':v.gain,'lo':v.lo,'hi':v.hi,'details':'Pooled T2 15%; '+(f'descriptive: only {october_onsets} onsets' if name_table=='s22_materiality' else 'confirmatory backward holdout')})
     q=pd.DataFrame(rows);record(name,q)
     fig=figure(name);ax=axes(fig,[.31,.30,.65,.55]);ax.yaxis.grid(False)
     for i,v in enumerate(q.itertuples()):
@@ -499,7 +502,7 @@ def holdout():
     ax.axvline(0,color=MUTED,lw=.7)
     ax.set(xlim=(-.004,.087),ylim=(-.65,2.65),xlabel='Weather gain in PR-AUC')
     ax.set_yticks([2,1,0],q.test);ax.set_xticks([0,.02,.04,.06,.08],['0','.02','.04','.06','.08'])
-    fig.text(.025,.025,'1 km max: descriptive selection · Oct 2026: 1 onset, descriptive only',fontsize=pt(18),color=MUTED)
+    fig.text(.025,.025,f'1 km max: descriptive selection · Oct 2026: {october_onsets} onsets, descriptive only',fontsize=pt(18),color=MUTED)
     AUDIT['notes'].append('1 km maximum is +0.00240 (S1 NB issue-time label, 30 min, all times), not the primary deficit-label maximum. It is a descriptive maximum across saved combinations; no model or outcome is re-scored. The Oct 2026 CI uses 893 defined bootstrap draws and cannot override the registered minimum-eight-onset power rule.')
     save(fig,name)
 

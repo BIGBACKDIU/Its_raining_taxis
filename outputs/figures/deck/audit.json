@@ -15,6 +15,7 @@
     "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
     "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd",
     "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
+    "outputs/tables/s22_storm_onsets.csv": "d340937142262face178eb59ce43b4050b2bc24e56006614f2ef7f37e91d91bb",
     "outputs/tables/s22_materiality.csv": "5efbd2a9898332c0c678e522dfad47aad5b919bfa2c3383af179afffc9d02ef2",
     "outputs/tables/s22b_materiality.csv": "96a0102048e1cf25c4083d8cb9f24653ab544a472a806488138a3ffa3e07c199"
   },
@@ -177,7 +178,7 @@
       "fonts_used": [
         "Poppins-Regular.ttf"
       ],
-      "sha256": "7a33883b90095172fb7b48ec58440ec6ddeb29e3418c50a938f6392a8e1c2631"
+      "sha256": "80fa925b0bb17075401b2d88eb32f5b9f09cc0f530088fad469b3cdcb3356dc5"
     }
   },
   "fonts": {

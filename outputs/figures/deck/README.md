@@ -68,9 +68,28 @@ are not overwritten. Snapshot rows are the only panel access; no model or held-o
   issue-time-label evaluation. Labels are precision percentages in the 19 alerted cells, not recall.
 - Holdout plot: 1 km “max” is the descriptive maximum over every saved 1 km combination, including
   S1: NB issue-time label, 30 minutes, all times (+0.00240; CI +0.00164 to +0.00288). October 2026 is
-  +0.023765 (CI +0.012303 to +0.078655), but its single onset fails the eight-onset power rule;
+  +0.023765 (CI +0.012303 to +0.078655), but its two onsets fail the eight-onset power rule;
   the result remains descriptive. 2019 is +0.008747 (CI +0.000807 to +0.017070), below +0.02.
   The exact source precision is retained in the accompanying CSV; displayed gains round to four decimals.
 
 Fonts: [Google Fonts Poppins](https://github.com/google/fonts/tree/main/ofl/poppins), SIL OFL 1.1.
 Font files and unmodified licence are in `assets/fonts/poppins/`. No new estimation or test-year use.
+
+## Complete project deck and remaining graphs (decision 168)
+
+The original eleven selected charts are now included in a complete presentation at
+`outputs/presentations/Its_Raining_Taxis_complete.pptx`, following the supplied reference.
+Every unique saved project SVG graph is also restyled in its appendix: 44 graphs, 97 data panels,
+67 appendix cards. `all/` contains each appendix card at 2220 × 856 px; multipart figures have
+several PNGs. The card crops contain panel headings where needed, but no slide title or source footer.
+The eleven original exports retain their exact requested sizes and also have SVG versions.
+
+All appendix text uses Poppins; the deck uses Anton for headings. Saved data paths and numeric labels
+are retained as editable slide objects; this does not create Office chart workbooks. Named maps have
+numbered place lists. Percentage-count maps share ±40% bounds, while counts, risk and minutes retain
+appropriate units. The fifteen-area planning heatmap uses the saved table and a sequential blue scale.
+See `outputs/presentations/graph_coverage.json` for the complete panel/slide/source hash inventory.
+
+Correction: October 2026 has **two** saved storm onsets, not the one stated in decision 167's
+presentation annotation. The holdout chart and its exported rows now say two; the effect, CI and
+registered descriptive-only conclusion are unchanged. No holdout is re-scored.

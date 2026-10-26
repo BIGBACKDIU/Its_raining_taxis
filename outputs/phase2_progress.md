@@ -759,3 +759,20 @@ maximum as descriptive selection over saved combinations. Full selections and ro
 folder README; input/font/image hashes and dimensions are in `audit.json`. No table-value mismatch
 was found. Tests: 35 passed (14 existing warnings). Wording check: 76 reviewed hits; additional checking
 of the deck script and README with the same patterns found no hits.
+
+### Complete project presentation (decision 168; presentation only)
+
+The supplied reference now has a completed 92-slide version: 24 main presentation slides, an appendix
+divider, and 67 appendix slides covering all 44 unique saved project graphs and 97 nonempty panels.
+Crowded maps have separate place lists; the appendix keeps diagnostics, failed designs and simulations.
+The eleven earlier selected charts remain, with SVG versions, and all appendix cards are exported as PNGs.
+The reference file and frozen result tables/figures are unchanged. No models or holdouts are re-scored.
+
+One earlier presentation annotation was wrong: October 2026 has **two** onsets, not one. Its annotation
+and plotted CSV are corrected; the estimates and descriptive-only conclusion are unchanged. Other
+reference wording now distinguishes absolute versus share losses, uses issue-time forecast precision,
+reports the simulator v2/v1 pass counts correctly, and discloses corrective/repeated scoring. Candidate
+recommendations do not claim measured operational benefits. Input hashes and graph coverage are recorded
+in `outputs/presentations/graph_coverage.json`. Poppins/Anton registration and package validation pass.
+All slides are rendered for visual inspection. Final gates: 35 tests pass (14 existing warnings);
+the wording checker reports the same 76 reviewed hits. No new local data are required.

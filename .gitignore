@@ -29,3 +29,5 @@ data/interim/s22b/
 data/raw_minute/
 data/interim/s23/
 .vercel
+
+.deck-build/

@@ -1,0 +1,895 @@
+{
+  "referenceSha256": "de264d1a33263c57da68d1d2c8e504bd4db555ea4b7a7661893ca3c9f86efe8e",
+  "mainSlides": 24,
+  "appendixDivider": 25,
+  "sourceGraphCount": 44,
+  "totalSlides": 92,
+  "coverage": [
+    {
+      "sourceGraph": "audit_unusual_days",
+      "sourceFile": "outputs/figures/audit_unusual_days.svg",
+      "sourceSha256": "e341c0534c4c48697d4444b25fb2b75b44d2399254fbfbef3ce8316012eb9bdd",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "ndsb57",
+      "slide": 26
+    },
+    {
+      "sourceGraph": "desc_maps_dry_heavy",
+      "sourceFile": "outputs/figures/desc_maps_dry_heavy.svg",
+      "sourceSha256": "2fbfc80abb4f7b40be54ff1ad0cf71c0e4df35fc9df49f29e4867cf3c2340531",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "ublife",
+      "slide": 27
+    },
+    {
+      "sourceGraph": "desc_maps_dry_heavy",
+      "sourceFile": "outputs/figures/desc_maps_dry_heavy.svg",
+      "sourceSha256": "2fbfc80abb4f7b40be54ff1ad0cf71c0e4df35fc9df49f29e4867cf3c2340531",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3
+      ],
+      "slideId": "cjrf7w",
+      "slide": 28
+    },
+    {
+      "sourceGraph": "desc_profile_rain_bands",
+      "sourceFile": "outputs/figures/desc_profile_rain_bands.svg",
+      "sourceSha256": "25a629c9413a77fc37ef14911efb1eff25b992c57ff59d58ad8a8af494fd06df",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "ereiru",
+      "slide": 29
+    },
+    {
+      "sourceGraph": "desc_rain_band_frequency",
+      "sourceFile": "outputs/figures/desc_rain_band_frequency.svg",
+      "sourceSha256": "699714f12f54909e0f92efdb12ae37a1d3632881f3cd19487c3c5233bacc8ea6",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "iqg21w",
+      "slide": 30
+    },
+    {
+      "sourceGraph": "desc_storm_2023-07-20_peak",
+      "sourceFile": "outputs/figures/desc_storm_2023-07-20_peak.svg",
+      "sourceSha256": "e1d66e451e9cfb849510d73b0f095d7444155f9d83da078aefbdc3b86c2a3303",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "kp91o5",
+      "slide": 31
+    },
+    {
+      "sourceGraph": "desc_trend_vs_fleet",
+      "sourceFile": "outputs/figures/desc_trend_vs_fleet.svg",
+      "sourceSha256": "6b7b4fc66b6552aa98a4119ae96d6914a95d910b55aa435fd418bbf906759922",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "v7r4kt",
+      "slide": 32
+    },
+    {
+      "sourceGraph": "dose_intensity_hangover",
+      "sourceFile": "outputs/figures/dose_intensity_hangover.svg",
+      "sourceSha256": "db05ce9253a583302fb0683e7af1f50bd43b04d4f60157b7627c680b8bf27329",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "iow20i",
+      "slide": 33
+    },
+    {
+      "sourceGraph": "dry_supply_by_band",
+      "sourceFile": "outputs/figures/dry_supply_by_band.svg",
+      "sourceSha256": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+      "part": 1,
+      "total": 5,
+      "panels": [
+        1
+      ],
+      "slideId": "feuef9",
+      "slide": 34
+    },
+    {
+      "sourceGraph": "dry_supply_by_band",
+      "sourceFile": "outputs/figures/dry_supply_by_band.svg",
+      "sourceSha256": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+      "part": 2,
+      "total": 5,
+      "panels": [
+        2
+      ],
+      "slideId": "1akx45",
+      "slide": 35
+    },
+    {
+      "sourceGraph": "dry_supply_by_band",
+      "sourceFile": "outputs/figures/dry_supply_by_band.svg",
+      "sourceSha256": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+      "part": 3,
+      "total": 5,
+      "panels": [
+        3
+      ],
+      "slideId": "ndbj5w",
+      "slide": 36
+    },
+    {
+      "sourceGraph": "dry_supply_by_band",
+      "sourceFile": "outputs/figures/dry_supply_by_band.svg",
+      "sourceSha256": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+      "part": 4,
+      "total": 5,
+      "panels": [
+        4
+      ],
+      "slideId": "xq7tkx",
+      "slide": 37
+    },
+    {
+      "sourceGraph": "dry_supply_by_band",
+      "sourceFile": "outputs/figures/dry_supply_by_band.svg",
+      "sourceSha256": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+      "part": 5,
+      "total": 5,
+      "panels": [
+        5
+      ],
+      "slideId": "pfizy8",
+      "slide": 38
+    },
+    {
+      "sourceGraph": "effects_approach_forecast",
+      "sourceFile": "outputs/figures/effects_approach_forecast.svg",
+      "sourceSha256": "9b84862966599d7ddc12dd12922df475d588fb2b27c749dac171d2da56a2e628",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "5i35dr",
+      "slide": 39
+    },
+    {
+      "sourceGraph": "effects_by_regime",
+      "sourceFile": "outputs/figures/effects_by_regime.svg",
+      "sourceSha256": "5ea1aaf184910e02afeb56d6f19924bfbfd0db7d34d2096f7521542547cee6c7",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "6t94yb",
+      "slide": 40
+    },
+    {
+      "sourceGraph": "effects_event_study",
+      "sourceFile": "outputs/figures/effects_event_study.svg",
+      "sourceSha256": "d6719b3b531c0a179d42997e4e053d6ae107462f8899709bc7bc2334a7770a20",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "xgap9t",
+      "slide": 41
+    },
+    {
+      "sourceGraph": "effects_interactions",
+      "sourceFile": "outputs/figures/effects_interactions.svg",
+      "sourceSha256": "b24ae07baa1ad64859b9fa116a3c66686ea4a7a23f5f7fe31d5695dfafc95883",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "enabm5",
+      "slide": 42
+    },
+    {
+      "sourceGraph": "effects_main",
+      "sourceFile": "outputs/figures/effects_main.svg",
+      "sourceSha256": "6c77b59775a84b7d53011d82bb21e667a6e77627eecf813121162a292a8bdf69",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "bsqpgb",
+      "slide": 43
+    },
+    {
+      "sourceGraph": "effects_robustness",
+      "sourceFile": "outputs/figures/effects_robustness.svg",
+      "sourceSha256": "b35b28073eb0e093d343df3573d6027053622aa80e16b4dbf1addd46f127358a",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1
+      ],
+      "slideId": "37wr55",
+      "slide": 44
+    },
+    {
+      "sourceGraph": "effects_robustness",
+      "sourceFile": "outputs/figures/effects_robustness.svg",
+      "sourceSha256": "b35b28073eb0e093d343df3573d6027053622aa80e16b4dbf1addd46f127358a",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        2
+      ],
+      "slideId": "tcsys1",
+      "slide": 45
+    },
+    {
+      "sourceGraph": "factors_contrasts",
+      "sourceFile": "outputs/figures/factors_contrasts.svg",
+      "sourceSha256": "63d265f8059de76cf835b114a6899d9d667844f33fe293f1fd9da3bdef508c3c",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "7q3hp4",
+      "slide": 46
+    },
+    {
+      "sourceGraph": "factors_shap",
+      "sourceFile": "outputs/figures/factors_shap.svg",
+      "sourceSha256": "1ccce94dda4023f8ab2308eb8c6997bcf23ae7e3349a3634fe6ab00979ff4db2",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1
+      ],
+      "slideId": "fo4pys",
+      "slide": 47
+    },
+    {
+      "sourceGraph": "factors_shap",
+      "sourceFile": "outputs/figures/factors_shap.svg",
+      "sourceSha256": "1ccce94dda4023f8ab2308eb8c6997bcf23ae7e3349a3634fe6ab00979ff4db2",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        2
+      ],
+      "slideId": "ynlicb",
+      "slide": 48
+    },
+    {
+      "sourceGraph": "feed_regimes",
+      "sourceFile": "outputs/figures/feed_regimes.svg",
+      "sourceSha256": "a36c74515a289f6cae095ee1efcdb203a5cc6dc92dc450c160626e6f8db8fc24",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "hvkw54",
+      "slide": 49
+    },
+    {
+      "sourceGraph": "fleet_trend",
+      "sourceFile": "outputs/figures/fleet_trend.svg",
+      "sourceSha256": "a594a6e30b94c37fa52042eba71f3d17d48e4af08b1619891d9e2339163fbdc4",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "2n0ygh",
+      "slide": 50
+    },
+    {
+      "sourceGraph": "forecast_pr_auc",
+      "sourceFile": "outputs/figures/forecast_pr_auc.svg",
+      "sourceSha256": "7a8cf67c93c3241f5c64a1367bcdb3b6e0a50c07cc8d9577074bc6cd48c77af7",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1
+      ],
+      "slideId": "60vo2n",
+      "slide": 51
+    },
+    {
+      "sourceGraph": "forecast_pr_auc",
+      "sourceFile": "outputs/figures/forecast_pr_auc.svg",
+      "sourceSha256": "7a8cf67c93c3241f5c64a1367bcdb3b6e0a50c07cc8d9577074bc6cd48c77af7",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        2
+      ],
+      "slideId": "b57plf",
+      "slide": 52
+    },
+    {
+      "sourceGraph": "forecast_topk_both_labels",
+      "sourceFile": "outputs/figures/forecast_topk_both_labels.svg",
+      "sourceSha256": "143376a0e488531cb5b9ae6f9a66052c6b39d6b5c984cd004e58dc8315eb8710",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "dfchz4",
+      "slide": 53
+    },
+    {
+      "sourceGraph": "inference_hotspots",
+      "sourceFile": "outputs/figures/inference_hotspots.svg",
+      "sourceSha256": "f8587c066a652231d2c595f3f61bf4a671e0578bd6ac2b9b38bc7070935d363d",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "66zjfp",
+      "slide": 54
+    },
+    {
+      "sourceGraph": "inference_permutation",
+      "sourceFile": "outputs/figures/inference_permutation.svg",
+      "sourceSha256": "b7aa6be62cbaccf25d473f41950ad841b06f43a906007a136f1a0989b58c5fdf",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "z8kgez",
+      "slide": 55
+    },
+    {
+      "sourceGraph": "inference_permutation",
+      "sourceFile": "outputs/figures/inference_permutation.svg",
+      "sourceSha256": "b7aa6be62cbaccf25d473f41950ad841b06f43a906007a136f1a0989b58c5fdf",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3
+      ],
+      "slideId": "8cm18t",
+      "slide": 56
+    },
+    {
+      "sourceGraph": "minutes_to_taxi_maps",
+      "sourceFile": "outputs/figures/minutes_to_taxi_maps.svg",
+      "sourceSha256": "76749fd013c7574fecaf90638363625177f060d9460bbd364d9f9314c4a2b8c4",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1
+      ],
+      "slideId": "lxmspp",
+      "slide": 57
+    },
+    {
+      "sourceGraph": "minutes_to_taxi_maps",
+      "sourceFile": "outputs/figures/minutes_to_taxi_maps.svg",
+      "sourceSha256": "76749fd013c7574fecaf90638363625177f060d9460bbd364d9f9314c4a2b8c4",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        2
+      ],
+      "slideId": "lwoutk",
+      "slide": 58
+    },
+    {
+      "sourceGraph": "mrt_did_event_study",
+      "sourceFile": "outputs/figures/mrt_did_event_study.svg",
+      "sourceSha256": "2b7782b8b6be4178bdec6d1dea7c648e77ddb2c087bbb7a40d5e7ff4e9b1ab00",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "2mjdog",
+      "slide": 59
+    },
+    {
+      "sourceGraph": "names_rain_hit_map",
+      "sourceFile": "outputs/figures/names_rain_hit_map.svg",
+      "sourceSha256": "4b1eac36599f880c6f4559a30b3b2706e4cf93e648806f94212c48579eff3033",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1
+      ],
+      "slideId": "7q8po5",
+      "slide": 60
+    },
+    {
+      "sourceGraph": "names_rain_hit_map",
+      "sourceFile": "outputs/figures/names_rain_hit_map.svg",
+      "sourceSha256": "4b1eac36599f880c6f4559a30b3b2706e4cf93e648806f94212c48579eff3033",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        2
+      ],
+      "slideId": "7gmnus",
+      "slide": 61
+    },
+    {
+      "sourceGraph": "planning_forecast_rain",
+      "sourceFile": "outputs/figures/planning_forecast_rain.svg",
+      "sourceSha256": "fafd117426b206ff1b80fd1ea62a2eafb07e0393436eaa67b688f320b8630350",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "be2662",
+      "slide": 62
+    },
+    {
+      "sourceGraph": "policy_diagnosis",
+      "sourceFile": "outputs/figures/policy_diagnosis.svg",
+      "sourceSha256": "b3e00961ab73b2614645d8d094d4a7481381eb857d02fa844b53d0282a6efac6",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "3vnhro",
+      "slide": 63
+    },
+    {
+      "sourceGraph": "policy_targeting",
+      "sourceFile": "outputs/figures/policy_targeting.svg",
+      "sourceSha256": "c5cd19a4b937c193abbadfdd3254acfb02cf7f77bebd683db65e8bd235d1dbce",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "z868mu",
+      "slide": 64
+    },
+    {
+      "sourceGraph": "radar_measurement_check",
+      "sourceFile": "outputs/figures/radar_measurement_check.svg",
+      "sourceSha256": "dd78e32f8346091b647049d1874da0b3d826c5337e46ef793a074f4f9e65302c",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "ejwkjq",
+      "slide": 65
+    },
+    {
+      "sourceGraph": "radar_measurement_check",
+      "sourceFile": "outputs/figures/radar_measurement_check.svg",
+      "sourceSha256": "dd78e32f8346091b647049d1874da0b3d826c5337e46ef793a074f4f9e65302c",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3
+      ],
+      "slideId": "t2e7p8",
+      "slide": 66
+    },
+    {
+      "sourceGraph": "risk_odds",
+      "sourceFile": "outputs/figures/risk_odds.svg",
+      "sourceSha256": "2a077fce0ffda8e280adec0c146695cdbfb136f67b3465c0bb7c76e49023c688",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "izqwem",
+      "slide": 67
+    },
+    {
+      "sourceGraph": "risk_types",
+      "sourceFile": "outputs/figures/risk_types.svg",
+      "sourceSha256": "b2c4afa577925dc80112f9a59f56d5b42e970be0a34557dd577f1cd6f75a524e",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "ee42on",
+      "slide": 68
+    },
+    {
+      "sourceGraph": "risk_vulnerability",
+      "sourceFile": "outputs/figures/risk_vulnerability.svg",
+      "sourceSha256": "9849222cb32e7ea2a3a923c4334e4728b981cb5642ee09981a915fa795590a3c",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "e6uuoq",
+      "slide": 69
+    },
+    {
+      "sourceGraph": "s1_weather_gain",
+      "sourceFile": "outputs/figures/s1_weather_gain.svg",
+      "sourceSha256": "607ad1ae8dbb4fd6f5de7f5dc4bb18da933823f652bdf3a31ec9b0fa60e40ac9",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "xxhie7",
+      "slide": 70
+    },
+    {
+      "sourceGraph": "s22_weather_gain",
+      "sourceFile": "outputs/figures/s22_weather_gain.svg",
+      "sourceSha256": "dadc3b8297ee934eddb44cefee07805cc7b8e4e16e75fdbcc78c417ab412abb8",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "9mov8b",
+      "slide": 71
+    },
+    {
+      "sourceGraph": "s22_weather_gain",
+      "sourceFile": "outputs/figures/s22_weather_gain.svg",
+      "sourceSha256": "dadc3b8297ee934eddb44cefee07805cc7b8e4e16e75fdbcc78c417ab412abb8",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3,
+        4
+      ],
+      "slideId": "sdeaw9",
+      "slide": 72
+    },
+    {
+      "sourceGraph": "s22b_weather_gain",
+      "sourceFile": "outputs/figures/s22b_weather_gain.svg",
+      "sourceSha256": "e406c47ce11663e2dfc49a3e39b23cdedba134c9883103f0d1caf05b29f1f31c",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "64gj0e",
+      "slide": 73
+    },
+    {
+      "sourceGraph": "s22b_weather_gain",
+      "sourceFile": "outputs/figures/s22b_weather_gain.svg",
+      "sourceSha256": "e406c47ce11663e2dfc49a3e39b23cdedba134c9883103f0d1caf05b29f1f31c",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3,
+        4
+      ],
+      "slideId": "14pkn5",
+      "slide": 74
+    },
+    {
+      "sourceGraph": "s23_flows",
+      "sourceFile": "outputs/figures/s23_flows.svg",
+      "sourceSha256": "170b3ea34f1bdbdabd4827e1026bbf48effb97757c4c8e7eafc6d87770b7f309",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "9axb7r",
+      "slide": 75
+    },
+    {
+      "sourceGraph": "s23_geography",
+      "sourceFile": "outputs/figures/s23_geography.svg",
+      "sourceSha256": "cab0875994741b984aa6de06d84c97f10fd3534f243716ea9a5833838d158f03",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "1s79e2",
+      "slide": 76
+    },
+    {
+      "sourceGraph": "s23_speed",
+      "sourceFile": "outputs/figures/s23_speed.svg",
+      "sourceSha256": "68acb67912710d4c84614554d376c9361afd55997abfff469a920b1482e4c097",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "hxcx6k",
+      "slide": 77
+    },
+    {
+      "sourceGraph": "sim2_diagnosis",
+      "sourceFile": "outputs/figures/sim2_diagnosis.svg",
+      "sourceSha256": "1d612b652dd4137be6430abdbb46e4323981a20407315463df30f82aa1ac59ae",
+      "part": 1,
+      "total": 2,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "8ovv3j",
+      "slide": 78
+    },
+    {
+      "sourceGraph": "sim2_diagnosis",
+      "sourceFile": "outputs/figures/sim2_diagnosis.svg",
+      "sourceSha256": "1d612b652dd4137be6430abdbb46e4323981a20407315463df30f82aa1ac59ae",
+      "part": 2,
+      "total": 2,
+      "panels": [
+        3
+      ],
+      "slideId": "0v29i0",
+      "slide": 79
+    },
+    {
+      "sourceGraph": "sim2_heldout_storms",
+      "sourceFile": "outputs/figures/sim2_heldout_storms.svg",
+      "sourceSha256": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+      "part": 1,
+      "total": 5,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "kege7i",
+      "slide": 80
+    },
+    {
+      "sourceGraph": "sim2_heldout_storms",
+      "sourceFile": "outputs/figures/sim2_heldout_storms.svg",
+      "sourceSha256": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+      "part": 2,
+      "total": 5,
+      "panels": [
+        3,
+        4
+      ],
+      "slideId": "dalm2p",
+      "slide": 81
+    },
+    {
+      "sourceGraph": "sim2_heldout_storms",
+      "sourceFile": "outputs/figures/sim2_heldout_storms.svg",
+      "sourceSha256": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+      "part": 3,
+      "total": 5,
+      "panels": [
+        5,
+        6
+      ],
+      "slideId": "mklq0n",
+      "slide": 82
+    },
+    {
+      "sourceGraph": "sim2_heldout_storms",
+      "sourceFile": "outputs/figures/sim2_heldout_storms.svg",
+      "sourceSha256": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+      "part": 4,
+      "total": 5,
+      "panels": [
+        7,
+        8
+      ],
+      "slideId": "wtg1se",
+      "slide": 83
+    },
+    {
+      "sourceGraph": "sim2_heldout_storms",
+      "sourceFile": "outputs/figures/sim2_heldout_storms.svg",
+      "sourceSha256": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+      "part": 5,
+      "total": 5,
+      "panels": [
+        9,
+        10
+      ],
+      "slideId": "m2q936",
+      "slide": 84
+    },
+    {
+      "sourceGraph": "sim_heldout_storms",
+      "sourceFile": "outputs/figures/sim_heldout_storms.svg",
+      "sourceSha256": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+      "part": 1,
+      "total": 5,
+      "panels": [
+        1,
+        2
+      ],
+      "slideId": "s3aaa2",
+      "slide": 85
+    },
+    {
+      "sourceGraph": "sim_heldout_storms",
+      "sourceFile": "outputs/figures/sim_heldout_storms.svg",
+      "sourceSha256": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+      "part": 2,
+      "total": 5,
+      "panels": [
+        3,
+        4
+      ],
+      "slideId": "igxop3",
+      "slide": 86
+    },
+    {
+      "sourceGraph": "sim_heldout_storms",
+      "sourceFile": "outputs/figures/sim_heldout_storms.svg",
+      "sourceSha256": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+      "part": 3,
+      "total": 5,
+      "panels": [
+        5,
+        6
+      ],
+      "slideId": "ptbqps",
+      "slide": 87
+    },
+    {
+      "sourceGraph": "sim_heldout_storms",
+      "sourceFile": "outputs/figures/sim_heldout_storms.svg",
+      "sourceSha256": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+      "part": 4,
+      "total": 5,
+      "panels": [
+        7,
+        8
+      ],
+      "slideId": "zvru3i",
+      "slide": 88
+    },
+    {
+      "sourceGraph": "sim_heldout_storms",
+      "sourceFile": "outputs/figures/sim_heldout_storms.svg",
+      "sourceSha256": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+      "part": 5,
+      "total": 5,
+      "panels": [
+        9,
+        10
+      ],
+      "slideId": "cywy53",
+      "slide": 89
+    },
+    {
+      "sourceGraph": "spillover_islandwide_map",
+      "sourceFile": "outputs/figures/spillover_islandwide_map.svg",
+      "sourceSha256": "b3041390b1eb6fae05c960f4499c616ec076f7878fc810e90fd11c7d070ea449",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "m1pwyo",
+      "slide": 90
+    },
+    {
+      "sourceGraph": "stands_predicted_sensitivity",
+      "sourceFile": "outputs/figures/stands_predicted_sensitivity.svg",
+      "sourceSha256": "c50d486f76f1c09677181efcd9151156122c57e8d96d32b59950b17c8a9d0fc7",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "xpdhdn",
+      "slide": 91
+    },
+    {
+      "sourceGraph": "taxi_deserts_map",
+      "sourceFile": "outputs/figures/taxi_deserts_map.svg",
+      "sourceSha256": "02af7ef387669c36d59ceff2f8e6ea73e59972f2c762e889b5f2ab319464ce29",
+      "part": 1,
+      "total": 1,
+      "panels": [
+        1
+      ],
+      "slideId": "w1z4he",
+      "slide": 92
+    }
+  ],
+  "sourceInputs": {
+    "outputs/figures/audit_unusual_days.svg": "e341c0534c4c48697d4444b25fb2b75b44d2399254fbfbef3ce8316012eb9bdd",
+    "outputs/figures/desc_maps_dry_heavy.svg": "2fbfc80abb4f7b40be54ff1ad0cf71c0e4df35fc9df49f29e4867cf3c2340531",
+    "outputs/tables/desc_maps_dry_heavy.csv": "1b8b427973ad6d8f2a409c4a6e3e8f28e4e5080013b9f2b6654d9250cff1370f",
+    "outputs/figures/desc_profile_rain_bands.svg": "25a629c9413a77fc37ef14911efb1eff25b992c57ff59d58ad8a8af494fd06df",
+    "outputs/figures/desc_rain_band_frequency.svg": "699714f12f54909e0f92efdb12ae37a1d3632881f3cd19487c3c5233bacc8ea6",
+    "outputs/figures/desc_storm_2023-07-20_peak.svg": "e1d66e451e9cfb849510d73b0f095d7444155f9d83da078aefbdc3b86c2a3303",
+    "outputs/figures/desc_trend_vs_fleet.svg": "6b7b4fc66b6552aa98a4119ae96d6914a95d910b55aa435fd418bbf906759922",
+    "outputs/figures/dose_intensity_hangover.svg": "db05ce9253a583302fb0683e7af1f50bd43b04d4f60157b7627c680b8bf27329",
+    "outputs/figures/dry_supply_by_band.svg": "e9d5a0708e802c184cf4888121470e344f213fddb0104725dd158d86fb4abf66",
+    "outputs/figures/effects_approach_forecast.svg": "9b84862966599d7ddc12dd12922df475d588fb2b27c749dac171d2da56a2e628",
+    "outputs/figures/effects_by_regime.svg": "5ea1aaf184910e02afeb56d6f19924bfbfd0db7d34d2096f7521542547cee6c7",
+    "outputs/figures/effects_event_study.svg": "d6719b3b531c0a179d42997e4e053d6ae107462f8899709bc7bc2334a7770a20",
+    "outputs/figures/effects_interactions.svg": "b24ae07baa1ad64859b9fa116a3c66686ea4a7a23f5f7fe31d5695dfafc95883",
+    "outputs/figures/effects_main.svg": "6c77b59775a84b7d53011d82bb21e667a6e77627eecf813121162a292a8bdf69",
+    "outputs/figures/effects_robustness.svg": "b35b28073eb0e093d343df3573d6027053622aa80e16b4dbf1addd46f127358a",
+    "outputs/figures/factors_contrasts.svg": "63d265f8059de76cf835b114a6899d9d667844f33fe293f1fd9da3bdef508c3c",
+    "outputs/figures/factors_shap.svg": "1ccce94dda4023f8ab2308eb8c6997bcf23ae7e3349a3634fe6ab00979ff4db2",
+    "outputs/figures/feed_regimes.svg": "a36c74515a289f6cae095ee1efcdb203a5cc6dc92dc450c160626e6f8db8fc24",
+    "outputs/figures/fleet_trend.svg": "a594a6e30b94c37fa52042eba71f3d17d48e4af08b1619891d9e2339163fbdc4",
+    "outputs/figures/forecast_pr_auc.svg": "7a8cf67c93c3241f5c64a1367bcdb3b6e0a50c07cc8d9577074bc6cd48c77af7",
+    "outputs/figures/forecast_topk_both_labels.svg": "143376a0e488531cb5b9ae6f9a66052c6b39d6b5c984cd004e58dc8315eb8710",
+    "outputs/figures/inference_hotspots.svg": "f8587c066a652231d2c595f3f61bf4a671e0578bd6ac2b9b38bc7070935d363d",
+    "outputs/tables/inference_hotspots.csv": "81f6d4c82a3d3bac8fd9406d350b24e055bf09881f23dbbc6e01defe6d2e38e8",
+    "outputs/figures/inference_permutation.svg": "b7aa6be62cbaccf25d473f41950ad841b06f43a906007a136f1a0989b58c5fdf",
+    "outputs/figures/minutes_to_taxi_maps.svg": "76749fd013c7574fecaf90638363625177f060d9460bbd364d9f9314c4a2b8c4",
+    "outputs/figures/mrt_did_event_study.svg": "2b7782b8b6be4178bdec6d1dea7c648e77ddb2c087bbb7a40d5e7ff4e9b1ab00",
+    "outputs/figures/names_rain_hit_map.svg": "4b1eac36599f880c6f4559a30b3b2706e4cf93e648806f94212c48579eff3033",
+    "outputs/tables/cell_rain_effects.csv": "f8426efb831bdbae3f69dbd40043689659278b31e553fd3d3a70e36fa21475c0",
+    "outputs/figures/planning_forecast_rain.svg": "fafd117426b206ff1b80fd1ea62a2eafb07e0393436eaa67b688f320b8630350",
+    "outputs/figures/policy_diagnosis.svg": "b3e00961ab73b2614645d8d094d4a7481381eb857d02fa844b53d0282a6efac6",
+    "outputs/figures/policy_targeting.svg": "c5cd19a4b937c193abbadfdd3254acfb02cf7f77bebd683db65e8bd235d1dbce",
+    "outputs/figures/radar_measurement_check.svg": "dd78e32f8346091b647049d1874da0b3d826c5337e46ef793a074f4f9e65302c",
+    "outputs/figures/risk_odds.svg": "2a077fce0ffda8e280adec0c146695cdbfb136f67b3465c0bb7c76e49023c688",
+    "outputs/figures/risk_types.svg": "b2c4afa577925dc80112f9a59f56d5b42e970be0a34557dd577f1cd6f75a524e",
+    "outputs/figures/risk_vulnerability.svg": "9849222cb32e7ea2a3a923c4334e4728b981cb5642ee09981a915fa795590a3c",
+    "outputs/figures/s1_weather_gain.svg": "607ad1ae8dbb4fd6f5de7f5dc4bb18da933823f652bdf3a31ec9b0fa60e40ac9",
+    "outputs/figures/s22_weather_gain.svg": "dadc3b8297ee934eddb44cefee07805cc7b8e4e16e75fdbcc78c417ab412abb8",
+    "outputs/figures/s22b_weather_gain.svg": "e406c47ce11663e2dfc49a3e39b23cdedba134c9883103f0d1caf05b29f1f31c",
+    "outputs/figures/s23_flows.svg": "170b3ea34f1bdbdabd4827e1026bbf48effb97757c4c8e7eafc6d87770b7f309",
+    "outputs/figures/s23_geography.svg": "cab0875994741b984aa6de06d84c97f10fd3534f243716ea9a5833838d158f03",
+    "outputs/figures/s23_speed.svg": "68acb67912710d4c84614554d376c9361afd55997abfff469a920b1482e4c097",
+    "outputs/figures/sim2_diagnosis.svg": "1d612b652dd4137be6430abdbb46e4323981a20407315463df30f82aa1ac59ae",
+    "outputs/figures/sim2_heldout_storms.svg": "fc645569d9b318f7cb7be55b892d5f599eac8550df7c8e6773b002b7f212bc29",
+    "outputs/figures/sim_heldout_storms.svg": "8be63749afd24027fb994fba1325dcc7b77031995ee517c93bca9ffea98c2f00",
+    "outputs/figures/spillover_islandwide_map.svg": "b3041390b1eb6fae05c960f4499c616ec076f7878fc810e90fd11c7d070ea449",
+    "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
+    "outputs/figures/stands_predicted_sensitivity.svg": "c50d486f76f1c09677181efcd9151156122c57e8d96d32b59950b17c8a9d0fc7",
+    "outputs/tables/stands_predicted_sensitivity_cells.csv": "426ceaf135a9a4fd76ff73a2b539984a50b2bcef7a07fb277a536c4f6c7c811c",
+    "outputs/figures/taxi_deserts_map.svg": "02af7ef387669c36d59ceff2f8e6ea73e59972f2c762e889b5f2ab319464ce29",
+    "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd"
+  }
+}

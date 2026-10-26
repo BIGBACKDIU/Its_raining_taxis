@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="727.2pt" height="397.44pt" viewBox="0 0 727.2 397.44" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-26T09:53:45.727835</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 397.44 
+L 727.2 397.44 
+L 727.2 0 
+L 0 0 
+z
+" style="fill: #fbfcfe"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 196.344 333.8496 
+L 705.384 333.8496 
+L 705.384 15.8976 
+L 196.344 15.8976 
+z
+" style="fill: #fbfcfe"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="196.344" y="360.4816" transform="rotate(-0 196.344 360.4816)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="288.896727" y="360.4816" transform="rotate(-0 288.896727 360.4816)">2</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="381.449455" y="360.4816" transform="rotate(-0 381.449455 360.4816)">4</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="474.002182" y="360.4816" transform="rotate(-0 474.002182 360.4816)">6</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="566.554909" y="360.4816" transform="rotate(-0 566.554909 360.4816)">8</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="450.864" y="386.6576" transform="rotate(-0 450.864 386.6576)">Fewer vacant taxis per heavy-rain half-hour</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6">
+      <path d="M 196.344 33.846503 
+L 705.384 33.846503 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_7"/>
+     <g id="text_7">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="42.162503" transform="rotate(-0 181.344 42.162503)">Changi T3</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_8">
+      <path d="M 196.344 59.487794 
+L 705.384 59.487794 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_9"/>
+     <g id="text_8">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="67.803794" transform="rotate(-0 181.344 67.803794)">Changi T1 / Jewel</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_10">
+      <path d="M 196.344 85.129084 
+L 705.384 85.129084 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11"/>
+     <g id="text_9">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="93.445084" transform="rotate(-0 181.344 93.445084)">Lau Pa Sat</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12">
+      <path d="M 196.344 110.770374 
+L 705.384 110.770374 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_13"/>
+     <g id="text_10">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="119.086374" transform="rotate(-0 181.344 119.086374)">Marina Bay Sands</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_14">
+      <path d="M 196.344 136.411665 
+L 705.384 136.411665 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_15"/>
+     <g id="text_11">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="144.727665" transform="rotate(-0 181.344 144.727665)">Dhoby Ghaut</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16">
+      <path d="M 196.344 162.052955 
+L 705.384 162.052955 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_17"/>
+     <g id="text_12">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="170.368955" transform="rotate(-0 181.344 170.368955)">Lavender</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_18">
+      <path d="M 196.344 187.694245 
+L 705.384 187.694245 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_19"/>
+     <g id="text_13">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="196.010245" transform="rotate(-0 181.344 196.010245)">Victoria</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_20">
+      <path d="M 196.344 213.335535 
+L 705.384 213.335535 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_21"/>
+     <g id="text_14">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="221.651535" transform="rotate(-0 181.344 221.651535)">Nicoll</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_22">
+      <path d="M 196.344 238.976826 
+L 705.384 238.976826 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_23"/>
+     <g id="text_15">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="247.292826" transform="rotate(-0 181.344 247.292826)">City Hall</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_24">
+      <path d="M 196.344 264.618116 
+L 705.384 264.618116 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_25"/>
+     <g id="text_16">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="272.934116" transform="rotate(-0 181.344 272.934116)">Chinatown</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_26">
+      <path d="M 196.344 290.259406 
+L 705.384 290.259406 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_27"/>
+     <g id="text_17">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="298.575406" transform="rotate(-0 181.344 298.575406)">Farrer Park</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_28">
+      <path d="M 196.344 315.900697 
+L 705.384 315.900697 
+" clip-path="url(#p49519cf839)" style="fill: none; stroke: #e4eaf4; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_29"/>
+     <g id="text_18">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="181.344" y="324.216697" transform="rotate(-0 181.344 324.216697)">Woodlands East</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 196.344 333.8496 
+L 705.384 333.8496 
+" style="fill: none; stroke: #e4eaf4; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 196.344 41.53889 
+L 523.980655 41.53889 
+L 523.980655 26.154116 
+L 196.344 26.154116 
+z
+" clip-path="url(#p49519cf839)" style="fill: #14295b"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 196.344 67.180181 
+L 513.799855 67.180181 
+L 513.799855 51.795406 
+L 196.344 51.795406 
+z
+" clip-path="url(#p49519cf839)" style="fill: #14295b"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 196.344 92.821471 
+L 423.098182 92.821471 
+L 423.098182 77.436697 
+L 196.344 77.436697 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 196.344 118.462761 
+L 416.619491 118.462761 
+L 416.619491 103.077987 
+L 196.344 103.077987 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 196.344 144.104052 
+L 369.880364 144.104052 
+L 369.880364 128.719277 
+L 196.344 128.719277 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 196.344 169.745342 
+L 363.864436 169.745342 
+L 363.864436 154.360568 
+L 196.344 154.360568 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 196.344 195.386632 
+L 360.162327 195.386632 
+L 360.162327 180.001858 
+L 196.344 180.001858 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 196.344 221.027923 
+L 343.9656 221.027923 
+L 343.9656 205.643148 
+L 196.344 205.643148 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 196.344 246.669213 
+L 337.024145 246.669213 
+L 337.024145 231.284439 
+L 196.344 231.284439 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 196.344 272.310503 
+L 335.635855 272.310503 
+L 335.635855 256.925729 
+L 196.344 256.925729 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 196.344 297.951794 
+L 319.439127 297.951794 
+L 319.439127 282.567019 
+L 196.344 282.567019 
+z
+" clip-path="url(#p49519cf839)" style="fill: #c0453c"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 196.344 323.593084 
+L 310.646618 323.593084 
+L 310.646618 308.20831 
+L 196.344 308.20831 
+z
+" clip-path="url(#p49519cf839)" style="fill: #14295b"/>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #14295b" x="529.533818" y="39.894503" transform="rotate(-0 529.533818 39.894503)">7.1 of 83.4 (−8.5%)</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #14295b" x="519.353018" y="65.535794" transform="rotate(-0 519.353018 65.535794)">6.9 of 43.1 (−15.9%)</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="428.651345" y="91.177084" transform="rotate(-0 428.651345 91.177084)">4.9 of 15.9 (−30.8%)</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="422.172655" y="116.818374" transform="rotate(-0 422.172655 116.818374)">4.8 of 13.1 (−36.4%)</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="375.433527" y="142.459665" transform="rotate(-0 375.433527 142.459665)">3.8 of 10.8 (−34.9%)</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="369.4176" y="168.100955" transform="rotate(-0 369.4176 168.100955)">3.6 of 16.5 (−21.9%)</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="365.715491" y="193.742245" transform="rotate(-0 365.715491 193.742245)">3.5 of 14.8 (−23.9%)</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="349.518764" y="219.383535" transform="rotate(-0 349.518764 219.383535)">3.2 of 14.6 (−21.9%)</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="342.577309" y="245.024826" transform="rotate(-0 342.577309 245.024826)">3.0 of 11.7 (−26.1%)</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="341.189018" y="270.666116" transform="rotate(-0 341.189018 270.666116)">3.0 of 13.8 (−21.8%)</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="324.992291" y="296.307406" transform="rotate(-0 324.992291 296.307406)">2.7 of 11.7 (−22.8%)</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: start; fill: #14295b" x="316.199782" y="321.948697" transform="rotate(-0 316.199782 321.948697)">2.5 of 14.3 (−17.3%)</text>
+   </g>
+  </g>
+  <g id="text_31">
+   <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #c0453c" x="196.344" y="22.5936" transform="rotate(-0 196.344 22.5936)">CBD and fringe</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p49519cf839">
+   <rect x="196.344" y="15.8976" width="509.04" height="317.952"/>
+  </clipPath>
+ </defs>
+</svg>

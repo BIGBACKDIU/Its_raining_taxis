@@ -1594,3 +1594,35 @@ results stay as they are and remain the pre-specified result.
     S1 NB issue-time label, 30 minutes, all times), explicitly a descriptive maximum; the regional points
     use pooled T2 15%, storm windows, 60 minutes. October's one onset remains descriptive under the
     registered power rule, regardless of its numerical gain. Do not re-score any combination.
+
+168. **Complete project presentation and all saved graphs (presentation only).** The user clarified
+    that the deliverable should include all project graphs and a slide deck following the supplied
+    `It's Raining Taxis.pptx` reference. Preserve that source file and its navy design, Anton headings,
+    Poppins body text and editable layout. The completed deck has 24 main slides, an appendix divider,
+    and 67 appendix slides covering all 44 unique saved analysis SVGs and 97 nonempty data panels.
+    Split crowded named maps and retain diagnostics, null results, failed designs and simulation caveats.
+    Save the deck and panel inventory in `outputs/presentations/`, and appendix card PNGs in
+    `outputs/figures/deck/all/`. This renders existing evidence only: no new analysis specification,
+    estimation, tuning, scoring, bootstrap or holdout-data access is needed.
+
+    Chart paths, confidence intervals and numeric labels come from the frozen SVGs; retain every
+    multiline label. Percentage-count map colours use cell-ID joins to existing result tables and
+    the common ±40% scale. Other map units remain unchanged. The original fifteen-area planning
+    heatmap is rebuilt from its saved table with a sequential blue scale and signed values. Record
+    source hashes and verify them after export. Plot paths and text are editable native objects,
+    not Office charts with embedded workbooks. Retain original scale rasters where appropriate.
+    Download unmodified Anton Regular and its OFL licence from google/fonts; use the previously
+    bundled Poppins fonts. Register fonts explicitly and fail on fallback.
+
+    Correct presentation claims against existing tables: issue-time precision is 54.23% for LightGBM
+    and 47.18% for persistence at 30 minutes; keep share estimates distinct from absolute changes;
+    best simulator v2 and v1 settings pass 3/10 and 4/10 respectively, neither the overall rule.
+    Policy-diagnosis issue-time precision is 44.16% for risk-weighted selected cells versus 27.70%
+    among all candidate cells; disclose the different group sizes. Recommendations remain candidates
+    for an operational trial. The morning-model corrective refit and repeated test scoring stay visible.
+
+    Correction to decision 167 and its progress note: `s22_storm_onsets.csv` contains **two** October
+    2026 onsets, not one. Correct the annotation and companion plotted CSV only. The saved gain,
+    confidence interval and descriptive-only conclusion (2 < 8 onsets) do not change. The 2019 primary
+    gain remains +0.0087, below +0.02. No outcomes are re-scored. Render and inspect the completed deck,
+    validate its package and reference font policy, then run the wording check and existing tests.

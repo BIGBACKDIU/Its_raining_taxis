@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="555.84pt" height="403.2pt" viewBox="0 0 555.84 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-26T09:53:46.110104</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 555.84 403.2 
+L 555.84 0 
+L 0 0 
+z
+" style="fill: #fbfcfe"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 177.8688 278.208 
+L 533.6064 278.208 
+L 533.6064 36.288 
+L 177.8688 36.288 
+z
+" style="fill: #fbfcfe"/>
+   </g>
+   <g clip-path="url(#pcae43abcde)">
+    <image xlink:href="data:image/png;base64,
+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54WcuBXY8fnDsTmCLLygAAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAICG4AAAAIrJ594Z1NcTAs2TP7r4yeAFO5dXAwegJM5+PbL4+eAMDkvHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAABAQHADAACA4AYAAIBl8MINAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAAcENAAAAF/5//wDnyUqztLp1DwAAAABJRU5ErkJggg==" id="image145daf3719" transform="scale(1 -1) translate(0 -241.92)" x="177.84" y="-36.36" width="355.68" height="241.92"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="213.44256" y="304.84" transform="rotate(-0 213.44256 304.84)">00–07</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="284.59008" y="304.84" transform="rotate(-0 284.59008 304.84)">07–10</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="355.7376" y="304.84" transform="rotate(-0 355.7376 304.84)">10–17</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="426.88512" y="304.84" transform="rotate(-0 426.88512 304.84)">17–20</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="498.03264" y="304.84" transform="rotate(-0 498.03264 304.84)">20–24</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="33.288" transform="rotate(-0 355.7376 33.288)">Weekday time band · NEA rain forecast</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="56.7" transform="rotate(-0 167.8688 56.7)">Changi</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="80.892" transform="rotate(-0 167.8688 80.892)">Bukit Merah</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8"/>
+     <g id="text_9">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="105.084" transform="rotate(-0 167.8688 105.084)">Downtown Core</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9"/>
+     <g id="text_10">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="129.276" transform="rotate(-0 167.8688 129.276)">Geylang</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_10"/>
+     <g id="text_11">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="153.468" transform="rotate(-0 167.8688 153.468)">Kallang</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_11"/>
+     <g id="text_12">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="177.66" transform="rotate(-0 167.8688 177.66)">Sengkang</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_12"/>
+     <g id="text_13">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="201.852" transform="rotate(-0 167.8688 201.852)">Woodlands</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_13"/>
+     <g id="text_14">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="226.044" transform="rotate(-0 167.8688 226.044)">Yishun</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_14"/>
+     <g id="text_15">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="250.236" transform="rotate(-0 167.8688 250.236)">Tampines</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_15"/>
+     <g id="text_16">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5a6683" x="167.8688" y="274.428" transform="rotate(-0 167.8688 274.428)">Ang Mo Kio</text>
+     </g>
+    </g>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="213.44256" y="54.432" transform="rotate(-0 213.44256 54.432)">33.1</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="284.59008" y="54.432" transform="rotate(-0 284.59008 54.432)">25.1</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="355.7376" y="54.432" transform="rotate(-0 355.7376 54.432)">17.4</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="54.432" transform="rotate(-0 426.88512 54.432)">−20.5</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="54.432" transform="rotate(-0 498.03264 54.432)">−26.8</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="213.44256" y="78.624" transform="rotate(-0 213.44256 78.624)">23.3</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="78.624" transform="rotate(-0 284.59008 78.624)">6.8</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="78.624" transform="rotate(-0 355.7376 78.624)">−28.0</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="426.88512" y="78.624" transform="rotate(-0 426.88512 78.624)">21.4</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="498.03264" y="78.624" transform="rotate(-0 498.03264 78.624)">24.8</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="213.44256" y="102.816" transform="rotate(-0 213.44256 102.816)">20.2</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="102.816" transform="rotate(-0 284.59008 102.816)">8.6</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="102.816" transform="rotate(-0 355.7376 102.816)">8.5</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="102.816" transform="rotate(-0 426.88512 102.816)">5.4</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="102.816" transform="rotate(-0 498.03264 102.816)">−15.6</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="127.008" transform="rotate(-0 213.44256 127.008)">3.9</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="284.59008" y="127.008" transform="rotate(-0 284.59008 127.008)">17.9</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="127.008" transform="rotate(-0 355.7376 127.008)">0.0</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="426.88512" y="127.008" transform="rotate(-0 426.88512 127.008)">16.5</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="127.008" transform="rotate(-0 498.03264 127.008)">15.1</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="151.2" transform="rotate(-0 213.44256 151.2)">5.7</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="284.59008" y="151.2" transform="rotate(-0 284.59008 151.2)">15.9</text>
+   </g>
+   <g id="text_39">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="151.2" transform="rotate(-0 355.7376 151.2)">−4.5</text>
+   </g>
+   <g id="text_40">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="426.88512" y="151.2" transform="rotate(-0 426.88512 151.2)">17.3</text>
+   </g>
+   <g id="text_41">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="151.2" transform="rotate(-0 498.03264 151.2)">12.6</text>
+   </g>
+   <g id="text_42">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="175.392" transform="rotate(-0 213.44256 175.392)">−8.9</text>
+   </g>
+   <g id="text_43">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="175.392" transform="rotate(-0 284.59008 175.392)">9.7</text>
+   </g>
+   <g id="text_44">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #ffffff" x="355.7376" y="175.392" transform="rotate(-0 355.7376 175.392)">17.2</text>
+   </g>
+   <g id="text_45">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="175.392" transform="rotate(-0 426.88512 175.392)">3.1</text>
+   </g>
+   <g id="text_46">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="175.392" transform="rotate(-0 498.03264 175.392)">−0.8</text>
+   </g>
+   <g id="text_47">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="199.584" transform="rotate(-0 213.44256 199.584)">−12.9</text>
+   </g>
+   <g id="text_48">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="199.584" transform="rotate(-0 284.59008 199.584)">9.1</text>
+   </g>
+   <g id="text_49">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="199.584" transform="rotate(-0 355.7376 199.584)">15.2</text>
+   </g>
+   <g id="text_50">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="199.584" transform="rotate(-0 426.88512 199.584)">11.7</text>
+   </g>
+   <g id="text_51">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="199.584" transform="rotate(-0 498.03264 199.584)">8.7</text>
+   </g>
+   <g id="text_52">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="223.776" transform="rotate(-0 213.44256 223.776)">−9.6</text>
+   </g>
+   <g id="text_53">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="223.776" transform="rotate(-0 284.59008 223.776)">9.0</text>
+   </g>
+   <g id="text_54">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="223.776" transform="rotate(-0 355.7376 223.776)">14.7</text>
+   </g>
+   <g id="text_55">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="223.776" transform="rotate(-0 426.88512 223.776)">3.3</text>
+   </g>
+   <g id="text_56">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="223.776" transform="rotate(-0 498.03264 223.776)">−1.1</text>
+   </g>
+   <g id="text_57">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="247.968" transform="rotate(-0 213.44256 247.968)">6.3</text>
+   </g>
+   <g id="text_58">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="247.968" transform="rotate(-0 284.59008 247.968)">−4.7</text>
+   </g>
+   <g id="text_59">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="247.968" transform="rotate(-0 355.7376 247.968)">−2.8</text>
+   </g>
+   <g id="text_60">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="247.968" transform="rotate(-0 426.88512 247.968)">4.8</text>
+   </g>
+   <g id="text_61">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="247.968" transform="rotate(-0 498.03264 247.968)">13.6</text>
+   </g>
+   <g id="text_62">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="213.44256" y="272.16" transform="rotate(-0 213.44256 272.16)">−1.4</text>
+   </g>
+   <g id="text_63">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="284.59008" y="272.16" transform="rotate(-0 284.59008 272.16)">7.6</text>
+   </g>
+   <g id="text_64">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="355.7376" y="272.16" transform="rotate(-0 355.7376 272.16)">−6.1</text>
+   </g>
+   <g id="text_65">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="426.88512" y="272.16" transform="rotate(-0 426.88512 272.16)">5.0</text>
+   </g>
+   <g id="text_66">
+    <text style="font-size: 17.28px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="498.03264" y="272.16" transform="rotate(-0 498.03264 272.16)">11.9</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_3">
+    <path d="M 188.9856 334.656 
+L 516.9312 334.656 
+L 516.9312 327.3984 
+L 188.9856 327.3984 
+z
+" style="fill: #fbfcfe"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAA48AAAAVCAYAAADmfNu3AAABg0lEQVR4nO3XQXLDIAwAQNr/P7HnvqBnk6vBtQRKMrns3jLCSDJ2PPr6+f3r7aSffg2BjVh74rpejQU52lvy95fXtpe/FsvqGa79cP7wHD+Q/2XPWLi2v7W2+edebWuxLEf1urjufn8fp9jRa9cNseN+z619gthxia3VneU47xvdx8uex06txRyLe8771vuPzvi+7p1a49raE/1HOVqt/9MZ58/Y/3vmta3VndZajA3vf/BM7+Sovv9zw/3yZz38693G5hzRB2lcG+Ub45ccwT5Rj2EfUT3Bh61c2xzv1dqCc4w+gHOOjdrWzzHpv3yOrdZ/eW21/2xtsba2ejY7a6tnM6Wrvo8b/X/PKQEAAGBmeAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAACBleAQAAKBlHmkMDN9twBgwAAAAAElFTkSuQmCC" id="image1ee22b2fe2" transform="scale(1 -1) translate(0 -7.56)" x="189" y="-327.24" width="327.96" height="7.56"/>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_6">
+     <g id="line2d_16"/>
+     <g id="text_67">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="188.9856" y="356.288" transform="rotate(-0 188.9856 356.288)">0</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_17"/>
+     <g id="text_68">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="287.924724" y="356.288" transform="rotate(-0 287.924724 356.288)">10</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_18"/>
+     <g id="text_69">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="386.863848" y="356.288" transform="rotate(-0 386.863848 356.288)">20</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_19"/>
+     <g id="text_70">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5a6683" x="485.802973" y="356.288" transform="rotate(-0 485.802973 356.288)">30</text>
+     </g>
+    </g>
+    <g id="text_71">
+     <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #14203a" x="352.9584" y="386.464" transform="rotate(-0 352.9584 386.464)">Fewer taxis per half-hour</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4"/>
+   <g id="LineCollection_1"/>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pcae43abcde">
+   <rect x="177.8688" y="36.288" width="355.7376" height="241.92"/>
+  </clipPath>
+ </defs>
+</svg>
