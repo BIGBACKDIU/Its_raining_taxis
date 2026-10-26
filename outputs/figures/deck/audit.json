@@ -1,0 +1,205 @@
+{
+  "inputs": {
+    "outputs/tables/effects_main.csv": "89e31d18aeeb09c47ce7a97b95ab68cf1f0be75ddf4b7096b05fa32dd01d53f0",
+    "outputs/tables/radar_effects.csv": "f6412080e83ea5548c01e141e4c4b6e9f1756ef465058db560ef06f3eda3883c",
+    "outputs/tables/radar_central.csv": "f14571752a0efc434309fe0ee14b65df1cc35b012f2e262f8a80372664e245c2",
+    "data/interim/panel30_2023.parquet": "3e0a55d3e1bd5a38cac1c2e4201d092d92e6f6ac4b58a839fe96adbb911848a1",
+    "outputs/tables/names_cells.csv": "1602ebb71381eecc10d1984cb790d337d95558827d07e39a9068c50d62478ea3",
+    "outputs/tables/rain_hit_top30_absolute.csv": "e7ba606ed0b32e7ab7393650133d04f5455e037c1dd6491eb63bb83b7cba6b16",
+    "outputs/tables/effects_event_study.csv": "4293c1eac993d863cfc75f91e8ec7d9c7531a75dda6a820193538cade194ca98",
+    "outputs/tables/effects_approach.csv": "e160050db8834372212fce11102d6a8894684eaec219e0fb878d21b36227f9a6",
+    "outputs/tables/dose_spline_curve.csv": "b6e6894c0f4c05ff7d9c42450e5368c68cb1042ff915c3eec2bcc0f87e971bba",
+    "outputs/tables/dose_duration_hangover.csv": "7ab89da0694102866693e4904a441090aa3c1a6c8f1f683b0e0984311115bde9",
+    "outputs/tables/rain_hit_absolute_all.csv": "1ee5fdd59055924bd69ad76193431f59efbfa840c516a024274da4df0a2e1e56",
+    "outputs/tables/rain_hit_share_all.csv": "9436b5513fde624b16bcf256eda7b60819be0bedc2f27d40f07810752720e223",
+    "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
+    "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd",
+    "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
+    "outputs/tables/s22_materiality.csv": "5efbd2a9898332c0c678e522dfad47aad5b919bfa2c3383af179afffc9d02ef2",
+    "outputs/tables/s22b_materiality.csv": "96a0102048e1cf25c4083d8cb9f24653ab544a472a806488138a3ffa3e07c199"
+  },
+  "charts": {
+    "deck_effects_main": {
+      "display_pixels": [
+        1016,
+        490
+      ],
+      "png_pixels": [
+        2032,
+        980
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "508c65176405e8b781deb8ea3291225dd184006adc2fd3a2f3696188d762bc58"
+    },
+    "deck_radar_check": {
+      "display_pixels": [
+        1146,
+        440
+      ],
+      "png_pixels": [
+        2292,
+        880
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "935fcbc2f7216fd0238ffdda1a4052c2a98250afd2eda7a5c187c0bab2b35fd6"
+    },
+    "deck_storm_peak": {
+      "display_pixels": [
+        1560,
+        516
+      ],
+      "png_pixels": [
+        3120,
+        1032
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "4aa95e978519d793ae9d8a6af7dfc4ec65cf4fa56573508d0b35bbe3f9faea29"
+    },
+    "deck_event_timeline": {
+      "display_pixels": [
+        1040,
+        536
+      ],
+      "png_pixels": [
+        2080,
+        1072
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "f3d01b99310a0f551501bdef99fd9fa272038b25c882d792c90f90868a363d93"
+    },
+    "deck_dose": {
+      "display_pixels": [
+        1016,
+        375
+      ],
+      "png_pixels": [
+        2032,
+        750
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "1fa5602c6f5c9c97e669185034689566d6fd5374fd4f7a3bf5edfa6bc7aa8aca"
+    },
+    "deck_where_map": {
+      "display_pixels": [
+        1520,
+        547
+      ],
+      "png_pixels": [
+        3040,
+        1094
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "ba9f6c9129651f262555d7d411517b9edaf20b12e9c0769f843872478cffdcc8"
+    },
+    "deck_places_bar": {
+      "display_pixels": [
+        1010,
+        552
+      ],
+      "png_pixels": [
+        2020,
+        1104
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "0956964df011e043e5df09c49c418f222c08e9e39d0fd70163d7c23b4236dae2"
+    },
+    "deck_islandwide_map": {
+      "display_pixels": [
+        889,
+        552
+      ],
+      "png_pixels": [
+        1778,
+        1104
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "361f7d1ee66f544c7f969d63d26296f94bb0f33621090ec605959bb0220b2236"
+    },
+    "deck_planning_heatmap": {
+      "display_pixels": [
+        772,
+        560
+      ],
+      "png_pixels": [
+        1544,
+        1120
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "af3fb5cc43f1d09493ead61ff358d9efd3ab469a6c1156eb49e0e73a98e20645"
+    },
+    "deck_forecast_bars": {
+      "display_pixels": [
+        1300,
+        487
+      ],
+      "png_pixels": [
+        2600,
+        974
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "9b93f17f6009f34a081f87287b8cdbf46828aa501163043bdb3e7cfd27114d0f"
+    },
+    "deck_holdout_gain": {
+      "display_pixels": [
+        1100,
+        420
+      ],
+      "png_pixels": [
+        2200,
+        840
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "7a33883b90095172fb7b48ec58440ec6ddeb29e3418c50a938f6392a8e1c2631"
+    }
+  },
+  "fonts": {
+    "Regular": {
+      "file": "assets/fonts/poppins/Poppins-Regular.ttf",
+      "sha256": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba"
+    },
+    "Medium": {
+      "file": "assets/fonts/poppins/Poppins-Medium.ttf",
+      "sha256": "90373e7d838d32468438fc3e152dca0bdb12edcab99ea639f158790b1ba1fd05"
+    },
+    "SemiBold": {
+      "file": "assets/fonts/poppins/Poppins-SemiBold.ttf",
+      "sha256": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286"
+    }
+  },
+  "notes": [
+    "Storm snapshot has no existing CSV. Exported unchanged saved panel rows and the original 02_describe.py formula, without refitting or rescoring.",
+    "Event recovery shading starts at +150 min: first saved CI including zero and all later CIs include zero. Before/onset phases are descriptive slide annotations. Approaching-rain callout rounds \u22127.3384034% to \u22127%; it is not an event-study point.",
+    "Places red group is presentation-only: Downtown Core, Museum, Rochor, Outram and Lavender/Kallang; other bars navy. Changi T3 table value is \u22128.50%, shown \u22128.5%, not the illustrative \u22128% in the request.",
+    "Island-wide map marks the three cells with positive absolute-change CIs, not the much larger set gaining share. Only Senoko West meets the naming filter; cells 48018 and 49023 remain unnamed (<4 expected). Map fills show all saved share estimates, not significance-thresholded zeros.",
+    "Planning areas use the original planning chart ordering: largest gap in any weekday band under an issued NEA rain forecast, top 10. Negative gaps retain their signed text; sequential colour floors at zero, exactly as the original chart.",
+    "1 km maximum is +0.00240 (S1 NB issue-time label, 30 min, all times), not the primary deficit-label maximum. It is a descriptive maximum across saved combinations; no model or outcome is re-scored. The Oct 2026 CI uses 893 defined bootstrap draws and cannot override the registered minimum-eight-onset power rule."
+  ]
+}

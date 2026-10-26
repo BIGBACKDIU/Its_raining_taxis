@@ -1555,3 +1555,42 @@ results stay as they are and remain the pre-specified result.
     https://storm-builder-sg.vercel.app (static files from `sim/v3`; `template.html` and env files excluded). The page
     and all the data it uses (`sim/v3/data.json`, scripts, build and check scripts) are in this repository. Below
     1024 px the page uses the stacked layout so the panels never cover the map. Engine, inputs and counters unchanged.
+
+167. **Deck charts: presentation-only exports from frozen results.** Restyle the 11 requested charts
+    into `outputs/figures/deck/` with the supplied navy/blue/red palette, Poppins text, no chart titles
+    or source lines, direct labels, and exact 2x PNG dimensions. Download unmodified Poppins Regular,
+    Medium and SemiBold TTFs from google/fonts, retain the OFL licence, register them explicitly, and
+    fail if any rendered text resolves to another font or lacks a glyph. No large Anton number callouts
+    are used. Hash source tables before and after plotting; save exact plotted rows and font/image/input
+    hashes beside the exports. Rendering only: no estimation, tuning, bootstrap, scoring or new test-year
+    data access. Existing result tables and figures remain unchanged.
+
+    Presentation selections: radar uses the registered primary dry threshold of 0 mm/h, absolute models
+    on their identical reduced sample, and the Central Area heavy contrast. Dose panels retain the saved
+    intensity and after-rain absolute/share estimates, adding the saved heavy-rain duration contrasts.
+    Event recovery shading begins at +150 minutes, the first CI containing zero with all later intervals
+    also containing zero; it is a statistical criterion, not complete physical recovery. The requested
+    −7% approach annotation rounds the separate model's −7.3384034%, not an event-study estimate.
+    Named heavy-rain map cells meet >=4 expected and q<0.10 in the relevant model; other cells use the
+    no-data colour. Negative/positive maps all use the same red/white/blue scale capped at ±40%.
+
+    The storm peak has no existing CSV table. Export the 374 unchanged saved panel rows at exactly
+    20 July 2023 09:30 and apply the original figure's descriptive formula 100*(vacant/max(1,baseline)-1).
+    Preserve those rows in the deck data folder. This reuses a frozen fit-period snapshot and saved
+    baseline, not a re-estimate. Rain colours saturate at 60 mm/h (last tick explicitly >=60).
+    Context-place markers use three already presentable cells from the frozen named ranking.
+
+    In island-wide rain, the three marked cells are those with clear positive **absolute** changes;
+    many more gain citywide share. Only Senoko West meets the naming filter. Cells 48018 and 49023
+    have <4 expected taxis and remain unnamed, with their small absolute gains disclosed. Planning
+    areas follow the existing chart's maximum-gap ordering under issued NEA rain forecasts on weekdays,
+    restricted to ten areas. Keep negative gap labels signed; sequential colour floors at zero.
+    The places chart's red CBD/fringe presentation group is Downtown Core, Museum, Rochor, Outram and
+    Lavender/Kallang. Its first table percentage is −8.50%, displayed −8.5%; do not substitute the
+    illustrative −8% from the request. All value labels use documented rounding of saved numbers.
+
+    Forecast bars use primary 1 km, issue-time labels, all times, K=19, regression without weather, and
+    the two LightGBM variants. Holdout gains use the maximum over all saved 1 km combinations (+0.00240,
+    S1 NB issue-time label, 30 minutes, all times), explicitly a descriptive maximum; the regional points
+    use pooled T2 15%, storm windows, 60 minutes. October's one onset remains descriptive under the
+    registered power rule, regardless of its numerical gain. Do not re-score any combination.

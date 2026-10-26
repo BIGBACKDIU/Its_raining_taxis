@@ -741,3 +741,21 @@ The six presentation screenshots are refreshed. Wording check: 76 reviewed hits,
   `outputs/figures/storm_builder_*.png` are refreshed. No model or number changed.
 - City-builder restyle of the Storm Builder (decision above): full-screen light map with floating panels and a tool
   bar. Presentation only; the browser checker passes with exact counter agreement.
+
+### Deck chart presentation exports (decision 167)
+
+Created all 11 requested PNGs in `outputs/figures/deck/` at exactly twice their specified display sizes.
+The charts use the supplied navy/blue/red palette, registered Poppins fonts, direct labels and common
+±40% change-map scales. Every text element passes a font-file and glyph check; image dimensions and
+all source hashes pass validation. Each image was opened for visual inspection, and label collisions
+were corrected. No model is re-estimated, no holdout is re-scored, and frozen tables/figures stay unchanged.
+
+The storm snapshot did not have a result CSV: the export copies its 374 saved panel rows and the
+original descriptive ratio formula, with exact values retained beside the PNGs. The first Changi label
+is −8.5% (saved −8.50%, rather than the request's illustrative −8%). Island-wide markers identify the
+three absolute gainers; only Senoko West meets the naming filter, so the other two use anonymous cell
+IDs. The holdout plot keeps October's one-onset result explicitly descriptive, and labels the 1 km
+maximum as descriptive selection over saved combinations. Full selections and rounding are in the
+folder README; input/font/image hashes and dimensions are in `audit.json`. No table-value mismatch
+was found. Tests: 35 passed (14 existing warnings). Wording check: 76 reviewed hits; additional checking
+of the deck script and README with the same patterns found no hits.
