@@ -1626,3 +1626,26 @@ results stay as they are and remain the pre-specified result.
     confidence interval and descriptive-only conclusion (2 < 8 onsets) do not change. The 2019 primary
     gain remains +0.0087, below +0.02. No outcomes are re-scored. Render and inspect the completed deck,
     validate its package and reference font policy, then run the wording check and existing tests.
+
+169. **HTML research story: 15 main graphs and the full evidence appendix (presentation only).**
+    The user approved an HTML redesign for clearer charts, design and scrolling, requesting at least
+    13–15 graphs in the main story. Build an offline page with exactly 15 main figures and retain all
+    44 saved analysis figures (97 nonempty data panels, 67 panel groups) in a searchable viewer.
+    Use the reference's navy palette, Poppins text and Anton display headings, with embedded fonts.
+    Add responsive charts, map measure and forecast-horizon controls, saved uncertainty switches,
+    exact-value disclosures and keyboard presentation navigation. This only renders saved evidence;
+    it is not a new analysis and requires no estimation, tuning, scoring or new held-out data use.
+
+    Main figures use existing result tables, with the storm snapshot reused from decision 167's saved
+    CSV. Preserve the cell-ID joins, expected-count/q-value naming filter, common ±40% map scale,
+    signed planning values, separate absolute/share interpretations and model-specific conclusions.
+    Show all four morning model/label combinations and both saved bootstrap intervals. Explicitly
+    disclose its corrective refit and repeated scoring. Keep October's two-onset result descriptive,
+    label the 1 km maximum as selected, and retain failed simulation and minute-flow limitations.
+    The after-rain annotation uses the table's explicit 30–60-minute bin. No frozen result changes.
+
+    Save editable presentation sources under `story/`, the builder in `analysis/build_story.py`, and
+    the HTML, source hashes, instructions and screenshots under `outputs/story/`. Verify source hashes
+    before/after building, all 15 main figures and 44 appendix entries, font loading, mobile/desktop
+    label bounds, chart controls, multi-panel navigation and presentation mode. Run the existing test
+    and wording gates; additionally review the new story prose with the wording-check patterns.

@@ -75,3 +75,10 @@ real OpenStreetMap road paths, animated model taxis, storm controls and a same-s
 It retains the failed-realism-check banner and the frozen v2 model numbers and parameters.
 The original simulation pages remain unchanged. See [`sim/v3/README.md`](sim/v3/README.md) for the build,
 checks, road attribution (OpenStreetMap contributors, ODbL) and presentation simplifications.
+
+### Interactive research story — presentation only
+
+Open [`outputs/story/index.html`](outputs/story/index.html) in a browser for a self-contained scrolling
+presentation: 15 main graphs, interactive maps and controls, and all 44 saved figures in a searchable
+appendix. Fonts, data and images are embedded for offline use. See [`outputs/story/README.md`](outputs/story/README.md)
+for presenter controls, rebuild instructions and provenance. Frozen results and models are unchanged.

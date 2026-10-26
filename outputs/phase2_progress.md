@@ -776,3 +776,25 @@ recommendations do not claim measured operational benefits. Input hashes and gra
 in `outputs/presentations/graph_coverage.json`. Poppins/Anton registration and package validation pass.
 All slides are rendered for visual inspection. Final gates: 35 tests pass (14 existing warnings);
 the wording checker reports the same 76 reviewed hits. No new local data are required.
+
+### HTML research story (decision 169; presentation only)
+
+Created `outputs/story/index.html`: a self-contained navy/Poppins/Anton research presentation with
+15 main graphs. The story moves from the rain association through timing, geography and forecasting
+to planning candidates and the simulation's limits. Interactive controls select map measure, forecast
+horizon and saved day/seven-day intervals. Each chart has a plain-English takeaway and method/source
+notes. The searchable evidence viewer retains all 44 saved figures, 97 data panels and 67 panel groups.
+Presentation mode supports arrow navigation; all assets are embedded for offline reading.
+
+No model, threshold, frozen table/figure, scoring log or holdout has changed. Named maps retain the
+count/q-value filter and counts beside percentages. The page shows the four morning combinations,
+corrective refit/repeated scoring, October's two-onset power failure, descriptive 1 km maximum,
+failed simulation rule and minute-flow limitations. The after-rain annotation uses the saved table's
+explicit 30–60-minute interval. Source hashes are verified before/after rendering in `provenance.json`.
+
+Visual checks cover all 15 main graphs, 1440 px desktop and 400 px phone layouts. SVG labels fit their
+bounds at both sizes; Poppins/Anton load successfully, and the browser logs no warnings or errors.
+Map positive/negative counts, map measure/horizon/interval controls, search, all 44 gallery entries,
+multiple panel groups and keyboard presentation navigation work. Desktop/map/mobile JPG previews are
+saved beside the HTML. Final gates: 35 tests passed (14 existing warnings); the wording checker reports
+76 existing reviewed hits. Four additional story-prose matches are explicit supply/causality caveats.
