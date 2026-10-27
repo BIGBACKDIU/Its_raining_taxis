@@ -45,9 +45,10 @@
 </section>
 
 <!-- 3 -->
-<section class="slide" id="s-method" data-title="Five years of data, five steps">
+<section class="slide centered" id="s-method" data-title="Five years of data, five steps">
  <div class="kicker" data-in>Approach</div>
  <h1 data-in style="--d:.1">Five years of data, five steps</h1>
+ <div class="body">
  <div class="steps" id="steps">
   <div class="step"><div class="n">1</div><h2>Clean</h2><p>Data audit: outages, stuck gauges, unusual days</p></div>
   <div class="step"><div class="n">2</div><h2>Compare</h2><p>Poisson regression: rainy vs dry half-hours</p></div>
@@ -60,6 +61,7 @@
   <div class="card warn" data-in style="--d:3.9"><b>One combined feed</b>Every taxi company, no taxi IDs</div>
   <div class="card warn" data-in style="--d:4.1"><b>Empty taxis only</b>We see supply, not demand</div>
   <div class="card warn" data-in style="--d:4.3"><b>Associations</b>Not proven causes</div>
+ </div>
  </div>
  <div class="source">Data: LTA taxi availability feed via data.gov.sg; NEA rainfall and 2-hour / 24-hour forecasts via data.gov.sg.</div>
  <aside class="notes">We worked in five steps. First, we cleaned the data: we audited feed outages, stuck rain gauges and unusual days. Second, we compared rainy and dry half-hours with Poisson regression, holding the square, time of day and season fixed. Third, we checked the results with bootstraps and false-discovery tests, so a few lucky squares cannot drive the story. Fourth, we forecast short-term shortages with LightGBM and compared it with a simple rule that assumes nothing changes. Fifth, we turned the results into an optimisation plan. Three limits apply to everything: one combined public feed with no taxi IDs, vacant taxis only, and associations rather than causes.</aside>
@@ -211,32 +213,36 @@
 </section>
 
 <!-- 12 -->
-<section class="slide" id="s-limits" data-title="What our data can't tell us">
+<section class="slide centered" id="s-limits" data-title="What our data can't tell us">
  <div class="kicker" data-in>Limitations</div>
  <h1 data-in style="--d:.1">What our data can't tell us</h1>
+ <div class="body">
  <div class="cards four big4">
-  <div class="card" data-in style="--d:.3"><span class="icon">Supply</span><b>Supply, not demand</b>No waiting times or fares</div>
-  <div class="card" data-in style="--d:.5"><span class="icon">Links</span><b>Associations, not causes</b>Rain coincides with fewer vacant taxis; we cannot say why</div>
-  <div class="card" data-in style="--d:.7"><span class="icon">No IDs</span><b>No taxi IDs</b>CDG can't be separated from other operators</div>
-  <div class="card" data-in style="--d:.9"><span class="icon">Model</span><b>The simulator fails its realism check</b>It illustrates, it doesn't predict</div>
+  <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16v-5l2-5h10l2 5v5M3 16h18M7 16v2M17 16v2"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg></span><b>Supply, not demand</b>No waiting times or fares</div>
+  <div class="card" data-in style="--d:.5"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><b>Associations, not causes</b>Rain coincides with fewer vacant taxis; we cannot say why</div>
+  <div class="card" data-in style="--d:.7"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M14 10h4M14 14h4M3 3l18 18"/></svg></span><b>No taxi IDs</b>CDG can't be separated from other operators</div>
+  <div class="card" data-in style="--d:.9"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M6 16l4-5 3 3 5-7"/><circle cx="18" cy="7" r="1"/></svg></span><b>The simulator fails its realism check</b>It illustrates, it doesn't predict</div>
  </div>
  <p class="note-line" data-in style="--d:1.2">Checked with 100 m radar rainfall, permutation tests, and fresh holdout data from 2026 and 2019.</p>
+ </div>
  <div class="source">Robustness: radar comparison, permutation inference, October 2026 and 2019 holdout storms.</div>
  <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, every rain result is an association; rain coincides with fewer vacant taxis, but our data cannot say why. Third, the public feed has no taxi IDs, so ComfortDelGro's taxis cannot be separated from other operators. Fourth, the simulator fails its realism check on real storms, so it illustrates and does not predict. We did test the main findings hard: with 100 metre radar rainfall, permutation tests, and fresh holdout data from 2026 and from 2019, and the core pattern held.</aside>
 </section>
 
 <!-- 13 -->
-<section class="slide" id="s-next" data-title="Further discussion">
+<section class="slide centered" id="s-next" data-title="Further discussion">
  <div class="kicker" data-in>Next steps</div>
  <h1 data-in style="--d:.1">Further discussion</h1>
+ <div class="body">
  <div class="cards four big4">
-  <div class="card" data-in style="--d:.4"><b>Prove it works</b>Pilot the playbook on some rain days or zones and not others; compare taxis, pickups and waiting times</div>
-  <div class="card" data-in style="--d:1.2"><b>Close the data gap</b>CDG's bookings, unfulfilled requests and driver status would explain why taxis vanish (our minute-by-minute tracking was only 10–23% accurate without taxi IDs)</div>
-  <div class="card" data-in style="--d:2"><b>Better short-term signal</b>NEA's radar API (live since July 2026) for regional storm alerts; in 2019 storms, weather gave a real but small gain ({{holdout}} PR-AUC)</div>
-  <div class="card" data-in style="--d:2.8"><b>Beyond rain</b>MRT breakdowns, big events, and dry-weather taxi deserts like Punggol</div>
+  <div class="card" data-in style="--d:.4"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></svg></span><b>Prove it works</b>Pilot the playbook on some rain days or zones and not others; compare taxis, pickups and waiting times</div>
+  <div class="card" data-in style="--d:1.2"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span><b>Close the data gap</b>CDG's bookings and driver status would explain why taxis vanish. Without taxi IDs, our minute tracking was only 10–23% accurate.</div>
+  <div class="card" data-in style="--d:2"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/><circle cx="12" cy="12" r="1"/></svg></span><b>Better short-term signal</b>NEA's radar API (live since July 2026) for regional storm alerts; in 2019 storms, weather gave a real but small gain ({{holdout}} PR-AUC)</div>
+  <div class="card" data-in style="--d:2.8"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="13" rx="3"/><path d="M6 10h12M9 19l-2 2M15 19l2 2"/><circle cx="9" cy="13" r=".8"/><circle cx="15" cy="13" r=".8"/></svg></span><b>Beyond rain</b>MRT breakdowns, big events, and dry-weather taxi deserts like Punggol</div>
+ </div>
  </div>
  <div class="source">2019 backward holdout: 49 storm onsets, 60-minute regional target. Minute tracking: synthetic matching diagnostics.</div>
- <aside class="notes">Where could this go next? First, prove it works: pilot the playbook on some rain days or zones and not others, then compare taxis, pickups and waiting times, which a pilot with company data could measure. Second, close the data gap: bookings, unfulfilled requests and driver status would show why taxis disappear; without taxi IDs, our minute-by-minute tracking was only 10 to 23 per cent accurate. Third, a better short-term signal: NEA's radar API, live since July 2026, could support regional storm alerts; in the 2019 storms, weather gave a real but small gain of 0.009 PR-AUC. Fourth, look beyond rain: MRT breakdowns, big events, and dry-weather taxi deserts such as Punggol.</aside>
+ <aside class="notes">Where could this go next? First, prove it works: pilot the playbook on some rain days or zones and not others, then compare taxis, pickups and waiting times, which a pilot with company data could measure. Second, close the data gap: bookings and driver status would show why taxis disappear; without taxi IDs, our minute-by-minute tracking was only 10 to 23 per cent accurate. Third, a better short-term signal: NEA's radar API, live since July 2026, could support regional storm alerts; in the 2019 storms, weather gave a real but small gain of 0.009 PR-AUC. Fourth, look beyond rain: MRT breakdowns, big events, and dry-weather taxi deserts such as Punggol.</aside>
 </section>
 
 <!-- 14 -->

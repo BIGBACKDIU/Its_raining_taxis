@@ -120,8 +120,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 510,
-    "svgs": 0
+    "text": 484,
+    "svgs": 10
    },
    {
     "slide": 13,
@@ -130,8 +130,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 682,
-    "svgs": 0
+    "text": 651,
+    "svgs": 12
    },
    {
     "slide": 14,
@@ -273,8 +273,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 510,
-    "svgs": 0
+    "text": 484,
+    "svgs": 10
    },
    {
     "slide": 13,
@@ -283,8 +283,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 682,
-    "svgs": 0
+    "text": 651,
+    "svgs": 12
    },
    {
     "slide": 14,
@@ -322,13 +322,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.009
+   "secondsWaited": 9.013
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.002
+   "secondsWaited": 9.004
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -337,7 +337,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.007
+   "secondsWaited": 9.005
   }
  },
  "storm": {

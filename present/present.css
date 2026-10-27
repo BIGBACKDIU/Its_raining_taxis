@@ -185,3 +185,11 @@ mark{background:linear-gradient(transparent 12%,var(--yellow) 12%,var(--yellow) 
 .takeaways{margin-top:90px;gap:48px}
 .takeaway{font-size:42px}
 .chart-row.wide .point{font-size:28px}
+
+/* polish: centred content block and card icons (slides 3, 12, 13) */
+.slide.centered{display:flex;flex-direction:column}
+.slide.centered .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:96px}
+.slide.centered .body>:first-child{margin-top:0}
+.cards.big4 .card{min-height:0}
+.cards.big4 .card .icon{display:block;width:60px;height:60px;color:var(--sky);margin-bottom:18px}
+.cards.big4 .card .icon svg{width:60px;height:60px;display:block}

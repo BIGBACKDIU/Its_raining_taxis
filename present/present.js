@@ -214,7 +214,7 @@ const eventCursor=(()=>{
   const near=P.find(p=>Math.abs(p[2]-minute)<1.5);
   label.textContent=`${minute>0?'+':minute<0?'−':''}${Math.abs(Math.round(minute))} min`+(near?` · ${num(near[3],1)}%`:'');
   const w=label.getComputedTextLength()+20,bx=Math.min(M.width-w-4,Math.max(4,sx-w/2));
-  box.setAttribute('x',bx);box.setAttribute('y',M.top-36);box.setAttribute('width',w);label.setAttribute('x',bx+10);label.setAttribute('y',M.top-15.5);
+  box.setAttribute('x',bx);box.setAttribute('y',M.bottom-40);box.setAttribute('width',w);label.setAttribute('x',bx+10);label.setAttribute('y',M.bottom-19.5);
  };
 })();
 hooks['s-event']={

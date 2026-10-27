@@ -94,7 +94,7 @@ def event(out, size):
     dc.SIZES[name] = size
     dc.record(name, t)
     fig = dc.figure(name)
-    ax = dc.axes(fig, [.10, .17, .87, .78])
+    ax = dc.axes(fig, [.10, .17, .87, .75])
     phases = [(-60, 0, 'Before'), (0, 60, 'First hour: deepest'), (60, 150, 'Recovery'), (150, 180, 'Noise')]
     for i, (start, end, text) in enumerate(phases):
         ax.axvspan(start, end, color=p['pale'] if i % 2 == 0 else '#EEF3FA', zorder=0, lw=0)
@@ -102,7 +102,7 @@ def event(out, size):
     ax.fill_between(t.event_min, t.pct_lo, t.pct_hi, color=p['light'], alpha=.55, lw=0, gid='event-band')
     ax.plot(t.event_min, t.pct, color=p['navy'], lw=2.6, marker='o', ms=6, gid='event-line')
     ax.axvline(0, color=p['navy'], ls='--', lw=1.3)
-    dc.label(ax, -3, -8.6, 'Rain starts', p['navy'], size=22, ha='right', va='bottom')
+    dc.label(ax, 0, 3.12, 'Rain starts', p['navy'], size=22, ha='center', va='bottom', weight=600, clip_on=False)
     ax.axhline(0, color=dc.MUTED, lw=.8)
     ax.set(xlim=(-60, 180), ylim=(-9, 3), xlabel='Minutes from rain onset in the square',
            ylabel='% vacant taxis vs −30 min')

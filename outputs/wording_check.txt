@@ -23,27 +23,27 @@ sim/v3/template.html:202 [demand] <details class="explain" id="help"><summary>Wh
 sim/v3/template.html:202 [lost riders] <details class="explain" id="help"><summary>What am I looking at?</summary><p><b>This is a model story, not observed taxi behaviour.</b> Teal dots represent vac
 present/template.html:27 [waiting time] <aside class="notes">Our question is simple: when it rains in Singapore, where do vacant taxis go, and where should they be? We are a student team, and this pro
 present/template.html:27 [cause] <aside class="notes">Our question is simple: when it rains in Singapore, where do vacant taxis go, and where should they be? We are a student team, and this pro
-present/template.html:61 [demand] <div class="card warn" data-in style="--d:4.1"><b>Empty taxis only</b>We see supply, not demand</div>
-present/template.html:62 [cause] <div class="card warn" data-in style="--d:4.3"><b>Associations</b>Not proven causes</div>
-present/template.html:65 [cause] <aside class="notes">We worked in five steps. First, we cleaned the data: we audited feed outages, stuck rain gauges and unusual days. Second, we compared rainy
-present/template.html:90 [cause] <div class="source">One observed storm, 20 July 2023, 06:30–13:30; expected = each square's usual level for that time. Averages: Poisson regression on half-hour
-present/template.html:106 [cause] <div class="source">Event study around rain onset in each square, relative to 30 minutes before; band = 95% CI. Saved estimates cover −60 to +180 minutes. Assoc
-present/template.html:122 [cause] <div class="source">Top 12 squares by vacant taxis lost per heavy-rain half-hour; expected ≥ 4 taxis and q &lt; 0.10. Associations, not causes.</div>
-present/template.html:137 [cause] <div class="source">Heavy-rain change in vacant taxis vs dry, by square characteristic, with 95% CIs; dotted line = reference (MRT exit ≥ 1 km). Associations, n
-present/template.html:138 [cause] <aside class="notes">Why the CBD? We tested whether common features of a square go with a bigger heavy-rain drop. Squares more than a kilometre from an MRT exit
-present/template.html:152 [cause] <div class="source">NEA 2-hour forecasts; weekday estimates, Apr 2022–Mar 2025; association, not cause. Alerts: top-19 squares, 30 and 60 minutes ahead, test ye
-present/template.html:218 [demand] <div class="card" data-in style="--d:.3"><span class="icon">Supply</span><b>Supply, not demand</b>No waiting times or fares</div>
-present/template.html:218 [waiting time] <div class="card" data-in style="--d:.3"><span class="icon">Supply</span><b>Supply, not demand</b>No waiting times or fares</div>
-present/template.html:218 [revenue] <div class="card" data-in style="--d:.3"><span class="icon">Supply</span><b>Supply, not demand</b>No waiting times or fares</div>
-present/template.html:219 [cause] <div class="card" data-in style="--d:.5"><span class="icon">Links</span><b>Associations, not causes</b>Rain coincides with fewer vacant taxis; we cannot say why
-present/template.html:225 [demand] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:225 [waiting time] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:225 [revenue] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:233 [waiting time] <div class="card" data-in style="--d:.4"><b>Prove it works</b>Pilot the playbook on some rain days or zones and not others; compare taxis, pickups and waiting t
-present/template.html:239 [waiting time] <aside class="notes">Where could this go next? First, prove it works: pilot the playbook on some rain days or zones and not others, then compare taxis, pickups 
-present/template.html:252 [demand] <div class="source">Supply, not demand · associations, not causes · references on the next slide.</div>
-present/template.html:252 [cause] <div class="source">Supply, not demand · associations, not causes · references on the next slide.</div>
-present/template.html:253 [cause] <aside class="notes">To close, three things to remember. One: heavy rain reliably comes with about 13 per cent fewer vacant taxis on the street, and about 25 pe
+present/template.html:62 [demand] <div class="card warn" data-in style="--d:4.1"><b>Empty taxis only</b>We see supply, not demand</div>
+present/template.html:63 [cause] <div class="card warn" data-in style="--d:4.3"><b>Associations</b>Not proven causes</div>
+present/template.html:67 [cause] <aside class="notes">We worked in five steps. First, we cleaned the data: we audited feed outages, stuck rain gauges and unusual days. Second, we compared rainy
+present/template.html:92 [cause] <div class="source">One observed storm, 20 July 2023, 06:30–13:30; expected = each square's usual level for that time. Averages: Poisson regression on half-hour
+present/template.html:108 [cause] <div class="source">Event study around rain onset in each square, relative to 30 minutes before; band = 95% CI. Saved estimates cover −60 to +180 minutes. Assoc
+present/template.html:124 [cause] <div class="source">Top 12 squares by vacant taxis lost per heavy-rain half-hour; expected ≥ 4 taxis and q &lt; 0.10. Associations, not causes.</div>
+present/template.html:139 [cause] <div class="source">Heavy-rain change in vacant taxis vs dry, by square characteristic, with 95% CIs; dotted line = reference (MRT exit ≥ 1 km). Associations, n
+present/template.html:140 [cause] <aside class="notes">Why the CBD? We tested whether common features of a square go with a bigger heavy-rain drop. Squares more than a kilometre from an MRT exit
+present/template.html:154 [cause] <div class="source">NEA 2-hour forecasts; weekday estimates, Apr 2022–Mar 2025; association, not cause. Alerts: top-19 squares, 30 and 60 minutes ahead, test ye
+present/template.html:221 [demand] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" str
+present/template.html:221 [waiting time] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" str
+present/template.html:221 [revenue] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" str
+present/template.html:222 [cause] <div class="card" data-in style="--d:.5"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" str
+present/template.html:229 [demand] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:229 [waiting time] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:229 [revenue] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:238 [waiting time] <div class="card" data-in style="--d:.4"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" str
+present/template.html:245 [waiting time] <aside class="notes">Where could this go next? First, prove it works: pilot the playbook on some rain days or zones and not others, then compare taxis, pickups 
+present/template.html:258 [demand] <div class="source">Supply, not demand · associations, not causes · references on the next slide.</div>
+present/template.html:258 [cause] <div class="source">Supply, not demand · associations, not causes · references on the next slide.</div>
+present/template.html:259 [cause] <aside class="notes">To close, three things to remember. One: heavy rain reliably comes with about 13 per cent fewer vacant taxis on the street, and about 25 pe
 analysis/02_describe.py:192 [cause] fig.text(0.01, 0.005, "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Association, not cause.",
 analysis/03_effects.py:4 [validation] Estimator: Poisson PML with fixed effects and day-clustered errors (analysis/fepois_hd.py, validated against
 analysis/03_effects.py:5 [validation] pyfixest on 2023 with --validate). Effects are 100 * (exp(b) - 1) % with 95% CI.

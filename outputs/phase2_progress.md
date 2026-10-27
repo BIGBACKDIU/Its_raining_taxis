@@ -920,3 +920,9 @@ scans `present/template.html`: 23 new hits, all disclaimers or proposed pilot me
 mid-animation: no console errors, nothing outside the slide, no overflow or overlaps, storm replay
 advances, Storm Builder and the Netlify prototype both load in their frames, and Storm Builder unloads
 on leaving its slide. `outputs/story/index.html` is byte-identical. No estimation, scoring or test-year use.
+
+Decision 174 polish (presentation only, no number changes): slide 5 "Rain starts" label moved above
+the plot and the cursor readout moved to the bottom of the plot, so the cursor never crosses the
+label; slide 12 cards use small inline icons instead of repeated words; slides 3, 12 and 13 centre
+their content between title and footer; slide 13 cards gain icons and card 2 is shortened. Checks
+rerun at 1920×1080 and 1440×900: no errors, overflow or overlaps; embeds load and unload.

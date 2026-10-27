@@ -44,9 +44,10 @@
         1280
       ],
       "fonts_used": [
-        "Poppins-Regular.ttf"
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
       ],
-      "sha256": "53473733dcb40f0e59e7d1fe9cb7f259e2350cdb76ce07852867e1b203c9ccea"
+      "sha256": "cab1e773a961fd036766234662d9863984ca1b6f268abcda21e887b66e325223"
     },
     "present_places_bar": {
       "display_pixels": [

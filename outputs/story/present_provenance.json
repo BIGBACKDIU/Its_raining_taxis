@@ -16,7 +16,7 @@
     120,
     101,
     103,
-    112,
+    110,
     104,
     62
   ],
@@ -58,16 +58,16 @@
     "data/static/sg_map.json": "2375b6865eaec2c0a0ce30f2016c667bd97c984cecfe95a1d89d91c6cac46d29",
     "outputs/story/data/storm_2023-07-20.csv": "6646d4521b5c661ef3f3c9d78d9912cf125a42146d3be10474e43b2903f5003b",
     "outputs/story/data/storm_2023-07-20.json": "ee65b9346fbc094f0f073b1353796e7efb1b68e1165c64d659aedce0d50ea03c",
-    "outputs/figures/deck/present/meta.json": "e0f42f57e483a82b119fc022d3de3b3b47e5ec2abd3853f555494a753dc50e46",
+    "outputs/figures/deck/present/meta.json": "6a00ff6ce503fc251f0cd0bb04e08c1a8c708ded384db889414e5a88a1f135f6",
     "assets/fonts/poppins/Poppins-Regular.ttf": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba",
     "assets/fonts/poppins/Poppins-Medium.ttf": "90373e7d838d32468438fc3e152dca0bdb12edcab99ea639f158790b1ba1fd05",
     "assets/fonts/poppins/Poppins-SemiBold.ttf": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286",
     "assets/fonts/anton/Anton-Regular.ttf": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab",
-    "outputs/figures/deck/present/present_event_timeline.svg": "b4e8fa9fb7f130fd9329ea6303efb201a4e9bb4567823dc854d9077792b621a3",
-    "outputs/figures/deck/present/present_places_bar.svg": "66f68f2ea87f7f13fe3ce4c138c6af2930044e53e8fa534f7bf80b5122224726",
-    "outputs/figures/deck/present/present_factors.svg": "57c07e43e423ef438bd791682faa2a583da3b2b3dc93c6b3db87784ceb04e7ff",
-    "outputs/figures/deck/present/present_planning_heatmap.svg": "5d630bb24b0c5a68f383a1276bea0b601e8006de500a98b9204b804997cc3da5"
+    "outputs/figures/deck/present/present_event_timeline.svg": "0a5a3fcb20910cf7e5250d226f135628446ce4f5007be2244ef1e16bcc6b506d",
+    "outputs/figures/deck/present/present_places_bar.svg": "3c67b2e4dc2b99c3966f72655db8bb7286259bd5faba17323df663822e3dd628",
+    "outputs/figures/deck/present/present_factors.svg": "f4df7d6069fc7a77a17fd0d40ed6b364feec14164a8299ff234f43336b5f6247",
+    "outputs/figures/deck/present/present_planning_heatmap.svg": "5ef8162fbbf2657bd1e08f425b44d09d936c82ce2e37d38a86e590944059de04"
   },
-  "html_sha256": "b3368feb3e8e5aaa105bf09b5af8fac796397429d60987e3e388537a3dec0ceb",
-  "bytes": 1115563
+  "html_sha256": "acce7cdf8a7f2f9fd44b97af5f0430aab960cc519a5635d1f917c19865d02b8f",
+  "bytes": 1118302
 }
