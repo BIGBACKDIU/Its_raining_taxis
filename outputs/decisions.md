@@ -1859,3 +1859,8 @@ results stay as they are and remain the pre-specified result.
     To keep each evidence line on one line, the timeline spans nearly the full slide width. Speaker notes
     carry the full simulator method and the 4 of 10 / 3 of 10 realism results. No number changes,
     estimation or scoring; `outputs/story/index.html` is unchanged.
+
+180. **Final small presentation fixes (presentation only).** Remove the leading "·" from the METHOD text on
+    slides 4–8. Slide 10: evidence lines at 20 px directly under each step (wrapping allowed), the timeline
+    aligned to the 120 px content margins, and a "PR-AUC" label under "+0.001". Slide 11: the dashboard embed
+    about 15% taller. No number changes, estimation or scoring; `outputs/story/index.html` is unchanged.
