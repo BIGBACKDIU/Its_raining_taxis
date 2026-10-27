@@ -44,6 +44,28 @@ FACTORS = [
     ('CONTRAST: heavy, mall in cell', 'Mall in the square'),
 ]
 META = {}
+ORIG_PT = dc.pt
+DECK_MARKERS = dc.markers
+MARKER_PX = 20  # numbered map markers: the only chart text allowed below the 24 px floor (decision 176)
+
+
+def present_pt(px):
+    """Projector floor: presentation charts are shown 1:1, so no chart text is drawn below 24 px."""
+    return max(px, 24) * 72 / 100
+
+
+def numbered_markers(ax, rows, spacing=3.0):
+    """Numbered place markers with leader lines; numbers sit inside outlined circles (20 px text)."""
+    placed = []
+    for k, r in enumerate(rows.itertuples(), 1):
+        origin = np.array([r.cell // 1000 + .5, r.cell % 1000 + .5])
+        candidates = [origin] + [origin + rad * np.array([np.cos(a), np.sin(a)])
+                                 for rad in [1.6, 2.8, 4.0, 5.2, 6.4] for a in np.linspace(0, 2 * np.pi, 24, endpoint=False)]
+        point = next((c for c in candidates if all(np.linalg.norm(c - q) > spacing for q in placed)), candidates[-1])
+        placed.append(point)
+        ax.plot([origin[0], point[0]], [origin[1], point[1]], color=dc.NAVY, lw=1, zorder=5)
+        ax.scatter(*point, s=560, color='#FFFFFF', edgecolor=dc.NAVY, linewidth=1.5, zorder=6)
+        ax.text(*point, str(k), color=dc.NAVY, fontsize=MARKER_PX * .72, weight=600, ha='center', va='center', zorder=7)
 
 
 def use(palette, out):
@@ -55,6 +77,8 @@ def use(palette, out):
     dc.DIVERGING = LinearSegmentedColormap.from_list('deck_change', [dc.RED, dc.WHITE, dc.BLUE], N=257)
     dc.DIVERGING.set_bad(dc.NO_DATA)
     dc.OUT = out
+    dc.pt = present_pt if palette == 'present' else ORIG_PT
+    dc.markers = numbered_markers if palette == 'present' else DECK_MARKERS
     dc.fonts()
     plt.rcParams.update({'svg.hashsalt': 'dao2702', 'svg.fonttype': 'none'})
     if palette == 'present':
@@ -136,7 +160,7 @@ def places(out, size):
     dc.SIZES[name] = size
     dc.record(name, t)
     fig = dc.figure(name)
-    ax = dc.axes(fig, [.25, .14, .73, .84], grid=False)
+    ax = dc.axes(fig, [.335, .22, .655, .77], grid=False)
     ax.xaxis.grid(True, color=dc.GRID, linewidth=.7)
     y = np.arange(12)[::-1]
     colors = [dc.RED if r.planning_area in CENTRAL else p['navy'] for r in t.itertuples()]
@@ -145,11 +169,29 @@ def places(out, size):
         bar.set_gid(f'bar-{i}')
         text = f'{r.taxis_lost_per_heavy_half_hour:.1f} of {r.expected_vacant_heavy:.1f} ({dc.pct(r.abs_pct)})'
         dc.label(ax, r.taxis_lost_per_heavy_half_hour + .12, yi, text, color, va='center').set_gid(f'barlabel-{i}')
-    ax.set_yticks(y, [dc.place_name(r) for r in t.itertuples()])
-    ax.tick_params(axis='y', pad=14)
-    ax.set(xlim=(0, 11.2), ylim=(-.7, 11.7), xlabel='Fewer vacant taxis per heavy-rain half-hour')
+    ax.set_yticks(y, [f'{i + 1}   {dc.place_name(r)}' for i, r in enumerate(t.itertuples())])
+    ax.tick_params(axis='y', pad=12)
+    ax.set(xlim=(0, 13.2), ylim=(-.7, 11.7))
+    ax.set_xlabel('Fewer vacant taxis per heavy-rain half-hour', labelpad=4)
+    ax.tick_params(axis='x', pad=4)
     ax.set_xticks([0, 2, 4, 6, 8])
     ax.spines['bottom'].set_color(dc.GRID)
+    dc.save(fig, name)
+
+
+def places_map(out, size):
+    use('present', out)
+    name = 'present_places_map'
+    t = dc.read('rain_hit_absolute_all')
+    top = dc.read('rain_hit_top30_absolute').head(12).reset_index(drop=True)
+    names, land = dc.geography()
+    dc.SIZES[name] = size
+    dc.record(name, t[['cell', 'abs_pct']])
+    fig = dc.figure(name)
+    ax = dc.map_axes(fig, [.0, .32, 1, .68], names, land)
+    dc.map_values(ax, t, 'abs_pct')
+    numbered_markers(ax, top)
+    dc.colorbar(fig, [.08, .25, .84, .03], label_text='Heavy rain: % vacant taxis vs normal')
     dc.save(fig, name)
 
 
@@ -168,7 +210,7 @@ def planning(out, size):
     cmap = LinearSegmentedColormap.from_list('present_blue', [p['pale'], p['light'], p['blue'], p['navy']])
     norm = Normalize(0, np.nanmax(m.values))
     fig = dc.figure(name)
-    ax = fig.add_axes([.18, .22, .43, .65])
+    ax = fig.add_axes([.205, .27, .375, .56])
     for i in range(10):
         for j in range(5):
             v = m.iloc[i, j]
@@ -190,12 +232,12 @@ def planning(out, size):
         spine.set_visible(False)
     rows = list(order)
     callouts = [
-        ('CHANGI', ['00-07'], 'Changi 00–07', '{a} fewer per half-hour ({p})'),
+        ('CHANGI', ['00-07'], 'Changi 00–07', '{a} fewer per half-hour\n({p})'),
         ('DOWNTOWN CORE', ['00-07'], 'Downtown Core 00–07', '{a} fewer ({p})'),
-        ('BUKIT MERAH', ['17-20', '20-24'], 'Bukit Merah 17–20, 20–24', '{a} fewer ({p})'),
+        ('BUKIT MERAH', ['17-20', '20-24'], 'Bukit Merah 17–20, 20–24', '{a} fewer\n({p})'),
     ]
-    tx = 4.9
-    ty = [0.2, 2.6, 5.0]
+    tx = 4.85
+    ty = [0.0, 3.5, 7.0]
     for k, (area, cols, title, fmt) in enumerate(callouts):
         i = rows.index(area)
         js = [bands.index(c) for c in cols]
@@ -206,18 +248,19 @@ def planning(out, size):
         ax.add_patch(Rectangle((min(js) - .47, i - .47), len(js) - .06, .94, fill=False, edgecolor=p['accent'],
                                lw=2.2, zorder=5, gid=f'callout-box-{k}', clip_on=False))
         bx, by = min(js) - .47, i - .47
-        ax.scatter([bx], [by], s=360, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.4, zorder=7, clip_on=False,
+        ax.scatter([bx], [by], s=560, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7, clip_on=False,
                    gid=f'callout-badge-{k}')
-        dc.label(ax, bx, by, str(k + 1), p['accent'], size=18, ha='center', va='center', weight=600, zorder=8,
-                 clip_on=False).set_gid(f'callout-num-{k}')
-        ax.scatter([tx + .14], [ty[k]], s=360, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.4, zorder=7, clip_on=False, gid=f'callout-keybadge-{k}')
-        dc.label(ax, tx + .14, ty[k], str(k + 1), p['accent'], size=18, ha='center', va='center', weight=600, zorder=8,
-                 clip_on=False).set_gid(f'callout-keynum-{k}')
-        dc.label(ax, tx + .38, ty[k], title, p['accent'], size=22, va='center', weight=600, clip_on=False).set_gid(f'callout-title-{k}')
-        dc.label(ax, tx + .38, ty[k] + .72, text, dc.RED, size=24, va='center', weight=500,
+        ax.text(bx, by, str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center', weight=600,
+                zorder=8, clip_on=False).set_gid(f'callout-num-{k}')
+        ax.scatter([tx + .16], [ty[k]], s=560, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7,
+                   clip_on=False, gid=f'callout-keybadge-{k}')
+        ax.text(tx + .16, ty[k], str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center',
+                weight=600, zorder=8, clip_on=False).set_gid(f'callout-keynum-{k}')
+        dc.label(ax, tx + .45, ty[k], title, p['accent'], size=28, va='center', weight=600, clip_on=False).set_gid(f'callout-title-{k}')
+        dc.label(ax, tx + .45, ty[k] + .55, text, dc.RED, size=28, va='top', weight=500, linespacing=1.15,
                  clip_on=False).set_gid(f'callout-text-{k}')
-    dc.label(ax, tx, 9.3, 'Negative = more taxis than usual.', dc.MUTED, size=22, va='center', clip_on=False)
-    dc.colorbar(fig, [.19, .115, .41, .022], cmap, norm, 'Fewer taxis per half-hour', ticks=[0, 10, 20, 30])
+    fig.text(.62, .1, 'Negative = more taxis than usual', fontsize=dc.pt(24), color=dc.MUTED)
+    dc.colorbar(fig, [.205, .155, .375, .025], cmap, norm, 'Fewer taxis per half-hour', ticks=[0, 10, 20, 30])
     dc.save(fig, name)
 
 
@@ -314,20 +357,48 @@ def policy(out, size):
     dc.save(fig, name)
 
 
+def where_present():
+    """Deck named-place maps with larger map panels for the appendix (same saved inputs and filters)."""
+    name = 'deck_where_map'
+    a, s, (names, land) = dc.read('rain_hit_absolute_all'), dc.read('rain_hit_share_all'), dc.geography()
+    fig = dc.figure(name)
+    plotted = []
+    for j, (t, flag, metric, count) in enumerate([(a, 'presentable_abs', 'abs_pct', 'taxis_lost_per_heavy_half_hour'),
+                                                 (s, 'presentable_share', 'share_pct', 'abs_change_per_half_hour')]):
+        q = t[t[flag] & (t.expected_vacant_heavy >= 4) & (t['abs_q' if j == 0 else 'share_q'] < .1)].copy()
+        top = q.nlargest(10, count) if j == 0 else q.nsmallest(10, metric)
+        q['signed_count'] = -q[count] if j == 0 else q[count]
+        top['signed_count'] = -top[count] if j == 0 else top[count]
+        q['panel'] = 'absolute' if j == 0 else 'share'
+        plotted.append(q)
+        ax = dc.map_axes(fig, [.0 + j * .5, .24, .33, .66], names, land)
+        dc.map_values(ax, q, metric)
+        numbered_markers(ax, top, spacing=2.6)
+        dc.key(fig, [.335 + j * .5, .04, .165, .92], top, metric, 'signed_count', size=24)
+        fig.text(.005 + j * .5, .94, 'Absolute count' if j == 0 else 'Citywide share', fontsize=dc.pt(24), color=dc.NAVY, weight=500)
+        dc.colorbar(fig, [.03 + j * .5, .17, .27, .025])
+    dc.record(name, pd.concat(plotted))
+    dc.save(fig, name)
+
+
 def main():
     PRESENT.mkdir(parents=True, exist_ok=True)
     factors('deck', DECK, 'deck_factors', (1100, 560))
-    factors('present', PRESENT, 'present_factors', (1180, 700))
-    event(PRESENT, (1180, 640))
-    places(PRESENT, (1180, 690))
-    planning(PRESENT, (1200, 760))
-    regimes(PRESENT, (1500, 520))
-    robustness(PRESENT, (1000, 680))
-    policy(PRESENT, (1150, 600))
-    # The deck's appendix charts, redrawn unchanged in the presentation palette (same saved inputs).
-    use('present', PRESENT)
-    for function in [dc.main_effects, dc.radar, dc.dose, dc.where, dc.island, dc.forecasting, dc.holdout]:
+    factors('present', PRESENT, 'present_factors', (1110, 640))
+    event(PRESENT, (1110, 640))
+    places(PRESENT, (824, 420))
+    places_map(PRESENT, (539, 420))
+    planning(PRESENT, (1110, 640))
+    regimes(PRESENT, (1680, 440))
+    robustness(PRESENT, (1680, 680))
+    policy(PRESENT, (1110, 640))
+    # The deck's appendix charts in the presentation palette, sized to their slot and shown 1:1.
+    for function, name, size in [(dc.main_effects, 'deck_effects_main', (824, 660)), (dc.radar, 'deck_radar_check', (824, 660)),
+                                 (dc.dose, 'deck_dose', (1680, 740)), (where_present, 'deck_where_map', (1680, 780)),
+                                 (dc.island, 'deck_islandwide_map', (1200, 700)), (dc.forecasting, 'deck_forecast_bars', (1680, 680)),
+                                 (dc.holdout, 'deck_holdout_gain', (1110, 700))]:
         use('present', PRESENT)
+        dc.SIZES[name] = size
         function()
     for rel, digest in dc.AUDIT['inputs'].items():
         assert dc.sha(dc.ROOT / rel) == digest, f'Frozen input changed: {rel}'

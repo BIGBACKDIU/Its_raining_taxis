@@ -9,9 +9,13 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 225,
+    "text": 173,
     "svgs": 0,
-    "canvasColours": 63
+    "minFont": {
+     "px": 20,
+     "text": "Rain  light to heavy  vacant taxi · illu"
+    },
+    "canvasColours": 68
    },
    {
     "slide": 2,
@@ -21,7 +25,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 684,
-    "svgs": 25
+    "svgs": 25,
+    "minFont": {
+     "px": 20,
+     "text": "Context"
+    }
    },
    {
     "slide": 3,
@@ -31,7 +39,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 595,
-    "svgs": 0
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Approach"
+    }
    },
    {
     "slide": 4,
@@ -40,8 +52,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 617,
-    "svgs": 1657
+    "text": 869,
+    "svgs": 1656,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 1 · Descriptive"
+    }
    },
    {
     "slide": 5,
@@ -50,8 +66,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 541,
-    "svgs": 103
+    "text": 783,
+    "svgs": 103,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 2 · Descriptive"
+    }
    },
    {
     "slide": 6,
@@ -60,8 +80,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 816,
-    "svgs": 143
+    "text": 1221,
+    "svgs": 1467,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 3 · Descriptive to diagnostic"
+    }
    },
    {
     "slide": 7,
@@ -70,8 +94,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 607,
-    "svgs": 161
+    "text": 924,
+    "svgs": 161,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 4 · Diagnostic"
+    }
    },
    {
     "slide": 8,
@@ -80,8 +108,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1148,
-    "svgs": 352
+    "text": 1379,
+    "svgs": 354,
+    "minFont": {
+     "px": 20,
+     "text": "3"
+    }
    },
    {
     "slide": 9,
@@ -90,8 +122,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 415,
-    "svgs": 2
+    "text": 250,
+    "svgs": 2,
+    "minFont": {
+     "px": 20,
+     "text": "Live demo · illustration only"
+    }
    },
    {
     "slide": 10,
@@ -100,8 +136,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 751,
-    "svgs": 0
+    "text": 674,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Recommendation"
+    }
    },
    {
     "slide": 11,
@@ -111,7 +151,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 400,
-    "svgs": 0
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Prototype"
+    }
    },
    {
     "slide": 12,
@@ -120,8 +164,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 519,
-    "svgs": 10
+    "text": 507,
+    "svgs": 10,
+    "minFont": {
+     "px": 20,
+     "text": "Limitations"
+    }
    },
    {
     "slide": 13,
@@ -130,8 +178,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1204,
-    "svgs": 16
+    "text": 1186,
+    "svgs": 16,
+    "minFont": {
+     "px": 20,
+     "text": "Next steps"
+    }
    },
    {
     "slide": 14,
@@ -140,8 +192,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 949,
-    "svgs": 2
+    "text": 788,
+    "svgs": 2,
+    "minFont": {
+     "px": 20,
+     "text": "Summary"
+    }
    },
    {
     "slide": 15,
@@ -150,8 +206,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 818,
-    "svgs": 0
+    "text": 1457,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix"
+    }
    },
    {
     "slide": 16,
@@ -160,8 +220,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 727,
-    "svgs": 123
+    "text": 603,
+    "svgs": 123,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A1"
+    }
    },
    {
     "slide": 17,
@@ -170,78 +234,152 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1582,
-    "svgs": 0
+    "text": 1016,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A2"
+    }
    },
    {
     "slide": 18,
-    "id": "a3",
-    "file": "1920x1080-18-a3.jpg",
+    "id": "a3a",
+    "file": "1920x1080-18-a3a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 997,
-    "svgs": 571
+    "text": 546,
+    "svgs": 335,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A3a"
+    }
    },
    {
     "slide": 19,
-    "id": "a4",
-    "file": "1920x1080-19-a4.jpg",
+    "id": "a3b",
+    "file": "1920x1080-19-a3b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 490,
-    "svgs": 366
+    "text": 493,
+    "svgs": 236,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A3b"
+    }
    },
    {
     "slide": 20,
-    "id": "a5",
-    "file": "1920x1080-20-a5.jpg",
+    "id": "a4",
+    "file": "1920x1080-20-a4.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1482,
-    "svgs": 3493
+    "text": 438,
+    "svgs": 366,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A4"
+    }
    },
    {
     "slide": 21,
-    "id": "a6",
-    "file": "1920x1080-21-a6.jpg",
+    "id": "a5a",
+    "file": "1920x1080-21-a5a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 932,
-    "svgs": 264
+    "text": 1021,
+    "svgs": 2205,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A5a"
+    }
    },
    {
     "slide": 22,
-    "id": "a7",
-    "file": "1920x1080-22-a7.jpg",
+    "id": "a5b",
+    "file": "1920x1080-22-a5b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 840,
-    "svgs": 97
+    "text": 475,
+    "svgs": 1288,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A5b"
+    }
    },
    {
     "slide": 23,
-    "id": "a8",
-    "file": "1920x1080-23-a8.jpg",
+    "id": "a6a",
+    "file": "1920x1080-23-a6a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1185,
-    "svgs": 0
+    "text": 462,
+    "svgs": 156,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6a"
+    }
    },
    {
     "slide": 24,
-    "id": "a9",
-    "file": "1920x1080-24-a9.jpg",
+    "id": "a6b",
+    "file": "1920x1080-24-a6b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1363,
-    "svgs": 0
+    "text": 540,
+    "svgs": 108,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6b"
+    }
+   },
+   {
+    "slide": 25,
+    "id": "a7",
+    "file": "1920x1080-25-a7.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 764,
+    "svgs": 97,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A7"
+    }
+   },
+   {
+    "slide": 26,
+    "id": "a8",
+    "file": "1920x1080-26-a8.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 832,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A8"
+    }
+   },
+   {
+    "slide": 27,
+    "id": "a9",
+    "file": "1920x1080-27-a9.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 834,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A9"
+    }
    }
   ],
   "1440x900": [
@@ -252,9 +390,13 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 225,
+    "text": 173,
     "svgs": 0,
-    "canvasColours": 69
+    "minFont": {
+     "px": 20,
+     "text": "Rain  light to heavy  vacant taxi · illu"
+    },
+    "canvasColours": 62
    },
    {
     "slide": 2,
@@ -264,7 +406,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 684,
-    "svgs": 25
+    "svgs": 25,
+    "minFont": {
+     "px": 20,
+     "text": "Context"
+    }
    },
    {
     "slide": 3,
@@ -274,7 +420,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 595,
-    "svgs": 0
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Approach"
+    }
    },
    {
     "slide": 4,
@@ -283,8 +433,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 616,
-    "svgs": 1657
+    "text": 868,
+    "svgs": 1656,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 1 · Descriptive"
+    }
    },
    {
     "slide": 5,
@@ -293,8 +447,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 541,
-    "svgs": 103
+    "text": 783,
+    "svgs": 103,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 2 · Descriptive"
+    }
    },
    {
     "slide": 6,
@@ -303,8 +461,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 816,
-    "svgs": 143
+    "text": 1221,
+    "svgs": 1467,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 3 · Descriptive to diagnostic"
+    }
    },
    {
     "slide": 7,
@@ -313,8 +475,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 607,
-    "svgs": 161
+    "text": 924,
+    "svgs": 161,
+    "minFont": {
+     "px": 20,
+     "text": "Chart 4 · Diagnostic"
+    }
    },
    {
     "slide": 8,
@@ -323,8 +489,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1148,
-    "svgs": 352
+    "text": 1379,
+    "svgs": 354,
+    "minFont": {
+     "px": 20,
+     "text": "3"
+    }
    },
    {
     "slide": 9,
@@ -333,8 +503,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 415,
-    "svgs": 2
+    "text": 250,
+    "svgs": 2,
+    "minFont": {
+     "px": 20,
+     "text": "Live demo · illustration only"
+    }
    },
    {
     "slide": 10,
@@ -343,8 +517,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 751,
-    "svgs": 0
+    "text": 674,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Recommendation"
+    }
    },
    {
     "slide": 11,
@@ -354,7 +532,11 @@
     "overflow": [],
     "overlaps": [],
     "text": 400,
-    "svgs": 0
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Prototype"
+    }
    },
    {
     "slide": 12,
@@ -363,8 +545,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 519,
-    "svgs": 10
+    "text": 507,
+    "svgs": 10,
+    "minFont": {
+     "px": 20,
+     "text": "Limitations"
+    }
    },
    {
     "slide": 13,
@@ -373,8 +559,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1204,
-    "svgs": 16
+    "text": 1186,
+    "svgs": 16,
+    "minFont": {
+     "px": 20,
+     "text": "Next steps"
+    }
    },
    {
     "slide": 14,
@@ -383,8 +573,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 949,
-    "svgs": 2
+    "text": 788,
+    "svgs": 2,
+    "minFont": {
+     "px": 20,
+     "text": "Summary"
+    }
    },
    {
     "slide": 15,
@@ -393,8 +587,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 818,
-    "svgs": 0
+    "text": 1457,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix"
+    }
    },
    {
     "slide": 16,
@@ -403,8 +601,12 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 727,
-    "svgs": 123
+    "text": 603,
+    "svgs": 123,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A1"
+    }
    },
    {
     "slide": 17,
@@ -413,78 +615,152 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1582,
-    "svgs": 0
+    "text": 1016,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A2"
+    }
    },
    {
     "slide": 18,
-    "id": "a3",
-    "file": "1440x900-18-a3.jpg",
+    "id": "a3a",
+    "file": "1440x900-18-a3a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 997,
-    "svgs": 571
+    "text": 546,
+    "svgs": 335,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A3a"
+    }
    },
    {
     "slide": 19,
-    "id": "a4",
-    "file": "1440x900-19-a4.jpg",
+    "id": "a3b",
+    "file": "1440x900-19-a3b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 490,
-    "svgs": 366
+    "text": 493,
+    "svgs": 236,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A3b"
+    }
    },
    {
     "slide": 20,
-    "id": "a5",
-    "file": "1440x900-20-a5.jpg",
+    "id": "a4",
+    "file": "1440x900-20-a4.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1482,
-    "svgs": 3493
+    "text": 438,
+    "svgs": 366,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A4"
+    }
    },
    {
     "slide": 21,
-    "id": "a6",
-    "file": "1440x900-21-a6.jpg",
+    "id": "a5a",
+    "file": "1440x900-21-a5a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 932,
-    "svgs": 264
+    "text": 1021,
+    "svgs": 2205,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A5a"
+    }
    },
    {
     "slide": 22,
-    "id": "a7",
-    "file": "1440x900-22-a7.jpg",
+    "id": "a5b",
+    "file": "1440x900-22-a5b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 840,
-    "svgs": 97
+    "text": 475,
+    "svgs": 1288,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A5b"
+    }
    },
    {
     "slide": 23,
-    "id": "a8",
-    "file": "1440x900-23-a8.jpg",
+    "id": "a6a",
+    "file": "1440x900-23-a6a.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1185,
-    "svgs": 0
+    "text": 462,
+    "svgs": 156,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6a"
+    }
    },
    {
     "slide": 24,
-    "id": "a9",
-    "file": "1440x900-24-a9.jpg",
+    "id": "a6b",
+    "file": "1440x900-24-a6b.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1363,
-    "svgs": 0
+    "text": 540,
+    "svgs": 108,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6b"
+    }
+   },
+   {
+    "slide": 25,
+    "id": "a7",
+    "file": "1440x900-25-a7.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 764,
+    "svgs": 97,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A7"
+    }
+   },
+   {
+    "slide": 26,
+    "id": "a8",
+    "file": "1440x900-26-a8.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 832,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A8"
+    }
+   },
+   {
+    "slide": 27,
+    "id": "a9",
+    "file": "1440x900-27-a9.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 834,
+    "svgs": 0,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A9"
+    }
    }
   ]
  },
@@ -502,13 +778,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.006
+   "secondsWaited": 9.003
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.007
+   "secondsWaited": 9.003
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -517,7 +793,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.004
+   "secondsWaited": 9.003
   }
  },
  "storm": {
@@ -534,6 +810,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.666956521739134,
+ "titleFrameMs": 16.666956521739127,
  "problems": []
 }

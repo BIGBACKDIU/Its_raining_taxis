@@ -103,6 +103,22 @@ def values():
     v['sim1'], v['sim2'] = (str(read(t).storms_passed.max()) for t in ['sim_plausibility', 'sim2_plausibility'])
     v['bench'] = str(read('sim2_diagnosis_summary').query("period=='test'").stat_passes.iloc[0])
     v['test_log'] = str(len(pd.read_csv(track(ROOT / 'outputs/test_scoring_log.csv'))))
+    em = read('effects_main').set_index(['model', 'term']).pct
+    v['light'], v['moderate'], v['share_heavy'] = pct(em['abs', 'light'], 1), pct(em['abs', 'moderate'], 1), pct(em['share', 'heavy'], 1)
+    v['deepest'] = pct(ev.loc[ev.event_min == 30, 'pct'].iloc[0], 1)
+    dose = read('dose_spline_curve').query("model=='abs'").set_index('mmh').pct
+    v['dose1'] = pct(dose[1.0], 1)
+    dh = read('dose_duration_hangover').query("model=='abs'").set_index('term').pct
+    v['long_spell'] = pct(dh['heavy_wet>120'])
+    v['after'] = pct(-dh[[t for t in dh.index if t.startswith('dry_')][0]])
+    v['hotspots'] = str((read('inference_hotspots').hotspot == 'significantly lower').sum())
+    v['reference'] = pct(f.loc['CONTRAST: heavy, MRT >= 1 km (reference)', 'pct'], 1)
+    fs = read('factors_panel_interactions').query("model=='share'").set_index('term').pct
+    v['central_share'], v['reference_share'] = pct(fs['CONTRAST: heavy, Central Area'], 1), pct(fs['CONTRAST: heavy, MRT >= 1 km (reference)'], 1)
+    wls = read('factors_cell_wls').query("outcome=='abs'").set_index('characteristic').pct_per_sd
+    v['wls_central'], v['wls_stands'] = f"{-wls['central_area']:.0f}%", f"+{wls['taxi_stands_300m']:.1f}%"
+    rf = read('factors_cell_summary').rf_spatial_cv_r2
+    v['rf_r2'] = f'{rf.min():.2f}–{rf.max():.2f}'
     expected = {'heavy': '−12.9%', 'heavy_round': '−13%', 'central': '−24.5%', 'central_round': '−25%', 'approach': '−7%',
                 'firsthour': '−5%', 'recovery': '2.5 h', 'changi_lost': '7.1', 'changi_expected': '83', 'changi_pct': '−8.5%',
                 'bayfront': '−36%', 'dhoby': '−35%', 'raffles': '−31%', 'gain': '0.001', 'lgb': '53%', 'persist': '46%',
@@ -112,7 +128,10 @@ def values():
                 'h19': '+0.009', 'h19_ci': '+0.001 to +0.017', 'snap_ok': '120,017', 'snap_expected': '122,688',
                 'snap_usable': '118,136', 'snap_share': '97.8%', 'gauges': v['gauges'], 'stuck_gauges': '20', 'stuck_days': '439',
                 'excluded_days': '100', 'outage_days': '17', 'spells': '8', 'sim1': '4', 'sim2': '3', 'bench': '3',
-                'test_log': v['test_log']}
+                'test_log': v['test_log'], 'light': '−7.7%', 'moderate': '−10.8%', 'share_heavy': '−5.7%',
+                'deepest': '−5.6%', 'dose1': '−9.7%', 'long_spell': '−18%', 'after': '5%', 'hotspots': '299',
+                'reference': '−12.0%', 'central_share': '−18.9%', 'reference_share': '−5.0%', 'wls_central': '11%',
+                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15'}
     assert v == expected, {k: (v[k], expected[k]) for k in v if v[k] != expected.get(k)}
     return v
 
@@ -226,7 +245,10 @@ def main():
     template = (SOURCE / 'template.html').read_text()
     css = (SOURCE / 'present.css').read_text().replace('/*__FONTS__*/', fonts())
     js = (SOURCE / 'present.js').read_text()
+    unused = {'firsthour', 'bayfront', 'dhoby', 'raffles'}  # checked against the tables above, no longer shown since decision 176
     for key, value in v.items():
+        if key in unused:
+            continue
         assert '{{' + key + '}}' in template, key
         template = template.replace('{{' + key + '}}', value)
     assert '{{' not in template
@@ -236,11 +258,11 @@ def main():
         template = template.replace(f'<!--SVG:{name}-->', chart(name))
     assert '<!--SVG:' not in template
     slides = re.findall(r'<section class="slide[^"]*" id="([^"]+)"', template)
-    assert len(slides) == 24 and template.count('data-appendix=') == 10
+    assert len(slides) == 27 and template.count('data-appendix=') == 13
     notes = re.findall(r'<aside class="notes">(.*?)</aside>', template, flags=re.S)
     words = [len(n.split()) for n in notes]
-    assert len(notes) == 24 and all(80 <= w <= 120 for w in words[:14]), words
-    assert 'logo' not in template.lower() and 'not affiliated with ComfortDelGro' in template
+    assert len(notes) == 27 and all(80 <= w <= 120 for w in words[:14]), words
+    assert 'logo' not in template.lower() and 'to be added' not in template.lower()
     html = (template.replace('/*__CSS__*/', css)
             .replace('/*__DATA__*/', 'const DATA = ' + json.dumps(data, separators=(',', ':')).replace('</', '<\\/') + ';')
             .replace('/*__JS__*/', js))
@@ -248,7 +270,7 @@ def main():
     for rel, digest in HASHES.items():
         assert sha(ROOT / rel) == digest, rel
     (OUT.parent / 'present_provenance.json').write_text(json.dumps(
-        {'presentation_only': True, 'decisions': [174, 175], 'slides': 14, 'appendix_slides': 10, 'qr_decoded': decoded, 'notes_words': words,
+        {'presentation_only': True, 'decisions': [174, 175, 176], 'slides': 14, 'appendix_slides': 13, 'qr_decoded': decoded, 'notes_words': words,
          'values': v, 'source_hashes': HASHES, 'html_sha256': sha(OUT), 'bytes': OUT.stat().st_size},
         indent=2, ensure_ascii=False) + '\n')
     print(f'Built {OUT.relative_to(ROOT)} ({OUT.stat().st_size:,} bytes); 14 slides + references + A1–A9; QR decodes to {decoded}; notes {min(words)}–{max(words)} words.')

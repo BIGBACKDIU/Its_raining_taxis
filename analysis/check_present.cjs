@@ -20,7 +20,7 @@ function audit(){
     if(b.x0<-1||b.y0<-1||b.x1>1921||b.y1>1081)outside.push({el:e.tagName+'.'+e.className+'#'+e.id,b});
     if(e.scrollHeight>e.clientHeight+2&&getComputedStyle(e).overflow!=='visible'||e.scrollWidth>e.clientWidth+2&&['hidden','auto','scroll'].includes(getComputedStyle(e).overflowX))overflow.push(e.tagName+'.'+e.className+'#'+e.id);
   }
-  const blocks=[...slide.querySelectorAll('.head h1,.kicker,.foot,.point,.card,.step,.tstep,.chart,.map,#storm-line,.avg,.tally,.clock,.frame,.strip,.qr,.question,.dataline,.callout-wide,.legend,.takeaway,.questions,.found,.conf,.stat,.defs p,.refs p,.title-copy>*,.radar-key,.anim-label,.label,.caption,.appendix-link,.tag,.benefits,.note-box')].filter(visible);
+  const blocks=[...slide.querySelectorAll('.head h1,.kicker,.foot,.point,.card,.step,.tstep,.chart,.map,#storm-line,.avg,.tally,.clock,.frame,.strip,.qr,.question,.dataline,.callout-wide,.legend,.takeaway,.questions,.found,.conf,.stat,.defs p,.refs p,.title-copy>*,.radar-key,.label,.caption,.appendix-link,.tag,.benefits,.note-box,.method,.shows-label,.rows5 .row,.legend-col,.storm-head,.robust,.strip')].filter(visible);
   for(let i=0;i<blocks.length;i++)for(let j=i+1;j<blocks.length;j++){
     const a=blocks[i],b=blocks[j];if(a.contains(b)||b.contains(a))continue;
     const A=box(a),B=box(b),w=Math.min(A.x1,B.x1)-Math.max(A.x0,B.x0),h=Math.min(A.y1,B.y1)-Math.max(A.y0,B.y0);
@@ -28,8 +28,17 @@ function audit(){
   }
   const number=document.querySelector('#number');
   for(const b of blocks){if(b.classList.contains('foot'))continue;const A=box(number),B=box(b),w=Math.min(A.x1,B.x1)-Math.max(A.x0,B.x0),h=Math.min(A.y1,B.y1)-Math.max(A.y0,B.y0);if(w>2&&h>2)overlaps.push(['#number',b.className||b.tagName,Math.round(w),Math.round(h)]);}
+  // smallest rendered font on the slide, in 1920x1080 stage pixels (map attribution and embedded sites excluded)
+  let minFont={px:999,text:''};
+  for(const e of slide.querySelectorAll('*')){
+    if(!visible(e)||e.closest('.attribution,aside,iframe,.fallback,.loading'))continue;
+    const own=[...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim());if(!own)continue;
+    let px=parseFloat(getComputedStyle(e).fontSize);
+    if(e instanceof SVGElement){const m=e.getScreenCTM();px=px*Math.hypot(m.a,m.b)/k;}
+    if(px<minFont.px)minFont={px:Math.round(px*10)/10,text:e.textContent.trim().slice(0,40)};
+  }
   const text=slide.innerText.replace(/\s+/g,' ').trim().length,svgs=slide.querySelectorAll('svg *').length;
-  return{outside,overflow,overlaps,text,svgs};
+  return{outside,overflow,overlaps,text,svgs,minFont};
 }
 
 (async()=>{
@@ -45,7 +54,7 @@ function audit(){
     if(w===1920){
       await page.waitForTimeout(3200);
       report.titleFrameMs=await page.evaluate(()=>new Promise(done=>{const times=[];let last=performance.now();const step=now=>{times.push(now-last);last=now;if(times.length<120)requestAnimationFrame(step);else done(times.slice(5).reduce((a,b)=>a+b,0)/(times.length-5));};requestAnimationFrame(step);}));
-      for(const t of [2,9,16]){await page.evaluate(t=>TITLE_FRAME(t),t);await page.screenshot({path:path.join(out,`title-frame-${t}s-1920x1080.jpg`),type:'jpeg',quality:84});}
+      for(const t of [4,18,32]){await page.evaluate(t=>TITLE_FRAME(t),t);await page.screenshot({path:path.join(out,`title-frame-${t}s-1920x1080.jpg`),type:'jpeg',quality:84});}
     }
     const ids=await page.evaluate(()=>[...document.querySelectorAll('.slide')].map(s=>s.id));
     const rows=[];
@@ -88,6 +97,7 @@ function audit(){
   }
   report.problems=problems;
   fs.writeFileSync(path.join(out,'check.json'),JSON.stringify(report,null,1)+'\n');
-  console.log(JSON.stringify({errors:report.errors,problems,storm:report.storm,embeds:report.embeds,reducedMotion:report.reducedMotion,titleFrameMs:report.titleFrameMs},null,1));
+  report.minFonts=Object.fromEntries(Object.entries(report.viewports).map(([vp,rows])=>[vp,rows.map(r=>[r.id,r.minFont.px,r.minFont.text])]));
+  console.log(JSON.stringify({minFonts:report.minFonts['1920x1080'],errors:report.errors,problems,storm:report.storm,embeds:report.embeds,reducedMotion:report.reducedMotion,titleFrameMs:report.titleFrameMs},null,1));
   if(report.errors.length||problems.length)process.exitCode=1;
 })();

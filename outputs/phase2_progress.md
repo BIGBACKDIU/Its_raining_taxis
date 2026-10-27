@@ -940,3 +940,15 @@ with key numbers; appendix pages A1–A9 follow the references (A key / Escape).
 24 pages at 1920×1080 and 1440×900 and three title frames: no console errors, overflow or overlaps;
 storm replay plays; both embeds load and Storm Builder unloads. Wording check: 26 reviewed hits in the
 page (disclaimers, pilot measures, data needs). No estimation, scoring or test-year use.
+
+## Decision 176: final presentation pass (presentation only)
+
+`outputs/story/present.html` is now sized for a classroom projector: charts are rendered at display size
+(24 px minimum chart text), body text 30 px, titles 68 px, footers 20 px; the smallest font found on any of
+the 27 pages is 20 px (map attribution excluded). Chart slides 4–8 have a METHOD box and 2–3 analysis points
+with saved values; slide 6 adds a numbered 1 km heavy-rain map; slides 3, 10, 12, 13 and 14 fill the
+content area; the Storm Builder embed is taller with a slim legend/QR strip; references are complete;
+the appendix is split into 12 pages. Title animation: 40-second loop, half the earlier speed, gentler
+camera and softer heavy-rain core (60 fps measured). Browser checks at 1920×1080 and 1440×900 plus three
+title frames: no errors, overflow or overlaps; storm replay plays; QR decodes in the build and in the
+screenshots; Storm Builder loads and unloads. No estimation, scoring or test-year use; index.html unchanged.

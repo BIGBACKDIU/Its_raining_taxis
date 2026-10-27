@@ -1,4 +1,4 @@
-# Fifteen-minute presentation (decisions 174–175)
+# Fifteen-minute presentation (decisions 174–176)
 
 `outputs/story/present.html` is a single offline file (fonts, data and charts embedded; only the two
 live demos need internet). Presentation only: every number is read from saved tables at build time
@@ -35,3 +35,11 @@ Presentation choices to know before presenting:
   usable after glitch removal.
 - Storm Builder has no URL preset; the speaker notes say to pick Monsoon surge, weekend, 1 pm by hand.
 - Wang (2024) and Sun et al. (2020) need full references from the team.
+
+## Decision 176: projector pass
+
+Charts are rendered at their display size and shown 1:1 with a 24 px floor on chart text (20 px inside
+numbered markers). Slides use 68 px titles, 56 px key numbers, 30 px body text and 20 px footers; the
+browser check reports the smallest font per page (20 px everywhere, map attribution excluded). Chart
+slides 4–8 carry a METHOD box and "What it shows" points; slide 6 adds a numbered 1 km map. The title
+animation runs on a 40-second loop. Appendix pages: A1, A2, A3a/b, A4, A5a/b, A6a/b, A7, A8, A9.

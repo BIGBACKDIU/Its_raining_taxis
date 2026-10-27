@@ -74,7 +74,7 @@ function updatePresenter(){
 
 /* ---------- 1 title: illustrative radar-style rain and taxi dots on the Storm Builder's road map ----------
    World units are 10 m (Storm Builder projection). Everything is periodic in LOOP seconds, so the loop is seamless. */
-const tc=$('#title-canvas'),tx=tc.getContext('2d'),T=DATA.title,LOOP=20;
+const tc=$('#title-canvas'),tx=tc.getContext('2d'),T=DATA.title,LOOP=40;  // 40 s loop: half the earlier speed (decision 176)
 const WX0=300,WX1=5600,WY0=900,WY1=3900,S0=1920/(WX1-WX0)*1.02,SB=S0*1.35;
 const base=document.createElement('canvas');base.width=Math.ceil((WX1-WX0)*SB);base.height=Math.ceil((WY1-WY0)*SB);
 (function drawBase(){
@@ -93,12 +93,12 @@ const base=document.createElement('canvas');base.width=Math.ceil((WX1-WX0)*SB);b
 const G=10,GW=Math.ceil((WX1-WX0)/G),GH=Math.ceil((WY1-WY0)/G),field=new Float32Array(GW*GH);
 const rainCanvas=document.createElement('canvas');rainCanvas.width=GW;rainCanvas.height=GH;
 const rc=rainCanvas.getContext('2d'),img=rc.createImageData(GW,GH);
-const BANDS=[[.16,[111,169,138],.60],[.30,[185,196,106],.64],[.46,[216,178,90],.68],[.64,[208,132,79],.72],[.84,[185,88,75],.75]];
+const BANDS=[[.16,[111,169,138],.60],[.30,[185,196,106],.63],[.46,[216,178,90],.65],[.64,[205,150,96],.62],[.84,[196,128,100],.56]];
 const perm=(()=>{const r=rng(91),p=Array.from({length:256},(_,i)=>i);for(let i=255;i>0;i--){const j=Math.floor(r()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return Uint8Array.from([...p,...p]);})();
 function vnoise(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf);
  const h=(i,j)=>perm[(perm[(xi+i)&255]+yi+j)&255]/255;const a=h(0,0),b=h(1,0),c=h(0,1),d=h(1,1);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v;}
 // rain cells: start/end x, latitude, peak, size, phase in the loop (different track lengths = different speeds)
-const CELLS=[[500,4200,3050,1.25,170,.0],[1300,4000,2300,1.0,140,.12],[300,3100,1700,.9,160,.25],[2300,5600,2750,1.35,200,.38],[900,3600,3350,.8,120,.5],[2600,5400,1900,1.1,165,.62],[0,2700,2500,.95,135,.74],[1800,4900,2050,1.2,150,.86],[3200,5800,3200,.85,125,.94]];
+const CELLS=[[500,4200,3050,1.25,170,.0],[1300,4000,2300,1.0,140,.12],[300,3100,1700,.9,160,.25],[2300,5600,2750,1.0,200,.38],[900,3600,3350,.8,120,.5],[2600,5400,1900,1.1,165,.62],[0,2700,2500,.95,135,.74],[1800,4900,2050,1.2,150,.86],[3200,5800,3200,.85,125,.94]];
 function computeRain(t){
  const th=2*Math.PI*t/LOOP,ox=2.2*Math.cos(th),oy=2.2*Math.sin(th);
  field.fill(0);
@@ -120,7 +120,7 @@ function computeRain(t){
 function rainAt(x,y){const i=Math.round((x-WX0)/G),j=Math.round((WY1-y)/G);return i<0||j<0||i>=GW||j>=GH?0:field[j*GW+i];}
 const dotRand=rng(2702),DOTS=T.routes.map(r=>({r,phase:dotRand(),thr:.45+.5*dotRand()}));
 function drawTitle(t,refresh=true){
- const th=2*Math.PI*t/LOOP,z=1.06+.05*Math.sin(th),s=S0*z,cx=2620+170*Math.sin(th+.6),cy=2380+70*Math.sin(2*th);
+ const th=2*Math.PI*t/LOOP,z=1.06+.015*Math.sin(th),s=S0*z,cx=2620+85*Math.sin(th+.6),cy=2380+35*Math.sin(2*th);
  if(refresh)computeRain(t);
  tx.setTransform(1,0,0,1,0,0);tx.globalAlpha=1;tx.fillStyle='#06111F';tx.fillRect(0,0,1920,1080);
  const k=s/SB;tx.imageSmoothingEnabled=true;tx.imageSmoothingQuality='high';
@@ -150,16 +150,16 @@ window.TITLE_FRAME=t=>{cancelAnimationFrame(titleRAF);drawTitle(t);};
 (function fleet(){
  const W=1080,H=470,x=v=>v===2015?250:830,y=v=>420-v/100000*380;
  const s=el('svg',{viewBox:`0 0 ${W} ${H}`});
- for(const v of[0,25000,50000,75000,100000]){add(s,'line',{x1:90,x2:870,y1:y(v),y2:y(v),stroke:C.grid,'stroke-width':1});add(s,'text',{x:76,y:y(v)+7,'text-anchor':'end','font-size':20,fill:C.muted},v?num(v/1000)+'k':'0');}
- for(const yr of[2015,2025])add(s,'text',{x:x(yr),y:458,'text-anchor':'middle','font-size':24,fill:C.muted,'font-weight':500},yr);
+ for(const v of[0,25000,50000,75000,100000]){add(s,'line',{x1:90,x2:870,y1:y(v),y2:y(v),stroke:C.grid,'stroke-width':1});add(s,'text',{x:76,y:y(v)+9,'text-anchor':'end','font-size':28,fill:C.muted},v?num(v/1000)+'k':'0');}
+ for(const yr of[2015,2025])add(s,'text',{x:x(yr),y:462,'text-anchor':'middle','font-size':28,fill:C.muted,'font-weight':500},yr);
  const series=[{name:'Taxis',a:28259,b:12161,c:C.slate},{name:'Private-hire cars',a:29369,b:95857,c:C.steel}];
  for(const r of series)add(s,'path',{class:'ln',d:`M${x(2015)},${y(r.a)}L${x(2025)},${y(r.b)}`,stroke:r.c,pathLength:1});
  const end=add(s,'g',{class:'end'});
  for(const[i,r]of series.entries()){
   for(const[yr,v]of[[2015,r.a],[2025,r.b]])add(end,'circle',{cx:x(yr),cy:y(v),r:6,fill:r.c,stroke:C.white,'stroke-width':2});
-  add(end,'text',{x:x(2015)-20,y:y(r.a)+(i===0?36:-14),'text-anchor':'end','font-size':28,'font-weight':500,fill:r.c},num(r.a));
-  add(end,'text',{x:x(2025)+22,y:y(r.b)+10,'font-size':36,'font-weight':500,fill:r.c},num(r.b));
-  add(end,'text',{x:x(2025)+22,y:y(r.b)+40,'font-size':19,fill:C.muted},r.name);
+  add(end,'text',{x:x(2015)-20,y:y(r.a)+(i===0?36:-14),'text-anchor':'end','font-size':32,'font-weight':500,fill:r.c},num(r.a));
+  add(end,'text',{x:x(2025)+22,y:y(r.b)+12,'font-size':40,'font-weight':500,fill:r.c},num(r.b));
+  add(end,'text',{x:x(2025)+22,y:y(r.b)+46,'font-size':28,fill:C.muted},r.name);
  }
  $('#fleet-chart').append(s);
 })();
@@ -175,43 +175,42 @@ const analysed=new Map(S.cells.map((c,i)=>[c,i]));
 function rainColor(v){if(!(v>0))return C.dry;if(v<=20)return mix(C.rainLow,C.steel,v/20);return mix(C.steel,C.navy,Math.min(1,(v-20)/40));}
 function changeColor(v){return mix(C.white,v<0?C.red:C.steel,Math.min(1,Math.abs(v)/40));}
 function stormMap(host,legend){
- const s=add($(host),'svg',{viewBox:'0 0 620 392',role:'img'});const rects=[];
+ const s=add($(host),'svg',{viewBox:'0 0 620 412',role:'img'});const rects=[];
  for(const ring of DATA.land)add(s,'path',{d:ring.map(([x,y],i)=>(i?'L':'M')+MAP.x(x).toFixed(1)+','+MAP.y(y).toFixed(1)).join('')+'Z',fill:'#EEF1F5',stroke:C.grid,'stroke-width':.8});
  const all=[...new Set([...DATA.cells.map(c=>c[0]),...S.cells])];
  for(const cell of all){const i=analysed.get(cell);const r=add(s,'rect',{x:MAP.x(Math.floor(cell/1000)).toFixed(1),y:MAP.y(cell%1000+1).toFixed(1),width:MAP.k-.6,height:MAP.k-.6,fill:C.none,stroke:'#FFFFFF','stroke-width':.4});if(i!==undefined)rects[i]=r;}
- const g=add(s,'g',{transform:'translate(30,350)'});legend(g,s);return rects;
+ const g=add(s,'g',{transform:'translate(20,342)'});legend(g,s);return rects;
 }
 const gradient=(s,id,stops)=>{const defs=add(s,'defs');const lg=add(defs,'linearGradient',{id});stops.forEach(([o,c])=>add(lg,'stop',{offset:o,'stop-color':c}));};
 const rainRects=stormMap('#map-rain',(g,s)=>{
  gradient(s,'rain-scale',[[0,C.rainLow],[1/3,C.steel],[1,C.navy]]);
- add(g,'rect',{x:0,y:0,width:34,height:12,fill:C.dry,rx:2});add(g,'text',{x:17,y:36,'text-anchor':'middle','font-size':16,fill:C.muted},'dry');
- add(g,'rect',{x:50,y:0,width:300,height:12,fill:'url(#rain-scale)',rx:2});
- for(const[v,l]of[[0,'>0'],[20,'20'],[60,'≥60 mm/h']])add(g,'text',{x:50+v/60*300,y:36,'text-anchor':v===0?'start':v===60?'end':'middle','font-size':16,fill:C.muted},l);
+ add(g,'rect',{x:0,y:0,width:46,height:14,fill:C.dry,rx:2});add(g,'text',{x:23,y:48,'text-anchor':'middle','font-size':28,fill:C.muted},'dry');
+ add(g,'rect',{x:70,y:0,width:360,height:14,fill:'url(#rain-scale)',rx:2});
+ for(const[v,l]of[[0,'>0'],[20,'20'],[60,'≥60 mm/h']])add(g,'text',{x:70+v/60*360,y:48,'text-anchor':v===0?'start':v===60?'end':'middle','font-size':28,fill:C.muted},l);
 });
 const changeRects=stormMap('#map-change',(g,s)=>{
  gradient(s,'change-scale',[[0,C.red],[.5,C.white],[1,C.steel]]);
- add(g,'rect',{x:0,y:0,width:350,height:12,fill:'url(#change-scale)',rx:2,stroke:C.grid,'stroke-width':.6});
- for(const[v,l]of[[-40,'−40%'],[0,'0'],[40,'+40%']])add(g,'text',{x:(v+40)/80*350,y:36,'text-anchor':v<0?'start':v>0?'end':'middle','font-size':16,fill:C.muted},l);
- add(g,'text',{x:362,y:11,'font-size':16,fill:C.muted},'fewer · more');
+ add(g,'rect',{x:0,y:0,width:420,height:14,fill:'url(#change-scale)',rx:2,stroke:C.grid,'stroke-width':.6});
+ for(const[v,l]of[[-40,'−40%'],[0,'0'],[40,'+40%']])add(g,'text',{x:(v+40)/80*420,y:48,'text-anchor':v<0?'start':v>0?'end':'middle','font-size':28,fill:C.muted},l);
 });
 const totals=S.times.map((_,f)=>({observed:S.vacant[f].reduce((a,b)=>a+b,0),expected:S.baseline[f].reduce((a,b)=>a+b,0)}));
 const PEAK=S.times.findIndex(t=>t.slice(11,16)==='09:30');
 const line=(()=>{
- const W=1290,H=236,x=i=>78+i*(1250-78)/(S.times.length-1),y=v=>196-(v-1200)/1500*176;
+ const W=1109,H=215,x=i=>92+i*(1090-92)/(S.times.length-1),y=v=>168-(v-1200)/1500*152;
  const s=add($('#storm-line'),'svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Actual and expected vacant taxis, 06:30 to 13:30'});
- for(const v of[1500,2000,2500]){add(s,'line',{x1:78,x2:1250,y1:y(v),y2:y(v),stroke:C.grid});add(s,'text',{x:66,y:y(v)+6,'text-anchor':'end','font-size':18,fill:C.muted},num(v));}
- for(const i of[0,PEAK,S.times.length-1])add(s,'text',{x:x(i),y:226,'text-anchor':i===0?'start':i===PEAK?'middle':'end','font-size':18,fill:C.muted},S.times[i].slice(11,16));
+ for(const v of[1500,2000,2500]){add(s,'line',{x1:92,x2:1090,y1:y(v),y2:y(v),stroke:C.grid});add(s,'text',{x:80,y:y(v)+8,'text-anchor':'end','font-size':24,fill:C.muted},num(v));}
+ for(const i of[0,PEAK,S.times.length-1])add(s,'text',{x:x(i),y:206,'text-anchor':i===0?'start':i===PEAK?'middle':'end','font-size':24,fill:C.muted},S.times[i].slice(11,16));
  add(s,'path',{d:totals.map((r,i)=>(i?'L':'M')+x(i)+','+y(r.expected)).join(''),fill:'none',stroke:C.muted,'stroke-width':2.5,'stroke-dasharray':'7 6'});
  const obs=add(s,'path',{fill:'none',stroke:C.navy,'stroke-width':3,'stroke-linejoin':'round'});
  const dot=add(s,'circle',{r:6,fill:C.navy,stroke:C.white,'stroke-width':2});
- const cursor=add(s,'line',{y1:16,y2:202,stroke:C.steel,'stroke-width':1.5,'stroke-dasharray':'4 4'});
+ const cursor=add(s,'line',{y1:12,y2:176,stroke:C.steel,'stroke-width':1.5,'stroke-dasharray':'4 4'});
  s.insertBefore(cursor,obs);
  const p=totals[PEAK],gap=p.expected-p.observed;
  const peak=add(s,'g',{opacity:0});
  add(peak,'line',{x1:x(PEAK),x2:x(PEAK),y1:y(p.observed),y2:y(p.expected),stroke:C.red,'stroke-width':4});
- add(peak,'text',{x:x(PEAK)+16,y:y(p.expected)-8,'font-size':21,'font-weight':500,fill:C.red},`09:30 · ${num(gap)} fewer (${num(-gap/p.expected*100,1)}%) · this storm`);
- add(s,'text',{x:1250,y:y(totals.at(-1).expected)-12,'text-anchor':'end','font-size':18,fill:C.muted},'Expected');
- const lab=add(s,'text',{'font-size':18,'font-weight':500,fill:C.navy},'Actual');
+ add(peak,'text',{x:x(PEAK)+16,y:y(p.expected)-8,'font-size':24,'font-weight':500,fill:C.red},`09:30 · ${num(gap)} fewer (${num(-gap/p.expected*100,1)}%) · this storm`);
+ add(s,'text',{x:1090,y:y(totals.at(-1).expected)-12,'text-anchor':'end','font-size':24,fill:C.muted},'Expected');
+ const lab=add(s,'text',{'font-size':24,'font-weight':500,fill:C.navy},'Actual');
  return f=>{
   obs.setAttribute('d',totals.slice(0,f+1).map((r,i)=>(i?'L':'M')+x(i)+','+y(r.observed)).join(''));
   dot.setAttribute('cx',x(f));dot.setAttribute('cy',y(totals[f].observed));
@@ -226,7 +225,7 @@ function setStorm(f){
  S.cells.forEach((_,i)=>{const v=S.vacant[f][i],b=S.baseline[f][i];rainRects[i].setAttribute('fill',rainColor(S.mmh[f][i]));changeRects[i].setAttribute('fill',changeColor(100*(v/Math.max(1,b)-1)));});
  $('#storm-clock').textContent=S.times[f].slice(11,16);
  const t=totals[f],wet=S.mmh[f].filter(v=>v>0).length;
- $('#storm-tally').innerHTML=`<span class="num">${num(t.observed)}</span> vacant taxis<br>vs <span class="num">${num(t.expected)}</span> expected<br><span class="muted">${wet} of 374 squares with rain</span>`;
+ $('#storm-tally').innerHTML=`<span class="num">${num(t.observed)}</span> vacant vs <span class="num">${num(t.expected)}</span> expected · <span class="muted">${wet} of 374 squares wet</span>`;
  line(f);
 }
 function stormStep(){const f=(stormFrame+1)%S.times.length;setStorm(f);later(stormStep,f===PEAK?4000:f===S.times.length-1?2000:1500);}
@@ -240,7 +239,7 @@ const eventCursor=(()=>{
  const g=add(svg,'g',{id:'event-cursor','pointer-events':'none'});
  const ln=add(g,'line',{y1:M.top,y2:M.bottom,stroke:C.navy,'stroke-width':1.5});
  const dot=add(g,'circle',{r:6,fill:C.white,stroke:C.navy,'stroke-width':2.5});
- const box=add(g,'rect',{height:30,rx:4,fill:C.navy});const label=add(g,'text',{'font-size':16,'font-weight':500,fill:'#fff','font-family':'Poppins'});
+ const box=add(g,'rect',{height:30,rx:4,fill:C.navy});const label=add(g,'text',{'font-size':17.3,'font-weight':500,fill:'#fff','font-family':'Poppins'});
  return minute=>{
   let k=P.findIndex(p=>p[2]>=minute);if(k<=0)k=1;const a=P[k-1],b=P[k],f=Math.max(0,Math.min(1,(minute-a[2])/(b[2]-a[2])));
   const sx=a[0]+(b[0]-a[0])*f,sy=a[1]+(b[1]-a[1])*f,pct=a[3]+(b[3]-a[3])*f;

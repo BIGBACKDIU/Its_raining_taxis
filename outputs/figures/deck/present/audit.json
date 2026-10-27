@@ -3,6 +3,8 @@
     "outputs/tables/factors_panel_interactions.csv": "28504c2bfa6e6670f3b30adf951bef07c6b31ae2fff6d3ae8a75e8f54cdf32d6",
     "outputs/tables/effects_event_study.csv": "4293c1eac993d863cfc75f91e8ec7d9c7531a75dda6a820193538cade194ca98",
     "outputs/tables/rain_hit_top30_absolute.csv": "e7ba606ed0b32e7ab7393650133d04f5455e037c1dd6491eb63bb83b7cba6b16",
+    "outputs/tables/rain_hit_absolute_all.csv": "1ee5fdd59055924bd69ad76193431f59efbfa840c516a024274da4df0a2e1e56",
+    "outputs/tables/names_cells.csv": "1602ebb71381eecc10d1984cb790d337d95558827d07e39a9068c50d62478ea3",
     "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd",
     "outputs/tables/feed_regimes.csv": "cec6b6c2b9ce5e7742022e981a475ec89d4cb6a9b1236c96b326ace1e42d3ac9",
     "outputs/tables/effects_robust.csv": "33ad6ba2b844adf1d49315dfb6d663f04252139c38d51bfe597b5ad971081001",
@@ -12,9 +14,7 @@
     "outputs/tables/radar_central.csv": "f14571752a0efc434309fe0ee14b65df1cc35b012f2e262f8a80372664e245c2",
     "outputs/tables/dose_spline_curve.csv": "b6e6894c0f4c05ff7d9c42450e5368c68cb1042ff915c3eec2bcc0f87e971bba",
     "outputs/tables/dose_duration_hangover.csv": "7ab89da0694102866693e4904a441090aa3c1a6c8f1f683b0e0984311115bde9",
-    "outputs/tables/rain_hit_absolute_all.csv": "1ee5fdd59055924bd69ad76193431f59efbfa840c516a024274da4df0a2e1e56",
     "outputs/tables/rain_hit_share_all.csv": "9436b5513fde624b16bcf256eda7b60819be0bedc2f27d40f07810752720e223",
-    "outputs/tables/names_cells.csv": "1602ebb71381eecc10d1984cb790d337d95558827d07e39a9068c50d62478ea3",
     "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
     "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
     "outputs/tables/s22_storm_onsets.csv": "d340937142262face178eb59ce43b4050b2bc24e56006614f2ef7f37e91d91bb",
@@ -38,206 +38,222 @@
     },
     "present_factors": {
       "display_pixels": [
-        1180,
-        700
+        1110,
+        640
       ],
       "png_pixels": [
-        2360,
-        1400
+        2220,
+        1280
       ],
       "fonts_used": [
         "Poppins-Regular.ttf"
       ],
-      "sha256": "48bfcb2190e174a03100ca755ccb3f74e0debac13fe0e0c9ad540c08864e6918"
+      "sha256": "efede43d9b85efb4d1550950040d397ddf0e747765191da3225d79fa46ff247f"
     },
     "present_event_timeline": {
       "display_pixels": [
-        1180,
+        1110,
         640
       ],
       "png_pixels": [
-        2360,
+        2220,
         1280
       ],
       "fonts_used": [
         "Poppins-Regular.ttf",
         "Poppins-SemiBold.ttf"
       ],
-      "sha256": "838c7cf2f2941fb0bca6133d26e44514b3872adef900e23a9c8e5e77836f8bd9"
+      "sha256": "7e601ad364dd24502c1cbfb9638ca2951620d1e1dfdb6eaa3ba93a5ae24c32c2"
     },
     "present_places_bar": {
       "display_pixels": [
-        1180,
-        690
-      ],
-      "png_pixels": [
-        2360,
-        1380
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "f554a4864fd934b53472454ffb3d23066802ce37c4707b37df46b76630f2ea02"
-    },
-    "present_planning_heatmap": {
-      "display_pixels": [
-        1200,
-        760
-      ],
-      "png_pixels": [
-        2400,
-        1520
-      ],
-      "fonts_used": [
-        "Poppins-Medium.ttf",
-        "Poppins-Regular.ttf",
-        "Poppins-SemiBold.ttf"
-      ],
-      "sha256": "17b22a8809722c5e9006885a572f64fc9dd580fd2d1b5e01a91290332e520e0e"
-    },
-    "present_regimes": {
-      "display_pixels": [
-        1500,
-        520
-      ],
-      "png_pixels": [
-        3000,
-        1040
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "731d25acda05b257a1e9d768d56d04b5eac05e4b9067259646147ee8b06be410"
-    },
-    "present_robustness": {
-      "display_pixels": [
-        1000,
-        680
-      ],
-      "png_pixels": [
-        2000,
-        1360
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "bce2086a74a58f2c498d67e477d77660c8129c0f90e052eaaee021b9272b16b5"
-    },
-    "present_policy": {
-      "display_pixels": [
-        1150,
-        600
-      ],
-      "png_pixels": [
-        2300,
-        1200
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "0505600d636545de38dd1365ceae544249519106ba095a654867ba6ae93f38a2"
-    },
-    "deck_effects_main": {
-      "display_pixels": [
-        1016,
-        490
-      ],
-      "png_pixels": [
-        2032,
-        980
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "4f5c37990ccd5cc0f6805c99f985008d3cf2fcedbfd6387eba5ae64ee6a12eaf"
-    },
-    "deck_radar_check": {
-      "display_pixels": [
-        1146,
-        440
-      ],
-      "png_pixels": [
-        2292,
-        880
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "a85654d1b5464f33aa912e93b713ceac1c8778e401aa00bf896b69ae42881380"
-    },
-    "deck_dose": {
-      "display_pixels": [
-        1016,
-        375
-      ],
-      "png_pixels": [
-        2032,
-        750
-      ],
-      "fonts_used": [
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "916e5df34278846664b90e610a35b0b89212a48257a5e43a6113eb9a466877e1"
-    },
-    "deck_where_map": {
-      "display_pixels": [
-        1520,
-        547
-      ],
-      "png_pixels": [
-        3040,
-        1094
-      ],
-      "fonts_used": [
-        "Poppins-Medium.ttf",
-        "Poppins-Regular.ttf",
-        "Poppins-SemiBold.ttf"
-      ],
-      "sha256": "5a93bfea642cdc0e652395802f75ba68fd230c3d31e98d934e4ea23acfdff531"
-    },
-    "deck_islandwide_map": {
-      "display_pixels": [
-        889,
-        552
-      ],
-      "png_pixels": [
-        1778,
-        1104
-      ],
-      "fonts_used": [
-        "Poppins-Medium.ttf",
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "58d8fbd44659b5b6fdb2ce994360312374e976a9c9e2af13521a20c1bcc678d1"
-    },
-    "deck_forecast_bars": {
-      "display_pixels": [
-        1300,
-        487
-      ],
-      "png_pixels": [
-        2600,
-        974
-      ],
-      "fonts_used": [
-        "Poppins-Medium.ttf",
-        "Poppins-Regular.ttf"
-      ],
-      "sha256": "0e09e90aaee8918c2e7971ec04b6c9840f52a42ac0a0b1192c33cc81e01d53b4"
-    },
-    "deck_holdout_gain": {
-      "display_pixels": [
-        1100,
+        824,
         420
       ],
       "png_pixels": [
-        2200,
+        1648,
         840
       ],
       "fonts_used": [
         "Poppins-Regular.ttf"
       ],
-      "sha256": "ca523bccfa8aba14e827323b39824efa6eb7bc43b76a5be14cf8541fab23d4a8"
+      "sha256": "df1d3b76d2e24e823eb631accb3e954d5570db41348b2f24200ca629fc8723bc"
+    },
+    "present_places_map": {
+      "display_pixels": [
+        539,
+        420
+      ],
+      "png_pixels": [
+        1078,
+        840
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "b0af389617c3616eafd323a9de1ac904e1c4b48b01043cb595b2f23013e140c1"
+    },
+    "present_planning_heatmap": {
+      "display_pixels": [
+        1110,
+        640
+      ],
+      "png_pixels": [
+        2220,
+        1280
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "b13ee9f28fda9d7bae6f616c963165b89bac21780b72878200d867b7ac8e7f66"
+    },
+    "present_regimes": {
+      "display_pixels": [
+        1680,
+        440
+      ],
+      "png_pixels": [
+        3360,
+        880
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "a9fffdbc133a2da4417e3c933d5583f4cd0068a610c5d6847523f9267ef05f60"
+    },
+    "present_robustness": {
+      "display_pixels": [
+        1680,
+        680
+      ],
+      "png_pixels": [
+        3360,
+        1360
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "20bf74668c524ec2377e5c6c02148df215428c0e63c5807eea9bef1f7bf8c857"
+    },
+    "present_policy": {
+      "display_pixels": [
+        1110,
+        640
+      ],
+      "png_pixels": [
+        2220,
+        1280
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "5dd09b02251ba68fbdd13ad308fcfe3af3dd9ec9c77e33eadd25394690ac8af5"
+    },
+    "deck_effects_main": {
+      "display_pixels": [
+        824,
+        660
+      ],
+      "png_pixels": [
+        1648,
+        1320
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "f49a78860c5e49b2697d334f16bccff27e02973fc911b465a40a7d426a1eb561"
+    },
+    "deck_radar_check": {
+      "display_pixels": [
+        824,
+        660
+      ],
+      "png_pixels": [
+        1648,
+        1320
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "0763489d72ce5756cbcd51147991a5aa960826d5f8d4a5ca2859b3ac61db9124"
+    },
+    "deck_dose": {
+      "display_pixels": [
+        1680,
+        740
+      ],
+      "png_pixels": [
+        3360,
+        1480
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "90739ac2259086a215287a678db46358e8b1a8826c82c20133574f889107cc55"
+    },
+    "deck_where_map": {
+      "display_pixels": [
+        1680,
+        780
+      ],
+      "png_pixels": [
+        3360,
+        1560
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "28312268c41369cd522d4e5d6cf693625557fab16716250f58af6af28094b3f0"
+    },
+    "deck_islandwide_map": {
+      "display_pixels": [
+        1200,
+        700
+      ],
+      "png_pixels": [
+        2400,
+        1400
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "57d719b342bbfbf7beabf01f603d284bc0c0b0b5d8b8f356f5ee188c64d038dd"
+    },
+    "deck_forecast_bars": {
+      "display_pixels": [
+        1680,
+        680
+      ],
+      "png_pixels": [
+        3360,
+        1360
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "f5f0a6fab1d2b22dd73f17886053f4f6bcc3a081cad3934b9b75abe2c41bd57f"
+    },
+    "deck_holdout_gain": {
+      "display_pixels": [
+        1110,
+        700
+      ],
+      "png_pixels": [
+        2220,
+        1400
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "2108360594f1c1b6609f20d7efc34d3dc904b4b45a4073c85fabc1b15457fcd4"
     }
   },
   "fonts": {

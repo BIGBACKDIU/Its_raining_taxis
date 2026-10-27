@@ -216,3 +216,143 @@ h1,h2,h3{margin:0;font-weight:400}
 .tstep h2{font-size:28px}.tstep p{font-size:21px}
 .defs{font-size:20px}.defs.three{font-size:18px}
 .conf{font-size:19px}
+
+/* ===== Decision 176: projector type scale and full-slide layouts (overrides the rules above) ===== */
+.head{top:44px}
+.kicker{font-size:20px}
+.head h1{font-size:68px;line-height:1.04;margin-top:8px}
+.body{top:186px;bottom:76px;justify-content:flex-start}
+.foot .source,.source{font-size:20px}
+#number{font-size:20px;bottom:20px}
+.grid{row-gap:24px}
+.button,.appendix-link{font-size:24px;padding:12px 22px}
+.legend,.legend-col{font-size:24px}
+.point{font-size:30px;line-height:1.35;padding:18px 22px}
+.point .num{font-size:56px;line-height:1.05}
+.point small{font-size:22px}
+.card{font-size:30px}
+.card b{font-size:32px}
+
+/* chart slides 4-8: chart left (8 of 12 columns), analysis right, METHOD box in the same place */
+.chart-slide .body > .grid{position:relative;height:100%;align-content:start}
+.method{position:absolute;left:0;right:0;bottom:0;display:flex;gap:22px;align-items:baseline;background:#EAF1F8;border-radius:10px;padding:16px 24px;font-size:24px;line-height:1.4;color:var(--ink)}
+.method-label{flex:none;font-size:20px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4F7CAC}
+.shows{display:flex;flex-direction:column;gap:16px}
+.shows-label{font-size:20px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+.shows .point b{font-weight:600}
+.storm-head{display:flex;align-items:baseline;gap:22px;margin-bottom:6px}
+.storm-head .clock{font-size:56px;color:var(--navy);line-height:1}
+.storm-head .tally{font-size:30px;margin:0;line-height:1.3}
+.storm-head .tally .num{font-size:30px}
+.map h3{font-size:24px;margin-bottom:2px}
+
+/* slide 6 */
+.legend-col{display:flex;flex-direction:column;gap:14px;padding-top:12px}
+.legend-col i{display:inline-block;width:16px;height:16px;border-radius:3px;margin-right:10px}
+.strip4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.strip4 .point{padding:14px 20px}
+.strip4 .point .num{font-size:56px;margin:2px 0}
+.mini{display:block;font-size:20px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* slide 2 */
+.question{font-size:32px}
+.question small{font-size:24px}
+
+/* slide 3: step cards, balanced */
+.body.fill{display:flex;flex-direction:column;justify-content:space-between}
+.steps{gap:24px}
+.steps::before{display:none}
+.step{border:1px solid var(--line);border-radius:10px;padding:24px 24px 26px;background:var(--white);min-height:290px}
+.step .marker,.tstep .marker{position:static;margin-bottom:16px;width:40px;height:40px;font-size:20px}
+.step{padding-top:24px}
+.step h2{font-size:36px}
+.step p{font-size:28px;line-height:1.35}
+.dataline{font-size:30px}
+.cards.three .card{min-height:150px}
+
+/* slide 10: playbook cards 3 x 2 */
+.playbook{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tstep{border:1px solid var(--line);border-radius:10px;padding:22px 24px;background:var(--white);opacity:.4;min-height:240px}
+.tstep h2{font-size:34px}
+.tstep p{font-size:28px;line-height:1.35;color:var(--ink)}
+.callout-wide{font-size:30px;padding:18px 0}
+.callout-wide .num{font-size:64px}
+
+/* slide 11 */
+.dash-frame{height:690px}
+.benefits{font-size:30px}
+.benefits li::before{top:20px}
+.tag{font-size:24px}
+.note-box{font-size:30px}
+
+/* slide 12 */
+.cards.four.big .card{min-height:430px;padding:32px 30px;font-size:30px;line-height:1.4}
+.cards.four.big .card .icon,.cards.four.big .card .icon svg{width:52px;height:52px}
+.robust{font-size:30px;color:var(--muted);margin:0}
+
+/* slide 13: five full-width rows */
+.rows5{display:flex;flex-direction:column;gap:10px;height:100%}
+.rows5 .row{flex:1;display:grid;grid-template-columns:330px 380px 1fr;gap:28px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 22px;background:var(--white)}
+.rows5 .what{display:flex;align-items:center;gap:16px}
+.rows5 .what b{font-size:30px;font-weight:500;color:var(--navy);line-height:1.2}
+.rows5 .icon{margin:0;width:40px;height:40px;flex:none}.rows5 .icon svg{width:40px;height:40px}
+.rows5 .key{font-size:52px;font-weight:500;line-height:1.05;color:var(--navy)}
+.rows5 .key.red{color:var(--red);font-size:44px}
+.rows5 .key small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:4px;line-height:1.25}
+.rows5 .lines p{margin:0;font-size:28px;line-height:1.22;color:var(--ink)}
+.rows5 .lines p+p{margin-top:4px}
+
+/* slide 14 */
+.found{font-size:28px;line-height:1.3}
+.found caption{font-size:20px}
+.found th{width:200px;font-size:28px;padding:14px 18px 14px 0}
+.found td{padding:14px 0}
+.found td .num{font-size:30px}
+.remember h2{font-size:20px}
+.takeaway{font-size:30px;line-height:1.3;padding:14px 0;grid-template-columns:48px 1fr}
+.takeaway .n{width:36px;height:36px;font-size:20px}
+.questions{font-size:64px}
+#s-close .qr svg{width:116px;height:116px}
+.qr .qr-text{font-size:20px}.qr .qr-text b{font-size:22px}
+
+/* slide 9: tall embed, slim strip */
+#s-builder .head{top:44px}
+#s-builder .head h1{font-size:64px;margin-top:6px}
+.builder-frame{top:160px;height:732px;left:77px;right:77px}
+.strip{position:absolute;left:77px;right:600px;top:912px;flex-direction:row;align-items:center;gap:34px;font-size:24px}
+.strip i{display:inline-block;width:16px;height:16px;border-radius:50%;margin-right:10px;vertical-align:-1px}
+#s-builder .qr{right:220px;bottom:22px}
+#s-builder .qr svg{width:150px;height:150px}
+
+/* title */
+.title-copy .sub{font-size:34px}
+.radar-key{font-size:20px;bottom:46px;gap:8px}
+.radar-key i{width:26px;height:10px}
+.attribution{position:absolute;left:var(--margin);bottom:22px;font-size:13px;color:rgba(255,255,255,.45)}
+
+/* references */
+.refs{font-size:26px;line-height:1.45;columns:2;column-gap:64px;column-fill:balance}
+.refs p{margin:0 0 22px;padding-left:30px;text-indent:-30px;overflow-wrap:anywhere}
+.refs-link{margin:0}
+
+/* appendix */
+.label{font-size:24px}
+.caption{font-size:24px}
+.stat{font-size:24px}.stat .num{font-size:40px}
+.defs{columns:2;column-gap:64px;font-size:26px;line-height:1.4}
+.defs p{margin:0 0 16px}
+.conf{font-size:24px;line-height:1.4}
+.conf th{font-size:26px}
+a.button{font-size:24px}
+.radar-key{bottom:62px}
+.strip{right:680px}
+.cards.four.big .card b{font-size:32px;margin-bottom:10px}
+.places-grid{grid-template-columns:824px 539px 1fr}
+.places-grid .c6,.places-grid .c4,.places-grid .c2{grid-column:auto}
+.places-grid .strip4,.places-grid .method{grid-column:1 / -1}
+.legend-col span{white-space:nowrap}
+.found th,.found td{padding-top:22px;padding-bottom:22px}
+.takeaway{padding:20px 0}
+.questions{font-size:72px}
+.tstep{min-height:290px}
+.legend-col span.muted{white-space:normal}
