@@ -386,3 +386,33 @@ a.button{font-size:24px}
 #s-method .cards.three .card{min-height:170px}
 .callout-pair .big{flex:none;white-space:nowrap}
 .cards.four.big .card{min-height:540px}
+
+/* ===== Decision 178 ===== */
+.cc .n{background:var(--navy);color:#fff;border-color:var(--navy)}
+/* slide 9: method line between embed and strip */
+.builder-frame{height:660px}
+.builder-method{position:absolute;left:77px;right:520px;top:834px;bottom:auto;white-space:normal;padding:10px 22px;line-height:1.35}
+.strip{top:948px}
+/* slide 10: horizontal timeline */
+#s-playbook .body.fill{justify-content:center;gap:110px}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(6,1fr);column-gap:26px;margin:0}
+.timeline::before{display:none}
+.timeline .track{position:absolute;left:20px;right:calc((100% - 130px)/6 - 20px);top:20px;height:3px;background:var(--line)}
+.timeline .track .fill{position:absolute;left:0;top:0;height:3px;width:0;background:var(--slate)}
+.entered .timeline .track .fill{width:100%;transition:width 4.6s linear .5s}
+.timeline .tstep{border:0;background:none;padding:66px 0 0;min-height:0;opacity:.4}
+.timeline .tstep .marker{position:absolute;top:0;left:0;width:42px;height:42px;margin:0;border-width:2px;font-size:20px}
+.timeline .tstep h2{font-size:34px;line-height:1.15}
+.timeline .tstep p{font-size:28px;line-height:1.3;margin-top:10px}
+.timeline .tstep.lit{opacity:1}
+/* slide 12: cards fit their content, line directly below */
+.cards.four.big .card{min-height:0}
+#s-limits .body.fill{justify-content:flex-start;gap:36px}
+/* slide 3: equal gaps between the three rows */
+#s-method .body.fill{justify-content:flex-start;gap:64px}
+#s-method .step{min-height:0}
+#s-method .cards.three .card{min-height:0}
+#s-playbook .body.fill{justify-content:flex-start;gap:96px;padding-top:36px}
+.builder-frame{height:636px}
+.builder-method{right:77px;top:810px}
+.strip{top:940px}

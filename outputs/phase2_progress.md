@@ -958,3 +958,8 @@ area), two big-number callouts and a one-line METHOD box; slide 6 bars beside th
 heatmap with markers outside the cells and one callout column; slide 13 one line per row; slide 12 robustness
 line under the cards. Removed text moved to the speaker notes with every number. Browser checks at both
 sizes: no overlap or overflow, smallest font 20 px; index.html unchanged.
+
+Decision 178 (presentation only): slide 8 heatmap on the maps' diverging scale (±35) with numbered badges
+inside the highlighted cells; slide 9 METHOD box under a still-tall embed; slide 10 horizontal six-node
+timeline; slide 11 without the extra button or hover title; slides 3 and 12 evenly spaced. Browser checks at
+both sizes: no overlap or overflow, smallest font 20 px; index.html unchanged.

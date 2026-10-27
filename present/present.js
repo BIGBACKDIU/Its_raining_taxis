@@ -274,7 +274,8 @@ function embed(hostId,src,title,onReady){
  return{
   enter(){
    host.querySelector('.fallback').hidden=true;host.querySelector('.loading').hidden=false;
-   const frame=document.createElement('iframe');frame.title=title;frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allow='fullscreen';
+   const frame=document.createElement('iframe');frame.setAttribute('aria-label',title);  // no title attribute: no hover tooltip
+   frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allow='fullscreen';
    let loaded=false;frame.addEventListener('load',()=>{loaded=true;host.querySelector('.loading').hidden=true;onReady?.(frame);});
    timer=setTimeout(()=>{if(!loaded){frame.remove();host.querySelector('.loading').hidden=true;host.querySelector('.fallback').hidden=false;}},8000);
    frame.src=src;host.append(frame);

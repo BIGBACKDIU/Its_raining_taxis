@@ -207,16 +207,18 @@ def planning(out, size):
     dc.record(name, q)
     m = q.pivot(index='planning_area', columns='time_band', values='abs_loss_taxis_per_half_hour').reindex(index=order, columns=bands)
     pc = q.pivot(index='planning_area', columns='time_band', values='pct_change').reindex(index=order, columns=bands)
-    cmap = LinearSegmentedColormap.from_list('present_blue', [p['pale'], p['light'], p['blue'], p['navy']])
-    norm = Normalize(0, np.nanmax(m.values))
+    # Decision 178: the maps' diverging scale; positive gap (fewer taxis) red, negative (more taxis) blue.
+    cmap = LinearSegmentedColormap.from_list('present_gap', [dc.BLUE, dc.WHITE, dc.RED], N=257)
+    norm = Normalize(-35, 35)
+    assert np.nanmax(np.abs(m.values)) <= 35
     fig = dc.figure(name)
-    ax = fig.add_axes([.177, .255, .70, .605])
+    ax = fig.add_axes([.177, .255, .80, .605])
     for i in range(10):
         for j in range(5):
             v = m.iloc[i, j]
             if pd.isna(v):
                 continue
-            rgb = cmap(norm(max(0, v)))
+            rgb = cmap(norm(v))
             ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor=rgb, edgecolor='#FFFFFF', lw=1.5, gid=f'cell-{i}-{j}'))
             lum = np.dot(rgb[:3], [.2126, .7152, .0722])
             ax.text(j, i, '0.0' if round(v, 1) == 0 else f'{v:.1f}'.replace('-', '−'), ha='center', va='center',
@@ -231,18 +233,19 @@ def planning(out, size):
     for spine in ax.spines.values():
         spine.set_visible(False)
     rows = list(order)
-    # Decision 177: outlined cells and numbered markers outside the grid; callout text lives on the slide.
+    # Decision 178: outlined cells with a numbered badge in each first cell's top-left corner.
     callouts = [('CHANGI', ['00-07']), ('DOWNTOWN CORE', ['00-07']), ('BUKIT MERAH', ['17-20', '20-24'])]
     for k, (area, cols) in enumerate(callouts):
         i, js = rows.index(area), [bands.index(c) for c in cols]
         ax.add_patch(Rectangle((min(js) - .47, i - .47), len(js) - .06, .94, fill=False, edgecolor=p['accent'],
                                lw=2.4, zorder=5, gid=f'callout-box-{k}', clip_on=False))
-        mx = 4.5 + .32
-        ax.scatter([mx], [i], s=620, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7, clip_on=False,
-                   gid=f'callout-badge-{k}')
-        ax.text(mx, i, str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center', weight=600,
-                zorder=8, clip_on=False).set_gid(f'callout-num-{k}')
-    dc.colorbar(fig, [.177, .125, .70, .022], cmap, norm, 'Fewer vacant taxis per half-hour', ticks=[0, 10, 20, 30])
+        bx, by = min(js) - .5 + .095, i - .5 + .33
+        ax.scatter([bx], [by], s=340, color=p['accent'], edgecolor='#FFFFFF', linewidth=1, zorder=7, gid=f'callout-badge-{k}')
+        ax.text(bx, by, str(k + 1), color='#FFFFFF', fontsize=MARKER_PX * .72, ha='center', va='center', weight=600,
+                zorder=8).set_gid(f'callout-num-{k}')
+    cb = dc.colorbar(fig, [.177, .125, .80, .022], cmap, norm, 'Fewer vacant taxis per half-hour (red) · more (blue)',
+                     ticks=[-30, -20, -10, 0, 10, 20, 30])
+    cb.ax.set_xticklabels(['−30', '−20', '−10', '0', '10', '20', '30'])
     dc.save(fig, name)
 
 

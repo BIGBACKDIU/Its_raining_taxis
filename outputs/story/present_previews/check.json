@@ -108,8 +108,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 980,
-    "svgs": 323,
+    "text": 1012,
+    "svgs": 335,
     "minFont": {
      "px": 20,
      "text": "3"
@@ -122,7 +122,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 250,
+    "text": 447,
     "svgs": 2,
     "minFont": {
      "px": 20,
@@ -136,7 +136,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 674,
+    "text": 531,
     "svgs": 0,
     "minFont": {
      "px": 20,
@@ -150,7 +150,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 400,
+    "text": 383,
     "svgs": 0,
     "minFont": {
      "px": 20,
@@ -489,8 +489,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 980,
-    "svgs": 323,
+    "text": 1012,
+    "svgs": 335,
     "minFont": {
      "px": 20,
      "text": "3"
@@ -503,7 +503,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 250,
+    "text": 447,
     "svgs": 2,
     "minFont": {
      "px": 20,
@@ -517,7 +517,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 674,
+    "text": 531,
     "svgs": 0,
     "minFont": {
      "px": 20,
@@ -531,7 +531,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 400,
+    "text": 383,
     "svgs": 0,
     "minFont": {
      "px": 20,
@@ -778,7 +778,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.006
+   "secondsWaited": 9.003
   },
   "s-builder@1440": {
    "iframe": true,
@@ -793,7 +793,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.009
+   "secondsWaited": 9.005
   }
  },
  "storm": {
@@ -810,6 +810,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.66521739130435,
+ "titleFrameMs": 16.665217391304346,
  "problems": []
 }

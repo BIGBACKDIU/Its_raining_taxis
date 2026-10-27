@@ -162,6 +162,7 @@
   <div class="fallback" hidden><div><b>Storm Builder did not load</b>Open it in a new tab to continue the demo.<br><br><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
   <div class="loading">Loading Storm Builder…</div>
  </div>
+ <div class="method builder-method" data-in style="--d:.4"><span class="method-label">Method</span><span>· Agent-based simulation, minute by minute · taxis matched to requests on OpenStreetMap roads · rain raises requests and takes some drivers off duty · tuned on 20 past storms, checked on 10</span></div>
  <div class="strip" data-in style="--d:.5"><span><i style="background:var(--teal)"></i>Vacant</span><span><i style="background:var(--amber)"></i>Hired</span><span><i style="background:var(--violet)"></i>Repositioning</span><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div>
  <div class="qr" data-in style="--d:.7"><div class="qr-text"><b>Try it yourself</b>storm-builder-sg.vercel.app</div><!--QR--></div>
  <aside class="notes">To make this tangible, we built Storm Builder, a scenario tool. Taxis in teal are vacant, amber are hired and violet are repositioning. For the demo, choose the Monsoon surge preset, which is an island-wide storm, then set the day to a weekend and the start to 1 pm; the app has no web-address setting for this, so set it by hand. Please treat everything here as an illustration. None of the simulator versions passes our realism check on real held-out storms, so it is useful for discussing trade-offs, not for predicting numbers. If the frame does not load, the button opens it in a new tab.</aside>
@@ -171,13 +172,14 @@
 <section class="slide" id="s-playbook" data-title="A rain-day playbook">
  <header class="head"><div class="kicker" data-in>Recommendation</div><h1 data-in style="--d:.1">A rain-day playbook</h1></header>
  <div class="body fill">
-  <div class="playbook" id="playbook">
-   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Read the 24-hour forecast; schedule incentives and staging.</p></div>
-   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Rain forecast or 2–5 km away: move idle drivers toward the CBD.</p></div>
-   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi and Downtown Core early; Geylang and Kallang at rush hour; Bukit Merah in the evening.</p></div>
-   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>Get more drivers out; don't move taxis between areas that are all short.</p></div>
-   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up support.</p></div>
-   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours.</p></div>
+  <div class="timeline" id="playbook">
+   <div class="track"><div class="fill"></div></div>
+   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Check the 24-h forecast; plan incentives</p></div>
+   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Move idle drivers toward the CBD</p></div>
+   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi, CBD early; Bukit Merah late</p></div>
+   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>More drivers out, not reshuffled</p></div>
+   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up driver support</p></div>
+   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours</p></div>
   </div>
   <div class="callout-wide" data-in style="--d:5"><span class="num">{{policy}}</span><span>Our repositioning plan picks squares that really run short {{policy}} of the time, vs {{random}} at random.</span></div>
  </div>
@@ -196,7 +198,6 @@
   <div class="c4 shows">
    <span class="tag" data-in style="--d:.4">Sample data, for illustration</span>
    <ul class="benefits" data-in style="--d:.6"><li>Clearer dispatcher guidance</li><li>Targeted incentives</li><li>Less wasted repositioning</li></ul>
-   <div data-in style="--d:.8"><a class="button" href="https://golden-beijinho-83f174.netlify.app" target="_blank" rel="noopener">Open prototype ↗</a></div>
    <div class="note-box" data-in style="--d:1">A live version needs CDG's own booking and driver data.</div>
   </div>
  </div></div>
