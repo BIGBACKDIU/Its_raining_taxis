@@ -1776,3 +1776,33 @@ results stay as they are and remain the pre-specified result.
     precision (LightGBM 54.2%/51.9%, persistence 47.2%/44.0%); storm expected counts are rounded to
     whole taxis. The Storm Builder has no URL preset, so the island-wide weekend 1 pm scenario is a
     speaker-note instruction. No estimation, labels, scoring or test-year use; no frozen file changes.
+
+175. **Second design pass on the presentation page (presentation only).** The user asked for a calmer,
+    more professional look for `outputs/story/present.html`: palette navy #0B1F3A, slate #2E4A6B, steel
+    blue #4F7CAC for data, surfaces #F4F6F9/#FFFFFF, ink #1A2433, muted #5B6676, hairlines #DDE3EA; taxi
+    yellow #F2B705 only for progress, the active step and one small accent; red #B5473A only for fewer
+    taxis and the map scale. Remove thick borders, highlighter, filled number circles and heavy shadows;
+    smaller Anton titles, Poppins 400/500 body text, tabular figures, a 12-column grid and identical title
+    and footer positions. All presentation charts are redrawn in this palette by `analysis/present_charts.py`
+    from the same saved tables (the deck renderer with a palette override; the original deck exports stay).
+
+    Title: the dark map uses the Storm Builder's own map data (`sim/v3/data.json`: coastline, land use
+    parks, road classes 0–2). The opening animation is illustrative and labelled so: a periodic 20-second
+    loop of noise-based radar-style rain cells drifting west to east, a few hundred teal dots moving along
+    real roads that dim under heavier synthetic rain, and a slow camera drift. It shows no observations or
+    estimates. Reduced motion shows one static frame.
+
+    Storm Builder slide: near-full-width embed with a slim legend/limitation strip and an offline QR code
+    (segno, generated at build time and decoded with zxing-cpp in the build check) for
+    https://storm-builder-sg.vercel.app; the same code appears on the summary slide. Slide 13 has five
+    cards and slide 14 a "What we found" table, using saved values: −12.9%/−24.5% heavy rain, radar
+    −12.0%, −7% approaching rain, recovery ~2.5 h, Changi 7.1 of 83, CBD −31% to −36%, 329 of 374 squares
+    with fewer taxis in island-wide rain, +0.001 and +0.009 PR-AUC, 6–10% morning gain, 44% vs 28% plan
+    precision, 0.73 vacant taxis per 10,000 residents in Punggol Town Centre (saved 0.726), and the
+    user-supplied fleet counts. Appendix pages A1–A9 (after the references, outside the 14-slide count;
+    "A" key or button to enter, Escape to return) show saved coverage, methods, effects, robustness,
+    radar, dose, maps, forecasting, policy and simulation results, the summary's confidence statements,
+    the three-review history and the test-year log. Snapshot coverage is reported as 120,017 of 122,688
+    expected snapshots OK (97.8%), with 118,136 usable after glitch removal. The feed-regime, robustness
+    and policy charts are redrawn from `feed_regimes.csv`, `effects_robust.csv` and `policy_diagnosis.csv`.
+    No estimation, labels, scoring or test-year use; `outputs/story/index.html` is not changed.
