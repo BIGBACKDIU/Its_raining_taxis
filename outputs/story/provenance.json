@@ -15,6 +15,9 @@
     "outputs/tables/radar_central.csv": "f14571752a0efc434309fe0ee14b65df1cc35b012f2e262f8a80372664e245c2",
     "outputs/tables/effects_event_study.csv": "4293c1eac993d863cfc75f91e8ec7d9c7531a75dda6a820193538cade194ca98",
     "outputs/tables/effects_approach.csv": "e160050db8834372212fce11102d6a8894684eaec219e0fb878d21b36227f9a6",
+    "outputs/tables/effects_forecast.csv": "5c169110baf488c7211651002fdd1d197cf90fdb22a779401f9d2c6ec4bb3d5c",
+    "outputs/tables/effects_interact.csv": "478968fd151bb6d000d9c8d0b535e6eee406215ff57ec64220d394b2bf77eb57",
+    "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
     "outputs/tables/dose_spline_curve.csv": "b6e6894c0f4c05ff7d9c42450e5368c68cb1042ff915c3eec2bcc0f87e971bba",
     "outputs/tables/dose_duration_hangover.csv": "7ab89da0694102866693e4904a441090aa3c1a6c8f1f683b0e0984311115bde9",
     "outputs/tables/rain_hit_absolute_all.csv": "1ee5fdd59055924bd69ad76193431f59efbfa840c516a024274da4df0a2e1e56",
@@ -28,7 +31,6 @@
     "outputs/tables/spillover_islandwide_share.csv": "be07769ab59809c35e9fd2c06df1c0f8039b9ee30e9624842171116a0daa26ff",
     "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd",
     "outputs/tables/factors_panel_interactions.csv": "28504c2bfa6e6670f3b30adf951bef07c6b31ae2fff6d3ae8a75e8f54cdf32d6",
-    "outputs/tables/forecast_eval_both_labels.csv": "7afe9aa48a1f05b4e61c608181a71c3daf1135c53f974c2bb85f580446af66a1",
     "outputs/figures/deck/data/deck_holdout_gain.csv": "0f5237718734a2e13a43284f60cc3373aa875e4c44a357ee15f54a26e5f11890",
     "outputs/tables/morning_forecast_value.csv": "7b0b6987c076574935e1a846f311bc19fdd3db2cda80fca3e2a33d26bd301dde",
     "outputs/tables/forecast_eval_lead_both_labels.csv": "38b12b20544f76a014faae31cae466c65101e5b858e7abdd3dc33a4e87586354",
@@ -104,12 +106,13 @@
     "outputs/figures/deck/all/spillover_islandwide_map_part1.png": "8451407008911625c94ea53ce29f42226eb90468f3544ea8a546f3476548830d",
     "outputs/figures/deck/all/stands_predicted_sensitivity_part1.png": "20fb951b3fc932291089f10710457181601e211213558380c2f8bee15ff9e3de",
     "outputs/figures/deck/all/taxi_deserts_map_part1.png": "b663e6792af5338dbd89592fd99615af21b008bb75fac3f556461ba1ec425ef0",
+    "story/storyline.json": "abdd2470ce09065c6a9c5e1f4036af3326db49ce4517c766f2561be3b70cfd3c",
     "story/evidence_notes.json": "681e23f879d2fdeff0e880ae5c51bc6901195339744f267feaf804a7970381e6",
     "assets/fonts/poppins/Poppins-Regular.ttf": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba",
     "assets/fonts/poppins/Poppins-Medium.ttf": "90373e7d838d32468438fc3e152dca0bdb12edcab99ea639f158790b1ba1fd05",
     "assets/fonts/poppins/Poppins-SemiBold.ttf": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286",
     "assets/fonts/anton/Anton-Regular.ttf": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab"
   },
-  "html_sha256": "40d64a2089acbcb1d656da35e1671945c7a95070dd552b445275f50707be2e4e",
-  "bytes": 12084954
+  "html_sha256": "93895c616326874d011052705c5ce6f8e126905cc6fa987c5261b0d2e5c0b9fc",
+  "bytes": 12131846
 }

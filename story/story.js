@@ -2,7 +2,7 @@
 const C={navy:'#14295b',blue:'#2c5eaa',light:'#8fb8f2',pale:'#dce6f4',red:'#c0453c',ink:'#14203a',muted:'#5a6683',grid:'#e4eaf4',land:'#e4eaf4',none:'#f2f4f7',white:'#ffffff'};
 const NS='http://www.w3.org/2000/svg';
 let currentStormRows=DATA.storm;
-const state={where:'absolute',cell:48022,horizon:30,morning:'day',category:'All',search:'',expanded:false,modal:null,part:0};
+const state={where:'absolute',cell:48022,horizon:30,morning:'week',category:'All',search:'',expanded:false,modal:null,part:0};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const n=(v,d=1)=>Number(v).toFixed(d).replace('-','−');
 const pct=(v,d=1)=>`${n(v,d)}%`;
@@ -69,7 +69,7 @@ function drawCurve(id,rows,xkey,domainX,domainY,xticks,yticks,{band=true,event=f
  axisX(s,x,xticks,h-b,v=>v,event?'Minutes from local rain onset':'Rain intensity (mm/h)',w);
 }
 function horizontalBars(id,rows,{max=25,ticks=[0,5,10,15,20,25],axis='',height,rowHeight=60}={}){
- const{s,w,mobile}=chart(id,height||rows.length*rowHeight+90),l=mobile?108:180,r=id==='chart-policy'?(mobile?105:145):(mobile?70:105),x=scale([0,max],[l,w-r]);
+ const{s,w,mobile}=chart(id,height||rows.length*rowHeight+90),l=mobile?108:180,r=id==='chart-policy'?(mobile?135:240):id==='chart-places'&&document.body.classList.contains('present-mode')?250:(mobile?70:105),x=scale([0,max],[l,w-r]);
  for(const[i,row]of rows.entries()){
   const y=28+i*rowHeight;colorBar(s,row,y);
   function colorBar(s,row,y){
@@ -84,7 +84,7 @@ function horizontalBars(id,rows,{max=25,ticks=[0,5,10,15,20,25],axis='',height,r
 }
 function drawDuration(){horizontalBars('chart-duration',DATA.duration.map((r,i)=>({label:['First 30 min','31–60 min','61–120 min','Over 120 min'][i],value:-r.pct,lo:-r.pct_hi,hi:-r.pct_lo,color:i===3?C.red:C.navy,display:pct(r.pct),tip:`<strong>${esc(r.term)}</strong>${pct(r.pct,2)}<br>95% CI ${pct(r.pct_lo,2)} to ${pct(r.pct_hi,2)}`})),{max:25,axis:'Fewer vacant taxis (%)',rowHeight:58,height:320});}
 function nameOf(r){const name=DATA.aliases[r.cell]||r.subzone||`Cell ${r.cell}`;return name===name.toUpperCase()?name.toLowerCase().replace(/(^|\s)\S/g,v=>v.toUpperCase()):name;}
-function drawPlaces(){horizontalBars('chart-places',DATA.places.map(r=>({label:nameOf(r),value:r.taxis_lost_per_heavy_half_hour,display:`${n(r.taxis_lost_per_heavy_half_hour)} / ${n(r.expected_vacant_heavy)}`,color:['Downtown Core','Museum','Rochor','Outram','Kallang'].includes(r.planning_area)?C.red:C.navy,tip:`<strong>${esc(nameOf(r))}</strong>${n(r.taxis_lost_per_heavy_half_hour,3)} fewer / ${n(r.expected_vacant_heavy,3)} expected<br>${pct(r.abs_pct,2)}; 95% CI ${pct(r.abs_lo,2)} to ${pct(r.abs_hi,2)}`})),{max:8,ticks:[0,2,4,6,8],axis:'Fewer taxis per heavy-rain half-hour',rowHeight:37,height:540});}
+function drawPlaces(){horizontalBars('chart-places',DATA.places.map(r=>({label:nameOf(r),value:r.taxis_lost_per_heavy_half_hour,display:document.body.classList.contains('present-mode')?`${n(r.taxis_lost_per_heavy_half_hour,2)} of ${n(r.expected_vacant_heavy,2)} (${pct(r.abs_pct,2)})`:`${n(r.taxis_lost_per_heavy_half_hour)} / ${n(r.expected_vacant_heavy)}`,color:['Downtown Core','Museum','Rochor','Outram','Kallang'].includes(r.planning_area)?C.red:C.navy,tip:`<strong>${esc(nameOf(r))}</strong>${n(r.taxis_lost_per_heavy_half_hour,3)} fewer / ${n(r.expected_vacant_heavy,3)} expected<br>${pct(r.abs_pct,2)}; 95% CI ${pct(r.abs_lo,2)} to ${pct(r.abs_hi,2)}`})),{max:8,ticks:[0,2,4,6,8],axis:'Fewer taxis per heavy-rain half-hour',rowHeight:37,height:540});}
 function mix(a,b,f){const A=a.slice(1).match(/../g).map(x=>parseInt(x,16)),B=b.slice(1).match(/../g).map(x=>parseInt(x,16));return'#'+A.map((v,i)=>Math.round(v*(1-f)+B[i]*f).toString(16).padStart(2,'0')).join('');}
 function change(v){return mix(C.white,v<0?C.red:C.blue,Math.min(1,Math.abs(v)/40));}
 function sequential(v,max=60){const stops=[C.pale,C.light,C.blue,C.navy],t=Math.min(2.999,Math.max(0,v)/max*3),k=Math.floor(t);return mix(stops[k],stops[k+1],t-k);}
@@ -122,7 +122,7 @@ function updatePlace(r){
  $$('#map-where [data-selected]').forEach(x=>{x.removeAttribute('data-selected');x.setAttribute('stroke','#fbfcfe');x.setAttribute('stroke-width',.4);});
  const rect=$(`#map-where [data-cell="${r.cell}"]`);if(rect){rect.setAttribute('data-selected','true');rect.setAttribute('stroke',C.navy);rect.setAttribute('stroke-width',2);}
 }
-function drawWhere(){const share=state.where==='share',rows=share?DATA.share:DATA.absolute;mapChart('map-where',rows,{value:r=>share?r.share_pct:r.abs_pct,filter:r=>share?r.presentable_share:r.presentable_abs,callback:updatePlace});const r=rows.find(r=>r.cell===state.cell&&(share?r.presentable_share:r.presentable_abs))||rows.find(r=>share?r.presentable_share:r.presentable_abs);updatePlace(r);$('#where-scale').textContent=`${share?'Change in citywide share':'Change in vacant count'} vs no-rain expectation · colour capped at ±40%`;}
+function drawWhere(){const share=state.where==='share',rows=share?DATA.share:DATA.absolute;const key=$('#where-markers');if(key)key.hidden=share;mapChart('map-where',rows,{value:r=>share?r.share_pct:r.abs_pct,filter:r=>share?r.presentable_share:r.presentable_abs,callback:updatePlace,markers:share?[]:DATA.places.slice(0,4)});const r=rows.find(r=>r.cell===state.cell&&(share?r.presentable_share:r.presentable_abs))||rows.find(r=>share?r.presentable_share:r.presentable_abs);updatePlace(r);$('#where-scale').textContent=`${share?'Change in citywide share':'Change in vacant count'} vs no-rain expectation · colour capped at ±40%`;}
 function drawMaps(){mapChart('hero-map',DATA.storm,{value:r=>r.pct,hero:true});drawWhere();mapChart('map-rain',DATA.storm,{value:r=>r.mmh});mapChart('map-storm',DATA.storm,{value:r=>r.pct});const gains=DATA.island.filter(r=>r.absolute==='more taxis').sort((a,b)=>a.cell-b.cell);mapChart('map-island',DATA.island,{value:r=>r.share_pct,markers:gains});$('#island-gainers').innerHTML=gains.map((r,i)=>`<p><b>${i+1} · ${r.presentable?esc(nameOf(r)):'Cell '+r.cell}</b> &nbsp; ${sign(r.abs_change_per_half_hour,3)} taxis / ${n(r.expected_vacant,2)} expected${r.presentable?'':' · below naming threshold'}</p>`).join('');}
 function drawPlanning(){
  const host=$('#chart-planning'),grid=document.createElement('div');grid.className='planning-heatmap';grid.setAttribute('role','table');grid.setAttribute('aria-label','Fewer vacant taxis per half-hour by area and weekday time band');
@@ -146,14 +146,22 @@ function dotRows(id,rows,{domain=[-20,3],ticks=[-20,-10,0],axis='',height,rowHei
 }
 function drawFactors(){const labels={heavy_x_central_area:'Central Area',heavy_x_mrt_lt300m:'MRT exit <300 m',heavy_x_taxi_stand_300m:'Taxi stand <300 m',heavy_x_mall:'Mall in the square',heavy_x_hdb_units_sd:'HDB density (+1 SD)'};dotRows('chart-factors',Object.entries(labels).map(([term,label],i)=>{const r=DATA.factors.find(v=>v.term===term);return{label,value:r.pct,lo:r.pct_lo,hi:r.pct_hi,display:sign(r.pct)+'%',ciUnit:'%',color:i===0?C.red:C.blue};}),{domain:[-20,4],ticks:[-20,-10,0],axis:'Multiplicative difference in the heavy-rain association (%)',rowHeight:55,height:365});}
 function drawForecast(){
- const r=DATA.forecast.find(r=>r.h===state.horizon),rows=[['Persistence','topk_precision_persistence',C.navy],['Regression','topk_precision_glm_no_weather',C.blue],['LightGBM','topk_precision_lgb_no_weather',C.blue],['LightGBM + weather','topk_precision_lgb_weather',C.red]];
- const{s,w,mobile}=chart('chart-forecast',365),l=mobile?106:200,rpad=65,x=scale([0,65],[l,w-rpad]);
- line(s,x(r.base_rate*100),18,x(r.base_rate*100),285,C.muted,1,'4 4');
- for(const[i,[label,key,color]]of rows.entries()){const y=47+i*63;txt(s,l-13,y+5,label==='LightGBM + weather'&&mobile?'LGBM + weather':label,{'text-anchor':'end',fill:C.ink,'font-size':mobile?11:13});add(s,'rect',{x:l,y:y-12,width:x(r[key]*100)-l,height:24,rx:3,fill:color});txt(s,w-2,y+5,pct(r[key]*100,2),{fill:color,'font-size':14,'font-weight':600,'text-anchor':'end'});}
- axisX(s,x,[0,20,40,60],285,v=>v+'%','Share of 19 alerts that are truly low',w);
- txt(s,l,352,`Base rate: ${pct(r.base_rate*100,2)} · dashed line`,{'font-size':10});
- const result=$('[data-main-graph="forecast"] .analysis-notes>div:nth-child(2) p');if(result)result.textContent=`At ${state.horizon} minutes, LightGBM precision is ${pct(r.topk_precision_lgb_no_weather*100,2)}, versus ${pct(r.topk_precision_persistence*100,2)} for persistence. With weather it is ${pct(r.topk_precision_lgb_weather*100,2)}.`;
- $('#forecast-takeaway').innerHTML=`<strong>${pct(r.topk_precision_lgb_no_weather*100)} with LightGBM, versus ${pct(r.topk_precision_persistence*100)} with persistence.</strong> Adding weather gives ${pct(r.topk_precision_lgb_weather*100)}. The model gain comes mainly from taxi information.`;
+ const presenting=document.body.classList.contains('present-mode');
+ const rows=[['Persistence','topk_precision_persistence',C.navy],['Regression','topk_precision_glm_no_weather',C.blue],['LightGBM','topk_precision_lgb_no_weather',C.blue],['LightGBM + weather','topk_precision_lgb_weather',C.red]];
+ const selected=presenting?DATA.forecast:[DATA.forecast.find(r=>r.h===state.horizon)];
+ const{s,w,mobile}=chart('chart-forecast',presenting?515:365),l=mobile?120:210,rpad=68,x=scale([0,65],[l,w-rpad]);
+ selected.forEach((row,j)=>{
+  const top=presenting?42+j*218:15;
+  if(presenting)txt(s,l,top-18,`${row.h}-minute forecast`,{fill:C.ink,'font-size':18,'font-weight':600});
+  line(s,x(row.base_rate*100),top-4,x(row.base_rate*100),top+172,C.muted,1,'4 4');
+  rows.forEach(([label,key,color],i)=>{const y=top+18+i*(presenting?43:63);txt(s,l-13,y+5,label==='LightGBM + weather'&&mobile?'LGBM + weather':label,{'text-anchor':'end',fill:C.ink,'font-size':13});add(s,'rect',{x:l,y:y-11,width:x(row[key]*100)-l,height:22,rx:3,fill:color});txt(s,w-2,y+5,pct(row[key]*100,2),{fill:color,'font-size':14,'font-weight':600,'text-anchor':'end'});});
+ });
+ axisX(s,x,[0,20,40,60],presenting?463:285,v=>v+'%','Correct alerts out of the 19 issued (%)',w);
+ if(!presenting){const r=selected[0];txt(s,l,352,`Base rate: ${pct(r.base_rate*100,2)} · dashed line`,{'font-size':10});}
+ else txt(s,l,505,'Dashed lines: prevalence of low availability (26.4%)',{'font-size':10});
+ const result=$('[data-main-graph="forecast"] .finding-note p');
+ if(result)result.innerHTML=presenting?'At 30 minutes, <b>54.23% of LightGBM alerts are correct versus 47.18%</b> for persistence. At 60 minutes: <b>51.95% versus 43.99%</b>. Weather gives 54.20% and 51.88%.':`At ${state.horizon} minutes, <b>${pct(selected[0].topk_precision_lgb_no_weather*100,2)}</b> of LightGBM alerts are correct, compared with ${pct(selected[0].topk_precision_persistence*100,2)} for persistence and ${pct(selected[0].topk_precision_lgb_weather*100,2)} with weather.`;
+ const takeaway=$('#forecast-takeaway');if(takeaway)takeaway.hidden=true;
 }
 function drawLead(){
  const{s,w,mobile}=chart('chart-lead',350),l=mobile?54:95,r=20,x=scale([0,1],[l,w-r]);
@@ -165,10 +173,10 @@ function drawLead(){
 }
 function drawPolicy(){
  const choices=[['(c) top-19 forecast ranking, no constraints','Forecast ranking',C.navy],['(c) restricted to cells with a staging point','Eligible + staging',C.blue],['(b) policy, weights = forecast risk','Risk-weighted policy',C.red],['(a) policy as designed','Original policy',C.blue],['all candidate cells (expected >= 4)','All candidate cells',C.light]];
- horizontalBars('chart-policy',choices.map(([variant,label,color])=>{const r=DATA.policy.find(r=>r.variant===variant);return{label,value:r.precision_issue_time*100,display:pct(r.precision_issue_time*100,2)+' / '+n(r.cells_per_decision,1),color,tip:`<strong>${label}</strong>${pct(r.precision_issue_time*100,2)} precision<br>${n(r.cells_per_decision,2)} selected cells per decision`};}),{max:60,ticks:[0,20,40,60],axis:'Targeted cells truly low (%)',rowHeight:58,height:390});
+ horizontalBars('chart-policy',choices.map(([variant,label,color])=>{const r=DATA.policy.find(r=>r.variant===variant);return{label,value:r.precision_issue_time*100,display:pct(r.precision_issue_time*100,2)+' · '+n(r.cells_per_decision,1)+' cells',color,tip:`<strong>${label}</strong>${pct(r.precision_issue_time*100,2)} precision<br>${n(r.cells_per_decision,2)} selected cells per decision`};}),{max:60,ticks:[0,20,40,60],axis:'Targeted cells truly low (%)',rowHeight:58,height:390});
 }
-function drawHoldout(){dotRows('chart-holdout',DATA.holdout.map((r,i)=>({label:['1 km test-year maximum','October 2026 · storms','2019 · storms'][i],value:r.gain,lo:r.lo,hi:r.hi,display:sign(r.gain,4),color:i===1?C.red:C.navy,hollow:i===1,decimals:4})),{domain:[-.005,.09],ticks:[0,.02,.04,.06,.08],axis:'Weather gain in PR-AUC',rowHeight:78,height:335,thresholds:[{value:.01,label:'Cell bar +.01'},{value:.02,label:'Regional bar +.02'}]});}
-function drawMorning(){dotRows('chart-morning',DATA.morning.map(r=>({label:(r.model==='lgb'?'Flexible':'Linear')+' · '+r.label,value:r.deviance_improvement_pct,lo:state.morning==='week'?r.lo_block7:r.lo,hi:state.morning==='week'?r.hi_block7:r.hi,display:sign(r.deviance_improvement_pct)+'%',ciUnit:'%',color:r.deviance_improvement_pct<0?C.red:r.model==='lgb'?C.blue:C.navy})),{domain:[-7,13],ticks:[-5,0,5,10],axis:'Lower prediction deviance with weather (%)',rowHeight:65,height:355});}
+function drawHoldout(){dotRows('chart-holdout',DATA.holdout.map((r,i)=>({label:['October 2026 · 2 storms','2019 · 49 storms'][i],value:r.gain,lo:r.lo,hi:r.hi,display:sign(r.gain,4),color:i===0?C.light:C.navy,hollow:i===0,decimals:4})),{domain:[-.005,.09],ticks:[0,.02,.04,.06,.08],axis:'Weather gain in PR-AUC',rowHeight:78,height:335,thresholds:[{value:.02,label:'Materiality bar +0.02'}]});}
+function drawMorning(){dotRows('chart-morning',DATA.morning.map(r=>({label:(r.model==='lgb'?'Flexible':'Linear')+' · '+r.label,value:r.deviance_improvement_pct,lo:state.morning==='week'?r.lo_block7:r.lo,hi:state.morning==='week'?r.hi_block7:r.hi,display:sign(r.deviance_improvement_pct)+'%',ciUnit:'%',color:r.deviance_improvement_pct<0?C.red:r.model==='lgb'?C.blue:C.navy})),{domain:[-7,13],ticks:[-5,0,5,10],axis:'Prediction-error reduction (deviance, %)',rowHeight:65,height:355});}
 function drawSimulation(){
  const{s,w,mobile}=chart('chart-simulation',285),l=mobile?118:235,x=scale([0,10],[l,w-62]);
  for(const[i,r]of DATA.simulation.entries()){
@@ -180,7 +188,7 @@ function drawSimulation(){
 }
 function controls(id,update){$$('#'+id+' button').forEach(button=>button.addEventListener('click',()=>{$$('#'+id+' button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update(button.dataset.value);}));}
 controls('where-controls',v=>{state.where=v;drawWhere();morphHost($('#map-where'));});controls('forecast-controls',v=>{state.horizon=Number(v);drawForecast();morphHost($('#chart-forecast'));});controls('morning-controls',v=>{state.morning=v;drawMorning();morphHost($('#chart-morning'));});
-function renderCharts(){drawEffects();drawRadar();drawCurve('chart-event',DATA.event,'event_min',[-60,180],[-8,3],[-60,0,60,120,180],[-8,-4,0],{event:true});drawCurve('chart-dose',DATA.dose,'mmh',[0,60],[-18,2],[0,20,40,60],[-15,-10,-5,0]);drawDuration();drawPlaces();drawForecast();drawLead();drawPolicy();drawHoldout();drawMorning();drawSimulation();}
+function renderCharts(){drawEffects();drawStormHistory();drawContrasts();drawApproach();drawWeatherChecks();drawCurve('chart-event',DATA.event,'event_min',[-60,180],[-8,3],[-60,0,60,120,180],[-8,-4,0],{event:true});drawCurve('chart-dose',DATA.dose,'mmh',[0,60],[-18,2],[0,20,40,60],[-15,-10,-5,0]);drawDuration();drawPlaces();drawForecast();drawLead();drawPolicy();drawHoldout();drawMorning();}
 function buildTables(){
  for(const host of $$('[data-table]')){const rows=DATA[host.dataset.table],cols=[...new Set(rows.flatMap(Object.keys))],box=document.createElement('div');box.className='data-table';box.innerHTML=`<table><thead><tr>${cols.map(c=>'<th scope="col">'+esc(c)+'</th>').join('')}</tr></thead><tbody>${rows.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(r[c]??'')+'</td>').join('')+'</tr>').join('')}</tbody></table>`;host.replaceChildren(box);}
 }
@@ -206,3 +214,37 @@ const chapterObserver=new IntersectionObserver(entries=>{for(const e of entries)
 let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(typeof fitScene==='function')fitScene();renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();if(typeof fitScene==='function')fitScene();},140);});
 buildTables();drawMaps();drawPlanning();renderGallery();renderCharts();
 document.fonts.ready.then(async()=>{await Promise.all([document.fonts.load('400 16px Poppins'),document.fonts.load('500 16px Poppins'),document.fonts.load('600 16px Poppins'),document.fonts.load('400 20px Anton')]);if(!document.fonts.check('16px Poppins')||!document.fonts.check('50px Anton'))throw Error('Required fonts did not load');renderCharts();if(typeof refreshExplorers==='function')refreshExplorers();document.documentElement.dataset.ready='true';});
+
+function drawStormHistory(){
+ const index=DATA.stormFrames.findIndex(frame=>frame.rows===currentStormRows),activeIndex=index<0?6:index;
+ const rows=DATA.stormFrames.map(frame=>({observed:frame.rows.reduce((v,r)=>v+r.vacant,0),expected:frame.rows.reduce((v,r)=>v+r.baseline,0)}));
+ const{s,w}=chart('chart-storm-history',180),x=scale([0,14],[58,w-25]),y=scale([1200,2700],[133,20]);
+ axisY(s,y,[1500,2000,2500],58,w-25,v=>Number(v).toLocaleString('en-SG'));
+ for(const [key,color,dash] of [['expected',C.muted,'5 4'],['observed',C.navy,null]])add(s,'path',{d:rows.map((r,i)=>(i?'L':'M')+x(i)+','+y(r[key])).join(''),fill:'none',stroke:color,'stroke-width':2.5,...(dash?{'stroke-dasharray':dash}:{})});
+ line(s,x(6),y(rows[6].observed),x(6),y(rows[6].expected),C.red,3);
+ txt(s,x(6)+12,30,'09:30 · 837 fewer (−36.2%)',{fill:C.red,'font-size':12,'font-weight':600});
+ line(s,x(activeIndex),16,x(activeIndex),139,C.blue,1.2,'3 4');
+ for(const [i,label] of [[0,'06:30'],[6,'09:30'],[14,'13:30']])txt(s,x(i),160,label,{'font-size':11,'text-anchor':i===0?'start':i===14?'end':'middle'});
+
+}
+function drawContrasts(){
+ const{s,w}=chart('chart-contrasts',280),l=w<550?135:190,x=scale([-32,0],[l,w-75]);
+ const groups=['city centre','outside centre','rush hour','other times'];
+ const names=['Central area','Outside centre','Weekday rush','Other times'];
+ groups.forEach((group,i)=>{const row=DATA.contrasts.find(r=>r.group===group),y=36+i*45+(i>=2?12:0),color=i===0?C.red:i===2?C.blue:C.navy;txt(s,l-12,y+5,names[i],{'text-anchor':'end',fill:C.ink,'font-size':12});ci(s,x,row.pct_lo,row.pct_hi,y,color,row.pct);txt(s,w-2,y+5,pct(row.pct),{fill:color,'text-anchor':'end','font-size':14,'font-weight':600});});
+ axisX(s,x,[-30,-20,-10,0],210,v=>v+'%','Heavy rain versus dry conditions',w);
+}
+function drawApproach(){
+ const ring=DATA.approach[0],forecast=DATA.forecastSignals.find(r=>r.variant==='forecast only'),adjusted=DATA.forecastSignals.find(r=>r.variant==='forecast + neighbouring rain');
+ dotRows('chart-approach',[[ring,'Rain 2–5 km away',C.red],[forecast,'Thundery forecast',C.navy],[adjusted,'Forecast + nearby-rain controls',C.blue]].map(([r,label,color])=>({label,value:r.pct,lo:r.pct_lo,hi:r.pct_hi,display:pct(r.pct,1),color,ciUnit:'%'})),{domain:[-12,1],ticks:[-10,-5,0],axis:'Vacant count difference while the local cell stays dry (%)',rowHeight:80,height:365});
+}
+function drawWeatherChecks(){
+ const host=$('#chart-weather-gain');host.replaceChildren();const grid=document.createElement('div');grid.className='weather-gain-grid';
+ function cell(value,cls=''){const el=document.createElement('div');el.className=cls;el.textContent=value;grid.append(el);return el;}
+ cell('Grid · label','gain-corner');for(const subset of ['all','rainy (rain at target time)'])for(const h of [30,60,120])cell((subset==='all'?'All':'Rainy')+' · '+h+' min','gain-head');
+ for(const scale of ['1km','2km','pa'])for(const label of ['deficit >= 50%','below NB 5th percentile']){
+  cell(({ '1km':'1 km','2km':'2 km','pa':'Planning area'})[scale]+' · '+(label.startsWith('deficit')?(scale==='pa'?'50%':'50% deficit'):(scale==='pa'?'NB':'NB tail')),'gain-row');
+  for(const subset of ['all','rainy (rain at target time)'])for(const h of [30,60,120]){const r=DATA.weatherChecks.find(r=>r.scale===scale&&r.label===label&&r.subset===subset&&r.h===h),v=cell(sign(r.weather_gain,5),'gain-cell');v.style.background=r.weather_gain>=0?mix(C.white,C.light,Math.min(.8,r.weather_gain/.01)):mix(C.white,C.pale,Math.min(1,-r.weather_gain/.01));v.title=`95% CI ${sign(r.gain_lo,4)} to ${sign(r.gain_hi,4)}`;if(r.weather_gain===Math.max(...DATA.weatherChecks.map(r=>r.weather_gain)))v.classList.add('gain-best');}
+ }
+ host.append(grid);
+}

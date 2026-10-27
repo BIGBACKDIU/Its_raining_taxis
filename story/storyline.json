@@ -1,0 +1,152 @@
+[
+  {
+    "graph": 1,
+    "id": "storm",
+    "claim": "At this storm’s peak, 837 fewer vacant taxis than expected.",
+    "method": "A storm-day shortfall, measured against the usual level",
+    "analysis": "At 09:30, there are 1,473 taxis versus 2,309.6 expected: 837 fewer (−36.2%). At 08:30, the 258 cells with no rain in the preceding half-hour already have 11.6% fewer than expected.",
+    "decision": "The rain footprint alone misses part of the supply gap. A useful warning system must look beyond the square under the cloud.",
+    "next_question": "Does this pattern persist across years, after usual place and time differences are controlled?",
+    "source": "storm_2023-07-20.csv"
+  },
+  {
+    "graph": 2,
+    "id": "effects",
+    "claim": "Heavy rain is associated with 12.9% fewer vacant taxis.",
+    "method": "Same-place, same-time Poisson comparison",
+    "analysis": "Light, moderate and heavy rain correspond to 7.7%, 10.8% and 12.9% fewer vacant taxis. Heavy rain still has a −5.7% local-share association after the citywide comparison.",
+    "decision": "Rain is linked to both a wider supply drop and extra local losses. Focusing only on the wet square would miss the wider part.",
+    "next_question": "Which places and times have the largest losses?",
+    "source": "effects_main.csv"
+  },
+  {
+    "graph": 3,
+    "id": "where",
+    "claim": "The central-area percentage loss is about twice as large.",
+    "method": "Spatial estimates plus group-interaction regressions",
+    "analysis": "The central-area contrast is −24.2% versus −11.9% outside. Weekday rush periods show −18.1% versus −11.3% at other times.",
+    "decision": "Rain plans should give extra attention to central coverage and weekday peaks. Next, translate percentages into the number of taxis involved.",
+    "next_question": "Does the largest percentage loss also mean the most taxis lost?",
+    "source": "rain_hit_absolute_all.csv · effects_interact.csv"
+  },
+  {
+    "graph": 4,
+    "id": "places",
+    "claim": "Changi loses more taxis; Bayfront loses a larger fraction.",
+    "method": "Rank the absolute heavy-rain gap",
+    "analysis": "Changi T3: 7.08 of 83.37 taxis (−8.50%). Marina Bay Sands: 4.76 of 13.08 (−36.42%). The airport loses more taxis; Bayfront loses a larger fraction.",
+    "decision": "Use taxi counts to size a staging trial and percentages to judge local severity. The two rankings answer different planning questions.",
+    "next_question": "When should a response start, and how long does the gap remain?",
+    "source": "rain_hit_top30_absolute.csv"
+  },
+  {
+    "graph": 5,
+    "id": "event",
+    "claim": "The deepest average gap is in the first hour.",
+    "method": "Align many local rain onsets",
+    "analysis": "Availability is 5.3% lower at onset and 5.6% lower 30 minutes later. The estimate narrows to −1.3% at +120 minutes; from +150 minutes, all later intervals include zero.",
+    "decision": "The deepest average gap comes early. Waiting until after rain starts leaves little time for a driver to reposition.",
+    "next_question": "Is there any useful signal before local rain begins?",
+    "source": "effects_event_study.csv"
+  },
+  {
+    "graph": 6,
+    "id": "approach",
+    "claim": "Supply is already lower before local rain arrives.",
+    "method": "Test nearby rain and forecasts while the cell stays dry",
+    "analysis": "Rain >2.5 mm/h 2–5 km away is associated with 7.3% fewer vacant taxis in a still-dry cell. An issued thundery forecast corresponds to −5.1%, or −3.7% with neighbouring rain controlled.",
+    "decision": "Nearby rain and issued forecasts are plausible early signals. Their predictive value still needs a direct with/without-weather test.",
+    "next_question": "Does the response depend more on intensity, spell length, or time since rain?",
+    "source": "effects_approach.csv · effects_forecast.csv"
+  },
+  {
+    "graph": 7,
+    "id": "dose",
+    "claim": "The supply gap is larger during long heavy-rain spells.",
+    "method": "Separate intensity and spell-duration models",
+    "analysis": "The intensity curve reaches −9.7% at only 1 mm/h. Heavy spells deepen from −11.4% in the first half-hour to −18.0% beyond two hours. The saved 30–60-minute after-rain bin is −5.3%.",
+    "decision": "Rain planning needs spell length as well as intensity. An extreme-intensity trigger alone would miss gaps already present in lighter rain.",
+    "next_question": "When rain covers the island, can another area reliably supply spare taxis?",
+    "source": "dose_spline_curve.csv · dose_duration_hangover.csv"
+  },
+  {
+    "graph": 8,
+    "id": "island",
+    "claim": "Island-wide rain leaves few clear gainers to draw taxis from.",
+    "method": "Compare local shares during island-wide rain",
+    "analysis": "329 of 374 cells have clearly fewer vacant taxis; only 3 clearly gain. Several eastern and northern cells gain citywide share while their actual taxi counts still fall.",
+    "decision": "A relative gainer is not automatically a donor area. A repositioning plan must check the current surplus before drawing taxis from it.",
+    "next_question": "Can a model identify the next low-supply cells accurately enough to act?",
+    "source": "spillover_islandwide_share.csv"
+  },
+  {
+    "graph": 9,
+    "id": "forecast",
+    "claim": "Taxi information improves alerts. Weather barely changes them.",
+    "method": "Forecast the same targets with and without weather",
+    "analysis": "At 30 minutes, 54.23% of LightGBM alerts are correct versus 47.18% for persistence. At 60 minutes: 51.95% versus 43.99%. Weather gives 54.20% and 51.88%.",
+    "decision": "The model improves alert ranking, but adding the tested weather inputs barely changes it. The next test checks whether a different target or scale changes that conclusion.",
+    "next_question": "Is the small weather gain just a consequence of the 1 km target or its label?",
+    "source": "forecast_eval_both_labels.csv"
+  },
+  {
+    "graph": 10,
+    "id": "weather-gain",
+    "claim": "Changing the grid and label still adds little forecast skill.",
+    "method": "Registered secondary tests across targets and scales",
+    "analysis": "0 of 36 comparisons reaches the +0.0100 materiality bar. The largest gain is +0.0024; larger grids and the noise-aware label do not rescue the tested weather features.",
+    "decision": "The weak increment is not confined to one sparse-cell definition. Use the stronger taxi-information model while testing any new weather approach separately.",
+    "next_question": "Even with better ranking, how often do alerts arrive before a shortfall starts?",
+    "source": "forecast_eval_both_labels.csv · S1, issue-time rows"
+  },
+  {
+    "graph": 11,
+    "id": "lead",
+    "claim": "Most shortfalls still receive no advance warning.",
+    "method": "Measure warning before each low-supply run",
+    "analysis": "Only 6.65% of runs receive advance warning at 30 minutes and 13.79% at 60. About 83% are never alerted under this workload.",
+    "decision": "Correct alerts are not enough: most shortfalls lack advance warning. This limits how much proactive repositioning the current system can support.",
+    "next_question": "Could weather work better for regional shortfalls specifically during storms?",
+    "source": "forecast_eval_lead_both_labels.csv"
+  },
+  {
+    "graph": 12,
+    "id": "holdout",
+    "claim": "Regional storm forecasts show a small, unconfirmed weather gain.",
+    "method": "Test frozen regional models on separate holdouts",
+    "analysis": "October 2026 gives +0.0238, but only 2 storms versus 8 required. In 2019, 49 storms give +0.0087 [0.0008, 0.0171], below +0.02.",
+    "decision": "There is small positive regional weather information, but no adequately powered confirmation of a material gain. October’s promising point estimate is not confirmation.",
+    "next_question": "Does weather help a different decision: planning the coming day at 09:00?",
+    "source": "s22_materiality.csv · s22b_materiality.csv"
+  },
+  {
+    "graph": 13,
+    "id": "morning",
+    "claim": "Weather helps daily planning in the flexible model.",
+    "method": "Predict daily exposure using information available by 09:00",
+    "analysis": "The flexible model lowers deviance by 6.3% on the issue-time label and 10.1% retrospectively. The linear model is flat or worse: −4.5% on issue-time.",
+    "decision": "Weather helps the coarser daily-planning task in the flexible model. That supports testing advance staffing/staging schedules, rather than claiming better immediate cell alerts.",
+    "next_question": "Which areas and time bands should a planning trial focus on?",
+    "source": "morning_forecast_value.csv"
+  },
+  {
+    "graph": 14,
+    "id": "planning",
+    "claim": "The planning window depends on both place and time.",
+    "method": "Aggregate forecast-conditioned gaps by place and time",
+    "analysis": "Changi: roughly 25–33 fewer taxis early in the day. Bukit Merah: roughly 21–25 fewer in evening/night periods. Central-area gaps have a different daily pattern.",
+    "decision": "A single island-wide incentive window would miss these differences. A planning trial should specify both an area and a time band.",
+    "next_question": "How much targeting precision survives actual staging and supply constraints?",
+    "source": "planning_rain_losses.csv"
+  },
+  {
+    "graph": 15,
+    "id": "policy",
+    "claim": "Operational constraints reduce targeting precision.",
+    "method": "Evaluate an implementable constrained allocation",
+    "analysis": "Unconstrained ranking reaches 51.47% precision. Eligibility/staging gives 48.05%; the risk-weighted allocation gives 44.16%, versus 31.01% for the original policy.",
+    "decision": "Use risk weighting for a staging pilot, with live donor checks and travel limits. Operational feasibility costs targeting precision; the final plan still needs an intervention trial.",
+    "next_question": "Recommendation: use live supply for dispatch and the morning forecast for a targeted planning trial.",
+    "source": "policy_diagnosis.csv"
+  }
+]

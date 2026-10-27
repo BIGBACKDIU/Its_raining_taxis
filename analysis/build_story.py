@@ -19,6 +19,11 @@ def main():
  data['radarCentral']=records(read('radar_central').query("group=='Central Area' and dry_threshold_mmh==0"))
  data['event']=records(read('effects_event_study').query("model=='event_abs'"))
  data['approach']=records(read('effects_approach').query("model=='abs' and term=='ring_heavier_owndry'"))
+ data['forecastSignals']=records(read('effects_forecast').query("model=='abs' and term=='fc_thundery'"))
+ data['contrasts']=records(read('effects_interact').query("model=='abs' and interaction in ['city centre', 'rush hour (weekday 07-10, 17-20)']"))
+ data['weatherChecks']=records(read('forecast_eval_both_labels').query("analysis=='S1' and label_version=='issue-time'"))
+ assert len(data['weatherChecks'])==36
+ assert len({(r['scale'],r['label'],r['h'],r['subset']) for r in data['weatherChecks']})==36
  data['dose']=records(read('dose_spline_curve').query("model=='abs'"))
  data['duration']=records(read('dose_duration_hangover').query("model=='abs' and part=='duration' and term.str.startswith('heavy_wet')"))
  data['after']=records(read('dose_duration_hangover').query("model=='abs' and term.str.startswith('dry_')"))
@@ -44,7 +49,7 @@ def main():
  data['planning']=records(plan[plan.planning_area.isin(order)]);data['planningOrder']=list(order)
  data['factors']=records(read('factors_panel_interactions').query("model=='abs'"))
  data['forecast']=records(read('forecast_eval_both_labels').query("analysis=='primary' and scale=='1km' and label_version=='issue-time' and subset=='all' and h in [30,60]"))
- hp=ROOT/'outputs/figures/deck/data/deck_holdout_gain.csv';HASHES[str(hp.relative_to(ROOT))]=sha(hp);data['holdout']=records(pd.read_csv(hp))
+ hp=ROOT/'outputs/figures/deck/data/deck_holdout_gain.csv';HASHES[str(hp.relative_to(ROOT))]=sha(hp);data['holdout']=records(pd.read_csv(hp).iloc[1:])
  data['morning']=records(read('morning_forecast_value'))
  data['lead']=records(read('forecast_eval_lead_both_labels').query("analysis=='primary' and scale=='1km' and label_version=='issue-time' and model=='lgb_no_weather'"))
  data['policy']=records(read('policy_diagnosis').query("split=='test'"))
@@ -79,6 +84,8 @@ def main():
   if name not in gallery:gallery[name]={'id':name,'title':labels[name][0],'category':labels[name][1],'source':row['sourceFile'],'parts':[]}
   gallery[name]['parts'].append('data:image/png;base64,'+base64.b64encode(p.read_bytes()).decode())
  assert len(gallery)==44 and sum(len(v['parts']) for v in gallery.values())==67
+ storyline_path=SOURCE/'storyline.json';HASHES[str(storyline_path.relative_to(ROOT))]=sha(storyline_path)
+ narrative=json.loads(storyline_path.read_text());assert len(narrative)==15
  notes_path=SOURCE/'evidence_notes.json';HASHES[str(notes_path.relative_to(ROOT))]=sha(notes_path)
  evidence_notes=json.loads(notes_path.read_text());assert set(evidence_notes)==set(gallery)
  for name,note in evidence_notes.items():gallery[name].update(note)
@@ -90,11 +97,14 @@ def main():
   for filename,weight in weights:
    p=ROOT/f'assets/fonts/{folder}/{family}-{filename}.ttf';HASHES[str(p.relative_to(ROOT))]=sha(p)
    fonts.append(f"@font-face{{font-family:'{family}';font-style:normal;font-weight:{weight};font-display:swap;src:url(data:font/ttf;base64,{base64.b64encode(p.read_bytes()).decode()}) format('truetype')}}")
- template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text()+'\n'+(SOURCE/'presentation.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
+ template=(SOURCE/'template.html').read_text();css=(SOURCE/'story.css').read_text()+'\n'+(SOURCE/'presentation.css').read_text()+'\n'+(SOURCE/'editorial.css').read_text();js=(SOURCE/'story.js').read_text()+'\n'+(SOURCE/'motion.js').read_text()
  html=template.replace('/*__FONTS__*/','\n'.join(fonts)).replace('/*__CSS__*/',css).replace('/*__DATA__*/','const DATA = '+json.dumps(data,separators=(',',':'),ensure_ascii=False).replace('</','<\\/')+';').replace('/*__JS__*/',js)
  assert len(re.findall(r'<figure[^>]*data-main-graph=',html))==15
  assert len(re.findall(r'data-scene=',html))==26
  assert len(re.findall(r'class="analysis-notes"',html))==15
+ assert re.findall(r'<figure[^>]*data-main-graph="([^"]+)"',html)==[row['id'] for row in narrative]
+ assert 'graphs in the main story' not in template
+ assert 'data-main-graph="simulation"' not in template
  (OUT/'index.html').write_text(html)
  for relative,expected in HASHES.items():assert sha(ROOT/relative)==expected,relative
  (OUT/'provenance.json').write_text(json.dumps({'presentation_only':True,'main_graphs':15,'presentation_scenes':26,'storm_frames':len(data['stormFrames']),'appendix_graphs':44,'appendix_panels':97,'appendix_cards':67,'source_hashes':HASHES,'html_sha256':sha(OUT/'index.html'),'bytes':(OUT/'index.html').stat().st_size},indent=2)+'\n')

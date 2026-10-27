@@ -872,6 +872,40 @@ editable scripts. The presentation build metadata changes only its recorded HTML
 Final gates: 35 tests passed (14 existing warnings), the same 76 reviewed wording hits, and matching
 provenance hashes for all frozen inputs. No model, score, analysis table or registered rule changes.
 
+### Rebuilt main argument and quantitative slide analysis (decision 173; presentation only)
+
+Removed the graph-count and caveat slogans from the cover. The 15 main figures now answer linked
+questions about the rain gap, its geography/timing, useful forecasting, and feasible action. Every
+figure leads with a numerical analysis and specific decision implication, followed by a concise
+method. A bridge explains why the next comparison is needed. The selection and source references
+are recorded in `story/storyline.json` and `outputs/story/EDITORIAL_NOTES.md`.
+
+The storm slide now includes an actual/expected count timeline: 1,473 versus 2,309.6 at 09:30,
+a gap of 837 (36.2%). At 08:30, 258 cells with no rain in the preceding half-hour have an 11.6%
+gap. This arithmetic comes from the existing fit-period replay export. Pooled regressions follow
+that single-storm illustration. The spatial slide adds centre/rush contrasts; named count rankings
+then distinguish airport volume from Bayfront's larger percentage gap.
+
+Removed radar and simulation-realism diagnostics from the main figure sequence, retaining both
+in the full 44-figure appendix. Added the saved nearby-rain/forecast comparison and every one of
+the 36 issue-time S1 gains. All 36 displayed gains match the table to its five saved decimal places;
+none reaches +0.01. The nearby-ring definition is correctly >2.5 mm/h, with the own cell dry for
+90 minutes, after checking `03_effects_more.py`. Both short-term forecast horizons are shown
+simultaneously. Regional holdouts compare the same target. Daily planning remains model-specific.
+Graph 15 now evaluates feasible targeting: 51.47% unconstrained, 48.05% with eligibility/staging,
+44.16% risk-weighted and 31.01% original, with different mean cell counts explicitly labelled.
+The live simulator is an optional demonstration after the recommendation, with its limitations.
+
+Browser checks cover all 26 scenes at 1,920 px, 1,440 px and 400 px, full-window bounds, complete
+analysis panels, chart labels and reading-mode controls. New preview images record the revised
+storm, weather-comparison and final policy slides. Frozen inputs and result tables remain unchanged;
+no model, labels, bootstrap, score or holdout is rerun. Final test/wording results are recorded below.
+
+Final gates for decision 173: **35 tests passed** (14 existing warnings); wording check reports the
+same **76 reviewed hits**. Additional browser checks find no clipped chart labels or analysis
+panels at 1,440 px, and all 26 scenes restore with unique IDs. All 36 rendered matrix values and
+the storm arithmetic were checked against their saved source data; source hashes match.
+
 ## Decision 174: fifteen-minute presentation page (presentation only)
 
 Built `outputs/story/present.html` (14 slides plus a references appendix, ~1.1 MB, single offline file)

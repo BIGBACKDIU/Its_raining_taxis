@@ -51,6 +51,7 @@ function setStormFrame(index,animate=true){
   if(animate)morphHost($('#'+id));
  }
  $('#storm-time').textContent=frame.time.slice(11,16)+' SGT';
+ drawStormHistory();
  $('#storm-scrub').value=stormIndex;if(!stormTimer)buttonState('#storm-play',false,stormIndex===stormTimes.length-1?'Replay storm':'Play storm');
  const observed=frame.rows.reduce((sum,r)=>sum+r.vacant,0),expected=frame.rows.reduce((sum,r)=>sum+r.baseline,0),wet=frame.rows.filter(r=>r.mmh>0).length;
  $('#storm-summary').innerHTML=`<strong>${observed.toLocaleString('en-SG')} vacant taxis</strong> across the 374 analysed squares, versus ${expected.toLocaleString('en-SG',{minimumFractionDigits:1,maximumFractionDigits:1})} expected. <strong>${wet} squares</strong> have rain in the preceding half-hour.`;
@@ -59,7 +60,7 @@ function setStormFrame(index,animate=true){
 }
 function startStorm(loop=false){
  stopStorm();if(stormIndex>=stormTimes.length-1)setStormFrame(0,false);buttonState('#storm-play',true,'Play storm');let hold=0;
- stormTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#storm-play').closest('figure'))){stopStorm();return;}if(hold){hold--;return;}if(stormIndex===stormTimes.length-1){if(!loop){stopStorm();return;}setStormFrame(0);return;}setStormFrame(stormIndex+1);if(stormIndex===6||stormIndex===stormTimes.length-1)hold=2;},1200);
+ stormTimer=setInterval(()=>{if(document.hidden||!playerIsVisible($('#storm-play').closest('figure'))){stopStorm();return;}if(hold){hold--;return;}if(stormIndex===stormTimes.length-1){if(!loop){stopStorm();return;}setStormFrame(0);return;}setStormFrame(stormIndex+1);if(stormIndex===6||stormIndex===stormTimes.length-1)hold=4;},1200);
 }
 $('#storm-play').addEventListener('click',()=>{if(stormTimer)stopStorm();else startStorm();});
 $('#storm-scrub').addEventListener('input',e=>{stopStorm();setStormFrame(Number(e.target.value),false);});
@@ -113,21 +114,15 @@ function startPresentationPlayback(restart=true){
  setPresentationLabel('morning-controls','7-day block confidence intervals');
  if(id==='graph-morning'){state.morning='week';setPresentationLabel('morning-controls','7-day block confidence intervals');drawMorning();}
  if(id==='simulation-demo'){if(!$('#simulation-frame').getAttribute('src'))loadLiveSimulation(true);sendSimulationPlayback(motionEnabled&&!presentationPaused);return;}
+ if(id==='graph-where'){state.where='absolute';drawWhere();setPresentationLabel('where-controls','Heavy rain · vacant counts');}
+ if(id==='graph-forecast')setPresentationLabel('forecast-controls','30 and 60 minutes · same workload');
  if(!motionEnabled||presentationPaused||document.hidden){if(restart&&id==='graph-storm')setStormFrame(6,false);return;}
  if(id==='graph-storm'){if(restart)setStormFrame(0,false);startStorm(true);}
  if(id==='graph-event'){if(restart)showEvent(0);startEvent(true);}
- if(id==='graph-dose'){
-  const indices=[1,10,25,60].map(value=>DATA.dose.findIndex(row=>row.mmh===value)).filter(index=>index>=0);let cursor=0;
-  if(restart)showDose(indices[0]);sceneTimer=setInterval(()=>{cursor=(cursor+1)%indices.length;showDose(indices[cursor]);},3000);
- }
- if(id==='graph-where'){
-  if(restart){state.where='absolute';drawWhere();}setPresentationLabel('where-controls',state.where==='absolute'?'Vacant count · heavy rain':'Citywide share · heavy rain');
-  sceneTimer=setInterval(()=>{state.where=state.where==='absolute'?'share':'absolute';drawWhere();setPresentationLabel('where-controls',state.where==='absolute'?'Vacant count · heavy rain':'Citywide share · heavy rain');},9000);
- }
- if(id==='graph-forecast'){
-  if(restart){state.horizon=30;drawForecast();}setPresentationLabel('forecast-controls',state.horizon+'-minute horizon');
-  sceneTimer=setInterval(()=>{state.horizon=state.horizon===30?60:30;drawForecast();setPresentationLabel('forecast-controls',state.horizon+'-minute horizon');},8500);
- }
+ if(id==='graph-dose')showDose(DATA.dose.findIndex(row=>row.mmh===1));
+ if(id==='graph-where'){state.where='absolute';drawWhere();setPresentationLabel('where-controls','Heavy rain · vacant counts');}
+ if(id==='graph-forecast'){setPresentationLabel('forecast-controls','30 and 60 minutes · same workload');drawForecast();}
+
 }
 function showSlide(index,direction=1){
  pausePlayers();if(typeof stopLiveSimulation==='function')stopLiveSimulation();if(sceneAnimation)sceneAnimation.cancel();

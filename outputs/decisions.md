@@ -1719,6 +1719,37 @@ results stay as they are and remain the pre-specified result.
     Verify identical bounds and no clipped notes at desktop/phone sizes, autoplay/pause/resume,
     reading-view restoration, frozen input hashes, tests and the wording gate before committing.
 
+173. **Select graphs for the research argument and put quantitative analysis first (presentation only).**
+    The user rejected the graph-count/caveat cover text, a storm replay without a useful numerical
+    interpretation, and simulator diagnostics occupying the final main-graph slot. Remove the cover
+    filler. Reorder the 15 main figures around four linked questions: rain magnitude/geography;
+    timing/extent; incremental and timely forecasting skill; daily planning and feasible allocation.
+    Keep all 44 source figures in the appendix, including radar and simulator diagnostics. The live
+    app becomes an optional demonstration after the recommendation, not main analytical evidence.
+
+    Add a saved-count timeline to the storm replay and state its actual-versus-expected comparison:
+    1,473 versus 2,309.5936 at 09:30, a gap of 836.5936 (837 rounded), or 36.2225%. The 08:30 cells
+    with no rain in the preceding half-hour total 1,167/1,319.8843, a descriptive 11.5832% gap across
+    258 cells. These are arithmetic summaries of the existing fit-period presentation export; no
+    new inference, labels, estimation or outcome scoring. Preserve the distinction between this
+    individual storm and pooled regression estimates.
+
+    Give every figure a numerical analysis, its specific planning implication, concise method and
+    a bridge to the next question. Add pooled centre/rush contrasts to the spatial slide. Replace
+    the two diagnostics in the main sequence with an approaching-rain/forecast comparison and all
+    36 saved issue-time S1 weather gains. Show both alert horizons together. Compare only like
+    regional targets in the holdout figure. End graph 15 with the saved constrained targeting
+    comparison, including differing cell counts; retain all model/label combinations in the daily
+    planning comparison. `story/storyline.json` and `outputs/story/EDITORIAL_NOTES.md` record the
+    selection and claim sources; the builder enforces the selected figure order.
+
+    Source-code check corrects a presentation definition: `ring_heavier_owndry` is ring rain >2.5 mm/h
+    with the own cell dry for three half-hours (`03_effects_more.py`), not the >10 mm/h heavy band.
+    Use that actual definition beside the saved −7.338403% estimate; do not change frozen tables.
+    Keep issue-time corrective scoring, holdout power and target definitions with the relevant
+    evidence. Validate source arithmetic, all 36 matrix entries, reading/presentation layouts and
+    the existing test/wording gates. No frozen model, rule, headline table or scoring log changes.
+
 174. **Fifteen-minute presentation page `outputs/story/present.html` (presentation only).** The user
     asked for a 14-slide talk version of the research story, built from saved results only. Build it
     from new sources in `present/` with `analysis/build_present.py`; `outputs/story/index.html` and the
