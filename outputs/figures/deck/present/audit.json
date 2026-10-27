@@ -1,0 +1,97 @@
+{
+  "inputs": {
+    "outputs/tables/factors_panel_interactions.csv": "28504c2bfa6e6670f3b30adf951bef07c6b31ae2fff6d3ae8a75e8f54cdf32d6",
+    "outputs/tables/effects_event_study.csv": "4293c1eac993d863cfc75f91e8ec7d9c7531a75dda6a820193538cade194ca98",
+    "outputs/tables/rain_hit_top30_absolute.csv": "e7ba606ed0b32e7ab7393650133d04f5455e037c1dd6491eb63bb83b7cba6b16",
+    "outputs/tables/planning_rain_losses.csv": "f87741f2864350ef2da1feac2e809f75591f632670e3905e40bfa537fa2edacd"
+  },
+  "charts": {
+    "deck_factors": {
+      "display_pixels": [
+        1100,
+        560
+      ],
+      "png_pixels": [
+        2200,
+        1120
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "a0f442a146746b6b9c61accdccab30fe49607eede698b1f60fafd5a1367dca7f"
+    },
+    "present_factors": {
+      "display_pixels": [
+        1180,
+        700
+      ],
+      "png_pixels": [
+        2360,
+        1400
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "ac2f17b84742404d76fff22a80d06ccd15b62bb722984939eb3402ee13773fc1"
+    },
+    "present_event_timeline": {
+      "display_pixels": [
+        1180,
+        640
+      ],
+      "png_pixels": [
+        2360,
+        1280
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "53473733dcb40f0e59e7d1fe9cb7f259e2350cdb76ce07852867e1b203c9ccea"
+    },
+    "present_places_bar": {
+      "display_pixels": [
+        1180,
+        690
+      ],
+      "png_pixels": [
+        2360,
+        1380
+      ],
+      "fonts_used": [
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "bc2e5986f1af9dd179a78caf9655f1a48cb563d24bb8aba88531fe28918a9d5f"
+    },
+    "present_planning_heatmap": {
+      "display_pixels": [
+        1200,
+        760
+      ],
+      "png_pixels": [
+        2400,
+        1520
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf",
+        "Poppins-SemiBold.ttf"
+      ],
+      "sha256": "b91903e2c3e36be75b545198dda0162261203c73cf342e10a197047030701027"
+    }
+  },
+  "fonts": {
+    "Regular": {
+      "file": "assets/fonts/poppins/Poppins-Regular.ttf",
+      "sha256": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba"
+    },
+    "Medium": {
+      "file": "assets/fonts/poppins/Poppins-Medium.ttf",
+      "sha256": "90373e7d838d32468438fc3e152dca0bdb12edcab99ea639f158790b1ba1fd05"
+    },
+    "SemiBold": {
+      "file": "assets/fonts/poppins/Poppins-SemiBold.ttf",
+      "sha256": "d3bf1bdaf0550e83da9ac0b1d1d9fe6db086835a83aa28578e609a394b9a0286"
+    }
+  },
+  "notes": []
+}

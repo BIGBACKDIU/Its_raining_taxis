@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rain and Taxis</title>
+<meta name="description" content="Fifteen-minute presentation of the DAO2702 rain and vacant-taxi study. Student project, not affiliated with ComfortDelGro.">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+<div id="viewport">
+<main id="stage" aria-live="polite">
+<div id="progress"></div>
+
+<!-- 1 -->
+<section class="slide dark" id="s-title" data-title="When it rains, where should taxis go?">
+ <canvas id="title-canvas" width="1920" height="1080" aria-hidden="true"></canvas>
+ <div class="title-copy">
+  <h1 data-in style="--d:.2">When it rains,<br>where should <span>taxis</span> go?</h1>
+  <div class="sub" data-in style="--d:.6">A data story for ComfortDelGro · DAO2702</div>
+  <div class="team" data-in style="--d:.8">[Team names]</div>
+  <div class="disclaim" data-in style="--d:1">Student project · not affiliated with ComfortDelGro</div>
+ </div>
+ <div class="radar-key" data-in style="--d:1.4">Rain intensity <i style="background:#3CB44B"></i><i style="background:#FFE119"></i><i style="background:#F58231"></i><i style="background:#E6194B"></i> light to heavy · illustrative</div>
+ <aside class="notes">Our question is simple: when it rains in Singapore, where do vacant taxis go, and where should they be? We are a student team, and this project is not affiliated with ComfortDelGro. Everything we show comes from public data: five years of taxi positions from the government feed, plus rainfall from NEA gauges and forecasts. Two words matter throughout. First, we see vacant taxis, which is supply; we cannot see riders, bookings or waiting times. Second, because this is observational data, the patterns we show are associations, not proof that rain causes them. The moving rain on this map is decoration for the title only. Let us start with the market.</aside>
+</section>
+
+<!-- 2 -->
+<section class="slide" id="s-market" data-title="Fewer taxis, more competition">
+ <div class="kicker" data-in>Context</div>
+ <h1 data-in style="--d:.1">Fewer taxis, more competition</h1>
+ <div class="market">
+  <div class="chart" id="fleet-chart" data-in style="--d:.25" role="img" aria-label="Taxis fell from 28,259 in 2015 to 12,161 in 2025; private-hire cars rose from 29,369 to 95,857."></div>
+  <div class="points" style="padding-top:40px">
+   <div class="point hot" data-in style="--d:1.6"><span class="big red">−5%</span>CDG local fleet in H1 2026<small>The Straits Times (2026)</small></div>
+   <div class="point" data-in style="--d:1.9">Every remaining taxi matters more on a rainy day.</div>
+  </div>
+ </div>
+ <p class="question" data-in style="--d:2.3">How can ComfortDelGro use rainfall data and historical taxi activity to identify <mark>where</mark>, <mark>when</mark> and <mark>how many</mark> available taxis should be positioned during rainy periods, so taxis are available where riders need them?
+  <small>CDG's matching reacts to bookings; we found no public information that it positions taxis ahead of rain.</small></p>
+ <div class="source">Source: LTA (2026), vehicle population 2015 and 2025 (the line joins these two years only); The Straits Times (2026).</div>
+ <aside class="notes">Singapore's taxi fleet has shrunk sharply. LTA counts show 28,259 taxis in 2015 and 12,161 in 2025, while private-hire cars grew from 29,369 to 95,857. The line simply joins those two years; we are not showing the path in between. The Straits Times reported that ComfortDelGro's local fleet fell about 5 per cent in the first half of 2026. With fewer taxis, each one matters more on a rainy day. So our business question is: where, when and how many available taxis should be positioned during rain? Public sources describe matching that reacts to bookings; we found nothing public about positioning taxis ahead of rain.</aside>
+</section>
+
+<!-- 3 -->
+<section class="slide" id="s-method" data-title="Five years of data, five steps">
+ <div class="kicker" data-in>Approach</div>
+ <h1 data-in style="--d:.1">Five years of data, five steps</h1>
+ <div class="steps" id="steps">
+  <div class="step"><div class="n">1</div><h2>Clean</h2><p>Data audit: outages, stuck gauges, unusual days</p></div>
+  <div class="step"><div class="n">2</div><h2>Compare</h2><p>Poisson regression: rainy vs dry half-hours</p></div>
+  <div class="step"><div class="n">3</div><h2>Check</h2><p>Bootstrap and false-discovery tests</p></div>
+  <div class="step"><div class="n">4</div><h2>Forecast</h2><p>LightGBM vs persistence</p></div>
+  <div class="step"><div class="n">5</div><h2>Act</h2><p>Optimisation: where to stage taxis</p></div>
+ </div>
+ <div class="dataline" data-in style="--d:3.6">5 years · 374 one-km squares · a snapshot every 30 minutes · NEA rain gauges and forecasts</div>
+ <div class="cards three">
+  <div class="card warn" data-in style="--d:3.9"><b>One combined feed</b>Every taxi company, no taxi IDs</div>
+  <div class="card warn" data-in style="--d:4.1"><b>Empty taxis only</b>We see supply, not demand</div>
+  <div class="card warn" data-in style="--d:4.3"><b>Associations</b>Not proven causes</div>
+ </div>
+ <div class="source">Data: LTA taxi availability feed via data.gov.sg; NEA rainfall and 2-hour / 24-hour forecasts via data.gov.sg.</div>
+ <aside class="notes">We worked in five steps. First, we cleaned the data: we audited feed outages, stuck rain gauges and unusual days. Second, we compared rainy and dry half-hours with Poisson regression, holding the square, time of day and season fixed. Third, we checked the results with bootstraps and false-discovery tests, so a few lucky squares cannot drive the story. Fourth, we forecast short-term shortages with LightGBM and compared it with a simple rule that assumes nothing changes. Fifth, we turned the results into an optimisation plan. Three limits apply to everything: one combined public feed with no taxi IDs, vacant taxis only, and associations rather than causes.</aside>
+</section>
+
+<!-- 4 -->
+<section class="slide" id="s-storm" data-title="Heavy rain, fewer vacant taxis on the street">
+ <div class="kicker" data-in>Chart 1 · Descriptive</div>
+ <h1 data-in style="--d:.1">Heavy rain, fewer vacant taxis on the street</h1>
+ <div class="storm">
+  <div data-in style="--d:.3">
+   <div class="maps">
+    <div class="map"><h3>Rain in the previous 30 min</h3><div id="map-rain"></div></div>
+    <div class="map"><h3>Vacant taxis vs expected</h3><div id="map-change"></div></div>
+   </div>
+   <div id="storm-line"></div>
+  </div>
+  <div>
+   <div data-in style="--d:.5"><div class="clock big"><span id="storm-clock">06:30</span><small>20 Jul 2023</small></div>
+   <div class="tally" id="storm-tally"></div></div>
+   <div class="avg" data-in style="--d:.8">
+    <div class="lead">On average 2022–2025</div>
+    <div class="row"><span class="big">{{heavy}}</span><span>vacant taxis in heavy rain</span></div>
+    <div class="row"><span class="big">{{central}}</span><span>in the CBD (URA Central Area)</span></div>
+   </div>
+  </div>
+ </div>
+ <div class="source">One observed storm, 20 July 2023, 06:30–13:30; expected = each square's usual level for that time. Averages: Poisson regression on half-hours with fixed effects. Associations, not causes.</div>
+ <aside class="notes">Here is one real storm, on 20 July 2023. The left map shows rain in the previous half-hour; grey means dry. The right map compares vacant taxis with the usual level for that square and time. At the 09:30 peak there were 1,473 vacant taxis across our 374 squares, against about 2,310 expected: 837 fewer, or 36.2 per cent. That is one storm. On average across 2022 to 2025, heavy rain comes with 12.9 per cent fewer vacant taxis, and 24.5 per cent fewer in the Central Area. These are associations: rain coincides with fewer vacant taxis, for reasons our data cannot separate.</aside>
+</section>
+
+<!-- 5 -->
+<section class="slide" id="s-event" data-title="It starts before the rain arrives">
+ <div class="kicker" data-in>Chart 2 · Descriptive</div>
+ <h1 data-in style="--d:.1">It starts before the rain arrives</h1>
+ <div class="chart-row wide">
+  <div class="chart" id="event-chart" data-in style="--d:.3"><!--SVG:present_event_timeline--></div>
+  <div class="points">
+   <div class="point hot" data-in style="--d:.8"><span class="big red">{{approach}}</span>when rain is 2–5 km away and the square is still dry<small>Separate model, heavier rain nearby</small></div>
+   <div class="point hot" data-in style="--d:1.1"><span class="big red">{{firsthour}}</span>in the first hour of rain</div>
+   <div class="point" data-in style="--d:1.4"><span class="big taxi">~{{recovery}}</span>until the drop is no longer detectable</div>
+  </div>
+ </div>
+ <div class="source">Event study around rain onset in each square, relative to 30 minutes before; band = 95% CI. Saved estimates cover −60 to +180 minutes. Associations, not causes.</div>
+ <aside class="notes">When does the drop happen? This chart lines up rain onsets in each square and compares the square with itself 30 minutes before rain begins. Vacant taxis are already about 5 per cent lower in the first half-hour, stay low through the first hour, and the gap shrinks until about two and a half hours, when it is no longer distinguishable from noise. A separate model adds something useful for planning: when heavier rain is 2 to 5 kilometres away and the square itself is still dry, there are already about 7 per cent fewer vacant taxis. So the window to act is before the rain reaches a place.</aside>
+</section>
+
+<!-- 6 -->
+<section class="slide" id="s-places" data-title="Changi loses the most taxis, the CBD the biggest share">
+ <div class="kicker" data-in>Chart 3 · Descriptive to diagnostic</div>
+ <h1 data-in style="--d:.1">Changi loses the most taxis, the CBD the biggest share</h1>
+ <div class="chart-row wide">
+  <div class="chart" id="places-chart" data-in style="--d:.2"><!--SVG:present_places_bar--></div>
+  <div class="points">
+   <div class="point" data-in style="--d:1.6"><span class="big taxi">{{changi_lost}} of {{changi_expected}}</span>taxis lost at Changi T3, only {{changi_pct}}</div>
+   <div class="point hot" data-in style="--d:1.9"><b>CBD:</b> Bayfront (Marina Bay Sands) {{bayfront}}, Dhoby Ghaut {{dhoby}}, Raffles Place (Lau Pa Sat) {{raffles}}</div>
+   <div class="legend" data-in style="--d:2.1"><span><i style="background:var(--red)"></i>CBD and fringe</span><span><i style="background:var(--taxi)"></i>Elsewhere</span></div>
+  </div>
+ </div>
+ <div class="source">Top 12 squares by vacant taxis lost per heavy-rain half-hour; expected ≥ 4 taxis and q &lt; 0.10. Associations, not causes.</div>
+ <aside class="notes">Where is the loss largest? Each bar shows how many fewer vacant taxis we see in a heavy-rain half-hour, with the expected number and the percentage. Changi Terminal 3 loses the most taxis, 7.1 of about 83 expected, but that is only 8.5 per cent because the airport has so many. The CBD and its fringe, in red, lose a much bigger share: Bayfront around Marina Bay Sands about 36 per cent, Dhoby Ghaut about 35, and Raffles Place around Lau Pa Sat about 31. So the airport matters for absolute numbers and the CBD for proportion. Every place shown passes our naming filter.</aside>
+</section>
+
+<!-- 7 -->
+<section class="slide" id="s-factors" data-title="Only the CBD stands out">
+ <div class="kicker" data-in>Chart 4 · Diagnostic</div>
+ <h1 data-in style="--d:.1">Only the CBD stands out</h1>
+ <div class="chart-row wide">
+  <div class="chart" id="factors-chart" data-in style="--d:.3"><!--SVG:present_factors--></div>
+  <div class="points">
+   <div class="point hot" data-in style="--d:1.2">Tested three ways (regression, spatial model, random forest): only the Central Area holds up in all three.</div>
+   <div class="point" data-in style="--d:1.5">MRT exits, taxi stands and malls make no clear difference.</div>
+  </div>
+ </div>
+ <div class="source">Heavy-rain change in vacant taxis vs dry, by square characteristic, with 95% CIs; dotted line = reference (MRT exit ≥ 1 km). Associations, not causes.</div>
+ <aside class="notes">Why the CBD? We tested whether common features of a square go with a bigger heavy-rain drop. Squares more than a kilometre from an MRT exit show about 12.0 per cent fewer vacant taxis in heavy rain. Squares near MRT exits, near taxi stands or with a mall are almost identical, between 11.6 and 12.5 per cent. Only the URA Central Area stands out, at 24.5 per cent, with a confidence interval well clear of the others. We checked this three ways, with the regression, a spatial model and a random forest, and only the Central Area held up in all three. These are associations, not causes.</aside>
+</section>
+
+<!-- 8 -->
+<section class="slide" id="s-planning" data-title="Weather plans the day better than it triggers alerts">
+ <div class="kicker" data-in>Chart 5 · Predictive</div>
+ <h1 data-in style="--d:.1">Weather plans the day better than it triggers alerts</h1>
+ <div class="hm-row">
+  <div class="chart" id="planning-chart" data-in style="--d:.2"><!--SVG:present_planning_heatmap--></div>
+  <div class="points" style="padding-top:30px">
+   <div class="point" data-in style="--d:2.4"><b>Short-term alerts:</b> weather adds about {{gain}} PR-AUC. LightGBM is right {{lgb}} of the time vs {{persist}} for 'nothing changes', with or without weather. Only {{lead}} of shortages are flagged in advance.</div>
+   <div class="point" data-in style="--d:2.7;border-left-color:var(--yellow)"><b>Morning planning:</b> NEA's 24-hour forecast, available before 09:00, improves predictions of later shortages by {{morning}}.</div>
+  </div>
+ </div>
+ <div class="source">NEA 2-hour forecasts; weekday estimates, Apr 2022–Mar 2025; association, not cause. Alerts: top-19 squares, 30 and 60 minutes ahead, test year.</div>
+ <aside class="notes">Can we plan for it? This heatmap shows, for weekdays, how many fewer vacant taxis we see per half-hour when NEA's issued forecast mentions showers, by planning area and time band. Changi between midnight and 7 am averages 33.1 fewer, or 23 per cent; Downtown Core 20.2 fewer, or 43 per cent; Bukit Merah in the evening 21.4 and 24.8 fewer, about 28 per cent. Negative cells mean more taxis than usual. For short-term alerts, weather adds almost nothing, about 0.001 PR-AUC, and only 6 to 13 per cent of shortages are flagged in advance. But NEA's morning 24-hour forecast improves predictions of later shortages by 6 to 10 per cent.</aside>
+</section>
+
+<!-- 9 -->
+<section class="slide" id="s-builder" data-title="Storm Builder: a scenario tool">
+ <div class="kicker" data-in>Live demo · illustration only</div>
+ <h1 data-in style="--d:.1">Storm Builder: try a storm, watch the taxis</h1>
+ <div class="embed-row">
+  <div class="frame" data-in style="--d:.3" id="builder-frame">
+   <div class="fallback" hidden><div><b>Storm Builder did not load</b>Open it in a new tab to continue the demo.<br><br><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
+   <div class="loading">Loading Storm Builder…</div>
+  </div>
+  <div class="side">
+   <div class="banner" data-in style="--d:.5">Scenario tool, not a forecast: it does not pass our realism check on real storms.</div>
+   <div class="keys" data-in style="--d:.7"><span><i style="background:var(--teal)"></i>Teal = vacant</span><span><i style="background:var(--amber)"></i>Amber = hired</span><span><i style="background:var(--violet)"></i>Violet = repositioning</span></div>
+   <div data-in style="--d:.9"><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div>
+  </div>
+ </div>
+ <div class="source">storm-builder-sg.vercel.app · simulated scenario built from our saved estimates; taxis are an animation of model counts, not real vehicles.</div>
+ <aside class="notes">To make this tangible, we built Storm Builder, a scenario tool. Taxis in teal are vacant, amber are hired and violet are repositioning. For the demo, choose the Monsoon surge preset, which is an island-wide storm, then set the day to a weekend and the start to 1 pm; the app has no web-address setting for this, so set it by hand. Please treat everything here as an illustration. None of the simulator versions passes our realism check on real held-out storms, so it is useful for discussing trade-offs, not for predicting numbers. If the frame does not load, the button opens it in a new tab.</aside>
+</section>
+
+<!-- 10 -->
+<section class="slide" id="s-playbook" data-title="A rain-day playbook">
+ <div class="kicker" data-in>Recommendation</div>
+ <h1 data-in style="--d:.1">A rain-day playbook</h1>
+ <div class="timeline" id="playbook">
+  <div class="fill"></div>
+  <div class="tstep" data-n="1"><h2>By 09:00</h2><p>Read the 24-hour forecast; schedule incentives and staging.</p></div>
+  <div class="tstep" data-n="2"><h2>30–60 min before</h2><p>Rain forecast or 2–5 km away: move idle drivers toward the CBD.</p></div>
+  <div class="tstep" data-n="3"><h2>During rain</h2><p>Changi and Downtown Core early; Geylang and Kallang at rush hour; Bukit Merah in the evening.</p></div>
+  <div class="tstep" data-n="4"><h2>Island-wide rain</h2><p>Get more drivers out; don't move taxis between areas that are all short.</p></div>
+  <div class="tstep" data-n="5"><h2>Over 2 hours</h2><p>Step up support.</p></div>
+  <div class="tstep" data-n="6"><h2>After rain</h2><p>Keep incentives for 1–2 hours.</p></div>
+ </div>
+ <div class="callout-wide" data-in style="--d:5.2"><span class="big">{{policy}}</span><span>Our repositioning plan picks squares that really run short {{policy}} of the time, vs {{random}} at random.</span></div>
+ <div class="source">Plan precision: risk-weighted repositioning plan vs all candidate squares (expected ≥ 4 taxis), test year, issue-time labels. Timing from the event study; places from the planning heatmap.</div>
+ <aside class="notes">Here is how the findings become a playbook. By 9 am, read NEA's 24-hour forecast and schedule incentives and staging. Thirty to sixty minutes before rain, when it is forecast or 2 to 5 kilometres away, move idle drivers toward the CBD. During rain, focus on Changi and Downtown Core early in the day, Geylang and Kallang at rush hour, and Bukit Merah in the evening. When rain is island-wide, get more drivers out rather than moving taxis between areas that are all short. For long spells, step up support, and keep incentives for one to two hours afterwards. Our plan picks squares that really run short 44 per cent of the time, against 28 per cent for all candidates.</aside>
+</section>
+
+<!-- 11 -->
+<section class="slide" id="s-dashboard" data-title="A dashboard for dispatchers">
+ <div class="kicker" data-in>Prototype</div>
+ <h1 data-in style="--d:.1">A dashboard for dispatchers</h1>
+ <div class="embed-row">
+  <div class="frame" data-in style="--d:.3" id="dash-frame">
+   <div class="fallback" hidden><div><b>Prototype opens in a new tab</b>The embedded view is not available here.<br><br><a class="button" href="https://golden-beijinho-83f174.netlify.app" target="_blank" rel="noopener">Open prototype ↗</a></div></div>
+   <div class="loading">Loading prototype…</div>
+  </div>
+  <div class="side">
+   <span class="tag" data-in style="--d:.4">Sample data, for illustration</span>
+   <ul class="benefits" data-in style="--d:.6"><li>Clearer dispatcher guidance</li><li>Targeted incentives</li><li>Less wasted repositioning</li></ul>
+   <div data-in style="--d:.8"><a class="button" href="https://golden-beijinho-83f174.netlify.app" target="_blank" rel="noopener">Open prototype ↗</a></div>
+   <div class="banner" data-in style="--d:1">A live version needs CDG's own booking and driver data.</div>
+  </div>
+ </div>
+ <div class="source">golden-beijinho-83f174.netlify.app · prototype with sample data; not connected to any live system.</div>
+ <aside class="notes">This is how the playbook could reach dispatchers: a simple dashboard showing where and when to expect fewer vacant taxis, and which incentives to schedule. Please note that this prototype uses sample data for illustration; it is not connected to any live system. The benefits are clearer guidance for dispatchers, incentives aimed at the right places and times, and less wasted repositioning of taxis toward squares that will not run short. The important hand-off is the data: a live version needs ComfortDelGro's own booking and driver data, because our public feed shows only vacant taxis, across all companies, without taxi IDs.</aside>
+</section>
+
+<!-- 12 -->
+<section class="slide" id="s-limits" data-title="What our data can't tell us">
+ <div class="kicker" data-in>Limitations</div>
+ <h1 data-in style="--d:.1">What our data can't tell us</h1>
+ <div class="cards four big4">
+  <div class="card" data-in style="--d:.3"><span class="icon">Supply</span><b>Supply, not demand</b>No waiting times or fares</div>
+  <div class="card" data-in style="--d:.5"><span class="icon">Links</span><b>Associations, not causes</b>Rain coincides with fewer vacant taxis; we cannot say why</div>
+  <div class="card" data-in style="--d:.7"><span class="icon">No IDs</span><b>No taxi IDs</b>CDG can't be separated from other operators</div>
+  <div class="card" data-in style="--d:.9"><span class="icon">Model</span><b>The simulator fails its realism check</b>It illustrates, it doesn't predict</div>
+ </div>
+ <p class="note-line" data-in style="--d:1.2">Checked with 100 m radar rainfall, permutation tests, and fresh holdout data from 2026 and 2019.</p>
+ <div class="source">Robustness: radar comparison, permutation inference, October 2026 and 2019 holdout storms.</div>
+ <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, every rain result is an association; rain coincides with fewer vacant taxis, but our data cannot say why. Third, the public feed has no taxi IDs, so ComfortDelGro's taxis cannot be separated from other operators. Fourth, the simulator fails its realism check on real storms, so it illustrates and does not predict. We did test the main findings hard: with 100 metre radar rainfall, permutation tests, and fresh holdout data from 2026 and from 2019, and the core pattern held.</aside>
+</section>
+
+<!-- 13 -->
+<section class="slide" id="s-next" data-title="Further discussion">
+ <div class="kicker" data-in>Next steps</div>
+ <h1 data-in style="--d:.1">Further discussion</h1>
+ <div class="cards four big4">
+  <div class="card" data-in style="--d:.4"><b>Prove it works</b>Pilot the playbook on some rain days or zones and not others; compare taxis, pickups and waiting times</div>
+  <div class="card" data-in style="--d:1.2"><b>Close the data gap</b>CDG's bookings, unfulfilled requests and driver status would explain why taxis vanish (our minute-by-minute tracking was only 10–23% accurate without taxi IDs)</div>
+  <div class="card" data-in style="--d:2"><b>Better short-term signal</b>NEA's radar API (live since July 2026) for regional storm alerts; in 2019 storms, weather gave a real but small gain ({{holdout}} PR-AUC)</div>
+  <div class="card" data-in style="--d:2.8"><b>Beyond rain</b>MRT breakdowns, big events, and dry-weather taxi deserts like Punggol</div>
+ </div>
+ <div class="source">2019 backward holdout: 49 storm onsets, 60-minute regional target. Minute tracking: synthetic matching diagnostics.</div>
+ <aside class="notes">Where could this go next? First, prove it works: pilot the playbook on some rain days or zones and not others, then compare taxis, pickups and waiting times, which a pilot with company data could measure. Second, close the data gap: bookings, unfulfilled requests and driver status would show why taxis disappear; without taxi IDs, our minute-by-minute tracking was only 10 to 23 per cent accurate. Third, a better short-term signal: NEA's radar API, live since July 2026, could support regional storm alerts; in the 2019 storms, weather gave a real but small gain of 0.009 PR-AUC. Fourth, look beyond rain: MRT breakdowns, big events, and dry-weather taxi deserts such as Punggol.</aside>
+</section>
+
+<!-- 14 -->
+<section class="slide dark" id="s-close" data-title="Three things to remember">
+ <div class="kicker" data-in>Summary</div>
+ <h1 data-in style="--d:.1">Three things to remember</h1>
+ <div class="takeaways">
+  <div class="takeaway" data-in style="--d:.4"><span class="n">1</span><span><strong>{{heavy_round}}, {{central_round}} in the CBD:</strong> heavy rain reliably comes with fewer vacant taxis on the street</span></div>
+  <div class="takeaway" data-in style="--d:.8"><span class="n">2</span><span><strong>Act early:</strong> plan from the morning forecast, not from alerts</span></div>
+  <div class="takeaway" data-in style="--d:1.2"><span class="n">3</span><span><strong>Next:</strong> CDG's own data, and a pilot to prove it works</span></div>
+ </div>
+ <div class="questions" data-in style="--d:1.8">Questions?</div>
+ <div class="source">Supply, not demand · associations, not causes · references on the next slide.</div>
+ <aside class="notes">To close, three things to remember. One: heavy rain reliably comes with about 13 per cent fewer vacant taxis on the street, and about 25 per cent fewer in the CBD; that is an association we found across five years, not a proven cause. Two: act early. The useful signal is the morning forecast, which helps plan the day, not short-term weather alerts, which add very little. Three: the next step is ComfortDelGro's own data and a pilot, which together could show whether the playbook really helps. Thank you; we are happy to take questions. The references are on the slide after this one.</aside>
+</section>
+
+<!-- appendix (outside the 14-slide count) -->
+<section class="slide" id="s-refs" data-title="References" data-appendix>
+ <div class="kicker">Appendix</div>
+ <h1>References</h1>
+ <div class="refs">
+  <p>Land Transport Authority (2026). Annual vehicle statistics: taxis and private-hire cars, 2015–2025.</p>
+  <p>The Straits Times (2026). Report on ComfortDelGro's local taxi fleet, first half of 2026.</p>
+  <p>Wang (2024). [Full reference to be added by the team.]</p>
+  <p>Sun et al. (2020). [Full reference to be added by the team.]</p>
+  <p>data.gov.sg datasets: LTA taxi availability; NEA rainfall readings; NEA 2-hour and 24-hour weather forecasts.</p>
+  <p>Zhuang, Q., Peleg, N., Prein, A., Babovic, V., &amp; Fatichi, S. (2026). High-resolution radar–gauge merged rainfall dataset over Singapore (100 m, 5-min and hourly), v1. Zenodo 19642566. CC BY 4.0.</p>
+  <p>OpenStreetMap contributors. Map data under the Open Database License.</p>
+ </div>
+ <div class="source">Student project · not affiliated with ComfortDelGro.</div>
+ <aside class="notes">This appendix lists the sources behind the slides: LTA vehicle statistics and The Straits Times for the market context, Wang (2024) and Sun et al. (2020) from the literature, the data.gov.sg taxi availability, rainfall and forecast datasets, Zhuang et al. (2026) on Zenodo under a CC BY 4.0 licence, and OpenStreetMap contributors for the road network. It is outside the fourteen-slide talk.</aside>
+</section>
+
+<div id="nav"><button id="prev" aria-label="Previous slide">←</button><button id="next" aria-label="Next slide">→</button></div>
+<div id="number"></div>
+</main>
+</div>
+
+<div id="presenter" hidden aria-label="Presenter panel">
+ <div><h4>Speaker notes</h4><div id="p-title"></div><div id="p-notes"></div></div>
+ <div id="p-side"><h4>Elapsed</h4><div id="p-timer">00:00</div><p class="muted" style="color:#9fb1d4">Target 15:00 · <button id="p-reset">Reset</button></p><h4>Next</h4><p id="p-next"></p><p style="color:#9fb1d4;font-size:15px">S hides this panel · F full screen</p></div>
+</div>
+<script>
+/*__DATA__*/
+/*__JS__*/
+</script>
+</body>
+</html>

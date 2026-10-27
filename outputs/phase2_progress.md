@@ -871,3 +871,18 @@ editable scripts. The presentation build metadata changes only its recorded HTML
 
 Final gates: 35 tests passed (14 existing warnings), the same 76 reviewed wording hits, and matching
 provenance hashes for all frozen inputs. No model, score, analysis table or registered rule changes.
+
+## Decision 174: fifteen-minute presentation page (presentation only)
+
+Built `outputs/story/present.html` (14 slides plus a references appendix, ~1.1 MB, single offline file)
+from new sources in `present/` with `analysis/build_present.py`. New chart `deck_factors` and
+presentation-palette copies of the event, places, factors and planning charts come from
+`analysis/present_charts.py` using the existing deck renderer. All 21 table-derived on-slide values
+are recomputed and asserted at build time; speaker notes are 80–120 words per slide. The headline
+of slide 4 uses association wording ("Heavy rain, fewer vacant taxis on the street"); the
+repositioning callout uses issue-time labels consistently (44% vs 28%). The wording check now also
+scans `present/template.html`: 23 new hits, all disclaimers or proposed pilot measures (99 in total).
+`node analysis/check_present.cjs` screenshots all 15 slides at 1920×1080 and 1440×900 plus the title
+mid-animation: no console errors, nothing outside the slide, no overflow or overlaps, storm replay
+advances, Storm Builder and the Netlify prototype both load in their frames, and Storm Builder unloads
+on leaving its slide. `outputs/story/index.html` is byte-identical. No estimation, scoring or test-year use.

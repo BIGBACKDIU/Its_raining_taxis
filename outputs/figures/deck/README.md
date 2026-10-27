@@ -93,3 +93,13 @@ See `outputs/presentations/graph_coverage.json` for the complete panel/slide/sou
 Correction: October 2026 has **two** saved storm onsets, not the one stated in decision 167's
 presentation annotation. The holdout chart and its exported rows now say two; the effect, CI and
 registered descriptive-only conclusion are unchanged. No holdout is re-scored.
+
+## Factors chart and presentation-palette copies (decision 174)
+
+`deck_factors.png/.svg` (1100 × 560, same renderer and checks) shows the saved absolute heavy-rain
+contrasts in `factors_panel_interactions.csv`: URA Central Area −24.5%, MRT exit <300 m −12.5%,
+300–1,000 m −11.6%, ≥1 km reference −12.0%, taxi stand within 300 m −11.7%, mall −12.3%, with saved
+95% CIs, Central Area in red and a dotted reference line. `present/` holds the event timeline, places,
+factors and planning charts redrawn in the taxi-blue presentation palette for
+`outputs/story/present.html` (run `.venv/bin/python -m analysis.present_charts`); the eleven original
+exports and `audit.json` are unchanged. `present/meta.json` stores SVG coordinates for the animations.

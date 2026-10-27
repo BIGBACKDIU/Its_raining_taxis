@@ -1,0 +1,358 @@
+{
+ "browser": "156.0.8078.48",
+ "viewports": {
+  "1920x1080": [
+   {
+    "slide": 1,
+    "id": "s-title",
+    "file": "1920x1080-01-title.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 188,
+    "svgs": 0,
+    "canvasColours": 120
+   },
+   {
+    "slide": 2,
+    "id": "s-market",
+    "file": "1920x1080-02-market.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 659,
+    "svgs": 25
+   },
+   {
+    "slide": 3,
+    "id": "s-method",
+    "file": "1920x1080-03-method.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 595,
+    "svgs": 0
+   },
+   {
+    "slide": 4,
+    "id": "s-storm",
+    "file": "1920x1080-04-storm.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 617,
+    "svgs": 1657
+   },
+   {
+    "slide": 5,
+    "id": "s-event",
+    "file": "1920x1080-05-event.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 541,
+    "svgs": 103
+   },
+   {
+    "slide": 6,
+    "id": "s-places",
+    "file": "1920x1080-06-places.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 816,
+    "svgs": 143
+   },
+   {
+    "slide": 7,
+    "id": "s-factors",
+    "file": "1920x1080-07-factors.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 607,
+    "svgs": 161
+   },
+   {
+    "slide": 8,
+    "id": "s-planning",
+    "file": "1920x1080-08-planning.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1148,
+    "svgs": 354
+   },
+   {
+    "slide": 9,
+    "id": "s-builder",
+    "file": "1920x1080-09-builder.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 452,
+    "svgs": 0
+   },
+   {
+    "slide": 10,
+    "id": "s-playbook",
+    "file": "1920x1080-10-playbook.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 739,
+    "svgs": 0
+   },
+   {
+    "slide": 11,
+    "id": "s-dashboard",
+    "file": "1920x1080-11-dashboard.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 400,
+    "svgs": 0
+   },
+   {
+    "slide": 12,
+    "id": "s-limits",
+    "file": "1920x1080-12-limits.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 510,
+    "svgs": 0
+   },
+   {
+    "slide": 13,
+    "id": "s-next",
+    "file": "1920x1080-13-next.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 682,
+    "svgs": 0
+   },
+   {
+    "slide": 14,
+    "id": "s-close",
+    "file": "1920x1080-14-close.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 325,
+    "svgs": 0
+   },
+   {
+    "slide": 15,
+    "id": "s-refs",
+    "file": "1920x1080-15-refs.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 753,
+    "svgs": 0
+   }
+  ],
+  "1440x900": [
+   {
+    "slide": 1,
+    "id": "s-title",
+    "file": "1440x900-01-title.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 188,
+    "svgs": 0,
+    "canvasColours": 44
+   },
+   {
+    "slide": 2,
+    "id": "s-market",
+    "file": "1440x900-02-market.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 659,
+    "svgs": 25
+   },
+   {
+    "slide": 3,
+    "id": "s-method",
+    "file": "1440x900-03-method.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 595,
+    "svgs": 0
+   },
+   {
+    "slide": 4,
+    "id": "s-storm",
+    "file": "1440x900-04-storm.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 616,
+    "svgs": 1657
+   },
+   {
+    "slide": 5,
+    "id": "s-event",
+    "file": "1440x900-05-event.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 541,
+    "svgs": 103
+   },
+   {
+    "slide": 6,
+    "id": "s-places",
+    "file": "1440x900-06-places.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 816,
+    "svgs": 143
+   },
+   {
+    "slide": 7,
+    "id": "s-factors",
+    "file": "1440x900-07-factors.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 607,
+    "svgs": 161
+   },
+   {
+    "slide": 8,
+    "id": "s-planning",
+    "file": "1440x900-08-planning.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1148,
+    "svgs": 354
+   },
+   {
+    "slide": 9,
+    "id": "s-builder",
+    "file": "1440x900-09-builder.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 452,
+    "svgs": 0
+   },
+   {
+    "slide": 10,
+    "id": "s-playbook",
+    "file": "1440x900-10-playbook.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 739,
+    "svgs": 0
+   },
+   {
+    "slide": 11,
+    "id": "s-dashboard",
+    "file": "1440x900-11-dashboard.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 400,
+    "svgs": 0
+   },
+   {
+    "slide": 12,
+    "id": "s-limits",
+    "file": "1440x900-12-limits.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 510,
+    "svgs": 0
+   },
+   {
+    "slide": 13,
+    "id": "s-next",
+    "file": "1440x900-13-next.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 682,
+    "svgs": 0
+   },
+   {
+    "slide": 14,
+    "id": "s-close",
+    "file": "1440x900-14-close.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 325,
+    "svgs": 0
+   },
+   {
+    "slide": 15,
+    "id": "s-refs",
+    "file": "1440x900-15-refs.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 753,
+    "svgs": 0
+   }
+  ]
+ },
+ "embeds": {
+  "s-builder@1920": {
+   "iframe": true,
+   "src": "https://storm-builder-sg.vercel.app/?presentation=1",
+   "fallbackShown": false,
+   "secondsWaited": 9.003
+  },
+  "s-builder-unload@1920": {
+   "iframeAfterLeaving": false
+  },
+  "s-dashboard@1920": {
+   "iframe": true,
+   "src": "https://golden-beijinho-83f174.netlify.app/",
+   "fallbackShown": false,
+   "secondsWaited": 9.009
+  },
+  "s-builder@1440": {
+   "iframe": true,
+   "src": "https://storm-builder-sg.vercel.app/?presentation=1",
+   "fallbackShown": false,
+   "secondsWaited": 9.002
+  },
+  "s-builder-unload@1440": {
+   "iframeAfterLeaving": false
+  },
+  "s-dashboard@1440": {
+   "iframe": true,
+   "src": "https://golden-beijinho-83f174.netlify.app/",
+   "fallbackShown": false,
+   "secondsWaited": 9.007
+  }
+ },
+ "storm": {
+  "frameBefore": 1,
+  "frameAfter": 3,
+  "plays": true,
+  "distinctFills": [
+   10,
+   157
+  ]
+ },
+ "reducedMotion": {
+  "stormFrame": 6,
+  "hiddenEntries": 0
+ },
+ "errors": [],
+ "problems": []
+}
