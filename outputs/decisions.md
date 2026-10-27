@@ -1806,3 +1806,26 @@ results stay as they are and remain the pre-specified result.
     expected snapshots OK (97.8%), with 118,136 usable after glitch removal. The feed-regime, robustness
     and policy charts are redrawn from `feed_regimes.csv`, `effects_robust.csv` and `policy_diagnosis.csv`.
     No estimation, labels, scoring or test-year use; `outputs/story/index.html` is not changed.
+
+176. **Final presentation pass: projector readability, fuller slides, method boxes (presentation only).**
+    The user asked for `outputs/story/present.html` to be readable on a classroom projector: at 1920×1080,
+    titles 64–72 px, key numbers 56–72 px, body/card text ≥ 30 px, chart axis/tick labels ≥ 24 px,
+    callouts 28 px, footers 20 px, and nothing below 20 px except the map attribution. Charts are rendered
+    by `analysis/present_charts.py` at their display size (shown 1:1), with a 24 px floor on chart text
+    (20 px inside numbered map markers). Content fills the area between title and footer.
+
+    Each chart slide (4–8) gains a METHOD box and 2–3 "What it shows" points, using saved values:
+    light/moderate/heavy −7.7%/−10.8%/−12.9% and share −5.7% (`effects_main.csv`); −5.6% at +30 min
+    (`effects_event_study.csv`); −9.7% at 1 mm/h (`dose_spline_curve.csv`); −18.0% for heavy spells over
+    2 hours and −5.3% in the first half-hour after rain (`dose_duration_hangover.csv`); 299 of 374 squares
+    significantly lower (`inference_hotspots.csv`); 329 of 374 in island-wide rain; Central Area share
+    contrast −18.9% vs −5.0% (`factors_panel_interactions.csv`); square-level Central Area −10.6%,
+    business land +3.6% and taxi stands +2.5% per SD (`factors_cell_wls.csv`); random-forest spatial-CV
+    R² 0.12–0.15 (`factors_cell_summary.csv`). Slide 6 adds a 1 km map of all 374 saved heavy-rain
+    absolute % estimates (±40% scale) with the 12 bar-chart places numbered. The title animation runs
+    at half speed on a 40-second seamless loop with gentler camera motion and a softer heavy-rain core.
+    The non-affiliation line is removed from the title and references slides at the user's request.
+    References use the full entries supplied by the user (LTA, ComfortDelGro 1H FY2026 release, The
+    Straits Times, Wang 2024, Sun et al. 2020, data.gov.sg, Zhuang et al. 2026, OpenStreetMap). The
+    appendix splits where needed so every chart is shown at ≥ 24 px text. No estimation, scoring or
+    test-year use; `outputs/story/index.html` is unchanged.
