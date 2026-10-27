@@ -1871,3 +1871,12 @@ results stay as they are and remain the pre-specified result.
     `storm-builder-sg`. `scripts/deploy_deck.sh` re-copies the page and redeploys to production. The
     production URL must open without a Vercel login. Live checks: slide 1 on load, arrow keys, F and S,
     both embeds load, slide 14 QR code decodes to storm-builder-sg.vercel.app. No analysis changes.
+
+182. **Smoother presentation motion (presentation only).** The user reported laggy animations. Measured in
+    Chrome traces (1440×900, 2× pixel density): repainting, not script, dominated. The title map and rain
+    layer now move with GPU-composited CSS transforms; only the coarse rain field (every third frame, active
+    cells only) and the taxi dots are redrawn. The timeline cursor draws in its own small overlay, so the
+    chart is not repainted each frame. Inactive slides are skipped by the browser (`content-visibility`),
+    the progress bar and timeline fill animate with transforms, the stage is no longer restyled on every
+    slide change, and live embeds load just after the slide fade. Visual output is unchanged. No analysis,
+    number or text changes; `outputs/story/index.html` is unchanged.

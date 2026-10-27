@@ -429,8 +429,8 @@ a.button{font-size:24px}
 .builder-bar .qr svg{width:90px;height:90px}
 .builder-bar .qr-text{font-size:15px;line-height:1.5;color:var(--muted);text-align:left}
 .text-link{font-size:15px;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
-#stage[data-slide="s-builder"] #number{top:26px;bottom:auto;right:77px}
-#stage[data-slide="s-builder"] #nav{top:14px;bottom:auto;right:180px}
+#number.top{top:26px;bottom:auto;right:77px}
+#nav.top{top:14px;bottom:auto;right:180px}
 
 /* ===== Decision 179: playbook evidence lines and second row ===== */
 #s-playbook .body.fill{left:56px;right:56px;justify-content:center;gap:84px;padding-top:0}
@@ -465,3 +465,19 @@ a.button{font-size:24px}
 .callout-wide .num{line-height:1}
 #s-dashboard .dash-frame{height:794px}
 .rows-wide{padding:0}
+
+/* ===== Decision 182: smoother motion (composited layers, less repainting) ===== */
+.slide:not(.active):not(.leaving){content-visibility:hidden}
+.slide.active,.slide.leaving{will-change:opacity}
+.slide.active [data-in]{will-change:opacity,transform}
+#progress{width:100%;transform-origin:0 50%;transform:scaleX(0);transition:transform .5s var(--ease)}
+#title-scene{position:absolute;inset:0;overflow:hidden;background:#06111F}
+#title-scene canvas{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#title-rain{image-rendering:auto}
+#title-dots{width:1920px;height:1080px}
+.title-shade{position:absolute;left:0;top:0;width:1250px;height:1080px;background:linear-gradient(90deg,rgba(11,31,58,.94) 0%,rgba(11,31,58,.7) 55%,rgba(11,31,58,0) 100%)}
+#event-chart{position:relative}
+.cursor-layer{position:absolute;left:0;top:0;width:100%;height:auto;pointer-events:none;will-change:transform}
+.timeline .track .fill{width:100%;transform-origin:0 50%;transform:scaleX(0)}
+.entered .timeline .track .fill{width:100%;transform:scaleX(1);transition:transform 4.6s linear .5s}
+@media (prefers-reduced-motion: reduce){.timeline .track .fill{transform:scaleX(1)}}

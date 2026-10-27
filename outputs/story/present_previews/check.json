@@ -15,7 +15,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 68
+    "canvasColours": 6
    },
    {
     "slide": 2,
@@ -409,7 +409,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 64
+    "canvasColours": 4
    },
    {
     "slide": 2,
@@ -804,7 +804,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.005
+   "secondsWaited": 9.003
   },
   "s-builder@1440": {
    "iframe": true,

@@ -972,3 +972,5 @@ or overflow, METHOD and evidence lines unwrapped, embed loads and unloads, QR de
 Decision 180 (presentation only): leading "·" removed from METHOD text on slides 4–8; slide 10 evidence lines at 20 px under each step, timeline on the 120 px margins, "PR-AUC" label under +0.001; slide 11 embed about 15% taller. Checks at both sizes: no overlap or overflow; embeds load and unload; index.html unchanged.
 
 Decision 181 (presentation only): the deck is public at https://raining-taxis-deck.vercel.app (Vercel project raining-taxis-deck, static index.html only; scripts/deploy_deck.sh redeploys). Live check in a fresh browser context: HTTP 200 without login, opens on slide 1, arrow keys, F (full screen) and S (presenter notes) work, both embeds load, slide 14 QR decodes to storm-builder-sg.vercel.app.
+
+Decision 182 (presentation only): smoother motion. Chrome traces on the timeline slide: raster 42 to 10 ms and GPU 244 to 73 ms per 3 s; layout on slide changes 80 to 20 ms per 7 changes; visuals unchanged. All browser checks pass; deck redeployed.

@@ -440,8 +440,8 @@ a.button{font-size:24px}
 .builder-bar .qr svg{width:90px;height:90px}
 .builder-bar .qr-text{font-size:15px;line-height:1.5;color:var(--muted);text-align:left}
 .text-link{font-size:15px;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
-#stage[data-slide="s-builder"] #number{top:26px;bottom:auto;right:77px}
-#stage[data-slide="s-builder"] #nav{top:14px;bottom:auto;right:180px}
+#number.top{top:26px;bottom:auto;right:77px}
+#nav.top{top:14px;bottom:auto;right:180px}
 
 /* ===== Decision 179: playbook evidence lines and second row ===== */
 #s-playbook .body.fill{left:56px;right:56px;justify-content:center;gap:84px;padding-top:0}
@@ -477,6 +477,22 @@ a.button{font-size:24px}
 #s-dashboard .dash-frame{height:794px}
 .rows-wide{padding:0}
 
+/* ===== Decision 182: smoother motion (composited layers, less repainting) ===== */
+.slide:not(.active):not(.leaving){content-visibility:hidden}
+.slide.active,.slide.leaving{will-change:opacity}
+.slide.active [data-in]{will-change:opacity,transform}
+#progress{width:100%;transform-origin:0 50%;transform:scaleX(0);transition:transform .5s var(--ease)}
+#title-scene{position:absolute;inset:0;overflow:hidden;background:#06111F}
+#title-scene canvas{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#title-rain{image-rendering:auto}
+#title-dots{width:1920px;height:1080px}
+.title-shade{position:absolute;left:0;top:0;width:1250px;height:1080px;background:linear-gradient(90deg,rgba(11,31,58,.94) 0%,rgba(11,31,58,.7) 55%,rgba(11,31,58,0) 100%)}
+#event-chart{position:relative}
+.cursor-layer{position:absolute;left:0;top:0;width:100%;height:auto;pointer-events:none;will-change:transform}
+.timeline .track .fill{width:100%;transform-origin:0 50%;transform:scaleX(0)}
+.entered .timeline .track .fill{width:100%;transform:scaleX(1);transition:transform 4.6s linear .5s}
+@media (prefers-reduced-motion: reduce){.timeline .track .fill{transform:scaleX(1)}}
+
 </style>
 </head>
 <body>
@@ -486,7 +502,7 @@ a.button{font-size:24px}
 
 <!-- 1 -->
 <section class="slide dark" id="s-title" data-title="When it rains, where should taxis go?">
- <canvas id="title-canvas" width="1920" height="1080" aria-hidden="true"></canvas>
+ <div id="title-scene" aria-hidden="true"><canvas id="title-base"></canvas><canvas id="title-rain"></canvas><canvas id="title-dots" width="1920" height="1080"></canvas><div class="title-shade"></div></div>
  <div class="title-copy">
   <div class="rule" data-in style="--d:.2"></div>
   <h1 data-in style="--d:.4">When it rains, where should taxis go?</h1>
@@ -37276,15 +37292,15 @@ function show(index){
  index=Math.max(0,Math.min(slides.length-1,index));
  if(index===current)return;
  const old=slides[current];
- if(old){old.classList.remove('active');hooks[old.id]?.leave?.();setTimeout(()=>{if(!old.classList.contains('active'))old.classList.remove('entered');},500);}
+ if(old){old.classList.remove('active');old.classList.add('leaving');hooks[old.id]?.leave?.();setTimeout(()=>{if(!old.classList.contains('active'))old.classList.remove('entered','leaving');},500);}
  for(const t of timers)clearTimeout(t);timers.clear();
  current=index;const slide=slides[index];
- slide.classList.remove('entered');slide.classList.add('active');
+ slide.classList.remove('entered','leaving');slide.classList.add('active');
  requestAnimationFrame(()=>requestAnimationFrame(()=>{if(slides[current]===slide)slide.classList.add('entered');}));
  hooks[slide.id]?.enter?.();
  stage.classList.toggle('dark',slide.classList.contains('dark'));
- stage.dataset.slide=slide.id;
- $('#progress').style.width=Math.min(index+1,MAIN)/MAIN*100+'%';
+ const top=slide.id==='s-builder';$('#number').classList.toggle('top',top);$('#nav').classList.toggle('top',top);  // no stage-wide restyle
+ $('#progress').style.transform=`scaleX(${Math.min(index+1,MAIN)/MAIN})`;
  const tag=slide.dataset.appendix;
  $('#number').innerHTML=tag?`<b>${tag==='References'?tag:'Appendix '+tag}</b>`:`<b>${index+1}</b> / ${MAIN}`;
  history.replaceState(null,'','#'+(index+1));
@@ -37322,9 +37338,9 @@ function updatePresenter(){
 
 /* ---------- 1 title: illustrative radar-style rain and taxi dots on the Storm Builder's road map ----------
    World units are 10 m (Storm Builder projection). Everything is periodic in LOOP seconds, so the loop is seamless. */
-const tc=$('#title-canvas'),tx=tc.getContext('2d'),T=DATA.title,LOOP=40;  // 40 s loop: half the earlier speed (decision 176)
+const T=DATA.title,LOOP=40;  // 40 s loop: half the earlier speed (decision 176)
 const WX0=300,WX1=5600,WY0=900,WY1=3900,S0=1920/(WX1-WX0)*1.02,SB=S0*1.35;
-const base=document.createElement('canvas');base.width=Math.ceil((WX1-WX0)*SB);base.height=Math.ceil((WY1-WY0)*SB);
+const base=$('#title-base');base.width=Math.ceil((WX1-WX0)*SB);base.height=Math.ceil((WY1-WY0)*SB);
 (function drawBase(){
  const b=base.getContext('2d');b.setTransform(SB,0,0,-SB,-WX0*SB,WY1*SB);
  const poly=(rings,flat=true)=>{const p=new Path2D();for(const r of rings){p.moveTo(r[0],r[1]);for(let i=2;i<r.length;i+=2)p.lineTo(r[i],r[i+1]);p.closePath();}return p;};
@@ -37339,7 +37355,8 @@ const base=document.createElement('canvas');base.width=Math.ceil((WX1-WX0)*SB);b
 })();
 // rain field on a coarse world grid (160 m), recomputed every other frame
 const G=10,GW=Math.ceil((WX1-WX0)/G),GH=Math.ceil((WY1-WY0)/G),field=new Float32Array(GW*GH);
-const rainCanvas=document.createElement('canvas');rainCanvas.width=GW;rainCanvas.height=GH;
+const rainCanvas=$('#title-rain');rainCanvas.width=GW;rainCanvas.height=GH;
+const dotsCanvas=$('#title-dots'),tx=dotsCanvas.getContext('2d');
 const rc=rainCanvas.getContext('2d'),img=rc.createImageData(GW,GH);
 const BANDS=[[.16,[111,169,138],.60],[.30,[185,196,106],.63],[.46,[216,178,90],.65],[.64,[205,150,96],.62],[.84,[196,128,100],.56]];
 const perm=(()=>{const r=rng(91),p=Array.from({length:256},(_,i)=>i);for(let i=255;i>0;i--){const j=Math.floor(r()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return Uint8Array.from([...p,...p]);})();
@@ -37347,34 +37364,43 @@ function vnoise(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=x
  const h=(i,j)=>perm[(perm[(xi+i)&255]+yi+j)&255]/255;const a=h(0,0),b=h(1,0),c=h(0,1),d=h(1,1);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v;}
 // rain cells: start/end x, latitude, peak, size, phase in the loop (different track lengths = different speeds)
 const CELLS=[[500,4200,3050,1.25,170,.0],[1300,4000,2300,1.0,140,.12],[300,3100,1700,.9,160,.25],[2300,5600,2750,1.0,200,.38],[900,3600,3350,.8,120,.5],[2600,5400,1900,1.1,165,.62],[0,2700,2500,.95,135,.74],[1800,4900,2050,1.2,150,.86],[3200,5800,3200,.85,125,.94]];
+// Band colours as packed RGBA words (little-endian) for fast writes.
+const BAND_RGBA=BANDS.map(([,c,a])=>((Math.round(a*255)<<24)|(c[2]<<16)|(c[1]<<8)|c[0])>>>0);
+const pix=new Uint32Array(img.data.buffer);
 function computeRain(t){
+ // Only the grid cells inside the active rain cells are evaluated (decision 182).
  const th=2*Math.PI*t/LOOP,ox=2.2*Math.cos(th),oy=2.2*Math.sin(th);
- field.fill(0);
+ field.fill(0);pix.fill(0);
+ const boxes=[];
  for(const[xs,xe,y0,amp,sig,ph]of CELLS){
   const u=((t/LOOP+ph)%1+1)%1,env=Math.pow(Math.sin(Math.PI*u),1.2),cx=xs+(xe-xs)*u,cy=y0+110*Math.sin(2*Math.PI*u+ph*7),A=amp*env,sy=sig*(.7+.5*env),sx=sy*1.45;
   if(A<.02)continue;
   const gx0=Math.max(0,Math.floor((cx-3*sx-WX0)/G)),gx1=Math.min(GW-1,Math.ceil((cx+3*sx-WX0)/G)),gy0=Math.max(0,Math.floor((WY1-(cy+3*sy))/G)),gy1=Math.min(GH-1,Math.ceil((WY1-(cy-3*sy))/G));
-  for(let j=gy0;j<=gy1;j++){const y=WY1-j*G,dy=(y-cy)/sy;for(let i=gx0;i<=gx1;i++){const dx=(WX0+i*G-cx)/sx;field[j*GW+i]+=A*Math.exp(-.5*(dx*dx+dy*dy));}}
+  if(gx0>gx1||gy0>gy1)continue;
+  boxes.push([gx0,gx1,gy0,gy1]);
+  for(let j=gy0;j<=gy1;j++){const y=WY1-j*G,dy=(y-cy)/sy,ey=dy*dy;for(let i=gx0;i<=gx1;i++){const dx=(WX0+i*G-cx)/sx;field[j*GW+i]+=A*Math.exp(-.5*(dx*dx+ey));}}
  }
- const d=img.data;
- for(let j=0;j<GH;j++)for(let i=0;i<GW;i++){
-  const k=j*GW+i;let v=field[k];
-  if(v>.04){const x=(WX0+i*G)/150,y=(WY1-j*G)/150;v*=.25+1.05*(.6*vnoise(x+ox,y+oy)+.4*vnoise(2.3*x-oy,2.3*y+ox));}
-  field[k]=v;let band=-1;for(let b=0;b<BANDS.length;b++)if(v>=BANDS[b][0])band=b;
-  const o=k*4;if(band<0){d[o+3]=0;continue;}const[,c,a]=BANDS[band];d[o]=c[0];d[o+1]=c[1];d[o+2]=c[2];d[o+3]=a*255;
+ const done=new Uint8Array(GW*GH);
+ for(const[gx0,gx1,gy0,gy1]of boxes)for(let j=gy0;j<=gy1;j++)for(let i=gx0;i<=gx1;i++){
+  const k=j*GW+i;if(done[k])continue;done[k]=1;let v=field[k];
+  if(v<=.04){field[k]=v;continue;}
+  const x=(WX0+i*G)/150,y=(WY1-j*G)/150;v*=.25+1.05*(.6*vnoise(x+ox,y+oy)+.4*vnoise(2.3*x-oy,2.3*y+ox));field[k]=v;
+  let band=-1;for(let q=0;q<BANDS.length;q++)if(v>=BANDS[q][0])band=q;
+  if(band>=0)pix[k]=BAND_RGBA[band];
  }
  rc.putImageData(img,0,0);
 }
 function rainAt(x,y){const i=Math.round((x-WX0)/G),j=Math.round((WY1-y)/G);return i<0||j<0||i>=GW||j>=GH?0:field[j*GW+i];}
 const dotRand=rng(2702),DOTS=T.routes.map(r=>({r,phase:dotRand(),thr:.45+.5*dotRand()}));
 function drawTitle(t,refresh=true){
+ // Camera motion moves the pre-drawn map and the rain layer with GPU-composited CSS transforms (decision 182);
+ // only the coarse rain field (every third frame) and the taxi dots are redrawn.
  const th=2*Math.PI*t/LOOP,z=1.06+.015*Math.sin(th),s=S0*z,cx=2620+85*Math.sin(th+.6),cy=2380+35*Math.sin(2*th);
+ const ox=960+(WX0-cx)*s,oy=540-(WY1-cy)*s;
  if(refresh)computeRain(t);
- tx.setTransform(1,0,0,1,0,0);tx.globalAlpha=1;tx.fillStyle='#06111F';tx.fillRect(0,0,1920,1080);
- const k=s/SB;tx.imageSmoothingEnabled=true;tx.imageSmoothingQuality='high';
- tx.drawImage(base,960+(WX0-cx)*s,540-(WY1-cy)*s,base.width*k,base.height*k);
- tx.drawImage(rainCanvas,960+(WX0-cx)*s,540-(WY1-cy)*s,GW*G*s,GH*G*s);
- tx.fillStyle='#3FC1B0';
+ base.style.transform=`translate(${ox}px,${oy}px) scale(${s/SB})`;
+ rainCanvas.style.transform=`translate(${ox}px,${oy}px) scale(${G*s})`;
+ tx.clearRect(0,0,1920,1080);tx.fillStyle='#3FC1B0';
  for(const dot of DOTS){
   const p=dot.r,n=p.length/2,w=((dot.phase+t/LOOP)%1)*2,u=w<1?w:2-w,f=u*(n-1),a=Math.floor(f),b=Math.min(n-1,a+1),q=f-a;
   const x=p[2*a]+(p[2*b]-p[2*a])*q,y=p[2*a+1]+(p[2*b+1]-p[2*a+1])*q,rain=rainAt(x,y);
@@ -37383,16 +37409,15 @@ function drawTitle(t,refresh=true){
   tx.fillRect(960+(x-cx)*s-1.6,540-(y-cy)*s-1.6,3.2,3.2);
  }
  tx.globalAlpha=1;
- const shade=tx.createLinearGradient(0,0,1250,0);shade.addColorStop(0,'rgba(11,31,58,.94)');shade.addColorStop(.55,'rgba(11,31,58,.7)');shade.addColorStop(1,'rgba(11,31,58,0)');
- tx.fillStyle=shade;tx.fillRect(0,0,1250,1080);
 }
 let titleRAF=0,titleFrame=0;
 hooks['s-title']={
  enter(){cancelAnimationFrame(titleRAF);if(!motion){drawTitle(7);return;}const start=performance.now();
-  const loop=now=>{const t=((now-start)/1000)%LOOP;drawTitle(t,titleFrame++%2===0);titleRAF=requestAnimationFrame(loop);};titleRAF=requestAnimationFrame(loop);},
+  const loop=now=>{const t=((now-start)/1000)%LOOP;drawTitle(t,titleFrame++%3===0);titleRAF=requestAnimationFrame(loop);};titleRAF=requestAnimationFrame(loop);},
  leave(){cancelAnimationFrame(titleRAF);}
 };
 window.TITLE_FRAME=t=>{cancelAnimationFrame(titleRAF);drawTitle(t);};
+drawTitle(7);
 
 /* ---------- 2 fleet: two supplied years joined by a line ---------- */
 (function fleet(){
@@ -37483,8 +37508,10 @@ setStorm(PEAK);
 /* ---------- 5 event cursor sweeping the saved −60 to +180 minutes ---------- */
 let eventRAF=0;
 const eventCursor=(()=>{
- const svg=$('#event-chart svg'),M=DATA.meta.present_event_timeline,P=M.points;
+ const chart=$('#event-chart svg'),M=DATA.meta.present_event_timeline,P=M.points;
+ const svg=add($('#event-chart'),'svg',{viewBox:chart.getAttribute('viewBox'),class:'cursor-layer','aria-hidden':'true'});
  const g=add(svg,'g',{id:'event-cursor','pointer-events':'none'});
+ const widths=new Map();
  const ln=add(g,'line',{y1:M.top,y2:M.bottom,stroke:C.navy,'stroke-width':1.5});
  const dot=add(g,'circle',{r:6,fill:C.white,stroke:C.navy,'stroke-width':2.5});
  const box=add(g,'rect',{height:30,rx:4,fill:C.navy});const label=add(g,'text',{'font-size':17.3,'font-weight':500,fill:'#fff','font-family':'Poppins'});
@@ -37494,7 +37521,8 @@ const eventCursor=(()=>{
   ln.setAttribute('x1',sx);ln.setAttribute('x2',sx);dot.setAttribute('cx',sx);dot.setAttribute('cy',sy);
   const near=P.find(p=>Math.abs(p[2]-minute)<1.5);
   label.textContent=`${minute>0?'+':minute<0?'−':''}${Math.abs(Math.round(minute))} min`+(near?` · ${num(near[3],1)}%`:'');
-  const w=label.getComputedTextLength()+20,bx=Math.min(M.width-w-4,Math.max(4,sx-w/2));
+  if(!widths.has(label.textContent))widths.set(label.textContent,label.getComputedTextLength());
+  const w=widths.get(label.textContent)+20,bx=Math.min(M.width-w-4,Math.max(4,sx-w/2));
   box.setAttribute('x',bx);box.setAttribute('y',M.bottom-40);box.setAttribute('width',w);label.setAttribute('x',bx+10);label.setAttribute('y',M.bottom-19.5);
  };
 })();
@@ -37519,14 +37547,17 @@ hooks['s-planning']={enter:callouts};
 /* ---------- 9 Storm Builder and 11 dashboard: load on entry, unload on exit ---------- */
 function embed(hostId,src,title,onReady){
  const host=$('#'+hostId);let timer=0;
+ function load(){
+  const frame=document.createElement('iframe');frame.setAttribute('aria-label',title);  // no title attribute: no hover tooltip
+  frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allow='fullscreen';
+  let loaded=false;frame.addEventListener('load',()=>{loaded=true;host.querySelector('.loading').hidden=true;onReady?.(frame);});
+  timer=setTimeout(()=>{if(!loaded){frame.remove();host.querySelector('.loading').hidden=true;host.querySelector('.fallback').hidden=false;}},8000);
+  frame.src=src;host.append(frame);
+ }
  return{
   enter(){
    host.querySelector('.fallback').hidden=true;host.querySelector('.loading').hidden=false;
-   const frame=document.createElement('iframe');frame.setAttribute('aria-label',title);  // no title attribute: no hover tooltip
-   frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allow='fullscreen';
-   let loaded=false;frame.addEventListener('load',()=>{loaded=true;host.querySelector('.loading').hidden=true;onReady?.(frame);});
-   timer=setTimeout(()=>{if(!loaded){frame.remove();host.querySelector('.loading').hidden=true;host.querySelector('.fallback').hidden=false;}},8000);
-   frame.src=src;host.append(frame);
+   clearTimeout(timer);timer=setTimeout(load,550);  // load after the slide fade so the transition stays smooth
   },
   leave(){clearTimeout(timer);host.querySelector('iframe')?.remove();host.querySelector('.loading').hidden=false;}
  };

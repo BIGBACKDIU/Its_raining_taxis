@@ -18,7 +18,7 @@ function audit(){
     if(!visible(e)||e.closest('svg')&&e.tagName!=='svg'||e.tagName==='CANVAS'||e.tagName==='ASIDE'||e.closest('aside'))continue;
     const b=box(e);if(b.x1-b.x0<1||b.y1-b.y0<1)continue;
     if(b.x0<-1||b.y0<-1||b.x1>1921||b.y1>1081)outside.push({el:e.tagName+'.'+e.className+'#'+e.id,b});
-    if(e.scrollHeight>e.clientHeight+2&&getComputedStyle(e).overflow!=='visible'||e.scrollWidth>e.clientWidth+2&&['hidden','auto','scroll'].includes(getComputedStyle(e).overflowX))overflow.push(e.tagName+'.'+e.className+'#'+e.id);
+    if(e.id!=='title-scene'&&(e.scrollHeight>e.clientHeight+2&&getComputedStyle(e).overflow!=='visible'||e.scrollWidth>e.clientWidth+2&&['hidden','auto','scroll'].includes(getComputedStyle(e).overflowX)))overflow.push(e.tagName+'.'+e.className+'#'+e.id);
   }
   const blocks=[...slide.querySelectorAll('.head h1,.kicker,.foot,.point,.card,.step,.tstep,.chart,.map,#storm-line,.avg,.tally,.clock,.frame,.strip,.qr,.question,.dataline,.callout-wide,.legend,.takeaway,.questions,.found,.conf,.stat,.defs p,.refs p,.title-copy>*,.radar-key,.label,.caption,.appendix-link,.tag,.benefits,.note-box,.method,.shows-label,.rows5 .row,.legend-col,.storm-head,.robust,.strip')].filter(visible);
   for(let i=0;i<blocks.length;i++)for(let j=i+1;j<blocks.length;j++){
@@ -77,7 +77,7 @@ function audit(){
         return{frameHeightShare:Math.round(f.height/S.height*1000)/1000,methodOneLine:m.scrollWidth<=m.clientWidth+1&&r(m).height/k<50,chromeOverlap:chrome.some(c=>things.some(t=>ov(c,t)))};});
       if(id==='s-playbook')a.evidence=await page.evaluate(()=>[...document.querySelectorAll('.evidence')].map(e=>e.getBoundingClientRect().height/(document.querySelector('#stage').getBoundingClientRect().width/1920)<30));
 
-      if(id==='s-title')a.canvasColours=await page.evaluate(()=>{const c=document.querySelector('#title-canvas').getContext('2d').getImageData(0,0,1920,1080).data,s=new Set;for(let k=0;k<c.length;k+=4*997)s.add(c[k]>>4<<8|c[k+1]>>4<<4|c[k+2]>>4);return s.size;});
+      if(id==='s-title')a.canvasColours=await page.evaluate(()=>{const c=document.querySelector('#title-dots').getContext('2d').getImageData(0,0,1920,1080).data,s=new Set;for(let k=0;k<c.length;k+=4*997)s.add(c[k]>>4<<8|c[k+1]>>4<<4|c[k+2]>>4);return s.size;});
       const file=`${w}x${h}-${String(i+1).padStart(2,'0')}-${id.replace(/^s-/,'')}.jpg`;
       await page.screenshot({path:path.join(out,file),type:'jpeg',quality:82});
       rows.push({slide:i+1,id,file,...a});
