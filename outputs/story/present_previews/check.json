@@ -52,7 +52,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 590,
+    "text": 588,
     "svgs": 1656,
     "minFont": {
      "px": 20,
@@ -66,7 +66,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 469,
+    "text": 467,
     "svgs": 103,
     "minFont": {
      "px": 20,
@@ -80,7 +80,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 960,
+    "text": 958,
     "svgs": 1467,
     "minFont": {
      "px": 20,
@@ -94,7 +94,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 631,
+    "text": 629,
     "svgs": 161,
     "minFont": {
      "px": 20,
@@ -108,7 +108,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1012,
+    "text": 1010,
     "svgs": 335,
     "minFont": {
      "px": 20,
@@ -141,17 +141,17 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 840,
+    "text": 847,
     "svgs": 0,
     "minFont": {
-     "px": 16,
-     "text": "Morning forecast: plans 6–10% better"
+     "px": 20,
+     "text": "Recommendation"
     },
     "evidence": [
-     true,
-     true,
-     true,
-     true,
+     false,
+     false,
+     false,
+     false,
      true,
      true
     ]
@@ -446,7 +446,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 589,
+    "text": 587,
     "svgs": 1656,
     "minFont": {
      "px": 20,
@@ -460,7 +460,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 469,
+    "text": 467,
     "svgs": 103,
     "minFont": {
      "px": 20,
@@ -474,7 +474,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 960,
+    "text": 958,
     "svgs": 1467,
     "minFont": {
      "px": 20,
@@ -488,7 +488,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 631,
+    "text": 629,
     "svgs": 161,
     "minFont": {
      "px": 20,
@@ -502,7 +502,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1012,
+    "text": 1010,
     "svgs": 335,
     "minFont": {
      "px": 20,
@@ -535,17 +535,17 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 840,
+    "text": 847,
     "svgs": 0,
     "minFont": {
-     "px": 16,
-     "text": "Morning forecast: plans 6–10% better"
+     "px": 20,
+     "text": "Recommendation"
     },
     "evidence": [
-     true,
-     true,
-     true,
-     true,
+     false,
+     false,
+     false,
+     false,
      true,
      true
     ]
@@ -795,7 +795,7 @@
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.004
+   "secondsWaited": 9.002
   },
   "s-builder-unload@1920": {
    "iframeAfterLeaving": false
@@ -804,13 +804,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.009
+   "secondsWaited": 9.005
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.002
+   "secondsWaited": 9.003
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -819,7 +819,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.008
+   "secondsWaited": 9.005
   }
  },
  "storm": {
@@ -836,6 +836,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.66608695652174,
+ "titleFrameMs": 16.666086956521738,
  "problems": []
 }

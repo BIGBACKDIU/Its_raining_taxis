@@ -466,6 +466,17 @@ a.button{font-size:24px}
 .timeline{grid-template-columns:repeat(6,minmax(0,1fr))}
 .evidence{letter-spacing:-.02em}
 
+/* ===== Decision 180 ===== */
+#s-playbook .body.fill{left:var(--margin);right:var(--margin)}
+.timeline{column-gap:24px}
+.timeline .track{right:calc((100% - 120px)/6 - 20px)}
+.timeline .tstep p{flex:none}
+.evidence{font-size:20px;line-height:1.3;margin-top:12px;white-space:normal;letter-spacing:0}
+.num-label{display:block;font-size:20px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.callout-wide .num{line-height:1}
+#s-dashboard .dash-frame{height:794px}
+.rows-wide{padding:0}
+
 </style>
 </head>
 <body>
@@ -540,7 +551,7 @@ a.button{font-size:24px}
    <div class="callout" data-in style="--d:0.6"><span class="big red">837 fewer</span><span class="line">vacant taxis at this storm's 09:30 peak (−36.2%)</span></div>
    <div class="callout" data-in style="--d:0.8"><span class="big red">−12.9%</span><span class="line">on average in heavy rain · −24.5% in the CBD</span></div>
   </div>
-  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>· Poisson fixed-effects regression · each square vs its usual level</span></div>
+  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>Poisson fixed-effects regression · each square vs its usual level</span></div>
  </div></div>
  <footer class="foot"><span class="source">One observed storm, 20 July 2023, 06:30–13:30. Averages: effects_main.csv. Associations, not causes.</span></footer>
  <aside class="notes">Here is one real storm, on 20 July 2023. The left map shows rain in the previous half-hour; grey means dry. The right map compares vacant taxis with each square's usual level. At the 09:30 peak there were 1,473 vacant taxis across our 374 squares against about 2,310 expected: 837 fewer, or 36.2 per cent. On average, light rain goes with 7.7 per cent fewer vacant taxis, moderate with 10.8 and heavy with 12.9, and the CBD with 24.5 per cent. Against the city at the same moment, the extra local drop is only 5.7 per cent, so most of the drop is citywide. These are associations.</aside>
@@ -788,7 +799,7 @@ L 875.0952 436.248
    <div class="callout" data-in style="--d:0.6"><span class="big red">−7%</span><span class="line">before rain arrives (2–5 km away)</span></div>
    <div class="callout" data-in style="--d:0.8"><span class="big">~2.5 h</span><span class="line">until the drop is no longer detectable</span></div>
   </div>
-  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>· Event study around rain onsets · 95% CIs</span></div>
+  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>Event study around rain onsets · 95% CIs</span></div>
  </div></div>
  <footer class="foot"><span class="source">effects_event_study.csv, effects_approach.csv, dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not causes.</span></footer>
  <aside class="notes">When does the drop happen? This chart lines up rain onsets in each square and compares the square with itself 30 minutes before rain begins. The gap is deepest about 30 minutes after rain starts, 5.6 per cent, and is no longer detectable after about two and a half hours. A separate model shows 7 per cent fewer vacant taxis when heavier rain is 2 to 5 kilometres away and the square is still dry. Even 1 millimetre per hour goes with 9.7 per cent fewer, and after two hours of heavy rain the gap reaches 18 per cent. After rain stops, supply stays about 5 per cent low for half an hour.</aside>
@@ -9822,7 +9833,7 @@ iVBORw0KGgoAAAANSUhEUgAAA/AAAAAZCAYAAACW/MXZAAABe0lEQVR4nO3XTY6DMAwG0MC5Zjv37slC
    <div class="callout" data-in style="--d:1.4"><span class="big red">−31% to −36%</span><span class="line">By share: the CBD</span></div>
    </div>
   </div>
-  <div class="method" data-in style="--d:1.6"><span class="method-label">Method</span><span>· Poisson model per square · false-discovery control · ≥ 4 expected taxis</span></div>
+  <div class="method" data-in style="--d:1.6"><span class="method-label">Method</span><span>Poisson model per square · false-discovery control · ≥ 4 expected taxis</span></div>
  </div></div>
  <footer class="foot"><span class="source">rain_hit_top30_absolute.csv, rain_hit_absolute_all.csv, inference_hotspots.csv, spillover_islandwide_share.csv. Associations, not causes.</span></footer>
  <aside class="notes">Where is the loss largest? The bars show how many fewer vacant taxis we see in a heavy-rain half-hour, and the map shows the percentage change in every square, with the same twelve places numbered. Changi Terminal 3 loses the most taxis, 7.1 of about 83 expected, but only 8.5 per cent. The CBD loses the biggest share: Bayfront, Dhoby Ghaut and Raffles Place lose 31 to 36 per cent. So ranking by count and by share gives different hotspots. Overall, 299 of 374 squares are significantly lower in heavy rain, and 329 of 374 lose taxis when rain is island-wide.</aside>
@@ -10155,7 +10166,7 @@ z
    <div class="callout" data-in style="--d:0.6"><span class="big red">−24.5%</span><span class="line">Central Area vs −12.0% elsewhere</span></div>
    <div class="callout" data-in style="--d:0.8"><span class="big">−11.6% to −12.5%</span><span class="line">MRT exits, taxi stands, malls: no clear difference</span></div>
   </div>
-  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>· Poisson interactions · checked with spatial model and random forest</span></div>
+  <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>Poisson interactions · checked with spatial model and random forest</span></div>
  </div></div>
  <footer class="foot"><span class="source">factors_panel_interactions.csv, factors_cell_wls.csv, factors_cell_summary.csv; 95% CIs; dotted line = MRT exit ≥ 1 km reference. Associations, not causes.</span></footer>
  <aside class="notes">Why the CBD? We tested whether features of a square go with a bigger heavy-rain drop. Only the URA Central Area stands out: 24.5 per cent fewer vacant taxis against 12.0 per cent elsewhere, and 18.9 against 5.0 per cent in the share model. Near MRT exits, taxi stands or malls the drop stays between 11.6 and 12.5 per cent. Square-level models agree, with about 11 per cent more loss in the Central Area and smaller losses on business land. Taxi stands show about 2.5 per cent per standard deviation in one design only. A random forest explains little out of area, R squared 0.12 to 0.15.</aside>
@@ -10980,7 +10991,7 @@ iVBORw0KGgoAAAANSUhEUgAAB9QAAAAhCAYAAACIupAxAAACaUlEQVR4nO3Z0VHEMAwFwOQapCFKosYz
    <p class="short" data-in style="--d:2.1"><b>Short-term alerts:</b> weather adds ~0.001 PR-AUC</p>
    <p class="short" data-in style="--d:2.3"><b>Morning planning:</b> 6–10% better predictions</p>
   </div>
-  <div class="method" data-in style="--d:2.5"><span class="method-label">Method</span><span>· Regression on issued NEA forecasts · LightGBM vs persistence</span></div>
+  <div class="method" data-in style="--d:2.5"><span class="method-label">Method</span><span>Regression on issued NEA forecasts · LightGBM vs persistence</span></div>
  </div></div>
  <footer class="foot"><span class="source">planning_rain_losses.csv (weekdays, Apr 2022–Mar 2025), forecast_eval_both_labels.csv, morning_forecast_value.csv. Association, not cause.</span></footer>
  <aside class="notes">Can we plan for it? This heatmap shows, on weekdays, how many fewer vacant taxis we see per half-hour when NEA's issued forecast mentions showers. Changi from midnight to 7 am averages 33.1 fewer, or 23 per cent; Downtown Core 20.2 fewer, 43 per cent; Bukit Merah from 5 pm to midnight 21.4 and 24.8 fewer, about 28 per cent. Negative cells mean more taxis than usual. For short-term alerts, weather adds about 0.001 PR-AUC; LightGBM is right 53 per cent of the time against 46 for 'nothing changes', and only 6 to 13 per cent of shortages are flagged in advance. The morning 24-hour forecast improves later predictions by 6 to 10 per cent.</aside>
@@ -11015,7 +11026,7 @@ iVBORw0KGgoAAAANSUhEUgAAB9QAAAAhCAYAAACIupAxAAACaUlEQVR4nO3Z0VHEMAwFwOQapCFKosYz
   </div>
   <div class="rows-wide">
   <div class="callout-wide" data-in style="--d:5"><span class="num">44%</span><span>Our repositioning plan picks squares that really run short 44% of the time, vs 28% at random.</span></div>
-  <div class="callout-wide" data-in style="--d:5.3"><span class="num red">+0.001</span><span>Don't spend on rain-triggered real-time alerts: weather adds almost nothing beyond watching current taxi numbers.</span></div>
+  <div class="callout-wide" data-in style="--d:5.3"><span class="num red">+0.001<small class="num-label">PR-AUC</small></span><span>Don't spend on rain-triggered real-time alerts: weather adds almost nothing beyond watching current taxi numbers.</span></div>
   </div>
  </div>
  <footer class="foot"><span class="source">Plan precision: risk-weighted plan vs all candidate squares (expected ≥ 4 taxis), test year, issue-time labels.</span></footer>
