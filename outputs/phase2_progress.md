@@ -926,3 +926,17 @@ the plot and the cursor readout moved to the bottom of the plot, so the cursor n
 label; slide 12 cards use small inline icons instead of repeated words; slides 3, 12 and 13 centre
 their content between title and footer; slide 13 cards gain icons and card 2 is shortened. Checks
 rerun at 1920×1080 and 1440×900: no errors, overflow or overlaps; embeds load and unload.
+
+## Decision 175: second presentation design pass (presentation only)
+
+`outputs/story/present.html` now uses a calm navy/slate/steel palette with yellow only for progress and
+the active step, hairline cards, outlined step markers, smaller Anton titles and a 12-column grid with
+fixed title and footer positions. All presentation charts were redrawn in this palette from the same
+saved tables, plus new feed-regime, robustness and policy charts for the appendix. The title slide shows
+the Storm Builder's road map in a dark theme with an illustrative 20-second loop of radar-style rain
+cells and teal taxi dots (measured at 60 fps). The Storm Builder slide has a near-full-width embed and an
+offline QR code (decoded at build time and again from the screenshots); slides 13 and 14 were rebuilt
+with key numbers; appendix pages A1–A9 follow the references (A key / Escape). Browser checks of all
+24 pages at 1920×1080 and 1440×900 and three title frames: no console errors, overflow or overlaps;
+storm replay plays; both embeds load and Storm Builder unloads. Wording check: 26 reviewed hits in the
+page (disclaimers, pilot measures, data needs). No estimation, scoring or test-year use.

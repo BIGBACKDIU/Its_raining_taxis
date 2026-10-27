@@ -1,0 +1,4 @@
+test,gain,lo,hi,details
+1 km test year max,0.0023999999999999998,0.00164,0.0028800000000000002,S1; below NB 5th percentile; 30 min; issue-time; all
+Oct 2026 storms · 60 min,0.023764758978876532,0.012303075362956606,0.078654816116116355,Pooled T2 15%; descriptive: only 2 onsets
+2019 storms · 60 min,0.0087472322976931416,0.00080708230340074418,0.017069791429182354,Pooled T2 15%; confirmatory backward holdout

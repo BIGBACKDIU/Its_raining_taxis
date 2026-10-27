@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="828pt" height="432pt" viewBox="0 0 828 432" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-27T21:15:20.025663</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432 
+L 828 432 
+L 828 0 
+L 0 0 
+L 0 432 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 306.36 362.88 
+L 803.16 362.88 
+L 803.16 17.28 
+L 306.36 17.28 
+L 306.36 362.88 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 306.36 362.88 
+L 306.36 17.28 
+" clip-path="url(#p8214b2434c)" style="fill: none; stroke: #dde3ea; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5b6676" x="306.36" y="389.512" transform="rotate(-0 306.36 389.512)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 438.84 362.88 
+L 438.84 17.28 
+" clip-path="url(#p8214b2434c)" style="fill: none; stroke: #dde3ea; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5b6676" x="438.84" y="389.512" transform="rotate(-0 438.84 389.512)">20%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 571.32 362.88 
+L 571.32 17.28 
+" clip-path="url(#p8214b2434c)" style="fill: none; stroke: #dde3ea; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5b6676" x="571.32" y="389.512" transform="rotate(-0 571.32 389.512)">40%</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 703.8 362.88 
+L 703.8 17.28 
+" clip-path="url(#p8214b2434c)" style="fill: none; stroke: #dde3ea; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #5b6676" x="703.8" y="389.512" transform="rotate(-0 703.8 389.512)">60%</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: middle; fill: #1a2433" x="554.76" y="415.688" transform="rotate(-0 554.76 415.688)">Chosen squares that really run short (test year)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9"/>
+     <g id="text_6">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="55.586083" transform="rotate(-0 296.36 55.586083)">All candidate squares</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10"/>
+     <g id="text_7">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="103.189388" transform="rotate(-0 296.36 103.189388)">Plan as designed</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_11"/>
+     <g id="text_8">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="150.792694" transform="rotate(-0 296.36 150.792694)">Plan, 19 squares with most taxis</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12"/>
+     <g id="text_9">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="198.396" transform="rotate(-0 296.36 198.396)">Plan weighted by forecast risk</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13"/>
+     <g id="text_10">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="245.999306" transform="rotate(-0 296.36 245.999306)">Risk plan, staging points only</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_14"/>
+     <g id="text_11">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="293.602612" transform="rotate(-0 296.36 293.602612)">Risk plan, reachable in 60 min</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_15"/>
+     <g id="text_12">
+      <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: end; fill: #5b6676" x="296.36" y="341.205917" transform="rotate(-0 296.36 341.205917)">Top-19 forecast, no constraints</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 306.36 362.88 
+L 803.16 362.88 
+" style="fill: none; stroke: #dde3ea; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 306.36 61.551074 
+L 489.8448 61.551074 
+L 489.8448 32.989091 
+L 306.36 32.989091 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #a9c0da"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 306.36 109.15438 
+L 511.77024 109.15438 
+L 511.77024 80.592397 
+L 306.36 80.592397 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #4f7cac"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 306.36 156.757686 
+L 547.34112 156.757686 
+L 547.34112 128.195702 
+L 306.36 128.195702 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #4f7cac"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 306.36 204.360992 
+L 598.87584 204.360992 
+L 598.87584 175.799008 
+L 306.36 175.799008 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #2e4a6b"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 306.36 251.964298 
+L 624.6432 251.964298 
+L 624.6432 223.402314 
+L 306.36 223.402314 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #4f7cac"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 306.36 299.567603 
+L 624.90816 299.567603 
+L 624.90816 271.00562 
+L 306.36 271.00562 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #4f7cac"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 306.36 347.170909 
+L 647.29728 347.170909 
+L 647.29728 318.608926 
+L 306.36 318.608926 
+z
+" clip-path="url(#p8214b2434c)" style="fill: #4f7cac"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="495.144" y="52.814083" transform="rotate(-0 495.144 52.814083)">27.7% · 196.1 squares</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="517.06944" y="100.417388" transform="rotate(-0 517.06944 100.417388)">31.0% · 75.5 squares</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="552.64032" y="148.020694" transform="rotate(-0 552.64032 148.020694)">36.4% · 18.9 squares</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="604.17504" y="195.624" transform="rotate(-0 604.17504 195.624)">44.2% · 16.1 squares</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="629.9424" y="243.227306" transform="rotate(-0 629.9424 243.227306)">48.0% · 19.0 squares</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="630.20736" y="290.830612" transform="rotate(-0 630.20736 290.830612)">48.1% · 19.0 squares</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 15.84px; font-family: 'Poppins'; text-anchor: start; fill: #1a2433" x="652.59648" y="338.433917" transform="rotate(-0 652.59648 338.433917)">51.5% · 19.0 squares</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p8214b2434c">
+   <rect x="306.36" y="17.28" width="496.8" height="345.6"/>
+  </clipPath>
+ </defs>
+</svg>

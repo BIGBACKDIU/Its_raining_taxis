@@ -14,3 +14,5 @@ pulp>=2.8
 optuna>=3.6
 ruptures>=1.1
 pypdf>=4.0
+segno==1.6.6  # presentation QR code (decision 175)
+zxing-cpp==3.1.1  # QR decode check in build_present

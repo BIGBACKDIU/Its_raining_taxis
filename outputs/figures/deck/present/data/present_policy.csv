@@ -1,0 +1,8 @@
+variant,split,precision_retrospective,precision_issue_time,cells_per_decision,decisions,adopt_risk_weights_rule
+all candidate cells (expected >= 4),test,0.27460000000000001,0.27700000000000002,196.11330000000001,300,True
+(a) policy as designed,test,0.30599999999999999,0.31009999999999999,75.519999999999996,300,True
+"(a) policy as designed, 19 cells with most taxis",test,0.36399999999999999,0.36380000000000001,18.853300000000001,300,True
+"(b) policy, weights = forecast risk",test,0.43419999999999997,0.44159999999999999,16.050000000000001,300,True
+(c) restricted to cells with a staging point,test,0.47749999999999998,0.48049999999999998,19,300,True
+(c) ... and reachable from a surplus cell within 60 min,test,0.47810000000000002,0.48089999999999999,19,300,True
+"(c) top-19 forecast ranking, no constraints",test,0.5081,0.51470000000000005,19,300,True

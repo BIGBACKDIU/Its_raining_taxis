@@ -9,9 +9,9 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 188,
+    "text": 225,
     "svgs": 0,
-    "canvasColours": 120
+    "canvasColours": 63
    },
    {
     "slide": 2,
@@ -20,7 +20,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 659,
+    "text": 684,
     "svgs": 25
    },
    {
@@ -81,7 +81,7 @@
     "overflow": [],
     "overlaps": [],
     "text": 1148,
-    "svgs": 354
+    "svgs": 352
    },
    {
     "slide": 9,
@@ -90,8 +90,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 452,
-    "svgs": 0
+    "text": 415,
+    "svgs": 2
    },
    {
     "slide": 10,
@@ -100,7 +100,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 739,
+    "text": 751,
     "svgs": 0
    },
    {
@@ -120,7 +120,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 484,
+    "text": 519,
     "svgs": 10
    },
    {
@@ -130,8 +130,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 651,
-    "svgs": 12
+    "text": 1204,
+    "svgs": 16
    },
    {
     "slide": 14,
@@ -140,8 +140,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 325,
-    "svgs": 0
+    "text": 949,
+    "svgs": 2
    },
    {
     "slide": 15,
@@ -150,7 +150,97 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 753,
+    "text": 818,
+    "svgs": 0
+   },
+   {
+    "slide": 16,
+    "id": "a1",
+    "file": "1920x1080-16-a1.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 727,
+    "svgs": 123
+   },
+   {
+    "slide": 17,
+    "id": "a2",
+    "file": "1920x1080-17-a2.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1582,
+    "svgs": 0
+   },
+   {
+    "slide": 18,
+    "id": "a3",
+    "file": "1920x1080-18-a3.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 997,
+    "svgs": 571
+   },
+   {
+    "slide": 19,
+    "id": "a4",
+    "file": "1920x1080-19-a4.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 490,
+    "svgs": 366
+   },
+   {
+    "slide": 20,
+    "id": "a5",
+    "file": "1920x1080-20-a5.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1482,
+    "svgs": 3493
+   },
+   {
+    "slide": 21,
+    "id": "a6",
+    "file": "1920x1080-21-a6.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 932,
+    "svgs": 264
+   },
+   {
+    "slide": 22,
+    "id": "a7",
+    "file": "1920x1080-22-a7.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 840,
+    "svgs": 97
+   },
+   {
+    "slide": 23,
+    "id": "a8",
+    "file": "1920x1080-23-a8.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1185,
+    "svgs": 0
+   },
+   {
+    "slide": 24,
+    "id": "a9",
+    "file": "1920x1080-24-a9.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1363,
     "svgs": 0
    }
   ],
@@ -162,9 +252,9 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 188,
+    "text": 225,
     "svgs": 0,
-    "canvasColours": 44
+    "canvasColours": 69
    },
    {
     "slide": 2,
@@ -173,7 +263,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 659,
+    "text": 684,
     "svgs": 25
    },
    {
@@ -234,7 +324,7 @@
     "overflow": [],
     "overlaps": [],
     "text": 1148,
-    "svgs": 354
+    "svgs": 352
    },
    {
     "slide": 9,
@@ -243,8 +333,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 452,
-    "svgs": 0
+    "text": 415,
+    "svgs": 2
    },
    {
     "slide": 10,
@@ -253,7 +343,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 739,
+    "text": 751,
     "svgs": 0
    },
    {
@@ -273,7 +363,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 484,
+    "text": 519,
     "svgs": 10
    },
    {
@@ -283,8 +373,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 651,
-    "svgs": 12
+    "text": 1204,
+    "svgs": 16
    },
    {
     "slide": 14,
@@ -293,8 +383,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 325,
-    "svgs": 0
+    "text": 949,
+    "svgs": 2
    },
    {
     "slide": 15,
@@ -303,7 +393,97 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 753,
+    "text": 818,
+    "svgs": 0
+   },
+   {
+    "slide": 16,
+    "id": "a1",
+    "file": "1440x900-16-a1.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 727,
+    "svgs": 123
+   },
+   {
+    "slide": 17,
+    "id": "a2",
+    "file": "1440x900-17-a2.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1582,
+    "svgs": 0
+   },
+   {
+    "slide": 18,
+    "id": "a3",
+    "file": "1440x900-18-a3.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 997,
+    "svgs": 571
+   },
+   {
+    "slide": 19,
+    "id": "a4",
+    "file": "1440x900-19-a4.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 490,
+    "svgs": 366
+   },
+   {
+    "slide": 20,
+    "id": "a5",
+    "file": "1440x900-20-a5.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1482,
+    "svgs": 3493
+   },
+   {
+    "slide": 21,
+    "id": "a6",
+    "file": "1440x900-21-a6.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 932,
+    "svgs": 264
+   },
+   {
+    "slide": 22,
+    "id": "a7",
+    "file": "1440x900-22-a7.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 840,
+    "svgs": 97
+   },
+   {
+    "slide": 23,
+    "id": "a8",
+    "file": "1440x900-23-a8.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1185,
+    "svgs": 0
+   },
+   {
+    "slide": 24,
+    "id": "a9",
+    "file": "1440x900-24-a9.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 1363,
     "svgs": 0
    }
   ]
@@ -322,13 +502,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.013
+   "secondsWaited": 9.006
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.004
+   "secondsWaited": 9.007
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -337,7 +517,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.005
+   "secondsWaited": 9.004
   }
  },
  "storm": {
@@ -345,8 +525,8 @@
   "frameAfter": 3,
   "plays": true,
   "distinctFills": [
-   10,
-   157
+   9,
+   156
   ]
  },
  "reducedMotion": {
@@ -354,5 +534,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
+ "titleFrameMs": 16.666956521739134,
  "problems": []
 }

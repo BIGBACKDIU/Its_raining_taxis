@@ -1,4 +1,4 @@
-# Fifteen-minute presentation (decision 174)
+# Fifteen-minute presentation (decisions 174–175)
 
 `outputs/story/present.html` is a single offline file (fonts, data and charts embedded; only the two
 live demos need internet). Presentation only: every number is read from saved tables at build time
@@ -12,8 +12,15 @@ node analysis/check_present.cjs               # screenshots + checks in outputs/
 ```
 
 Keys: ← → / Space / Page Up/Down move, Home/End jump, **F** full screen, **S** presenter panel
-(speaker notes, next slide, elapsed timer). `present.html#4` opens slide 4. The references slide
-follows slide 14 and is outside the 14-slide count. Motion respects `prefers-reduced-motion`.
+(speaker notes, next slide, elapsed timer), **A** appendix, **Escape** back to the talk. `present.html#4`
+opens slide 4. References and appendix pages A1–A9 follow slide 14 and are outside the 14-slide count.
+Motion respects `prefers-reduced-motion` (the title shows one static frame).
+
+Design (decision 175): navy #0B1F3A, slate #2E4A6B, steel #4F7CAC, surfaces #F4F6F9/#FFFFFF, hairlines
+#DDE3EA; yellow #F2B705 only for progress and the active step; red #B5473A only for fewer taxis and
+map scales; 12-column grid with fixed title and footer positions. The title animation is illustrative:
+synthetic noise-based rain cells and teal dots on real roads from `sim/v3/data.json`, a 20-second
+seamless loop. The QR code (segno) is generated at build time and decoded with zxing-cpp before use.
 
 Sources: `template.html` (slides and speaker notes), `present.css`, `present.js`. The story page
 (`outputs/story/index.html`, `story/`) is not changed.
@@ -24,5 +31,7 @@ Presentation choices to know before presenting:
 - The event cursor covers the saved −60 to +180 minute range; no −2 h estimate exists.
 - "53% vs 46%" is the mean of the saved 30- and 60-minute top-19 precision.
 - The repositioning callout uses issue-time labels throughout: 44% vs 28%.
+- Appendix A1–A9 draw saved tables only; snapshot coverage is 120,017 of 122,688 OK (97.8%), 118,136
+  usable after glitch removal.
 - Storm Builder has no URL preset; the speaker notes say to pick Monsoon surge, weekend, 1 pm by hand.
 - Wang (2024) and Sun et al. (2020) need full references from the team.
