@@ -1829,3 +1829,12 @@ results stay as they are and remain the pre-specified result.
     Straits Times, Wang 2024, Sun et al. 2020, data.gov.sg, Zhuang et al. 2026, OpenStreetMap). The
     appendix splits where needed so every chart is shown at ≥ 24 px text. No estimation, scoring or
     test-year use; `outputs/story/index.html` is unchanged.
+
+177. **Declutter the presentation chart slides (presentation only).** The user found slides 4–8 too dense.
+    On slides 4–8 the chart takes at least 65% of the content area, with at most two callouts (56 px number,
+    one 28 px line) and a one-line METHOD box. Slide 6 shows bars (~55% width, full height) beside the
+    numbered map (~40%); slide 8 shows the heatmap at ≥55% width with numbered markers outside the cells and
+    the three cell callouts in one column. Slide 13 keeps one line per row. Text removed from slides moves
+    to that slide's speaker notes, which keep every number. The slide-7 "no clear difference" callout shows
+    the saved range of the other heavy-rain contrasts (−11.6% to −12.5%, `factors_panel_interactions.csv`).
+    No number changes, estimation or scoring; `outputs/story/index.html` is unchanged.
