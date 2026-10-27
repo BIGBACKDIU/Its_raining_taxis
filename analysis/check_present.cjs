@@ -72,6 +72,11 @@ function audit(){
         report.embeds[`${id}@${w}`]={...state,secondsWaited:(Date.now()-t0)/1000};
       }
       const a=await page.evaluate(audit);
+      if(id==='s-builder')a.builder=await page.evaluate(()=>{const S=document.querySelector('#stage').getBoundingClientRect(),k=S.width/1920,r=e=>e.getBoundingClientRect(),f=r(document.querySelector('#builder-frame')),m=document.querySelector('.method-line'),ov=(A,B)=>A.left<B.right&&B.left<A.right&&A.top<B.bottom&&B.top<A.bottom;
+        const chrome=['#nav','#number'].map(q=>r(document.querySelector(q))),things=['.builder-bar .qr','.text-link','.method-line','#builder-frame'].map(q=>r(document.querySelector(q)));
+        return{frameHeightShare:Math.round(f.height/S.height*1000)/1000,methodOneLine:m.scrollWidth<=m.clientWidth+1&&r(m).height/k<50,chromeOverlap:chrome.some(c=>things.some(t=>ov(c,t)))};});
+      if(id==='s-playbook')a.evidence=await page.evaluate(()=>[...document.querySelectorAll('.evidence')].map(e=>e.getBoundingClientRect().height/(document.querySelector('#stage').getBoundingClientRect().width/1920)<30));
+
       if(id==='s-title')a.canvasColours=await page.evaluate(()=>{const c=document.querySelector('#title-canvas').getContext('2d').getImageData(0,0,1920,1080).data,s=new Set;for(let k=0;k<c.length;k+=4*997)s.add(c[k]>>4<<8|c[k+1]>>4<<4|c[k+2]>>4);return s.size;});
       const file=`${w}x${h}-${String(i+1).padStart(2,'0')}-${id.replace(/^s-/,'')}.jpg`;
       await page.screenshot({path:path.join(out,file),type:'jpeg',quality:82});
@@ -98,6 +103,8 @@ function audit(){
   report.problems=problems;
   fs.writeFileSync(path.join(out,'check.json'),JSON.stringify(report,null,1)+'\n');
   report.minFonts=Object.fromEntries(Object.entries(report.viewports).map(([vp,rows])=>[vp,rows.map(r=>[r.id,r.minFont.px,r.minFont.text])]));
-  console.log(JSON.stringify({minFonts:report.minFonts['1920x1080'],errors:report.errors,problems,storm:report.storm,embeds:report.embeds,reducedMotion:report.reducedMotion,titleFrameMs:report.titleFrameMs},null,1));
+  report.slide9=Object.fromEntries(Object.entries(report.viewports).map(([vp,rows])=>[vp,rows.find(r=>r.id==='s-builder').builder]));
+  report.slide10=Object.fromEntries(Object.entries(report.viewports).map(([vp,rows])=>[vp,rows.find(r=>r.id==='s-playbook').evidence]));
+  console.log(JSON.stringify({slide9:report.slide9,slide10:report.slide10,minFonts:report.minFonts['1920x1080'],errors:report.errors,problems,storm:report.storm,embeds:report.embeds,reducedMotion:report.reducedMotion,titleFrameMs:report.titleFrameMs},null,1));
   if(report.errors.length||problems.length)process.exitCode=1;
 })();

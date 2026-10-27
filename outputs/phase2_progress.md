@@ -963,3 +963,8 @@ Decision 178 (presentation only): slide 8 heatmap on the maps' diverging scale (
 inside the highlighted cells; slide 9 METHOD box under a still-tall embed; slide 10 horizontal six-node
 timeline; slide 11 without the extra button or hover title; slides 3 and 12 evenly spaced. Browser checks at
 both sizes: no overlap or overflow, smallest font 20 px; index.html unchanged.
+
+Decision 179 (presentation only): slide 9 now has a compact header, the Storm Builder embed at 81% of slide
+height, one 15 px METHOD line, a 90 px QR code and a text link; page number and arrows sit top right on this
+slide. Slide 10 gains six one-line evidence lines and a "+0.001" alerts row. Checks at both sizes: no overlap
+or overflow, METHOD and evidence lines unwrapped, embed loads and unloads, QR decodes; index.html unchanged.

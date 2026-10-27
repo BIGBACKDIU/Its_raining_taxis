@@ -162,10 +162,11 @@
   <div class="fallback" hidden><div><b>Storm Builder did not load</b>Open it in a new tab to continue the demo.<br><br><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
   <div class="loading">Loading Storm Builder…</div>
  </div>
- <div class="method builder-method" data-in style="--d:.4"><span class="method-label">Method</span><span>· Agent-based simulation, minute by minute · taxis matched to requests on OpenStreetMap roads · rain raises requests and takes some drivers off duty · tuned on 20 past storms, checked on 10</span></div>
- <div class="strip" data-in style="--d:.5"><span><i style="background:var(--teal)"></i>Vacant</span><span><i style="background:var(--amber)"></i>Hired</span><span><i style="background:var(--violet)"></i>Repositioning</span><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div>
- <div class="qr" data-in style="--d:.7"><div class="qr-text"><b>Try it yourself</b>storm-builder-sg.vercel.app</div><!--QR--></div>
- <aside class="notes">To make this tangible, we built Storm Builder, a scenario tool. Taxis in teal are vacant, amber are hired and violet are repositioning. For the demo, choose the Monsoon surge preset, which is an island-wide storm, then set the day to a weekend and the start to 1 pm; the app has no web-address setting for this, so set it by hand. Please treat everything here as an illustration. None of the simulator versions passes our realism check on real held-out storms, so it is useful for discussing trade-offs, not for predicting numbers. If the frame does not load, the button opens it in a new tab.</aside>
+ <div class="builder-bar" data-in style="--d:.4">
+  <div class="method-line"><span class="pill">Method</span><span class="text">Agent-based simulation, minute by minute · taxis matched to requests on OpenStreetMap roads · rain raises requests and takes drivers off duty · tuned on 20 storms, checked on 10</span></div>
+  <div class="qr"><!--QR--><div class="qr-text">Try it yourself ·<br>storm-builder-sg.vercel.app<br><a class="text-link" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
+ </div>
+ <aside class="notes">Storm Builder is our scenario tool. It is an agent-based simulation, minute by minute: taxis are matched to requests on OpenStreetMap roads, and rain raises requests and takes some drivers off duty. It was tuned on 20 past storms and checked on 10 held-out storms. For the demo, choose Monsoon surge, set a weekend and 1 pm by hand. Treat it as an illustration: the best simulator setup matched only 4 of 10 held-out storms, and a simple rain-effect benchmark 3 of 10, so no version passes our realism check. If the frame does not load, use the link to open it in a new tab.</aside>
 </section>
 
 <!-- 10 -->
@@ -174,17 +175,20 @@
  <div class="body fill">
   <div class="timeline" id="playbook">
    <div class="track"><div class="fill"></div></div>
-   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Check the 24-h forecast; plan incentives</p></div>
-   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Move idle drivers toward the CBD</p></div>
-   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi, CBD early; Bukit Merah late</p></div>
-   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>More drivers out, not reshuffled</p></div>
-   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up driver support</p></div>
-   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours</p></div>
+   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Check the 24-h forecast; plan incentives</p><span class="evidence">Morning forecast: plans {{morning}} better</span></div>
+   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Move idle drivers toward the CBD</p><span class="evidence">Already {{approach}} when rain is 2–5 km away</span></div>
+   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi, CBD early; Bukit Merah late</p><span class="evidence">CBD {{central}} vs {{reference}} elsewhere</span></div>
+   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>More drivers out, not reshuffled</p><span class="evidence">{{island_fewer}} of 374 squares lose taxis</span></div>
+   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up driver support</p><span class="evidence">{{spell_first}} at first, {{long_spell}} after 2 h</span></div>
+   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours</p><span class="evidence">About {{recovery}} to recover</span></div>
   </div>
+  <div class="rows-wide">
   <div class="callout-wide" data-in style="--d:5"><span class="num">{{policy}}</span><span>Our repositioning plan picks squares that really run short {{policy}} of the time, vs {{random}} at random.</span></div>
+  <div class="callout-wide" data-in style="--d:5.3"><span class="num red">+{{gain}}</span><span>Don't spend on rain-triggered real-time alerts: weather adds almost nothing beyond watching current taxi numbers.</span></div>
+  </div>
  </div>
  <footer class="foot"><span class="source">Plan precision: risk-weighted plan vs all candidate squares (expected ≥ 4 taxis), test year, issue-time labels.</span></footer>
- <aside class="notes">Here is how the findings become a playbook. By 9 am, read NEA's 24-hour forecast and schedule incentives and staging. Thirty to sixty minutes before rain, when it is forecast or 2 to 5 kilometres away, move idle drivers toward the CBD. During rain, focus on Changi and Downtown Core early in the day, Geylang and Kallang at rush hour, and Bukit Merah in the evening. When rain is island-wide, get more drivers out rather than moving taxis between areas that are all short. For long spells, step up support, and keep incentives for one to two hours afterwards. Our plan picks squares that really run short 44 per cent of the time, against 28 per cent for all candidates.</aside>
+ <aside class="notes">Here is the playbook. By 9 am, read NEA's 24-hour forecast and schedule incentives; it plans 6 to 10 per cent better. Thirty to sixty minutes before rain, when it is 2 to 5 kilometres away, move idle drivers toward the CBD. During rain, focus on Changi and Downtown Core early, Geylang and Kallang at rush hour, and Bukit Merah in the evening. In island-wide rain, get more drivers out rather than shuffling taxis. Step up support in long spells and keep incentives for one to two hours after. Our plan picks short squares 44 per cent of the time, against 28. Don't spend on rain-triggered real-time alerts: weather adds only 0.001 PR-AUC.</aside>
 </section>
 
 <!-- 11 -->

@@ -36,6 +36,7 @@ function show(index){
  requestAnimationFrame(()=>requestAnimationFrame(()=>{if(slides[current]===slide)slide.classList.add('entered');}));
  hooks[slide.id]?.enter?.();
  stage.classList.toggle('dark',slide.classList.contains('dark'));
+ stage.dataset.slide=slide.id;
  $('#progress').style.width=Math.min(index+1,MAIN)/MAIN*100+'%';
  const tag=slide.dataset.appendix;
  $('#number').innerHTML=tag?`<b>${tag==='References'?tag:'Appendix '+tag}</b>`:`<b>${index+1}</b> / ${MAIN}`;

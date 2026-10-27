@@ -428,6 +428,44 @@ a.button{font-size:24px}
 .builder-method{right:77px;top:810px}
 .strip{top:940px}
 
+/* ===== Decision 179: Storm Builder slide dominated by the embed ===== */
+#s-builder .head{top:18px}
+#s-builder .kicker{font-size:16px}
+#s-builder .head h1{font-size:44px;line-height:1.1;margin-top:4px;white-space:nowrap}
+#s-builder .builder-frame{top:92px;height:878px;left:77px;right:77px}
+.builder-bar{position:absolute;left:77px;right:77px;top:980px;height:90px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.method-line{display:flex;align-items:center;gap:14px;white-space:nowrap;font-size:15px;color:var(--ink);background:#EAF1F8;border-radius:8px;padding:8px 14px}
+.method-line .pill{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4F7CAC;background:#fff;border-radius:999px;padding:3px 10px}
+.builder-bar .qr{position:static;display:flex;flex-direction:row;align-items:center;gap:12px}
+.builder-bar .qr svg{width:90px;height:90px}
+.builder-bar .qr-text{font-size:15px;line-height:1.5;color:var(--muted);text-align:left}
+.text-link{font-size:15px;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+#stage[data-slide="s-builder"] #number{top:26px;bottom:auto;right:77px}
+#stage[data-slide="s-builder"] #nav{top:14px;bottom:auto;right:180px}
+
+/* ===== Decision 179: playbook evidence lines and second row ===== */
+#s-playbook .body.fill{left:56px;right:56px;justify-content:center;gap:84px;padding-top:0}
+#s-playbook .head{left:var(--margin)}
+.timeline{column-gap:10px}
+.timeline .track{right:calc((100% - 50px)/6 - 20px)}
+.evidence{display:block;margin-top:14px;font-size:16px;line-height:1.3;color:#4F7CAC;white-space:nowrap;letter-spacing:-.01em}
+.rows-wide{display:flex;flex-direction:column;padding:0 64px}
+.rows-wide .callout-wide{border-top:1px solid var(--line);border-bottom:0}
+.rows-wide .callout-wide:last-child{border-bottom:1px solid var(--line)}
+.rows-wide .callout-wide .num{min-width:200px}
+.callout-wide .num.red{color:var(--red)}
+#s-builder .head{right:320px}
+#s-builder .builder-frame{top:100px;height:870px}
+#s-builder .builder-bar .qr{position:static}
+#s-builder .builder-bar .qr svg{width:90px;height:90px}
+.method-line{gap:10px;padding:8px 12px}
+.builder-bar{gap:16px}
+.builder-bar .qr-text{white-space:nowrap;line-height:1.45}
+.timeline .tstep{display:flex;flex-direction:column}
+.timeline .tstep p{flex:1}
+.timeline{grid-template-columns:repeat(6,minmax(0,1fr))}
+.evidence{letter-spacing:-.02em}
+
 </style>
 </head>
 <body>
@@ -10955,10 +10993,11 @@ iVBORw0KGgoAAAANSUhEUgAAB9QAAAAhCAYAAACIupAxAAACaUlEQVR4nO3Z0VHEMAwFwOQapCFKosYz
   <div class="fallback" hidden><div><b>Storm Builder did not load</b>Open it in a new tab to continue the demo.<br><br><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
   <div class="loading">Loading Storm Builder…</div>
  </div>
- <div class="method builder-method" data-in style="--d:.4"><span class="method-label">Method</span><span>· Agent-based simulation, minute by minute · taxis matched to requests on OpenStreetMap roads · rain raises requests and takes some drivers off duty · tuned on 20 past storms, checked on 10</span></div>
- <div class="strip" data-in style="--d:.5"><span><i style="background:var(--teal)"></i>Vacant</span><span><i style="background:var(--amber)"></i>Hired</span><span><i style="background:var(--violet)"></i>Repositioning</span><a class="button" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div>
- <div class="qr" data-in style="--d:.7"><div class="qr-text"><b>Try it yourself</b>storm-builder-sg.vercel.app</div><svg role="img" aria-label="QR code for storm-builder-sg.vercel.app" viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#0b1f3a" d="M2 2.5h7m2 0h3m1 0h2m1 0h1m2 0h1m2 0h7m-29 1h1m5 0h1m4 0h1m1 0h4m3 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h3m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h4m2 0h1m3 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h2m1 0h2m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m1 0h2m1 0h3m1 0h4m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h6m-20 1h1m2 0h1m1 0h2m1 0h3m1 0h1m5 0h1m1 0h2m1 0h1m-22 1h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h3m2 0h1m2 0h1m-29 1h2m2 0h1m1 0h2m2 0h2m5 0h1m1 0h1m1 0h2m2 0h3m-27 1h2m1 0h2m1 0h3m1 0h1m2 0h2m3 0h1m6 0h2m-26 1h1m1 0h4m3 0h2m4 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-27 1h1m1 0h2m3 0h1m1 0h1m5 0h5m-22 1h4m1 0h5m1 0h1m9 0h1m3 0h4m-28 1h1m2 0h1m3 0h2m1 0h5m1 0h1m1 0h2m3 0h2m1 0h1m-28 1h3m1 0h1m1 0h2m2 0h1m2 0h2m2 0h1m1 0h3m5 0h1m-26 1h4m1 0h1m1 0h3m4 0h1m4 0h3m1 0h1m2 0h1m-29 1h1m1 0h1m2 0h4m1 0h1m1 0h2m2 0h1m3 0h1m1 0h1m1 0h1m2 0h2m-27 1h2m1 0h1m1 0h1m1 0h1m1 0h3m3 0h2m1 0h2m5 0h2m-29 1h1m2 0h2m1 0h7m1 0h3m2 0h6m1 0h1m-19 1h1m1 0h2m1 0h1m3 0h4m3 0h1m1 0h3m-29 1h7m3 0h2m1 0h2m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m-28 1h1m5 0h1m1 0h2m2 0h2m1 0h2m3 0h1m3 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h4m2 0h5m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m1 0h4m-28 1h1m1 0h3m1 0h1m2 0h1m2 0h2m4 0h1m1 0h2m2 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m3 0h1m1 0h6m3 0h1m2 0h1m-28 1h7m1 0h2m1 0h3m3 0h1m2 0h2m2 0h1m2 0h1"/></svg></div>
- <aside class="notes">To make this tangible, we built Storm Builder, a scenario tool. Taxis in teal are vacant, amber are hired and violet are repositioning. For the demo, choose the Monsoon surge preset, which is an island-wide storm, then set the day to a weekend and the start to 1 pm; the app has no web-address setting for this, so set it by hand. Please treat everything here as an illustration. None of the simulator versions passes our realism check on real held-out storms, so it is useful for discussing trade-offs, not for predicting numbers. If the frame does not load, the button opens it in a new tab.</aside>
+ <div class="builder-bar" data-in style="--d:.4">
+  <div class="method-line"><span class="pill">Method</span><span class="text">Agent-based simulation, minute by minute · taxis matched to requests on OpenStreetMap roads · rain raises requests and takes drivers off duty · tuned on 20 storms, checked on 10</span></div>
+  <div class="qr"><svg role="img" aria-label="QR code for storm-builder-sg.vercel.app" viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#0b1f3a" d="M2 2.5h7m2 0h3m1 0h2m1 0h1m2 0h1m2 0h7m-29 1h1m5 0h1m4 0h1m1 0h4m3 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h3m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h4m2 0h1m3 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h2m1 0h2m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m1 0h2m1 0h3m1 0h4m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h6m-20 1h1m2 0h1m1 0h2m1 0h3m1 0h1m5 0h1m1 0h2m1 0h1m-22 1h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h3m2 0h1m2 0h1m-29 1h2m2 0h1m1 0h2m2 0h2m5 0h1m1 0h1m1 0h2m2 0h3m-27 1h2m1 0h2m1 0h3m1 0h1m2 0h2m3 0h1m6 0h2m-26 1h1m1 0h4m3 0h2m4 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-27 1h1m1 0h2m3 0h1m1 0h1m5 0h5m-22 1h4m1 0h5m1 0h1m9 0h1m3 0h4m-28 1h1m2 0h1m3 0h2m1 0h5m1 0h1m1 0h2m3 0h2m1 0h1m-28 1h3m1 0h1m1 0h2m2 0h1m2 0h2m2 0h1m1 0h3m5 0h1m-26 1h4m1 0h1m1 0h3m4 0h1m4 0h3m1 0h1m2 0h1m-29 1h1m1 0h1m2 0h4m1 0h1m1 0h2m2 0h1m3 0h1m1 0h1m1 0h1m2 0h2m-27 1h2m1 0h1m1 0h1m1 0h1m1 0h3m3 0h2m1 0h2m5 0h2m-29 1h1m2 0h2m1 0h7m1 0h3m2 0h6m1 0h1m-19 1h1m1 0h2m1 0h1m3 0h4m3 0h1m1 0h3m-29 1h7m3 0h2m1 0h2m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m-28 1h1m5 0h1m1 0h2m2 0h2m1 0h2m3 0h1m3 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h4m2 0h5m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m1 0h4m-28 1h1m1 0h3m1 0h1m2 0h1m2 0h2m4 0h1m1 0h2m2 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m3 0h1m1 0h6m3 0h1m2 0h1m-28 1h7m1 0h2m1 0h3m3 0h1m2 0h2m2 0h1m2 0h1"/></svg><div class="qr-text">Try it yourself ·<br>storm-builder-sg.vercel.app<br><a class="text-link" href="https://storm-builder-sg.vercel.app/" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
+ </div>
+ <aside class="notes">Storm Builder is our scenario tool. It is an agent-based simulation, minute by minute: taxis are matched to requests on OpenStreetMap roads, and rain raises requests and takes some drivers off duty. It was tuned on 20 past storms and checked on 10 held-out storms. For the demo, choose Monsoon surge, set a weekend and 1 pm by hand. Treat it as an illustration: the best simulator setup matched only 4 of 10 held-out storms, and a simple rain-effect benchmark 3 of 10, so no version passes our realism check. If the frame does not load, use the link to open it in a new tab.</aside>
 </section>
 
 <!-- 10 -->
@@ -10967,17 +11006,20 @@ iVBORw0KGgoAAAANSUhEUgAAB9QAAAAhCAYAAACIupAxAAACaUlEQVR4nO3Z0VHEMAwFwOQapCFKosYz
  <div class="body fill">
   <div class="timeline" id="playbook">
    <div class="track"><div class="fill"></div></div>
-   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Check the 24-h forecast; plan incentives</p></div>
-   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Move idle drivers toward the CBD</p></div>
-   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi, CBD early; Bukit Merah late</p></div>
-   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>More drivers out, not reshuffled</p></div>
-   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up driver support</p></div>
-   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours</p></div>
+   <div class="tstep"><span class="marker">1</span><h2>By 09:00</h2><p>Check the 24-h forecast; plan incentives</p><span class="evidence">Morning forecast: plans 6–10% better</span></div>
+   <div class="tstep"><span class="marker">2</span><h2>30–60 min before</h2><p>Move idle drivers toward the CBD</p><span class="evidence">Already −7% when rain is 2–5 km away</span></div>
+   <div class="tstep"><span class="marker">3</span><h2>During rain</h2><p>Changi, CBD early; Bukit Merah late</p><span class="evidence">CBD −24.5% vs −12.0% elsewhere</span></div>
+   <div class="tstep"><span class="marker">4</span><h2>Island-wide rain</h2><p>More drivers out, not reshuffled</p><span class="evidence">329 of 374 squares lose taxis</span></div>
+   <div class="tstep"><span class="marker">5</span><h2>Over 2 hours</h2><p>Step up driver support</p><span class="evidence">−11% at first, −18% after 2 h</span></div>
+   <div class="tstep"><span class="marker">6</span><h2>After rain</h2><p>Keep incentives for 1–2 hours</p><span class="evidence">About 2.5 h to recover</span></div>
   </div>
+  <div class="rows-wide">
   <div class="callout-wide" data-in style="--d:5"><span class="num">44%</span><span>Our repositioning plan picks squares that really run short 44% of the time, vs 28% at random.</span></div>
+  <div class="callout-wide" data-in style="--d:5.3"><span class="num red">+0.001</span><span>Don't spend on rain-triggered real-time alerts: weather adds almost nothing beyond watching current taxi numbers.</span></div>
+  </div>
  </div>
  <footer class="foot"><span class="source">Plan precision: risk-weighted plan vs all candidate squares (expected ≥ 4 taxis), test year, issue-time labels.</span></footer>
- <aside class="notes">Here is how the findings become a playbook. By 9 am, read NEA's 24-hour forecast and schedule incentives and staging. Thirty to sixty minutes before rain, when it is forecast or 2 to 5 kilometres away, move idle drivers toward the CBD. During rain, focus on Changi and Downtown Core early in the day, Geylang and Kallang at rush hour, and Bukit Merah in the evening. When rain is island-wide, get more drivers out rather than moving taxis between areas that are all short. For long spells, step up support, and keep incentives for one to two hours afterwards. Our plan picks squares that really run short 44 per cent of the time, against 28 per cent for all candidates.</aside>
+ <aside class="notes">Here is the playbook. By 9 am, read NEA's 24-hour forecast and schedule incentives; it plans 6 to 10 per cent better. Thirty to sixty minutes before rain, when it is 2 to 5 kilometres away, move idle drivers toward the CBD. During rain, focus on Changi and Downtown Core early, Geylang and Kallang at rush hour, and Bukit Merah in the evening. In island-wide rain, get more drivers out rather than shuffling taxis. Step up support in long spells and keep incentives for one to two hours after. Our plan picks short squares 44 per cent of the time, against 28. Don't spend on rain-triggered real-time alerts: weather adds only 0.001 PR-AUC.</aside>
 </section>
 
 <!-- 11 -->
@@ -37230,6 +37272,7 @@ function show(index){
  requestAnimationFrame(()=>requestAnimationFrame(()=>{if(slides[current]===slide)slide.classList.add('entered');}));
  hooks[slide.id]?.enter?.();
  stage.classList.toggle('dark',slide.classList.contains('dark'));
+ stage.dataset.slide=slide.id;
  $('#progress').style.width=Math.min(index+1,MAIN)/MAIN*100+'%';
  const tag=slide.dataset.appendix;
  $('#number').innerHTML=tag?`<b>${tag==='References'?tag:'Appendix '+tag}</b>`:`<b>${index+1}</b> / ${MAIN}`;

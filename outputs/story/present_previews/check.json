@@ -122,11 +122,16 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 447,
+    "text": 410,
     "svgs": 2,
     "minFont": {
-     "px": 20,
-     "text": "Live demo · illustration only"
+     "px": 13,
+     "text": "Method"
+    },
+    "builder": {
+     "frameHeightShare": 0.806,
+     "methodOneLine": true,
+     "chromeOverlap": false
     }
    },
    {
@@ -136,12 +141,20 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 531,
+    "text": 840,
     "svgs": 0,
     "minFont": {
-     "px": 20,
-     "text": "Recommendation"
-    }
+     "px": 16,
+     "text": "Morning forecast: plans 6–10% better"
+    },
+    "evidence": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
    },
    {
     "slide": 11,
@@ -503,11 +516,16 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 447,
+    "text": 410,
     "svgs": 2,
     "minFont": {
-     "px": 20,
-     "text": "Live demo · illustration only"
+     "px": 13,
+     "text": "Method"
+    },
+    "builder": {
+     "frameHeightShare": 0.806,
+     "methodOneLine": true,
+     "chromeOverlap": false
     }
    },
    {
@@ -517,12 +535,20 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 531,
+    "text": 840,
     "svgs": 0,
     "minFont": {
-     "px": 20,
-     "text": "Recommendation"
-    }
+     "px": 16,
+     "text": "Morning forecast: plans 6–10% better"
+    },
+    "evidence": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
    },
    {
     "slide": 11,
@@ -778,13 +804,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.009
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.002
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -793,7 +819,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.005
+   "secondsWaited": 9.008
   }
  },
  "storm": {
@@ -810,6 +836,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.665217391304346,
+ "titleFrameMs": 16.66608695652174,
  "problems": []
 }

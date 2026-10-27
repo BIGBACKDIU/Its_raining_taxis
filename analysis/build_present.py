@@ -110,6 +110,7 @@ def values():
     v['dose1'] = pct(dose[1.0], 1)
     dh = read('dose_duration_hangover').query("model=='abs'").set_index('term').pct
     v['long_spell'] = pct(dh['heavy_wet>120'])
+    v['spell_first'] = pct(dh['heavy_wet<=30'])
     v['after'] = pct(-dh[[t for t in dh.index if t.startswith('dry_')][0]])
     v['hotspots'] = str((read('inference_hotspots').hotspot == 'significantly lower').sum())
     v['reference'] = pct(f.loc['CONTRAST: heavy, MRT >= 1 km (reference)', 'pct'], 1)
@@ -133,7 +134,7 @@ def values():
                 'test_log': v['test_log'], 'light': '−7.7%', 'moderate': '−10.8%', 'share_heavy': '−5.7%',
                 'deepest': '−5.6%', 'dose1': '−9.7%', 'long_spell': '−18%', 'after': '5%', 'hotspots': '299',
                 'reference': '−12.0%', 'central_share': '−18.9%', 'reference_share': '−5.0%', 'wls_central': '11%',
-                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15', 'others': '−11.6% to −12.5%'}
+                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15', 'others': '−11.6% to −12.5%', 'spell_first': '−11%'}
     assert v == expected, {k: (v[k], expected[k]) for k in v if v[k] != expected.get(k)}
     return v
 

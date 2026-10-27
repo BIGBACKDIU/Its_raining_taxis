@@ -17,8 +17,8 @@
     101,
     107,
     115,
-    107,
-    120,
+    106,
+    113,
     101,
     103,
     112,
@@ -90,6 +90,7 @@
     "deepest": "−5.6%",
     "dose1": "−9.7%",
     "long_spell": "−18%",
+    "spell_first": "−11%",
     "after": "5%",
     "hotspots": "299",
     "reference": "−12.0%",
@@ -155,6 +156,6 @@
     "outputs/figures/deck/present/present_regimes.svg": "59ab4a9af0b330fd862ecafd48fa0a027d988b044027967215a7e5b47b8e2cdd",
     "outputs/figures/deck/present/present_robustness.svg": "c92110d625afe5bd627ea8e903fe4c06030bb101e903347fbec9d4b7eb268eb5"
   },
-  "html_sha256": "2242c120ab48b5715fe65585127d23b4e5e6e4e993b3ce1a0e8418888395768b",
-  "bytes": 3096868
+  "html_sha256": "ca62ffdcd53286c104a2d389fa9acbb8af76241f79a52de3c9cc5fb7595a2956",
+  "bytes": 3099664
 }
