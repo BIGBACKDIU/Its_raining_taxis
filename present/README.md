@@ -43,3 +43,15 @@ numbered markers). Slides use 68 px titles, 56 px key numbers, 30 px body text a
 browser check reports the smallest font per page (20 px everywhere, map attribution excluded). Chart
 slides 4–8 carry a METHOD box and "What it shows" points; slide 6 adds a numbered 1 km map. The title
 animation runs on a 40-second loop. Appendix pages: A1, A2, A3a/b, A4, A5a/b, A6a/b, A7, A8, A9.
+
+## Website (decision 181)
+
+Public at **https://raining-taxis-deck.vercel.app** (Vercel project `raining-taxis-deck`, team
+`mhfurui-7256s-projects`, static file only). After rebuilding the page, redeploy with:
+
+```sh
+scripts/deploy_deck.sh
+```
+
+It copies `outputs/story/present.html` to `deploy/deck/index.html` and runs `vercel deploy deploy/deck --prod --yes`
+(linking the folder to the project first on a fresh clone). `deploy/deck/.vercel` is git-ignored.

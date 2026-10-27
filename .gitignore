@@ -31,3 +31,5 @@ data/interim/s23/
 .vercel
 
 .deck-build/
+deploy/deck/.vercel
+deploy/deck/.env*
