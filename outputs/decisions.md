@@ -1718,3 +1718,30 @@ results stay as they are and remain the pre-specified result.
     The existing Git-connected production deployment receives this app-shell change on push.
     Verify identical bounds and no clipped notes at desktop/phone sizes, autoplay/pause/resume,
     reading-view restoration, frozen input hashes, tests and the wording gate before committing.
+
+174. **Fifteen-minute presentation page `outputs/story/present.html` (presentation only).** The user
+    asked for a 14-slide talk version of the research story, built from saved results only. Build it
+    from new sources in `present/` with `analysis/build_present.py`; `outputs/story/index.html` and the
+    `story/` sources are not changed. Reuse the story page's embedded Poppins/Anton fonts, coastline,
+    1 km grid, observed 20 July 2023 storm export and the Storm Builder embed/playback messages.
+    The look uses a taxi-blue palette (#0B3D91, #1E88E5, white/pale blue, ink #14203A, yellow #FFC72C
+    for highlights/progress); red #C0453C only marks fewer taxis. No ComfortDelGro logo, wordmark or
+    brand asset; the title slide states "Student project · not affiliated with ComfortDelGro".
+
+    Charts: `analysis/present_charts.py` redraws the event timeline, places bars and planning heatmap
+    with the same deck renderer, fonts, sizes rules and saved inputs as `analysis/deck_charts.py`, in
+    the presentation palette, into `outputs/figures/deck/present/`. It also adds `deck_factors`
+    (deck palette, `outputs/figures/deck/`) and its presentation copy from the saved
+    `factors_panel_interactions.csv` absolute heavy-rain contrasts: Central Area −24.51%,
+    MRT exit <300 m −12.46%, 300–1,000 m −11.61%, ≥1 km reference −12.02%, taxi stand within 300 m
+    −11.69%, mall −12.33%, with saved 95% CIs and a dotted reference line at −12.0%. The original
+    eleven deck exports are not overwritten.
+
+    Every number is either read from saved tables at build time or is a value supplied by the user
+    (2015/2025 LTA fleet counts, ComfortDelGro fleet news, reference list). Presentation choices:
+    the fleet chart joins only the two supplied years, with no intermediate values implied; the event
+    cursor sweeps the saved −60 to +180 minute range (no saved −2 h estimate exists); Changi T3 is
+    shown as −8.5% (saved −8.50%); "53% vs 46%" is the mean of the saved 30/60-minute top-19
+    precision (LightGBM 54.2%/51.9%, persistence 47.2%/44.0%); storm expected counts are rounded to
+    whole taxis. The Storm Builder has no URL preset, so the island-wide weekend 1 pm scenario is a
+    speaker-note instruction. No estimation, labels, scoring or test-year use; no frozen file changes.
