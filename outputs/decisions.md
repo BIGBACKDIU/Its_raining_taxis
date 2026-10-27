@@ -1864,3 +1864,10 @@ results stay as they are and remain the pre-specified result.
     slides 4–8. Slide 10: evidence lines at 20 px directly under each step (wrapping allowed), the timeline
     aligned to the 120 px content margins, and a "PR-AUC" label under "+0.001". Slide 11: the dashboard embed
     about 15% taller. No number changes, estimation or scoring; `outputs/story/index.html` is unchanged.
+
+181. **Publish the presentation as a public static website (presentation only).** Copy
+    `outputs/story/present.html` unchanged to `deploy/deck/index.html` and deploy that folder alone (no
+    build step, no other story files) as the Vercel project `raining-taxis-deck` in the same team as
+    `storm-builder-sg`. `scripts/deploy_deck.sh` re-copies the page and redeploys to production. The
+    production URL must open without a Vercel login. Live checks: slide 1 on load, arrow keys, F and S,
+    both embeds load, slide 14 QR code decodes to storm-builder-sg.vercel.app. No analysis changes.
