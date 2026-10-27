@@ -1838,3 +1838,12 @@ results stay as they are and remain the pre-specified result.
     to that slide's speaker notes, which keep every number. The slide-7 "no clear difference" callout shows
     the saved range of the other heavy-rain contrasts (−11.6% to −12.5%, `factors_panel_interactions.csv`).
     No number changes, estimation or scoring; `outputs/story/index.html` is unchanged.
+
+178. **Small presentation fixes (presentation only).** Slide 8's heatmap switches to the maps' diverging scale
+    (red = fewer vacant taxis, white = 0, blue = more; symmetric, capped at ±35) with numbered badges inside the
+    highlighted cells. Slide 10 returns to a horizontal six-node timeline (step texts shortened; full text stays
+    in the speaker notes). Slide 9 gains a METHOD box describing the existing simulator: minute-by-minute
+    agent-based simulation on OpenStreetMap roads, rain raising requests and taking some drivers off duty,
+    tuned on 20 past storms and checked on 10 (`sim2_diagnosis_by_storm.csv`: 20 fit and 10 test storms).
+    Slide 11 drops the extra button and the embed's hover title; slides 3 and 12 get even spacing. No number
+    changes, estimation or scoring; `outputs/story/index.html` is unchanged.
