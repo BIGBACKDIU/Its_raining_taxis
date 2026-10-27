@@ -1847,3 +1847,15 @@ results stay as they are and remain the pre-specified result.
     tuned on 20 past storms and checked on 10 (`sim2_diagnosis_by_storm.csv`: 20 fit and 10 test storms).
     Slide 11 drops the extra button and the embed's hover title; slides 3 and 12 get even spacing. No number
     changes, estimation or scoring; `outputs/story/index.html` is unchanged.
+
+179. **Storm Builder slide decluttered; playbook evidence lines (presentation only).** Slide 9: compact header
+    (16 px eyebrow, 44 px title), the embed at about 81% of slide height and near-full width, one thin METHOD
+    line (15 px) with a small QR code and an "Open in new tab" text link beside it; the slide number and
+    navigation arrows move to the top right on this slide only. The user explicitly accepts these small sizes
+    on this slide, overriding the 20 px floor of decision 176. Slide 10 adds one evidence line per step
+    (16 px, steel blue) from saved results — morning forecast 6–10%, −7% approaching rain, Central Area
+    −24.5% vs −12.0%, 329 of 374 squares in island-wide rain, heavy spells −11% (first 30 min, −11.4%) to
+    −18% (over 2 h), ~2.5 h to recovery — and a second row "+0.001" (weather gain in short-term alerts).
+    To keep each evidence line on one line, the timeline spans nearly the full slide width. Speaker notes
+    carry the full simulator method and the 4 of 10 / 3 of 10 realism results. No number changes,
+    estimation or scoring; `outputs/story/index.html` is unchanged.
