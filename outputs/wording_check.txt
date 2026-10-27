@@ -26,29 +26,27 @@ present/template.html:27 [cause] <aside class="notes">Our question is simple: wh
 present/template.html:60 [demand] <div class="card" data-in style="--d:4.1"><b>Empty taxis only</b>We see supply, not demand</div>
 present/template.html:61 [cause] <div class="card" data-in style="--d:4.3"><b>Associations</b>Not proven causes</div>
 present/template.html:65 [cause] <aside class="notes">We worked in five steps. First, we cleaned the data: we audited feed outages, stuck rain gauges and unusual days. Second, we compared rainy
-present/template.html:88 [cause] <footer class="foot"><span class="source">One observed storm, 20 July 2023, 06:30–13:30. Averages: effects_main.csv. Associations, not causes.</span></footer>
-present/template.html:89 [cause] <aside class="notes">Here is one real storm, on 20 July 2023. The left map shows rain in the previous half-hour; grey means dry. The right map compares vacant t
-present/template.html:105 [cause] <footer class="foot"><span class="source">effects_event_study.csv, effects_approach.csv, dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not ca
-present/template.html:124 [cause] <footer class="foot"><span class="source">rain_hit_top30_absolute.csv, rain_hit_absolute_all.csv, inference_hotspots.csv, spillover_islandwide_share.csv. Associ
-present/template.html:139 [validation] <div class="method" data-in style="--d:1.2"><span class="method-label">Method</span><span>Poisson fixed effects with heavy-rain × characteristic interactions, c
-present/template.html:141 [cause] <footer class="foot"><span class="source">factors_panel_interactions.csv, factors_cell_wls.csv, factors_cell_summary.csv; 95% CIs; dotted line = MRT exit ≥ 1 km
-present/template.html:157 [cause] <footer class="foot"><span class="source">planning_rain_losses.csv (weekdays, Apr 2022–Mar 2025), forecast_eval_both_labels.csv, morning_forecast_value.csv. Ass
-present/template.html:215 [demand] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
-present/template.html:215 [waiting time] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
-present/template.html:215 [revenue] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
-present/template.html:216 [cause] <div class="card" data-in style="--d:.5"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
-present/template.html:223 [demand] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:223 [waiting time] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:223 [revenue] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
-present/template.html:230 [waiting time] <div class="row" data-in style="--d:.3"><div class="what"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
-present/template.html:233 [revenue] <div class="row" data-in style="--d:1.2"><div class="what"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
-present/template.html:261 [demand] <footer class="foot"><span class="source">Supply, not demand · associations, not causes</span></footer>
-present/template.html:261 [cause] <footer class="foot"><span class="source">Supply, not demand · associations, not causes</span></footer>
-present/template.html:262 [demand] <aside class="notes">To close, here is what we found. Heavy rain comes with 12.9 per cent fewer vacant taxis, 24.5 per cent in the CBD, and radar rainfall gives
-present/template.html:269 [revenue] <p>ComfortDelGro Corporation. (2026, August 14). <i>ComfortDelGro reports 5.7% revenue growth as international public transport portfolio strengthens earnings</
-present/template.html:321 [cause] <footer class="foot"><span class="source">effects_main.csv, radar_effects.csv, radar_central.csv. 95% CIs. Associations, not causes.</span></footer>
-present/template.html:335 [cause] <footer class="foot"><span class="source">dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not causes.</span></footer>
-present/template.html:414 [cause] <p><b>Association.</b> Things move together; not proof of cause.</p>
+present/template.html:86 [cause] <footer class="foot"><span class="source">One observed storm, 20 July 2023, 06:30–13:30. Averages: effects_main.csv. Associations, not causes.</span></footer>
+present/template.html:101 [cause] <footer class="foot"><span class="source">effects_event_study.csv, effects_approach.csv, dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not ca
+present/template.html:120 [cause] <footer class="foot"><span class="source">rain_hit_top30_absolute.csv, rain_hit_absolute_all.csv, inference_hotspots.csv, spillover_islandwide_share.csv. Associ
+present/template.html:135 [cause] <footer class="foot"><span class="source">factors_panel_interactions.csv, factors_cell_wls.csv, factors_cell_summary.csv; 95% CIs; dotted line = MRT exit ≥ 1 km
+present/template.html:154 [cause] <footer class="foot"><span class="source">planning_rain_losses.csv (weekdays, Apr 2022–Mar 2025), forecast_eval_both_labels.csv, morning_forecast_value.csv. Ass
+present/template.html:212 [demand] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
+present/template.html:212 [waiting time] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
+present/template.html:212 [revenue] <div class="card" data-in style="--d:.3"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
+present/template.html:213 [cause] <div class="card" data-in style="--d:.5"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" str
+present/template.html:220 [demand] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:220 [waiting time] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:220 [revenue] <aside class="notes">Four limits shape how to use these results. First, we observe supply, not demand: we cannot see riders, waiting times or fares. Second, eve
+present/template.html:234 [waiting time] <aside class="notes">Five directions, each tied to a number. A pilot over six to eight weeks would test whether the 12.9 per cent heavy-rain gap, 24.5 in the CB
+present/template.html:234 [revenue] <aside class="notes">Five directions, each tied to a number. A pilot over six to eight weeks would test whether the 12.9 per cent heavy-rain gap, 24.5 in the CB
+present/template.html:258 [demand] <footer class="foot"><span class="source">Supply, not demand · associations, not causes</span></footer>
+present/template.html:258 [cause] <footer class="foot"><span class="source">Supply, not demand · associations, not causes</span></footer>
+present/template.html:259 [demand] <aside class="notes">To close, here is what we found. Heavy rain comes with 12.9 per cent fewer vacant taxis, 24.5 per cent in the CBD, and radar rainfall gives
+present/template.html:266 [revenue] <p>ComfortDelGro Corporation. (2026, August 14). <i>ComfortDelGro reports 5.7% revenue growth as international public transport portfolio strengthens earnings</
+present/template.html:318 [cause] <footer class="foot"><span class="source">effects_main.csv, radar_effects.csv, radar_central.csv. 95% CIs. Associations, not causes.</span></footer>
+present/template.html:332 [cause] <footer class="foot"><span class="source">dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not causes.</span></footer>
+present/template.html:411 [cause] <p><b>Association.</b> Things move together; not proof of cause.</p>
 analysis/02_describe.py:192 [cause] fig.text(0.01, 0.005, "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Association, not cause.",
 analysis/03_effects.py:4 [validation] Estimator: Poisson PML with fixed effects and day-clustered errors (analysis/fepois_hd.py, validated against
 analysis/03_effects.py:5 [validation] pyfixest on 2023 with --validate). Effects are 100 * (exp(b) - 1) % with 95% CI.

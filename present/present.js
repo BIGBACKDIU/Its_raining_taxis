@@ -196,9 +196,9 @@ const changeRects=stormMap('#map-change',(g,s)=>{
 const totals=S.times.map((_,f)=>({observed:S.vacant[f].reduce((a,b)=>a+b,0),expected:S.baseline[f].reduce((a,b)=>a+b,0)}));
 const PEAK=S.times.findIndex(t=>t.slice(11,16)==='09:30');
 const line=(()=>{
- const W=1109,H=215,x=i=>92+i*(1090-92)/(S.times.length-1),y=v=>168-(v-1200)/1500*152;
+ const W=1252,H=215,x=i=>92+i*(1232-92)/(S.times.length-1),y=v=>168-(v-1200)/1500*152;
  const s=add($('#storm-line'),'svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Actual and expected vacant taxis, 06:30 to 13:30'});
- for(const v of[1500,2000,2500]){add(s,'line',{x1:92,x2:1090,y1:y(v),y2:y(v),stroke:C.grid});add(s,'text',{x:80,y:y(v)+8,'text-anchor':'end','font-size':24,fill:C.muted},num(v));}
+ for(const v of[1500,2000,2500]){add(s,'line',{x1:92,x2:1232,y1:y(v),y2:y(v),stroke:C.grid});add(s,'text',{x:80,y:y(v)+8,'text-anchor':'end','font-size':24,fill:C.muted},num(v));}
  for(const i of[0,PEAK,S.times.length-1])add(s,'text',{x:x(i),y:206,'text-anchor':i===0?'start':i===PEAK?'middle':'end','font-size':24,fill:C.muted},S.times[i].slice(11,16));
  add(s,'path',{d:totals.map((r,i)=>(i?'L':'M')+x(i)+','+y(r.expected)).join(''),fill:'none',stroke:C.muted,'stroke-width':2.5,'stroke-dasharray':'7 6'});
  const obs=add(s,'path',{fill:'none',stroke:C.navy,'stroke-width':3,'stroke-linejoin':'round'});
@@ -209,7 +209,7 @@ const line=(()=>{
  const peak=add(s,'g',{opacity:0});
  add(peak,'line',{x1:x(PEAK),x2:x(PEAK),y1:y(p.observed),y2:y(p.expected),stroke:C.red,'stroke-width':4});
  add(peak,'text',{x:x(PEAK)+16,y:y(p.expected)-8,'font-size':24,'font-weight':500,fill:C.red},`09:30 · ${num(gap)} fewer (${num(-gap/p.expected*100,1)}%) · this storm`);
- add(s,'text',{x:1090,y:y(totals.at(-1).expected)-12,'text-anchor':'end','font-size':24,fill:C.muted},'Expected');
+ add(s,'text',{x:1232,y:y(totals.at(-1).expected)-12,'text-anchor':'end','font-size':24,fill:C.muted},'Expected');
  const lab=add(s,'text',{'font-size':24,'font-weight':500,fill:C.navy},'Actual');
  return f=>{
   obs.setAttribute('d',totals.slice(0,f+1).map((r,i)=>(i?'L':'M')+x(i)+','+y(r.observed)).join(''));

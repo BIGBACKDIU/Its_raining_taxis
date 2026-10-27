@@ -38,77 +38,76 @@
     },
     "present_factors": {
       "display_pixels": [
-        1110,
-        640
+        1253,
+        730
       ],
       "png_pixels": [
-        2220,
-        1280
+        2506,
+        1460
       ],
       "fonts_used": [
         "Poppins-Regular.ttf"
       ],
-      "sha256": "efede43d9b85efb4d1550950040d397ddf0e747765191da3225d79fa46ff247f"
+      "sha256": "36b4ebbf7d762ca282351530b5a5cedddea0716fbad1e090fba51df4ca645ad3"
     },
     "present_event_timeline": {
       "display_pixels": [
-        1110,
-        640
+        1253,
+        730
       ],
       "png_pixels": [
-        2220,
-        1280
+        2506,
+        1460
       ],
       "fonts_used": [
         "Poppins-Regular.ttf",
         "Poppins-SemiBold.ttf"
       ],
-      "sha256": "7e601ad364dd24502c1cbfb9638ca2951620d1e1dfdb6eaa3ba93a5ae24c32c2"
+      "sha256": "4f2560be35bed20c8e4baa808170c38db25068d8aba297378cc889f013e3129f"
     },
     "present_places_bar": {
       "display_pixels": [
-        824,
-        420
+        924,
+        730
       ],
       "png_pixels": [
-        1648,
-        840
+        1848,
+        1460
       ],
       "fonts_used": [
         "Poppins-Regular.ttf"
       ],
-      "sha256": "df1d3b76d2e24e823eb631accb3e954d5570db41348b2f24200ca629fc8723bc"
+      "sha256": "9832d0389580b97a4e14fd485524c842f55c088b2f6552556bca72f47dc0c08b"
     },
     "present_places_map": {
       "display_pixels": [
-        539,
-        420
+        600,
+        410
       ],
       "png_pixels": [
-        1078,
-        840
+        1200,
+        820
       ],
       "fonts_used": [
         "Poppins-Regular.ttf",
         "Poppins-SemiBold.ttf"
       ],
-      "sha256": "b0af389617c3616eafd323a9de1ac904e1c4b48b01043cb595b2f23013e140c1"
+      "sha256": "c2fa0e9f4e8d3521b84b9c5498579a1b17ac167eed053415a6fce736efd56c41"
     },
     "present_planning_heatmap": {
       "display_pixels": [
-        1110,
-        640
+        1253,
+        730
       ],
       "png_pixels": [
-        2220,
-        1280
+        2506,
+        1460
       ],
       "fonts_used": [
-        "Poppins-Medium.ttf",
         "Poppins-Regular.ttf",
         "Poppins-SemiBold.ttf"
       ],
-      "sha256": "b13ee9f28fda9d7bae6f616c963165b89bac21780b72878200d867b7ac8e7f66"
+      "sha256": "8b81c6d7d7fa80908922125de72864edd79d8a62036cd286a0b443d40c06db12"
     },
     "present_regimes": {
       "display_pixels": [

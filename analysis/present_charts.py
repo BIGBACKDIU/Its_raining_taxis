@@ -160,7 +160,7 @@ def places(out, size):
     dc.SIZES[name] = size
     dc.record(name, t)
     fig = dc.figure(name)
-    ax = dc.axes(fig, [.335, .22, .655, .77], grid=False)
+    ax = dc.axes(fig, [.31, .12, .67, .86], grid=False)
     ax.xaxis.grid(True, color=dc.GRID, linewidth=.7)
     y = np.arange(12)[::-1]
     colors = [dc.RED if r.planning_area in CENTRAL else p['navy'] for r in t.itertuples()]
@@ -210,7 +210,7 @@ def planning(out, size):
     cmap = LinearSegmentedColormap.from_list('present_blue', [p['pale'], p['light'], p['blue'], p['navy']])
     norm = Normalize(0, np.nanmax(m.values))
     fig = dc.figure(name)
-    ax = fig.add_axes([.205, .27, .375, .56])
+    ax = fig.add_axes([.177, .255, .70, .605])
     for i in range(10):
         for j in range(5):
             v = m.iloc[i, j]
@@ -220,7 +220,7 @@ def planning(out, size):
             ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor=rgb, edgecolor='#FFFFFF', lw=1.5, gid=f'cell-{i}-{j}'))
             lum = np.dot(rgb[:3], [.2126, .7152, .0722])
             ax.text(j, i, '0.0' if round(v, 1) == 0 else f'{v:.1f}'.replace('-', '−'), ha='center', va='center',
-                    fontsize=dc.pt(24), color='#FFFFFF' if lum < .55 else dc.INK)
+                    fontsize=dc.pt(28), color='#FFFFFF' if lum < .55 else dc.INK)
     ax.set(xlim=(-.5, 4.5), ylim=(9.5, -.5))
     ax.set_yticks(range(10), [s.title() for s in order])
     ax.set_xticks(range(5), ['00–07', '07–10', '10–17', '17–20', '20–24'])
@@ -231,36 +231,18 @@ def planning(out, size):
     for spine in ax.spines.values():
         spine.set_visible(False)
     rows = list(order)
-    callouts = [
-        ('CHANGI', ['00-07'], 'Changi 00–07', '{a} fewer per half-hour\n({p})'),
-        ('DOWNTOWN CORE', ['00-07'], 'Downtown Core 00–07', '{a} fewer ({p})'),
-        ('BUKIT MERAH', ['17-20', '20-24'], 'Bukit Merah 17–20, 20–24', '{a} fewer\n({p})'),
-    ]
-    tx = 4.85
-    ty = [0.0, 3.5, 7.0]
-    for k, (area, cols, title, fmt) in enumerate(callouts):
-        i = rows.index(area)
-        js = [bands.index(c) for c in cols]
-        a = ' and '.join(f'{m.loc[area, c]:.1f}' for c in cols)
-        pcs = sorted({f'{pc.loc[area, c]:.0f}' for c in cols})
-        assert len(pcs) == 1, (area, pcs)
-        text = fmt.format(a=a, p=dc.pct(float(pcs[0]), 0))
+    # Decision 177: outlined cells and numbered markers outside the grid; callout text lives on the slide.
+    callouts = [('CHANGI', ['00-07']), ('DOWNTOWN CORE', ['00-07']), ('BUKIT MERAH', ['17-20', '20-24'])]
+    for k, (area, cols) in enumerate(callouts):
+        i, js = rows.index(area), [bands.index(c) for c in cols]
         ax.add_patch(Rectangle((min(js) - .47, i - .47), len(js) - .06, .94, fill=False, edgecolor=p['accent'],
-                               lw=2.2, zorder=5, gid=f'callout-box-{k}', clip_on=False))
-        bx, by = min(js) - .47, i - .47
-        ax.scatter([bx], [by], s=560, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7, clip_on=False,
+                               lw=2.4, zorder=5, gid=f'callout-box-{k}', clip_on=False))
+        mx = 4.5 + .32
+        ax.scatter([mx], [i], s=620, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7, clip_on=False,
                    gid=f'callout-badge-{k}')
-        ax.text(bx, by, str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center', weight=600,
+        ax.text(mx, i, str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center', weight=600,
                 zorder=8, clip_on=False).set_gid(f'callout-num-{k}')
-        ax.scatter([tx + .16], [ty[k]], s=560, color='#FFFFFF', edgecolor=p['accent'], linewidth=1.5, zorder=7,
-                   clip_on=False, gid=f'callout-keybadge-{k}')
-        ax.text(tx + .16, ty[k], str(k + 1), color=p['accent'], fontsize=MARKER_PX * .72, ha='center', va='center',
-                weight=600, zorder=8, clip_on=False).set_gid(f'callout-keynum-{k}')
-        dc.label(ax, tx + .45, ty[k], title, p['accent'], size=28, va='center', weight=600, clip_on=False).set_gid(f'callout-title-{k}')
-        dc.label(ax, tx + .45, ty[k] + .55, text, dc.RED, size=28, va='top', weight=500, linespacing=1.15,
-                 clip_on=False).set_gid(f'callout-text-{k}')
-    fig.text(.62, .1, 'Negative = more taxis than usual', fontsize=dc.pt(24), color=dc.MUTED)
-    dc.colorbar(fig, [.205, .155, .375, .025], cmap, norm, 'Fewer taxis per half-hour', ticks=[0, 10, 20, 30])
+    dc.colorbar(fig, [.177, .125, .70, .022], cmap, norm, 'Fewer vacant taxis per half-hour', ticks=[0, 10, 20, 30])
     dc.save(fig, name)
 
 
@@ -384,11 +366,11 @@ def where_present():
 def main():
     PRESENT.mkdir(parents=True, exist_ok=True)
     factors('deck', DECK, 'deck_factors', (1100, 560))
-    factors('present', PRESENT, 'present_factors', (1110, 640))
-    event(PRESENT, (1110, 640))
-    places(PRESENT, (824, 420))
-    places_map(PRESENT, (539, 420))
-    planning(PRESENT, (1110, 640))
+    factors('present', PRESENT, 'present_factors', (1253, 730))
+    event(PRESENT, (1253, 730))
+    places(PRESENT, (924, 730))
+    places_map(PRESENT, (600, 410))
+    planning(PRESENT, (1253, 730))
     regimes(PRESENT, (1680, 440))
     robustness(PRESENT, (1680, 680))
     policy(PRESENT, (1110, 640))

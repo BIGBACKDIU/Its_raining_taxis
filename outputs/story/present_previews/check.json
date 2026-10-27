@@ -52,7 +52,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 869,
+    "text": 590,
     "svgs": 1656,
     "minFont": {
      "px": 20,
@@ -66,7 +66,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 783,
+    "text": 469,
     "svgs": 103,
     "minFont": {
      "px": 20,
@@ -80,11 +80,11 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1221,
+    "text": 960,
     "svgs": 1467,
     "minFont": {
      "px": 20,
-     "text": "Chart 3 · Descriptive to diagnostic"
+     "text": "12"
     }
    },
    {
@@ -94,7 +94,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 924,
+    "text": 631,
     "svgs": 161,
     "minFont": {
      "px": 20,
@@ -108,8 +108,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1379,
-    "svgs": 354,
+    "text": 980,
+    "svgs": 323,
     "minFont": {
      "px": 20,
      "text": "3"
@@ -178,7 +178,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1186,
+    "text": 859,
     "svgs": 16,
     "minFont": {
      "px": 20,
@@ -396,7 +396,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 62
+    "canvasColours": 64
    },
    {
     "slide": 2,
@@ -433,7 +433,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 868,
+    "text": 589,
     "svgs": 1656,
     "minFont": {
      "px": 20,
@@ -447,7 +447,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 783,
+    "text": 469,
     "svgs": 103,
     "minFont": {
      "px": 20,
@@ -461,11 +461,11 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1221,
+    "text": 960,
     "svgs": 1467,
     "minFont": {
      "px": 20,
-     "text": "Chart 3 · Descriptive to diagnostic"
+     "text": "12"
     }
    },
    {
@@ -475,7 +475,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 924,
+    "text": 631,
     "svgs": 161,
     "minFont": {
      "px": 20,
@@ -489,8 +489,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1379,
-    "svgs": 354,
+    "text": 980,
+    "svgs": 323,
     "minFont": {
      "px": 20,
      "text": "3"
@@ -559,7 +559,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 1186,
+    "text": 859,
     "svgs": 16,
     "minFont": {
      "px": 20,
@@ -769,7 +769,7 @@
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.004
   },
   "s-builder-unload@1920": {
    "iframeAfterLeaving": false
@@ -778,7 +778,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.006
   },
   "s-builder@1440": {
    "iframe": true,
@@ -793,7 +793,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.009
   }
  },
  "storm": {
@@ -810,6 +810,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.666956521739127,
+ "titleFrameMs": 16.66521739130435,
  "problems": []
 }

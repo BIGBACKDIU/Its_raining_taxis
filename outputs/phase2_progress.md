@@ -952,3 +952,9 @@ the appendix is split into 12 pages. Title animation: 40-second loop, half the e
 camera and softer heavy-rain core (60 fps measured). Browser checks at 1920×1080 and 1440×900 plus three
 title frames: no errors, overflow or overlaps; storm replay plays; QR decodes in the build and in the
 screenshots; Storm Builder loads and unloads. No estimation, scoring or test-year use; index.html unchanged.
+
+Decision 177 (presentation only): chart slides 4–8 decluttered to a dominant chart (≥65% of the content
+area), two big-number callouts and a one-line METHOD box; slide 6 bars beside the numbered map; slide 8
+heatmap with markers outside the cells and one callout column; slide 13 one line per row; slide 12 robustness
+line under the cards. Removed text moved to the speaker notes with every number. Browser checks at both
+sizes: no overlap or overflow, smallest font 20 px; index.html unchanged.

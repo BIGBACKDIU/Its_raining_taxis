@@ -117,6 +117,8 @@ def values():
     v['central_share'], v['reference_share'] = pct(fs['CONTRAST: heavy, Central Area'], 1), pct(fs['CONTRAST: heavy, MRT >= 1 km (reference)'], 1)
     wls = read('factors_cell_wls').query("outcome=='abs'").set_index('characteristic').pct_per_sd
     v['wls_central'], v['wls_stands'] = f"{-wls['central_area']:.0f}%", f"+{wls['taxi_stands_300m']:.1f}%"
+    others = f.loc[[t for t in f.index if t.startswith('CONTRAST') and 'Central' not in t], 'pct']
+    v['others'] = f'{pct(others.max(), 1)} to {pct(others.min(), 1)}'
     rf = read('factors_cell_summary').rf_spatial_cv_r2
     v['rf_r2'] = f'{rf.min():.2f}–{rf.max():.2f}'
     expected = {'heavy': '−12.9%', 'heavy_round': '−13%', 'central': '−24.5%', 'central_round': '−25%', 'approach': '−7%',
@@ -131,7 +133,7 @@ def values():
                 'test_log': v['test_log'], 'light': '−7.7%', 'moderate': '−10.8%', 'share_heavy': '−5.7%',
                 'deepest': '−5.6%', 'dose1': '−9.7%', 'long_spell': '−18%', 'after': '5%', 'hotspots': '299',
                 'reference': '−12.0%', 'central_share': '−18.9%', 'reference_share': '−5.0%', 'wls_central': '11%',
-                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15'}
+                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15', 'others': '−11.6% to −12.5%'}
     assert v == expected, {k: (v[k], expected[k]) for k in v if v[k] != expected.get(k)}
     return v
 
@@ -245,9 +247,12 @@ def main():
     template = (SOURCE / 'template.html').read_text()
     css = (SOURCE / 'present.css').read_text().replace('/*__FONTS__*/', fonts())
     js = (SOURCE / 'present.js').read_text()
-    unused = {'firsthour', 'bayfront', 'dhoby', 'raffles'}  # checked against the tables above, no longer shown since decision 176
+    unused = {'firsthour', 'bayfront', 'dhoby', 'raffles', 'light', 'moderate', 'share_heavy', 'deepest', 'dose1',
+              'long_spell', 'after', 'hotspots', 'central_share', 'reference_share', 'wls_central', 'wls_stands', 'rf_r2',
+              'lgb', 'persist', 'lead'}  # checked against the tables above, no longer shown since decision 176
     for key, value in v.items():
-        if key in unused:
+        if key in unused:  # values kept in the provenance; slide text may no longer show them
+            template = template.replace('{{' + key + '}}', value)
             continue
         assert '{{' + key + '}}' in template, key
         template = template.replace('{{' + key + '}}', value)
