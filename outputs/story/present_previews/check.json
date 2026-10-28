@@ -177,7 +177,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 507,
+    "text": 504,
     "svgs": 10,
     "minFont": {
      "px": 20,
@@ -409,7 +409,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 4
+    "canvasColours": 3
    },
    {
     "slide": 2,
@@ -571,7 +571,7 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 507,
+    "text": 504,
     "svgs": 10,
     "minFont": {
      "px": 20,
@@ -804,13 +804,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.008
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.011
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -819,7 +819,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.005
+   "secondsWaited": 9.004
   }
  },
  "storm": {

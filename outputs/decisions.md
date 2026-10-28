@@ -1880,3 +1880,9 @@ results stay as they are and remain the pre-specified result.
     the progress bar and timeline fill animate with transforms, the stage is no longer restyled on every
     slide change, and live embeds load just after the slide fade. Visual output is unchanged. No analysis,
     number or text changes; `outputs/story/index.html` is unchanged.
+
+183. **Title line break and limitation card wording (presentation only).** Slide 1 shows the title on two
+    lines ("When it rains," / "Where should taxis go?"). At the user's request, slide 12's fourth card now
+    reads "The simulator can be more robust — Use it to illustrate, not to predict", with matching speaker
+    notes. The simulator's failed realism check stays disclosed on slide 9's notes and appendix A7–A8.
+    No number changes; `outputs/story/index.html` is unchanged.
