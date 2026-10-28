@@ -354,8 +354,22 @@
    },
    {
     "slide": 25,
+    "id": "a6c",
+    "file": "1920x1080-25-a6c.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 704,
+    "svgs": 123,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6c"
+    }
+   },
+   {
+    "slide": 26,
     "id": "a7",
-    "file": "1920x1080-25-a7.jpg",
+    "file": "1920x1080-26-a7.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -367,9 +381,9 @@
     }
    },
    {
-    "slide": 26,
+    "slide": 27,
     "id": "a8",
-    "file": "1920x1080-26-a8.jpg",
+    "file": "1920x1080-27-a8.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -381,9 +395,9 @@
     }
    },
    {
-    "slide": 27,
+    "slide": 28,
     "id": "a9",
-    "file": "1920x1080-27-a9.jpg",
+    "file": "1920x1080-28-a9.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -409,7 +423,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 3
+    "canvasColours": 5
    },
    {
     "slide": 2,
@@ -748,8 +762,22 @@
    },
    {
     "slide": 25,
+    "id": "a6c",
+    "file": "1440x900-25-a6c.jpg",
+    "outside": [],
+    "overflow": [],
+    "overlaps": [],
+    "text": 704,
+    "svgs": 123,
+    "minFont": {
+     "px": 20,
+     "text": "Appendix A6c"
+    }
+   },
+   {
+    "slide": 26,
     "id": "a7",
-    "file": "1440x900-25-a7.jpg",
+    "file": "1440x900-26-a7.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -761,9 +789,9 @@
     }
    },
    {
-    "slide": 26,
+    "slide": 27,
     "id": "a8",
-    "file": "1440x900-26-a8.jpg",
+    "file": "1440x900-27-a8.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -775,9 +803,9 @@
     }
    },
    {
-    "slide": 27,
+    "slide": 28,
     "id": "a9",
-    "file": "1440x900-27-a9.jpg",
+    "file": "1440x900-28-a9.jpg",
     "outside": [],
     "overflow": [],
     "overlaps": [],
@@ -804,13 +832,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.008
+   "secondsWaited": 9.004
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.011
+   "secondsWaited": 9.003
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -819,7 +847,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.004
+   "secondsWaited": 9.005
   }
  },
  "storm": {

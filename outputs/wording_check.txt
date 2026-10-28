@@ -46,7 +46,7 @@ present/template.html:264 [demand] <aside class="notes">To close, here is what w
 present/template.html:271 [revenue] <p>ComfortDelGro Corporation. (2026, August 14). <i>ComfortDelGro reports 5.7% revenue growth as international public transport portfolio strengthens earnings</
 present/template.html:323 [cause] <footer class="foot"><span class="source">effects_main.csv, radar_effects.csv, radar_central.csv. 95% CIs. Associations, not causes.</span></footer>
 present/template.html:337 [cause] <footer class="foot"><span class="source">dose_spline_curve.csv, dose_duration_hangover.csv. Associations, not causes.</span></footer>
-present/template.html:416 [cause] <p><b>Association.</b> Things move together; not proof of cause.</p>
+present/template.html:430 [cause] <p><b>Association.</b> Things move together; not proof of cause.</p>
 analysis/02_describe.py:192 [cause] fig.text(0.01, 0.005, "Sources: data.gov.sg taxi availability (LTA), NEA rainfall. Association, not cause.",
 analysis/03_effects.py:4 [validation] Estimator: Poisson PML with fixed effects and day-clustered errors (analysis/fepois_hd.py, validated against
 analysis/03_effects.py:5 [validation] pyfixest on 2023 with --validate). Effects are 100 * (exp(b) - 1) % with 95% CI.

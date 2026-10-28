@@ -120,6 +120,9 @@ def values():
     v['wls_central'], v['wls_stands'] = f"{-wls['central_area']:.0f}%", f"+{wls['taxi_stands_300m']:.1f}%"
     others = f.loc[[t for t in f.index if t.startswith('CONTRAST') and 'Central' not in t], 'pct']
     v['others'] = f'{pct(others.max(), 1)} to {pct(others.min(), 1)}'
+    mv = read('morning_forecast_value').set_index(['label', 'model']).deviance_improvement_pct
+    v['m_lgb_r'], v['m_lgb_i'] = pct(mv['retrospective', 'lgb'], 1), pct(mv['issue-time', 'lgb'], 1)
+    v['m_glm_r'], v['m_glm_i'] = pct(mv['retrospective', 'glm'], 1), pct(mv['issue-time', 'glm'], 1)
     rf = read('factors_cell_summary').rf_spatial_cv_r2
     v['rf_r2'] = f'{rf.min():.2f}–{rf.max():.2f}'
     expected = {'heavy': '−12.9%', 'heavy_round': '−13%', 'central': '−24.5%', 'central_round': '−25%', 'approach': '−7%',
@@ -134,7 +137,8 @@ def values():
                 'test_log': v['test_log'], 'light': '−7.7%', 'moderate': '−10.8%', 'share_heavy': '−5.7%',
                 'deepest': '−5.6%', 'dose1': '−9.7%', 'long_spell': '−18%', 'after': '5%', 'hotspots': '299',
                 'reference': '−12.0%', 'central_share': '−18.9%', 'reference_share': '−5.0%', 'wls_central': '11%',
-                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15', 'others': '−11.6% to −12.5%', 'spell_first': '−11%'}
+                'wls_stands': '+2.5%', 'rf_r2': '0.12–0.15', 'others': '−11.6% to −12.5%', 'spell_first': '−11%',
+                'm_lgb_r': '10.1%', 'm_lgb_i': '6.3%', 'm_glm_r': '0.2%', 'm_glm_i': '−4.5%'}
     assert v == expected, {k: (v[k], expected[k]) for k in v if v[k] != expected.get(k)}
     return v
 
@@ -264,10 +268,10 @@ def main():
         template = template.replace(f'<!--SVG:{name}-->', chart(name))
     assert '<!--SVG:' not in template
     slides = re.findall(r'<section class="slide[^"]*" id="([^"]+)"', template)
-    assert len(slides) == 27 and template.count('data-appendix=') == 13
+    assert len(slides) == 28 and template.count('data-appendix=') == 14
     notes = re.findall(r'<aside class="notes">(.*?)</aside>', template, flags=re.S)
     words = [len(n.split()) for n in notes]
-    assert len(notes) == 27 and all(80 <= w <= 120 for w in words[:14]), words
+    assert len(notes) == 28 and all(80 <= w <= 120 for w in words[:14]), words
     assert 'logo' not in template.lower() and 'to be added' not in template.lower()
     html = (template.replace('/*__CSS__*/', css)
             .replace('/*__DATA__*/', 'const DATA = ' + json.dumps(data, separators=(',', ':')).replace('</', '<\\/') + ';')
@@ -276,7 +280,7 @@ def main():
     for rel, digest in HASHES.items():
         assert sha(ROOT / rel) == digest, rel
     (OUT.parent / 'present_provenance.json').write_text(json.dumps(
-        {'presentation_only': True, 'decisions': [174, 175, 176], 'slides': 14, 'appendix_slides': 13, 'qr_decoded': decoded, 'notes_words': words,
+        {'presentation_only': True, 'decisions': list(range(174, 185)), 'slides': 14, 'appendix_slides': 14, 'qr_decoded': decoded, 'notes_words': words,
          'values': v, 'source_hashes': HASHES, 'html_sha256': sha(OUT), 'bytes': OUT.stat().st_size},
         indent=2, ensure_ascii=False) + '\n')
     print(f'Built {OUT.relative_to(ROOT)} ({OUT.stat().st_size:,} bytes); 14 slides + references + A1–A9; QR decodes to {decoded}; notes {min(words)}–{max(words)} words.')

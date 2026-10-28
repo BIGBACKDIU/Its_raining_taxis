@@ -375,6 +375,20 @@
  <aside class="notes">The weather gains on the two fresh holdouts are small.</aside>
 </section>
 
+<section class="slide" id="a6c" data-title="A6c Planning: value of the morning forecast" data-appendix="A6c">
+ <header class="head"><div class="kicker">Appendix A6c</div><h1>Planning: value of the morning forecast</h1></header>
+ <div class="body"><div class="grid">
+  <div class="chart c8"><!--SVG:present_morning--></div>
+  <div class="c4 shows">
+   <div class="point">At 09:00, predicts how many short half-hours each planning area will have later that day (10–17, 17–20, 20–24).</div>
+   <div class="point">Adding NEA's 24-hour forecast helps LightGBM under both labels; the linear regression does not benefit.</div>
+   <div class="point">Second scoring of the test year, after a reviewer-required timing fix; disclosed.</div>
+  </div>
+ </div></div>
+ <footer class="foot"><span class="source">morning_forecast_value.csv; Poisson deviance, 95% day-block bootstrap CIs; test year Oct 2025–Sep 2026.</span></footer>
+ <aside class="notes">At 9 am, a model predicts how many short half-hours each planning area will have later that day. Adding NEA's morning 24-hour forecast lowers LightGBM's prediction error by {{m_lgb_r}} with the retrospective label and {{m_lgb_i}} with the issue-time label, both above the 2% bar set in advance; the linear regression changes by {{m_glm_r}} and {{m_glm_i}}, so it does not benefit.</aside>
+</section>
+
 <section class="slide" id="a7" data-title="A7 Policy and simulation" data-appendix="A7">
  <header class="head"><div class="kicker">Appendix A7</div><h1>Policy and simulation</h1></header>
  <div class="body"><div class="grid">

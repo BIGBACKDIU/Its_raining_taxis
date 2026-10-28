@@ -366,6 +366,41 @@ def where_present():
     dc.save(fig, name)
 
 
+MORNING = [('retrospective', 'lgb', 'LightGBM · retrospective label'), ('issue-time', 'lgb', 'LightGBM · issue-time label'),
+           ('retrospective', 'glm', 'Regression · retrospective label'), ('issue-time', 'glm', 'Regression · issue-time label')]
+
+
+def morning(out, size):
+    """Decision 184: saved step-15 morning-forecast value (no re-scoring)."""
+    p = use('present', out)
+    name = 'present_morning'
+    t = dc.read('morning_forecast_value').set_index(['label', 'model']).loc[[(l, m) for l, m, _ in MORNING]].reset_index()
+    dc.SIZES[name] = size
+    dc.record(name, t)
+    fig = dc.figure(name)
+    ax = dc.axes(fig, [.375, .15, .585, .74], grid=False)
+    ax.xaxis.grid(True, color=dc.GRID, linewidth=.7)
+    ax.axvline(0, color=dc.MUTED, lw=1)
+    ax.axvline(2, color=dc.MUTED, ls=(0, (4, 3)), lw=1.4)
+    n = len(t)
+    for i, r in enumerate(t.itertuples()):
+        y = n - 1 - i
+        color = p['accent'] if r.model == 'lgb' else dc.LIGHT
+        dc.error(ax, r.deviance_improvement_pct, y, r.lo, r.hi, color, horizontal=True, ms=12)
+        lgb = r.model == 'lgb'  # regression labels sit left of their whiskers, clear of the 2% line
+        dc.label(ax, r.hi + .4 if lgb else r.lo - .4, y, f'{r.deviance_improvement_pct:+.1f}%'.replace('-', '−'),
+                 p['accent'] if lgb else dc.MUTED, va='center', ha='left' if lgb else 'right', weight=500)
+    dc.label(ax, 2.2, n - .35, 'Bar set in advance: 2%', dc.MUTED, size=24, va='center')
+    ax.set_yticks(range(n)[::-1], [label for _, _, label in MORNING])
+    ax.tick_params(axis='y', pad=14)
+    ax.set(xlim=(-8, 14), ylim=(-.6, n - .05))
+    ax.set_xticks([-5, 0, 5, 10], ['−5%', '0', '+5%', '+10%'])
+    fig.text(.5, .025, "% lower prediction error with NEA's morning forecast (test year)", ha='center',
+             fontsize=dc.pt(24), color=dc.INK)
+    ax.spines['bottom'].set_color(dc.GRID)
+    dc.save(fig, name)
+
+
 def main():
     PRESENT.mkdir(parents=True, exist_ok=True)
     factors('deck', DECK, 'deck_factors', (1100, 560))
@@ -377,6 +412,7 @@ def main():
     regimes(PRESENT, (1680, 440))
     robustness(PRESENT, (1680, 680))
     policy(PRESENT, (1110, 640))
+    morning(PRESENT, (1110, 640))
     # The deck's appendix charts in the presentation palette, sized to their slot and shown 1:1.
     for function, name, size in [(dc.main_effects, 'deck_effects_main', (824, 660)), (dc.radar, 'deck_radar_check', (824, 660)),
                                  (dc.dose, 'deck_dose', (1680, 740)), (where_present, 'deck_where_map', (1680, 780)),

@@ -10,6 +10,7 @@
     "outputs/tables/effects_robust.csv": "33ad6ba2b844adf1d49315dfb6d663f04252139c38d51bfe597b5ad971081001",
     "outputs/tables/effects_main.csv": "89e31d18aeeb09c47ce7a97b95ab68cf1f0be75ddf4b7096b05fa32dd01d53f0",
     "outputs/tables/policy_diagnosis.csv": "43c2a679f1cd84ce4efdde59d516f9b3a021038f307657659f3d90a2eb561ab7",
+    "outputs/tables/morning_forecast_value.csv": "7b0b6987c076574935e1a846f311bc19fdd3db2cda80fca3e2a33d26bd301dde",
     "outputs/tables/radar_effects.csv": "f6412080e83ea5548c01e141e4c4b6e9f1756ef465058db560ef06f3eda3883c",
     "outputs/tables/radar_central.csv": "f14571752a0efc434309fe0ee14b65df1cc35b012f2e262f8a80372664e245c2",
     "outputs/tables/dose_spline_curve.csv": "b6e6894c0f4c05ff7d9c42450e5368c68cb1042ff915c3eec2bcc0f87e971bba",
@@ -150,6 +151,21 @@
         "Poppins-Regular.ttf"
       ],
       "sha256": "5dd09b02251ba68fbdd13ad308fcfe3af3dd9ec9c77e33eadd25394690ac8af5"
+    },
+    "present_morning": {
+      "display_pixels": [
+        1110,
+        640
+      ],
+      "png_pixels": [
+        2220,
+        1280
+      ],
+      "fonts_used": [
+        "Poppins-Medium.ttf",
+        "Poppins-Regular.ttf"
+      ],
+      "sha256": "0c789d0dd553d2104e0b4e587fef2b60c1bf7759f9675c3b10580698b65a4468"
     },
     "deck_effects_main": {
       "display_pixels": [
