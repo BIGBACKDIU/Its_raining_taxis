@@ -1894,3 +1894,7 @@ results stay as they are and remain the pre-specified result.
     that these are from the second test-year scoring after the decision-131 timing fixes, as logged. Drawn by
     `analysis/present_charts.py`, numbers checked in `analysis/build_present.py`. No estimation or re-scoring;
     `outputs/story/index.html` is unchanged.
+
+185. **A6c as a bar chart (presentation only).** At the user's request, the morning-forecast appendix chart is
+    redrawn as bars in the style of A6a: one panel per label (retrospective, issue-time), LightGBM and regression
+    bars with the saved 95% day-block CIs as whiskers, and the 2% bar set in advance. Same saved table and values.

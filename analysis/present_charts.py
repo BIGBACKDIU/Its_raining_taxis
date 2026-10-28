@@ -371,33 +371,36 @@ MORNING = [('retrospective', 'lgb', 'LightGBM · retrospective label'), ('issue-
 
 
 def morning(out, size):
-    """Decision 184: saved step-15 morning-forecast value (no re-scoring)."""
-    p = use('present', out)
+    """Decision 184-185: saved step-15 morning-forecast value as bars (no re-scoring)."""
+    use('present', out)
     name = 'present_morning'
     t = dc.read('morning_forecast_value').set_index(['label', 'model']).loc[[(l, m) for l, m, _ in MORNING]].reset_index()
     dc.SIZES[name] = size
     dc.record(name, t)
     fig = dc.figure(name)
-    ax = dc.axes(fig, [.375, .15, .585, .74], grid=False)
-    ax.xaxis.grid(True, color=dc.GRID, linewidth=.7)
-    ax.axvline(0, color=dc.MUTED, lw=1)
-    ax.axvline(2, color=dc.MUTED, ls=(0, (4, 3)), lw=1.4)
-    n = len(t)
-    for i, r in enumerate(t.itertuples()):
-        y = n - 1 - i
-        color = p['accent'] if r.model == 'lgb' else dc.LIGHT
-        dc.error(ax, r.deviance_improvement_pct, y, r.lo, r.hi, color, horizontal=True, ms=12)
-        lgb = r.model == 'lgb'  # regression labels sit left of their whiskers, clear of the 2% line
-        dc.label(ax, r.hi + .4 if lgb else r.lo - .4, y, f'{r.deviance_improvement_pct:+.1f}%'.replace('-', '−'),
-                 p['accent'] if lgb else dc.MUTED, va='center', ha='left' if lgb else 'right', weight=500)
-    dc.label(ax, 2.2, n - .35, 'Bar set in advance: 2%', dc.MUTED, size=24, va='center')
-    ax.set_yticks(range(n)[::-1], [label for _, _, label in MORNING])
-    ax.tick_params(axis='y', pad=14)
-    ax.set(xlim=(-8, 14), ylim=(-.6, n - .05))
-    ax.set_xticks([-5, 0, 5, 10], ['−5%', '0', '+5%', '+10%'])
-    fig.text(.5, .025, "% lower prediction error with NEA's morning forecast (test year)", ha='center',
-             fontsize=dc.pt(24), color=dc.INK)
-    ax.spines['bottom'].set_color(dc.GRID)
+    for j, (label, title) in enumerate([('retrospective', 'Retrospective label'), ('issue-time', 'Issue-time label')]):
+        ax = dc.axes(fig, [.1 + j * .47, .2, .4, .64])
+        q = t[t.label == label].set_index('model').loc[['lgb', 'glm']]
+        values = q.deviance_improvement_pct.to_numpy()
+        bars = ax.bar([0, 1], values, color=[dc.NAVY, dc.LIGHT], width=.58, zorder=3)
+        ax.errorbar([0, 1], values, yerr=[values - q.lo.to_numpy(), q.hi.to_numpy() - values], fmt='none',
+                    ecolor=dc.INK, elinewidth=1.4, capsize=6, zorder=4)
+        for x, r in enumerate(q.itertuples()):
+            up = r.deviance_improvement_pct >= 0
+            # small values sit above the 2% line
+            dc.label(ax, x, max(r.hi + .5, 2.6) if up else (r.lo - .5), f'{r.deviance_improvement_pct:+.1f}%'.replace('-', '−'),
+                     dc.INK, ha='center', va='bottom' if up else 'top')
+        ax.axhline(0, color=dc.MUTED, lw=1)
+        ax.axhline(2, color=dc.MUTED, ls=(0, (4, 3)), lw=1.2)
+        if j == 0:
+            ax.set_ylabel('% lower prediction error')
+        else:
+            dc.label(ax, 1.58, 2.35, 'Bar set in\nadvance: 2%', dc.MUTED, size=24, ha='right', va='bottom', linespacing=1.1)
+        ax.set(ylim=(-8, 14), xlim=(-.6, 1.6))
+        ax.set_xticks([0, 1], ['LightGBM', 'Regression'])
+        ax.set_yticks([-5, 0, 5, 10], ['−5%', '0', '+5%', '+10%'])
+        fig.text(.1 + j * .47, .9, title, fontsize=dc.pt(24), color=dc.NAVY, weight=500)
+    fig.text(.5, .03, "With NEA's morning forecast · test year", ha='center', fontsize=dc.pt(24), color=dc.INK)
     dc.save(fig, name)
 
 

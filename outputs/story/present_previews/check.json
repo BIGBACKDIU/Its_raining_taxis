@@ -359,8 +359,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 704,
-    "svgs": 123,
+    "text": 674,
+    "svgs": 147,
     "minFont": {
      "px": 20,
      "text": "Appendix A6c"
@@ -423,7 +423,7 @@
      "px": 20,
      "text": "Rain  light to heavy  vacant taxi · illu"
     },
-    "canvasColours": 5
+    "canvasColours": 4
    },
    {
     "slide": 2,
@@ -767,8 +767,8 @@
     "outside": [],
     "overflow": [],
     "overlaps": [],
-    "text": 704,
-    "svgs": 123,
+    "text": 674,
+    "svgs": 147,
     "minFont": {
      "px": 20,
      "text": "Appendix A6c"
@@ -823,7 +823,7 @@
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.002
+   "secondsWaited": 9.003
   },
   "s-builder-unload@1920": {
    "iframeAfterLeaving": false
@@ -832,13 +832,13 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.004
+   "secondsWaited": 9.005
   },
   "s-builder@1440": {
    "iframe": true,
    "src": "https://storm-builder-sg.vercel.app/?presentation=1",
    "fallbackShown": false,
-   "secondsWaited": 9.003
+   "secondsWaited": 9.004
   },
   "s-builder-unload@1440": {
    "iframeAfterLeaving": false
@@ -847,7 +847,7 @@
    "iframe": true,
    "src": "https://golden-beijinho-83f174.netlify.app/",
    "fallbackShown": false,
-   "secondsWaited": 9.005
+   "secondsWaited": 9.006
   }
  },
  "storm": {
@@ -864,6 +864,6 @@
   "hiddenEntries": 0
  },
  "errors": [],
- "titleFrameMs": 16.666086956521738,
+ "titleFrameMs": 16.666956521739127,
  "problems": []
 }

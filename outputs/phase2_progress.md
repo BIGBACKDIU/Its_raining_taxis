@@ -978,3 +978,5 @@ Decision 182 (presentation only): smoother motion. Chrome traces on the timeline
 Decision 183 (presentation only): two-line title on slide 1; slide 12 fourth card and notes reworded ("The simulator can be more robust"). Checks at both sizes pass; deck redeployed.
 
 Decision 184 (presentation only): appendix page A6c shows the saved morning-forecast planning value (LightGBM +10.1%/+6.3%, regression +0.2%/−4.5%, 95% day-block CIs, 2% bar) from morning_forecast_value.csv. Checks at both sizes pass; deck redeployed.
+
+Decision 185 (presentation only): A6c redrawn as bars (one panel per label, 95% CI whiskers, 2% bar). Checks pass; deck redeployed.
