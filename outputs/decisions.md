@@ -1886,3 +1886,11 @@ results stay as they are and remain the pre-specified result.
     reads "The simulator can be more robust — Use it to illustrate, not to predict", with matching speaker
     notes. The simulator's failed realism check stays disclosed on slide 9's notes and appendix A7–A8.
     No number changes; `outputs/story/index.html` is unchanged.
+
+184. **Appendix page A6c: value of the morning forecast (presentation only).** Add an appendix page after A6b
+    showing the saved step-15 results from `morning_forecast_value.csv` only: LightGBM and regression,
+    retrospective and issue-time labels, % lower Poisson deviance with NEA's morning 24-hour forecast, with the
+    saved 95% day-block bootstrap CIs and the pre-registered 2% materiality bar (decision 113). The page notes
+    that these are from the second test-year scoring after the decision-131 timing fixes, as logged. Drawn by
+    `analysis/present_charts.py`, numbers checked in `analysis/build_present.py`. No estimation or re-scoring;
+    `outputs/story/index.html` is unchanged.
